@@ -15,6 +15,11 @@ class CreateTaxesTable extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('short_name',60)->nullable(false);
+            $table->string('name',120)->nullable(false);
+            $table->float('value')->nullable(false);
+            $table->enum('type',['proc','fijo'])->nullable(false);
+            $table->enum('status',['A','I'])->default('A');
             $table->timestamps();
         });
     }
