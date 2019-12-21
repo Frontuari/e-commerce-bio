@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHomePageTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateHomePageTable extends Migration
      */
     public function up()
     {
-        Schema::create('home_page', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable(false);
+            $table->string('public_name')->nullable(false);
+            $table->enum('status',['A','I'])->default('A');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateHomePageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home_page');
+        Schema::dropIfExists('views');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupEventsTable extends Migration
+class CreateHomePageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateGroupEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_events', function (Blueprint $table) {
+        Schema::create('home_page', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title',120)->nullable(false);
+            $table->text('description')->nullable();
+            $table->enum('status',['A','I'])->default('A');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateGroupEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_events');
+        Schema::dropIfExists('home_page');
     }
 }

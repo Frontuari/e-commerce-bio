@@ -15,7 +15,11 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name',120)->nullable(false);
+            $table->bigInteger('view_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('view_id')->references('id')->on('views')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
