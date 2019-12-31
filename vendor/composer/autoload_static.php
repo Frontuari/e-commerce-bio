@@ -170,8 +170,8 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -5389,6 +5389,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\See' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/See.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Since' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Since.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Source' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Source.php',
+        'phpDocumentor\\Reflection\\DocBlock\\Tags\\TagWithType' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/TagWithType.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Throws' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Throws.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Uses' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Uses.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Var_' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Var_.php',
