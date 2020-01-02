@@ -11,6 +11,6 @@ class Category extends Model {
      *
      * @var array
      */
-    protected $table = 'categories';
-    protected $fillable = ['id', 'parent_id', 'order', 'name', 'slug'];
+    protected $table = 'product_categories';
+    protected $fillable = ['id', 'name', 'description', 'avatar', 'status'];
 }
