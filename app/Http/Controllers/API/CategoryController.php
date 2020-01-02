@@ -21,7 +21,7 @@ class CategoryController extends BaseController
 
     public function index()
     {
-        $Categories = Category::all();  
+        $Categories = Category::where('status','A')->get();
         return $this->sendResponse(CategoryResource::collection($Categories), 'Category retrieved successfully.');
     }
 
