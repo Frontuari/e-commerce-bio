@@ -31,3 +31,6 @@ Route::get('products/most/viewed','API\ProductController@most_viewed')->name("mo
 Route::get('products/most/recent','API\ProductController@most_recent')->name("most_recent");
 Route::get('products/most/sold','API\ProductController@most_sold')->name("most_sold");
 Route::get('products/best/price','API\ProductController@best_price')->name("best_price");
+
+//BRANDS
+Route::resource('brands', 'API\BrandController');
