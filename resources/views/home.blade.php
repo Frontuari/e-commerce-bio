@@ -5,10 +5,10 @@
 	<title>Bio Mercados</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="Shortcut Icon" href="assets/img/favicon.svg" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
+	
 </head>
 <body>
 	<header>
@@ -1631,9 +1631,7 @@
 	</div>
 
 	<div class="over toggle-menu"></div>
-	<script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/popper.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/frontend/js/build.js') }}"></script>
 	<script>
 		$(document).ready(function(){
 			$(".toggle-menu").click(function(){
