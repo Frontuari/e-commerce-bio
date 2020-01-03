@@ -35,6 +35,8 @@ Route::get('products/best/price','API\ProductController@best_price')->name("best
 //BRANDS
 Route::resource('brands', 'API\BrandController');
 
-
+//PACKAGES
 Route::resource('packages', 'API\ProductPackageController');//PACKAGE
 
+//SETINGS
+Route::get('settings','API\SettingController@all')->name('settings');
