@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
-	
+
 </head>
 <body>
 	<header>
@@ -77,11 +77,11 @@
 								</div>
 							</li>
 							<!-- no loggeado -->
-						
+
 							<!-- loggeado -->
 							<!--<li id="nav-logged"><a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> <a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
-							
+
 							<li id="nav-cart"><a href="#"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">0</span></a></li>
 							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a></li>
 
@@ -100,22 +100,22 @@
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">
 							<button class="navbar-toggler toggle-menu" type="button">
-								<img src="assets/img/close-menu-movil-bio.svg" alt="Menu Bars">
+								<img src="assets/img/close-menu-movil-bio.svg" style="width:30px !important; height:25px !important;" alt="Menu Bars">
 							</button>
 						</div>
-						<div class="col-md-12">
+						<!--<div class="col-md-12">
 							<ul class="social-nav">
 								<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
 								<li><a href="#"><img src="assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
 								<li><a href="#"><img src="assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
 								<li><a href="#"><img src="assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 							</ul>
-						</div>
+						</div>-->
 						<div class="col-md-12">
 							<!-- loggeado -->
 							<!--<div class="top-info-nav">
 								<div class="top-info-log">
-									<a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
+									<a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a>
 									<a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 									<a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a>
 								</div>
@@ -194,7 +194,7 @@
 							</div>
 						</li>
 					</ul>
-					
+
 				</div>
 			</div>
 		</nav>

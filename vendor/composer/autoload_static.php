@@ -172,8 +172,8 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -522,10 +522,12 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
     );
 
     public static $classMap = array (
+        'App\\Brand' => __DIR__ . '/../..' . '/app/Brand.php',
         'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\API\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BaseController.php',
+        'App\\Http\\Controllers\\API\\BrandController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BrandController.php',
         'App\\Http\\Controllers\\API\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CategoryController.php',
         'App\\Http\\Controllers\\API\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ProductController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -543,6 +545,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Resources\\Brand' => __DIR__ . '/../..' . '/app/Http/Resources/Brand.php',
         'App\\Http\\Resources\\Category' => __DIR__ . '/../..' . '/app/Http/Resources/Category.php',
         'App\\Http\\Resources\\Product' => __DIR__ . '/../..' . '/app/Http/Resources/Product.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
@@ -5415,7 +5418,6 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\See' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/See.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Since' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Since.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Source' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Source.php',
-        'phpDocumentor\\Reflection\\DocBlock\\Tags\\TagWithType' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/TagWithType.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Throws' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Throws.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Uses' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Uses.php',
         'phpDocumentor\\Reflection\\DocBlock\\Tags\\Var_' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Var_.php',

@@ -6,10 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Brand' => $baseDir . '/app/Brand.php',
     'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\API\\BaseController' => $baseDir . '/app/Http/Controllers/API/BaseController.php',
+    'App\\Http\\Controllers\\API\\BrandController' => $baseDir . '/app/Http/Controllers/API/BrandController.php',
     'App\\Http\\Controllers\\API\\CategoryController' => $baseDir . '/app/Http/Controllers/API/CategoryController.php',
     'App\\Http\\Controllers\\API\\ProductController' => $baseDir . '/app/Http/Controllers/API/ProductController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -27,6 +29,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Resources\\Brand' => $baseDir . '/app/Http/Resources/Brand.php',
     'App\\Http\\Resources\\Category' => $baseDir . '/app/Http/Resources/Category.php',
     'App\\Http\\Resources\\Product' => $baseDir . '/app/Http/Resources/Product.php',
     'App\\Product' => $baseDir . '/app/Product.php',
@@ -4899,7 +4902,6 @@ return array(
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\See' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/See.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\Since' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Since.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\Source' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Source.php',
-    'phpDocumentor\\Reflection\\DocBlock\\Tags\\TagWithType' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/TagWithType.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\Throws' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Throws.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\Uses' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Uses.php',
     'phpDocumentor\\Reflection\\DocBlock\\Tags\\Var_' => $vendorDir . '/phpdocumentor/reflection-docblock/src/DocBlock/Tags/Var_.php',

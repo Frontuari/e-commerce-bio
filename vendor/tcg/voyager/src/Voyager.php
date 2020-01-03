@@ -325,16 +325,6 @@ class Voyager
 
     public function getLocales()
     {
-        $appLocales = [];
-        if ($this->filesystem->exists(resource_path('lang/vendor/voyager'))) {
-            $appLocales = array_diff(scandir(resource_path('lang/vendor/voyager')), ['..', '.']);
-        }
-
-        $vendorLocales = array_diff(scandir(realpath(__DIR__.'/../publishable/lang')), ['..', '.']);
-        $allLocales = array_merge($vendorLocales, $appLocales);
-
-        asort($allLocales);
-
-        return $allLocales;
+        return array_diff(scandir(realpath(__DIR__.'/../publishable/lang')), ['..', '.']);
     }
 }
