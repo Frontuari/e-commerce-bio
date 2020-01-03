@@ -1668,11 +1668,15 @@
 	</div>
 
 	<div class="over toggle-menu"></div>
-	<script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="assets/js/popper.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+	
+	<script type="text/javascript" src="{{ asset('assets/js/popper.js') }}"></script>
+	
+	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+
 	<script>
-		$(document).ready(function(){
+		jQuery(document).ready(function($){
 			$(".toggle-menu").click(function(){
 				$(".over").toggle();
 				$(".navbar").toggleClass("navbar-translate");
