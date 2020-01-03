@@ -84,7 +84,11 @@
 	}
 	.social-nav a{
 		display: inline-flex;
-		min-width: 30px;
+		width: 30px;
+	}
+	.social-nav a img{
+		display: block;
+		width: 100%;
 	}
 	.section-title{
 		text-align: center;
@@ -289,15 +293,14 @@
 		min-width: 20px;
 		height: 20px;
 		border-radius: 30px;
-		display: flex;
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		margin-left: 5px;
 	}
 	.bio-points{
-		font-size: 14px !important;
 		font-style: italic;
-		justify-content: center;
+		justify-content: flex-end;
 		width: 100%;
 	}
 	.bio-points .quantity-span{
@@ -312,6 +315,9 @@
 	.navbar-toggler img{
 		display: block;
 		width: 40px;
+	}
+	.navbar .navbar-toggler img{
+		width: 20px;
 	}
 	.navbar-toggler{
 		padding-left: 0;
@@ -373,6 +379,10 @@
 			max-width: 250px;
 			margin: 0;
 		}
+		.bio-points{
+			font-size: 14px !important;
+			justify-content: center;
+		}
 	}
 	@media (max-width: 991px){
 		#toggler-header{ order: 0; }
@@ -396,8 +406,7 @@
 			max-width: 100%;
 		}
 		#nav-fav,
-		#nav-logout,
-		#nav-header .bio-points{
+		#nav-logout{
 			display: none !important;
 		}
 		.logout{
@@ -410,6 +419,14 @@
 		#nav-logged{ order: 2; }
 
 		#nav-fav{ order: 3; }
+	}
+	@media (max-width: 767px){
+		#search-header form{
+			max-width: 70%;
+		}
+		#search-header form input[type="search"], #search-header form input[type="text"]{
+			font-size: 18px;
+		}
 	}
 /*
 	======================================================
@@ -574,10 +591,6 @@
 		.navbar-nav .dropdown-menu{
 			margin-top: 0;
 		}
-		.navbar-nav .dropdown-toggle .dropdown-uppercase{
-			text-transform: uppercase;
-			margin-right: 5px;
-		}
 		.navbar-nav .dropdown-menu .dropdown-item{
 			border-bottom: 1px solid rgba(255,255,255,.6);
 		}
@@ -659,7 +672,6 @@
 	}
 	.carousel-caption .ico-text{
 		display: inline-block;
-		width: 4%;
 		max-height: 45px;
 		margin-top: -10px;
 	}
@@ -704,9 +716,9 @@
 	======================================================
 	Categories
 	======================================================
-*/
+*/	
 	#categories{
-		margin-top: 3rem;
+		margin: 3rem 0;
 	}
 	.category-box{
 		margin-bottom: 30px;
@@ -791,7 +803,7 @@
 	======================================================
 	Tabs
 	======================================================
-*/
+*/	
 	.nav-tabs{
 		border: 0;
 		justify-content: center;
@@ -816,7 +828,7 @@
 	}
 	.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
 	    border-color: #28b67a;
-	}
+	}	
 	@media (min-width: 992px){
 		.nav-tabs .nav-item{
 			margin-bottom: 0;
@@ -837,7 +849,7 @@
 	======================================================
 	Products
 	======================================================
-*/
+*/	
 	#products{
 		padding: 3rem 0;
 	}
@@ -965,7 +977,7 @@
 	======================================================
 	Combos
 	======================================================
-*/
+*/	
 	#combos-bio{
 		padding: 2rem 0 3rem;
 	}
@@ -1031,7 +1043,7 @@
 	======================================================
 	Heros
 	======================================================
-*/
+*/	
 	.hero{
 		display: flex;
 		align-items: center;
@@ -1131,6 +1143,7 @@
 	}
 	.modal-dialog{
 		max-width: 300px;
+		margin: .5rem auto;
 	}
 	.modal .modal-content{
 		border-radius: 20px;
@@ -1173,11 +1186,41 @@
 		margin-bottom: 0;
 		margin-right: 10px;
 	}
+	.modal .product-block .product-quantity .product-quantity-group{
+		display: flex;
+		align-items: center;	
+	}
 	.modal .product-block .product-quantity .form-control{
 		max-width: 60px;
 		height: calc(1rem + 1rem + 2px);
 		padding: .5rem .25rem;
 		text-align: center;
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons{
+		display: flex;
+		flex-direction: column;
+		max-width: 30px;
+		margin-left: 10px;
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons .btn{
+		height: 15px;
+		width: 15px;
+		padding: 0;
+		transition: filter .3s ease;
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons .btn:focus{
+		box-shadow: none;
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons .btn:hover,
+	.modal .product-block .product-quantity .product-quantity-buttons .btn:focus{
+		filter: brightness(85%);
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons .btn img{
+		display: block;
+		width: 100%;
+	}
+	.modal .product-block .product-quantity .product-quantity-buttons .btn:not(:last-child){
+		margin-bottom: 5px;
 	}
 	.modal .product-block .product-options .product-prices{
 		margin-bottom: 1rem;
@@ -1212,7 +1255,7 @@
 	======================================================
 	Footer
 	======================================================
-*/
+*/	
 	.footer{
 		padding: 3rem 0 0;
 		position: relative;
@@ -1348,6 +1391,24 @@
 		.footer > .container{
 			margin-bottom: 4rem;
 		}
+		.footer-block .btn-title{
+			display: inline-flex;
+			position: relative;
+			padding-right: 25px;
+		}
+		.footer-block .btn-title:before{
+			content: '';
+			display: inline-block;
+			width: 20px;
+			height: 11px;
+			position: absolute;
+			right: 0;
+			top: 9px;
+			background-image: url('../img/abajo-bio.svg');
+			background-size: 20px;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
 		.footer-block #enlaces .card,
 		.footer-block #apps .card{
 			flex-direction: row;
@@ -1360,14 +1421,12 @@
 			max-width: 50%;
 		}
 	}
-/*
-	======================================================
-	Responsive
-	======================================================
-*/
-	@media (min-width: 768px){
-	}
-	@media (min-width: 992px){
-	}
-	@media (max-width: 991px){
+	@media (max-width: 767px){
+		.footer::before {
+		    width: 188px;
+		    height: 115px;
+		}
+		.bottom-footer p{
+			display: none;
+		}
 	}
