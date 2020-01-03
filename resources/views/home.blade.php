@@ -7,6 +7,7 @@
 	<link rel="Shortcut Icon" href="assets/img/favicon.svg" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
 
 </head>
