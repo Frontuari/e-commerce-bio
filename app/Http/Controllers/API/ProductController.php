@@ -13,7 +13,7 @@ class ProductController extends BaseController
 {
     public function index()
     {
-        $Products = Product::all();  
+        $Products = Product::where('status','A')->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
 

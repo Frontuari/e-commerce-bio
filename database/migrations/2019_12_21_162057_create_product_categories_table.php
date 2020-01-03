@@ -18,6 +18,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('name',120)->nullable(false);
             $table->text('description')->nullable(false);
             $table->string('avatar',200)->nullable();
+            $table->integer('order');
             $table->enum('status',['A','I'])->default('A');
             $table->timestamps();
         });

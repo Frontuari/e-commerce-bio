@@ -1,12 +1,10 @@
 <?php
-   
 
 namespace App\Http\Controllers\API;
-   
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Category;
+use App\ProductCategory;
 use Validator;
 use App\Http\Resources\Category as CategoryResource;
 
@@ -21,7 +19,7 @@ class CategoryController extends BaseController
 
     public function index()
     {
-        $Categories = Category::where('status','A')->get();
+        $Categories = ProductCategory::where('status','A')->orderBy("order","asc")->get();
         return $this->sendResponse(CategoryResource::collection($Categories), 'Category retrieved successfully.');
     }
 
@@ -46,7 +44,7 @@ class CategoryController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $Category = Category::create($input);
+        $Category = ProductCategory::create($input);
    
         return $this->sendResponse(new CategoryResource($Category), 'Category created successfully.');
     } 
@@ -60,7 +58,7 @@ class CategoryController extends BaseController
 
     public function show($id)
     {
-        $Category = Category::find($id);
+        $Category = ProductCategory::find($id);
 
         if (is_null($Category)) {
             return $this->sendError('Category not found.');
@@ -77,7 +75,7 @@ class CategoryController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, Category $Category)
+    public function update(Request $request, ProductCategory $Category)
     {
 
         $input = $request->all();
@@ -108,7 +106,7 @@ class CategoryController extends BaseController
      * @return \Illuminate\Http\Response
     */
 
-    public function destroy(Category $Category)
+    public function destroy(ProductCategory $Category)
     {
         $Category->delete();
         return $this->sendResponse([], 'Category deleted successfully.');

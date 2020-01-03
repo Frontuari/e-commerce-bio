@@ -34,3 +34,7 @@ Route::get('products/best/price','API\ProductController@best_price')->name("best
 
 //BRANDS
 Route::resource('brands', 'API\BrandController');
+
+
+Route::resource('packages', 'API\ProductPackageController');//PACKAGE
+
