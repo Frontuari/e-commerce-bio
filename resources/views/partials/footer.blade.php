@@ -97,10 +97,10 @@
 											<div class="product-quantity-group">
 												<input id="quantity" class="form-control" type="text" name="quantity" value="1">
 												<div class="product-quantity-buttons">
-													<button type="button" class="btn" onclick="increaseValue()">
+													<button type="button" class="btn increaseValue">
 														<img src="assets/img/increase.png" alt="Increase">
 													</button>
-													<button type="button" class="btn" onclick="decreaseValue()">
+													<button type="button" class="btn decreaseValue">
 														<img src="assets/img/decrease.png" alt="decrease">
 													</button>
 												</div>
@@ -165,10 +165,10 @@
 											<div class="product-quantity-group">
 												<input id="quantity2" class="form-control" type="text" name="quantity" value="1">
 												<div class="product-quantity-buttons">
-													<button type="button" class="btn" onclick="increaseValue2()">
+													<button type="button" class="btn increaseValue" >
 														<img src="assets/img/increase.png" alt="Increase">
 													</button>
-													<button type="button" class="btn" onclick="decreaseValue2()">
+													<button type="button" class="btn decreaseValue">
 														<img src="assets/img/decrease.png" alt="decrease">
 													</button>
 												</div>
@@ -202,44 +202,66 @@
 	@yield('js')
 	<script>
 		jQuery(document).ready(function($){
+
+
 			$(".toggle-menu").click(function(){
 				$(".over").toggle();
 				$(".navbar").toggleClass("navbar-translate");
 			});
+
+			/*Elementos a usar al momento de incrementar el valor*/
+			$(document).on('click','.increaseValue',function()
+			{
+				quantity = parseInt($(this).parent().parent().find('input[name=quantity]').val());
+				//incrementa 1
+				quantity = quantity + 1;
+				$(this).parent().parent().find('input[name=quantity]').val(quantity);
+			});
+
+			//reducir el valor
+			$(document).on('click','.decreaseValue',function()
+			{
+				quantity = parseInt($(this).parent().parent().find('input[name=quantity]').val());
+				if(quantity>1)
+				{
+					quantity = quantity - 1;
+					$(this).parent().parent().find('input[name=quantity]').val(quantity);
+				}
+			});
+
 		});
 
-		function increaseValue() {
+		/*function increaseValue() {
 		  var value = parseInt(document.getElementById('quantity').value, 10);
 		  value = isNaN(value) ? 0 : value;
 		  value++;
 		  document.getElementById('quantity').value = value;
-		}
+		}*/
 
-		function decreaseValue() {
+		/*function decreaseValue() {
 		  var value = parseInt(document.getElementById('quantity').value, 10);
 		  value = isNaN(value) ? 0 : value;
 		  value < 1 ? value = 1 : '';
 		  value--;
 		  document.getElementById('quantity').value = value;
-		}
+		}*/
 
-		/*DUPLICADA SOLO PARA EL DEMO, ELIMINAR DURANTE LA PROGRAMACIÓN*/
-
-
-		function increaseValue2() {
-		  var value = parseInt(document.getElementById('quantity2').value, 10);
+		/*function increaseValue2(e) {
+		  //var value = parseInt(document.getElementById('quantity2').value, 10);
+		 console.log(e);
+		  var value = parseInt(e.value,10);
 		  value = isNaN(value) ? 0 : value;
 		  value++;
 		  document.getElementById('quantity2').value = value;
-		}
+		}*/
 
-		function decreaseValue2() {
+		/*function decreaseValue2() {
 		  var value = parseInt(document.getElementById('quantity2').value, 10);
 		  value = isNaN(value) ? 0 : value;
 		  value < 1 ? value = 1 : '';
 		  value--;
 		  document.getElementById('quantity2').value = value;
-		}
+		}*/
 	</script>
 </body>
 </html>
