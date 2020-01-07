@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
+	
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/multirange.css') }}">
 	@yield('css')
 </head>
 <body>
