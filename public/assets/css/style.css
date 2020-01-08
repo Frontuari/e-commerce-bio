@@ -272,10 +272,6 @@
 		
 	}
 
-	#nav-header ul li{
-		border:1px solid red;
-	}
-
 	#nav-header a{
 		color: #fff;
 		display: flex;
