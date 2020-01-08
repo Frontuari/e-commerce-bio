@@ -50,7 +50,7 @@
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						<a class="navbar-brand" href="#"><img src="assets/img/logo-bio-mercados-blanco.svg" alt="Bio Mercados"></a>
+						<a class="navbar-brand" href="{{ url('/home') }}"><img src="assets/img/logo-bio-mercados-blanco.svg" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
 						<ul>

@@ -255,6 +255,7 @@
 		width: 100%;
 		max-height: 100px;
 	}
+
 	#nav-header ul{
 		width: 100%;
 		display: flex;
@@ -262,16 +263,26 @@
 		justify-content: right;
 		list-style: none;
 		padding: 0px;
+		border:1px solid blue;
+		float:right;
+
 	}
 	#nav-header ul li:not(:last-child){
 		margin-bottom: 10px;
+		
 	}
+
+	#nav-header ul li{
+		border:1px solid red;
+	}
+
 	#nav-header a{
 		color: #fff;
 		display: flex;
 		align-items: center;
 		line-height: 1;
 		font-size: 13px;
+		text-align: right !important;
 	}
 	#nav-header a .link-text{
 		margin-right: 5px;
@@ -351,6 +362,7 @@
 		font-style: italic;
 		justify-content: flex-end;
 		width: 100%;
+		text-align: righ
 	}
 	.bio-points .quantity-span{
 		font-style: normal;
