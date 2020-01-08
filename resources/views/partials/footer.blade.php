@@ -262,6 +262,20 @@
 		  value--;
 		  document.getElementById('quantity2').value = value;
 		}*/
+
+		$(window).scroll(function() {    
+		    var scroll = $(window).scrollTop();
+
+		     //>=, not <=
+		    if (scroll >= 1) {
+		        //clearHeader, not clearheader - caps H
+		        $("#myHeader").addClass("fixed-top");
+		    }
+
+		    if(scroll == 0){
+		    	$("#myHeader").removeClass("fixed-top");
+		    }
+		}); //missing );
 	</script>
 </body>
 </html>

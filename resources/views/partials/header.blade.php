@@ -14,7 +14,7 @@
 	@yield('css')
 </head>
 <body>
-		<header>
+		<header id="myHeader" style="background: white !important;">
 		<div class="top-header">
 			<div class="container">
 				<div class="row align-items-center">
