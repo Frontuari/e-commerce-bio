@@ -723,6 +723,7 @@
 		display: inline-block;
 		max-height: 45px;
 		margin-top: -10px;
+		width: 40px !important;
 	}
 	.carousel-caption p{
 		color: #28b67a;
