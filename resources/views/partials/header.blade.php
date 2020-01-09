@@ -20,7 +20,7 @@
 				<div class="row align-items-center">
 					<div class="col-md-6">
 						<div class="top-info">
-							<a href="mailto:contacto@biomercado.com">contacto@biomercado.com</a>
+							<a href="mailto:contacto@biomercado.com">contacto@biomercados.com.ve</a>
 							<a href="tel:584241234567">+58 424 123 4567</a>
 						</div>
 					</div>
