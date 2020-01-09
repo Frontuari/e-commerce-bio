@@ -280,6 +280,9 @@
 			if(event.target.checked){
 				var li = "Oferta: "+$(this).attr("title");
 				$("#selected-filters").append("<li id='sel_"+$(this).attr('id')+"'>"+li+"&nbsp; &nbsp;<a href='#' data-id='sel_"+$(this).attr('id')+"' class='remove-filter-selected'>X</a></li>");
+			}else{
+				var element = $(this).attr("id");
+				$("#sel_"+element).remove();
 			}
 		});
 
