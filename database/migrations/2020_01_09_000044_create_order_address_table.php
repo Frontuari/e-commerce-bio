@@ -26,7 +26,7 @@ class CreateOrderAddressTable extends Migration
             $table->unsignedBigInteger('cities_id');
             $table->text('address');
             $table->enum('status', ['A', 'I'])->default('A');
-
+            $table->timestamps();
             $table->index(["cities_id"], 'fk_direccion_pedido_parroquia1_idx');
 
             $table->index(["users_id"], 'fk_direccion_pedido_usuario1_idx');

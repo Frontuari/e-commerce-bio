@@ -46,3 +46,6 @@ Route::resource('payment_methods', 'API\PaymentMethodsController');
 
 //FAVORITE PRODUCTS
 Route::resource('favorite', 'API\FavoriteController');
+
+//RATING PRODUCTS
+Route::resource('rating_products', 'API\RatingProductsController');

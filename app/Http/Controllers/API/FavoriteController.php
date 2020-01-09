@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Favorite;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
-use App\Http\Resources\Favorite as FavoriteResource;
+use App\Http\Controllers\API\BaseController;
+//use App\Http\Resources\Favorite as FavoriteResource;
 class FavoriteController extends BaseController
 {
     /**
