@@ -49,3 +49,6 @@ Route::resource('favorite', 'API\FavoriteController');
 
 //RATING PRODUCTS
 Route::resource('rating_products', 'API\RatingProductsController');
+
+//TRACKING
+Route::resource('tracking', 'API\TrackingController');

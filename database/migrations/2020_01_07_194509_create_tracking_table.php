@@ -16,6 +16,8 @@ class CreateTrackingTable extends Migration
         Schema::create('tracking', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('users_id')->unsigned();
+            $table->bigInteger('orders_id')->unsigned();
+            $table->bigInteger('orders_status_id')->unsigned();
             $table->text('description');
             $table->timestamps();
         });
