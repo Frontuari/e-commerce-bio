@@ -1,5 +1,5 @@
 <footer class="section footer">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="footer-block">
@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<div class="bottom-footer">
-			<div class="container">
+			<div class="container-fluid">
 				<p>Todos los derechos reservados. Bio Mercados 2020</p>
 			</div>
 		</div>
@@ -276,6 +276,18 @@
 		    	$("#myHeader").removeClass("fixed-top");
 		    }
 		}); //missing );
+		$(".check-box").click(function(event){
+			if(event.target.checked){
+				var li = "Oferta: "+$(this).attr("title");
+				$("#selected-filters").append("<li id='sel_"+$(this).attr('id')+"'>"+li+"&nbsp; &nbsp;<a href='#' data-id='sel_"+$(this).attr('id')+"' class='remove-filter-selected'>X</a></li>");
+			}
+		});
+
+		$('body').on('click','.remove-filter-selected', function(){
+			var seleccionado = $(this).attr('data-id').split('_')[1];
+			$("#"+seleccionado).prop('checked',false);
+			$(this).parent().remove();
+		});
 	</script>
 </body>
 </html>

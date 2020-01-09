@@ -16,7 +16,7 @@
 <body>
 		<header id="myHeader" style="background: white !important;">
 		<div class="top-header">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row align-items-center">
 					<div class="col-md-6">
 						<div class="top-info">
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="middle-header">
-			<div class="container">
+			<div class="container"> <!--Aqui se debe poner contenedior fluido mas sin embargo cuando se coloca no se visualiza a nivel de responsive-->
 				<div class="row align-items-center-md">
 					<div id="toggler-header" class="col-4">
 						<button class="navbar-toggler toggle-menu" type="button">
@@ -98,7 +98,7 @@
 			</div>
 		</div>
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container">
+			<div class="container-fluid">
 				<div id="mainNavbar">
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">

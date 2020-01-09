@@ -6,7 +6,7 @@
 
 <!-- MAIN -->
 
-<section class="jumbotron" style="background-image: url('');">
+<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
 		<div class="container">
 			<div class="text-center">
 				<h1>Víveres</h1>
@@ -14,7 +14,7 @@
 		</div>
 	</section>
 	<section id="catalogo" class="main-content">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div id="sidebar">
 					<div class="products-order">
@@ -23,7 +23,9 @@
 							<select id="show" class="form-control">
 								<option value="10">10</option>
 								<option value="20">20</option>
-								<option value="30">30</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+								<option value="-1">Todos</option>
 							</select>
 							<span>Resultados de 253</span>
 						</div>
@@ -56,19 +58,19 @@
 							<div class="filter filter-offers">
 								<h4>Ofertas</h4>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-reciente" name="mas-reciente">
-									<label for="mas-reciente">Más Reciente</label>
+									<input type="checkbox" class="check-box" id="mas-reciente" title="Mas Recientes" name="mas-reciente">
+									<label for="mas-reciente">Más Recientes</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-buscados" name="mas-buscados">
+									<input type="checkbox" class="check-box" id="mas-buscados" title="Mas Buscados" name="mas-buscados">
 									<label for="mas-buscados">Más Buscados</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-vendidos" name="mas-vendidos">
+									<input type="checkbox" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="mas-vendidos">
 									<label for="mas-vendidos">Más Vendidos</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mejor-precio" name="mejor-precio">
+									<input type="checkbox" class="check-box" id="mejor-precio" title="Mejor Precio" name="mejor-precio">
 									<label for="mejor-precio">Mejor Precio</label>
 								</div>
 							</div>
@@ -90,16 +92,28 @@
 						<div class="ad-box">
 							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>
 						</div>
+						<div class="ad-box">
+							<a href="#"><img src="assets/img/puntos-bio-mercados.jpg"></a>
+						</div>
 					</div>
 				</div>
 				<div id="content">
+
+					
+					<!--Filtros seleccionados-->
+					<ul id='selected-filters'></ul>
+					<!--Fin filtros seleccionados-->
+
+
 					<div class="products-order">
 						<div class="form-group">
 							<span>Mostrando</span>
 							<select id="show" class="form-control">
 								<option value="10">10</option>
 								<option value="20">20</option>
-								<option value="30">30</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+								<option value="-1">Todos</option>
 							</select>
 							<span>Resultados de 253</span>
 						</div>
@@ -108,12 +122,16 @@
 							<select id="order-by" class="form-control">
 								<option value="1">De A -> Z</option>
 								<option value="2">De Z -> A</option>
+								<option value="2">Precio - De menor a mayor</option>
+								<option value="2">Precio - De mayor a menor</option>
+								<option value="2">Más Vendidos</option>
+								<option value="2">Más Recientes</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="product-list">
-						<div class="container">
+						<div class="container-fluid">
 							<div class="row">
 								<div class="col-6 col-lg-12">
 									<div class="product-block">
@@ -662,7 +680,7 @@
 											</div>
 										</div>
 										<div class="product-content">
-											<a href="#" class="product-title">Suavisante de Ropa</a>
+											<a href="#" class="product-title">Suavizante de Ropa</a>
 											<span class="product-info">1 L</span>
 											<div class="product-prices">
 												<span class="product-descount">$ 2 / Bs 90.000</span>
@@ -725,6 +743,9 @@
 					<div class="bio-ads">
 						<div class="ad-box">
 							<a href="#"><img src="assets/img/puntos-bio-mercados.jpg"></a>
+						</div>
+						<div class="ad-box">
+							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>
 						</div>
 						<div class="ad-box">
 							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>

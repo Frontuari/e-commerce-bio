@@ -67,7 +67,7 @@
 			</div>
 		</div>
 		<div class="combo-group-big">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-12 col-lg-4">
 						<div id="combo-group-1" class="row combo-group">
@@ -423,7 +423,7 @@
 	</section>
 
 	<section id="categories">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12 category-box">
 					<div class="category-img" style="background-image: url('assets/img/categoria-verduras-bio.jpg');">
@@ -470,7 +470,7 @@
 	</section>
 
 	<section id="products">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="section-title">
 				<h2>Nuestros Productos</h2>
 			</div>
@@ -482,7 +482,7 @@
 					<a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Más Vendidos</a>
 				</li>
 				<li class="nav-item text-right-md">
-					<a class="nav-link" id="searched-tab" data-toggle="tab" href="#searched" role="tab" aria-controls="searched" aria-selected="false">Más Buscado</a>
+					<a class="nav-link" id="searched-tab" data-toggle="tab" href="#searched" role="tab" aria-controls="searched" aria-selected="false">Más Buscados</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" id="cost-tab" data-toggle="tab" href="#cost" role="tab" aria-controls="cost" aria-selected="false">Mejor Precio</a>
@@ -722,7 +722,7 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">Suavisante de Ropa</a>
+								<a href="#" class="product-title">Suavizante de Ropa</a>
 								<span class="product-info">1 L</span>
 								<div class="product-prices">
 									<span class="product-descount">$ 2 / Bs 90.000</span>
@@ -893,7 +893,7 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">Suavisante de Ropa</a>
+								<a href="#" class="product-title">Suavizante de Ropa</a>
 								<span class="product-info">1 L</span>
 								<div class="product-prices">
 									<span class="product-descount">$ 2 / Bs 90.000</span>
@@ -1064,7 +1064,7 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">Suavisante de Ropa</a>
+								<a href="#" class="product-title">Suavizante de Ropa</a>
 								<span class="product-info">1 L</span>
 								<div class="product-prices">
 									<span class="product-descount">$ 2 / Bs 90.000</span>
@@ -1236,7 +1236,7 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">Suavisante de Ropa</a>
+								<a href="#" class="product-title">Suavizante de Ropa</a>
 								<span class="product-info">1 L</span>
 								<div class="product-prices">
 									<span class="product-descount">$ 2 / Bs 90.000</span>
