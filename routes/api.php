@@ -40,3 +40,9 @@ Route::resource('packages', 'API\ProductPackageController');//PACKAGE
 
 //SETINGS
 Route::get('settings','API\SettingController@all')->name('settings');
+
+//PAYMENT_METHODS
+Route::resource('payment_methods', 'API\PaymentMethodsController');
+
+//FAVORITE PRODUCTS
+Route::resource('favorite', 'API\FavoriteController');
