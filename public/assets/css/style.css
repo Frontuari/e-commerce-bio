@@ -1632,6 +1632,194 @@
 			max-width: 220px;
 		}
 	}
+
+
+/*
+	======================================================
+	Register form
+	======================================================
+*/	
+	#register{
+		padding: 3rem 0;
+		background-image: url('../img/fondo-registro.jpg');
+		background-size: 100%;
+		background-position: left bottom;
+		background-repeat: no-repeat;
+	}
+	.register-form{
+		padding: 2rem 4rem 2rem 2rem;
+		background-color: #fff;
+		background-image: url('../img/fondo-formulario-bio-mercados.png');
+		background-size: 135px;
+		background-position: 95% top;
+		background-repeat: no-repeat;
+		border-radius: 15px;
+		box-shadow: 2px 2px 10px rgba(0,0,0,.2);
+	}
+	.form-title{
+		color: #e1251b;
+		margin-bottom: 2rem;
+	}
+	.register-form .form-group:last-child{
+		margin-bottom: 0;
+	}
+	.register-form .form-check:not(:last-child){
+		margin-bottom: 1rem;
+	}
+	.register-form label{
+		margin-bottom: 0;
+	}
+	.register-form .btn{
+		background-color: #80bc00;
+		box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+		color: #fff;
+		display: block;
+		margin: auto;
+		transition: filter .3s ease;
+	}
+	.register-form .btn:hover{
+		color: #fff;
+		filter: brightness(85%);
+	}
+	.register-content{
+		margin-bottom: 3rem;
+	}
+	.register-content h2{
+		color: #28b67a;
+		font-weight: 300;
+		text-align: center;
+    	font-family: 'Bree Lt';
+    	margin-bottom: 0;
+	}
+	.register-content h1{
+		color: #e1251b;
+		text-align: center;
+		font-weight: 400;
+		margin-bottom: 2rem;
+	}
+	.register-content .items{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.register-content .items li{
+		display: flex;
+		align-items: center;
+		width: 100%;
+		padding: .5rem 0;
+	}
+	.register-content .items li:not(:last-child){
+		margin-bottom: .5rem;
+	}
+	.register-content .items li:before{
+		content: '';
+		display: block;
+		height: 35px;
+		width: 35px;
+		background-image: url('../img/item-bio-mercados.svg');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		background-position: center;
+		margin-right: 2rem;
+	}
+	.gender{
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-bottom: 1rem;
+	}
+	.gender .form-check{
+		margin-bottom: 0 !important;
+		margin-right: 2rem;
+	}
+	.gender .form-check:last-child{
+		margin-right: 0;
+	}
+	.gender > label{
+		width: 100%;
+		margin-bottom: .5rem;
+	}
+	.form-check{
+		padding-left: 0;
+		display: flex;
+		align-items: center;
+	}
+	.form-check label:hover{
+		cursor: pointer;
+	}
+	.form-check-input {
+		visibility: hidden;
+		opacity: 0;
+		position: absolute;
+		left: -9999999;
+	}
+	.custom-check{
+		display: flex;
+		align-items: flex-start;
+		position: relative;
+	}
+	.custom-check span{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 20px;
+		min-width: 20px;
+		margin-right: 1rem;
+		border: 1px solid #d9d9d9;
+	}
+	.form-check-radio .custom-check span{
+		border-radius: 50%;
+		margin-right: .5rem;
+	}
+	input[type=checkbox]:checked + .custom-check span:before,
+	input[type=radio]:checked + .custom-check span:before{
+		content: '';
+		display: block;
+		height: 14px;
+		width: 14px;
+	}
+	input[type=checkbox]:checked + .custom-check span:before{
+		background-image: url('../img/visto-bueno-bio-mercados.svg');
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	input[type=radio]:checked + .custom-check span:before{
+		background-color: #28b67a;
+		border-radius: 50%;
+	}
+	input[type=radio]:checked + .custom-check span,
+	input[type=checkbox]:checked + .custom-check span{
+		border-color: #28b67a;
+	}
+	@media (min-width: 992px){
+		#register{
+			background-size: 80%;
+		}
+		.register-form{
+			padding: 2rem 6rem 2rem 2rem;
+			background-size: 175px;
+		}
+		.register-content{
+			padding-right: 3rem;
+			margin-bottom: 0;
+		}
+	}
+	@media (min-width: 576px){
+		.gender .form-check{
+			margin-right: 0;
+			margin-left: 2rem;
+		}
+		.gender > label{
+			width: auto;
+			margin-bottom: 0;
+		}
+	}
+
+
+
+
+
 /*
 	======================================================
 	Footer
