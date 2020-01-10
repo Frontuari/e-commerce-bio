@@ -92,7 +92,7 @@
 							<!--<li id="nav-logout"><a href="#"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 						</ul>
-						<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+						<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 					</div>
 				</div>
 			</div>
@@ -102,8 +102,9 @@
 				<div id="mainNavbar">
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">
-							<button class="navbar-toggler toggle-menu" type="button">
-								<img src="assets/img/close-menu-movil-bio.svg" alt="Menu Bars">
+							<button class="navbar-toggler toggle-menu close-menu-button" type="button">
+								X
+								<!--<img src="assets/img/close-menu-movil-bio.svg" alt="Menu Bars">-->
 							</button>
 						</div>
 						<div class="col-md-12">
@@ -122,13 +123,13 @@
 									<a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 									<a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a>
 								</div>
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">253<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">253<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 							</div>-->
 							<!-- loggeado -->
 
 							<!-- no loggeado -->
 							<div class="top-info-nav">
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 								<a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 							</div>
 							<!-- no loggeado -->

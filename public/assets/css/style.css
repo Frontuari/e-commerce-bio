@@ -2041,3 +2041,8 @@
 		border-radius: 100% !important;
 		background:#ccc !important;padding: 3px !important;
 	}
+
+	button.close-menu-button{
+		font-size:20px !important;
+		font-weight: bold !important;
+	}
