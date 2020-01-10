@@ -74,7 +74,7 @@
 											<button type="submit" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
-											<small>¿No tienes cuenta? <a href="#">Registrate aquí</a></small>
+											<small>¿No tienes cuenta? <a href="{{ url('/register') }}">Registrate aquí</a></small>
 										</div>
 									</form>
 								</div>
@@ -169,7 +169,7 @@
 								<img src="assets/img/flecha-izquierda-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a class="dropdown-item" href="#">Víveres</a>
+								<a class="dropdown-item" href="{{ url('/catalog')}}">Víveres</a>
 								<a class="dropdown-item" href="#">Bebidas</a>
 								<a class="dropdown-item" href="#">Bodegón</a>
 								<a class="dropdown-item" href="#">Hogar y Juguetes</a>

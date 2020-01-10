@@ -19,6 +19,10 @@ Route::get('/catalog', function(){
 	return view('catalog');
 });
 
+Route::get('/register', function(){
+	return view('register');
+});
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
