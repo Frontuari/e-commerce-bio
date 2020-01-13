@@ -27,9 +27,9 @@ class CreateUsersTable extends Migration
             $table->dateTime('last_activity')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('password', 255);
             $table->integer('cant_orders')->nullable()->default('0');
-            $table->unsignedInteger('peoples_id');
-            $table->unsignedInteger('coins_id');
-            $table->unsignedInteger('groups_id');
+            $table->unsignedInteger('peoples_id')->nullable();
+            $table->unsignedInteger('coins_id')->nullable();
+            $table->unsignedInteger('groups_id')->nullable();
             $table->string('name', 200)->nullable();
             $table->string('email', 200);
             $table->timestamp('email_verified_at')->nullable();
