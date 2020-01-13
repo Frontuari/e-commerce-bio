@@ -21,16 +21,15 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            
             $table->increments('id');
             $table->string('name', 45);
-            $table->unsignedInteger('view_id');
+            $table->unsignedInteger('views_id');
 
-            $table->index(["view_id"], 'fk_events_view1_idx');
+            $table->index(["views_id"], 'fk_events_views1_idx');
 
 
-            $table->foreign('view_id', 'fk_events_view1_idx')
-                ->references('id')->on('view')
+            $table->foreign('views_id', 'fk_events_views1_idx')
+                ->references('id')->on('views')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

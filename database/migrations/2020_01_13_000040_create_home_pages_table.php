@@ -4,24 +4,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHomePageTable extends Migration
+class CreateHomePagesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'home_page';
+    public $tableName = 'home_pages';
 
     /**
      * Run the migrations.
-     * @table home_page
+     * @table home_pages
      *
      * @return void
      */
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            
             $table->increments('id');
             $table->string('title', 100);
             $table->text('description');

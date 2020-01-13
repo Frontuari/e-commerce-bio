@@ -4,24 +4,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateViewTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'view';
+    public $tableName = 'views';
 
     /**
      * Run the migrations.
-     * @table view
+     * @table views
      *
      * @return void
      */
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-           
             $table->increments('id');
             $table->string('name', 45);
             $table->string('public_name', 45)->nullable();
