@@ -21,7 +21,7 @@ class CreateDetPaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+         
             $table->increments('id');
             $table->unsignedInteger('payment_methods_id');
             $table->unsignedInteger('coins_id');

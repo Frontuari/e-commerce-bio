@@ -21,7 +21,7 @@ class CreateUserVisitProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'Aria';
+            
             $table->bigIncrements('id');
             $table->unsignedBigInteger('products_id');
             $table->unsignedInteger('users_id');

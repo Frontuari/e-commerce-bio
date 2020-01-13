@@ -21,7 +21,7 @@ class CreateRatingProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+           
             $table->bigIncrements('id');
             $table->unsignedTinyInteger('rating')->default('0');
             $table->string('opinion')->nullable();

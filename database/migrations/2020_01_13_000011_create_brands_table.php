@@ -21,7 +21,7 @@ class CreateBrandsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            
             $table->increments('id');
             $table->string('name', 45)->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');

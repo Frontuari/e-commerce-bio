@@ -21,7 +21,7 @@ class CreateDetProductTaxesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            
             $table->increments('id');
             $table->decimal('total', 20, 6);
             $table->unsignedInteger('taxes_id');

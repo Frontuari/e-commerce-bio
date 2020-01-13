@@ -16,6 +16,7 @@ class BrandController extends BaseController
     {
         $Brands = Brand::where('status','A')->get();
         return $this->sendResponse(BrandResource::collection($Brands), 'Brand retrieved successfully.');
+    
     }
     
 }

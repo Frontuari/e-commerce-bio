@@ -21,7 +21,7 @@ class CreateFavoritesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            
             $table->bigIncrements('id');
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('products_id');

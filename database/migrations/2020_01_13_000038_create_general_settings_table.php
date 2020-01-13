@@ -21,7 +21,6 @@ class CreateGeneralSettingsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('max_failed_attempts')->nullable()->default('4');
             $table->integer('lock_duration')->nullable()->default('1')->comment('Expresado en horas');

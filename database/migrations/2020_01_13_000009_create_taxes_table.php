@@ -21,7 +21,7 @@ class CreateTaxesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            
             $table->increments('id');
             $table->string('short_name', 45);
             $table->string('name')->nullable();

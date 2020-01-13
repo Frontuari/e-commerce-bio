@@ -21,7 +21,7 @@ class CreateDetBankOrdersTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->decimal('amount', 20, 6)->nullable();
             $table->integer('orders_id');
