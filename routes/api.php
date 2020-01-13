@@ -42,12 +42,12 @@ Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR
     Route::resource('payment_methods', 'API\PaymentMethodsController');
 
     //FAVORITE PRODUCTS
-    Route::resource('favorite', 'API\FavoriteController');
+    Route::resource('favorites', 'API\FavoriteController');
 
     //RATING PRODUCTS
     Route::resource('rating_products', 'API\RatingProductsController');
 
     //TRACKING
-    Route::resource('tracking', 'API\TrackingController');
+    Route::resource('trackings', 'API\TrackingController');
 
 });
