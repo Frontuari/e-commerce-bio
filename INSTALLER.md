@@ -9,6 +9,7 @@
 ## Configuración de la Base de datos
 * cp .env.example .env
 * configurar los datos de la base de datos en el archivo .env
+* Modificar la linea APP_URL=http://localhost:8000 (Deben colocar el puerto para que funcionen las imagenes del Voyager)
 * php artisan key:generate
 * php artisan migrate
 
