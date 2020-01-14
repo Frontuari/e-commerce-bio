@@ -1,8 +1,11 @@
 <?php
+
 namespace Illuminate\Console\Concerns;
+
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+
 trait CallsCommands
 {
     /**
@@ -12,6 +15,7 @@ trait CallsCommands
      * @return \Symfony\Component\Console\Command\Command
      */
     abstract protected function resolveCommand($command);
+
     /**
      * Call another console command.
      *
@@ -23,6 +27,7 @@ trait CallsCommands
     {
         return $this->runCommand($command, $arguments, $this->output);
     }
+
     /**
      * Call another console command silently.
      *
@@ -34,6 +39,7 @@ trait CallsCommands
     {
         return $this->runCommand($command, $arguments, new NullOutput);
     }
+
     /**
      * Run the given the console command.
      *
@@ -45,10 +51,12 @@ trait CallsCommands
     protected function runCommand($command, array $arguments, OutputInterface $output)
     {
         $arguments['command'] = $command;
+
         return $this->resolveCommand($command)->run(
             $this->createInputFromArguments($arguments), $output
         );
     }
+
     /**
      * Create an input instance from the given arguments.
      *
@@ -63,6 +71,7 @@ trait CallsCommands
             }
         });
     }
+
     /**
      * Get all of the context passed to the command.
      *

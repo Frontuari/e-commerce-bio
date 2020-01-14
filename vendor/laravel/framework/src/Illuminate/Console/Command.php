@@ -18,7 +18,7 @@ use Symfony\Component\Console\Question\Question;
 class Command extends SymfonyCommand
 {
     use Concerns\CallsCommands,
-       Macroable;
+        Macroable;
 
     /**
      * The Laravel application instance.
