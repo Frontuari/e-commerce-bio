@@ -291,6 +291,10 @@
 			$("#"+seleccionado).prop('checked',false);
 			$(this).parent().remove();
 		});
+
+		$('#entrar').click(function(){
+			document.location.href="{{ url('/profile') }}";
+		});
 	</script>
 </body>
 </html>

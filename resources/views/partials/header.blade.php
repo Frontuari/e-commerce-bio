@@ -71,7 +71,7 @@
 											<input type="pass" class="form-control" name="password">
 										</div>
 										<div class="form-group">
-											<button type="submit" class="btn">Entrar</button>
+											<button type="submit" id='entrar' class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
 											<small>¿No tienes cuenta? <a href="{{ url('/register') }}">Registrate aquí</a></small>
