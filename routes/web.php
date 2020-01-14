@@ -26,7 +26,3 @@ Route::get('/register', function(){
 Route::get('/profile', function(){
 	return view('profile');
 });
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
