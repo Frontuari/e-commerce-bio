@@ -9,9 +9,16 @@
 ## Configuración de la Base de datos
 * cp .env.example .env
 * configurar los datos de la base de datos en el archivo .env
-* Modificar la linea APP_URL=http://localhost:8000 (Deben colocar el puerto para que funcionen las imagenes del Voyager)
 * php artisan key:generate
 * php artisan migrate
+
+## Configuración del Voyager
+* En el archivo .env Verificar la linea: APP_URL=http://localhost:8000 
+* Considerar que debe poseer el puerto para que funcionen las imagenes en Voyager.
+* Ejecutar: php artisan voyager:install
+* Crear un usuario: php artisan voyager:admin TUCORREO --create
+* Iniciar el servidor: php artisan serve
+* Acceder con tu usuario y contraseña a traves de http://127.0.0.1:8000/admin
 
 ## Instalación del passport
 * php artisan passport:install
