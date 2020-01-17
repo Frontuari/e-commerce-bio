@@ -26,3 +26,11 @@ Route::get('/register', function(){
 Route::get('/profile', function(){
 	return view('profile');
 });
+
+Route::get('/cart', function(){
+	return view('cart');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
