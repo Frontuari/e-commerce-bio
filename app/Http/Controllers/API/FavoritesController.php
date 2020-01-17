@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Favorite;
+use App\Favorites;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 //use App\Http\Resources\Favorite as FavoriteResource;
-class FavoriteController extends BaseController
+class FavoritesController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class FavoriteController extends BaseController
     {
         //$id_usuario=$request->user()->id;
         $id_usuario=1;
-        $a=Favorite::where('users_id',$id_usuario)->get();
+        $a=Favorites::where('users_id',$id_usuario)->get();
         return $this->sendResponse($a);        
 
 
@@ -41,7 +41,7 @@ class FavoriteController extends BaseController
      */
     public function store(Request $request)
     {
-        $favorite = new Favorite;
+        $favorite = new Favorites;
         $favorite->users_id=1;
         if($request->products_id and $favorite->users_id){
             $favorite->products_id=$request->products_id;

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 
-Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR EL BEARER TOKEN
+//Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR EL BEARER TOKEN
 
     //CATEGORIES
     Route::resource('categories', 'API\CategoryController');
@@ -33,7 +33,7 @@ Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR
     Route::resource('brands', 'API\BrandController');
 
     //PACKAGES
-    Route::resource('packages', 'API\ProductPackageController');//PACKAGE
+    Route::resource('packages', 'API\DetProductPackagesController');//PACKAGE
 
     //SETINGS
     Route::get('settings','API\SettingController@all')->name('settings');
@@ -42,12 +42,12 @@ Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR
     Route::resource('payment_methods', 'API\PaymentMethodsController');
 
     //FAVORITE PRODUCTS
-    Route::resource('favorites', 'API\FavoriteController');
+    Route::resource('favorites', 'API\FavoritesController');
 
     //RATING PRODUCTS
     Route::resource('rating_products', 'API\RatingProductsController');
 
     //TRACKING
-    Route::resource('trackings', 'API\TrackingController');
+    Route::resource('trackings', 'API\TrackingsController');
 
-});
+//});

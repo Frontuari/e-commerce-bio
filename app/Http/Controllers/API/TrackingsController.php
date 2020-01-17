@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Tracking;
+use App\Trackings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
-class TrackingController extends BaseController
+class TrackingsController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class TrackingController extends BaseController
      */
     public function store(Request $request)
     {
-        $Tracking = new Tracking;
+        $Tracking = new Trackings;
         $Tracking->users_id=1;
 
 
@@ -63,7 +63,7 @@ class TrackingController extends BaseController
     public function show($id)
     {
         $id_usuario=1;
-        $a=Tracking::where('users_id',$id_usuario)->where('orders_id',$id)->get();
+        $a=Trackings::where('users_id',$id_usuario)->where('orders_id',$id)->get();
         return $this->sendResponse($a);   
     }
 
