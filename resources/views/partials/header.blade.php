@@ -15,8 +15,8 @@
 </head>
 
 <body>
-	<header>
-		<div class="top-header">
+	<header id="myHeader">
+		<div class="top-header color-white">
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6">
@@ -51,7 +51,8 @@
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/logo-bio-mercados-blanco.svg" alt="Bio Mercados"></a>
+						<!--<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/logo-bio-mercados-blanco.svg" alt="Bio Mercados"></a>-->
+						<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/	logo-biomercados.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
 						<ul>
@@ -99,7 +100,7 @@
 				</div>
 			</div>
 		</div>
-		<nav class="navbar navbar-expand-lg navbar-light">
+		<nav class="navbar navbar-expand-lg navbar-light color-white navbar-custom">
 			<div class="container">
 				<div id="mainNavbar">
 					<div id="top-info" class="w-100 align-items-center">

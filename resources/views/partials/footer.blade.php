@@ -343,13 +343,15 @@
 		     //>=, not <=
 		    if (scroll >= 1) {
 		        //clearHeader, not clearheader - caps H
+		        height_header = $("#myHeader").height();
+		       
 		        $("#myHeader").addClass("fixed-top");
-		        //$(".jumbotron").css({'margin-top':'20%'});
+		        $(".jumbotron").css({'margin-top':height_header+'px'});
 		    }
 
 		    if(scroll == 0){
 		    	$("#myHeader").removeClass("fixed-top");
-		        //$(".jumbotron").css({'margin-top':'0px'});
+		        $(".jumbotron").css({'margin-top':'0px'});
 
 		    }
 		}); //missing );

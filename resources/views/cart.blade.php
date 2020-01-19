@@ -63,10 +63,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" value="5">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" onclick="increaseValue2()">
+																		<button type="button" class="btn increaseValue">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn" onclick="decreaseValue2()">
+																		<button type="button" class="btn decreaseValue">
 																			<img src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
@@ -101,10 +101,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" value="1">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" onclick="increaseValue2()">
+																		<button type="button" class="btn increaseValue">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn" onclick="decreaseValue2()">
+																		<button type="button" class="btn decreaseValue">
 																			<img src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
@@ -139,10 +139,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" value="7">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" onclick="increaseValue2()">
+																		<button type="button" class="btn increaseValue">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn" onclick="decreaseValue2()">
+																		<button type="button" class="btn decreaseValue">
 																			<img src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
@@ -177,10 +177,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" value="8">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" onclick="increaseValue2()">
+																		<button type="button" class="btn increaseValue">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn" onclick="decreaseValue2()">
+																		<button type="button" class="btn decreaseValue">
 																			<img src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
