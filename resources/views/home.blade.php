@@ -25,9 +25,9 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="d-block w-100" src="assets/img/slide-bio-1.jpg" alt="First slide">
+					<img class="d-block w-100" src="assets/img/Slide-Bio-2.jpg" alt="First slide">
 					<div class="container">
-						<div class="carousel-caption">
+						<div class="carousel-caption caption-right">
 							<h5>¡Aprovecha nuestros combos!</h5>
 							<h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
 							<p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>

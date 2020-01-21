@@ -768,6 +768,8 @@
 		bottom: initial;
 		text-align: left;
 	}
+
+
 	.carousel-caption h1, .carousel-caption h2,
 	.carousel-caption h3, .carousel-caption h4,
 	.carousel-caption h5, .carousel-caption h6{
@@ -824,6 +826,14 @@
 		height: 17px;
 		width: 17px;
 	}
+	/*Clase para los que aparecera  en la derecha*/
+	.caption-right{
+		text-align: right;
+	}
+	.caption-right h2{
+		display: initial;
+	}
+	
 	@media (min-width: 992px){
 		#main-slider{
 			display: block;
