@@ -2,12 +2,18 @@
 
 namespace App;
 
+/*use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notifiable;*/
 
-class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
+
+
+/*class User extends Model implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens;
 
@@ -16,6 +22,10 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
      *
      * @var array
      */
+class User extends Model implements AuthenticatableContract {
+
+    use Authenticatable;
+    
     protected $fillable = [
         'name', 'email', 'password','people_id','group_id','currency_id'
     ];
@@ -37,4 +47,12 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasVerifiedEmail(){ }
+
+    public function markEmailAsVerified(){ }
+
+    public function sendEmailVerificationNotification(){ }
+
+    public function getEmailForVerification(){ }
 }

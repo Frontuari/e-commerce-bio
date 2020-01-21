@@ -19,7 +19,7 @@ Route::get('/catalog', function(){
 	return view('catalog');
 });
 
-Route::get('/register', function(){
+Route::get('/join', function(){
 	return view('register');
 });
 
@@ -33,4 +33,4 @@ Route::get('/cart', function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('dashboard');
