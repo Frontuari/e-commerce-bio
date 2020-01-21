@@ -52,5 +52,7 @@ Route::post('login', 'API\RegisterController@login');
 
     //ORDERS
     Route::resource('orders', 'API\OrdersController');
+        //ADD QUALIFY ORDER
+        Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
 
 //});

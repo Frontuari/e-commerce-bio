@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Orders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\DB;
 class OrdersController extends BaseController
 {
     /**
@@ -14,7 +15,8 @@ class OrdersController extends BaseController
      */
     public function index()
     {
-        //
+        $a=Orders::where('status','A')->get();
+        return $this->sendResponse($a);
     }
 
     /**
@@ -57,7 +59,7 @@ class OrdersController extends BaseController
              }
              catch(\Exception $e){
                
-                return $this->sendError($this->manejar_error($e,true));
+                return $this->sendError($this->manejar_error($e));
              }
 
 
@@ -77,9 +79,34 @@ class OrdersController extends BaseController
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show(Orders $orders,$id)
     {
-        //
+        $a= $orders->where('id',$id)->get();
+        return $this->sendResponse($a);
+    }
+
+
+
+    public function set_qualify(Orders $orders, Request $r){
+        if(!$r->user_rating) return $this->sendError("Debe calificar la orden.");
+
+
+        try{
+            $users_id=1;    #USUARIO DE LA SESSION
+            DB::table('orders as o')->where('o.id', $r->id)->where('order_address.users_id',$users_id)->join('order_address', 'order_address.id', '=', 'o.order_address_id')
+            ->update(
+                [
+                    'user_rating' => $r->user_rating,
+                    'opinion'=>'$r->opinion'
+                 ]
+            );
+
+         }
+         catch(\Exception $e){
+           
+            return $this->sendError($this->manejar_error($e));
+         }
+         return $this->sendResponse($orders);
     }
 
     /**
@@ -100,9 +127,28 @@ class OrdersController extends BaseController
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, Orders $orders,$id)
     {
-        //
+      //  $orders = new Orders;
+      exit();
+        $orders->find($id)->update($request->all());
+        exit();
+        echo $orders->sub_total;
+        
+        exit();
+        $a= $orders->where('id',$id)->get();
+        echo print_r($a);
+       
+        exit();
+        $orders->opinion=$request->opinion;
+        $orders->save();
+        //$orders->find($id)->update($request->all());
+
+
+       // $orders->find($id);
+       // $orders->id=$request->id;
+       // $orders->opinion=$request->opinion;
+       // echo $orders->update();
     }
 
     /**
