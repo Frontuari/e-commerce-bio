@@ -50,4 +50,20 @@ class BaseController extends Controller
         return response()->json($response, $code);
 
     }
+    public function manejar_error($e,$mostrar_error=false){
+            $msj=$e->getMessage();    
+            preg_match('/^SQLSTATE.[0-9]+/', $msj, $matches);
+            $arr=explode("[",$matches[0]);
+            if($mostrar_error)  echo  $msj;
+            switch($arr[1]){
+                case 23502:
+                case 42703: return "Debe completar todos los campos obligatorios.";
+            break;
+                case 23503: return "Disculpe, pero uno de los datos introducidos es incorrecto.";
+            default:
+                return  "Disculpe intente nuevamente.";
+
+            }
+
+    }
 }

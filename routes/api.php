@@ -50,4 +50,7 @@ Route::post('login', 'API\RegisterController@login');
     //TRACKING
     Route::resource('trackings', 'API\TrackingsController');
 
+    //ORDERS
+    Route::resource('orders', 'API\OrdersController');
+
 //});
