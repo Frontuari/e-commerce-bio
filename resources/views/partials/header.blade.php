@@ -52,7 +52,7 @@
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
 						<!--<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/logo-bio-mercados-blanco.svg" alt="Bio Mercados"></a>-->
-						<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/	logo-biomercados.png" alt="Bio Mercados"></a>
+						<a class="navbar-brand" href="{{ url('/') }}"><img src="assets/img/	logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
 						<ul>

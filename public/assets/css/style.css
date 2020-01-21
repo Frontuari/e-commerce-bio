@@ -267,10 +267,11 @@
 	======================================================
 */
 	.middle-header{
-		padding: 1rem 0;
+		padding: 0.7rem 0;
 		position: relative;
-		background-color: #58bd00;
+		background-color: #7fbc01;
 		border-bottom: 16px solid #28b67a;
+		overflow: hidden;
 	}
 	.middle-header:before,
 	.middle-header:after{
@@ -293,8 +294,8 @@
 		right: 0;
 		bottom: -16px;
 		width: 150px;
-		height: 89px;
-		background-image: url('../img/fondo-cabecera-bio-bottom.png');
+		height: 80px;
+		background-image: url('../img/fondo-banner-nuevo.png');
 	}
 	.middle-header .container{
 		position: relative;
