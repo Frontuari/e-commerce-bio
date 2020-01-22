@@ -3,7 +3,7 @@
 @section('title','Home')
 
 @section('body')
-<!-- MAIN -->
+<!-- MAIN  -->
 <main>
 	<section id="main-slider">
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

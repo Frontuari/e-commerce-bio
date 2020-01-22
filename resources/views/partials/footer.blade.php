@@ -288,7 +288,6 @@
 	<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
 	
-
 	@yield('js')
 	<script>
 		jQuery(document).ready(function($){

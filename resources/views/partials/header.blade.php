@@ -109,6 +109,7 @@
 								<img src="assets/img/close-menu-movil-bio.svg" alt="Menu Bars">
 							</button>
 						</div>
+						<!---->
 						<div class="col-md-12">
 							<ul class="social-nav">
 								<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
