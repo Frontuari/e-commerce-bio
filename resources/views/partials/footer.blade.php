@@ -267,7 +267,7 @@
 
 
 	<!-- MODAL PRINCIPAL SIEMPRE ACTIVO-->
-	<div class="modal modal-order fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalOrderLabel" aria-hidden="true">
+	<div class="modal modal-principal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel" aria-hidden="true" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -292,8 +292,7 @@
 	<script>
 		jQuery(document).ready(function($){
 
-			$("#ModalPrincipal").removeClass("fade").hide(0).delay(500).fadeIn(500);
-
+			/*$("#ModalPrincipal").removeClass("fade").hide(0).delay(500).fadeIn(500);
 			$("#ModalPrincipal").click(function()
 			{
 				//$("#ModalPrincipal").addClass('fade');
@@ -301,11 +300,10 @@
 				{
 					$("#ModalPrincipal").css({'display':'none'});
 				});
-
-
-
-			});
-
+			});*/
+			 $(window).on('load',function(){
+		        $('#ModalPrincipal').modal('show');
+			    });
 
 			$(".toggle-menu").click(function(){
 				$(".over").toggle();
