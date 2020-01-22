@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FixBrand extends Migration
+class FixEANProducts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class FixBrand extends Migration
      */
     public function up()
     {
-        Schema::table('brands', function (Blueprint $table) {
-            
-           $table->dropColumn(['create_at','updated_at']);
-           
-           
-            
-            
-           
+        Schema::table('products', function ($table) {
+            $table->string('EAN', 20)->change();
         });
     }
 

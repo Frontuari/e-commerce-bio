@@ -89,6 +89,7 @@ class OrdersController extends BaseController
 
     public function set_qualify(Orders $orders, Request $r){
         if(!$r->user_rating) return $this->sendError("Debe calificar la orden.");
+        if($r->user_rating>5) $r->user_rating=5;
 
 
         try{
@@ -97,7 +98,7 @@ class OrdersController extends BaseController
             ->update(
                 [
                     'user_rating' => $r->user_rating,
-                    'opinion'=>'$r->opinion'
+                    'opinion'=>"$r->opinion"
                  ]
             );
 
