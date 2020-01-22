@@ -1499,11 +1499,13 @@
 	
 	/*CUstom modal*/
 
-	#ModalPrincipal .modal-dialog{
+	#ModalPrincipal .modal-dialog
+	{
 			max-width: 900px;
 			text-align: center;
 		}
-	#ModalPrincipal .modal-dialog .modal-content .modal-body{
+	#ModalPrincipal .modal-dialog .modal-content .modal-body
+	{
 			background-image: url('../img/Fondo-Pop-up.png');
 			background-size: 100%;
 			background-position: bottom center;
@@ -1513,17 +1515,20 @@
 			padding-right: 90px;
 			padding-bottom: 200px;
 		}
-	#ModalPrincipal .modal-dialog .modal-content .modal-body h2{
+	#ModalPrincipal .modal-dialog .modal-content .modal-body h2
+	{
 			color: #80bc00;
 			font-family: 'Bree Lt';
 			font-size: 32px;
 			margin-bottom: 2rem;
 			font-weight: 400;
 		}
-	#ModalPrincipal .modal-dialog .modal-content .modal-body p{
+	#ModalPrincipal .modal-dialog .modal-content .modal-body p
+	{
 			font-family: 'Bree Lt';
 		}
-	#ModalPrincipal .modal-dialog .modal-content .modal-body a{
+	#ModalPrincipal .modal-dialog .modal-content .modal-body a
+	{
 			color: #e1251b;
 			font-weight: 600;
 		}
