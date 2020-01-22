@@ -1496,6 +1496,45 @@
 	.modal-backdrop{
 		background-color: initial;
 	}
+	
+	/*CUstom modal*/
+
+	#ModalPrincipal .modal-dialog{
+			max-width: 900px;
+			text-align: center;
+		}
+	#ModalPrincipal .modal-dialog .modal-content .modal-body{
+			background-image: url('../img/Fondo-Pop-up.png');
+			background-size: 100%;
+			background-position: bottom center;
+			background-repeat: no-repeat;
+			height: auto;
+			padding-left: 90px;
+			padding-right: 90px;
+			padding-bottom: 200px;
+		}
+	#ModalPrincipal .modal-dialog .modal-content .modal-body h2{
+			color: #80bc00;
+			font-family: 'Bree Lt';
+			font-size: 32px;
+			margin-bottom: 2rem;
+			font-weight: 400;
+		}
+	#ModalPrincipal .modal-dialog .modal-content .modal-body p{
+			font-family: 'Bree Lt';
+		}
+	#ModalPrincipal .modal-dialog .modal-content .modal-body a{
+			color: #e1251b;
+			font-weight: 600;
+		}
+	#ModalPrincipal .modal-dialog .modal-content .modal-body .order-text{
+			color: #28b67a;
+			font-weight: 600;
+	}
+
+
+
+
 	.btn-addcart{
 		color: #fff;
 		background-color: #80bc00;

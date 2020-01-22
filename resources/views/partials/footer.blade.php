@@ -264,8 +264,24 @@
 			</div>
 		</div>
 	</div>
-	<div class="over toggle-menu"></div>
 
+
+	<!-- MODAL PRINCIPAL SIEMPRE ACTIVO-->
+	<div class="modal modal-order fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalOrderLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2>Desde <b>bio mercados</b>, inspirados en servir,<br/> queremos darte la mas cordial bienvenida</h2>
+					<p>Pensando en tu comodidad, ahora ponemos a tu disposición nuestra tienda virtual <strong>bio en linea</strong> , la cual puedes visitar ingresando a <a href="" class="enlace-modal">www.biomercados.com.ve</a> donde viviras la mejor experiencia de compra en linea con la variedad, frescura y calidad bio de siempre</p>
+					<p>Desde tu Smartphone o Tablet podras visitar bio en linea y hacer compras para ti o para tu familia, solo debes <strong>registrar</strong> tus datos una vez</p>
+					<p><span class="order-text">Llevamos tu mercado hasta tu puerta o lo retiras</span> lista para llevar, bio en linea, a su servicio con un clic!!!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="over toggle-menu"></div>
 	<script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/popper.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -277,11 +293,27 @@
 	<script>
 		jQuery(document).ready(function($){
 
+			$("#ModalPrincipal").removeClass("fade").hide(0).delay(500).fadeIn(500);
+
+			$("#ModalPrincipal").click(function()
+			{
+				//$("#ModalPrincipal").addClass('fade');
+				$('#ModalPrincipal').fadeOut(500,function()
+				{
+					$("#ModalPrincipal").css({'display':'none'});
+				});
+
+
+
+			});
+
 
 			$(".toggle-menu").click(function(){
 				$(".over").toggle();
 				$(".navbar").toggleClass("navbar-translate");
 			});
+
+
 
 			/*Elementos a usar al momento de incrementar el valor*/
 			$(document).on('click','.increaseValue',function()
