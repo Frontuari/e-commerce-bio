@@ -25,14 +25,14 @@
 							<a href="tel:584241234567">+58 424 123 4567</a>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<!--<div class="col-md-6">
 						<ul class="social-nav">
 							<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
 							<li><a href="#"><img src="assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
 							<li><a href="#"><img src="assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
 							<li><a href="#"><img src="assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 						</ul>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 					<div id="search-header" class="col-lg-5 col-md-12">
 						<form class="form-inline" action="">
 							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search">
-							<button class="btn btn-search" type="submit"><img src="assets/img/icono-busqueda-bio.svg"></button>
+							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
@@ -90,7 +90,7 @@
 							<li id="nav-cart"><a href="{{ url('/cart') }}"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">0</span></a></li>
 							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a></li>
 
-							<li id="bio-wallet"><a href="#" class="bio-points">bio Wallet<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a></li>
+							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 
 							<!-- loggeado -->
 							<!--<li id="nav-logout"><a href="#"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
