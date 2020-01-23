@@ -45,8 +45,10 @@
 
 * Voyager
 
-open following file
+* Colocar => ? en :
 projectfolder\vendor\tcg\voyager\routes\voyager.php
-Add ? infornt of {id} as {id?} at following line
+Add ? infornt of {id} as {id?} 
 
-Route::delete('{id}', ['uses' => $namespacePrefix.'VoyagerBreadController@destroy', 'as' => 'delete']);
+* Colocar => ? en :
+/var/www/html/e-commerce-bio/vendor/tcg/voyager/resources/views/menus/browse.blade.php  Linea 110
+$(this).data('id?')
