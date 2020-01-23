@@ -55,4 +55,7 @@ Route::post('login', 'API\RegisterController@login');
         //ADD QUALIFY ORDER
         Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
 
+    //ADD VISIT USER PRODUCT
+    Route::resource('user_visit_products', 'API\UserVisitProductsController');
+        
 //});
