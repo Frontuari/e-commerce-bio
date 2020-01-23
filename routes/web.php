@@ -34,3 +34,8 @@ Route::get('/cart', function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('dashboard');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

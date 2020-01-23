@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
 
-
 /*class User extends Model implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens;
@@ -21,8 +20,8 @@ use Illuminate\Auth\Authenticatable;
      * The attributes that are mass assignable.
      *
      * @var array
-     */
-class User extends Model implements AuthenticatableContract {
+     */  // extends Model esto se cambio para que funcione voyager
+class User extends \TCG\Voyager\Models\User implements AuthenticatableContract {
 
     use Authenticatable;
     

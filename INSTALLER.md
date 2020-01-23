@@ -40,3 +40,13 @@
 
 ### error en el htaccess (Linux)
 * sudo a2enmod rewrite
+
+### SOLUCION A ERRORES
+
+* Voyager
+
+open following file
+projectfolder\vendor\tcg\voyager\routes\voyager.php
+Add ? infornt of {id} as {id?} at following line
+
+Route::delete('{id}', ['uses' => $namespacePrefix.'VoyagerBreadController@destroy', 'as' => 'delete']);
