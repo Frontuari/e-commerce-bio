@@ -56,8 +56,8 @@ Route::group(['as' => 'voyager.'], function () {
         }
 
         // Role Routes
-        Route::resource('roles', $namespacePrefix.'VoyagerRoleController');
-       // Route::resource('roles', $namespacePrefix.'VoyagerRoleController', ['parameters' => ['roles' => 'id']]);
+        //Route::resource('roles', $namespacePrefix.'VoyagerRoleController');
+       Route::resource('roles', $namespacePrefix.'VoyagerRoleController', ['parameters' => ['roles' => 'id']]);
         // Menu Routes
         Route::group([
             'as'     => 'menus.',
