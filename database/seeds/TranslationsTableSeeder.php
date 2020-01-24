@@ -62,22 +62,22 @@ class TranslationsTableSeeder extends Seeder
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Página');
         }
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.user.singular'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Utilizador');
-        }
+        //$dtp = DataType::where($_fld, __('voyager::seeders.data_types.user.singular'))->firstOrFail();
+       // if ($dtp->exists) {
+            //$this->trans('pt', $this->arr($_tpl, $dtp->id), 'Utilizador');
+       // }
         $dtp = DataType::where($_fld, __('voyager::seeders.data_types.category.singular'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Categoria');
         }
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.menu.singular'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Menu');
-        }
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.role.singular'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Função');
-        }
+       // $dtp = DataType::where($_fld, __('voyager::seeders.data_types.menu.singular'))->firstOrFail();
+      //  if ($dtp->exists) {
+      //      $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Menu');
+      //  }
+       // $dtp = DataType::where($_fld, __('voyager::seeders.data_types.role.singular'))->firstOrFail();
+        //if ($dtp->exists) {
+        //    $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Função');
+       // }
 
         // Adding translations for 'display_name_plural'
         //
@@ -91,18 +91,18 @@ class TranslationsTableSeeder extends Seeder
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Páginas');
         }
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.user.plural'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Utilizadores');
-        }
+        //$dtp = DataType::where($_fld, __('voyager::seeders.data_types.user.plural'))->firstOrFail();
+        //if ($dtp->exists) {
+            //$this->trans('pt', $this->arr($_tpl, $dtp->id), 'Utilizadores');
+       // }
         $dtp = DataType::where($_fld, __('voyager::seeders.data_types.category.plural'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Categorias');
         }
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.menu.plural'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Menus');
-        }
+        //$dtp = DataType::where($_fld, __('voyager::seeders.data_types.menu.plural'))->firstOrFail();
+       // if ($dtp->exists) {
+        //    $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Menus');
+        //}
         $dtp = DataType::where($_fld, __('voyager::seeders.data_types.role.plural'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Funções');

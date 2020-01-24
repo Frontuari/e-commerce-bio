@@ -52,3 +52,7 @@ Add ? infornt of {id} as {id?}
 * Colocar => ? en :
 /var/www/html/e-commerce-bio/vendor/tcg/voyager/resources/views/menus/browse.blade.php  Linea 110
 $(this).data('id?')
+* Reemplazar la linea por esto:
+resources/views/tools/bread/edit-add.blade.php
+Linea 376
+ '_field_trans' => $dataRow ? get_field_translations($dataRow,'display_name') : json_encode([config('voyager.multilingual.default') => ucwords(str_replace('_', ' ', $data['field']))]),
