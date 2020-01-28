@@ -5409,6 +5409,7 @@ return array(
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
     'TrackingsTableSeeder' => $baseDir . '/database/seeds/TrackingsTableSeeder.php',
+    'TranslationsTableSeeder' => $baseDir . '/database/seeds/TranslationsTableSeeder.php',
     'TransportsTableSeeder' => $baseDir . '/database/seeds/TransportsTableSeeder.php',
     'UserVisitProductsTableSeeder' => $baseDir . '/database/seeds/UserVisitProductsTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',

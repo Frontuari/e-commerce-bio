@@ -6016,6 +6016,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TrackingsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TrackingsTableSeeder.php',
+        'TranslationsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TranslationsTableSeeder.php',
         'TransportsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TransportsTableSeeder.php',
         'UserVisitProductsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UserVisitProductsTableSeeder.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',

@@ -1,4 +1,3 @@
-	</main>
 	<footer class="section footer">
 		<div class="container">
 			<div class="row">
@@ -288,8 +287,11 @@
 	<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
 	
+	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+	
 	@yield('js')
 	<script>
+
 		jQuery(document).ready(function($){
 
 			/*$("#ModalPrincipal").removeClass("fade").hide(0).delay(500).fadeIn(500);
