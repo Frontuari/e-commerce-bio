@@ -631,6 +631,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Events' => __DIR__ . '/../..' . '/app/Events.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Favorites' => __DIR__ . '/../..' . '/app/Favorites.php',
+        'App\\FuncionesGenerales' => __DIR__ . '/../..' . '/app/FuncionesGenerales.php',
         'App\\GeneralSettings' => __DIR__ . '/../..' . '/app/GeneralSettings.php',
         'App\\Groups' => __DIR__ . '/../..' . '/app/Groups.php',
         'App\\HomePages' => __DIR__ . '/../..' . '/app/HomePages.php',

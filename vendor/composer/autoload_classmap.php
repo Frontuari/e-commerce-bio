@@ -24,6 +24,7 @@ return array(
     'App\\Events' => $baseDir . '/app/Events.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Favorites' => $baseDir . '/app/Favorites.php',
+    'App\\FuncionesGenerales' => $baseDir . '/app/FuncionesGenerales.php',
     'App\\GeneralSettings' => $baseDir . '/app/GeneralSettings.php',
     'App\\Groups' => $baseDir . '/app/Groups.php',
     'App\\HomePages' => $baseDir . '/app/HomePages.php',
