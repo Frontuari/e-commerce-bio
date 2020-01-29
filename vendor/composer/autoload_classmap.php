@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdvsTableSeeder' => $baseDir . '/database/seeds/AdvsTableSeeder.php',
+    'App\\Advs' => $baseDir . '/app/Advs.php',
     'App\\BankDatas' => $baseDir . '/app/BankDatas.php',
     'App\\Banks' => $baseDir . '/app/Banks.php',
     'App\\Brand' => $baseDir . '/app/Brand.php',
@@ -41,6 +43,7 @@ return array(
     'App\\Http\\Controllers\\API\\SettingController' => $baseDir . '/app/Http/Controllers/API/SettingController.php',
     'App\\Http\\Controllers\\API\\TrackingsController' => $baseDir . '/app/Http/Controllers/API/TrackingsController.php',
     'App\\Http\\Controllers\\API\\UserVisitProductsController' => $baseDir . '/app/Http/Controllers/API/UserVisitProductsController.php',
+    'App\\Http\\Controllers\\AdvsController' => $baseDir . '/app/Http/Controllers/AdvsController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -5410,7 +5413,6 @@ return array(
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
     'TrackingsTableSeeder' => $baseDir . '/database/seeds/TrackingsTableSeeder.php',
-    'TranslationsTableSeeder' => $baseDir . '/database/seeds/TranslationsTableSeeder.php',
     'TransportsTableSeeder' => $baseDir . '/database/seeds/TransportsTableSeeder.php',
     'UserVisitProductsTableSeeder' => $baseDir . '/database/seeds/UserVisitProductsTableSeeder.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
