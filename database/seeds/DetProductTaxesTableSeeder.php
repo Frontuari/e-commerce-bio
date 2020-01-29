@@ -16,6 +16,14 @@ class DetProductTaxesTableSeeder extends Seeder
 
         \DB::table('det_product_taxes')->delete();
         
+        \DB::table('det_product_taxes')->insert(array (
+            0 => 
+            array (
+                'id' => 2,
+                'taxes_id' => 1,
+                'products_id' => 2,
+            ),
+        ));
         
         
     }

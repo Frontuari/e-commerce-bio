@@ -20,11 +20,11 @@ class OrdersTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 11,
-                'sub_total' => '100.000000',
-                'total_pay' => '200.000000',
-                'total_tax' => '20.000000',
-                'total_packaging' => '50.000000',
-                'total_transport' => '0.000000',
+                'sub_total' => '1000.000000',
+                'total_pay' => '2000000.000000',
+                'total_tax' => '1000.000000',
+                'total_packaging' => '1000.000000',
+                'total_transport' => '1000.000000',
                 'order_address_id' => 1,
                 'status' => 'A',
                 'transports_id' => 1,
@@ -32,11 +32,11 @@ class OrdersTableSeeder extends Seeder
                 'delivery_time_date' => '2020-01-28 00:00:00',
                 'discount' => NULL,
                 'packagings_id' => 1,
-                'currency_rate' => '74000.000000',
+                'currency_rate' => '80000.000000',
                 'opinion' => 'Hola',
                 'coins_id' => 1,
-                'created_at' => '2020-01-21 17:31:39',
-                'updated_at' => '2020-01-21 21:45:19',
+                'created_at' => '2020-01-21 17:31:00',
+                'updated_at' => '2020-01-28 14:58:38',
             ),
         ));
         

@@ -19,21 +19,21 @@ class PackagingsTableSeeder extends Seeder
         \DB::table('packagings')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'name' => 'Bolsas',
-                'value' => '10000.000000',
-                'status' => 'A',
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            1 => 
-            array (
                 'id' => 2,
                 'name' => 'Cajas',
                 'value' => '100000.000000',
                 'status' => 'A',
                 'created_at' => '2020-01-24 16:13:56',
                 'updated_at' => '2020-01-24 16:13:56',
+            ),
+            1 => 
+            array (
+                'id' => 1,
+                'name' => 'Bolsas',
+                'value' => '20000.000000',
+                'status' => 'A',
+                'created_at' => NULL,
+                'updated_at' => '2020-01-28 18:37:16',
             ),
         ));
         

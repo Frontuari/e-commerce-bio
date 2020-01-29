@@ -22,11 +22,11 @@ class TaxesTableSeeder extends Seeder
                 'id' => 1,
                 'short_name' => 'IVA',
                 'name' => 'impuesto sobre la renta',
-                'value' => '0.160000',
+                'value' => '10.100000',
                 'type' => 'porc',
                 'status' => 'A',
                 'created_at' => NULL,
-                'updated_at' => NULL,
+                'updated_at' => '2020-01-28 15:40:46',
             ),
         ));
         

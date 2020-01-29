@@ -613,6 +613,8 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
     );
 
     public static $classMap = array (
+        'AdvsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvsTableSeeder.php',
+        'App\\Advs' => __DIR__ . '/../..' . '/app/Advs.php',
         'App\\BankDatas' => __DIR__ . '/../..' . '/app/BankDatas.php',
         'App\\Banks' => __DIR__ . '/../..' . '/app/Banks.php',
         'App\\Brand' => __DIR__ . '/../..' . '/app/Brand.php',
@@ -648,6 +650,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\API\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/SettingController.php',
         'App\\Http\\Controllers\\API\\TrackingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/TrackingsController.php',
         'App\\Http\\Controllers\\API\\UserVisitProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UserVisitProductsController.php',
+        'App\\Http\\Controllers\\AdvsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdvsController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
