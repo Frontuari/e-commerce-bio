@@ -920,14 +920,14 @@ class MenuItemsTableSeeder extends Seeder
                 'title' => 'Publicidades',
                 'url' => '',
                 'target' => '_self',
-                'icon_class' => NULL,
-                'color' => NULL,
+                'icon_class' => 'voyager-tv',
+                'color' => '#000000',
                 'parent_id' => NULL,
                 'order' => 20,
                 'created_at' => '2020-01-29 02:11:23',
-                'updated_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 12:51:32',
                 'route' => 'voyager.advs.index',
-                'parameters' => NULL,
+                'parameters' => 'null',
             ),
         ));
         
