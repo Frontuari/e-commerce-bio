@@ -24,7 +24,7 @@
 						<div class="col-6 col-20" v-for="product_view in viewed" v-bind:key="product_view.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img src="assets/img/producto-bio-006.jpg">
+									<img :src="'storage/'+product_view.photo">
 									<div class="product-actions">
 										<button type="button" class="btn" data-toggle="modal" data-target="#ModalProd">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -40,7 +40,7 @@
 								<a href="#" class="product-title">{{ product_view.name }}</a>
 								<span class="product-info">500 g</span>
 								<div class="product-prices">
-									<p>Bs {{ product_view.price }}</p>
+									<p>Bs {{ product_view.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -48,10 +48,10 @@
 				</div>
 				<div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
 					<div class="row">
-						<div class="col-6 col-20">
+						<div class="col-6 col-20" v-for="product_sold in sold" v-bind:key="product_sold.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img src="assets/img/producto-bio-006.jpg">
+									<img :src="'storage/'+product_view.photo">
 									<div class="product-actions">
 										<button type="button" class="btn" data-toggle="modal" data-target="#ModalProd">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -64,10 +64,10 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">Mantequilla</a>
+								<a href="#" class="product-title">{{ product_view.name }}</a>
 								<span class="product-info">500 g</span>
 								<div class="product-prices">
-									<p>$ 3 / Bs 135.000</p>
+									<p>Bs {{ product_view.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -164,7 +164,15 @@
 			getBestPrice: async function () {
 				const response = await axios.get(URLSERVER+'api/products/best/price');
 				this.best_price = response.data.data;
-			},
+			}
+		},
+		filters: {
+			FormatNumber: function (num) {
+				num = parseFloat(num).toFixed(2);
+				const arrNum = num.split(".");
+				const decimal = arrNum[1];
+				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
+			}
 		},
         mounted(){
 			this.getViewed();
