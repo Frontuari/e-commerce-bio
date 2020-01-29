@@ -8,6 +8,12 @@ class Packagings extends Model
 {
     public function getValueAttribute($value)
     {
-        return number_format($value, 2, '.', '');
+        $fg= new FuncionesGenerales;
+        return $fg->get_formato_moneda($value);
+    }
+    public function setValueAttribute($value)
+    {
+        $fg= new FuncionesGenerales;
+        $this->attributes['value']=$fg->set_formato_moneda($value);
     }
 }

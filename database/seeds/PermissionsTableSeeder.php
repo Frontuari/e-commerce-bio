@@ -1025,6 +1025,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
+            126 => 
+            array (
+                'id' => 137,
+                'key' => 'browse_advs',
+                'table_name' => 'advs',
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 02:11:23',
+            ),
+            127 => 
+            array (
+                'id' => 138,
+                'key' => 'read_advs',
+                'table_name' => 'advs',
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 02:11:23',
+            ),
+            128 => 
+            array (
+                'id' => 139,
+                'key' => 'edit_advs',
+                'table_name' => 'advs',
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 02:11:23',
+            ),
+            129 => 
+            array (
+                'id' => 140,
+                'key' => 'add_advs',
+                'table_name' => 'advs',
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 02:11:23',
+            ),
+            130 => 
+            array (
+                'id' => 141,
+                'key' => 'delete_advs',
+                'table_name' => 'advs',
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-01-29 02:11:23',
+            ),
         ));
         
         

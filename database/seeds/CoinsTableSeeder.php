@@ -45,10 +45,10 @@ class CoinsTableSeeder extends Seeder
                 'name' => 'Bitcoin',
                 'symbol' => 'BTC',
                 'status' => 'A',
-                'rate' => '650000000.000000000',
+                'rate' => '652000000.000000000',
                 'coins_id' => NULL,
                 'created_at' => '2020-01-24 19:45:35',
-                'updated_at' => '2020-01-24 19:48:30',
+                'updated_at' => '2020-01-28 18:32:38',
             ),
         ));
         

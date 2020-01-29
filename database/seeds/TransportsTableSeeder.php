@@ -33,11 +33,11 @@ class TransportsTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Retirar en tienda',
                 'description' => 'Debe esperar por lo menos 30 minutos antes de dirigirse a nuestra tienda Bio y retirar su pedido.',
-                'price' => '10000.000000',
+                'price' => '200000.000000',
                 'time_minutes' => 30,
                 'status' => 'A',
                 'created_at' => NULL,
-                'updated_at' => '2020-01-24 19:58:54',
+                'updated_at' => '2020-01-28 18:35:36',
             ),
         ));
         

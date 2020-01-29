@@ -8,6 +8,12 @@ class Coins extends Model
 {
     public function getRateAttribute($value)
     {
-        return number_format($value, 2, '.', '');
+        $fg= new FuncionesGenerales;
+        return $fg->get_formato_moneda($value);
+    }
+    public function setRateAttribute($value)
+    {
+        $fg= new FuncionesGenerales;
+        $this->attributes['rate']=$fg->set_formato_moneda($value);
     }
 }
