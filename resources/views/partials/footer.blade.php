@@ -312,7 +312,25 @@
 			});*/
 			 $(window).on('load',function(){
 		        $('#ModalPrincipal').modal('show');
-			    });
+
+		        width_window = parseInt($(window).width());
+		        if(width_window<=990)
+		        {
+		        	$(".container-movil").removeClass("container-fluid").addClass("container");
+		        }else{
+		        	$(".container-movil").removeClass("container").addClass("container-fluid");
+		        }
+			 });
+			 $(window).resize(function()
+			 {
+			 		width_window = parseInt($(window).width());
+			        if(width_window<=990)
+			        {
+			        	$(".container-movil").removeClass("container-fluid").addClass("container");
+			        }else{
+			        	$(".container-movil").removeClass("container").addClass("container-fluid");
+			        }
+			 });
 
 			$(".toggle-menu").click(function(){
 				$(".over").toggle();

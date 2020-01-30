@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="middle-header">
-			<div class="container-fluid">
+			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
 					<div id="toggler-header" class="col-4">
 						<button class="navbar-toggler toggle-menu" type="button">
