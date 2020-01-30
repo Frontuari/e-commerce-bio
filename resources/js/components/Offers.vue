@@ -1,5 +1,5 @@
 <template>
-    <section id="offers" class="hero" style="background-image: url('assets/img/banner-1-bio.jpg');">
+    <section id="offers" class="hero" :style="{backgroundImage: backgrounds[0]}">
 		<div class="container hero-container">
 			<div class="hero-content">
 				<h2>GRANDES <span>Ofertas</span></h2>
@@ -13,14 +13,18 @@
 export default {
     data() {
         return {
-
+			backgrounds: []
         }
     },
     methods: {
-
+		getAds: async function() {
+            const response = await axios.get(URLSERVER+'api/advs/type/medio_bajo');
+			const medio = response.data.data;
+			this.backgrounds.push('url(storage/'+medio[0].image+')');
+        }
     },
     mounted() {
-
+        this.getAds();
     }
 }
 </script>
