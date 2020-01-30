@@ -100,7 +100,7 @@
 			</div>
 		</div>
 		<nav class="navbar navbar-expand-lg navbar-light color-white navbar-custom">
-			<div class="container">
+			<div class="container-fluid">
 				<div id="mainNavbar">
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">
