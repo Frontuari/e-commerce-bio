@@ -881,6 +881,22 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.advs.index',
                 'parameters' => 'null',
             ),
+            54 => 
+            array (
+                'id' => 63,
+                'menu_id' => 3,
+                'title' => 'Combos',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-bread',
+                'color' => '#000000',
+                'parent_id' => NULL,
+                'order' => 21,
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:41:53',
+                'route' => 'voyager.packages.index',
+                'parameters' => 'null',
+            ),
         ));
         
         

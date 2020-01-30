@@ -1065,6 +1065,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
+            131 => 
+            array (
+                'id' => 142,
+                'key' => 'browse_packages',
+                'table_name' => 'packages',
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:27:46',
+            ),
+            132 => 
+            array (
+                'id' => 143,
+                'key' => 'read_packages',
+                'table_name' => 'packages',
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:27:46',
+            ),
+            133 => 
+            array (
+                'id' => 144,
+                'key' => 'edit_packages',
+                'table_name' => 'packages',
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:27:46',
+            ),
+            134 => 
+            array (
+                'id' => 145,
+                'key' => 'add_packages',
+                'table_name' => 'packages',
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:27:46',
+            ),
+            135 => 
+            array (
+                'id' => 146,
+                'key' => 'delete_packages',
+                'table_name' => 'packages',
+                'created_at' => '2020-01-30 12:27:46',
+                'updated_at' => '2020-01-30 12:27:46',
+            ),
         ));
         
         
