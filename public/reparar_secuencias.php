@@ -35,6 +35,7 @@ $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
 while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
 foreach ($line as $col_value) {
 
+    echo $col_value."<br>";
     echo pg_query($col_value)."<br>";
 
     
