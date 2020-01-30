@@ -63,9 +63,9 @@
         </div>
 
         <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
-
+        
             <div class="login-container">
-
+            <div class="text-center"> <img class="img-responsive" style="padding:50px; width:100%" src="{{Voyager::image( Voyager::setting('site.logo','')) }}"></div>
                 <p>{{ __('voyager::login.signin_below') }}</p>
 
                 <form action="{{ route('voyager.login') }}" method="POST">

@@ -26,7 +26,6 @@ class OrdersTableSeeder extends Seeder
                 'total_packaging' => '1000.000000',
                 'total_transport' => '1000.000000',
                 'order_address_id' => 1,
-                'status' => 'A',
                 'transports_id' => 1,
                 'user_rating' => 5,
                 'delivery_time_date' => '2020-01-28 00:00:00',
@@ -36,7 +35,8 @@ class OrdersTableSeeder extends Seeder
                 'opinion' => 'Hola',
                 'coins_id' => 1,
                 'created_at' => '2020-01-21 17:31:00',
-                'updated_at' => '2020-01-28 14:58:38',
+                'updated_at' => '2020-01-30 00:26:37',
+                'status' => 'EN',
             ),
         ));
         

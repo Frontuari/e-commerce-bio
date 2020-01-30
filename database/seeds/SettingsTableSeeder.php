@@ -41,17 +41,6 @@ class SettingsTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 3,
-                'key' => 'site.logo',
-                'display_name' => 'Site Logo',
-                'value' => '',
-                'details' => '',
-                'type' => 'image',
-                'order' => 3,
-                'group' => 'Site',
-            ),
-            3 => 
-            array (
                 'id' => 8,
                 'key' => 'admin.loader',
                 'display_name' => 'Admin Loader',
@@ -61,7 +50,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 3,
                 'group' => 'Admin',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 7,
                 'key' => 'admin.description',
@@ -72,7 +61,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 2,
                 'group' => 'Admin',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 5,
                 'key' => 'admin.bg_image',
@@ -83,7 +72,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 5,
                 'group' => 'Admin',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 9,
                 'key' => 'admin.icon_image',
@@ -94,18 +83,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 4,
                 'group' => 'Admin',
             ),
-            7 => 
-            array (
-                'id' => 6,
-                'key' => 'admin.title',
-                'display_name' => 'Admin Title',
-                'value' => 'Bio en Línea Admin',
-                'details' => '',
-                'type' => 'text',
-                'order' => 1,
-                'group' => 'Admin',
-            ),
-            8 => 
+            6 => 
             array (
                 'id' => 4,
                 'key' => 'site.google_analytics_tracking_id',
@@ -116,16 +94,38 @@ class SettingsTableSeeder extends Seeder
                 'order' => 4,
                 'group' => 'Site',
             ),
-            9 => 
+            7 => 
             array (
-                'id' => 10,
-                'key' => 'admin.google_analytics_client_id',
-            'display_name' => 'Google Analytics Client ID (used for admin dashboard)',
-                'value' => NULL,
+                'id' => 6,
+                'key' => 'admin.title',
+                'display_name' => 'Admin Title',
+                'value' => 'Inspirados en Servir',
                 'details' => '',
                 'type' => 'text',
                 'order' => 1,
                 'group' => 'Admin',
+            ),
+            8 => 
+            array (
+                'id' => 10,
+                'key' => 'admin.google_analytics_client_id',
+            'display_name' => 'Google Analytics Client ID (used for admin dashboard)',
+                'value' => '1072700240867-e38ui1ll8abb18fqppjeuhpogdtp06dg.apps.googleusercontent.com',
+                'details' => '',
+                'type' => 'text',
+                'order' => 1,
+                'group' => 'Admin',
+            ),
+            9 => 
+            array (
+                'id' => 3,
+                'key' => 'site.logo',
+                'display_name' => 'Site Logo',
+                'value' => 'settings/January2020/25HXxpdG4cUgVMs1Q32b.png',
+                'details' => '',
+                'type' => 'image',
+                'order' => 3,
+                'group' => 'Site',
             ),
         ));
         
