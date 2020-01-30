@@ -272,8 +272,8 @@
 				<div class="modal-body">
 					<h2>Desde <b>bio mercados</b>, inspirados en servir,<br/> queremos darte la mas cordial bienvenida</h2>
 					<p>Pensando en tu comodidad, ahora ponemos a tu disposición nuestra tienda virtual <strong>bio en linea</strong> , la cual puedes visitar ingresando a <a href="" class="enlace-modal">www.biomercados.com.ve</a> donde viviras la mejor experiencia de compra en linea con la variedad, frescura y calidad bio de siempre</p>
-					<p>Desde tu Smartphone o Tablet podras visitar bio en linea y hacer compras para ti o para tu familia, solo debes <strong>registrar</strong> tus datos una vez</p>
-					<p><span class="order-text">Llevamos tu mercado hasta tu puerta o lo retiras</span> lista para llevar, bio en linea, a su servicio con un clic!!!</p>
+					<p>Desde tu teléfono, tablet o Pc podras visitar bio en linea y hacer compras para ti o para tu familia, solo debes <strong>registrar</strong> tus datos una vez</p>
+					<p><span class="order-text">Llevamos el mercado hasta la puerta de tu casa o lo retiras</span> lista para llevar, bio en linea, a su servicio con un clic!!!</p>
 				</div>
 			</div>
 		</div>
@@ -286,13 +286,20 @@
 	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
-	
-	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-	
+	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>	
 	@yield('js')
 	<script>
 
 		jQuery(document).ready(function($){
+
+			var modal_principal = localStorage.getItem("ModalPrincipal");
+			if(modal_principal == 'visto')
+			{
+				$("#ModalPrincipal").remove();
+			}else{
+				//no pasa nada
+				localStorage.setItem("ModalPrincipal", "visto");
+			}
 
 			/*$("#ModalPrincipal").removeClass("fade").hide(0).delay(500).fadeIn(500);
 			$("#ModalPrincipal").click(function()
