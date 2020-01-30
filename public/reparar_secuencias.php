@@ -1,8 +1,12 @@
 <?php
-$base_dato="biomercado";
-$usuario="postgres";
-$clave="18671986";
-$dbconn = pg_connect("host=localhost dbname=$base_dato user=$usuario password=$clave")
+
+require __DIR__.'/../vendor/autoload.php';
+
+$base_dato=getenv("DB_DATABASE");
+$usuario=getenv("DB_USERNAME");
+$clave=getenv("DB_PASSWORD");
+$puerto=getenv("DB_PORT");
+$dbconn = pg_connect("host=localhost dbname=$base_dato user=$usuario password=$clave port=$puerto")
 or die('No se ha podido conectar: ' . pg_last_error());
 
 // Realizando una consulta SQL
