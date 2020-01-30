@@ -22,6 +22,10 @@ window.URLSERVER = protocolo+"//"+host+"/"+path+"/";
 
 Vue.component('nuestros-productos', require('./components/ProductFilterComponent.vue').default);
 Vue.component('slider', require('./components/Slider.vue').default);
+Vue.component('footer-ad', require('./components/Footer.vue').default);
+Vue.component('ads', require('./components/Ads.vue').default);
+Vue.component('offers', require('./components/Offers.vue').default);
+Vue.component('combos', require('./components/Combos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

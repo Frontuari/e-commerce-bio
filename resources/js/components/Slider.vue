@@ -39,7 +39,6 @@
             getSliders: async function() {
 				const response = await axios.get(URLSERVER+'api/advs/type/top');
                 this.sliders = response.data.data;
-                console.log("this.sliders::> ",this.sliders);
 			},
         },
         mounted() {

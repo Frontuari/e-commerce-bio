@@ -5,8 +5,8 @@
 @section('body')
 
 <!--MAIN-->
-
-<section class="jumbotron" style="background-image: url('');">
+<main id="app">
+	<section class="jumbotron" style="background-image: url('');">
 		<div class="container">
 			<div class="text-center">
 				<h1>Carrito de Compras</h1>
@@ -724,9 +724,6 @@
 			</div>
 		</div>
 	</section>
-
-
-
+</main>
 <!-- CIERRE DEL MAIN-->
-
 @stop
