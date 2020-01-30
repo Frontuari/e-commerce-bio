@@ -1053,7 +1053,7 @@
 		right: 0;
 		bottom: 1rem;
 		transform: translateY(100px);
-		transition: all 0.4s linear;
+		transition: all 0.2s linear;
 		opacity: 0;
 		z-index: 1;
 	}
@@ -1075,6 +1075,7 @@
 		height: 25px;
 		transition: all .3s ease;
 	}
+
 	.product-buttons button:hover,
 	.product-actions button:hover{
 		filter: initial;
@@ -1083,6 +1084,7 @@
 	.product-actions button:focus{
 		box-shadow: none;
 	}
+
 	.product-buttons button:hover svg path,
 	.product-actions button:hover svg path{
 		fill: #28b67a;
