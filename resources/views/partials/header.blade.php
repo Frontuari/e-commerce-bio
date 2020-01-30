@@ -105,7 +105,7 @@
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">
 							<button class="navbar-toggler toggle-menu" type="button">
-								<img src="assets/img/close-menu-movil-bio.svg" alt="Menu Bars">
+								<img src="assets/img/x.svg" alt="Menu Bars">
 							</button>
 						</div>
 						<!---->

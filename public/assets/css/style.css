@@ -297,7 +297,7 @@
 		bottom: -16px;
 		width: 150px;
 		height: 80px;
-		background-image: url('../img/fondo-banner-nuevo.png');
+		background-image: url('../img/fondo_cabecera_nuevo.svg');
 	}
 	.middle-header .container{
 		position: relative;
