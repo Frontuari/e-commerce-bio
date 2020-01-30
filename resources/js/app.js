@@ -21,6 +21,7 @@ window.URLSERVER = protocolo+"//"+host+"/"+path+"/";
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('nuestros-productos', require('./components/ProductFilterComponent.vue').default);
+Vue.component('slider', require('./components/Slider.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

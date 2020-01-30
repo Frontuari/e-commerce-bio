@@ -18,6 +18,10 @@ Route::post('login', 'API\RegisterController@login');
 
 //Route::middleware('auth:api')->group( function () { //ESTE MIDDLEWARE DEBEN USAR EL BEARER TOKEN
 
+    //ADVS
+    Route::resource('advs', 'API\AdvsController');
+    Route::get('advs/type/{type}','API\AdvsController@ByType')->name("adv_type");
+
     //CATEGORIES
     Route::resource('categories', 'API\CategoryController');
 

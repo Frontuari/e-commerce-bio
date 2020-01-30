@@ -5,67 +5,13 @@
 @section('body')
 <!-- MAIN  -->
 <main id="app">
-	<section id="main-slider">
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img class="d-block w-100" src="assets/img/Slide-Bio-2.jpg" alt="First slide">
-					<div class="container">
-						<div class="carousel-caption caption-right">
-							<h5>¡Aprovecha nuestros combos!</h5>
-							<h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
-							<p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
-							<a href="#" class="btn">Comprar</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="carousel-item ">
-					<img class="d-block w-100" src="assets/img/slide-bio-1.jpg" alt="First slide">
-					<div class="container">
-						<div class="carousel-caption">
-							<h5>¡Aprovecha nuestros combos!</h5>
-							<h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
-							<p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
-							<a href="#" class="btn">Comprar</a>
-						</div>
-					</div>
-				</div>
-		
-				<div class="carousel-item">
-					<img class="d-block w-100" src="assets/img/Slide-Bio-2.jpg" alt="First slide">
-					<div class="container">
-						<div class="carousel-caption caption-right">
-							<h5>¡Aprovecha nuestros combos!</h5>
-							<h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
-							<p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
-							<a href="#" class="btn">Comprar</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-	</section>
-
-
+	
+	<slider></slider>
 
 	<section id="combos-bio">
 		<div class="container">
 			<div class="section-title">
-				<h2>Combos bio	<img src="assets/img/botón-circular-bio.svg"></h2>
+				<h2>Combos bio	<img src="assets/img/boton-circular-bio.svg"></h2>
 			</div>
 		</div>
 		<div class="combo-group-big">
@@ -431,7 +377,7 @@
 					<div class="category-img" style="background-image: url('assets/img/categoria-verduras-bio.jpg');">
 						<div class="category-content">
 							<h3>Verduras, Frutas<br> y Hortalizas</h3>
-							<a href="#">Ver todos los productos <img src="assets/img/botón-circular-bio.svg"></a>
+							<a href="#">Ver todos los productos <img src="assets/img/boton-circular-bio.svg"></a>
 						</div>
 					</div>
 				</div>
@@ -439,7 +385,7 @@
 					<div class="category-img" style="background-image: url('assets/img/categoria-bebidas-bio.jpg');">
 						<div class="category-content">
 							<h3>Bebidas</h3>
-							<a href="#">Ver todos los productos <img src="assets/img/botón-circular-bio.svg"></a>
+							<a href="#">Ver todos los productos <img src="assets/img/boton-circular-bio.svg"></a>
 						</div>
 					</div>
 				</div>
@@ -447,13 +393,13 @@
 					<div class="category-img category-img-first" style="background-image: url('assets/img/categoria-queso-y-charcuteria-bio.jpg');">
 						<div class="category-content">
 							<h3>Quesos y Charcuteria</h3>
-							<a href="#">Ver todos los productos <img src="assets/img/botón-circular-bio.svg"></a>
+							<a href="#">Ver todos los productos <img src="assets/img/boton-circular-bio.svg"></a>
 						</div>
 					</div>
 					<div class="category-img category-img-last" style="background-image: url('assets/img/categoria-pollo-y-carnes-bio.jpg');">
 						<div class="category-content">
 							<h3>Pollos y Carnes</h3>
-							<a href="#">Ver todos los productos <img src="assets/img/botón-circular-bio.svg"></a>
+							<a href="#">Ver todos los productos <img src="assets/img/boton-circular-bio.svg"></a>
 						</div>
 					</div>
 				</div>
@@ -466,7 +412,7 @@
 			<div class="hero-content">
 				<h2>GRANDES <span>Ofertas</span></h2>
 				<h3>en nuestros productos de</h3>
-				<a href="#">VERDURAS, FRUTAS Y HORTALIZAS <img src="assets/img/botón-circular-bio.svg"></a>
+				<a href="#">VERDURAS, FRUTAS Y HORTALIZAS <img src="assets/img/boton-circular-bio.svg"></a>
 			</div>
 		</div>
 	</section>
@@ -477,7 +423,7 @@
 		<div class="container hero-container">
 			<div class="hero-content">
 				<h2>LLÉVATE</h2>
-				<h3>uno de nuestros <a href="#">COMBOS bio <img src="assets/img/botón-circular-bio.svg"></a></h3>
+				<h3>uno de nuestros <a href="#">COMBOS bio <img src="assets/img/boton-circular-bio.svg"></a></h3>
 				<h4>¡Con un <b>excelente precio</b>!</h4>
 			</div>
 		</div>

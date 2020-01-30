@@ -24,7 +24,7 @@ class Product extends JsonResource
             'keyword' => $this->keyword,
             'name' => $this->name,
             'price' => $this->price,
-            'product_subcategories_id' => $this->product_subcategories_id,
+            'sub_categories_id' => $this->sub_categories_id,
             'promote' => $this->promote,
             'qty_avaliable' => $this->qty_avaliable,
             'qty_sold' => $this->qty_sold,

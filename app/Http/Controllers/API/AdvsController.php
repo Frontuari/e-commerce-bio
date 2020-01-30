@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Advs;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use Validator;
+use App\Http\Resources\Advs as AdvsResource;
 
-class AdvsController extends Controller
+class AdvsController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class AdvsController extends Controller
      */
     public function index()
     {
-        //
+        $Advs = Advs::where('status','A')->get();
+        return $this->sendResponse(AdvsResource::collection($Advs), 'Advs retrieved successfully.');
     }
 
     /**
@@ -81,5 +85,11 @@ class AdvsController extends Controller
     public function destroy(Advs $advs)
     {
         //
+    }
+
+    public function ByType($type)
+    {
+        $Advs = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower($type)).'%'])->orderBy('order','ASC')->get();
+        return $this->sendResponse(AdvsResource::collection($Advs), 'Advs retrieved successfully.');
     }
 }

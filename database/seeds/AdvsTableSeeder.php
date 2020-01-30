@@ -43,7 +43,7 @@ class AdvsTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'image' => 'advs/January2020/ivW4tVFlhXF8nGUFekx2.jpg',
-                'order' => 1,
+                'order' => 5,
                 'type' => 'medio_bajo',
                 'created_at' => '2020-01-29 02:45:53',
                 'updated_at' => '2020-01-29 02:48:23',
@@ -87,8 +87,8 @@ class AdvsTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'image' => 'advs/January2020/ZGlymMCNMrsPKELH7noS.jpg',
-                'order' => 1,
-                'type' => 'medio_dere',
+                'order' => 3,
+                'type' => 'medio_dere_top',
                 'created_at' => '2020-01-29 02:50:30',
                 'updated_at' => '2020-01-29 02:50:30',
                 'status' => 'A',
@@ -98,7 +98,7 @@ class AdvsTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'image' => 'advs/January2020/1CfRsq9wgGNz6XFxA2wp.jpg',
-                'order' => 2,
+                'order' => 4,
                 'type' => 'top',
                 'created_at' => '2020-01-29 02:50:48',
                 'updated_at' => '2020-01-29 02:50:48',

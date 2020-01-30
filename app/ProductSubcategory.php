@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductSubcategory extends Model
 {
-    protected $table = 'products_subcategories';
+    protected $table = 'sub_categories';
 
     public function categories()
     {

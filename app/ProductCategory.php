@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductCategory extends Model
 {
-    protected $table = 'product_categories';
-    protected $fillable = ['id', 'name', 'description', 'avatar', 'status'];
+    protected $table = 'categories';
+    protected $fillable = ['id', 'name', 'description', 'image','parent_id','order','slug','status'];
     
     public function subcategories()
     {
