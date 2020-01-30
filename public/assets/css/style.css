@@ -538,6 +538,7 @@
 		#nav-fav{ order: 3; }
 
 		#bio-wallet{ order: 4; }
+		#nav-login,#bio-wallet{display: none;}
 	}
 	@media (max-width: 767px){
 		#search-header form{
@@ -546,6 +547,7 @@
 		#search-header form input[type="search"], #search-header form input[type="text"]{
 			font-size: 18px;
 		}
+		#nav-login,#bio-wallet{display: none;}
 	}
 /*
 	======================================================

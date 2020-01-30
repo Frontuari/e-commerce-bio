@@ -16,7 +16,7 @@
 <body>
 	<header id="myHeader">
 		<div class="top-header color-white">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row align-items-center">
 					<div class="col-md-6">
 						<div class="top-info">
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="middle-header">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row align-items-center-md">
 					<div id="toggler-header" class="col-4">
 						<button class="navbar-toggler toggle-menu" type="button">
