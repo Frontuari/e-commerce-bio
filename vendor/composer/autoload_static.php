@@ -614,7 +614,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
 
     public static $classMap = array (
         'AdvsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvsTableSeeder.php',
-        'App\\Advs' => __DIR__ . '/../..' . '/app/Advs.php',
+        'App\\Advs' => __DIR__ . '/../..' . '/app/widgets/Simple.php',
         'App\\BankDatas' => __DIR__ . '/../..' . '/app/BankDatas.php',
         'App\\Banks' => __DIR__ . '/../..' . '/app/Banks.php',
         'App\\Brand' => __DIR__ . '/../..' . '/app/Brand.php',
@@ -637,6 +637,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\GeneralSettings' => __DIR__ . '/../..' . '/app/GeneralSettings.php',
         'App\\Groups' => __DIR__ . '/../..' . '/app/Groups.php',
         'App\\HomePages' => __DIR__ . '/../..' . '/app/HomePages.php',
+        'App\\Http\\Controllers\\API\\AdvsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/AdvsController.php',
         'App\\Http\\Controllers\\API\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BaseController.php',
         'App\\Http\\Controllers\\API\\BrandController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BrandController.php',
         'App\\Http\\Controllers\\API\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CategoryController.php',
@@ -650,7 +651,6 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\API\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/SettingController.php',
         'App\\Http\\Controllers\\API\\TrackingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/TrackingsController.php',
         'App\\Http\\Controllers\\API\\UserVisitProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UserVisitProductsController.php',
-        'App\\Http\\Controllers\\AdvsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdvsController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -701,6 +701,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Resources\\Advs' => __DIR__ . '/../..' . '/app/Http/Resources/Advs.php',
         'App\\Http\\Resources\\Brand' => __DIR__ . '/../..' . '/app/Http/Resources/Brand.php',
         'App\\Http\\Resources\\Category' => __DIR__ . '/../..' . '/app/Http/Resources/Category.php',
         'App\\Http\\Resources\\DetProductPackages' => __DIR__ . '/../..' . '/app/Http/Resources/DetProductPackages.php',

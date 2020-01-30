@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdvsTableSeeder' => $baseDir . '/database/seeds/AdvsTableSeeder.php',
-    'App\\Advs' => $baseDir . '/app/Advs.php',
+    'App\\Advs' => $baseDir . '/app/widgets/Simple.php',
     'App\\BankDatas' => $baseDir . '/app/BankDatas.php',
     'App\\Banks' => $baseDir . '/app/Banks.php',
     'App\\Brand' => $baseDir . '/app/Brand.php',
@@ -30,6 +30,7 @@ return array(
     'App\\GeneralSettings' => $baseDir . '/app/GeneralSettings.php',
     'App\\Groups' => $baseDir . '/app/Groups.php',
     'App\\HomePages' => $baseDir . '/app/HomePages.php',
+    'App\\Http\\Controllers\\API\\AdvsController' => $baseDir . '/app/Http/Controllers/API/AdvsController.php',
     'App\\Http\\Controllers\\API\\BaseController' => $baseDir . '/app/Http/Controllers/API/BaseController.php',
     'App\\Http\\Controllers\\API\\BrandController' => $baseDir . '/app/Http/Controllers/API/BrandController.php',
     'App\\Http\\Controllers\\API\\CategoryController' => $baseDir . '/app/Http/Controllers/API/CategoryController.php',
@@ -43,7 +44,6 @@ return array(
     'App\\Http\\Controllers\\API\\SettingController' => $baseDir . '/app/Http/Controllers/API/SettingController.php',
     'App\\Http\\Controllers\\API\\TrackingsController' => $baseDir . '/app/Http/Controllers/API/TrackingsController.php',
     'App\\Http\\Controllers\\API\\UserVisitProductsController' => $baseDir . '/app/Http/Controllers/API/UserVisitProductsController.php',
-    'App\\Http\\Controllers\\AdvsController' => $baseDir . '/app/Http/Controllers/AdvsController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -94,6 +94,7 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Resources\\Advs' => $baseDir . '/app/Http/Resources/Advs.php',
     'App\\Http\\Resources\\Brand' => $baseDir . '/app/Http/Resources/Brand.php',
     'App\\Http\\Resources\\Category' => $baseDir . '/app/Http/Resources/Category.php',
     'App\\Http\\Resources\\DetProductPackages' => $baseDir . '/app/Http/Resources/DetProductPackages.php',
