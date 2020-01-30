@@ -150,6 +150,90 @@ class DetProductPackagesTableSeeder extends Seeder
                 'packages_id' => 3,
                 'products_id' => 7,
             ),
+            19 => 
+            array (
+                'id' => 20,
+                'cant' => NULL,
+                'packages_id' => 4,
+                'products_id' => 9,
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'cant' => NULL,
+                'packages_id' => 4,
+                'products_id' => 10,
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'cant' => NULL,
+                'packages_id' => 4,
+                'products_id' => 1,
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'cant' => NULL,
+                'packages_id' => 6,
+                'products_id' => 8,
+            ),
+            23 => 
+            array (
+                'id' => 24,
+                'cant' => NULL,
+                'packages_id' => 6,
+                'products_id' => 9,
+            ),
+            24 => 
+            array (
+                'id' => 25,
+                'cant' => NULL,
+                'packages_id' => 6,
+                'products_id' => 7,
+            ),
+            25 => 
+            array (
+                'id' => 26,
+                'cant' => NULL,
+                'packages_id' => 7,
+                'products_id' => 2,
+            ),
+            26 => 
+            array (
+                'id' => 27,
+                'cant' => NULL,
+                'packages_id' => 7,
+                'products_id' => 5,
+            ),
+            27 => 
+            array (
+                'id' => 28,
+                'cant' => NULL,
+                'packages_id' => 7,
+                'products_id' => 6,
+            ),
+            28 => 
+            array (
+                'id' => 29,
+                'cant' => NULL,
+                'packages_id' => 8,
+                'products_id' => 8,
+            ),
+            29 => 
+            array (
+                'id' => 30,
+                'cant' => NULL,
+                'packages_id' => 8,
+                'products_id' => 9,
+            ),
+            30 => 
+            array (
+                'id' => 31,
+                'cant' => NULL,
+                'packages_id' => 8,
+                'products_id' => 1,
+            ),
         ));
         
         
