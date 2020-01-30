@@ -1850,8 +1850,14 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1892,10 +1898,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      backgrounds: []
+    };
   },
-  methods: {},
-  mounted: function mounted() {}
+  methods: {
+    getAds: function () {
+      var _getAds = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response, medio;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get(URLSERVER + 'api/advs/type/medio');
+
+              case 2:
+                response = _context.sent;
+                medio = response.data.data;
+                this.backgrounds.push('url(storage/' + medio[0].image + ')');
+                this.backgrounds.push('url(storage/' + medio[1].image + ')');
+                this.backgrounds.push('url(storage/' + medio[2].image + ')');
+                this.backgrounds.push('url(storage/' + medio[3].image + ')');
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getAds() {
+        return _getAds.apply(this, arguments);
+      }
+
+      return getAds;
+    }()
+  },
+  mounted: function mounted() {
+    this.getAds();
+  }
 });
 
 /***/ }),
@@ -2332,11 +2377,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 foot = response.data.data[0];
-                console.log("foot::> ", foot);
                 this.background = 'url(storage/' + foot.image + ')';
-                console.log("this.background::> ", this.background);
 
-              case 7:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -38940,126 +38983,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { attrs: { id: "categories" } }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 category-box" }, [
+          _c(
+            "div",
+            {
+              staticClass: "category-img",
+              style: { backgroundImage: _vm.backgrounds[0] }
+            },
+            [_vm._m(0)]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 category-box category-box-middle" }, [
+          _c(
+            "div",
+            {
+              staticClass: "category-img",
+              style: { backgroundImage: _vm.backgrounds[1] }
+            },
+            [_vm._m(1)]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 category-box category-box-double" }, [
+          _c(
+            "div",
+            {
+              staticClass: "category-img category-img-first",
+              style: { backgroundImage: _vm.backgrounds[2] }
+            },
+            [_vm._m(2)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "category-img category-img-last",
+              style: { backgroundImage: _vm.backgrounds[3] }
+            },
+            [_vm._m(3)]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { attrs: { id: "categories" } }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 category-box" }, [
-            _c(
-              "div",
-              {
-                staticClass: "category-img",
-                staticStyle: {
-                  "background-image":
-                    "url('assets/img/categoria-verduras-bio.jpg')"
-                }
-              },
-              [
-                _c("div", { staticClass: "category-content" }, [
-                  _c("h3", [
-                    _vm._v("Verduras, Frutas"),
-                    _c("br"),
-                    _vm._v(" y Hortalizas")
-                  ]),
-                  _vm._v(" "),
-                  _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Ver todos los productos "),
-                    _c("img", {
-                      attrs: { src: "assets/img/boton-circular-bio.svg" }
-                    })
-                  ])
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 category-box category-box-middle" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "category-img",
-                  staticStyle: {
-                    "background-image":
-                      "url('assets/img/categoria-bebidas-bio.jpg')"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "category-content" }, [
-                    _c("h3", [_vm._v("Bebidas")]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Ver todos los productos "),
-                      _c("img", {
-                        attrs: { src: "assets/img/boton-circular-bio.svg" }
-                      })
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 category-box category-box-double" },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "category-img category-img-first",
-                  staticStyle: {
-                    "background-image":
-                      "url('assets/img/categoria-queso-y-charcuteria-bio.jpg')"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "category-content" }, [
-                    _c("h3", [_vm._v("Quesos y Charcuteria")]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Ver todos los productos "),
-                      _c("img", {
-                        attrs: { src: "assets/img/boton-circular-bio.svg" }
-                      })
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "category-img category-img-last",
-                  staticStyle: {
-                    "background-image":
-                      "url('assets/img/categoria-pollo-y-carnes-bio.jpg')"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "category-content" }, [
-                    _c("h3", [_vm._v("Pollos y Carnes")]),
-                    _vm._v(" "),
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v("Ver todos los productos "),
-                      _c("img", {
-                        attrs: { src: "assets/img/boton-circular-bio.svg" }
-                      })
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
+    return _c("div", { staticClass: "category-content" }, [
+      _c("h3", [_vm._v("Verduras, Frutas"), _c("br"), _vm._v(" y Hortalizas")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Ver todos los productos "),
+        _c("img", { attrs: { src: "assets/img/boton-circular-bio.svg" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "category-content" }, [
+      _c("h3", [_vm._v("Bebidas")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Ver todos los productos "),
+        _c("img", { attrs: { src: "assets/img/boton-circular-bio.svg" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "category-content" }, [
+      _c("h3", [_vm._v("Quesos y Charcuteria")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Ver todos los productos "),
+        _c("img", { attrs: { src: "assets/img/boton-circular-bio.svg" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "category-content" }, [
+      _c("h3", [_vm._v("Pollos y Carnes")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _vm._v("Ver todos los productos "),
+        _c("img", { attrs: { src: "assets/img/boton-circular-bio.svg" } })
       ])
     ])
   }

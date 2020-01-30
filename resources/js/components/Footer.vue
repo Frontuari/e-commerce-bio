@@ -20,9 +20,7 @@ export default {
         getFoot: async function() {
             const response = await axios.get(URLSERVER+'api/advs/type/footer');
             const foot = response.data.data[0];
-            console.log("foot::> ",foot);
             this.background = 'url(storage/'+foot.image+')';
-            console.log("this.background::> ",this.background);
         },
     },
     mounted() {
