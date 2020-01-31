@@ -58,6 +58,8 @@ Route::post('login', 'API\RegisterController@login');
     Route::resource('orders', 'API\OrdersController');
         //ADD QUALIFY ORDER
         Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
+        //Estadistica del año
+        Route::get('orders/estadistica/ano','API\OrdersController@estadistica_ano');
 
     //ADD VISIT USER PRODUCT
     Route::resource('user_visit_products', 'API\UserVisitProductsController');

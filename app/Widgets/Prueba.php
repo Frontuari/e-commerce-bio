@@ -23,7 +23,17 @@ class Prueba extends BaseDimmer
      */
     public function run()
     {
-        return $this->top().$this->productos().$this->usuarios().$this->ventas().$this->opiniones();
+        $h="";
+        $h.= "<div class='row'>".$this->top().
+        $this->productos().
+        $this->usuarios().
+        $this->ventas().
+        $this->opiniones().
+        '</div>'.
+        $this->grafico_pedidos();
+        //$h.=$this->footer();
+        //$h.=$this->footer();
+        return $h;
     }
 
     /**
@@ -38,22 +48,57 @@ class Prueba extends BaseDimmer
     public function productos(){
         $products= new Products;
         $count = $products->count();
-        return '<div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-          <span class="info-box-icon bg-aqua"><i class="ion-ios-baseball-outline"></i></span>
+        $url="/admin/products";
+        return '
+          
+            <div class="col-md-3 col-sm-6 col-xs-12 lin">
+            <a href="'.$url.'">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="ion-ios-baseball-outline"></i></span>
+                   
+                    <div class="info-box-content">
+                    <span class="info-box-text">Productos</span>
+                        <span class="info-box-number">'.$count.'</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div></a>
+                <!-- /.info-box -->
+             </div>
+    ';
+    }
+    public function grafico_pedidos(){
+        $html="";
+        $html.='
+      
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Historico de pedidos</h3>
 
-          <div class="info-box-content">
-            <span class="info-box-text">Productos</span>
-            <span class="info-box-number">'.$count.'</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </div>';
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="areaChart" style="height: 248px; width: 511px;" height="248" width="511"></canvas>
+                    </div>
+                </div>
+                 <!-- /.box-body -->
+            </div>
+            <script type="text/javascript">
+var APP_URL = "'.url("/").'";
+</script>
+         ';
+      return $html;
+
     }
     public function usuarios(){
         $count = Voyager::model('User')->count();
-        return '<div class="col-md-3 col-sm-6 col-xs-12">
+        $url="/admin/users";
+        return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+        <a href="'.$url.'">
         <div class="info-box">
           <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
@@ -63,13 +108,16 @@ class Prueba extends BaseDimmer
           </div>
           <!-- /.info-box-content -->
         </div>
+        </a>
         <!-- /.info-box -->
       </div>';
     }
     public function ventas(){
         $orders= new Orders;
         $count = $orders->count();
-        return '<div class="col-md-3 col-sm-6 col-xs-12">
+        $url="/admin/orders";
+        return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+        <a href="'.$url.'">
         <div class="info-box">
           <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
 
@@ -78,14 +126,16 @@ class Prueba extends BaseDimmer
             <span class="info-box-number">'.$count.'</span>
           </div>
           <!-- /.info-box-content -->
-        </div>
+        </div></a>
         <!-- /.info-box -->
       </div>';
     }
     public function opiniones(){
         $RatingProducts= new RatingProducts;
         $count = $RatingProducts->count();
-        return '<div class="col-md-3 col-sm-6 col-xs-12">
+        $url="/admin/rating-products";
+        return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+        <a href="'.$url.'">
         <div class="info-box">
           <span class="info-box-icon bg-red"><i class="ion-heart"></i></span>
 
@@ -94,7 +144,7 @@ class Prueba extends BaseDimmer
             <span class="info-box-number">'.$count.'</span>
           </div>
           <!-- /.info-box-content -->
-        </div>
+        </div></a>
         <!-- /.info-box -->
       </div>';
     }
@@ -102,10 +152,27 @@ class Prueba extends BaseDimmer
         $html="";
         $html.='<link rel="stylesheet" href="css/AdminLTE.min.css">';
         $html.='<link rel="stylesheet" href="css/_all-skins.min.css">';
-        $html.='<link rel="stylesheet" href="css/ionicons.min.css">';
-        $html.='<link rel="stylesheet" href="fontawesome-free-5.12.0-web/css/all.min.css">
+        $html.='<link rel="stylesheet" href="css/ionicons.min.css">
+        <style>
+
+        .lin a{
+         color:#000; 
+        }
+        .lin:hover{
+          filter:brightness(1.2);
+          transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter, filter;
+          transition-duration: 1s;
+        }
         
+        </style>
         ';
+       // $html.='<link rel="stylesheet" href="fontawesome-free-5.12.0-web/css/all.min.css">';
+        return $html;
+    }
+
+    public function footer(){
+        $html="";
+        
         return $html;
     }
 }

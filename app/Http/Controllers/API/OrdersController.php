@@ -15,10 +15,44 @@ class OrdersController extends BaseController
      */
     public function index()
     {
-        $a=Orders::where('status','A')->get();
+        $a=Orders::get();
         return $this->sendResponse($a);
     }
+    public function estadistica_ano(){
+        $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
 
+//return $this->sendResponse($a);
+        $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+        $arr['datasets'][0]=array(
+            'label'               => 'Pedidos',
+            'fillColor'           => 'rgba(60,141,188,0.9)',
+            'strokeColor'         => 'rgba(60,141,188,0.8)',
+            'pointColor'         => '#3b8bba',
+            'pointStrokeColor'    => 'rgba(60,141,188,1)',
+            'pointHighlightFill'  => '#fff',
+            'pointHighlightStroke'=> 'rgba(60,141,188,1)');
+            //echo json_encode($arr);
+          //  print_r($a);
+           // exit();
+         // data                : [28, 48, 40, 19, 86, 27, 90,200]
+         foreach($arr['labels'] as $cod=>$mes){
+
+            foreach ($a as $valor){
+                if($valor->mes==($cod+1)){
+                    $arr['datasets'][0]['data'][$cod]=$valor->count;
+                }else{
+                    if(!isset($arr['datasets'][0]['data'][$cod])){
+                    $arr['datasets'][0]['data'][$cod]=0;
+                    }
+                }
+                
+            }
+         }
+
+        return json_encode($arr);
+
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
