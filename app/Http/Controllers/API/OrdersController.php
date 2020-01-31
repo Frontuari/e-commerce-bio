@@ -25,11 +25,11 @@ class OrdersController extends BaseController
         $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         $arr['datasets'][0]=array(
             'label'               => 'Pedidos',
-            'fillColor'           => 'rgba(60,141,188,0.9)',
-            'strokeColor'         => 'rgba(60,141,188,0.8)',
-            'pointColor'         => '#3b8bba',
+            'fillColor'           => '#28b67a',
+            'strokeColor'         => '#13945C',
+            'pointColor'         => '#13945C',
             'pointStrokeColor'    => 'rgba(60,141,188,1)',
-            'pointHighlightFill'  => '#fff',
+            'pointHighlightFill'  => '#80bc00',
             'pointHighlightStroke'=> 'rgba(60,141,188,1)');
             //echo json_encode($arr);
           //  print_r($a);
