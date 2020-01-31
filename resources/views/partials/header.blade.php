@@ -60,7 +60,10 @@
 								<a href="#" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
-								<div class="dropdown-menu" aria-labelledby="navbarLogin">
+
+								
+						<!-- el login-->
+						<div class="dropdown-menu  login_navbar" aria-labelledby="navbarLogin">
 									<form action="#">
 										<h3>Acceder a la cuenta</h3>
 										<div class="form-group">
@@ -78,7 +81,10 @@
 											<small>¿No tienes cuenta? <a href="{{ url('/register') }}">Registrate aquí</a></small>
 										</div>
 									</form>
-								</div>
+						</div>
+
+
+								
 							</li>
 							<!-- no loggeado -->
 						
@@ -95,6 +101,7 @@
 							<!--<li id="nav-logout"><a href="#"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 						</ul>
+
 					</div>
 				</div>
 			</div>
