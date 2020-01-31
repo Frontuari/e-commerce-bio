@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdvsTableSeeder' => $baseDir . '/database/seeds/AdvsTableSeeder.php',
-    'App\\Advs' => $baseDir . '/app/widgets/Simple.php',
+    'App\\Advs' => $baseDir . '/app/Advs.php',
     'App\\BankDatas' => $baseDir . '/app/BankDatas.php',
     'App\\Banks' => $baseDir . '/app/Banks.php',
     'App\\Brand' => $baseDir . '/app/Brand.php',
@@ -137,6 +137,9 @@ return array(
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserVisitProducts' => $baseDir . '/app/UserVisitProducts.php',
     'App\\Views' => $baseDir . '/app/Views.php',
+    'App\\Widgets\\BaseDimmer' => $baseDir . '/app/Widgets/BaseDimmer.php',
+    'App\\Widgets\\Prueba' => $baseDir . '/app/Widgets/Prueba.php',
+    'App\\Widgets\\Simple' => $baseDir . '/app/Widgets/Simple.php',
     'Arrilot\\Widgets\\AbstractWidget' => $vendorDir . '/arrilot/laravel-widgets/src/AbstractWidget.php',
     'Arrilot\\Widgets\\AsyncFacade' => $vendorDir . '/arrilot/laravel-widgets/src/AsyncFacade.php',
     'Arrilot\\Widgets\\Console\\WidgetMakeCommand' => $vendorDir . '/arrilot/laravel-widgets/src/Console/WidgetMakeCommand.php',
@@ -5392,6 +5395,7 @@ return array(
     'TCG\\Voyager\\Widgets\\BaseDimmer' => $vendorDir . '/tcg/voyager/src/Widgets/BaseDimmer.php',
     'TCG\\Voyager\\Widgets\\PageDimmer' => $vendorDir . '/tcg/voyager/src/Widgets/PageDimmer.php',
     'TCG\\Voyager\\Widgets\\PostDimmer' => $vendorDir . '/tcg/voyager/src/Widgets/PostDimmer.php',
+    'TCG\\Voyager\\Widgets\\Simple' => $vendorDir . '/tcg/voyager/src/Widgets/Simple.php',
     'TCG\\Voyager\\Widgets\\UserDimmer' => $vendorDir . '/tcg/voyager/src/Widgets/UserDimmer.php',
     'TaxesTableSeeder' => $baseDir . '/database/seeds/TaxesTableSeeder.php',
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',

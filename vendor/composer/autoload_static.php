@@ -614,7 +614,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
 
     public static $classMap = array (
         'AdvsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvsTableSeeder.php',
-        'App\\Advs' => __DIR__ . '/../..' . '/app/widgets/Simple.php',
+        'App\\Advs' => __DIR__ . '/../..' . '/app/Advs.php',
         'App\\BankDatas' => __DIR__ . '/../..' . '/app/BankDatas.php',
         'App\\Banks' => __DIR__ . '/../..' . '/app/Banks.php',
         'App\\Brand' => __DIR__ . '/../..' . '/app/Brand.php',
@@ -744,6 +744,9 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserVisitProducts' => __DIR__ . '/../..' . '/app/UserVisitProducts.php',
         'App\\Views' => __DIR__ . '/../..' . '/app/Views.php',
+        'App\\Widgets\\BaseDimmer' => __DIR__ . '/../..' . '/app/Widgets/BaseDimmer.php',
+        'App\\Widgets\\Prueba' => __DIR__ . '/../..' . '/app/Widgets/Prueba.php',
+        'App\\Widgets\\Simple' => __DIR__ . '/../..' . '/app/Widgets/Simple.php',
         'Arrilot\\Widgets\\AbstractWidget' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/AbstractWidget.php',
         'Arrilot\\Widgets\\AsyncFacade' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/AsyncFacade.php',
         'Arrilot\\Widgets\\Console\\WidgetMakeCommand' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Console/WidgetMakeCommand.php',
@@ -5999,6 +6002,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'TCG\\Voyager\\Widgets\\BaseDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/BaseDimmer.php',
         'TCG\\Voyager\\Widgets\\PageDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/PageDimmer.php',
         'TCG\\Voyager\\Widgets\\PostDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/PostDimmer.php',
+        'TCG\\Voyager\\Widgets\\Simple' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/Simple.php',
         'TCG\\Voyager\\Widgets\\UserDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/UserDimmer.php',
         'TaxesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TaxesTableSeeder.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',

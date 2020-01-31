@@ -985,7 +985,6 @@ abstract class Model implements Arrayable, ArrayAccess, Jsonable, JsonSerializab
      * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    
     public function registerGlobalScopes($builder)
     {
         foreach ($this->getGlobalScopes() as $identifier => $scope) {
