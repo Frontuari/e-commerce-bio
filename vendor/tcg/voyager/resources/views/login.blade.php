@@ -13,87 +13,79 @@
         <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}">
     @endif
     <style>
+    
         body {
+            
             background-image:url('{{ Voyager::image( Voyager::setting("admin.bg_image"), voyager_asset("images/bg.jpg") ) }}');
             background-color: {{ Voyager::setting("admin.bg_color", "#FFFFFF" ) }};
         }
-        body.login .login-sidebar {
-            border-top:5px solid {{ config('voyager.primary_color','#22A7F0') }};
+        *d  {
+            border: 1px solid #000;
         }
-        @media (max-width: 767px) {
-            body.login .login-sidebar {
-                border-top:0px !important;
-                border-left:5px solid {{ config('voyager.primary_color','#22A7F0') }};
-            }
+        .la{
+
+            
         }
-        body.login .form-group-default.focused{
-            border-color:{{ config('voyager.primary_color','#22A7F0') }};
-        }
-        .login-button, .bar:before, .bar:after{
-            background:{{ config('voyager.primary_color','#22A7F0') }};
-        }
-        .remember-me-text{
-            padding:0 5px;
-        }
+    
     </style>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 </head>
-<body class="login">
-<div class="container-fluid">
-    <div class="row">
-        <div class="faded-bg animated"></div>
-        <div class="hidden-xs col-sm-7 col-md-8">
-            <div class="clearfix">
-                <div class="col-sm-12 col-md-10 col-md-offset-2">
-                    <div class="logo-title-container">
-                        <?php $admin_logo_img = Voyager::setting('admin.icon_image', ''); ?>
-                        @if($admin_logo_img == '')
-                        <img class="img-responsive pull-left flip logo hidden-xs animated fadeIn" src="{{ voyager_asset('images/logo-icon-light.png') }}" alt="Logo Icon">
-                        @else
-                        <img class="img-responsive pull-left flip logo hidden-xs animated fadeIn" src="{{ Voyager::image($admin_logo_img) }}" alt="Logo Icon">
-                        @endif
-                        <div class="copy animated fadeIn">
-                            <h1>{{ Voyager::setting('admin.title', 'Voyager') }}</h1>
-                            <p>{{ Voyager::setting('admin.description', __('voyager::login.welcome')) }}</p>
-                        </div>
-                    </div> <!-- .logo-title-container -->
-                </div>
-            </div>
+<body class="login ">
+<div class="container-fluid" >
+    <div class="row" >
+         <div class="text-center">
+            <a href="../index.php" style="margin:0 auto">
+            <img class="img-responsive" style="margin:0 auto; width:200px" src="{{Voyager::image( Voyager::setting('site.logo','')) }}" />
+            
+            </a><br>
+            
+                <span style="font-size:20px; color:#28b67a"><b>Ingresa los datos para iniciar sesión</b>
+            
         </div>
-
-        <div class="col-xs-12 col-sm-5 col-md-4 login-sidebar">
-        
-            <div class="login-container">
-            <div class="text-center"> <a href="../index.php"><img class="img-responsive" style="padding:50px; width:100%" src="{{Voyager::image( Voyager::setting('site.logo','')) }}"></a></div>
-                <p>{{ __('voyager::login.signin_below') }}</p>
-
+        <div class="faded-bg animated"></div>
+        <div class="col-md-4"></div>;
+        <div class="col-md-4 login-sidebar" style="
+        -webkit-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
+-moz-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
+box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
+ min-height:45vh;  margin: 0 auto; border-radius:20px; border: 0px solid #000">
+            <img style="width:39%; float:right" src="/storage/settings/January2020/login.svg">
+            <div class="login-container" style="margin-top:-20px;">
                 <form action="{{ route('voyager.login') }}" method="POST">
                     {{ csrf_field() }}
-                    <div class="form-group form-group-default" id="emailGroup">
-                        <label>{{ __('voyager::generic.email') }}</label>
+                    <div class="fosrm-group form-group-ddefault" id="emailGroup">
+                        <label style="font-size:13px; color:#000; font-weight:800">Correo electrónico</label>
                         <div class="controls">
-                            <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="{{ __('voyager::generic.email') }}" class="form-control" required>
+                            <input style=" border:1px solid #28b67a;" type="text" name="email" id="email" value="{{ old('email') }}" placeholder="{{ __('voyager::generic.email') }}" class="form-control" required>
                          </div>
                     </div>
-
-                    <div class="form-group form-group-default" id="passwordGroup">
-                        <label>{{ __('voyager::generic.password') }}</label>
+<br>
+                    <div class="fodrm-group form-group-defauldt" id="passwordGroup">
+                        <label style="font-size:13px; color:#000; font-weight:800">Contraseña</label>
                         <div class="controls">
-                            <input type="password" name="password" placeholder="{{ __('voyager::generic.password') }}" class="form-control" required>
+                            <input style=" border:1px solid #28b67a;" type="password" name="password" placeholder="{{ __('voyager::generic.password') }}" class="form-control in" required>
                         </div>
                     </div>
-
+                    <br>
                     <div class="form-group" id="rememberMeGroup">
                         <div class="controls">
-                        <input type="checkbox" name="remember" id="remember" value="1"><label for="remember" class="remember-me-text">{{ __('voyager::generic.remember_me') }}</label>
-                        </div>
+
+                        <label class="container">
+  <input checked="checked" type="checkbox" name="remember" id="remember" value="1">
+  <span style="font-size:12px;"><b>Recuérdame</b></span>
+  <span class="checkmark"></span>
+</label>
+
+
+   </div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-block login-button">
+                    <div class="text-right">
+                    <button type="submit" class="btn btn-success login-buttson">
                         <span class="signingin hidden"><span class="voyager-refresh"></span> {{ __('voyager::login.loggingin') }}...</span>
-                        <span class="signin">{{ __('voyager::generic.login') }}</span>
+                        <span class="signin" style=" font-size:14px;"><b>Ingresar</b></span>
                     </button>
+                    </div>
 
               </form>
 
@@ -147,4 +139,84 @@
 
 </script>
 </body>
+<style>
+        label{
+            color:#000;
+        }
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 20px;
+
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ margin-top:5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #FFF;
+  border: 1px solid #28b67a;
+  
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+.container .checkmark{
+
+  border:1px solid #80bc00;
+
+}
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 3px;
+  height: 7px;
+  border: solid #80bc00;
+  
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
 </html>
