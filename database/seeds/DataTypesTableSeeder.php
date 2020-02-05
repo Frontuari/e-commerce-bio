@@ -145,24 +145,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'id' => 26,
-                'name' => 'products',
-                'slug' => 'products',
-                'display_name_singular' => 'Producto',
-                'display_name_plural' => 'Productos',
-                'icon' => NULL,
-                'model_name' => 'App\\Products',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-01-24 15:05:08',
-                'updated_at' => '2020-01-29 23:37:53',
-                'server_side' => 0,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-            ),
-            8 => 
-            array (
                 'id' => 12,
                 'name' => 'peoples',
                 'slug' => 'peoples',
@@ -174,6 +156,24 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => true,
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-30 00:39:13',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            8 => 
+            array (
+                'id' => 26,
+                'name' => 'products',
+                'slug' => 'products',
+                'display_name_singular' => 'Producto',
+                'display_name_plural' => 'Productos',
+                'icon' => NULL,
+                'model_name' => 'App\\Products',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-01-24 15:05:08',
+                'updated_at' => '2020-02-04 22:41:40',
                 'server_side' => 0,
                 'controller' => NULL,
                 'policy_name' => NULL,
@@ -217,41 +217,23 @@ class DataTypesTableSeeder extends Seeder
             ),
             11 => 
             array (
-                'id' => 28,
-                'name' => 'sub_categories',
-                'slug' => 'sub-categories',
-                'display_name_singular' => 'Sub categoría',
-                'display_name_plural' => 'Sub categorías',
-                'icon' => NULL,
-                'model_name' => 'App\\SubCategories',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-01-24 16:20:09',
-                'updated_at' => '2020-01-30 00:52:12',
-                'server_side' => 0,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-            ),
-            12 => 
-            array (
                 'id' => 9,
                 'name' => 'categories',
                 'slug' => 'categories',
                 'display_name_singular' => 'Categoría',
                 'display_name_plural' => 'Categorías',
                 'icon' => 'voyager-categories',
-                'model_name' => 'TCG\\Voyager\\Models\\Category',
+                'model_name' => 'App\\Categories',
                 'description' => NULL,
                 'generate_permissions' => true,
                 'created_at' => '2020-01-23 22:18:13',
-                'updated_at' => '2020-01-30 00:52:50',
+                'updated_at' => '2020-02-03 21:53:49',
                 'server_side' => 0,
                 'controller' => NULL,
                 'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
+                'details' => '{"order_column":"order","order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 31,
                 'name' => 'bank_datas',
@@ -269,7 +251,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 5,
                 'name' => 'cities',
@@ -287,7 +269,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"name","scope":null}',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 19,
                 'name' => 'payment_methods',
@@ -305,7 +287,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 21,
                 'name' => 'transports',
@@ -323,7 +305,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 33,
                 'name' => 'taxes',
@@ -341,7 +323,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 14,
                 'name' => 'coins',
@@ -359,7 +341,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 8,
                 'name' => 'states',
@@ -377,7 +359,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 23,
                 'name' => 'packagings',
@@ -394,6 +376,24 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => NULL,
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            20 => 
+            array (
+                'id' => 28,
+                'name' => 'sub_categories',
+                'slug' => 'sub-categories',
+                'display_name_singular' => 'Sub categoría',
+                'display_name_plural' => 'Sub categorías',
+                'icon' => NULL,
+                'model_name' => 'App\\SubCategories',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-01-24 16:20:09',
+                'updated_at' => '2020-02-04 23:12:38',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":"name","order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
             21 => 
             array (

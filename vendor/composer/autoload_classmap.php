@@ -516,6 +516,7 @@ return array(
     'DetGroupEventsTableSeeder' => $baseDir . '/database/seeds/DetGroupEventsTableSeeder.php',
     'DetProductPackagesTableSeeder' => $baseDir . '/database/seeds/DetProductPackagesTableSeeder.php',
     'DetProductTaxesTableSeeder' => $baseDir . '/database/seeds/DetProductTaxesTableSeeder.php',
+    'DetSubCategoriesTableSeeder' => $baseDir . '/database/seeds/DetSubCategoriesTableSeeder.php',
     'DetTransportCitiesTableSeeder' => $baseDir . '/database/seeds/DetTransportCitiesTableSeeder.php',
     'Doctrine\\Common\\Cache\\ApcCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/ApcCache.php',
     'Doctrine\\Common\\Cache\\ApcuCache' => $vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache/ApcuCache.php',

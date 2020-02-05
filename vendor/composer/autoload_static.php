@@ -1123,6 +1123,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'DetGroupEventsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DetGroupEventsTableSeeder.php',
         'DetProductPackagesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DetProductPackagesTableSeeder.php',
         'DetProductTaxesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DetProductTaxesTableSeeder.php',
+        'DetSubCategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DetSubCategoriesTableSeeder.php',
         'DetTransportCitiesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DetTransportCitiesTableSeeder.php',
         'Doctrine\\Common\\Cache\\ApcCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/ApcCache.php',
         'Doctrine\\Common\\Cache\\ApcuCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/ApcuCache.php',

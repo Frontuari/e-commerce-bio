@@ -18,21 +18,21 @@ class Categories extends Model
         foreach($a as $cod => $obj){
             if($count==$posicion){
                 $count++;
-            }else{
-                if($this->id!=$obj->id){
-                    $arr[$obj->id]=$count;
-                }
-            
-            $count++;
             }
-        
+             if($this->id!=$obj->id){
+                $arr[$obj->id]=$count;
+                $count++;
+            }
+
+
         }
        // print_r($arr);
       //  exit();
         foreach($arr as $co=>$va){
             Categories::where('id', $co)->update(array('order' => $va));
-           // DB::update("UPDATE 'categories' t1 SET t1.order=$va WHERE t1.id=$co");
-        }
+       
+       }
+       $this->attributes['order']=$posicion;
      
     }
 }

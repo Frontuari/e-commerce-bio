@@ -33,6 +33,14 @@ class BrandsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:08:35',
                 'updated_at' => '2020-01-24 16:08:35',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Heinz',
+                'status' => 'A',
+                'created_at' => '2020-02-04 22:37:47',
+                'updated_at' => '2020-02-04 22:37:47',
+            ),
         ));
         
         
