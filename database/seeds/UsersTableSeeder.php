@@ -82,29 +82,7 @@ class UsersTableSeeder extends Seeder
                 'avatar' => 'users/default.png',
                 'role_id' => 1,
                 'settings' => '{"locale":"es"}',
-            ),
-            2 => 
-            array (
-                'id' => 16,
-                'last_ip' => NULL,
-                'last_activity' => '2020-01-22 23:04:38',
-                'password' => '$2y$10$pBP8efPcAz93vf9x65h64e.b7KfPlqpeh3uI2XV1YT8e5IVDDuazi',
-                'cant_orders' => NULL,
-                'peoples_id' => 1,
-                'coins_id' => NULL,
-                'groups_id' => NULL,
-                'name' => 'Carlos',
-                'email' => 'cvargas@frontuari.net',
-                'email_verified_at' => NULL,
-                'failed_attempts' => NULL,
-                'purchase_quantity' => NULL,
-                'remember_token' => 'ylbPGu2XQitksSUVM8Z0Ik7xiPXGCdw81zOPPmWiGOLKyK4O3nyUrUY5p5Vz',
-                'created_at' => '2020-01-23 03:04:38',
-                'updated_at' => '2020-01-24 12:49:36',
-                'avatar' => 'users/default.png',
-                'role_id' => 1,
-                'settings' => '{"locale":"es"}',
-            ),
+            )
         ));
         
         
