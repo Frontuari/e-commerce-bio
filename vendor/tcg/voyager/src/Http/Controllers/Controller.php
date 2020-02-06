@@ -170,8 +170,9 @@ abstract class Controller extends BaseController
         }else{
             $id=$data['id'];
         }
-
+if(isset($_POST['cantidad'])){
         $cant=$_POST['cantidad'];
+
         
        /* if($_POST['_method']=='PUT'){
             foreach($_POST['package_belongstomany_product_relationship'] as $valor){
@@ -189,6 +190,7 @@ abstract class Controller extends BaseController
         //echo $cant[$valor]."<br>";
        DB::Update("UPDATE det_product_packages SET cant=$valor WHERE packages_id=$id AND products_id=$cod");
     }
+}
 //}
 
 //exit();
