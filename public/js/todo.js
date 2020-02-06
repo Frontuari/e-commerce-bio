@@ -11,7 +11,7 @@ $(function () {
     // Get context with jQuery - using jQuery's .get() method.
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
     // This will get the first returned node in the jQuery collection.
-    var areaChart       = new Chart(areaChartCanvas)
+    //var areaChart       = new Chart(areaChartCanvas)
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
 
@@ -66,8 +66,17 @@ $(function () {
       }
   
       //Create the line chart
-      areaChart.Line(areaChartData, areaChartOptions)
-  
+      //areaChart.Line(areaChartData, areaChartOptions)
+      new Chart(areaChartCanvas , {
+        type: "line",
+        data: areaChartData, 
+        options: areaChartOptions
+    });
+
+
+
+
+
     });
     
    

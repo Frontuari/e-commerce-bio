@@ -31,7 +31,7 @@ class Categories extends Model
         foreach($arr as $co=>$va){
             Categories::where('id', $co)->update(array('order' => $va));
        
-       }
+        }
        $this->attributes['order']=$posicion;
      
     }
