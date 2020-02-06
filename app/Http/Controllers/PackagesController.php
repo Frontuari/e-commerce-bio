@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Packages;
 use Illuminate\Http\Request;
 
-class PackagesController extends Controller
+class PackagesController extends VoyagerBreadController
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +22,7 @@ class PackagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.

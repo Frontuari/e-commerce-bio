@@ -19,18 +19,44 @@ class CategoriesTableSeeder extends Seeder
         \DB::table('categories')->insert(array (
             0 => 
             array (
+                'id' => 12,
+                'name' => 'Verduras, Frutas y Hortalizas',
+                'description' => NULL,
+                'image' => NULL,
+                'parent_id' => NULL,
+                'order' => 12,
+                'slug' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-01-29 15:29:49',
+                'updated_at' => '2020-02-06 02:28:55',
+            ),
+            1 => 
+            array (
                 'id' => 6,
                 'name' => 'Hogar y juguetes',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
-                'order' => 2,
+                'order' => 1,
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:41',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            1 => 
+            2 => 
+            array (
+                'id' => 1,
+                'name' => 'Víveres',
+                'description' => NULL,
+                'image' => NULL,
+                'parent_id' => 1,
+                'order' => 2,
+                'slug' => 'bodegon',
+                'status' => 'A',
+                'created_at' => NULL,
+                'updated_at' => '2020-02-06 02:28:55',
+            ),
+            3 => 
             array (
                 'id' => 5,
                 'name' => 'Chocolates, Cereales y Snacks',
@@ -41,9 +67,9 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:12',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            2 => 
+            4 => 
             array (
                 'id' => 3,
                 'name' => 'Frutas y Hortalizas',
@@ -54,35 +80,35 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => 'category-1',
                 'status' => 'A',
                 'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            3 => 
-            array (
-                'id' => 4,
-                'name' => 'Cuidado Personal',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => NULL,
-                'order' => 5,
-                'slug' => 'category-2',
-                'status' => 'A',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-02-04 13:02:04',
-            ),
-            4 => 
+            5 => 
             array (
                 'id' => 2,
                 'name' => 'Aseo del Hogar',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
-                'order' => 6,
+                'order' => 5,
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:28:12',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            5 => 
+            6 => 
+            array (
+                'id' => 4,
+                'name' => 'Cuidado Personal',
+                'description' => NULL,
+                'image' => NULL,
+                'parent_id' => NULL,
+                'order' => 6,
+                'slug' => 'category-2',
+                'status' => 'A',
+                'created_at' => '2020-01-23 22:26:37',
+                'updated_at' => '2020-02-06 02:28:55',
+            ),
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Bebidas',
@@ -93,9 +119,9 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:53:03',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            6 => 
+            8 => 
             array (
                 'id' => 7,
                 'name' => 'Bodegón',
@@ -106,9 +132,9 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:55',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            7 => 
+            9 => 
             array (
                 'id' => 9,
                 'name' => 'Mascotas',
@@ -119,9 +145,9 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:28:51',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            8 => 
+            10 => 
             array (
                 'id' => 10,
                 'name' => 'Quesos y Charcutería',
@@ -132,9 +158,9 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:29:17',
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
-            9 => 
+            11 => 
             array (
                 'id' => 11,
                 'name' => 'Pollo y Carnes',
@@ -145,33 +171,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:29:30',
-                'updated_at' => '2020-02-04 13:02:04',
-            ),
-            10 => 
-            array (
-                'id' => 12,
-                'name' => 'Verduras, Frutas y Hortalizas',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => NULL,
-                'order' => 12,
-                'slug' => NULL,
-                'status' => 'A',
-                'created_at' => '2020-01-29 15:29:49',
-                'updated_at' => '2020-02-04 13:02:04',
-            ),
-            11 => 
-            array (
-                'id' => 1,
-                'name' => 'Víveres',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => 1,
-                'order' => 1,
-                'slug' => 'bodegon',
-                'status' => 'A',
-                'created_at' => NULL,
-                'updated_at' => '2020-02-04 13:02:04',
+                'updated_at' => '2020-02-06 02:28:55',
             ),
         ));
         

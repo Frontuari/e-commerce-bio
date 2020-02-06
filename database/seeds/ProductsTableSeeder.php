@@ -142,7 +142,7 @@ class ProductsTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Harina Pan',
                 'description_short' => 'Harina de Maíz Blanco',
-                'description' => NULL,
+                'description' => '<p>oio</p>',
                 'price' => '100000.000000',
                 'qty_avaliable' => 10,
                 'qty_sold' => 0,
@@ -159,7 +159,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => 2,
                 'created_at' => NULL,
-                'updated_at' => '2020-01-29 17:04:54',
+                'updated_at' => '2020-02-06 02:57:45',
             ),
             6 => 
             array (
