@@ -181,9 +181,9 @@ echo "
     var row = table.insertRow(".$i.");
         
         row.insertCell().innerHTML= '".$valor->name."';
-        row.insertCell().innerHTML= \"<input name='cantidad[".$valor->products_id."]' type='number' min='1' value='$valor->cant'>\";
+        row.insertCell().innerHTML= \"<input name='cantidad[".$valor->products_id."]' type='number' min='1' value='".($valor->cant ? $valor->cant : 0)."'>\";
 
-        data[$valor->products_id]=$valor->cant;
+        data[$valor->products_id]=".($valor->cant ? $valor->cant : 0).";
        
         
        

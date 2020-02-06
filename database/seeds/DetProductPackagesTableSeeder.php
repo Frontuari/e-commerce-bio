@@ -82,157 +82,164 @@ class DetProductPackagesTableSeeder extends Seeder
             ),
             9 => 
             array (
-                'id' => 10,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 8,
-            ),
-            10 => 
-            array (
-                'id' => 11,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 9,
-            ),
-            11 => 
-            array (
-                'id' => 12,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 10,
-            ),
-            12 => 
-            array (
-                'id' => 13,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 1,
-            ),
-            13 => 
-            array (
-                'id' => 14,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 4,
-            ),
-            14 => 
-            array (
-                'id' => 15,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 3,
-            ),
-            15 => 
-            array (
-                'id' => 16,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 2,
-            ),
-            16 => 
-            array (
-                'id' => 17,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 5,
-            ),
-            17 => 
-            array (
-                'id' => 18,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 6,
-            ),
-            18 => 
-            array (
-                'id' => 19,
-                'cant' => NULL,
-                'packages_id' => 3,
-                'products_id' => 7,
-            ),
-            19 => 
-            array (
                 'id' => 20,
                 'cant' => NULL,
                 'packages_id' => 4,
                 'products_id' => 9,
             ),
-            20 => 
+            10 => 
             array (
                 'id' => 21,
                 'cant' => NULL,
                 'packages_id' => 4,
                 'products_id' => 10,
             ),
-            21 => 
+            11 => 
             array (
                 'id' => 22,
                 'cant' => NULL,
                 'packages_id' => 4,
                 'products_id' => 1,
             ),
-            22 => 
-            array (
-                'id' => 23,
-                'cant' => NULL,
-                'packages_id' => 6,
-                'products_id' => 8,
-            ),
-            23 => 
-            array (
-                'id' => 24,
-                'cant' => NULL,
-                'packages_id' => 6,
-                'products_id' => 9,
-            ),
-            24 => 
-            array (
-                'id' => 25,
-                'cant' => NULL,
-                'packages_id' => 6,
-                'products_id' => 7,
-            ),
-            25 => 
+            12 => 
             array (
                 'id' => 26,
                 'cant' => NULL,
                 'packages_id' => 7,
                 'products_id' => 2,
             ),
-            26 => 
+            13 => 
             array (
                 'id' => 27,
                 'cant' => NULL,
                 'packages_id' => 7,
                 'products_id' => 5,
             ),
-            27 => 
+            14 => 
             array (
                 'id' => 28,
                 'cant' => NULL,
                 'packages_id' => 7,
                 'products_id' => 6,
             ),
-            28 => 
+            15 => 
             array (
                 'id' => 29,
-                'cant' => NULL,
+                'cant' => 1,
                 'packages_id' => 8,
                 'products_id' => 8,
             ),
-            29 => 
+            16 => 
             array (
                 'id' => 30,
-                'cant' => NULL,
+                'cant' => 2,
                 'packages_id' => 8,
                 'products_id' => 9,
             ),
-            30 => 
+            17 => 
             array (
-                'id' => 31,
-                'cant' => NULL,
+                'id' => 33,
+                'cant' => 4,
+                'packages_id' => 8,
+                'products_id' => 2,
+            ),
+            18 => 
+            array (
+                'id' => 36,
+                'cant' => 5,
+                'packages_id' => 8,
+                'products_id' => 12,
+            ),
+            19 => 
+            array (
+                'id' => 37,
+                'cant' => 6,
                 'packages_id' => 8,
                 'products_id' => 1,
+            ),
+            20 => 
+            array (
+                'id' => 89,
+                'cant' => 1,
+                'packages_id' => 6,
+                'products_id' => 8,
+            ),
+            21 => 
+            array (
+                'id' => 90,
+                'cant' => 2,
+                'packages_id' => 6,
+                'products_id' => 9,
+            ),
+            22 => 
+            array (
+                'id' => 10,
+                'cant' => 1,
+                'packages_id' => 3,
+                'products_id' => 8,
+            ),
+            23 => 
+            array (
+                'id' => 11,
+                'cant' => 1,
+                'packages_id' => 3,
+                'products_id' => 9,
+            ),
+            24 => 
+            array (
+                'id' => 12,
+                'cant' => 1,
+                'packages_id' => 3,
+                'products_id' => 10,
+            ),
+            25 => 
+            array (
+                'id' => 13,
+                'cant' => 1,
+                'packages_id' => 3,
+                'products_id' => 1,
+            ),
+            26 => 
+            array (
+                'id' => 14,
+                'cant' => 2,
+                'packages_id' => 3,
+                'products_id' => 4,
+            ),
+            27 => 
+            array (
+                'id' => 15,
+                'cant' => 1,
+                'packages_id' => 3,
+                'products_id' => 3,
+            ),
+            28 => 
+            array (
+                'id' => 16,
+                'cant' => 2,
+                'packages_id' => 3,
+                'products_id' => 2,
+            ),
+            29 => 
+            array (
+                'id' => 17,
+                'cant' => 2,
+                'packages_id' => 3,
+                'products_id' => 5,
+            ),
+            30 => 
+            array (
+                'id' => 18,
+                'cant' => 2,
+                'packages_id' => 3,
+                'products_id' => 6,
+            ),
+            31 => 
+            array (
+                'id' => 19,
+                'cant' => 2,
+                'packages_id' => 3,
+                'products_id' => 7,
             ),
         ));
         

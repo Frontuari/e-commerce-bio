@@ -96,28 +96,6 @@ class SettingsTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'id' => 4,
-                'key' => 'site.google_analytics_tracking_id',
-                'display_name' => 'Google Analytics Tracking ID',
-                'value' => '817670918759-dh0lranp0bflqsfqd4n237meiksb923l.apps.googleusercontent.com',
-                'details' => '',
-                'type' => 'text',
-                'order' => 4,
-                'group' => 'Site',
-            ),
-            8 => 
-            array (
-                'id' => 12,
-                'key' => 'admin.google_analytics_client_id',
-                'display_name' => 'Google',
-                'value' => '817670918759-dh0lranp0bflqsfqd4n237meiksb923l.apps.googleusercontent.com',
-                'details' => NULL,
-                'type' => 'text',
-                'order' => 6,
-                'group' => 'Admin',
-            ),
-            9 => 
-            array (
                 'id' => 5,
                 'key' => 'admin.bg_image',
                 'display_name' => 'Admin Background Image',
@@ -127,7 +105,7 @@ class SettingsTableSeeder extends Seeder
                 'order' => 5,
                 'group' => 'Admin',
             ),
-            10 => 
+            8 => 
             array (
                 'id' => 13,
                 'key' => 'admin.detalle_login',
@@ -136,6 +114,39 @@ class SettingsTableSeeder extends Seeder
                 'details' => NULL,
                 'type' => 'image',
                 'order' => 7,
+                'group' => 'Admin',
+            ),
+            9 => 
+            array (
+                'id' => 4,
+                'key' => 'site.google_analytics_tracking_id',
+                'display_name' => 'Google Analytics Tracking ID',
+                'value' => NULL,
+                'details' => '',
+                'type' => 'text',
+                'order' => 4,
+                'group' => 'Site',
+            ),
+            10 => 
+            array (
+                'id' => 12,
+                'key' => 'admin.google_analytics_client_id',
+                'display_name' => 'Google',
+                'value' => NULL,
+                'details' => NULL,
+                'type' => 'text',
+                'order' => 6,
+                'group' => 'Admin',
+            ),
+            11 => 
+            array (
+                'id' => 14,
+                'key' => 'admin.mapa_posiciones_publicidad',
+                'display_name' => 'mapa_posiciones',
+                'value' => 'settings/February2020/WD9jBoasiDCH6reeUn11.jpg',
+                'details' => NULL,
+                'type' => 'image',
+                'order' => 8,
                 'group' => 'Admin',
             ),
         ));
