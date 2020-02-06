@@ -172,8 +172,11 @@ var row = table.insertRow(0);
 
 
 @php
+
 $i=0;
-                                $pack = DB::select("SELECT det_product_packages.*, products.name FROM det_product_packages INNER JOIN products ON products.id=det_product_packages.products_id WHERE packages_id=$dataTypeContent->id");
+if($dataTypeContent->id){
+$pack = DB::select("SELECT det_product_packages.*, products.name FROM det_product_packages INNER JOIN products ON products.id=det_product_packages.products_id WHERE packages_id='$dataTypeContent->id'");
+
 echo "var data= new Array(".count($pack).");";                                
                                 foreach($pack as $valor){
 
@@ -189,7 +192,12 @@ echo "
        
         ";
         $i++;               }
+    }else{
+        echo "var data= new Array();"; 
+
+    }
          echo "var i=".$i;
+
                             @endphp
                             /*
 $.each($(".select2-ajax option:selected"), function(){     
