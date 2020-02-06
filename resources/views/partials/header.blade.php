@@ -78,7 +78,7 @@
 											<button type="submit" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
-											<small>¿No tienes cuenta? <a href="{{ url('/register') }}">Registrate aquí</a></small>
+											<small>¿No tienes cuenta? <a href="{{ url('/join') }}">Registrate aquí</a></small>
 										</div>
 									</form>
 						</div>
