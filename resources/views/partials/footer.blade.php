@@ -292,9 +292,12 @@
 			$(document).on('click','.increaseValue',function()
 			{
 				quantity = parseInt($(this).parent().parent().find('input[name=quantity]').val());
-				//incrementa 1
-				quantity = quantity + 1;
-				$(this).parent().parent().find('input[name=quantity]').val(quantity);
+				max_stock = parseInt($(this).parent().find('span.max-stock').text());
+				if(quantity < max_stock){
+					//incrementa 1
+					quantity = quantity + 1;
+					$(this).parent().parent().find('input[name=quantity]').val(quantity);
+				}
 			});
 
 			//reducir el valor
