@@ -119,7 +119,7 @@
 					<div class="product-list">
 						<div class="container-fluid">
 							<div class="row">
-								<div class="col-6 col-lg-12">
+								<div class="col-6 col-lg-12" v-for="product_recent in recent">
 									<div class="product-block">
 										<div class="product-img">
 											<img src="assets/img/producto-bio-006.jpg">
@@ -135,7 +135,7 @@
 												</button>
 											</div>
 										</div>
-										<div class="product-content">
+										<div class="product-content" >
 											<a href="#" class="product-title">Mantequilla</a>
 											<span class="product-info">500 g</span>
 											<div class="product-prices">
@@ -211,3 +211,22 @@
 		</div>
 	</section>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+                recent: [],
+            }
+        },
+        methods: {
+            getRecent: async function () {
+				const response = await axios.get(URLHOME+'api/products/most/recent');
+				this.recent = response.data.data;
+				console.log(this.recent);
+			},
+        },
+        mounted() {
+			this.getRecent();
+        }
+    }
+</script>
