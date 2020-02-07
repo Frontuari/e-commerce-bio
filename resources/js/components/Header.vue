@@ -35,6 +35,7 @@
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
+						
 						<a class="navbar-brand" ><img src="assets/img/	logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
@@ -76,7 +77,7 @@
 							<!--<li id="nav-logged"><a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> <a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 							
-							<li id="nav-cart"><a ><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
+							<li id="nav-cart"><a ><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">0</span></a></li>
 							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a></li>
 
 							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
@@ -130,7 +131,7 @@
 					</div>
 					<ul class="navbar-nav">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Víveres</a>
+							<a class="nav-link" >Víveres</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Bebidas</a>
@@ -163,7 +164,7 @@
 								<img src="assets/img/flecha-izquierda-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a class="dropdown-item" href="#">Víveres</a>
+								<a class="dropdown-item" >Víveres</a>
 								<a class="dropdown-item" href="#">Bebidas</a>
 								<a class="dropdown-item" href="#">Bodegón</a>
 								<a class="dropdown-item" href="#">Hogar y Juguetes</a>
