@@ -76,7 +76,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'failed_attempts' => NULL,
                 'purchase_quantity' => NULL,
-                'remember_token' => 'ylbPGu2XQitksSUVM8Z0Ik7xiPXGCdw81zOPPmWiGOLKyK4O3nyUrUY5p5Va',
+                'remember_token' => '2HTbuN4HxbelraNfkAYuiNZiCd2I8hnTdS9rUCTHWQgVH8iXGF4LoUetKnCl',
                 'created_at' => '2020-01-23 03:04:38',
                 'updated_at' => '2020-01-24 12:49:36',
                 'avatar' => 'users/default.png',

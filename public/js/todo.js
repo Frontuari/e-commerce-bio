@@ -22,7 +22,10 @@ $(function () {
       //alert(data);
  
      // var areaChartData = {"labels":[data.labels],"datasets":[{"label":"Pedidos","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[data.datasets[0].data]}]};
-      //var areaChartData = {"labels":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],"datasets":[{"label":"Pedidos","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[2,0,0,0,1,0,0,0,0,0,0,0]}]};
+      //var areaChartData = {
+       // "labels":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+       // "datasets":[
+     //     {"label":"Pedidos","backgroundColor":"#28b67a","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[2,0,0,0,1,0,0,0,0,0,0,0]}]};
       var areaChartData = data;
 
 
@@ -30,7 +33,7 @@ $(function () {
         //Boolean - If we should show the scale at all
         showScale               : true,
         //Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines      : false,
+        scaleShowGridLines      : true,
         //String - Colour of the grid lines
         scaleGridLineColor      : 'rgba(0,0,0,.05)',
         //Number - Width of the grid lines
