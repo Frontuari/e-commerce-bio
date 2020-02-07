@@ -27,7 +27,8 @@ return [
     */
 
     'controllers' => [
-        'namespace' => 'TCG\\Voyager\\Http\\Controllers',
+       // 'namespace' => 'TCG\\Voyager\\Http\\Controllers',
+        'namespace' => 'App\\Http\\Controllers',
     ],
 
     /*
@@ -192,6 +193,9 @@ return [
 
     'additional_js' => [
         'js/todo.js',
+        'js/Chart.min.js',
+        'js/autonumeric.js',
+        'js/final.js',
     ],
 
     'googlemaps' => [

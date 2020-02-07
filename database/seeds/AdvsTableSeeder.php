@@ -27,6 +27,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:19:24',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'left'
             ),
             1 => 
             array (
@@ -38,6 +39,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:19:34',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'right'
             ),
             2 => 
             array (
@@ -49,6 +51,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:48:23',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
             3 => 
             array (
@@ -60,6 +63,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:48:31',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
             4 => 
             array (
@@ -71,6 +75,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:49:26',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
             5 => 
             array (
@@ -82,6 +87,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-29 02:49:56',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
             6 => 
             array (
@@ -93,6 +99,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-30 12:13:08',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
             7 => 
             array (
@@ -104,6 +111,7 @@ class AdvsTableSeeder extends Seeder
                 'updated_at' => '2020-01-30 12:13:15',
                 'status' => 'A',
                 'url' => '#',
+                'text_position' => 'none'
             ),
         ));
         

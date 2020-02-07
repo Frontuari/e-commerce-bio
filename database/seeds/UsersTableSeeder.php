@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 14,
+                'id' => 13,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-23 14:45:09',
                 'password' => '$2y$10$tLtJbxbUpUcYzEFWAG/TN.mM5y6qSmPvSAvzYbZX7slH/p35RlIG6',
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'failed_attempts' => 0,
                 'purchase_quantity' => 0,
-                'remember_token' => 'aq0Niwf66hBSykI1SSy7CU21fMgFqPMGk4UlQS7FsbKIVgNvqPwGgYTTgUjM',
+                'remember_token' => 'jU4bkAuhqzsCkGEmuCcsOpxQR5gnUn6aueRIHqW4hUvMy3aMzH7UJI1xYKKB',
                 'created_at' => '2020-01-23 18:45:09',
                 'updated_at' => '2020-01-27 00:04:52',
                 'avatar' => 'users/default.png',
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 13,
+                'id' => 16,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-22 23:04:38',
                 'password' => '$2y$10$pBP8efPcAz93vf9x65h64e.b7KfPlqpeh3uI2XV1YT8e5IVDDuazi',
@@ -76,13 +76,13 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'failed_attempts' => NULL,
                 'purchase_quantity' => NULL,
-                'remember_token' => 'SxRobtjAhFEtzABbPHV8DXHAnZHLn7hnUWjsTnMhtQXV52WakidVNeqTmTBW',
+                'remember_token' => '2HTbuN4HxbelraNfkAYuiNZiCd2I8hnTdS9rUCTHWQgVH8iXGF4LoUetKnCl',
                 'created_at' => '2020-01-23 03:04:38',
                 'updated_at' => '2020-01-24 12:49:36',
                 'avatar' => 'users/default.png',
                 'role_id' => 1,
                 'settings' => '{"locale":"es"}',
-            ),
+            )
         ));
         
         

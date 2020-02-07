@@ -57,5 +57,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DetBankOrdersTableSeeder::class);
         $this->call(RatingProductsTableSeeder::class);
         $this->call(AdvsTableSeeder::class);
+        $this->call(DetSubCategoriesTableSeeder::class);
     }
 }

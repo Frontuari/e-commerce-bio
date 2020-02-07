@@ -7,14 +7,21 @@
             <div class="carousel-inner">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
                     <img class="d-block w-100" :src="'storage/'+slider.image" alt="First slide">
-                    <!-- <div class="container">
-                        <div class="carousel-caption caption-right">
+                    <div class="container">
+                        <div class="carousel-caption caption-left" v-if="slider.text_position=='left'">
                             <h5>¡Aprovecha nuestros combos!</h5>
                             <h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
                             <p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
                             <a href="#" class="btn">Comprar</a>
                         </div>
-                    </div> -->
+
+                        <div class="carousel-caption caption-right" v-else>
+                            <h5>¡Aprovecha nuestros combos!</h5>
+                            <h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
+                            <p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
+                            <a href="#" class="btn">Comprar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -39,6 +46,7 @@
             getSliders: async function() {
 				const response = await axios.get(URLSERVER+'api/advs/type/top');
                 this.sliders = response.data.data;
+                console.log(this.sliders);
 			},
         },
         mounted() {

@@ -25,6 +25,7 @@ class OrdersController extends BaseController
         $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         $arr['datasets'][0]=array(
             'label'               => 'Pedidos',
+            'backgroundColor'       =>'#28b67a',
             'fillColor'           => '#28b67a',
             'strokeColor'         => '#13945C',
             'pointColor'         => '#13945C',

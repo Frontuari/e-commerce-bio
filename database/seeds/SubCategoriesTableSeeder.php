@@ -19,38 +19,17 @@ class SubCategoriesTableSeeder extends Seeder
         \DB::table('sub_categories')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'name' => 'Leche en polvo',
+                'id' => 7,
+                'name' => 'Salsas',
                 'description' => NULL,
                 'image' => NULL,
                 'status' => 'A',
                 'categories_id' => 1,
-                'created_at' => NULL,
-                'updated_at' => '2020-01-29 15:34:26',
+                'created_at' => '2020-01-29 17:16:04',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 8,
             ),
             1 => 
-            array (
-                'id' => 3,
-                'name' => 'Aceites',
-                'description' => NULL,
-                'image' => NULL,
-                'status' => 'A',
-                'categories_id' => 1,
-                'created_at' => '2020-01-29 15:35:17',
-                'updated_at' => '2020-01-29 15:35:17',
-            ),
-            2 => 
-            array (
-                'id' => 4,
-                'name' => 'Harina de Maíz',
-                'description' => NULL,
-                'image' => NULL,
-                'status' => 'A',
-                'categories_id' => 1,
-                'created_at' => '2020-01-29 15:38:58',
-                'updated_at' => '2020-01-29 15:39:51',
-            ),
-            3 => 
             array (
                 'id' => 5,
                 'name' => 'Refrescos',
@@ -59,9 +38,46 @@ class SubCategoriesTableSeeder extends Seeder
                 'status' => 'A',
                 'categories_id' => 8,
                 'created_at' => '2020-01-29 17:09:44',
-                'updated_at' => '2020-01-29 17:09:44',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 1,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Aceites',
+                'description' => NULL,
+                'image' => NULL,
+                'status' => 'A',
+                'categories_id' => 1,
+                'created_at' => '2020-01-29 15:35:17',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 2,
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'Harina de Maíz',
+                'description' => NULL,
+                'image' => NULL,
+                'status' => 'A',
+                'categories_id' => 1,
+                'created_at' => '2020-01-29 15:38:58',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 3,
             ),
             4 => 
+            array (
+                'id' => 1,
+                'name' => 'Leche en polvo',
+                'description' => NULL,
+                'image' => NULL,
+                'status' => 'A',
+                'categories_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 4,
+            ),
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Licores',
@@ -70,18 +86,8 @@ class SubCategoriesTableSeeder extends Seeder
                 'status' => 'A',
                 'categories_id' => 8,
                 'created_at' => '2020-01-29 17:12:23',
-                'updated_at' => '2020-01-29 17:12:23',
-            ),
-            5 => 
-            array (
-                'id' => 7,
-                'name' => 'Salsas',
-                'description' => NULL,
-                'image' => NULL,
-                'status' => 'A',
-                'categories_id' => 1,
-                'created_at' => '2020-01-29 17:16:04',
-                'updated_at' => '2020-01-29 17:16:04',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 5,
             ),
             6 => 
             array (
@@ -92,7 +98,8 @@ class SubCategoriesTableSeeder extends Seeder
                 'status' => 'A',
                 'categories_id' => 1,
                 'created_at' => '2020-01-29 17:21:29',
-                'updated_at' => '2020-01-29 17:21:29',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 6,
             ),
             7 => 
             array (
@@ -103,7 +110,8 @@ class SubCategoriesTableSeeder extends Seeder
                 'status' => 'A',
                 'categories_id' => 6,
                 'created_at' => '2020-01-29 17:32:35',
-                'updated_at' => '2020-01-29 17:32:35',
+                'updated_at' => '2020-02-06 02:31:34',
+                'position' => 7,
             ),
         ));
         

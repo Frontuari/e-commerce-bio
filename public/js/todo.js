@@ -11,7 +11,7 @@ $(function () {
     // Get context with jQuery - using jQuery's .get() method.
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
     // This will get the first returned node in the jQuery collection.
-    var areaChart       = new Chart(areaChartCanvas)
+    //var areaChart       = new Chart(areaChartCanvas)
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
 
@@ -22,7 +22,10 @@ $(function () {
       //alert(data);
  
      // var areaChartData = {"labels":[data.labels],"datasets":[{"label":"Pedidos","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[data.datasets[0].data]}]};
-      //var areaChartData = {"labels":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],"datasets":[{"label":"Pedidos","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[2,0,0,0,1,0,0,0,0,0,0,0]}]};
+      //var areaChartData = {
+       // "labels":["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+       // "datasets":[
+     //     {"label":"Pedidos","backgroundColor":"#28b67a","fillColor":"rgba(60,141,188,0.9)","strokeColor":"rgba(60,141,188,0.8)","pointColor":"#3b8bba","pointStrokeColor":"rgba(60,141,188,1)","pointHighlightFill":"#fff","pointHighlightStroke":"rgba(60,141,188,1)","data":[2,0,0,0,1,0,0,0,0,0,0,0]}]};
       var areaChartData = data;
 
 
@@ -30,7 +33,7 @@ $(function () {
         //Boolean - If we should show the scale at all
         showScale               : true,
         //Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines      : false,
+        scaleShowGridLines      : true,
         //String - Colour of the grid lines
         scaleGridLineColor      : 'rgba(0,0,0,.05)',
         //Number - Width of the grid lines
@@ -66,8 +69,17 @@ $(function () {
       }
   
       //Create the line chart
-      areaChart.Line(areaChartData, areaChartOptions)
-  
+      //areaChart.Line(areaChartData, areaChartOptions)
+      new Chart(areaChartCanvas , {
+        type: "line",
+        data: areaChartData, 
+        options: areaChartOptions
+    });
+
+
+
+
+
     });
     
    
