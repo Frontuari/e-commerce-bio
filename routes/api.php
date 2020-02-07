@@ -36,8 +36,11 @@ Route::post('login', 'API\RegisterController@login');
     //BRANDS
     Route::resource('brands', 'API\BrandController');
 
-    //PACKAGES
-    Route::resource('packages', 'API\DetProductPackagesController');//PACKAGE
+    //COMBOS
+    Route::resource('packages', 'API\PackageCotroller');
+
+    //PACKAGING
+    Route::resource('packaging', 'API\DetProductPackagesController');
 
     //SETINGS
     Route::get('settings','API\SettingController@all')->name('settings');

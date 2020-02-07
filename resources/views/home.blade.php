@@ -3,9 +3,6 @@
 @section('title','Home')
 
 @section('body')
-<!-- MAIN  -->
-<main id="app">
-	
 	<slider></slider>
 
 	<combos></combos>
@@ -17,10 +14,6 @@
 	<nuestros-productos></nuestros-productos>
 
 	<footer-ad></footer-ad>
-
-</main>
-<style>.cls-1{fill:#ccc;}</style>
-<!-- MAIN -->
 @stop
 
 @section('js')

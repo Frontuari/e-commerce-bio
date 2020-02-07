@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.EventBus = new Vue();
+
+
 /**
  * Detectar URL automaticamente del servidor
  */
@@ -26,6 +29,7 @@ Vue.component('footer-ad', require('./components/Footer.vue').default);
 Vue.component('ads', require('./components/Ads.vue').default);
 Vue.component('offers', require('./components/Offers.vue').default);
 Vue.component('combos', require('./components/Combos.vue').default);
+Vue.component('header-menu', require('./components/Header.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
