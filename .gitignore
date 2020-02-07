@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/js/app.js
 ~
 /storage/*.key
 package-lock.json
