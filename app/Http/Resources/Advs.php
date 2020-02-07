@@ -22,6 +22,7 @@ class Advs extends JsonResource
             'type' => $this->type,
             'url' => $this->url,
             'status' => $this->status,
+            'text_position' => $this->text_position,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

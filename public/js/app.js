@@ -2990,6 +2990,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -44146,16 +44153,52 @@ var render = function() {
                   attrs: { src: "storage/" + slider.image, alt: "First slide" }
                 }),
                 _vm._v(" "),
-                _vm._m(0, true)
+                _c("div", { staticClass: "container" }, [
+                  slider.text_position == "left"
+                    ? _c(
+                        "div",
+                        { staticClass: "carousel-caption caption-left" },
+                        [
+                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
+                          _vm._v(" "),
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _vm._m(1, true),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "btn", attrs: { href: "#" } },
+                            [_vm._v("Comprar")]
+                          )
+                        ]
+                      )
+                    : _c(
+                        "div",
+                        { staticClass: "carousel-caption caption-right" },
+                        [
+                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
+                          _vm._v(" "),
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            { staticClass: "btn", attrs: { href: "#" } },
+                            [_vm._v("Comprar")]
+                          )
+                        ]
+                      )
+                ])
               ]
             )
           }),
           0
         ),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(4),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(5)
       ]
     )
   ])
@@ -44165,29 +44208,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "carousel-caption caption-left" }, [
-        _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
-        _vm._v(" "),
-        _c("h2", [
-          _vm._v("Carnes "),
-          _c("img", {
-            staticClass: "ico-text",
-            attrs: { src: "assets/img/icono-bio.svg" }
-          }),
-          _vm._v("io")
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v("Compra una gran variedad de tipos "),
-          _c("br"),
-          _vm._v("de carnes a un excelente precio.")
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn", attrs: { href: "#" } }, [
-          _vm._v("Comprar")
-        ])
-      ])
+    return _c("h2", [
+      _vm._v("Carnes "),
+      _c("img", {
+        staticClass: "ico-text",
+        attrs: { src: "assets/img/icono-bio.svg" }
+      }),
+      _vm._v("io")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v("Compra una gran variedad de tipos "),
+      _c("br"),
+      _vm._v("de carnes a un excelente precio.")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _vm._v("Carnes "),
+      _c("img", {
+        staticClass: "ico-text",
+        attrs: { src: "assets/img/icono-bio.svg" }
+      }),
+      _vm._v("io")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v("Compra una gran variedad de tipos "),
+      _c("br"),
+      _vm._v("de carnes a un excelente precio.")
     ])
   },
   function() {
@@ -56922,8 +56982,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

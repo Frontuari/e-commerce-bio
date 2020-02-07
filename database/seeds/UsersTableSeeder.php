@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 14,
+                'id' => 13,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-23 14:45:09',
                 'password' => '$2y$10$tLtJbxbUpUcYzEFWAG/TN.mM5y6qSmPvSAvzYbZX7slH/p35RlIG6',
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 13,
+                'id' => 16,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-22 23:04:38',
                 'password' => '$2y$10$pBP8efPcAz93vf9x65h64e.b7KfPlqpeh3uI2XV1YT8e5IVDDuazi',
