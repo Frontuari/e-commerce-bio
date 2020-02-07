@@ -217,7 +217,11 @@ export default {
         });
     },
     mounted() {
-        this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+		if( window.localStorage.getItem("cart") ){
+			this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+		}else{
+			this.cant_cart = 0;
+		}
     }
 }
 </script>
