@@ -32,6 +32,7 @@ Route::post('login', 'API\RegisterController@login');
     Route::get('products/most/recent','API\ProductController@most_recent')->name("most_recent");
     Route::get('products/most/sold','API\ProductController@most_sold')->name("most_sold");
     Route::get('products/best/price','API\ProductController@best_price')->name("best_price");
+    Route::get('products/filter/{filters}','API\ProductController@filter')->name("filterBy");
 
     //BRANDS
     Route::resource('brands', 'API\BrandController');

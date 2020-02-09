@@ -59,5 +59,13 @@ class ProductController extends BaseController
         $Products = Product::where('status','A')->orderBy('price','asc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
+    
+    public function filter($filter) {
+
+        $filtros = explode("+",$filter);
+        
+
+        return $this->sendResponse($filtros,'filtros');
+    }
 
 }
