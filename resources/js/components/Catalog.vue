@@ -6,7 +6,7 @@
 					<div class="products-order">
 						<div class="form-group">
 							<span>Mostrando</span>
-							<select id="show" class="form-control">
+							<select id="show" class="form-control" v-model="limitP">
 								<option value="10">10</option>
 								<option value="20">20</option>
 								<option value="50">50</option>
@@ -17,9 +17,11 @@
 						</div>
 						<div class="form-group">
 							<h5>Organizar por:</h5>
-							<select id="order-by" class="form-control">
-								<option value="1">De A -> Z</option>
-								<option value="2">De Z -> A</option>
+							<select id="order-by" class="form-control" v-model="orderP">
+								<option value="AZasc">De A -> Z</option>
+								<option value="ZAdesc">De Z -> A</option>
+								<option value="Pasc">Precio - De menor a mayor</option>
+								<option value="Pdesc">Precio - De mayor a menor</option>
 							</select>
 						</div>
 					</div>
@@ -43,20 +45,21 @@
 							</div>
 							<div class="filter filter-offers">
 								<h4>Ofertas</h4>
+								FILTROS: {{filtros}} XXXX
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-reciente" title="Mas Recientes" name="mas-reciente">
+									<input type="checkbox" class="check-box" id="mas-reciente" title="Mas Recientes" name="mas-reciente" value="mr" v-model="filterP">
 									<label for="mas-reciente">Más Recientes</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-buscados" title="Mas Buscados" name="mas-buscados">
+									<input type="checkbox" class="check-box" id="mas-buscados" title="Mas Buscados" name="mas-buscados" value="mb" v-model="filterP">
 									<label for="mas-buscados">Más Buscados</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="mas-vendidos">
+									<input type="checkbox" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="mas-vendidos" value="mv" v-model="filterP">
 									<label for="mas-vendidos">Más Vendidos</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mejor-precio" title="Mejor Precio" name="mejor-precio">
+									<input type="checkbox" class="check-box" id="mejor-precio" title="Mejor Precio" name="mejor-precio" value="mj" v-model="filterP"> 
 									<label for="mejor-precio">Mejor Precio</label>
 								</div>
 							</div>
@@ -94,7 +97,7 @@
 					<div class="products-order">
 						<div class="form-group">
 							<span>Mostrando</span>
-							<select id="show" class="form-control">
+							<select id="show" class="form-control" v-model="limitP">
 								<option value="10">10</option>
 								<option value="20">20</option>
 								<option value="50">50</option>
@@ -105,13 +108,13 @@
 						</div>
 						<div class="form-group">
 							<h5>Organizar por:</h5>
-							<select id="order-by" class="form-control">
-								<option value="1">De A -> Z</option>
-								<option value="2">De Z -> A</option>
-								<option value="2">Precio - De menor a mayor</option>
-								<option value="2">Precio - De mayor a menor</option>
-								<option value="2">Más Vendidos</option>
-								<option value="2">Más Recientes</option>
+							<select id="order-by" class="form-control" v-model="orderP">
+								<option value="AZasc">De A -> Z</option>
+								<option value="ZAdesc">De Z -> A</option>
+								<option value="Pasc">Precio - De menor a mayor</option>
+								<option value="Pdesc">Precio - De mayor a menor</option>
+								<!-- <option value="2">Más Vendidos</option>
+								<option value="2">Más Recientes</option> -->
 							</select>
 						</div>
 					</div>
@@ -221,7 +224,11 @@
     export default {
         data() {
             return {
-                recent: [],
+				recent: [],
+				filterP: [],
+				limitP: 10,
+				orderP: 'AZasc',
+				rangeP: '',
             }
         },
         methods: {
@@ -265,6 +272,11 @@
 		},
         mounted() {
 			this.getRecent();
-        }
+		},
+		computed: {
+			filtros: function() {
+				return this.filterP.join("+")+"+limit="+this.limitP+"+order="+this.orderP+"+precio="+this.rangeP;
+			}
+		}
     }
 </script>
