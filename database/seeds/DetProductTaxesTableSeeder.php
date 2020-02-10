@@ -23,6 +23,12 @@ class DetProductTaxesTableSeeder extends Seeder
                 'taxes_id' => 1,
                 'products_id' => 2,
             ),
+            1 => 
+            array (
+                'id' => 3,
+                'taxes_id' => 1,
+                'products_id' => 13,
+            ),
         ));
         
         

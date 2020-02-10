@@ -91,30 +91,6 @@ class ProductsTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 2,
-                'name' => 'Leche Camprolac',
-                'description_short' => 'Leche en Polvo Completa',
-                'description' => '<p>Leche en polvo completa camprolat para adultos y ni&ntilde;os</p>',
-                'price' => '250000.000000',
-                'qty_avaliable' => 0,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 0,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => '12312',
-                'promote' => 0,
-                'discount' => '90.000000',
-                'photo' => 'products/February2020/1BRBlkzQpglLHp6G8BL9.jpeg',
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'created_at' => NULL,
-                'updated_at' => '2020-02-04 17:39:16',
-            ),
-            4 => 
-            array (
                 'id' => 12,
                 'name' => 'Salsa Heinz 230g',
                 'description_short' => 'Salsa de tomate heinz',
@@ -137,7 +113,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-02-04 22:41:48',
                 'updated_at' => '2020-02-04 22:42:02',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 1,
                 'name' => 'Harina Pan',
@@ -161,7 +137,55 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2020-02-06 02:57:45',
             ),
+            5 => 
+            array (
+                'id' => 13,
+                'name' => 'prueba',
+                'description_short' => 'asdf',
+                'description' => '<p>asdfa</p>',
+                'price' => '200000.000000',
+                'qty_avaliable' => 1,
+                'qty_sold' => 0,
+                'qty_view' => 0,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 1,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => 'products/February2020/ORMXFOLJp314b40TI0Iv.jpg',
+                'stores_id' => 1,
+                'brands_id' => 2,
+                'created_at' => '2020-02-10 14:42:40',
+                'updated_at' => '2020-02-10 14:42:40',
+            ),
             6 => 
+            array (
+                'id' => 2,
+                'name' => 'Leche Camprolac',
+                'description_short' => 'Leche en Polvo Completa',
+                'description' => '<p>Leche en polvo completa camprolat para adultos y ni&ntilde;os</p>',
+                'price' => '250000.000000',
+                'qty_avaliable' => 0,
+                'qty_sold' => 0,
+                'qty_view' => 0,
+                'user_rating' => '0',
+                'qty_min' => 0,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => '12312',
+                'promote' => 0,
+                'discount' => '90.000000',
+                'photo' => 'products/February2020/ilsVuFnCydWRlLZU5jcZ.jpg',
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'created_at' => NULL,
+                'updated_at' => '2020-02-10 20:13:06',
+            ),
+            7 => 
             array (
                 'id' => 4,
                 'name' => 'Aceite Vatel',
@@ -185,7 +209,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 17:08:14',
                 'updated_at' => '2020-01-29 17:08:14',
             ),
-            7 => 
+            8 => 
             array (
                 'id' => 3,
                 'name' => 'La Campiña',
@@ -209,7 +233,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 17:02:15',
                 'updated_at' => '2020-01-29 17:08:34',
             ),
-            8 => 
+            9 => 
             array (
                 'id' => 5,
                 'name' => 'Coca cola 2L',
@@ -233,7 +257,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 17:11:39',
                 'updated_at' => '2020-01-29 17:11:50',
             ),
-            9 => 
+            10 => 
             array (
                 'id' => 6,
                 'name' => 'Ron Cacique 500 1,5 L',
@@ -257,7 +281,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 17:13:58',
                 'updated_at' => '2020-01-29 17:13:58',
             ),
-            10 => 
+            11 => 
             array (
                 'id' => 7,
                 'name' => 'Salsa Iinglesa Olympia 150 CC',

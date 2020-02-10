@@ -41,6 +41,14 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'products_id' => 13,
+                'sub_categories_id' => 7,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         
