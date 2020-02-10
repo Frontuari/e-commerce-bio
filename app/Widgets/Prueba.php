@@ -69,7 +69,7 @@ class Prueba extends BaseDimmer
     public function grafico_pedidos(){
         $html="";
         $html.='
-      
+        <div class="center col-md-9 col-sm-12 col-xs-12 lin">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Historico de pedidos</h3>
@@ -87,6 +87,7 @@ class Prueba extends BaseDimmer
                 </div>
                  <!-- /.box-body -->
             </div>
+        </div>
             <script type="text/javascript">
 var APP_URL = "'.url("/").'";
 </script>

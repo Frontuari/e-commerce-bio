@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 class Packages extends Model
 {
-<<<<<<< HEAD
     protected $table='packages';
 
-=======
 
     public function setNameAttribute($value)
     {
@@ -34,7 +32,7 @@ class Packages extends Model
         */
         $this->attributes['name']=$value;
     }
->>>>>>> f1ec0b1a2fa8d76128272d664945f5b82a566668
+    
     public function setDiscountAttribute($value)
     {
         $fg= new FuncionesGenerales;
