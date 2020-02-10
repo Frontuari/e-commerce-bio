@@ -16,7 +16,7 @@ class FixAdvsAddUrl extends Migration
         Schema::table('advs', function (Blueprint $table) {
             
             $table->string('url', 255)->nullable()->default('#');
-            $table->enum('text_position',['left','right','none']);
+            //$table->enum('text_position',['left','right','none'])->nullable();
              
          });
     }
