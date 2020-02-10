@@ -49,7 +49,7 @@
         -webkit-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
 -moz-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
 box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
- min-height:45vh;  margin: 0 auto; border-radius:20px; border: 0px solid #000">
+ min-height:48vh;  margin: 0 auto; border-radius:20px; border: 0px solid #000">
             <img style="width:39%; float:right" src="/storage/settings/January2020/login.svg">
             <div class="login-container" style="margin-top:-20px;">
                 <form action="{{ route('voyager.login') }}" method="POST">
@@ -68,23 +68,32 @@ box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
                         </div>
                     </div>
                     <br>
-                    <div class="form-group" id="rememberMeGroup">
-                        <div class="controls">
+                  <style> *{border: 0px solid #000}</style>
+                      <div class="form-group" id="rememberMeGroup">
+                      <div class="row">
+                        <div class="col-xs-6">
+                          <div class="controls">
+                            <label class="container">
+                              <input checked="checked" type="checkbox" name="remember" id="remember" value="1">
+                              <span style="font-size:12px;"><b>Recuérdame</b></span>
+                             <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-xs-6">
+                        <div class="text-right">
+                      <button type="submit" class="btn btn-success login-buttson">
+                          <span class="signingin hidden"><span class="voyager-refresh"></span> {{ __('voyager::login.loggingin') }}...</span>
+                          <span class="signin" style=" font-size:14px;"><b>Ingresar</b></span>
+                      </button>
+                      </div>
+                        </div>    
+                          </div>
+                        </div>
+                                   
+                     
+                    
 
-                        <label class="container">
-  <input checked="checked" type="checkbox" name="remember" id="remember" value="1">
-  <span style="font-size:12px;"><b>Recuérdame</b></span>
-  <span class="checkmark"></span>
-</label>
-
-
-   </div>
-                    </div>
-                    <div class="text-right">
-                    <button type="submit" class="btn btn-success login-buttson">
-                        <span class="signingin hidden"><span class="voyager-refresh"></span> {{ __('voyager::login.loggingin') }}...</span>
-                        <span class="signin" style=" font-size:14px;"><b>Ingresar</b></span>
-                    </button>
                     </div>
 
               </form>
