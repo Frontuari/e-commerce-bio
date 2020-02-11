@@ -13,7 +13,7 @@ $usuario=$_GET['user'];
 $clave=$_GET['clave'];
 $puerto="5432";
 
-$dbconn = pg_connect("host=localhost dbname=$base_dato user=$usuario password=$clave port=$puerto")
+$dbconn = pg_connect("host=127.0.0.1 dbname=$base_dato user=$usuario password=$clave port=$puerto")
 or die('No se ha podido conectar: ' . pg_last_error());
 $query="SELECT * FROM pg_catalog.pg_tables";
 $result = pg_query($query) or die('La consulta fallo: ' . pg_last_error());
