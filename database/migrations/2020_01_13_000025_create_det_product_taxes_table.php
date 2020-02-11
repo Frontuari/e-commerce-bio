@@ -39,8 +39,8 @@ class CreateDetProductTaxesTable extends Migration
 
             $table->foreign('products_id', 'fk_det_product_taxes_products1_idx')
                 ->references('id')->on('products')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

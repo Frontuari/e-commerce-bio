@@ -35,8 +35,8 @@ class CreateDetBankOrdersTable extends Migration
 
             $table->foreign('orders_id', 'fk_det_bank_orders_orders1_idx')
                 ->references('id')->on('orders')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('bank_datas_id', 'fk_det_bank_orders_bank_datas1_idx')
                 ->references('id')->on('bank_datas')

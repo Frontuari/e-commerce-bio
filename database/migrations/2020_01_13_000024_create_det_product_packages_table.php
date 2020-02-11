@@ -39,8 +39,8 @@ class CreateDetProductPackagesTable extends Migration
 
             $table->foreign('products_id', 'fk_det_product_packages_products1_idx')
                 ->references('id')->on('products')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
