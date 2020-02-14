@@ -36,7 +36,7 @@
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
 						
-						<a class="navbar-brand" ><img src="assets/img/	logo-bio-en-linea.png" alt="Bio Mercados"></a>
+						<a  href="" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
 						<ul>
@@ -77,7 +77,7 @@
 							<!--<li id="nav-logged"><a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> <a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 							
-							<li id="nav-cart"><a ><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
+							<li id="nav-cart"><a  href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
 							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a></li>
 
 							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
