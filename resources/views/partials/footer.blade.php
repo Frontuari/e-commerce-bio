@@ -397,6 +397,12 @@
 			}
 		});
 
+		//Elementos que se ejecutaran en el carro de compras
+		$(".btn.btn-submit.next.action-button").click(function()
+		{
+			$(window).scrollTop(parseInt($(".jumbotron").offset().top));
+		});
+
 	</script>
 </body>
 </html>
