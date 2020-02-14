@@ -290,11 +290,17 @@
 
 			/*Elementos a usar al momento de incrementar el valor*/
 			$(document).on('click','.increaseValue',function()
-			{
+			{	
 				quantity = parseInt($(this).parent().parent().find('input[name=quantity]').val());
-				max_stock = parseInt($(this).parent().find('span.max-stock').text());
-				if(quantity < max_stock){
-					//incrementa 1
+
+				if($(this).parent().find('span.max-stock').text()!=''){
+					max_stock = parseInt($(this).parent().find('span.max-stock').text());
+					if(quantity < max_stock){
+						//incrementa 1
+						quantity = quantity + 1;
+						$(this).parent().parent().find('input[name=quantity]').val(quantity);
+					}
+				}else{
 					quantity = quantity + 1;
 					$(this).parent().parent().find('input[name=quantity]').val(quantity);
 				}

@@ -2625,128 +2625,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      cant_cart: 0
+      cant_cart: 0,
+      products_cart: 0
     };
   },
   methods: {
     updateCart: function updateCart(data) {
       console.log("entro por aqui por el on", data);
+    }
+  },
+  filters: {
+    FormatNumber: function FormatNumber(num) {
+      num = parseFloat(num).toFixed(2);
+      var arrNum = num.split(".");
+      var decimal = arrNum[1];
+      return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + decimal;
     }
   },
   created: function created() {
@@ -2759,6 +2655,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     if (window.localStorage.getItem("cart")) {
       this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+      this.products_cart = JSON.parse(window.localStorage.getItem("cart"));
+      console.log(this.products_cart);
     } else {
       this.cant_cart = 0;
     }
@@ -41654,44 +41552,123 @@ var render = function() {
                 _c("div", { staticClass: "product-list" }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-12 col-lg-8" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("div", { staticClass: "wizard-title" }, [
-                            _c("h3", [
-                              _vm._v("Mi carrito de compras "),
-                              _c("span", { staticClass: "quantity-span" }, [
-                                _vm._v(_vm._s(_vm.cant_cart))
+                      _c(
+                        "div",
+                        { staticClass: "row" },
+                        [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "wizard-title" }, [
+                              _c("h3", [
+                                _vm._v("Mi carrito de compras "),
+                                _c("span", { staticClass: "quantity-span" }, [
+                                  _vm._v(_vm._s(_vm.cant_cart))
+                                ])
                               ])
                             ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _vm._m(3)
-                      ]),
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.products_cart, function(product_cart) {
+                            return _c(
+                              "div",
+                              { staticClass: "col-6 col-lg-12" },
+                              [
+                                _c("div", { staticClass: "product-block" }, [
+                                  _c("div", { staticClass: "product-img" }, [
+                                    _c("img", {
+                                      attrs: {
+                                        src: "storage/" + product_cart.photo
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "product-content" },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "product-title",
+                                          attrs: { href: "#" }
+                                        },
+                                        [_vm._v(_vm._s(product_cart.name))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "product-info" },
+                                        [
+                                          _vm._v(
+                                            "Descripción: " +
+                                              _vm._s(
+                                                product_cart.description_short
+                                              )
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._m(0, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "product-prices" },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "product-descount" },
+                                            [
+                                              _vm._v(
+                                                "$ 4 / " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      product_cart.price
+                                                    )
+                                                  )
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("p", [
+                                            _vm._v(
+                                              "$ 3 / Bs " +
+                                                _vm._s(
+                                                  _vm._f("FormatNumber")(
+                                                    product_cart.discount
+                                                  )
+                                                )
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._m(1, true)
+                                ])
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      ),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(2)
                     ]),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(3)
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(4),
               _vm._v(" "),
-              _vm._m(7),
+              _vm._m(5),
               _vm._v(" "),
               _c("fieldset", [
                 _c("div", { staticClass: "thanks" }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-12" }, [
-                      _vm._m(8),
+                      _vm._m(6),
                       _vm._v(" "),
                       _c("div", { staticClass: "thanks-footer" }, [
                         _c(
@@ -41825,205 +41802,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-12" }, [
-      _c("div", { staticClass: "product-block" }, [
-        _c("div", { staticClass: "product-img" }, [
-          _c("img", { attrs: { src: "assets/img/producto-bio-006.jpg" } })
-        ]),
+    return _c("div", { staticClass: "product-quantity" }, [
+      _c("label", [_vm._v("Cantidad")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-quantity-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { id: "quantity2", type: "text", name: "quantity", value: "5" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "product-content" }, [
-          _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
-            _vm._v("Mantequilla")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Descripción: 500 gramos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-quantity" }, [
-            _c("label", [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-quantity-group" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "quantity2",
-                  type: "text",
-                  name: "quantity",
-                  value: "5"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "product-quantity-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn increaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/increase.png", alt: "Increase" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn decreaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("span", { staticClass: "product-descount" }, [
-              _vm._v("$ 4 / Bs 180.000")
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v("$ 3 / Bs 135.000")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-add" }, [
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Total a pagar:")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("p", [_vm._v("$ 15 / Bs 675.000")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "remove-product" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-delete-section",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v("Eliminar del carrito "),
-                _c("img", {
-                  attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
-                })
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-12" }, [
-      _c("div", { staticClass: "product-block" }, [
-        _c("div", { staticClass: "product-img" }, [
-          _c("img", { attrs: { src: "assets/img/combo-bio-006.jpg" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-content" }, [
+        _c("div", { staticClass: "product-quantity-buttons" }, [
           _c(
-            "a",
-            {
-              staticClass: "product-title",
-              attrs: {
-                href: "#",
-                "data-toggle": "modal",
-                "data-target": "#ModalProdCombo"
-              }
-            },
-            [_vm._v("Pizza Bio")]
+            "button",
+            { staticClass: "btn increaseValue", attrs: { type: "button" } },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/increase.png", alt: "Increase" }
+              })
+            ]
           ),
           _vm._v(" "),
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Descripción: 11 productos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-quantity" }, [
-            _c("label", [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-quantity-group" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "quantity2",
-                  type: "text",
-                  name: "quantity",
-                  value: "1"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "product-quantity-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn increaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/increase.png", alt: "Increase" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn decreaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("span"),
-            _vm._v(" "),
-            _c("p", [_vm._v("$ 10 / Bs 450.000")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-add" }, [
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Total a pagar:")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("p", [_vm._v("$ 10 / Bs 450.000")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "remove-product" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-delete-section",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v("Eliminar del carrito "),
-                _c("img", {
-                  attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
-                })
-              ]
-            )
-          ])
+          _c(
+            "button",
+            { staticClass: "btn decreaseValue", attrs: { type: "button" } },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/decrease.png", alt: "decrease" }
+              })
+            ]
+          )
         ])
       ])
     ])
@@ -42032,195 +41839,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-12" }, [
-      _c("div", { staticClass: "product-block" }, [
-        _c("div", { staticClass: "product-img" }, [
-          _c("img", { attrs: { src: "assets/img/producto-bio-001.jpg" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-content" }, [
-          _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
-            _vm._v("Aceite de maiz")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Descripción: 500 gramos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-quantity" }, [
-            _c("label", [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-quantity-group" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "quantity2",
-                  type: "text",
-                  name: "quantity",
-                  value: "7"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "product-quantity-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn increaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/increase.png", alt: "Increase" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn decreaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("span"),
-            _vm._v(" "),
-            _c("p", [_vm._v("$ 1 / Bs 45.000")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-add" }, [
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Total a pagar:")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("p", [_vm._v("$ 7 / Bs 315.000")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "remove-product" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-delete-section",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v("Eliminar del carrito "),
-                _c("img", {
-                  attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
-                })
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-12" }, [
-      _c("div", { staticClass: "product-block" }, [
-        _c("div", { staticClass: "product-img" }, [
-          _c("img", { attrs: { src: "assets/img/producto-bio-005.jpg" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-content" }, [
-          _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
-            _vm._v("Jabón de baño")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Descripción: 500 gramos")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-quantity" }, [
-            _c("label", [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "product-quantity-group" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "quantity2",
-                  type: "text",
-                  name: "quantity",
-                  value: "8"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "product-quantity-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn increaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/increase.png", alt: "Increase" }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn decreaseValue",
-                    attrs: { type: "button" }
-                  },
-                  [
-                    _c("img", {
-                      attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("span"),
-            _vm._v(" "),
-            _c("p", [_vm._v("$ 1.5 / Bs 67.500")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-add" }, [
-          _c("span", { staticClass: "product-info" }, [
-            _vm._v("Total a pagar:")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "product-prices" }, [
-            _c("p", [_vm._v("$ 12 / Bs 540.000")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "remove-product" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-delete-section",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v("Eliminar del carrito "),
-                _c("img", {
-                  attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
-                })
-              ]
-            )
-          ])
-        ])
+    return _c("div", { staticClass: "product-add" }, [
+      _c("span", { staticClass: "product-info" }, [_vm._v("Total a pagar:")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-prices" }, [
+        _c("p", [_vm._v("$ 15 / Bs 675.000")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "remove-product" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-delete-section", attrs: { type: "button" } },
+          [
+            _vm._v("Eliminar del carrito "),
+            _c("img", {
+              attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
+            })
+          ]
+        )
       ])
     ])
   },

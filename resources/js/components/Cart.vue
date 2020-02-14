@@ -36,14 +36,14 @@
 														<h3>Mi carrito de compras <span class="quantity-span">{{cant_cart}}</span></h3>
 													</div>
 												</div>
-												<div class="col-6 col-lg-12">
+												<div class="col-6 col-lg-12" v-for="product_cart in products_cart" >
 													<div class="product-block">
 														<div class="product-img">
-															<img src="assets/img/producto-bio-006.jpg">
+															<img  :src="'storage/'+product_cart.photo">
 														</div>
 														<div class="product-content">
-															<a href="#" class="product-title">Mantequilla</a>
-															<span class="product-info">Descripción: 500 gramos</span>
+															<a href="#" class="product-title">{{product_cart.name}}</a>
+															<span class="product-info">Descripción: {{product_cart.description_short}}</span>
 															<div class="product-quantity">
 																<label>Cantidad</label>
 																<div class="product-quantity-group">
@@ -53,14 +53,14 @@
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
 																		<button type="button" class="btn decreaseValue">
-																			<img src="assets/img/decrease.png" alt="decrease">
+																			<img   src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
 																</div>										
 															</div>
 															<div class="product-prices">
-																<span class="product-descount">$ 4 / Bs 180.000</span>
-																<p>$ 3 / Bs 135.000</p>
+																<span class="product-descount">$ 4 / {{ product_cart.price | FormatNumber }}</span>
+																<p>$ 3 / Bs {{ product_cart.discount | FormatNumber }}</p>
 															</div>
 														</div>
 														<div class="product-add">
@@ -74,120 +74,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-6 col-lg-12">
-													<div class="product-block">
-														<div class="product-img">
-															<img src="assets/img/combo-bio-006.jpg">
-														</div>
-														<div class="product-content">
-															<a href="#" class="product-title" data-toggle="modal" data-target="#ModalProdCombo">Pizza Bio</a>
-															<span class="product-info">Descripción: 11 productos</span>
-															<div class="product-quantity">
-																<label>Cantidad</label>
-																<div class="product-quantity-group">
-																	<input id="quantity2" class="form-control" type="text" name="quantity" value="1">
-																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn increaseValue">
-																			<img src="assets/img/increase.png" alt="Increase">
-																		</button>
-																		<button type="button" class="btn decreaseValue">
-																			<img src="assets/img/decrease.png" alt="decrease">
-																		</button>
-																	</div>
-																</div>										
-															</div>
-															<div class="product-prices">
-																<span></span>
-																<p>$ 10 / Bs 450.000</p>
-															</div>
-														</div>
-														<div class="product-add">
-															<span class="product-info">Total a pagar:</b></span>
-															<div class="product-prices">
-																<p>$ 10 / Bs 450.000</p>
-															</div>
-															<div class="remove-product">
-																<button class="btn btn-delete-section" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-6 col-lg-12">
-													<div class="product-block">
-														<div class="product-img">
-															<img src="assets/img/producto-bio-001.jpg">
-														</div>
-														<div class="product-content">
-															<a href="#" class="product-title">Aceite de maiz</a>
-															<span class="product-info">Descripción: 500 gramos</span>
-															<div class="product-quantity">
-																<label>Cantidad</label>
-																<div class="product-quantity-group">
-																	<input id="quantity2" class="form-control" type="text" name="quantity" value="7">
-																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn increaseValue">
-																			<img src="assets/img/increase.png" alt="Increase">
-																		</button>
-																		<button type="button" class="btn decreaseValue">
-																			<img src="assets/img/decrease.png" alt="decrease">
-																		</button>
-																	</div>
-																</div>										
-															</div>
-															<div class="product-prices">
-																<span></span>
-																<p>$ 1 / Bs 45.000</p>
-															</div>
-														</div>
-														<div class="product-add">
-															<span class="product-info">Total a pagar:</b></span>
-															<div class="product-prices">
-																<p>$ 7 / Bs 315.000</p>
-															</div>
-															<div class="remove-product">
-																<button class="btn btn-delete-section" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-6 col-lg-12">
-													<div class="product-block">
-														<div class="product-img">
-															<img src="assets/img/producto-bio-005.jpg">
-														</div>
-														<div class="product-content">
-															<a href="#" class="product-title">Jabón de baño</a>
-															<span class="product-info">Descripción: 500 gramos</span>
-															<div class="product-quantity">
-																<label>Cantidad</label>
-																<div class="product-quantity-group">
-																	<input id="quantity2" class="form-control" type="text" name="quantity" value="8">
-																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn increaseValue">
-																			<img src="assets/img/increase.png" alt="Increase">
-																		</button>
-																		<button type="button" class="btn decreaseValue">
-																			<img src="assets/img/decrease.png" alt="decrease">
-																		</button>
-																	</div>
-																</div>										
-															</div>
-															<div class="product-prices">
-																<span></span>
-																<p>$ 1.5 / Bs 67.500</p>
-															</div>
-														</div>
-														<div class="product-add">
-															<span class="product-info">Total a pagar:</b></span>
-															<div class="product-prices">
-																<p>$ 12 / Bs 540.000</p>
-															</div>
-															<div class="remove-product">
-																<button class="btn btn-delete-section" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
-															</div>
-														</div>
-													</div>
-												</div>
+								
 											</div>
 											<div class="row">
 												<div class="col-12">
@@ -717,7 +604,7 @@ export default {
     data() {
         return {
             cant_cart: 0,
-            
+            products_cart:0,
         }
     },
     methods: {
@@ -725,6 +612,14 @@ export default {
             console.log("entro por aqui por el on",data);
         }
     },
+    filters: {
+			FormatNumber: function (num) {
+				num = parseFloat(num).toFixed(2);
+				const arrNum = num.split(".");
+				const decimal = arrNum[1];
+				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
+			}
+	},
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;
@@ -733,6 +628,8 @@ export default {
     mounted() {
 		if( window.localStorage.getItem("cart") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+			this.products_cart = JSON.parse(window.localStorage.getItem("cart"));
+			console.log(this.products_cart);
 		}else{
 			this.cant_cart = 0;
 		}
