@@ -192,8 +192,8 @@ export default {
     },
     mounted() {
 		this.getCategories();
-		if( window.localStorage.getItem("cart") ){
-			this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+		if( window.localStorage.getItem("cartNew") ){
+			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 		}else{
 			this.cant_cart = 0;
 		}
