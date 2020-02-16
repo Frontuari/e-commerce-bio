@@ -198,8 +198,8 @@ export default {
 		},
 		async getFavorites() {
 			const response = await axios.get(URLSERVER+"api/favorites");
-			if(response.data.length > 0) {
-				this.cant_favorite = response.data.length;
+			if(response.data.data.length > 0) {
+				this.cant_favorite = response.data.data.length;
 			}else {
 				this.cant_favorite = 0;
 			}
