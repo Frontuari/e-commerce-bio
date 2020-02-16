@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Favorites;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
@@ -46,7 +47,12 @@ class FavoritesController extends BaseController
         if($request->products_id and $favorite->users_id){
             $favorite->products_id=$request->products_id;   
             $id_usuario = $favorite->users_id;
-            $favorite->save();
+            //validamos que se guarde
+            try {
+                $favorite->save();
+            } catch (\Exception $e) {
+                return 'error';
+            }
             //Traernos todos los favoritos
              $a=Favorites::where('users_id',$id_usuario)->get();
             //return $this->sendResponse($favorite);

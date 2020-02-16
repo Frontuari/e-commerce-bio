@@ -2942,7 +2942,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         user_id: 1
       }).then(function (response) {
         console.log(response);
-        EventBus.$emit("update_cantFavorite", response.data);
+
+        if (response.data != 'error') {
+          EventBus.$emit("update_cantFavorite", response.data);
+        } else {
+          console.log("El producto ya existe en favoritos");
+          alert("El producto ya existe en tus favoritos");
+        }
       })["catch"](function (error) {
         console.log(error);
       });
