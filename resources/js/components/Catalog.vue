@@ -278,6 +278,7 @@
                 		EventBus.$emit("update_cantFavorite",response.data);
                 	}else{
                 		console.log("El producto ya existe en favoritos");
+                		alert("El producto ya existe en tus favoritos");
                 	}
                 })
                 .catch(function (error) {
