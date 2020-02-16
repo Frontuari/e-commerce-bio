@@ -44,9 +44,13 @@ class FavoritesController extends BaseController
         $favorite = new Favorites;
         $favorite->users_id=1;
         if($request->products_id and $favorite->users_id){
-            $favorite->products_id=$request->products_id;
+            $favorite->products_id=$request->products_id;   
+            $id_usuario = $favorite->users_id;
             $favorite->save();
-            return $this->sendResponse($favorite);
+            //Traernos todos los favoritos
+             $a=Favorites::where('users_id',$id_usuario)->get();
+            //return $this->sendResponse($favorite);
+             return $a->count();
         }else{
             
             return $this->sendError();

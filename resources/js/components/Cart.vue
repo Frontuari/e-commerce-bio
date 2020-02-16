@@ -116,7 +116,7 @@
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">Bs {{total_cart | FormatNumber}} / 100$</h3>
+																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 															</div>

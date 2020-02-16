@@ -274,6 +274,7 @@
                 })
                 .then(function (response) {
                 	console.log(response);
+                	EventBus.$emit("update_cantFavorite",response.data);
                 })
                 .catch(function (error) {
                 	console.log(error);
@@ -282,7 +283,7 @@
 
 			},
 			removeCart(id) {
-				let storageProducts = JSON.parse(localStorage.getItem('cart'));
+				let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
 				let products = storageProducts.filter(product => product.id !== id );
 				localStorage.setItem('products', JSON.stringify(products));
 			}
