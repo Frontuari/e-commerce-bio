@@ -2943,12 +2943,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         user_id: 1
       }).then(function (response) {
         console.log(response);
+        EventBus.$emit("update_cantFavorite", response.data);
       })["catch"](function (error) {
         console.log(error);
       });
     },
     removeCart: function removeCart(id) {
-      var storageProducts = JSON.parse(localStorage.getItem('cart'));
+      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
       var products = storageProducts.filter(function (product) {
         return product.id !== id;
       });
@@ -41922,13 +41923,13 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("h3", { staticClass: "order-text" }, [
                                         _vm._v(
-                                          "Bs " +
+                                          "100$ / Bs " +
                                             _vm._s(
                                               _vm._f("FormatNumber")(
                                                 _vm.total_cart
                                               )
                                             ) +
-                                            " / 100$"
+                                            " "
                                         )
                                       ])
                                     ])
