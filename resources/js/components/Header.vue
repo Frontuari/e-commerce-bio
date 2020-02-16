@@ -32,6 +32,13 @@
 						<form class="form-inline" action="">
 							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search">
 							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
+
+							<div class="keyup_search">
+								<ol>
+									<li><i class="fa fa-search" aria-hidden="true"></i> Ejemplo</li>
+								</ol>
+							</div>
+
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">

@@ -90,6 +90,7 @@
 	.social-nav a{
 		display: inline-flex;
 		width: 30px;
+		position: relative;
 	}
 	.social-nav a img{
 		display: block;
@@ -2958,3 +2959,40 @@
 		background:#ccc !important;padding: 3px !important;
 	}
 
+
+
+/*====================COMPONENTES ADICIONALES====================*/
+	.keyup_search{
+		background-color:white;
+		min-width: 300px;
+		position:absolute;
+		margin-top: 90px;
+		z-index:99999;
+		padding: 0;
+		box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+		-webkit-border-radius: 2px;
+		-webkit-border-top-left-radius:0px;
+		-webkit-border-top-right-radius:0px;
+	    border-radius: 2px;
+	    background-color: #fff;
+	    padding-bottom: 0px;
+	    display: none;
+	}	
+	.keyup_search ol{
+		padding: 0px;
+		padding-top: 10px;
+	}
+	.keyup_search ol li{
+		list-style: none;
+		font-family: 'Bree Lt' !important;
+		font-weight: 100 !important;
+		padding-left: 15px;
+		padding-right: 15px;
+		padding-top: 5px;
+		padding-bottom:5px; 
+	}
+	.keyup_search ol li:hover{
+		background-color:#28b67a;
+		color:white;
+		cursor: pointer;
+	}

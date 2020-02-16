@@ -250,11 +250,20 @@
 			},
 			addToFavorite(product) {
 				let favorite = [];
-				if(localStorage.getItem('favorite')){
-					favorite = JSON.parse(localStorage.getItem('favorite'));
-				}
-				favorite.push(product);
-				localStorage.setItem('favorite', JSON.stringify(favorite));
+				//obtener la ID del producto
+				let products_id = product.id;
+				axios.post(URLHOME+'api/favorites', {
+                    products_id: products_id,
+                    user_id: 1
+                })
+                .then(function (response) {
+                	console.log(response);
+                })
+                .catch(function (error) {
+                	console.log(error);
+                });
+
+
 			},
 			removeCart(id) {
 				let storageProducts = JSON.parse(localStorage.getItem('cart'));

@@ -626,9 +626,9 @@ export default {
         });
     },
     mounted() {
-		if( window.localStorage.getItem("cart") ){
-			this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
-			this.products_cart = JSON.parse(window.localStorage.getItem("cart"));
+		if( window.localStorage.getItem("cartNew") ){
+			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
+			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
 			console.log(this.products_cart);
 		}else{
 			this.cant_cart = 0;
