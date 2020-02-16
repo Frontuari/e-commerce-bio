@@ -36,7 +36,7 @@
 														<h3>Mi carrito de compras <span class="quantity-span">{{cant_cart}}</span></h3>
 													</div>
 												</div>
-												<div class="col-6 col-lg-12" v-for="product_cart in products_cart" >
+												<div class="col-6 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
 													<div class="product-block">
 														<div class="product-img">
 															<img  :src="'storage/'+product_cart.product.photo">
@@ -69,14 +69,14 @@
 															</div>
 														</div>
 														<div class="product-add">
-															<span class="product-info">Total a pagar:</b></span>
+															<span class="product-info">Total a pagar: </span>
 															<div class="product-prices">
 																<p v-if="product_cart.product.discount > 0">$ 15 / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
 
 																<p v-if="product_cart.product.discount <= 0">$ 15 / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
 															</div>
 															<div class="remove-product">
-																<button class="btn btn-delete-section"  @click="removeCart(product_cart.product.id)" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
+																<button class="btn btn-delete-section"  @click="removeCart(index)" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
 															</div>
 														</div>
 													</div>
@@ -103,7 +103,7 @@
 															<div class="order-content">
 																<div class="order-description">
 																
-																	<div class="row"  v-for="product_cart in products_cart">
+																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
 																		
 																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
@@ -617,10 +617,11 @@ export default {
         updateCart(data) {
             console.log("entro por aqui por el on",data);
         },
-        removeCart(id) {
-			let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-			let products = storageProducts.filter(product => product.id !== id );
-			localStorage.setItem('products', JSON.stringify(products));
+        removeCart(index) {
+			this.products_cart.splice(index,1);
+			localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
+			this.cant_cart = this.products_cart.length;
+			EventBus.$emit("update_cantCart",this.products_cart.length);
 		}
     },
     filters: {
