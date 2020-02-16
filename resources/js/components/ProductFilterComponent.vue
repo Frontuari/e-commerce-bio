@@ -256,17 +256,7 @@
 				return tmp;
 			},
 			addToFavorite(product) {
-				let favorite = [];
-				if(localStorage.getItem('favorite')){
-					favorite = JSON.parse(localStorage.getItem('favorite'));
-				}
-				favorite.push(product);
-				localStorage.setItem('favorite', JSON.stringify(favorite));
-			},
-			removeCart(id) {
-				let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-				let products = storageProducts.filter(product => product.id !== id );
-				localStorage.setItem('products', JSON.stringify(products));
+				
 			}
 		},
 		filters: {
