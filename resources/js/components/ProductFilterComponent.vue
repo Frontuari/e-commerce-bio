@@ -256,7 +256,19 @@
 				return tmp;
 			},
 			addToFavorite(product) {
-				
+				let favorite = [];
+				//obtener la ID del producto
+				let products_id = product.id;
+				axios.post(URLHOME+'api/favorites', {
+                    products_id: products_id,
+                    user_id: 1
+                })
+                .then(function (response) {
+                	console.log(response);
+                })
+                .catch(function (error) {
+                	console.log(error);
+                });				
 			}
 		},
 		filters: {
