@@ -130,51 +130,24 @@
 						</div>
 					</div>
 					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a class="nav-link" >Víveres</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Bebidas</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Bodegón</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Hogar y Juguetes</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Chocolates, Cereales y Snacks</a>
+						<li class="nav-item" v-for="cat in categories.slice(0,5)" :key="cat.id">
+							<a class="nav-link" :href="'/catalog?cat='+cat.id">{{cat.name}}</a>
 						</li>
 						<li id="nav-categories" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Más Categorías
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a class="dropdown-item" href="#">Cuidado Personal</a>
-								<a class="dropdown-item" href="#">Aseo del Hogar</a>
-								<a class="dropdown-item" href="#">Mascotas</a>
-								<a class="dropdown-item" href="#">Quesos y Charcutería</a>
-								<a class="dropdown-item" href="#">Pollo y Carnes</a>
-								<a class="dropdown-item" href="#">Verduras, Frutas y Hortalizas</a>
+								<a v-for="cat in categories.slice(5)" :key="cat.id" class="dropdown-item" :href="'/catalog?cat='+cat.id">{{cat.name}}</a>
 							</div>
-						</li>
+						</li> 
 						<li id="nav-all-categories" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="dropdown-uppercase">Categorías</span>
 								<img src="assets/img/flecha-izquierda-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a class="dropdown-item" >Víveres</a>
-								<a class="dropdown-item" href="#">Bebidas</a>
-								<a class="dropdown-item" href="#">Bodegón</a>
-								<a class="dropdown-item" href="#">Hogar y Juguetes</a>
-								<a class="dropdown-item" href="#">Chocolates, Cereales y Snacks</a>
-								<a class="dropdown-item" href="#">Cuidado Personal</a>
-								<a class="dropdown-item" href="#">Aseo del Hogar</a>
-								<a class="dropdown-item" href="#">Mascotas</a>
-								<a class="dropdown-item" href="#">Quesos y Charcutería</a>
-								<a class="dropdown-item" href="#">Pollo y Carnes</a>
-								<a class="dropdown-item" href="#">Verduras, Frutas y Hortalizas</a>
+								<a v-for="cat in categories" :key="cat.id" class="dropdown-item" :href="'/catalog?cat='+cat.id" >{{cat.name}}</a>
 							</div>
 						</li>
 						<li id="nav-bios" class="nav-item dropdown">
@@ -203,13 +176,14 @@ export default {
     data() {
         return {
             cant_cart: 0,
-            
+            categories: []
         }
     },
     methods: {
-        updateCart(data) {
-            console.log("entro por aqui por el on",data);
-        }
+        async getCategories() {
+			const response = await axios.get(URLSERVER+"api/categories");
+			this.categories = response.data.data;
+		}
     },
     created() {
         EventBus.$on('update_cantCart', data => {
@@ -217,6 +191,7 @@ export default {
         });
     },
     mounted() {
+		this.getCategories();
 		if( window.localStorage.getItem("cart") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
 		}else{
