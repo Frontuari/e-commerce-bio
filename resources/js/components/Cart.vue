@@ -39,15 +39,15 @@
 												<div class="col-6 col-lg-12" v-for="product_cart in products_cart" >
 													<div class="product-block">
 														<div class="product-img">
-															<img  :src="'storage/'+product_cart.photo">
+															<img  :src="'storage/'+product_cart.product.photo">
 														</div>
 														<div class="product-content">
-															<a href="#" class="product-title">{{product_cart.name}}</a>
+															<a href="#" class="product-title">{{product_cart.product.name}}</a>
 															<span class="product-info">Descripción: {{product_cart.description_short}}</span>
 															<div class="product-quantity">
 																<label>Cantidad</label>
 																<div class="product-quantity-group">
-																	<input id="quantity2" class="form-control" type="text" name="quantity" value="5">
+																	<input id="quantity2" class="form-control" type="text" name="quantity" v-model="product_cart.cant">
 																	<div class="product-quantity-buttons">
 																		<button type="button" class="btn increaseValue">
 																			<img src="assets/img/increase.png" alt="Increase">
@@ -59,17 +59,24 @@
 																</div>										
 															</div>
 															<div class="product-prices">
-																<span class="product-descount">$ 4 / {{ product_cart.price | FormatNumber }}</span>
-																<p>$ 3 / Bs {{ product_cart.discount | FormatNumber }}</p>
+
+																<span class="product-descount" v-if="product_cart.product.discount > 0">$ 4 / {{ product_cart.product.price | FormatNumber }}</span>
+
+																<p v-if="product_cart.product.discount > 0">$ 3 / Bs {{ product_cart.product.discount | FormatNumber }}</p>
+
+																<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ 3 / Bs {{ product_cart.product.price | FormatNumber }}</p>
+
 															</div>
 														</div>
 														<div class="product-add">
 															<span class="product-info">Total a pagar:</b></span>
 															<div class="product-prices">
-																<p>$ 15 / Bs 675.000</p>
+																<p v-if="product_cart.product.discount > 0">$ 15 / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
+
+																<p v-if="product_cart.product.discount <= 0">$ 15 / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
 															</div>
 															<div class="remove-product">
-																<button class="btn btn-delete-section" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
+																<button class="btn btn-delete-section"  @click="removeCart(product_cart.product.id)" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
 															</div>
 														</div>
 													</div>
@@ -95,23 +102,21 @@
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
 																<div class="order-description">
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">34$ / Bs 1.535.000</h3>
+																
+																	<div class="row"  v-for="product_cart in products_cart">
+																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
+																		
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
+
 																	</div>
-																	<div class="row">
-																		<p>Pizza Bio (11 Articulos)</p>
-																		<h3 class="order-text">10$ / Bs 450.000</h3>
-																	</div>
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">2$ / Bs 90.000</h3>
-																	</div>
+																
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">Bs 5.000.000 / 100$</h3>
+																		<h3 class="order-text">Bs {{total_cart | FormatNumber}} / 100$</h3>
 																	</div>
 																</div>
 															</div>
@@ -605,12 +610,18 @@ export default {
         return {
             cant_cart: 0,
             products_cart:0,
+            total_cart:0,
         }
     },
     methods: {
         updateCart(data) {
             console.log("entro por aqui por el on",data);
-        }
+        },
+        removeCart(id) {
+			let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
+			let products = storageProducts.filter(product => product.id !== id );
+			localStorage.setItem('products', JSON.stringify(products));
+		}
     },
     filters: {
 			FormatNumber: function (num) {
@@ -633,6 +644,23 @@ export default {
 		}else{
 			this.cant_cart = 0;
 		}
+		//For para sacar el total del carro de compras
+		for(let i = 0; i<this.cant_cart; i++)
+		{
+			if(this.products_cart[i].product.discount>0)
+			{
+				console.log("Cantidad "+this.products_cart[i].product.discount);
+				this.total_cart+=parseFloat(this.products_cart[i].product.discount);
+			}else{
+				console.log("Cantidad "+this.products_cart[i].product.price);
+				this.total_cart+=parseFloat(this.products_cart[i].product.price);
+			}
+		}
+
+		//total general
+		console.log("Total General "+this.total_cart);
+		
+
     }
 }
 </script>

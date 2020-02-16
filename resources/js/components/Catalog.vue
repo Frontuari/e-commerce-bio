@@ -239,15 +239,31 @@
 			},
 			addToCart(product) {
 				let cart = [];
-				if(localStorage.getItem('cart')){
-					cart = JSON.parse(localStorage.getItem('cart'));
+				if(localStorage.getItem('cartNew')){
+					cart = JSON.parse(localStorage.getItem('cartNew'));
 				}
-				cart.push(product);
-				localStorage.setItem('cart', JSON.stringify(cart));
-				console.log("from modal::> cart.length",cart.length);
-				EventBus.$emit("update_cantCart",cart.length);
 
+				cart = this.validateCart(product,cart);
+
+				//cart.push(tmp);
+				localStorage.setItem('cartNew', JSON.stringify(cart));
+				EventBus.$emit("update_cantCart",cart.length);
 			},
+			validateCart(product,tmp) {
+				let exist = false;
+				tmp.forEach( (a,b) => {
+					if (a.product.id == product.id) {
+						tmp[b].cant++;
+						exist = true;
+					}
+				});
+				if(!exist) {
+					console.log("entro por aqui porque es primera vez");
+					tmp.push({product: product,cant: 1});
+				}
+				return tmp;
+			},
+			
 			addToFavorite(product) {
 				let favorite = [];
 				//obtener la ID del producto

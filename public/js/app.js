@@ -2625,16 +2625,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       cant_cart: 0,
-      products_cart: 0
+      products_cart: 0,
+      total_cart: 0
     };
   },
   methods: {
     updateCart: function updateCart(data) {
       console.log("entro por aqui por el on", data);
+    },
+    removeCart: function removeCart(id) {
+      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
+      var products = storageProducts.filter(function (product) {
+        return product.id !== id;
+      });
+      localStorage.setItem('products', JSON.stringify(products));
     }
   },
   filters: {
@@ -2659,7 +2672,21 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.products_cart);
     } else {
       this.cant_cart = 0;
-    }
+    } //For para sacar el total del carro de compras
+
+
+    for (var i = 0; i < this.cant_cart; i++) {
+      if (this.products_cart[i].product.discount > 0) {
+        console.log("Cantidad " + this.products_cart[i].product.discount);
+        this.total_cart += parseFloat(this.products_cart[i].product.discount);
+      } else {
+        console.log("Cantidad " + this.products_cart[i].product.price);
+        this.total_cart += parseFloat(this.products_cart[i].product.price);
+      }
+    } //total general
+
+
+    console.log("Total General " + this.total_cart);
   }
 });
 
@@ -2949,14 +2976,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     addToCart: function addToCart(product) {
       var cart = [];
 
-      if (localStorage.getItem('cart')) {
-        cart = JSON.parse(localStorage.getItem('cart'));
+      if (localStorage.getItem('cartNew')) {
+        cart = JSON.parse(localStorage.getItem('cartNew'));
       }
 
-      cart.push(product);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      console.log("from modal::> cart.length", cart.length);
+      cart = this.validateCart(product, cart); //cart.push(tmp);
+
+      localStorage.setItem('cartNew', JSON.stringify(cart));
       EventBus.$emit("update_cantCart", cart.length);
+    },
+    validateCart: function validateCart(product, tmp) {
+      var exist = false;
+      tmp.forEach(function (a, b) {
+        if (a.product.id == product.id) {
+          tmp[b].cant++;
+          exist = true;
+        }
+      });
+
+      if (!exist) {
+        console.log("entro por aqui porque es primera vez");
+        tmp.push({
+          product: product,
+          cant: 1
+        });
+      }
+
+      return tmp;
     },
     addToFavorite: function addToFavorite(product) {
       var favorite = []; //obtener la ID del producto
@@ -41612,7 +41658,9 @@ var render = function() {
                                   _c("div", { staticClass: "product-img" }, [
                                     _c("img", {
                                       attrs: {
-                                        src: "storage/" + product_cart.photo
+                                        src:
+                                          "storage/" +
+                                          product_cart.product.photo
                                       }
                                     })
                                   ]),
@@ -41627,7 +41675,11 @@ var render = function() {
                                           staticClass: "product-title",
                                           attrs: { href: "#" }
                                         },
-                                        [_vm._v(_vm._s(product_cart.name))]
+                                        [
+                                          _vm._v(
+                                            _vm._s(product_cart.product.name)
+                                          )
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -41643,43 +41695,192 @@ var render = function() {
                                         ]
                                       ),
                                       _vm._v(" "),
-                                      _vm._m(0, true),
+                                      _c(
+                                        "div",
+                                        { staticClass: "product-quantity" },
+                                        [
+                                          _c("label", [_vm._v("Cantidad")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "product-quantity-group"
+                                            },
+                                            [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: product_cart.cant,
+                                                    expression:
+                                                      "product_cart.cant"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                attrs: {
+                                                  id: "quantity2",
+                                                  type: "text",
+                                                  name: "quantity"
+                                                },
+                                                domProps: {
+                                                  value: product_cart.cant
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      product_cart,
+                                                      "cant",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _vm._m(0, true)
+                                            ]
+                                          )
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "div",
                                         { staticClass: "product-prices" },
                                         [
-                                          _c(
-                                            "span",
-                                            { staticClass: "product-descount" },
-                                            [
-                                              _vm._v(
-                                                "$ 4 / " +
-                                                  _vm._s(
-                                                    _vm._f("FormatNumber")(
-                                                      product_cart.price
-                                                    )
+                                          product_cart.product.discount > 0
+                                            ? _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "product-descount"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "$ 4 / " +
+                                                      _vm._s(
+                                                        _vm._f("FormatNumber")(
+                                                          product_cart.product
+                                                            .price
+                                                        )
+                                                      )
                                                   )
+                                                ]
                                               )
-                                            ]
-                                          ),
+                                            : _vm._e(),
                                           _vm._v(" "),
-                                          _c("p", [
-                                            _vm._v(
-                                              "$ 3 / Bs " +
-                                                _vm._s(
-                                                  _vm._f("FormatNumber")(
-                                                    product_cart.discount
-                                                  )
+                                          product_cart.product.discount > 0
+                                            ? _c("p", [
+                                                _vm._v(
+                                                  "$ 3 / Bs " +
+                                                    _vm._s(
+                                                      _vm._f("FormatNumber")(
+                                                        product_cart.product
+                                                          .discount
+                                                      )
+                                                    )
                                                 )
-                                            )
-                                          ])
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          product_cart.product.price > 0 &&
+                                          product_cart.product.discount <= 0
+                                            ? _c("p", [
+                                                _vm._v(
+                                                  "$ 3 / Bs " +
+                                                    _vm._s(
+                                                      _vm._f("FormatNumber")(
+                                                        product_cart.product
+                                                          .price
+                                                      )
+                                                    )
+                                                )
+                                              ])
+                                            : _vm._e()
                                         ]
                                       )
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(1, true)
+                                  _c("div", { staticClass: "product-add" }, [
+                                    _c(
+                                      "span",
+                                      { staticClass: "product-info" },
+                                      [_vm._v("Total a pagar:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "product-prices" },
+                                      [
+                                        product_cart.product.discount > 0
+                                          ? _c("p", [
+                                              _vm._v(
+                                                "$ 15 / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      product_cart.product
+                                                        .discount *
+                                                        product_cart.cant
+                                                    )
+                                                  )
+                                              )
+                                            ])
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        product_cart.product.discount <= 0
+                                          ? _c("p", [
+                                              _vm._v(
+                                                "$ 15 / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      product_cart.product
+                                                        .price *
+                                                        product_cart.cant
+                                                    )
+                                                  )
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "remove-product" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-delete-section",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.removeCart(
+                                                  product_cart.product.id
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm._v("Eliminar del carrito "),
+                                            _c("img", {
+                                              attrs: {
+                                                src:
+                                                  "assets/img/eliminar-bio-mercados.svg"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ])
                               ]
                             )
@@ -41688,23 +41889,120 @@ var render = function() {
                         2
                       ),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(1)
                     ]),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _c("div", { staticClass: "col-12 col-lg-4" }, [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "order-block" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-lg-12" }, [
+                              _c(
+                                "h3",
+                                { staticClass: "order-number order-text" },
+                                [_vm._v("Resumen de la compra")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "order-content" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "order-description" },
+                                  _vm._l(_vm.products_cart, function(
+                                    product_cart
+                                  ) {
+                                    return _c("div", { staticClass: "row" }, [
+                                      _c("p", [
+                                        _vm._v(
+                                          _vm._s(product_cart.product.name) +
+                                            " (" +
+                                            _vm._s(product_cart.cant) +
+                                            " Articulos)"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      product_cart.product.discount > 0
+                                        ? _c(
+                                            "h3",
+                                            { staticClass: "order-text" },
+                                            [
+                                              _vm._v(
+                                                "10$ / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      product_cart.product
+                                                        .discount
+                                                    )
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      product_cart.product.discount <= 0
+                                        ? _c(
+                                            "h3",
+                                            { staticClass: "order-text" },
+                                            [
+                                              _vm._v(
+                                                "10$ / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      product_cart.product.price
+                                                    )
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ])
+                                  }),
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "order-description order-total"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("p", [_vm._v("Total")]),
+                                      _vm._v(" "),
+                                      _c("h3", { staticClass: "order-text" }, [
+                                        _vm._v(
+                                          "Bs " +
+                                            _vm._s(
+                                              _vm._f("FormatNumber")(
+                                                _vm.total_cart
+                                              )
+                                            ) +
+                                            " / 100$"
+                                        )
+                                      ])
+                                    ])
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(2)
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("fieldset", [
                 _c("div", { staticClass: "thanks" }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-12" }, [
-                      _vm._m(6),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("div", { staticClass: "thanks-footer" }, [
                         _c(
@@ -41838,62 +42136,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-quantity" }, [
-      _c("label", [_vm._v("Cantidad")]),
+    return _c("div", { staticClass: "product-quantity-buttons" }, [
+      _c(
+        "button",
+        { staticClass: "btn increaseValue", attrs: { type: "button" } },
+        [
+          _c("img", {
+            attrs: { src: "assets/img/increase.png", alt: "Increase" }
+          })
+        ]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "product-quantity-group" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { id: "quantity2", type: "text", name: "quantity", value: "5" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-quantity-buttons" }, [
-          _c(
-            "button",
-            { staticClass: "btn increaseValue", attrs: { type: "button" } },
-            [
-              _c("img", {
-                attrs: { src: "assets/img/increase.png", alt: "Increase" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn decreaseValue", attrs: { type: "button" } },
-            [
-              _c("img", {
-                attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-              })
-            ]
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-add" }, [
-      _c("span", { staticClass: "product-info" }, [_vm._v("Total a pagar:")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-prices" }, [
-        _c("p", [_vm._v("$ 15 / Bs 675.000")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "remove-product" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-delete-section", attrs: { type: "button" } },
-          [
-            _vm._v("Eliminar del carrito "),
-            _c("img", {
-              attrs: { src: "assets/img/eliminar-bio-mercados.svg" }
-            })
-          ]
-        )
-      ])
+      _c(
+        "button",
+        { staticClass: "btn decreaseValue", attrs: { type: "button" } },
+        [
+          _c("img", {
+            attrs: { src: "assets/img/decrease.png", alt: "decrease" }
+          })
+        ]
+      )
     ])
   },
   function() {
@@ -41930,76 +42192,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-4" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "order-block" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-12" }, [
-              _c("h3", { staticClass: "order-number order-text" }, [
-                _vm._v("Resumen de la compra")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-content" }, [
-                _c("div", { staticClass: "order-description" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("p", [_vm._v("25 Artículos")]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "order-text" }, [
-                      _vm._v("34$ / Bs 1.535.000")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("p", [_vm._v("Pizza Bio (11 Articulos)")]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "order-text" }, [
-                      _vm._v("10$ / Bs 450.000")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("p", [_vm._v("25 Artículos")]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "order-text" }, [
-                      _vm._v("2$ / Bs 90.000")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "order-description order-total" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("p", [_vm._v("Total")]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "order-text" }, [
-                      _vm._v("Bs 5.000.000 / 100$")
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "order-footer-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-submit next action-button",
-                    attrs: { type: "button", name: "next" }
-                  },
-                  [_vm._v("CONFIRMAR PEDIDO")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-link",
-                    attrs: { href: "/catalago.php", type: "button" }
-                  },
-                  [_vm._v("Seguir comprando")]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "order-footer-buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-submit next action-button",
+          attrs: { type: "button", name: "next" }
+        },
+        [_vm._v("CONFIRMAR PEDIDO")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-link",
+          attrs: { href: "/catalago.php", type: "button" }
+        },
+        [_vm._v("Seguir comprando")]
+      )
     ])
   },
   function() {
