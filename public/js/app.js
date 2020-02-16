@@ -3633,7 +3633,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       cant_cart: 0,
-      categories: []
+      cant_favorite: 0,
+      categories: [],
+      products: []
     };
   },
   methods: {
@@ -3666,6 +3668,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getCategories;
+    }(),
+    SearchProducts: function () {
+      var _SearchProducts = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log(e.target.value);
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function SearchProducts(_x) {
+        return _SearchProducts.apply(this, arguments);
+      }
+
+      return SearchProducts;
+    }(),
+    getFavorites: function () {
+      var _getFavorites = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get(URLSERVER + "api/favorites");
+
+              case 2:
+                response = _context3.sent;
+
+                if (response.data.length > 0) {
+                  this.cant_favorite = response.data.length;
+                } else {
+                  this.cant_favorite = 0;
+                }
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getFavorites() {
+        return _getFavorites.apply(this, arguments);
+      }
+
+      return getFavorites;
     }()
   },
   created: function created() {
@@ -3674,9 +3735,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     EventBus.$on('update_cantCart', function (data) {
       _this.cant_cart = data;
     });
+    EventBus.$on('update_cantFavorite', function (data) {
+      _this.cant_favorite = data;
+    });
   },
   mounted: function mounted() {
     this.getCategories();
+    this.getFavorites();
 
     if (window.localStorage.getItem("cartNew")) {
       this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
@@ -48470,16 +48535,47 @@ var render = function() {
         _c("div", { staticClass: "row align-items-center-md" }, [
           _vm._m(1),
           _vm._v(" "),
-          _vm._m(2),
+          _c(
+            "div",
+            {
+              staticClass: "col-lg-5 col-md-12",
+              attrs: { id: "search-header" }
+            },
+            [
+              _c(
+                "form",
+                { staticClass: "form-inline", attrs: { action: "" } },
+                [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "search",
+                      placeholder: "Busca aquí...",
+                      "aria-label": "Search"
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.SearchProducts($event)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(4),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "col-lg-5 col-4", attrs: { id: "nav-header" } },
             [
               _c("ul", [
-                _vm._m(4),
+                _vm._m(5),
                 _vm._v(" "),
                 _c("li", { attrs: { id: "nav-cart" } }, [
                   _c("a", { attrs: { href: "cart" } }, [
@@ -48495,7 +48591,19 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(5),
+                _c("li", { attrs: { id: "nav-fav" } }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/favoritos-bio.svg",
+                        alt: "Favorites"
+                      }
+                    }),
+                    _c("span", { staticClass: "quantity-span" }, [
+                      _vm._v(_vm._s(_vm.cant_favorite))
+                    ])
+                  ])
+                ]),
                 _vm._v(" "),
                 _vm._m(6)
               ])
@@ -48674,39 +48782,26 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "col-lg-5 col-md-12", attrs: { id: "search-header" } },
-      [
-        _c("form", { staticClass: "form-inline", attrs: { action: "" } }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "search",
-              placeholder: "Busca aquí...",
-              "aria-label": "Search"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-search", attrs: { type: "submit" } },
-            [_c("img", { attrs: { src: "assets/img/busqueda-bio.svg" } })]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "keyup_search" }, [
-            _c("ol", [
-              _c("li", [
-                _c("i", {
-                  staticClass: "fa fa-search",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" Ejemplo")
-              ])
-            ])
-          ])
-        ])
-      ]
+      "button",
+      { staticClass: "btn btn-search", attrs: { type: "submit" } },
+      [_c("img", { attrs: { src: "assets/img/busqueda-bio.svg" } })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "keyup_search" }, [
+      _c("ol", [
+        _c("li", [
+          _c("i", {
+            staticClass: "fa fa-search",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" Ejemplo")
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -48798,19 +48893,6 @@ var staticRenderFns = [
           ])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { attrs: { id: "nav-fav" } }, [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("img", {
-          attrs: { src: "assets/img/favoritos-bio.svg", alt: "Favorites" }
-        }),
-        _c("span", { staticClass: "quantity-span" }, [_vm._v("0")])
-      ])
     ])
   },
   function() {

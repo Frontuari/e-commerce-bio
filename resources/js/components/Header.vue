@@ -30,7 +30,7 @@
 					</div>
 					<div id="search-header" class="col-lg-5 col-md-12">
 						<form class="form-inline" action="">
-							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search">
+							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)">
 							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
 
 							<div class="keyup_search">
@@ -85,7 +85,7 @@
 							<!-- loggeado -->
 							
 							<li id="nav-cart"><a  href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
-							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a></li>
+							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
 
 							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 
@@ -182,23 +182,41 @@
 export default {
     data() {
         return {
-            cant_cart: 0,
-            categories: []
+			cant_cart: 0,
+			cant_favorite: 0,
+			categories: [],
+			products: []
         }
     },
     methods: {
         async getCategories() {
 			const response = await axios.get(URLSERVER+"api/categories");
 			this.categories = response.data.data;
+		},
+		async SearchProducts(e) {
+			console.log(e.target.value);
+		},
+		async getFavorites() {
+			const response = await axios.get(URLSERVER+"api/favorites");
+			if(response.data.length > 0) {
+				this.cant_favorite = response.data.length;
+			}else {
+				this.cant_favorite = 0;
+			}
 		}
     },
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;
+		});
+		
+		EventBus.$on('update_cantFavorite', data => {
+            this.cant_favorite = data;
         });
     },
     mounted() {
 		this.getCategories();
+		this.getFavorites();
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 		}else{
