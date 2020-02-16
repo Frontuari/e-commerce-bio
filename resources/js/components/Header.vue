@@ -36,7 +36,7 @@
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
 						
-						<a  href="" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
+						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
 						<ul>

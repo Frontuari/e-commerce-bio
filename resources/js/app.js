@@ -18,7 +18,7 @@ window.EventBus = new Vue();
 const host = window.location.host;
 const path = window.location.pathname.split("/")[1];
 const protocolo = window.location.protocol;
-window.URLSERVER = protocolo+"//"+host+"/"+path+"/";
+window.URLSERVER = protocolo+"//"+host+"/";
 window.URLHOME = protocolo+"//"+host+"/";
 
 // const files = require.context('./', true, /\.vue$/i)

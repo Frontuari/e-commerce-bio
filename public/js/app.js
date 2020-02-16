@@ -48468,7 +48468,7 @@ var staticRenderFns = [
       "div",
       { staticClass: "col-lg-2 col-4", attrs: { id: "brand-header" } },
       [
-        _c("a", { staticClass: "navbar-brand", attrs: { href: "" } }, [
+        _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
           _c("img", {
             attrs: {
               src: "assets/img/logo-bio-en-linea.png",
@@ -62663,7 +62663,7 @@ window.EventBus = new Vue();
 var host = window.location.host;
 var path = window.location.pathname.split("/")[1];
 var protocolo = window.location.protocol;
-window.URLSERVER = protocolo + "//" + host + "/" + path + "/";
+window.URLSERVER = protocolo + "//" + host + "/";
 window.URLHOME = protocolo + "//" + host + "/"; // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
