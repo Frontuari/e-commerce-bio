@@ -274,7 +274,11 @@
                 })
                 .then(function (response) {
                 	console.log(response);
-                	EventBus.$emit("update_cantFavorite",response.data);
+                	if(response.data != 'error'){
+                		EventBus.$emit("update_cantFavorite",response.data);
+                	}else{
+                		console.log("El producto ya existe en favoritos");
+                	}
                 })
                 .catch(function (error) {
                 	console.log(error);
