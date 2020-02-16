@@ -3697,8 +3697,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getCategories();
 
-    if (window.localStorage.getItem("cart")) {
-      this.cant_cart = JSON.parse(window.localStorage.getItem("cart")).length;
+    if (window.localStorage.getItem("cartNew")) {
+      this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
     } else {
       this.cant_cart = 0;
     }
@@ -4158,14 +4158,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     addToCart: function addToCart(product) {
       var cart = [];
 
-      if (localStorage.getItem('cart')) {
-        cart = JSON.parse(localStorage.getItem('cart'));
+      if (localStorage.getItem('cartNew')) {
+        cart = JSON.parse(localStorage.getItem('cartNew'));
       }
 
-      cart.push(product);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      console.log("from modal::> cart.length", cart.length);
+      cart = this.validateCart(product, cart); //cart.push(tmp);
+
+      localStorage.setItem('cartNew', JSON.stringify(cart));
       EventBus.$emit("update_cantCart", cart.length);
+    },
+    validateCart: function validateCart(product, tmp) {
+      var exist = false;
+      tmp.forEach(function (a, b) {
+        if (a.product.id == product.id) {
+          tmp[b].cant++;
+          exist = true;
+        }
+      });
+
+      if (!exist) {
+        console.log("entro por aqui porque es primera vez");
+        tmp.push({
+          product: product,
+          cant: 1
+        });
+      }
+
+      return tmp;
     },
     addToFavorite: function addToFavorite(product) {
       var favorite = [];
@@ -4178,7 +4197,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       localStorage.setItem('favorite', JSON.stringify(favorite));
     },
     removeCart: function removeCart(id) {
-      var storageProducts = JSON.parse(localStorage.getItem('cart'));
+      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
       var products = storageProducts.filter(function (product) {
         return product.id !== id;
       });
