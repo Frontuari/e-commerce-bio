@@ -2799,6 +2799,7 @@ return array(
     'Laravel\\Passport\\Console\\PurgeCommand' => $vendorDir . '/laravel/passport/src/Console/PurgeCommand.php',
     'Laravel\\Passport\\Events\\AccessTokenCreated' => $vendorDir . '/laravel/passport/src/Events/AccessTokenCreated.php',
     'Laravel\\Passport\\Events\\RefreshTokenCreated' => $vendorDir . '/laravel/passport/src/Events/RefreshTokenCreated.php',
+    'Laravel\\Passport\\Exceptions\\InvalidAuthTokenException' => $vendorDir . '/laravel/passport/src/Exceptions/InvalidAuthTokenException.php',
     'Laravel\\Passport\\Exceptions\\MissingScopeException' => $vendorDir . '/laravel/passport/src/Exceptions/MissingScopeException.php',
     'Laravel\\Passport\\Exceptions\\OAuthServerException' => $vendorDir . '/laravel/passport/src/Exceptions/OAuthServerException.php',
     'Laravel\\Passport\\Guards\\TokenGuard' => $vendorDir . '/laravel/passport/src/Guards/TokenGuard.php',
