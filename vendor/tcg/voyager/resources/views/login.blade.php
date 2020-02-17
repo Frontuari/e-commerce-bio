@@ -35,7 +35,7 @@
 <div class="container-fluid" >
     <div class="row" >
          <div class="text-center">
-            <a href="../index.php" style="margin:0 auto">
+            <a href="../index.php" >
             <img class="img-responsive" style="margin:0 auto; width:200px" src="{{Voyager::image( Voyager::setting('site.logo','')) }}" />
             
             </a><br>
@@ -49,7 +49,7 @@
         -webkit-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
 -moz-box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
 box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
- min-height:48vh;  margin: 0 auto; border-radius:20px; border: 0px solid #000">
+ min-height:380px;  margin: 0 auto; border-radius:20px; border: 0px solid #000">
             <img style="width:39%; float:right" src="/storage/settings/January2020/login.svg">
             <div class="login-container" style="margin-top:-20px;">
                 <form action="{{ route('voyager.login') }}" method="POST">
@@ -61,7 +61,7 @@ box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
                          </div>
                     </div>
 <br>
-                    <div class="fodrm-group form-group-defauldt" id="passwordGroup">
+                    <div class="fodrm-group form-group-defaudlt" id="passwordGroup">
                         <label style="font-size:13px; color:#000; font-weight:800">Contraseña</label>
                         <div class="controls">
                             <input style=" border:1px solid #28b67a;" type="password" name="password" placeholder="{{ __('voyager::generic.password') }}" class="form-control in" required>
@@ -87,7 +87,8 @@ box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
                           <span class="signin" style=" font-size:14px;"><b>Ingresar</b></span>
                       </button>
                       </div>
-                        </div>    
+                      
+                        </div>    <div class="text-center"><a href="../index.php">Pagina de inicio</a></div>
                           </div>
                         </div>
                                    

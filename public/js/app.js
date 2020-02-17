@@ -51883,16 +51883,14 @@ var render = function() {
                         "div",
                         { staticClass: "carousel-caption caption-left" },
                         [
-                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
+                          _c("h5", [_vm._v("")]),
                           _vm._v(" "),
                           _vm._m(0, true),
                           _vm._v(" "),
                           _vm._m(1, true),
                           _vm._v(" "),
                           _c(
-                            "a",
-                            { staticClass: "btn", attrs: { href: "#" } },
-                            [_vm._v("Comprar")]
+                           
                           )
                         ]
                       )
@@ -51900,16 +51898,14 @@ var render = function() {
                         "div",
                         { staticClass: "carousel-caption caption-right" },
                         [
-                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
+                          _c("h5", [_vm._v("")]),
                           _vm._v(" "),
                           _vm._m(2, true),
                           _vm._v(" "),
                           _vm._m(3, true),
                           _vm._v(" "),
                           _c(
-                            "a",
-                            { staticClass: "btn", attrs: { href: "#" } },
-                            [_vm._v("Comprar")]
+                           
                           )
                         ]
                       )
@@ -51933,12 +51929,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", [
-      _vm._v("Carnes "),
-      _c("img", {
-        staticClass: "ico-text",
-        attrs: { src: "assets/img/icono-bio.svg" }
-      }),
-      _vm._v("io")
+
     ])
   },
   function() {
@@ -51946,9 +51937,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _vm._v("Compra una gran variedad de tipos "),
-      _c("br"),
-      _vm._v("de carnes a un excelente precio.")
     ])
   },
   function() {
@@ -51956,12 +51944,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", [
-      _vm._v("Carnes "),
-      _c("img", {
-        staticClass: "ico-text",
-        attrs: { src: "assets/img/icono-bio.svg" }
-      }),
-      _vm._v("io")
+      _vm._v(""),
+ 
     ])
   },
   function() {
@@ -51969,9 +51953,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-      _vm._v("Compra una gran variedad de tipos "),
+      _vm._v(""),
       _c("br"),
-      _vm._v("de carnes a un excelente precio.")
+      _vm._v("")
     ])
   },
   function() {

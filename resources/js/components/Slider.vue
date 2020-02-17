@@ -16,10 +16,7 @@
                         </div>
 
                         <div class="carousel-caption caption-right" v-else>
-                            <h5>¡Aprovecha nuestros combos!</h5>
-                            <h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
-                            <p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
-                            <a href="#" class="btn">Comprar</a>
+                           <a href="#" class="btn">Comprar</a>
                         </div>
                     </div>
                 </div>
