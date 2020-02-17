@@ -2938,6 +2938,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -46318,22 +46320,27 @@ var staticRenderFns = [
     return _c("div", { staticClass: "filter filter-price" }, [
       _c("h4", [_vm._v("Precio")]),
       _vm._v(" "),
-      _c("div", { staticClass: "range-output-price" }, [
-        _c("div", { staticClass: "range-output range-o0" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("-")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "range-output range-o1" })
+      _c("div", { staticClass: "range-slider" }, [
+        _c("input", {
+          staticClass: "js-range-slider",
+          attrs: { type: "text", value: "" }
+        })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "range-container" }, [
-        _c("div", { staticClass: "range-slider" }, [
-          _c("div", { staticClass: "range-track" })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "range-thumb range-t0" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "range-thumb range-t1" })
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "extra-controls" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "js-input-from form-control",
+            attrs: { type: "number", value: "0" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "js-input-to form-control",
+            attrs: { type: "number", value: "0" }
+          })
+        ])
       ])
     ])
   },
