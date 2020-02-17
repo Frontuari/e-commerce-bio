@@ -54,6 +54,12 @@
 										Mis pedidos
 									</a>
 								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="my-favorite" data-toggle="tab" href="#my-favorites" role="tab" aria-controls="my-favorites" aria-selected="false">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.89 25"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#eba900;}</style></defs><title>favoritos-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M7.84,12.6a.7.7,0,0,1-.7-.7V5.84h17a.71.71,0,1,1,0,1.41H8.54V11.9A.7.7,0,0,1,7.84,12.6Z"/><path class="cls-2" d="M12.81,12.4a3.9,3.9,0,0,1,1.75,1.12,4.14,4.14,0,0,1,1,3.66c-.37,2.26-2.21,4.51-5.13,6.41H24.24V12.4Z"/><path class="cls-1" d="M24.89,25H12a.71.71,0,0,1,0-1.41H23.48V8.48a.71.71,0,0,1,1.41,0Z"/><path class="cls-1" d="M19.22,9.93a.7.7,0,0,1-.7-.71V3.33a1.63,1.63,0,0,0-.72-1.4A3.12,3.12,0,0,0,16,1.41c-1.05,0-2.62.51-2.62,1.92V9.22a.71.71,0,1,1-1.41,0V3.33C12,1.14,14,0,16,0s3.94,1,3.94,3.33V9.22A.71.71,0,0,1,19.22,9.93Z"/><path class="cls-1" d="M14.56,13.52a3.74,3.74,0,0,0-2.72-1.29,6,6,0,0,0-4,1.76,6,6,0,0,0-4-1.76,3.74,3.74,0,0,0-2.72,1.29,4.14,4.14,0,0,0-1,3.66C.53,20,3.25,22.82,7.53,24.93a.72.72,0,0,0,.62,0c4.28-2.11,7-4.94,7.46-7.75A4.14,4.14,0,0,0,14.56,13.52ZM14.22,17C14,18,13.06,20.84,7.84,23.51,2.62,20.84,1.64,18,1.46,17a2.7,2.7,0,0,1,.66-2.44l0,0a2.37,2.37,0,0,1,1.72-.84h.06a5.21,5.21,0,0,1,3.41,1.82.74.74,0,0,0,1,0,5.13,5.13,0,0,1,3.47-1.82,2.37,2.37,0,0,1,1.72.84l0,0A2.7,2.7,0,0,1,14.22,17Z"/></g></g></svg>
+										Mis Favoritos
+									</a>
+								</li>
 							</ul>
 						</div>
 						<div class="col-lg-9 profile-content">
@@ -629,6 +635,8 @@
 										</div>
 									</div>
 								</div>
+								
+								<!-- ORDER TAB-->
 								<div class="tab-pane fade" id="my-orders" role="tabpanel" aria-labelledby="my-orders-tab">
 									<ul class="nav nav-tabs" id="" role="tablist">
 										<li class="nav-item">
@@ -809,6 +817,196 @@
 										</div>
 									</div>
 								</div>
+								<!-- CIERRE DEL ORDER TAB-->
+
+
+
+
+								<!-- ############################### SECCION DE MIS FAVORITO ######################################## -->
+
+								<!-- ORDER TAB-->
+								<div class="tab-pane" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites">
+									<ul class="nav nav-tabs" id="" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="all-orders-tab" data-toggle="tab" href="#all-orders" role="tab" aria-controls="all-orders" aria-selected="true">Mis productos Favoritos</a>
+										</li>
+									
+									</ul>
+									<div class="tab-content" id="orders-content">
+										<div class="tab-pane fade show active" id="all-orders" role="tabpanel" aria-labelledby="all-orders-tab">
+											<div class="order-table">
+												<div class="thead-bio">
+													<div class="row">
+														<div class="col-6 col-lg-20">Número de Pedido</div>
+														<div class="col-6 col-lg-20">Fecha</div>
+														<div class="col-6 col-lg-20">Dirección de entrega</div>
+														<div class="col-6 col-lg-20">Fecha de entrega</div>
+														<div class="col-6 col-lg-20">Estado</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #2235
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>01/01/2020</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
+															<span class="order-span">Dirección de entrega</span>Mi casa
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>04/01/2020</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status in-process" data-toggle="tooltip" data-placement="bottom" title="Su pedido se está procesando para ser enviado">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.12 19.97"><defs><style>.cls-1{fill:#e1251b;}</style></defs><title>en-proceso-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"/><path class="cls-1" d="M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"/><path class="cls-1" d="M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"/><path class="cls-1" d="M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"/><path class="cls-1" d="M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"/><path class="cls-1" d="M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"/><path class="cls-1" d="M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"/><path class="cls-1" d="M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"/></g></g></svg>
+															En Proceso
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #4452
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>23/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)">
+															<span class="order-span">Dirección de entrega</span>Mi Oficina
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>26/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status en-route" data-toggle="tooltip" data-placement="bottom" title="Su pedido ya esta en camino hacia el destino">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.09 20"><defs><style>.cls-1{fill:#eba900;}</style></defs><title>en-camino-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"/><rect class="cls-1" x="8.26" y="16.52" width="0.87" height="0.87"/><rect class="cls-1" x="20.43" y="16.52" width="0.87" height="0.87"/><rect class="cls-1" y="15.22" width="2.17" height="0.87"/><rect class="cls-1" x="0.87" y="13.48" width="1.3" height="0.87"/><rect class="cls-1" x="1.3" y="11.74" width="0.87" height="0.87"/><path class="cls-1" d="M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"/><path class="cls-1" d="M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"/><path class="cls-1" d="M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"/><rect class="cls-1" x="16.52" y="13.48" width="1.74" height="0.87"/></g></g></svg>
+															En Camino
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #3602
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>05/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
+															<span class="order-span">Dirección de entrega</span>Mi casa
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>08/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status complete" data-toggle="tooltip" data-placement="bottom" title="El pedido ya ha sido entregado">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.75 19.44"><defs><style>.cls-1{fill:#80bc00;}</style></defs><title>confirmar-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"/></g></g></svg>
+															Completado
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="order-in-process" role="tabpanel" aria-labelledby="order-in-process-tab">
+											<div class="order-table">
+												<div class="thead-bio">
+													<div class="row">
+														<div class="col-6 col-lg-20">Número de Pedido</div>
+														<div class="col-6 col-lg-20">Fecha</div>
+														<div class="col-6 col-lg-20">Dirección de entrega</div>
+														<div class="col-6 col-lg-20">Fecha de entrega</div>
+														<div class="col-6 col-lg-20">Estado</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #2235
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>01/01/2020</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
+															<span class="order-span">Dirección de entrega</span>Mi casa
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>04/01/2020</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status in-process" data-toggle="tooltip" data-placement="bottom" title="Su pedido se está procesando para ser enviado">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.12 19.97"><defs><style>.cls-1{fill:#e1251b;}</style></defs><title>en-proceso-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"/><path class="cls-1" d="M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"/><path class="cls-1" d="M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"/><path class="cls-1" d="M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"/><path class="cls-1" d="M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"/><path class="cls-1" d="M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"/><path class="cls-1" d="M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"/><path class="cls-1" d="M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"/></g></g></svg>
+															En Proceso
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #4452
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>23/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)">
+															<span class="order-span">Dirección de entrega</span>Mi Oficina
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>26/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status en-route" data-toggle="tooltip" data-placement="bottom" title="Su pedido ya esta en camino hacia el destino">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.09 20"><defs><style>.cls-1{fill:#eba900;}</style></defs><title>en-camino-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"/><rect class="cls-1" x="8.26" y="16.52" width="0.87" height="0.87"/><rect class="cls-1" x="20.43" y="16.52" width="0.87" height="0.87"/><rect class="cls-1" y="15.22" width="2.17" height="0.87"/><rect class="cls-1" x="0.87" y="13.48" width="1.3" height="0.87"/><rect class="cls-1" x="1.3" y="11.74" width="0.87" height="0.87"/><path class="cls-1" d="M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"/><path class="cls-1" d="M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"/><path class="cls-1" d="M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"/><rect class="cls-1" x="16.52" y="13.48" width="1.74" height="0.87"/></g></g></svg>
+															En Camino
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="complete-orders" role="tabpanel" aria-labelledby="complete-orders-tab">
+											<div class="order-table">
+												<div class="thead-bio">
+													<div class="row">
+														<div class="col-6 col-lg-20">Número de Pedido</div>
+														<div class="col-6 col-lg-20">Fecha</div>
+														<div class="col-6 col-lg-20">Dirección de entrega</div>
+														<div class="col-6 col-lg-20">Fecha de entrega</div>
+														<div class="col-6 col-lg-20">Estado</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-12 col-lg-20">
+														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+															<span class="order-span">Número de Pedido</span> #3602
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>05/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
+															<span class="order-span">Dirección de entrega</span>Mi casa
+														</button>
+													</div>
+													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>08/12/2019</div>
+													<div class="col-6 col-lg-20">
+														<span class="order-span">Estado</span>
+														<div class="process-status complete" data-toggle="tooltip" data-placement="bottom" title="El pedido ya ha sido entregado">
+															<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.75 19.44"><defs><style>.cls-1{fill:#80bc00;}</style></defs><title>confirmar-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"/></g></g></svg>
+															Completado
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- CIERRE DEL ORDER TAB-->
+
+
+								<!-- -->	
+
+
+
 							</div>
 						</div>
 					</div>
