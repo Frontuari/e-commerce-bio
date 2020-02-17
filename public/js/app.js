@@ -4334,10 +4334,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      datos: ''
+      User: {
+        username: '',
+        password: '',
+        c_password: '',
+        email: '',
+        sex: ''
+      }
     };
   },
-  methods: {}
+  methods: {
+    saveData: function saveData() {
+      axios.post(URLHOME + 'api/register', {
+        name: this.User.username,
+        password: this.User.password,
+        c_password: this.User.c_password,
+        email: this.User.email,
+        sex: this.User.sex
+      }).then(function (data) {
+        console.log("data ::> ", data);
+        alert("Usuario Registrado Exitosamente");
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -51883,130 +51902,248 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "register-form" }, [
+    _c("form", { attrs: { action: "" } }, [
+      _c("h2", { staticClass: "form-title" }, [_vm._v("Crear Cuenta")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "gender" }, [
+        _c("label", [_vm._v("Seleccione sexo")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check form-check-radio" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.User.sex,
+                expression: "User.sex"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "radio", id: "man", name: "gender" },
+            domProps: { checked: _vm._q(_vm.User.sex, null) },
+            on: {
+              change: function($event) {
+                return _vm.$set(_vm.User, "sex", null)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0)
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check form-check-radio" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.User.sex,
+                expression: "User.sex"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "radio", id: "women", name: "gender" },
+            domProps: { checked: _vm._q(_vm.User.sex, null) },
+            on: {
+              change: function($event) {
+                return _vm.$set(_vm.User, "sex", null)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "username" } }, [
+          _vm._v("Nombre de usuario:")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.User.username,
+              expression: "User.username"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "username", name: "username" },
+          domProps: { value: _vm.User.username },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.User, "username", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "email" } }, [
+          _vm._v("Correo Electrónico:")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.User.email,
+              expression: "User.email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "email", name: "email" },
+          domProps: { value: _vm.User.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.User, "email", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "password" } }, [_vm._v("Contraseña:")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.User.password,
+              expression: "User.password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "password", name: "password" },
+          domProps: { value: _vm.User.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.User, "password", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "password2" } }, [
+          _vm._v("Repite la contraseña:")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.User.c_password,
+              expression: "User.c_password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "password2", name: "password2" },
+          domProps: { value: _vm.User.c_password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.User, "c_password", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.saveData()
+              }
+            }
+          },
+          [_vm._v("CREAR CUENTA")]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "register-form" }, [
-      _c("form", { attrs: { action: "" } }, [
-        _c("h2", { staticClass: "form-title" }, [_vm._v("Crear Cuenta")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "gender" }, [
-          _c("label", [_vm._v("Seleccione sexo")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check form-check-radio" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "man", name: "gender" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-check", attrs: { for: "man" } },
-              [_c("span"), _vm._v("Hombre")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check form-check-radio" }, [
-            _c("input", {
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "women", name: "gender" }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "custom-check", attrs: { for: "women" } },
-              [_c("span"), _vm._v("Mujer")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "username" } }, [
-            _vm._v("Nombre de usuario:")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", id: "username", name: "username" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "email" } }, [
-            _vm._v("Correo Electrónico:")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", id: "email", name: "email" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "password" } }, [_vm._v("Contraseña:")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", id: "password", name: "password" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "password2" } }, [
-            _vm._v("Repite la contraseña:")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", id: "password2", name: "password2" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: { type: "checkbox", id: "terms", name: "terms" }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "custom-check", attrs: { for: "terms" } },
-            [_c("span"), _vm._v("Acepto los términos y condiciones.")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check" }, [
-          _c("input", {
-            staticClass: "form-check-input",
-            attrs: {
-              type: "checkbox",
-              id: "allow-offers",
-              name: "allow-offers"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "custom-check", attrs: { for: "allow-offers" } },
-            [
-              _c("span"),
-              _vm._v(
-                "Deseo recibir notificaciones de productos, ofertas y promociones al correo electrónico."
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-            _vm._v("CREAR CUENTA")
-          ])
-        ])
+    return _c("label", { staticClass: "custom-check", attrs: { for: "man" } }, [
+      _c("span"),
+      _vm._v("Hombre")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "custom-check", attrs: { for: "women" } },
+      [_c("span"), _vm._v("Mujer")]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-check" }, [
+      _c("input", {
+        staticClass: "form-check-input",
+        attrs: { type: "checkbox", id: "terms", name: "terms" }
+      }),
+      _vm._v(" "),
+      _c("label", { staticClass: "custom-check", attrs: { for: "terms" } }, [
+        _c("span"),
+        _vm._v("Acepto los términos y condiciones.")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-check" }, [
+      _c("input", {
+        staticClass: "form-check-input",
+        attrs: { type: "checkbox", id: "allow-offers", name: "allow-offers" }
+      }),
+      _vm._v(" "),
+      _c(
+        "label",
+        { staticClass: "custom-check", attrs: { for: "allow-offers" } },
+        [
+          _c("span"),
+          _vm._v(
+            "Deseo recibir notificaciones de productos, ofertas y promociones al correo electrónico."
+          )
+        ]
+      )
     ])
   }
 ]
