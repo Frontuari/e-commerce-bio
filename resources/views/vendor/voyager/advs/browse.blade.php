@@ -22,7 +22,7 @@
                 </a>
             @endif
         @endcan
-        <a target="_blank" href="/storage/{{setting('admin.mapa_posiciones_publicidad')}}" class="btn btn-primary btn-add-new" >Ver posiciones</a>
+        <button target="_blank" onclick="popitup('/storage/{{setting('admin.mapa_posiciones_publicidad')}}','Posiciones')" class="btn btn-primary btn-add-new" >Ver posiciones</button>
         @can('delete', app($dataType->model_name))
             @if($usesSoftDeletes)
                 <input type="checkbox" @if ($showSoftDeleted) checked @endif id="show_soft_deletes" data-toggle="toggle" data-on="{{ __('voyager::bread.soft_deletes_off') }}" data-off="{{ __('voyager::bread.soft_deletes_on') }}">
@@ -322,6 +322,12 @@
         <script src="{{ voyager_asset('lib/js/dataTables.responsive.min.js') }}"></script>
     @endif
     <script>
+function popitup(url,windowName) {
+       newwindow=window.open(url,windowName,'height=700,width=350');
+       if (window.focus) {newwindow.focus()}
+       return false;
+     }
+
         $(document).ready(function () {
             @if (!$dataType->server_side)
                 var table = $('#dataTable').DataTable({!! json_encode(
