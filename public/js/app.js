@@ -2930,6 +2930,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -50100,7 +50101,9 @@ var staticRenderFns = [
             _c("div", { staticClass: "form-group form-group-register" }, [
               _c("small", [
                 _vm._v("¿No tienes cuenta? "),
-                _c("a", [_vm._v("Registrate aquí")])
+                _c("a", { attrs: { href: "register" } }, [
+                  _vm._v("Registrate aquí")
+                ])
               ])
             ])
           ])

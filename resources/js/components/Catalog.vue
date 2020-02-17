@@ -1,4 +1,5 @@
 <template>
+	
 	<section id="catalogo" class="main-content">
 		<div class="container-fluid">
 			<div class="row">
