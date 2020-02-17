@@ -827,7 +827,7 @@
 											        <div class="row">
 											            <div class="col-6 col-lg-12" v-for="favorite in favorites">
 											                <div class="product-block">
-											                    <div class="product-img"><img src="storage/products/February2020/rxC19yA0bg8xoKiKqyRk.jpg">
+											                    <div class="product-img"><img   :src="'storage/'+favorite.photo | MediumImage" >
 											                        <div class="product-actions">
 											                            <button type="button" data-toggle="modal" data-target="#ModalProd" class="btn">
 											                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
@@ -866,25 +866,25 @@
 											                            </button>
 											                        </div>
 											                    </div>
-											                    <div class="product-content"><a href="#" class="product-title">Harina Pan</a> <span class="product-info">500 g</span>
+											                    <div class="product-content"><a href="#" class="product-title">{{favorite.product_name}}</a> <span class="product-info">500 g</span>
 											                        <div class="product-prices">
-											                            <p>Bs 100.000,00</p>
+											                            <p>Bs {{favorite.price | FormatNumber }}</p>
 											                        </div>
 											                    </div>
-											                    <div class="product-add"><span class="product-info">Disponibles: <b>10 en Stock</b></span>
+											                    <div class="product-add"><span class="product-info">Disponibles: <b>{{favorite.qty_avaliable}} en Stock</b></span>
 											                        <form action="">
 											                            <div class="product-quantity">
 											                                <label>Cantidad</label>
 											                                <div class="product-quantity-group">
 											                                    <input id="quantity2" type="text" name="quantity" value="1" class="form-control">
-											                                    <div class="product-quantity-buttons"><span class="max-stock" style="display: none;">10</span>
+											                                    <div class="product-quantity-buttons"><span class="max-stock" style="display: none;">{{favorite.qty_avaliable}}</span>
 											                                        <button type="button" onclick="" class="btn increaseValue"><img src="assets/img/increase.png" alt="Increase"></button>
 											                                        <button type="button" class="btn decreaseValue"><img src="assets/img/decrease.png" alt="decrease"></button>
 											                                    </div>
 											                                </div>
 											                            </div>
 											                            <div class="product-buttons">
-											                                <button type="button" class="btn btn-addcart-outline">
+											                                <button type="button" class="btn btn-addcart-outline" @click="addToCart(favorite)">
 											                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
 											                                        <title>añadir-carrito-bio</title>
 											                                        <g id="Capa_2" data-name="Capa 2">
@@ -1106,7 +1106,13 @@
 				const arrNum = num.split(".");
 				const decimal = arrNum[1];
 				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			}
+			},
+			MediumImage: function(imageText)
+			{
+				imageText = imageText.split('.');
+				let newImageText = imageText[0]+'-medium.'+imageText[1];
+				return newImageText;
+			}	
 		},
         mounted() {
 			this.getFavorites();

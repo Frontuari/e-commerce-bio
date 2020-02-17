@@ -33,16 +33,20 @@
 						<div id="filters-content" class="collapse">
 							<div class="filter filter-price">
 								<h4>Precio</h4>
-								<div class="range-output-price">
-									<div class="range-output range-o0"></div> <span>-</span> <div class="range-output range-o1"></div>
+			
+
+								<div class="range-slider">
+								    <input type="text" class="js-range-slider" value="" />
 								</div>
-								<div class="range-container">
-									<div class="range-slider">
-										<div class="range-track"></div>
+								  <hr>
+								<div class="extra-controls">
+									  <div class="form-group">
+									    <input type="number" class="js-input-from form-control" value="0" />
+									    <input type="number" class="js-input-to form-control" value="0" />
 									</div>
-									<div class="range-thumb range-t0"></div>
-									<div class="range-thumb range-t1"></div>
-								</div>
+								 </div>
+								
+
 							</div>
 							<div class="filter filter-offers">
 								<h4>Ofertas</h4>

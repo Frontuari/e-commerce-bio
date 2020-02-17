@@ -235,7 +235,9 @@
 	<script type="text/javascript" src="{{ asset('assets/js/popper.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>
+	<!--<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>-->
+
+	<script type="text/javascript" src="{{ asset('assets/js/range.js') }}"></script>
 	@yield('js')
 	<script>
 

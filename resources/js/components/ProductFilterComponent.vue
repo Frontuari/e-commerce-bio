@@ -220,6 +220,7 @@
 			getBestPrice: async function () {
 				const response = await axios.get(URLSERVER+'api/products/best/price');
 				this.best_price = response.data.data;
+				console.log(this.best_price);
 			},
 			count: function (type) {
 				if(type==1)
