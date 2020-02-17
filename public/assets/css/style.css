@@ -1020,6 +1020,16 @@
 		font-style: italic;
 		margin-bottom: .5rem;
 	}
+
+	#recents .row div div.product-block
+	{
+		border: 1px solid #ccc6;
+	}
+	#recents .row div div.product-block .product-title
+	{
+		font-size: 18px;
+	}
+
 	.product-block .product-info{
 		font-size: 14px;
 		margin-bottom: 0;
@@ -1048,6 +1058,7 @@
 		align-items: center;
 		background-color: #fff;
 		border-radius: 30px;
+		box-shadow: 1px 2px #b9b7b7;
 		padding: .35rem 1.25rem;
 		width: 100%;
 		max-width: 140px;

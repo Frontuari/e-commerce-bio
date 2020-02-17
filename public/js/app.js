@@ -4382,9 +4382,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -51872,10 +51869,15 @@ var render = function() {
                 class: { "carousel-item": true, active: index == 0 }
               },
               [
-                _c("img", {
-                  staticClass: "d-block w-100",
-                  attrs: { src: "storage/" + slider.image, alt: "First slide" }
-                }),
+                _c("a", { attrs: { href: slider.url } }, [
+                  _c("img", {
+                    staticClass: "d-block w-100",
+                    attrs: {
+                      src: "storage/" + slider.image,
+                      alt: "First slide"
+                    }
+                  })
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
                   slider.text_position == "left"
@@ -51883,32 +51885,14 @@ var render = function() {
                         "div",
                         { staticClass: "carousel-caption caption-left" },
                         [
-                          _c("h5", [_vm._v("")]),
+                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
                           _vm._v(" "),
                           _vm._m(0, true),
                           _vm._v(" "),
-                          _vm._m(1, true),
-                          _vm._v(" "),
-                          _c(
-                           
-                          )
+                          _vm._m(1, true)
                         ]
                       )
-                    : _c(
-                        "div",
-                        { staticClass: "carousel-caption caption-right" },
-                        [
-                          _c("h5", [_vm._v("")]),
-                          _vm._v(" "),
-                          _vm._m(2, true),
-                          _vm._v(" "),
-                          _vm._m(3, true),
-                          _vm._v(" "),
-                          _c(
-                           
-                          )
-                        ]
-                      )
+                    : _vm._e()
                 ])
               ]
             )
@@ -51916,9 +51900,9 @@ var render = function() {
           0
         ),
         _vm._v(" "),
-        _vm._m(4),
+        _vm._m(2),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(3)
       ]
     )
   ])
@@ -51929,7 +51913,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h2", [
-
+      _vm._v("Carnes "),
+      _c("img", {
+        staticClass: "ico-text",
+        attrs: { src: "assets/img/icono-bio.svg" }
+      }),
+      _vm._v("io")
     ])
   },
   function() {
@@ -51937,25 +51926,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", [
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _vm._v(""),
- 
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v(""),
+      _vm._v("Compra una gran variedad de tipos "),
       _c("br"),
-      _vm._v("")
+      _vm._v("de carnes a un excelente precio.")
     ])
   },
   function() {
@@ -71213,15 +71186,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/components/profile.vue ***!
   \*********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile.vue?vue&type=template&id=7eab0eae& */ "./resources/js/components/profile.vue?vue&type=template&id=7eab0eae&");
 /* harmony import */ var _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile.vue?vue&type=script&lang=js& */ "./resources/js/components/profile.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -71251,7 +71223,7 @@ component.options.__file = "resources/js/components/profile.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/components/profile.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
