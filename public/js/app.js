@@ -3047,6 +3047,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var arrNum = num.split(".");
       var decimal = arrNum[1];
       return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + decimal;
+    },
+    MediumImage: function MediumImage(imageText) {
+      imageText = imageText.split('.');
+      var newImageText = imageText[0] + '-medium.' + imageText[1];
+      return newImageText;
     }
   },
   mounted: function mounted() {
@@ -45735,7 +45740,11 @@ var render = function() {
                         _c("div", { staticClass: "product-block" }, [
                           _c("div", { staticClass: "product-img" }, [
                             _c("img", {
-                              attrs: { src: "storage/" + product_recent.photo }
+                              attrs: {
+                                src: _vm._f("MediumImage")(
+                                  "storage/" + product_recent.photo
+                                )
+                              }
                             }),
                             _vm._v(" "),
                             _c("div", { staticClass: "product-actions" }, [
