@@ -4430,6 +4430,1168 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      favorites: []
+    };
+  },
+  methods: {
+    getFavorites: function () {
+      var _getFavorites = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get(URLHOME + 'api/favorites');
+
+              case 2:
+                response = _context.sent;
+                this.favorites = response.data.data;
+                console.log(this.favorites);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getFavorites() {
+        return _getFavorites.apply(this, arguments);
+      }
+
+      return getFavorites;
+    }(),
+    addToCart: function addToCart(product) {
+      var cart = [];
+
+      if (localStorage.getItem('cartNew')) {
+        cart = JSON.parse(localStorage.getItem('cartNew'));
+      }
+
+      cart = this.validateCart(product, cart); //cart.push(tmp);
+
+      localStorage.setItem('cartNew', JSON.stringify(cart));
+      EventBus.$emit("update_cantCart", cart.length);
+    },
+    validateCart: function validateCart(product, tmp) {
+      var exist = false;
+      tmp.forEach(function (a, b) {
+        if (a.product.id == product.id) {
+          tmp[b].cant++;
+          exist = true;
+        }
+      });
+
+      if (!exist) {
+        console.log("entro por aqui porque es primera vez");
+        tmp.push({
+          product: product,
+          cant: 1
+        });
+      }
+
+      return tmp;
+    },
+    addToFavorite: function addToFavorite(product) {
+      var favorite = []; //obtener la ID del producto
+
+      var products_id = product.id;
+      axios.post(URLHOME + 'api/favorites', {
+        products_id: products_id,
+        user_id: 1
+      }).then(function (response) {
+        console.log(response);
+
+        if (response.data != 'error') {
+          EventBus.$emit("update_cantFavorite", response.data);
+        } else {
+          console.log("El producto ya existe en favoritos");
+          alert("El producto ya existe en tus favoritos");
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    removeCart: function removeCart(id) {
+      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
+      var products = storageProducts.filter(function (product) {
+        return product.id !== id;
+      });
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+  },
+  filters: {
+    FormatNumber: function FormatNumber(num) {
+      num = parseFloat(num).toFixed(2);
+      var arrNum = num.split(".");
+      var decimal = arrNum[1];
+      return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + decimal;
+    }
+  },
+  mounted: function mounted() {
+    this.getFavorites();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -42238,7 +43400,7 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "btn btn-link",
-              attrs: { href: "/catalago.php", type: "button" }
+              attrs: { href: "/catalog", type: "button" }
             },
             [_vm._v("Seguir comprando")]
           ),
@@ -43465,7 +44627,7 @@ var staticRenderFns = [
                     "a",
                     {
                       staticClass: "btn btn-link",
-                      attrs: { href: "/catalago.php", type: "button" }
+                      attrs: { href: "/catalog", type: "button" }
                     },
                     [_vm._v("Seguir comprando")]
                   ),
@@ -43760,7 +44922,7 @@ var staticRenderFns = [
                     "a",
                     {
                       staticClass: "btn btn-link",
-                      attrs: { href: "/catalago.php", type: "button" }
+                      attrs: { href: "/catalog", type: "button" }
                     },
                     [_vm._v("Seguir comprando")]
                   ),
@@ -48643,7 +49805,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("li", { attrs: { id: "nav-fav" } }, [
-                  _c("a", { attrs: { href: "#" } }, [
+                  _c("a", { attrs: { href: "profile" } }, [
                     _c("img", {
                       attrs: {
                         src: "assets/img/favoritos-bio.svg",
@@ -50856,6 +52018,6330 @@ var staticRenderFns = [
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
       ]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile.vue?vue&type=template&id=7eab0eae&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile.vue?vue&type=template&id=7eab0eae& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    { staticClass: "user-profile", attrs: { id: "user-profile" } },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-3 profile-sidebar" }, [
+                _c(
+                  "ul",
+                  {
+                    staticClass: "nav sidebar-tabs",
+                    attrs: { id: "SectionsTab", role: "tablist" }
+                  },
+                  [
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link active",
+                          attrs: {
+                            id: "personal-info-tab",
+                            "data-toggle": "tab",
+                            href: "#personal-info",
+                            role: "tab",
+                            "aria-controls": "personal-info",
+                            "aria-selected": "true"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 16.69 20"
+                              }
+                            },
+                            [
+                              _c("title", [
+                                _vm._v("datos-personales-bio-mercados")
+                              ]),
+                              _c(
+                                "g",
+                                {
+                                  attrs: { id: "Capa_2", "data-name": "Capa 2" }
+                                },
+                                [
+                                  _c(
+                                    "g",
+                                    {
+                                      attrs: {
+                                        id: "Perfil_de_Usuario",
+                                        "data-name": "Perfil de Usuario"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M8.22,9.63a4.63,4.63,0,0,0,3.4-1.41A4.63,4.63,0,0,0,13,4.82a4.65,4.65,0,0,0-1.41-3.41A4.63,4.63,0,0,0,8.22,0,4.65,4.65,0,0,0,4.81,1.41,4.65,4.65,0,0,0,3.4,4.82a4.63,4.63,0,0,0,1.41,3.4A4.65,4.65,0,0,0,8.22,9.63ZM5.64,2.24A3.48,3.48,0,0,1,8.22,1.17a3.46,3.46,0,0,1,2.57,1.07,3.48,3.48,0,0,1,1.07,2.58,3.46,3.46,0,0,1-1.07,2.57A3.46,3.46,0,0,1,8.22,8.46,3.48,3.48,0,0,1,5.64,7.39,3.46,3.46,0,0,1,4.57,4.82,3.48,3.48,0,0,1,5.64,2.24Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M16.65,15.38a12.56,12.56,0,0,0-.17-1.26,9.22,9.22,0,0,0-.31-1.28,6.15,6.15,0,0,0-.52-1.18,4.61,4.61,0,0,0-.79-1,3.69,3.69,0,0,0-1.13-.71,4,4,0,0,0-1.44-.26,1.47,1.47,0,0,0-.79.33l-.81.53A4.46,4.46,0,0,1,9.63,11a4.1,4.1,0,0,1-1.29.21A4.15,4.15,0,0,1,7.05,11a4.37,4.37,0,0,1-1-.46L5.18,10a1.45,1.45,0,0,0-.78-.33A4,4,0,0,0,3,9.92a3.69,3.69,0,0,0-1.13.71,4.92,4.92,0,0,0-.79,1,6.83,6.83,0,0,0-.52,1.18A10.91,10.91,0,0,0,.2,14.12,12.41,12.41,0,0,0,0,15.38c0,.38,0,.78,0,1.18a3.3,3.3,0,0,0,1,2.51A3.52,3.52,0,0,0,3.53,20h9.63a3.53,3.53,0,0,0,2.54-.93,3.34,3.34,0,0,0,1-2.51c0-.4,0-.8,0-1.18Zm-1.76,2.84a2.37,2.37,0,0,1-1.73.61H3.53a2.4,2.4,0,0,1-1.74-.61,2.18,2.18,0,0,1-.62-1.66c0-.37,0-.74,0-1.1a8.52,8.52,0,0,1,.15-1.14,8.36,8.36,0,0,1,.27-1.12,5.09,5.09,0,0,1,.42-1,3.54,3.54,0,0,1,.58-.76A2.39,2.39,0,0,1,3.39,11a2.64,2.64,0,0,1,.92-.18l.23.14.83.54a5.64,5.64,0,0,0,1.32.59,5.37,5.37,0,0,0,3.3,0,5.74,5.74,0,0,0,1.33-.59l.82-.54.24-.14a2.74,2.74,0,0,1,.92.18,2.34,2.34,0,0,1,.75.47,3.24,3.24,0,0,1,.58.76,5.13,5.13,0,0,1,.43,1,8.36,8.36,0,0,1,.27,1.12q.11.62.15,1.14h0c0,.35,0,.72,0,1.1a2.14,2.14,0,0,1-.62,1.66Z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t\tDatos personales\n\t\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: {
+                            id: "my-address-tab",
+                            "data-toggle": "tab",
+                            href: "#my-address",
+                            role: "tab",
+                            "aria-controls": "my-address",
+                            "aria-selected": "false"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 19.16 19.2"
+                              }
+                            },
+                            [
+                              _c("title", [
+                                _vm._v("mis-direcciones-bio-mercados")
+                              ]),
+                              _c(
+                                "g",
+                                {
+                                  attrs: { id: "Capa_2", "data-name": "Capa 2" }
+                                },
+                                [
+                                  _c(
+                                    "g",
+                                    {
+                                      attrs: {
+                                        id: "Perfil_de_Usuario",
+                                        "data-name": "Perfil de Usuario"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M7.59,12.07a4.48,4.48,0,1,1,4.48-4.48.38.38,0,1,1-.76,0,3.72,3.72,0,1,0-3.72,3.72.38.38,0,0,1,0,.76Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M7.36,19.16A.36.36,0,0,1,7,19a28.25,28.25,0,0,0-3-3.71,23,23,0,0,1-2.78-3.44A7.92,7.92,0,0,1,0,7.58,7.6,7.6,0,0,1,7.59,0a7.58,7.58,0,0,1,7.59,7.58.35.35,0,0,1-.11.27.36.36,0,0,1-.26.11.4.4,0,0,1-.39-.38,6.83,6.83,0,0,0-13.66,0c0,3,1.78,4.93,3.84,7.18a27.35,27.35,0,0,1,3.08,3.82.38.38,0,0,1-.12.52A.36.36,0,0,1,7.36,19.16Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M11.58,19.2a1.8,1.8,0,0,1-1.79-1.8V14l-.67.61a.46.46,0,0,1-.32.16.37.37,0,0,1-.28-.13.38.38,0,0,1-.1-.27.42.42,0,0,1,.12-.26l4-3.68a1.8,1.8,0,0,1,1.22-.48,1.79,1.79,0,0,1,1.22.48l4,3.68a.37.37,0,0,1,.12.26.34.34,0,0,1-.1.27.37.37,0,0,1-.28.13.44.44,0,0,1-.26-.1l-.76-.7V17.4A1.81,1.81,0,0,1,16,19.2Zm2.21-8.54a1.06,1.06,0,0,0-.71.28l-2.53,2.32V17.4a1,1,0,0,0,1,1H16a1,1,0,0,0,1-1V13.22l-2.5-2.28A1,1,0,0,0,13.79,10.66Z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t\tMis direcciones\n\t\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: {
+                            id: "my-orders-tab",
+                            "data-toggle": "tab",
+                            href: "#my-orders",
+                            role: "tab",
+                            "aria-controls": "my-orders",
+                            "aria-selected": "false"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 21.43 19.97"
+                              }
+                            },
+                            [
+                              _c("title", [_vm._v("mis-pedidos-bio-mercados")]),
+                              _c(
+                                "g",
+                                {
+                                  attrs: { id: "Capa_2", "data-name": "Capa 2" }
+                                },
+                                [
+                                  _c(
+                                    "g",
+                                    {
+                                      attrs: {
+                                        id: "Perfil_de_Usuario",
+                                        "data-name": "Perfil de Usuario"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t\tMis pedidos\n\t\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "nav-link",
+                          attrs: {
+                            id: "my-favorite",
+                            "data-toggle": "tab",
+                            href: "#my-favorites",
+                            role: "tab",
+                            "aria-controls": "my-favorites",
+                            "aria-selected": "false"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 24.89 25"
+                              }
+                            },
+                            [
+                              _c("defs"),
+                              _c("title", [_vm._v("favoritos-bio")]),
+                              _c(
+                                "g",
+                                {
+                                  attrs: { id: "Capa_2", "data-name": "Capa 2" }
+                                },
+                                [
+                                  _c(
+                                    "g",
+                                    {
+                                      attrs: {
+                                        id: "Guias_y_recursos",
+                                        "data-name": "Guias y recursos"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M7.84,12.6a.7.7,0,0,1-.7-.7V5.84h17a.71.71,0,1,1,0,1.41H8.54V11.9A.7.7,0,0,1,7.84,12.6Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-2",
+                                        attrs: {
+                                          d:
+                                            "M12.81,12.4a3.9,3.9,0,0,1,1.75,1.12,4.14,4.14,0,0,1,1,3.66c-.37,2.26-2.21,4.51-5.13,6.41H24.24V12.4Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M24.89,25H12a.71.71,0,0,1,0-1.41H23.48V8.48a.71.71,0,0,1,1.41,0Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M19.22,9.93a.7.7,0,0,1-.7-.71V3.33a1.63,1.63,0,0,0-.72-1.4A3.12,3.12,0,0,0,16,1.41c-1.05,0-2.62.51-2.62,1.92V9.22a.71.71,0,1,1-1.41,0V3.33C12,1.14,14,0,16,0s3.94,1,3.94,3.33V9.22A.71.71,0,0,1,19.22,9.93Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M14.56,13.52a3.74,3.74,0,0,0-2.72-1.29,6,6,0,0,0-4,1.76,6,6,0,0,0-4-1.76,3.74,3.74,0,0,0-2.72,1.29,4.14,4.14,0,0,0-1,3.66C.53,20,3.25,22.82,7.53,24.93a.72.72,0,0,0,.62,0c4.28-2.11,7-4.94,7.46-7.75A4.14,4.14,0,0,0,14.56,13.52ZM14.22,17C14,18,13.06,20.84,7.84,23.51,2.62,20.84,1.64,18,1.46,17a2.7,2.7,0,0,1,.66-2.44l0,0a2.37,2.37,0,0,1,1.72-.84h.06a5.21,5.21,0,0,1,3.41,1.82.74.74,0,0,0,1,0,5.13,5.13,0,0,1,3.47-1.82,2.37,2.37,0,0,1,1.72.84l0,0A2.7,2.7,0,0,1,14.22,17Z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\n\t\t\t\t\t\t\t\t\t"
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-9 profile-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "tab-content", attrs: { id: "TabContent" } },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane fade",
+                        attrs: {
+                          id: "my-orders",
+                          role: "tabpanel",
+                          "aria-labelledby": "my-orders-tab"
+                        }
+                      },
+                      [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-content",
+                            attrs: { id: "orders-content" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade show active",
+                                attrs: {
+                                  id: "all-orders",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "all-orders-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "order-table" }, [
+                                  _vm._m(4),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(5),
+                                    _vm._v(" "),
+                                    _vm._m(6),
+                                    _vm._v(" "),
+                                    _vm._m(7),
+                                    _vm._v(" "),
+                                    _vm._m(8),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status in-process",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido se está procesando para ser enviado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 20.12 19.97"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-proceso-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(9),
+                                    _vm._v(" "),
+                                    _vm._m(10),
+                                    _vm._v(" "),
+                                    _vm._m(11),
+                                    _vm._v(" "),
+                                    _vm._m(12),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status en-route",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido ya esta en camino hacia el destino"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 26.09 20"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-camino-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "8.26",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "20.43",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            y: "15.22",
+                                                            width: "2.17",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "0.87",
+                                                            y: "13.48",
+                                                            width: "1.3",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "1.3",
+                                                            y: "11.74",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "16.52",
+                                                            y: "13.48",
+                                                            width: "1.74",
+                                                            height: "0.87"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(13),
+                                    _vm._v(" "),
+                                    _vm._m(14),
+                                    _vm._v(" "),
+                                    _vm._m(15),
+                                    _vm._v(" "),
+                                    _vm._m(16),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status complete",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "El pedido ya ha sido entregado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 24.75 19.44"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "confirmar-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade",
+                                attrs: {
+                                  id: "order-in-process",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "order-in-process-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "order-table" }, [
+                                  _vm._m(17),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(18),
+                                    _vm._v(" "),
+                                    _vm._m(19),
+                                    _vm._v(" "),
+                                    _vm._m(20),
+                                    _vm._v(" "),
+                                    _vm._m(21),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status in-process",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido se está procesando para ser enviado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 20.12 19.97"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-proceso-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(22),
+                                    _vm._v(" "),
+                                    _vm._m(23),
+                                    _vm._v(" "),
+                                    _vm._m(24),
+                                    _vm._v(" "),
+                                    _vm._m(25),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status en-route",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido ya esta en camino hacia el destino"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 26.09 20"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-camino-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "8.26",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "20.43",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            y: "15.22",
+                                                            width: "2.17",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "0.87",
+                                                            y: "13.48",
+                                                            width: "1.3",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "1.3",
+                                                            y: "11.74",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "16.52",
+                                                            y: "13.48",
+                                                            width: "1.74",
+                                                            height: "0.87"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade",
+                                attrs: {
+                                  id: "complete-orders",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "complete-orders-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "order-table" }, [
+                                  _vm._m(26),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(27),
+                                    _vm._v(" "),
+                                    _vm._m(28),
+                                    _vm._v(" "),
+                                    _vm._m(29),
+                                    _vm._v(" "),
+                                    _vm._m(30),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status complete",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "El pedido ya ha sido entregado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 24.75 19.44"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "confirmar-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane",
+                        attrs: {
+                          id: "my-favorites",
+                          role: "tabpanel",
+                          "aria-labelledby": "my-favorites"
+                        }
+                      },
+                      [
+                        _vm._m(31),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-content",
+                            attrs: { id: "orders-content" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade show active",
+                                attrs: {
+                                  id: "all-orders",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "all-orders-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "product-list" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "container-fluid" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "row" },
+                                        _vm._l(_vm.favorites, function(
+                                          favorite
+                                        ) {
+                                          return _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-12" },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "product-block"
+                                                },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "product-img"
+                                                    },
+                                                    [
+                                                      _c("img", {
+                                                        attrs: {
+                                                          src:
+                                                            "storage/products/February2020/rxC19yA0bg8xoKiKqyRk.jpg"
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "product-actions"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "button",
+                                                            {
+                                                              staticClass:
+                                                                "btn",
+                                                              attrs: {
+                                                                type: "button",
+                                                                "data-toggle":
+                                                                  "modal",
+                                                                "data-target":
+                                                                  "#ModalProd"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "svg",
+                                                                {
+                                                                  attrs: {
+                                                                    xmlns:
+                                                                      "http://www.w3.org/2000/svg",
+                                                                    viewBox:
+                                                                      "0 0 14.31 15"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c("title", [
+                                                                    _vm._v(
+                                                                      "añadir-carrito-bio"
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "g",
+                                                                    {
+                                                                      attrs: {
+                                                                        id:
+                                                                          "Capa_2",
+                                                                        "data-name":
+                                                                          "Capa 2"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Guias_y_recursos",
+                                                                            "data-name":
+                                                                              "Guias y recursos"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                                              }
+                                                                            }
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "button",
+                                                            {
+                                                              staticClass:
+                                                                "btn",
+                                                              attrs: {
+                                                                type: "button"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "svg",
+                                                                {
+                                                                  attrs: {
+                                                                    xmlns:
+                                                                      "http://www.w3.org/2000/svg",
+                                                                    viewBox:
+                                                                      "0 0 14.93 15"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c("title", [
+                                                                    _vm._v(
+                                                                      "añadir-favorito-bio"
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "g",
+                                                                    {
+                                                                      attrs: {
+                                                                        id:
+                                                                          "Capa_2",
+                                                                        "data-name":
+                                                                          "Capa 2"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Guias_y_recursos",
+                                                                            "data-name":
+                                                                              "Guias y recursos"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                                              }
+                                                                            }
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                                              }
+                                                                            }
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                                              }
+                                                                            }
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "button",
+                                                            {
+                                                              staticClass:
+                                                                "btn",
+                                                              attrs: {
+                                                                type: "button",
+                                                                "data-toggle":
+                                                                  "modal",
+                                                                "data-target":
+                                                                  "#ModalProd"
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "svg",
+                                                                {
+                                                                  attrs: {
+                                                                    xmlns:
+                                                                      "http://www.w3.org/2000/svg",
+                                                                    viewBox:
+                                                                      "0 0 15.03 15"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c("title", [
+                                                                    _vm._v(
+                                                                      "visualizar-producto-bio"
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "g",
+                                                                    {
+                                                                      attrs: {
+                                                                        id:
+                                                                          "Capa_2",
+                                                                        "data-name":
+                                                                          "Capa 2"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Guias_y_recursos",
+                                                                            "data-name":
+                                                                              "Guias y recursos"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                                              }
+                                                                            }
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "path",
+                                                                            {
+                                                                              staticClass:
+                                                                                "cls-1",
+                                                                              attrs: {
+                                                                                d:
+                                                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                                              }
+                                                                            }
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _vm._m(32, true),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "product-add"
+                                                    },
+                                                    [
+                                                      _vm._m(33, true),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "form",
+                                                        {
+                                                          attrs: { action: "" }
+                                                        },
+                                                        [
+                                                          _vm._m(34, true),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "product-buttons"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "button",
+                                                                {
+                                                                  staticClass:
+                                                                    "btn btn-addcart-outline",
+                                                                  attrs: {
+                                                                    type:
+                                                                      "button"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "svg",
+                                                                    {
+                                                                      attrs: {
+                                                                        xmlns:
+                                                                          "http://www.w3.org/2000/svg",
+                                                                        viewBox:
+                                                                          "0 0 14.31 15"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "title",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "añadir-carrito-bio"
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Capa_2",
+                                                                            "data-name":
+                                                                              "Capa 2"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Guias_y_recursos",
+                                                                                "data-name":
+                                                                                  "Guias y recursos"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                                                  }
+                                                                                }
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "button",
+                                                                {
+                                                                  staticClass:
+                                                                    "btn btn-addfavorite",
+                                                                  attrs: {
+                                                                    type:
+                                                                      "button"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "svg",
+                                                                    {
+                                                                      attrs: {
+                                                                        xmlns:
+                                                                          "http://www.w3.org/2000/svg",
+                                                                        viewBox:
+                                                                          "0 0 14.93 15"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "title",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "añadir-favorito-bio"
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Capa_2",
+                                                                            "data-name":
+                                                                              "Capa 2"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Guias_y_recursos",
+                                                                                "data-name":
+                                                                                  "Guias y recursos"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                                                  }
+                                                                                }
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "button",
+                                                                {
+                                                                  staticClass:
+                                                                    "btn btn-view",
+                                                                  attrs: {
+                                                                    type:
+                                                                      "button"
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "svg",
+                                                                    {
+                                                                      attrs: {
+                                                                        xmlns:
+                                                                          "http://www.w3.org/2000/svg",
+                                                                        viewBox:
+                                                                          "0 0 15.03 15"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "title",
+                                                                        [
+                                                                          _vm._v(
+                                                                            "visualizar-producto-bio"
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "g",
+                                                                        {
+                                                                          attrs: {
+                                                                            id:
+                                                                              "Capa_2",
+                                                                            "data-name":
+                                                                              "Capa 2"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Guias_y_recursos",
+                                                                                "data-name":
+                                                                                  "Guias y recursos"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                                                  }
+                                                                                }
+                                                                              ),
+                                                                              _vm._v(
+                                                                                " "
+                                                                              ),
+                                                                              _c(
+                                                                                "path",
+                                                                                {
+                                                                                  staticClass:
+                                                                                    "cls-1",
+                                                                                  attrs: {
+                                                                                    d:
+                                                                                      "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                                                  }
+                                                                                }
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade",
+                                attrs: {
+                                  id: "order-in-process",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "order-in-process-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "order-table" }, [
+                                  _vm._m(35),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(36),
+                                    _vm._v(" "),
+                                    _vm._m(37),
+                                    _vm._v(" "),
+                                    _vm._m(38),
+                                    _vm._v(" "),
+                                    _vm._m(39),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status in-process",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido se está procesando para ser enviado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 20.12 19.97"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-proceso-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(40),
+                                    _vm._v(" "),
+                                    _vm._m(41),
+                                    _vm._v(" "),
+                                    _vm._m(42),
+                                    _vm._v(" "),
+                                    _vm._m(43),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status en-route",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "Su pedido ya esta en camino hacia el destino"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 26.09 20"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "en-camino-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "8.26",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "20.43",
+                                                            y: "16.52",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            y: "15.22",
+                                                            width: "2.17",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "0.87",
+                                                            y: "13.48",
+                                                            width: "1.3",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "1.3",
+                                                            y: "11.74",
+                                                            width: "0.87",
+                                                            height: "0.87"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"
+                                                          }
+                                                        }),
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"
+                                                          }
+                                                        }),
+                                                        _c("rect", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            x: "16.52",
+                                                            y: "13.48",
+                                                            width: "1.74",
+                                                            height: "0.87"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tab-pane fade",
+                                attrs: {
+                                  id: "complete-orders",
+                                  role: "tabpanel",
+                                  "aria-labelledby": "complete-orders-tab"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "order-table" }, [
+                                  _vm._m(44),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _vm._m(45),
+                                    _vm._v(" "),
+                                    _vm._m(46),
+                                    _vm._v(" "),
+                                    _vm._m(47),
+                                    _vm._v(" "),
+                                    _vm._m(48),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-6 col-lg-20" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "order-span" },
+                                          [_vm._v("Estado")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "process-status complete",
+                                            attrs: {
+                                              "data-toggle": "tooltip",
+                                              "data-placement": "bottom",
+                                              title:
+                                                "El pedido ya ha sido entregado"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "svg",
+                                              {
+                                                attrs: {
+                                                  xmlns:
+                                                    "http://www.w3.org/2000/svg",
+                                                  viewBox: "0 0 24.75 19.44"
+                                                }
+                                              },
+                                              [
+                                                _c("defs"),
+                                                _c("title", [
+                                                  _vm._v(
+                                                    "confirmar-bio-mercados"
+                                                  )
+                                                ]),
+                                                _c(
+                                                  "g",
+                                                  {
+                                                    attrs: {
+                                                      id: "Capa_2",
+                                                      "data-name": "Capa 2"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "g",
+                                                      {
+                                                        attrs: {
+                                                          id:
+                                                            "Perfil_de_Usuario",
+                                                          "data-name":
+                                                            "Perfil de Usuario"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("path", {
+                                                          staticClass: "cls-1",
+                                                          attrs: {
+                                                            d:
+                                                              "M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"
+                                                          }
+                                                        })
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "profile-header" }, [
+        _c("div", { staticClass: "profile-img" }, [
+          _c("img", {
+            attrs: {
+              src: "assets/img/profile-default.png",
+              alt: "Pablo Mendoza"
+            }
+          }),
+          _vm._v(" "),
+          _c("form", { attrs: { action: "" } }, [
+            _c("div", { staticClass: "change-profile-img" }, [
+              _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
+                _c("img", {
+                  attrs: { src: "assets/img/subir-archivo-bio-mercados.svg" }
+                })
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "profile-info" }, [
+          _c("h2", { staticClass: "profile-title" }, [_vm._v("Pablo Mendoza")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "bio-points" }, [
+            _vm._v("Mis Puntos bio"),
+            _c("span", { staticClass: "quantity-span" }, [
+              _vm._v("253"),
+              _c("img", {
+                attrs: {
+                  src: "assets/img/icono-puntos-bio.svg",
+                  alt: "Bio Points"
+                }
+              })
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade show active",
+        attrs: {
+          id: "personal-info",
+          role: "tabpanel",
+          "aria-labelledby": "personal-info-tab"
+        }
+      },
+      [
+        _c(
+          "ul",
+          { staticClass: "nav nav-tabs", attrs: { id: "", role: "tablist" } },
+          [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active",
+                  attrs: {
+                    id: "edit-profile-tab",
+                    "data-toggle": "tab",
+                    href: "#edit-profile",
+                    role: "tab",
+                    "aria-controls": "edit-profile",
+                    "aria-selected": "true"
+                  }
+                },
+                [_vm._v("Editar perfil")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: {
+                    id: "security-tab",
+                    "data-toggle": "tab",
+                    href: "#security",
+                    role: "tab",
+                    "aria-controls": "security",
+                    "aria-selected": "false"
+                  }
+                },
+                [_vm._v("Seguridad")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "tab-content",
+            attrs: { id: "personal-info-content" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show active",
+                attrs: {
+                  id: "edit-profile",
+                  role: "tabpanel",
+                  "aria-labelledby": "edit-profile-tab"
+                }
+              },
+              [
+                _c("form", { attrs: { action: "" } }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-name" } }, [
+                            _vm._v("Nombre (s):")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "user-name",
+                              name: "user-name",
+                              disabled: "disabled",
+                              value: "Pablo"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-lastname" } }, [
+                            _vm._v("Apellido (s):")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "user-lastname",
+                              name: "user-lastname",
+                              disabled: "disabled",
+                              value: "Mendoza"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-email" } }, [
+                            _vm._v("Correo Electrónico:")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "email",
+                              id: "user-email",
+                              name: "user-email",
+                              disabled: "disabled",
+                              value: "micorreo@gmail.com"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-birthday" } }, [
+                            _vm._v("Cumpleaños:")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "user-birthday",
+                              name: "user-birthday",
+                              disabled: "disabled",
+                              value: "DD/MM/YYYY"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-gender" } }, [
+                            _vm._v("Sexo:")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control dropdown-toggle",
+                            attrs: {
+                              type: "text",
+                              "data-toggle": "dropdown",
+                              "aria-expanded": "false",
+                              id: "user-gender",
+                              name: "user-gender",
+                              disabled: "disabled",
+                              value: "Masculino"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "dropdown-menu dropdown-menu-gender"
+                            },
+                            [
+                              _c("div", { staticClass: "dropdown-item" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-check form-check-radio"
+                                  },
+                                  [
+                                    _c("input", {
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "radio",
+                                        id: "man",
+                                        name: "radio-gender",
+                                        value: "Masculino"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "custom-check",
+                                        attrs: { for: "man" }
+                                      },
+                                      [_c("span"), _vm._v("Masculino")]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "dropdown-item" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-check form-check-radio"
+                                  },
+                                  [
+                                    _c("input", {
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "radio",
+                                        id: "women",
+                                        value: "Femenino",
+                                        name: "radio-gender"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "custom-check",
+                                        attrs: { for: "women" }
+                                      },
+                                      [_c("span"), _vm._v("Femenino")]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "user-contact-phone" } },
+                            [_vm._v("Teléfono de Contacto:")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "user-contact-phone",
+                              name: "user-contact-phone",
+                              disabled: "disabled",
+                              value: "04XX XXX XXXX"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-6" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "user-office-phone" } }, [
+                            _vm._v("Teléfono de Oficina:")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-edit-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/editar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-confirm-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/confirmar-bio-mercados.svg"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "user-office-phone",
+                              name: "user-office-phone",
+                              disabled: "disabled",
+                              value: "02XX XXX XXXX"
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-12" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-submit",
+                              attrs: { type: "submit" }
+                            },
+                            [_vm._v("GUARDAR CAMBIOS")]
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade",
+                attrs: {
+                  id: "security",
+                  role: "tabpanel",
+                  "aria-labelledby": "security-tab"
+                }
+              },
+              [
+                _c("form", { attrs: { action: "" } }, [
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "currently-password" } }, [
+                        _vm._v("Confirma tu contraseña actual:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "currently-password",
+                          name: "currently-password",
+                          value: ""
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "new-password" } }, [
+                        _vm._v("Escribe la nueva contraseña:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "new-password",
+                          name: "new-password",
+                          value: ""
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "new-password-confirm" } }, [
+                        _vm._v("Repite la nueva contraseña:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "new-password-confirm",
+                          name: "new-password-confirm",
+                          value: ""
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-5" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-submit",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("GUARDAR CAMBIOS")]
+                      )
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade",
+        attrs: {
+          id: "my-address",
+          role: "tabpanel",
+          "aria-labelledby": "my-address-tab"
+        }
+      },
+      [
+        _c(
+          "ul",
+          { staticClass: "nav nav-tabs", attrs: { id: "", role: "tablist" } },
+          [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link active",
+                  attrs: {
+                    id: "address-tab",
+                    "data-toggle": "tab",
+                    href: "#address",
+                    role: "tab",
+                    "aria-controls": "address",
+                    "aria-selected": "true"
+                  }
+                },
+                [_vm._v("Mis direcciones de Envio")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tab-content", attrs: { id: "address-content" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show active",
+                attrs: {
+                  id: "address",
+                  role: "tabpanel",
+                  "aria-labelledby": "address-tab"
+                }
+              },
+              [
+                _c("form", { attrs: { action: "" } }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "address-section",
+                        attrs: { id: "address-1" }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-name" } }, [
+                                _vm._v(
+                                  "Dirección Corta (ejm: Mi Casa, Mi Oficina):"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-name",
+                                  name: "address-name",
+                                  disabled: "disabled",
+                                  value: "Mi casa"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-urb" } }, [
+                                _vm._v("Urbanización / Barrio / Empresa:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-urb",
+                                  name: "address-urb",
+                                  disabled: "disabled",
+                                  value: "Urb Zaragoza"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-av" } }, [
+                                _vm._v("Sector, Avenida, calles, veredas:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-av",
+                                  name: "address-av",
+                                  disabled: "disabled",
+                                  value: "Avenida 1, entre calles 10 y 11"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-num" } }, [
+                                _vm._v("Número de casa/local:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-num",
+                                  name: "address-num",
+                                  disabled: "disabled",
+                                  value: "Casa 57"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-prov" } }, [
+                                _vm._v("Municipio/Provincia:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-prov",
+                                  name: "address-prov",
+                                  disabled: "disabled",
+                                  value: "Araure"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                { attrs: { for: "address-1-state" } },
+                                [_vm._v("Estado:")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control dropdown-toggle",
+                                attrs: {
+                                  type: "text",
+                                  "data-toggle": "dropdown",
+                                  "aria-expanded": "false",
+                                  id: "address-1-state",
+                                  name: "address-1-state",
+                                  disabled: "disabled",
+                                  value: "Portuguesa"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "dropdown-menu dropdown-menu-state"
+                                },
+                                [
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "amazonas-address-1",
+                                            name: "radio-address-1",
+                                            value: "Amazonas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "amazonas-address-1" }
+                                          },
+                                          [_vm._v("Amazonas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "anzoategui-address-1",
+                                            name: "radio-address-1",
+                                            value: "Anzoátegui"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "anzoategui-address-1"
+                                            }
+                                          },
+                                          [_vm._v("Anzoátegui")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "apure-address-1",
+                                            name: "radio-address-1",
+                                            value: "Apure"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "apure-address-1" }
+                                          },
+                                          [_vm._v("Apure")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "aragua-address-1",
+                                            name: "radio-address-1",
+                                            value: "Aragua"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "aragua-address-1" }
+                                          },
+                                          [_vm._v("Aragua")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "barinas-address-1",
+                                            name: "radio-address-1",
+                                            value: "Barinas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "barinas-address-1" }
+                                          },
+                                          [_vm._v("Barinas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "bolivar-address-1",
+                                            name: "radio-address-1",
+                                            value: "Bolívar"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "bolivar-address-1" }
+                                          },
+                                          [_vm._v("Bolívar")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "carabobo-address-1",
+                                            name: "radio-address-1",
+                                            value: "Carabobo"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "carabobo-address-1" }
+                                          },
+                                          [_vm._v("Carabobo")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "cojedes-address-1",
+                                            name: "radio-address-1",
+                                            value: "Cojedes"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "cojedes-address-1" }
+                                          },
+                                          [_vm._v("Cojedes")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "delta-amacuro-address-1",
+                                            name: "radio-address-1",
+                                            value: "Delta Amacuro"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "delta-amacuro-address-1"
+                                            }
+                                          },
+                                          [_vm._v("Delta Amacuro")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "falcon-address-1",
+                                            name: "radio-address-1",
+                                            value: "Falcón"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "falcon-address-1" }
+                                          },
+                                          [_vm._v("Falcón")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "distrito-capital-address-1",
+                                            name: "radio-address-1",
+                                            value: "Distrito Capital"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "distrito-capital-address-1"
+                                            }
+                                          },
+                                          [_vm._v("Distrito Capital")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "guarico-address-1",
+                                            name: "radio-address-1",
+                                            value: "Guárico"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "guarico-address-1" }
+                                          },
+                                          [_vm._v("Guárico")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "lara-address-1",
+                                            name: "radio-address-1",
+                                            value: "Lara"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "lara-address-1" }
+                                          },
+                                          [_vm._v("Lara")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "merida-address-1",
+                                            name: "radio-address-1",
+                                            value: "Mérida"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "merida-address-1" }
+                                          },
+                                          [_vm._v("Mérida")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "miranda-address-1",
+                                            name: "radio-address-1",
+                                            value: "Miranda"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "miranda-address-1" }
+                                          },
+                                          [_vm._v("Miranda")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "monagas-address-1",
+                                            name: "radio-address-1",
+                                            value: "Monagas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "monagas-address-1" }
+                                          },
+                                          [_vm._v("Monagas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "nueva-esparta-address-1",
+                                            name: "radio-address-1",
+                                            value: "Nueva Esparta"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "nueva-esparta-address-1"
+                                            }
+                                          },
+                                          [_vm._v("Nueva Esparta")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "portuguesa-address-1",
+                                            name: "radio-address-1",
+                                            value: "Portuguesa"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "portuguesa-address-1"
+                                            }
+                                          },
+                                          [_vm._v("Portuguesa")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "tachira-address-1",
+                                            name: "radio-address-1",
+                                            value: "Táchira"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "tachira-address-1" }
+                                          },
+                                          [_vm._v("Táchira")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "trujillo-address-1",
+                                            name: "radio-address-1",
+                                            value: "Trujillo"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "trujillo-address-1" }
+                                          },
+                                          [_vm._v("Trujillo")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "vargas-address-1",
+                                            name: "radio-address-1",
+                                            value: "Vargas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "vargas-address-1" }
+                                          },
+                                          [_vm._v("Vargas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "yaracuy-address-1",
+                                            name: "radio-address-1",
+                                            value: "Yaracuy"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "yaracuy-address-1" }
+                                          },
+                                          [_vm._v("Yaracuy")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "zulia-address-1",
+                                            name: "radio-address-1",
+                                            value: "Zulia"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "zulia-address-1" }
+                                          },
+                                          [_vm._v("Zulia")]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-post" } }, [
+                                _vm._v("Código postal:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-post",
+                                  name: "address-post",
+                                  disabled: "disabled",
+                                  value: "3303"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-ref" } }, [
+                                _vm._v("Punto de Referencia (opcional):")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-ref",
+                                  name: "address-ref",
+                                  disabled: "disabled",
+                                  value: "A lado de bodegon Girasol"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-submit",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("GUARDAR CAMBIOS")]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-delete-section",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _vm._v("Eliminar Dirección "),
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/eliminar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "address-section",
+                        attrs: { id: "address-2" }
+                      },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-name" } }, [
+                                _vm._v(
+                                  "Dirección Corta (ejm: Mi Casa, Mi Oficina):"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-name",
+                                  name: "address-name",
+                                  disabled: "disabled",
+                                  value: "Mi oficina"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-urb" } }, [
+                                _vm._v("Urbanización / Barrio / Empresa:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-urb",
+                                  name: "address-urb",
+                                  disabled: "disabled",
+                                  value: "Inversiones JM C.A"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-av" } }, [
+                                _vm._v("Sector, Avenida, calles, veredas:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-av",
+                                  name: "address-av",
+                                  disabled: "disabled",
+                                  value:
+                                    "Sector Centro, Av 34 entre calles 8 y 9"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-num" } }, [
+                                _vm._v("Número de casa/local:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-num",
+                                  name: "address-num",
+                                  disabled: "disabled",
+                                  value: "Local H-21"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-prov" } }, [
+                                _vm._v("Municipio/Provincia:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-prov",
+                                  name: "address-prov",
+                                  disabled: "disabled",
+                                  value: "Acarigua"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                { attrs: { for: "address-2-state" } },
+                                [_vm._v("Estado:")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control dropdown-toggle",
+                                attrs: {
+                                  type: "text",
+                                  "data-toggle": "dropdown",
+                                  "aria-expanded": "false",
+                                  id: "address-2-state",
+                                  name: "address-2-state",
+                                  disabled: "disabled",
+                                  value: "Portuguesa"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "dropdown-menu dropdown-menu-state"
+                                },
+                                [
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "amazonas-address-2",
+                                            name: "radio-address-2",
+                                            value: "Amazonas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "amazonas-address-2" }
+                                          },
+                                          [_vm._v("Amazonas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "anzoategui-address-2",
+                                            name: "radio-address-2",
+                                            value: "Anzoátegui"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "anzoategui-address-2"
+                                            }
+                                          },
+                                          [_vm._v("Anzoátegui")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "apure-address-2",
+                                            name: "radio-address-2",
+                                            value: "Apure"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "apure-address-2" }
+                                          },
+                                          [_vm._v("Apure")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "aragua-address-2",
+                                            name: "radio-address-2",
+                                            value: "Aragua"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "aragua-address-2" }
+                                          },
+                                          [_vm._v("Aragua")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "barinas-address-2",
+                                            name: "radio-address-2",
+                                            value: "Barinas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "barinas-address-2" }
+                                          },
+                                          [_vm._v("Barinas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "bolivar-address-2",
+                                            name: "radio-address-2",
+                                            value: "Bolívar"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "bolivar-address-2" }
+                                          },
+                                          [_vm._v("Bolívar")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "carabobo-address-2",
+                                            name: "radio-address-2",
+                                            value: "Carabobo"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "carabobo-address-2" }
+                                          },
+                                          [_vm._v("Carabobo")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "cojedes-address-2",
+                                            name: "radio-address-2",
+                                            value: "Cojedes"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "cojedes-address-2" }
+                                          },
+                                          [_vm._v("Cojedes")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "delta-amacuro-address-2",
+                                            name: "radio-address-2",
+                                            value: "Delta Amacuro"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "delta-amacuro-address-2"
+                                            }
+                                          },
+                                          [_vm._v("Delta Amacuro")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "falcon-address-2",
+                                            name: "radio-address-2",
+                                            value: "Falcón"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "falcon-address-2" }
+                                          },
+                                          [_vm._v("Falcón")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "distrito-capital-address-2",
+                                            name: "radio-address-2",
+                                            value: "Distrito Capital"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "distrito-capital-address-2"
+                                            }
+                                          },
+                                          [_vm._v("Distrito Capital")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "guarico-address-2",
+                                            name: "radio-address-2",
+                                            value: "Guárico"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "guarico-address-2" }
+                                          },
+                                          [_vm._v("Guárico")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "lara-address-2",
+                                            name: "radio-address-2",
+                                            value: "Lara"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "lara-address-2" }
+                                          },
+                                          [_vm._v("Lara")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "merida-address-2",
+                                            name: "radio-address-2",
+                                            value: "Mérida"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "merida-address-2" }
+                                          },
+                                          [_vm._v("Mérida")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "miranda-address-2",
+                                            name: "radio-address-2",
+                                            value: "Miranda"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "miranda-address-2" }
+                                          },
+                                          [_vm._v("Miranda")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "monagas-address-2",
+                                            name: "radio-address-2",
+                                            value: "Monagas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "monagas-address-2" }
+                                          },
+                                          [_vm._v("Monagas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "nueva-esparta-address-2",
+                                            name: "radio-address-2",
+                                            value: "Nueva Esparta"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "nueva-esparta-address-2"
+                                            }
+                                          },
+                                          [_vm._v("Nueva Esparta")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "portuguesa-address-2",
+                                            name: "radio-address-2",
+                                            value: "Portuguesa"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: {
+                                              for: "portuguesa-address-2"
+                                            }
+                                          },
+                                          [_vm._v("Portuguesa")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "tachira-address-2",
+                                            name: "radio-address-2",
+                                            value: "Táchira"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "tachira-address-2" }
+                                          },
+                                          [_vm._v("Táchira")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "trujillo-address-2",
+                                            name: "radio-address-2",
+                                            value: "Trujillo"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "trujillo-address-2" }
+                                          },
+                                          [_vm._v("Trujillo")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "vargas-address-2",
+                                            name: "radio-address-2",
+                                            value: "Vargas"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "vargas-address-2" }
+                                          },
+                                          [_vm._v("Vargas")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "yaracuy-address-2",
+                                            name: "radio-address-2",
+                                            value: "Yaracuy"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "yaracuy-address-2" }
+                                          },
+                                          [_vm._v("Yaracuy")]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "dropdown-item" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "form-check form-check-radio"
+                                      },
+                                      [
+                                        _c("input", {
+                                          staticClass: "form-check-input",
+                                          attrs: {
+                                            type: "radio",
+                                            id: "zulia-address-2",
+                                            name: "radio-address-2",
+                                            value: "Zulia"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "custom-check",
+                                            attrs: { for: "zulia-address-2" }
+                                          },
+                                          [_vm._v("Zulia")]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-post" } }, [
+                                _vm._v("Código postal:")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-post",
+                                  name: "address-post",
+                                  disabled: "disabled",
+                                  value: "3301"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "address-ref" } }, [
+                                _vm._v("Punto de Referencia (opcional):")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-edit-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/editar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-confirm-info",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/confirmar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "address-ref",
+                                  name: "address-ref",
+                                  disabled: "disabled",
+                                  value: "Frente a Traki"
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-submit",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("GUARDAR CAMBIOS")]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-delete-section",
+                                  attrs: { type: "button" }
+                                },
+                                [
+                                  _vm._v("Eliminar Dirección "),
+                                  _c("img", {
+                                    attrs: {
+                                      src:
+                                        "assets/img/eliminar-bio-mercados.svg"
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("button", { staticClass: "btn btn-add-section" }, [
+                      _vm._v("Agregar nueva dirección "),
+                      _c("img", {
+                        attrs: {
+                          src: "assets/img/nueva-direccion-bio-mercados.svg"
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "nav nav-tabs", attrs: { id: "", role: "tablist" } },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: {
+                id: "all-orders-tab",
+                "data-toggle": "tab",
+                href: "#all-orders",
+                role: "tab",
+                "aria-controls": "all-orders",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("Todos")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "order-in-process-tab",
+                "data-toggle": "tab",
+                href: "#order-in-process",
+                role: "tab",
+                "aria-controls": "order-in-process",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("En Proceso")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: {
+                id: "complete-orders-tab",
+                "data-toggle": "tab",
+                href: "#complete-orders",
+                role: "tab",
+                "aria-controls": "complete-orders",
+                "aria-selected": "false"
+              }
+            },
+            [_vm._v("Completados")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thead-bio" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Número de Pedido")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Dirección de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Fecha de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Estado")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("01/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("04/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("23/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("26/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("05/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("08/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thead-bio" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Número de Pedido")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Dirección de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Fecha de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Estado")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("01/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("04/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("23/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("26/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thead-bio" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Número de Pedido")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Dirección de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Fecha de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Estado")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("05/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("08/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      { staticClass: "nav nav-tabs", attrs: { id: "", role: "tablist" } },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: {
+                id: "all-orders-tab",
+                "data-toggle": "tab",
+                href: "#all-orders",
+                role: "tab",
+                "aria-controls": "all-orders",
+                "aria-selected": "true"
+              }
+            },
+            [_vm._v("Mis productos Favoritos")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-content" }, [
+      _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
+        _vm._v("Harina Pan")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [_vm._v("500 g")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-prices" }, [
+        _c("p", [_vm._v("Bs 100.000,00")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "product-info" }, [
+      _vm._v("Disponibles: "),
+      _c("b", [_vm._v("10 en Stock")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-quantity" }, [
+      _c("label", [_vm._v("Cantidad")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-quantity-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { id: "quantity2", type: "text", name: "quantity", value: "1" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "product-quantity-buttons" }, [
+          _c(
+            "span",
+            { staticClass: "max-stock", staticStyle: { display: "none" } },
+            [_vm._v("10")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn increaseValue",
+              attrs: { type: "button", onclick: "" }
+            },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/increase.png", alt: "Increase" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn decreaseValue", attrs: { type: "button" } },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/decrease.png", alt: "decrease" }
+              })
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thead-bio" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Número de Pedido")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Dirección de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Fecha de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Estado")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("01/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("04/01/2020")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("23/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("26/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "thead-bio" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Número de Pedido")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Dirección de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [
+          _vm._v("Fecha de entrega")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 col-lg-20" }, [_vm._v("Estado")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#ModalOrder"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Número de Pedido")
+          ]),
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
+      _vm._v("05/12/2019")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: {
+            type: "button",
+            "data-toggle": "tooltip",
+            "data-placement": "bottom",
+            title:
+              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+          }
+        },
+        [
+          _c("span", { staticClass: "order-span" }, [
+            _vm._v("Dirección de entrega")
+          ]),
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-lg-20" }, [
+      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
+      _vm._v("08/12/2019")
+    ])
   }
 ]
 render._withStripped = true
@@ -63056,6 +70542,7 @@ Vue.component('offers', __webpack_require__(/*! ./components/Offers.vue */ "./re
 Vue.component('combos', __webpack_require__(/*! ./components/Combos.vue */ "./resources/js/components/Combos.vue")["default"]);
 Vue.component('header-menu', __webpack_require__(/*! ./components/Header.vue */ "./resources/js/components/Header.vue")["default"]);
 Vue.component('catalog', __webpack_require__(/*! ./components/Catalog.vue */ "./resources/js/components/Catalog.vue")["default"]);
+Vue.component('profile', __webpack_require__(/*! ./components/profile.vue */ "./resources/js/components/profile.vue")["default"]);
 Vue.component('cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -63730,6 +71217,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Slider_vue_vue_type_template_id_872262e8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Slider_vue_vue_type_template_id_872262e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/profile.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/profile.vue ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile.vue?vue&type=template&id=7eab0eae& */ "./resources/js/components/profile.vue?vue&type=template&id=7eab0eae&");
+/* harmony import */ var _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile.vue?vue&type=script&lang=js& */ "./resources/js/components/profile.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/profile.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/profile.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/profile.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./profile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/profile.vue?vue&type=template&id=7eab0eae&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/profile.vue?vue&type=template&id=7eab0eae& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./profile.vue?vue&type=template&id=7eab0eae& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile.vue?vue&type=template&id=7eab0eae&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

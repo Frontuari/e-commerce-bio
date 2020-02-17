@@ -85,7 +85,7 @@
 							<!-- loggeado -->
 							
 							<li id="nav-cart"><a  href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
-							<li id="nav-fav"><a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
+							<li id="nav-fav"><a href="profile"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
 
 							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 

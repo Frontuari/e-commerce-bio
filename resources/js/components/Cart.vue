@@ -86,7 +86,7 @@
 											<div class="row">
 												<div class="col-12">
 													<div class="wizard-footer-buttons">
-														<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
+														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PEDIDO</button>
 														</div>
@@ -400,7 +400,7 @@
 											<div class="row">
 												<div class="col-12">
 													<div class="wizard-footer-buttons">
-														<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
+														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
 															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR DIRECCIÓN</button>
@@ -513,7 +513,7 @@
 											<div class="row">
 												<div class="col-12">
 													<div class="wizard-footer-buttons">
-														<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
+														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
 															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>

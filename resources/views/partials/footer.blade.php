@@ -358,11 +358,11 @@
 		    if (scroll >= 1) {
 		        //clearHeader, not clearheader - caps H
 		        height_header = $("#myHeader").height();
-		       
+
 		        $("#myHeader").addClass("fixed-top");
-		        $(".jumbotron").css({'margin-top':height_header+'px'});
-		        $("#main-slider").css({'margin-top':height_header+'px'});
-		        $("#combos-bio").css({'margin-top':height_header+'px'});
+		        $(".jumbotron").css({'margin-top':(height_header)+'px'});
+		        $("#main-slider").css({'margin-top':(height_header)+'px'});
+		        //$("#combos-bio").css({'margin-top':(height_header)+'px'});
 		        
 		    }
 

@@ -32,6 +32,7 @@ Vue.component('offers', require('./components/Offers.vue').default);
 Vue.component('combos', require('./components/Combos.vue').default);
 Vue.component('header-menu', require('./components/Header.vue').default);
 Vue.component('catalog', require('./components/Catalog.vue').default);
+Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
 
 /**
