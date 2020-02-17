@@ -2,7 +2,12 @@
 <section id="cart" class="cart">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12 mx-0">
+				<div  class="col-md-12 mx-0" v-if="cant_cart <= 0">
+					<p class="cart-empty bio-info">Tu carrito está vacío.</p>
+					<a class="button" href="catalog">Volver a la tienda</a>
+				</div>
+
+				<div class="col-md-12 mx-0" v-if="cant_cart > 0">
 					<div class="wizard">
 						<form class="wizard-form">
 							<ul class="progressbar">

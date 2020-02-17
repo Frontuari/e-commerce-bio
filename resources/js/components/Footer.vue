@@ -1,4 +1,5 @@
 <template>
+
     <section id="combos" class="hero" :style="{backgroundImage: background}">
 		<div class="container hero-container">
 			<div class="hero-content">

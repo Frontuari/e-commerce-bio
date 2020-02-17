@@ -33,6 +33,8 @@
 						<div id="filters-content" class="collapse">
 							<div class="filter filter-price">
 								<h4>Precio</h4>
+								
+								
 								<div class="range-output-price">
 									<div class="range-output range-o0"></div> <span>-</span> <div class="range-output range-o1"></div>
 								</div>

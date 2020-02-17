@@ -122,6 +122,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
 var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
 var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
@@ -144,7 +145,8 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -205,7 +207,11 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -219,7 +225,7 @@ module.exports = function xhrAdapter(config) {
       var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -242,8 +248,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
     }
 
     // Add responseType to request if needed
@@ -522,7 +528,15 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-  config.method = config.method ? config.method.toLowerCase() : 'get';
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -639,6 +653,38 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
+/***/ "./node_modules/axios/lib/core/buildFullPath.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/core/createError.js":
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
@@ -683,8 +729,6 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
 var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
 var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
-var isAbsoluteURL = __webpack_require__(/*! ./../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-var combineURLs = __webpack_require__(/*! ./../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -704,11 +748,6 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
-  // Support baseURL config
-  if (config.baseURL && !isAbsoluteURL(config.url)) {
-    config.url = combineURLs(config.baseURL, config.url);
-  }
-
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -723,7 +762,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers || {}
+    config.headers
   );
 
   utils.forEach(
@@ -846,13 +885,23 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
+  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
+    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath'
+  ];
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
+  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -864,13 +913,25 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach([
-    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
-    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
-    'socketPath'
-  ], function defaultToConfig2(prop) {
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys);
+
+  var otherKeys = Object
+    .keys(config2)
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -978,13 +1039,12 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  // Only Node.JS has a process variable that is of [[Class]] process
-  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
-  } else if (typeof XMLHttpRequest !== 'undefined') {
+  if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
     adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
   }
   return adapter;
 }
@@ -1506,7 +1566,6 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1522,6 +1581,27 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1578,16 +1658,6 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
 }
 
 /**
@@ -2560,6 +2630,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2638,6 +2713,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -3392,6 +3469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3642,8 +3720,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getCategories: function () {
-      var _getCategories = _asyncToGenerator(
+    getCategories: function getCategories() {
+      var _this = this;
+
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -3656,26 +3736,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                this.categories = response.data.data;
+                _this.categories = response.data.data;
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function getCategories() {
-        return _getCategories.apply(this, arguments);
-      }
-
-      return getCategories;
-    }(),
-    SearchProducts: function () {
-      var _SearchProducts = _asyncToGenerator(
+        }, _callee);
+      }))();
+    },
+    SearchProducts: function SearchProducts(e) {
+      return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -3688,16 +3762,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
-      }));
+      }))();
+    },
+    getFavorites: function getFavorites() {
+      var _this2 = this;
 
-      function SearchProducts(_x) {
-        return _SearchProducts.apply(this, arguments);
-      }
-
-      return SearchProducts;
-    }(),
-    getFavorites: function () {
-      var _getFavorites = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -3712,9 +3782,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.data.data.length > 0) {
-                  this.cant_favorite = response.data.data.length;
+                  _this2.cant_favorite = response.data.data.length;
                 } else {
-                  this.cant_favorite = 0;
+                  _this2.cant_favorite = 0;
                 }
 
               case 4:
@@ -3722,24 +3792,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
-      }));
-
-      function getFavorites() {
-        return _getFavorites.apply(this, arguments);
-      }
-
-      return getFavorites;
-    }()
+        }, _callee3);
+      }))();
+    }
   },
   created: function created() {
-    var _this = this;
+    var _this3 = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this.cant_cart = data;
+      _this3.cant_cart = data;
     });
     EventBus.$on('update_cantFavorite', function (data) {
-      _this.cant_favorite = data;
+      _this3.cant_favorite = data;
     });
   },
   mounted: function mounted() {
@@ -4184,8 +4248,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context5.sent;
                 this.best_price = response.data.data;
+                console.log(this.best_price);
 
-              case 4:
+              case 5:
               case "end":
                 return _context5.stop();
             }
@@ -5592,6 +5657,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var arrNum = num.split(".");
       var decimal = arrNum[1];
       return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "," + decimal;
+    },
+    MediumImage: function MediumImage(imageText) {
+      imageText = imageText.split('.');
+      var newImageText = imageText[0] + '-medium.' + imageText[1];
+      return newImageText;
     }
   },
   mounted: function mounted() {
@@ -10128,28 +10198,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 })));
 //# sourceMappingURL=bootstrap.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-module.exports = function isBuffer (obj) {
-  return obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
 
 
 /***/ }),
@@ -37891,7 +37939,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.0
+ * @version 1.16.1
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -38237,7 +38285,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -38392,8 +38440,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+  var borderTopWidth = parseFloat(styles.borderTopWidth);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -38414,8 +38462,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop, 10);
-    var marginLeft = parseFloat(styles.marginLeft, 10);
+    var marginTop = parseFloat(styles.marginTop);
+    var marginLeft = parseFloat(styles.marginLeft);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -39354,8 +39402,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -41856,715 +41904,384 @@ var render = function() {
   return _c("section", { staticClass: "cart", attrs: { id: "cart" } }, [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12 mx-0" }, [
-          _c("div", { staticClass: "wizard" }, [
-            _c("form", { staticClass: "wizard-form" }, [
-              _c("ul", { staticClass: "progressbar" }, [
-                _c(
-                  "li",
-                  {
-                    staticClass: "progressbar-item active",
-                    attrs: { id: "order-verification" }
-                  },
-                  [
+        _vm.cant_cart <= 0
+          ? _c("div", { staticClass: "col-md-12 mx-0" }, [
+              _c("p", { staticClass: "cart-empty bio-info" }, [
+                _vm._v("Tu carrito está vacío.")
+              ]),
+              _vm._v(" "),
+              _c("a", { staticClass: "button", attrs: { href: "catalog" } }, [
+                _vm._v("Volver a la tienda")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.cant_cart > 0
+          ? _c("div", { staticClass: "col-md-12 mx-0" }, [
+              _c("div", { staticClass: "wizard" }, [
+                _c("form", { staticClass: "wizard-form" }, [
+                  _c("ul", { staticClass: "progressbar" }, [
                     _c(
-                      "svg",
+                      "li",
                       {
-                        attrs: {
-                          "xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                          "xmlns:cc": "http://creativecommons.org/ns#",
-                          "xmlns:rdf":
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                          "xmlns:svg": "http://www.w3.org/2000/svg",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:sodipodi":
-                            "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
-                          "xmlns:inkscape":
-                            "http://www.inkscape.org/namespaces/inkscape",
-                          width: "100",
-                          height: "100",
-                          viewBox: "0 0 26.458333 26.458334",
-                          version: "1.1",
-                          id: "svg954",
-                          "inkscape:version": "0.92.3 (2405546, 2018-03-11)",
-                          "sodipodi:docname": "verificar-pedido-bio.svg"
-                        }
+                        staticClass: "progressbar-item active",
+                        attrs: { id: "order-verification" }
                       },
                       [
-                        _c("defs", { attrs: { id: "defs948" } }),
-                        _vm._v(" "),
-                        _c("sodipodi:namedview", {
-                          attrs: {
-                            id: "base",
-                            pagecolor: "#ffffff",
-                            bordercolor: "#666666",
-                            borderopacity: "1.0",
-                            "inkscape:pageopacity": "0.0",
-                            "inkscape:pageshadow": "2",
-                            "inkscape:zoom": "5.6",
-                            "inkscape:cx": "45.945476",
-                            "inkscape:cy": "44.557247",
-                            "inkscape:document-units": "mm",
-                            "inkscape:current-layer": "layer1",
-                            showgrid: "false",
-                            units: "px",
-                            "inkscape:window-width": "1920",
-                            "inkscape:window-height": "1017",
-                            "inkscape:window-x": "-8",
-                            "inkscape:window-y": "-8",
-                            "inkscape:window-maximized": "1"
-                          }
-                        }),
-                        _vm._v(" "),
                         _c(
-                          "metadata",
-                          { attrs: { id: "metadata951" } },
+                          "svg",
+                          {
+                            attrs: {
+                              "xmlns:dc": "http://purl.org/dc/elements/1.1/",
+                              "xmlns:cc": "http://creativecommons.org/ns#",
+                              "xmlns:rdf":
+                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+                              "xmlns:svg": "http://www.w3.org/2000/svg",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:sodipodi":
+                                "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+                              "xmlns:inkscape":
+                                "http://www.inkscape.org/namespaces/inkscape",
+                              width: "100",
+                              height: "100",
+                              viewBox: "0 0 26.458333 26.458334",
+                              version: "1.1",
+                              id: "svg954",
+                              "inkscape:version":
+                                "0.92.3 (2405546, 2018-03-11)",
+                              "sodipodi:docname": "verificar-pedido-bio.svg"
+                            }
+                          },
                           [
+                            _c("defs", { attrs: { id: "defs948" } }),
+                            _vm._v(" "),
+                            _c("sodipodi:namedview", {
+                              attrs: {
+                                id: "base",
+                                pagecolor: "#ffffff",
+                                bordercolor: "#666666",
+                                borderopacity: "1.0",
+                                "inkscape:pageopacity": "0.0",
+                                "inkscape:pageshadow": "2",
+                                "inkscape:zoom": "5.6",
+                                "inkscape:cx": "45.945476",
+                                "inkscape:cy": "44.557247",
+                                "inkscape:document-units": "mm",
+                                "inkscape:current-layer": "layer1",
+                                showgrid: "false",
+                                units: "px",
+                                "inkscape:window-width": "1920",
+                                "inkscape:window-height": "1017",
+                                "inkscape:window-x": "-8",
+                                "inkscape:window-y": "-8",
+                                "inkscape:window-maximized": "1"
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
-                              "rdf:RDF",
+                              "metadata",
+                              { attrs: { id: "metadata951" } },
                               [
                                 _c(
-                                  "cc:Work",
-                                  { attrs: { "rdf:about": "" } },
+                                  "rdf:RDF",
                                   [
-                                    _c("dc:format", [_vm._v("image/svg+xml")]),
-                                    _vm._v(" "),
-                                    _c("dc:type", {
-                                      attrs: {
-                                        "rdf:resource":
-                                          "http://purl.org/dc/dcmitype/StillImage"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("dc:title")
+                                    _c(
+                                      "cc:Work",
+                                      { attrs: { "rdf:about": "" } },
+                                      [
+                                        _c("dc:format", [
+                                          _vm._v("image/svg+xml")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("dc:type", {
+                                          attrs: {
+                                            "rdf:resource":
+                                              "http://purl.org/dc/dcmitype/StillImage"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("dc:title")
+                                      ],
+                                      1
+                                    )
                                   ],
                                   1
                                 )
                               ],
                               1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "g",
-                          {
-                            attrs: {
-                              "inkscape:label": "Capa 1",
-                              "inkscape:groupmode": "layer",
-                              id: "layer1",
-                              transform: "translate(0,-270.54165)"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.26458332" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 152.66081,104.88754 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.071942 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.620382 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.845142 h 8.39787 v 3.704162 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
-                                id: "path18"
-                              }
-                            }),
+                            ),
                             _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.36502817",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect871",
-                                width: "17.322243",
-                                height: "20.246883",
-                                x: "1.8368255",
-                                y: "271.68835"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.19695915",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect871-0",
-                                width: "9.6682243",
-                                height: "10.561244",
-                                x: "14.513832",
-                                y: "284.80243"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.06544681",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect871-0-0",
-                                width: "3.2898765",
-                                height: "3.4269435",
-                                x: "17.691982",
-                                y: "280.47778"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: {
-                                "fill-opacity": "1",
-                                "stroke-width": "0.50845605"
-                              },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 24.665539,283.60513 h -2.435885 v -1.13425 a 2.8801343,2.9884481 0 0 0 -2.191297,-2.88487 v -7.97092 a 0.72876884,0.75617583 0 0 0 -0.733761,-0.75618 H 1.9988326 a 0.72876884,0.75617583 0 0 0 -0.728769,0.75618 v 20.78967 a 0.72876884,0.75617583 0 0 0 0.728769,0.76134 H 13.259809 v 0.61115 a 2.8701513,2.9780897 0 0 0 2.870151,2.96773 h 6.40418 a 2.8651597,2.9729105 0 0 0 2.865159,-2.96773 v -9.41592 a 0.72876884,0.75617583 0 0 0 -0.73376,-0.7562 z m -3.898414,-1.13425 v 1.13425 h -2.875143 v -1.13425 a 1.4375716,1.4916347 0 0 1 2.875143,0 z m -18.0345304,9.17768 v -19.2721 H 18.575826 v 7.25098 a 2.8751427,2.9832689 0 0 0 -2.146373,2.86934 v 1.13425 h -2.435885 a 0.72876884,0.75617583 0 0 0 -0.733759,0.75619 v 7.26134 z m 21.2041754,2.12869 a 1.4026304,1.4553795 0 0 1 -1.40263,1.4502 h -6.40418 a 1.4026304,1.4553795 0 0 1 -1.407622,-1.4502 v -8.65459 h 1.707115 v 1.99922 a 0.73376039,0.7613551 0 0 0 1.462529,0 v -1.99922 h 2.875143 v 1.99922 a 0.73376039,0.7613551 0 0 0 1.462529,0 v -1.99922 h 1.707116 z",
-                                id: "path18-9"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 6.3814296,274.1374 -0.8286009,0.92192 -0.0549,-0.0724 a 0.73376039,0.7613551 0 0 0 -1.1380771,0.95298 l 0.5790221,0.74582 a 0.72876884,0.75617583 0 0 0 0.5440809,0.2797 h 0.02994 a 0.73376039,0.7613551 0 0 0 0.534098,-0.24345 l 1.4076219,-1.55378 a 0.73286427,0.76042525 0 1 0 -1.0731867,-1.03584 z",
-                                id: "path20"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 9.8505686,276.19358 h 6.5289694 a 0.73376039,0.7613551 0 1 0 0,-1.51753 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 z",
-                                id: "path22"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 6.3814296,278.75732 -0.8286009,0.9271 -0.0549,-0.0724 a 0.73376039,0.7613551 0 0 0 -1.1380771,0.93228 l 0.584014,0.75618 a 0.72876884,0.75617583 0 0 0 0.5440809,0.27967 h 0.02996 a 0.74873511,0.77689297 0 0 0 0.5291061,-0.23307 l 1.407622,-1.55378 a 0.73376039,0.7613551 0 0 0 -1.073187,-1.03587 z",
-                                id: "path24"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 9.8505686,280.79796 h 4.0930844 a 0.73376039,0.7613551 0 0 0 0,-1.51753 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 z",
-                                id: "path26"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 6.3814296,283.34101 -0.8286009,0.92707 -0.0549,-0.0724 a 0.73376039,0.7613551 0 1 0 -1.1380771,0.94782 l 0.584014,0.75618 a 0.75372666,0.78207224 0 0 0 0.5440809,0.28485 h 0.02996 a 0.73376039,0.7613551 0 0 0 0.5340969,-0.24342 l 1.407623,-1.55378 a 0.73376039,0.7613551 0 1 0 -1.0731867,-1.03587 z",
-                                id: "path28"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.50845605" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "M 11.06851,283.88482 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 H 11.06851 a 0.73376039,0.7613551 0 0 0 0,-1.51753 z",
-                                id: "path30"
-                              }
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(
-                      "\r\n\t\t\t\t\t\t\t\t\tVerificación del pedido\r\n\t\t\t\t\t\t\t\t"
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "progressbar-item",
-                    attrs: { id: "shipment-data" }
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          "xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                          "xmlns:cc": "http://creativecommons.org/ns#",
-                          "xmlns:rdf":
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                          "xmlns:svg": "http://www.w3.org/2000/svg",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:sodipodi":
-                            "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
-                          "xmlns:inkscape":
-                            "http://www.inkscape.org/namespaces/inkscape",
-                          viewBox: "0 0 26.09 20",
-                          version: "1.1",
-                          id: "svg30",
-                          "sodipodi:docname": "datos-de-envio-bio.svg",
-                          "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
-                        }
-                      },
-                      [
-                        _c(
-                          "metadata",
-                          { attrs: { id: "metadata34" } },
-                          [
-                            _c(
-                              "rdf:RDF",
-                              [
-                                _c(
-                                  "cc:Work",
-                                  { attrs: { "rdf:about": "" } },
-                                  [
-                                    _c("dc:format", [_vm._v("image/svg+xml")]),
-                                    _vm._v(" "),
-                                    _c("dc:type", {
-                                      attrs: {
-                                        "rdf:resource":
-                                          "http://purl.org/dc/dcmitype/StillImage"
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("sodipodi:namedview", {
-                          attrs: {
-                            pagecolor: "#ffffff",
-                            bordercolor: "#666666",
-                            borderopacity: "1",
-                            objecttolerance: "10",
-                            gridtolerance: "10",
-                            guidetolerance: "10",
-                            "inkscape:pageopacity": "0",
-                            "inkscape:pageshadow": "2",
-                            "inkscape:window-width": "1920",
-                            "inkscape:window-height": "1017",
-                            id: "namedview32",
-                            showgrid: "false",
-                            "inkscape:zoom": "16.68772",
-                            "inkscape:cx": "32.238103",
-                            "inkscape:cy": "-0.78023136",
-                            "inkscape:window-x": "-8",
-                            "inkscape:window-y": "-8",
-                            "inkscape:window-maximized": "1",
-                            "inkscape:current-layer": "svg30"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("defs", { attrs: { id: "defs4" } }),
-                        _vm._v(" "),
-                        _c("title", { attrs: { id: "title6" } }, [
-                          _vm._v("en-camino-bio-mercados")
-                        ]),
-                        _vm._v(" "),
-                        _c("rect", {
-                          staticStyle: {
-                            opacity: "1",
-                            fill: "#ffffff",
-                            "fill-opacity": "1",
-                            stroke: "none",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            id: "rect841",
-                            width: "20.982712",
-                            height: "5.1301694",
-                            x: "4.237288",
-                            y: "11.48",
-                            ry: "0.0645146"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("rect", {
-                          staticStyle: {
-                            opacity: "1",
-                            fill: "#ffffff",
-                            "fill-opacity": "1",
-                            stroke: "none",
-                            "stroke-width": "0.73681211",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            id: "rect841-0",
-                            width: "21.194576",
-                            height: "2.757288",
-                            x: "4.1611862",
-                            y: "10.595932",
-                            ry: "0.034674358"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("rect", {
-                          staticStyle: {
-                            opacity: "1",
-                            fill: "#ffffff",
-                            "fill-opacity": "1",
-                            stroke: "none",
-                            "stroke-width": "1.17707145",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            id: "rect841-0-3",
-                            width: "15.518463",
-                            height: "9.6105976",
-                            x: "-1.8213768",
-                            y: "7.8415132",
-                            ry: "0.12085835",
-                            transform:
-                              "matrix(0.99992374,-0.01235001,0.70867613,0.70553395,0,0)"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("rect", {
-                          staticStyle: {
-                            opacity: "1",
-                            fill: "#ffffff",
-                            "fill-opacity": "1",
-                            stroke: "none",
-                            "stroke-width": "0.79678148",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            id: "rect841-0-0",
-                            width: "9.711525",
-                            height: "7.0369492",
-                            x: "3.7671187",
-                            y: "5.4857626",
-                            ry: "0.08849337"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("circle", {
-                          staticStyle: {
-                            opacity: "1",
-                            fill: "#ffffff",
-                            "fill-opacity": "1",
-                            stroke: "none",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            id: "path879",
-                            cx: "5.6029224",
-                            cy: "5.6181674",
-                            r: "5.0026026"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "g",
-                          {
-                            attrs: {
-                              id: "Capa_2",
-                              "data-name": "Capa 2",
-                              transform: "translate(0.0033536,-1.0790039e-4)"
-                            }
-                          },
-                          [
                             _c(
                               "g",
                               {
                                 attrs: {
-                                  id: "Perfil_de_Usuario",
-                                  "data-name": "Perfil de Usuario"
+                                  "inkscape:label": "Capa 1",
+                                  "inkscape:groupmode": "layer",
+                                  id: "layer1",
+                                  transform: "translate(0,-270.54165)"
                                 }
                               },
                               [
                                 _c("path", {
                                   staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.26458332" },
                                   attrs: {
                                     "inkscape:connector-curvature": "0",
                                     d:
-                                      "M 26,11 20.6,5.6 A 1.26,1.26 0 0 0 19.68,5.22 h -7.51 v 0.87 h 2.18 v 6.52 h 0.87 V 6.09 h 4.42 a 0.45,0.45 0 0 1 0.31,0.12 l 0.74,0.75 h -2 a 0.87,0.87 0 0 0 -0.87,0.87 v 3.91 a 0.87,0.87 0 0 0 0.87,0.87 h 6.52 v 3.48 a 0.44,0.44 0 0 1 -0.44,0.43 h -0.9 a 3,3 0 0 0 -6,0 H 11.7 a 3,3 0 0 0 -6,0 H 4.78 A 0.43,0.43 0 0 1 4.35,16.09 V 12.17 H 3.48 v 3.92 a 1.3,1.3 0 0 0 1.3,1.3 h 0.91 a 3,3 0 0 0 0.88,1.74 H 0 V 20 h 20.87 a 3,3 0 0 0 3,-2.61 h 0.9 a 1.31,1.31 0 0 0 1.31,-1.3 V 11.3 A 0.43,0.43 0 0 0 26,11 Z M 6.52,17 A 2.18,2.18 0 1 1 8.7,19.13 2.19,2.19 0 0 1 6.52,17 Z m 4.3,2.17 a 3,3 0 0 0 0.88,-1.74 h 6.16 a 3.13,3.13 0 0 0 0.88,1.74 z m 10.05,0 A 2.18,2.18 0 1 1 23,17 2.17,2.17 0 0 1 20.83,19.17 Z M 18.7,11.74 V 7.83 h 2.86 l 3.66,3.65 v 0.26 z",
-                                    id: "path8"
+                                      "m 152.66081,104.88754 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.071942 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.620382 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.845142 h 8.39787 v 3.704162 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
+                                    id: "path18"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.36502817",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect871",
+                                    width: "17.322243",
+                                    height: "20.246883",
+                                    x: "1.8368255",
+                                    y: "271.68835"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.19695915",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect871-0",
+                                    width: "9.6682243",
+                                    height: "10.561244",
+                                    x: "14.513832",
+                                    y: "284.80243"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.06544681",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect871-0-0",
+                                    width: "3.2898765",
+                                    height: "3.4269435",
+                                    x: "17.691982",
+                                    y: "280.47778"
                                   }
                                 }),
                                 _vm._v(" "),
                                 _c("path", {
                                   staticClass: "cls-1",
+                                  staticStyle: {
+                                    "fill-opacity": "1",
+                                    "stroke-width": "0.50845605"
+                                  },
                                   attrs: {
                                     "inkscape:connector-curvature": "0",
                                     d:
-                                      "M 5.65,11.3 A 5.65,5.65 0 1 0 0,5.65 5.65,5.65 0 0 0 5.65,11.3 Z m 0,-10.43 A 4.78,4.78 0 1 1 0.87,5.65 4.78,4.78 0 0 1 5.65,0.87 Z",
+                                      "m 24.665539,283.60513 h -2.435885 v -1.13425 a 2.8801343,2.9884481 0 0 0 -2.191297,-2.88487 v -7.97092 a 0.72876884,0.75617583 0 0 0 -0.733761,-0.75618 H 1.9988326 a 0.72876884,0.75617583 0 0 0 -0.728769,0.75618 v 20.78967 a 0.72876884,0.75617583 0 0 0 0.728769,0.76134 H 13.259809 v 0.61115 a 2.8701513,2.9780897 0 0 0 2.870151,2.96773 h 6.40418 a 2.8651597,2.9729105 0 0 0 2.865159,-2.96773 v -9.41592 a 0.72876884,0.75617583 0 0 0 -0.73376,-0.7562 z m -3.898414,-1.13425 v 1.13425 h -2.875143 v -1.13425 a 1.4375716,1.4916347 0 0 1 2.875143,0 z m -18.0345304,9.17768 v -19.2721 H 18.575826 v 7.25098 a 2.8751427,2.9832689 0 0 0 -2.146373,2.86934 v 1.13425 h -2.435885 a 0.72876884,0.75617583 0 0 0 -0.733759,0.75619 v 7.26134 z m 21.2041754,2.12869 a 1.4026304,1.4553795 0 0 1 -1.40263,1.4502 h -6.40418 a 1.4026304,1.4553795 0 0 1 -1.407622,-1.4502 v -8.65459 h 1.707115 v 1.99922 a 0.73376039,0.7613551 0 0 0 1.462529,0 v -1.99922 h 2.875143 v 1.99922 a 0.73376039,0.7613551 0 0 0 1.462529,0 v -1.99922 h 1.707116 z",
+                                    id: "path18-9"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 6.3814296,274.1374 -0.8286009,0.92192 -0.0549,-0.0724 a 0.73376039,0.7613551 0 0 0 -1.1380771,0.95298 l 0.5790221,0.74582 a 0.72876884,0.75617583 0 0 0 0.5440809,0.2797 h 0.02994 a 0.73376039,0.7613551 0 0 0 0.534098,-0.24345 l 1.4076219,-1.55378 a 0.73286427,0.76042525 0 1 0 -1.0731867,-1.03584 z",
                                     id: "path20"
                                   }
                                 }),
                                 _vm._v(" "),
                                 _c("path", {
                                   staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
                                   attrs: {
                                     "inkscape:connector-curvature": "0",
                                     d:
-                                      "M 5.65,9.57 A 0.44,0.44 0 0 0 6,9.44 C 6.24,9.16 8.7,6.65 8.7,4.78 a 3.045,3.045 0 0 0 -6.09,0 c 0,1.87 2.45,4.38 2.73,4.66 a 0.48,0.48 0 0 0 0.31,0.13 z m 0,-7 A 2.18,2.18 0 0 1 7.83,4.78 C 7.83,5.9 6.46,7.62 5.65,8.5 4.85,7.62 3.48,5.9 3.48,4.78 A 2.17,2.17 0 0 1 5.65,2.61 Z",
+                                      "m 9.8505686,276.19358 h 6.5289694 a 0.73376039,0.7613551 0 1 0 0,-1.51753 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 z",
                                     id: "path22"
                                   }
                                 }),
                                 _vm._v(" "),
                                 _c("path", {
                                   staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
                                   attrs: {
                                     "inkscape:connector-curvature": "0",
                                     d:
-                                      "M 7,4.78 A 1.31,1.31 0 1 0 5.65,6.09 1.31,1.31 0 0 0 7,4.78 Z m -1.74,0 A 0.43,0.43 0 0 1 5.69,4.35 0.44,0.44 0 0 1 6.13,4.78 0.44,0.44 0 0 1 5.69,5.22 0.44,0.44 0 0 1 5.26,4.78 Z",
+                                      "m 6.3814296,278.75732 -0.8286009,0.9271 -0.0549,-0.0724 a 0.73376039,0.7613551 0 0 0 -1.1380771,0.93228 l 0.584014,0.75618 a 0.72876884,0.75617583 0 0 0 0.5440809,0.27967 h 0.02996 a 0.74873511,0.77689297 0 0 0 0.5291061,-0.23307 l 1.407622,-1.55378 a 0.73376039,0.7613551 0 0 0 -1.073187,-1.03587 z",
                                     id: "path24"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 9.8505686,280.79796 h 4.0930844 a 0.73376039,0.7613551 0 0 0 0,-1.51753 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 z",
+                                    id: "path26"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 6.3814296,283.34101 -0.8286009,0.92707 -0.0549,-0.0724 a 0.73376039,0.7613551 0 1 0 -1.1380771,0.94782 l 0.584014,0.75618 a 0.75372666,0.78207224 0 0 0 0.5440809,0.28485 h 0.02996 a 0.73376039,0.7613551 0 0 0 0.5340969,-0.24342 l 1.407623,-1.55378 a 0.73376039,0.7613551 0 1 0 -1.0731867,-1.03587 z",
+                                    id: "path28"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.50845605" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "M 11.06851,283.88482 H 9.8505686 a 0.73376039,0.7613551 0 1 0 0,1.51753 H 11.06851 a 0.73376039,0.7613551 0 0 0 0,-1.51753 z",
+                                    id: "path30"
                                   }
                                 })
                               ]
                             )
-                          ]
+                          ],
+                          1
                         ),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "0.99999994px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d:
-                              "m 1.3033536,11.739892 v 0.87 h 0.8700001 v -0.87 z",
-                            id: "path829",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "0.99999994px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d:
-                              "m 8.2633536,16.519893 v 0.87 h 0.8700001 v -0.87 z",
-                            id: "path829-0",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "0.99999994px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d: "m 20.433355,16.519893 v 0.87 h 0.87 v -0.87 z",
-                            id: "path829-0-9",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "1.2279979px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d:
-                              "m 0.86141189,13.479892 v 0.87 H 2.1733537 v -0.87 z",
-                            id: "path829-3",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "1.58054018px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d: "m 0,15.219892 v 0.87 h 2.1733537 v -0.87 z",
-                            id: "path829-3-0",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("path", {
-                          staticStyle: {
-                            stroke: "none",
-                            "stroke-width": "1.41245294px",
-                            "stroke-linecap": "butt",
-                            "stroke-linejoin": "miter",
-                            "stroke-opacity": "1"
-                          },
-                          attrs: {
-                            d:
-                              "m 16.523354,13.479892 v 0.87 h 1.735671 v -0.87 z",
-                            id: "path829-3-8",
-                            "inkscape:connector-curvature": "0"
-                          }
-                        })
-                      ],
-                      1
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tVerificación del pedido\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
                     ),
-                    _vm._v(
-                      "\r\n\t\t\t\t\t\t\t\t\tDatos de envío\r\n\t\t\t\t\t\t\t\t"
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "progressbar-item",
-                    attrs: { id: "pay-invoice" }
-                  },
-                  [
+                    _vm._v(" "),
                     _c(
-                      "svg",
+                      "li",
                       {
-                        attrs: {
-                          "xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                          "xmlns:cc": "http://creativecommons.org/ns#",
-                          "xmlns:rdf":
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                          "xmlns:svg": "http://www.w3.org/2000/svg",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:sodipodi":
-                            "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
-                          "xmlns:inkscape":
-                            "http://www.inkscape.org/namespaces/inkscape",
-                          width: "100",
-                          height: "100",
-                          viewBox: "0 0 26.458333 26.458334",
-                          version: "1.1",
-                          id: "svg954",
-                          "sodipodi:docname": "pagar-factura-bio.svg",
-                          "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
-                        }
+                        staticClass: "progressbar-item",
+                        attrs: { id: "shipment-data" }
                       },
                       [
-                        _c("defs", { attrs: { id: "defs948" } }),
-                        _vm._v(" "),
-                        _c("sodipodi:namedview", {
-                          attrs: {
-                            id: "base",
-                            pagecolor: "#ffffff",
-                            bordercolor: "#666666",
-                            borderopacity: "1.0",
-                            "inkscape:pageopacity": "0.0",
-                            "inkscape:pageshadow": "2",
-                            "inkscape:zoom": "5.6",
-                            "inkscape:cx": "-34.488683",
-                            "inkscape:cy": "38.724245",
-                            "inkscape:document-units": "mm",
-                            "inkscape:current-layer": "layer1",
-                            showgrid: "false",
-                            units: "px",
-                            "inkscape:window-width": "1920",
-                            "inkscape:window-height": "1017",
-                            "inkscape:window-x": "-8",
-                            "inkscape:window-y": "-8",
-                            "inkscape:window-maximized": "1"
-                          }
-                        }),
-                        _vm._v(" "),
                         _c(
-                          "metadata",
-                          { attrs: { id: "metadata951" } },
+                          "svg",
+                          {
+                            attrs: {
+                              "xmlns:dc": "http://purl.org/dc/elements/1.1/",
+                              "xmlns:cc": "http://creativecommons.org/ns#",
+                              "xmlns:rdf":
+                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+                              "xmlns:svg": "http://www.w3.org/2000/svg",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:sodipodi":
+                                "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+                              "xmlns:inkscape":
+                                "http://www.inkscape.org/namespaces/inkscape",
+                              viewBox: "0 0 26.09 20",
+                              version: "1.1",
+                              id: "svg30",
+                              "sodipodi:docname": "datos-de-envio-bio.svg",
+                              "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
+                            }
+                          },
                           [
                             _c(
-                              "rdf:RDF",
+                              "metadata",
+                              { attrs: { id: "metadata34" } },
                               [
                                 _c(
-                                  "cc:Work",
-                                  { attrs: { "rdf:about": "" } },
+                                  "rdf:RDF",
                                   [
-                                    _c("dc:format", [_vm._v("image/svg+xml")]),
-                                    _vm._v(" "),
-                                    _c("dc:type", {
-                                      attrs: {
-                                        "rdf:resource":
-                                          "http://purl.org/dc/dcmitype/StillImage"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("dc:title")
+                                    _c(
+                                      "cc:Work",
+                                      { attrs: { "rdf:about": "" } },
+                                      [
+                                        _c("dc:format", [
+                                          _vm._v("image/svg+xml")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("dc:type", {
+                                          attrs: {
+                                            "rdf:resource":
+                                              "http://purl.org/dc/dcmitype/StillImage"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
                                   ],
                                   1
                                 )
                               ],
                               1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "g",
-                          {
-                            attrs: {
-                              "inkscape:label": "Capa 1",
-                              "inkscape:groupmode": "layer",
-                              id: "layer1",
-                              transform: "translate(0,-270.54165)"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.26458332" },
+                            ),
+                            _vm._v(" "),
+                            _c("sodipodi:namedview", {
                               attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 153.84198,107.43888 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.07194 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.62038 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.84514 h 8.39787 v 3.70416 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
-                                id: "path18"
+                                pagecolor: "#ffffff",
+                                bordercolor: "#666666",
+                                borderopacity: "1",
+                                objecttolerance: "10",
+                                gridtolerance: "10",
+                                guidetolerance: "10",
+                                "inkscape:pageopacity": "0",
+                                "inkscape:pageshadow": "2",
+                                "inkscape:window-width": "1920",
+                                "inkscape:window-height": "1017",
+                                id: "namedview32",
+                                showgrid: "false",
+                                "inkscape:zoom": "16.68772",
+                                "inkscape:cx": "32.238103",
+                                "inkscape:cy": "-0.78023136",
+                                "inkscape:window-x": "-8",
+                                "inkscape:window-y": "-8",
+                                "inkscape:window-maximized": "1",
+                                "inkscape:current-layer": "svg30"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("defs", { attrs: { id: "defs4" } }),
+                            _vm._v(" "),
+                            _c("title", { attrs: { id: "title6" } }, [
+                              _vm._v("en-camino-bio-mercados")
+                            ]),
+                            _vm._v(" "),
+                            _c("rect", {
+                              staticStyle: {
+                                opacity: "1",
+                                fill: "#ffffff",
+                                "fill-opacity": "1",
+                                stroke: "none",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                id: "rect841",
+                                width: "20.982712",
+                                height: "5.1301694",
+                                x: "4.237288",
+                                y: "11.48",
+                                ry: "0.0645146"
                               }
                             }),
                             _vm._v(" "),
@@ -42574,821 +42291,1235 @@ var render = function() {
                                 fill: "#ffffff",
                                 "fill-opacity": "1",
                                 stroke: "none",
-                                "stroke-width": "0.27696145",
+                                "stroke-width": "0.73681211",
                                 "stroke-opacity": "1"
                               },
                               attrs: {
-                                id: "rect820",
-                                width: "23.020847",
-                                height: "17.173929",
-                                x: "1.6973457",
-                                y: "271.86725"
+                                id: "rect841-0",
+                                width: "21.194576",
+                                height: "2.757288",
+                                x: "4.1611862",
+                                y: "10.595932",
+                                ry: "0.034674358"
                               }
                             }),
                             _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
+                            _c("rect", {
+                              staticStyle: {
+                                opacity: "1",
+                                fill: "#ffffff",
+                                "fill-opacity": "1",
+                                stroke: "none",
+                                "stroke-width": "1.17707145",
+                                "stroke-opacity": "1"
+                              },
                               attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 20.443293,290.98672 a 0.47909954,0.55825186 0 0 0 -0.663706,0.14344 5.305258,6.1817433 0 0 1 -0.483497,0.70676 5.1909776,6.0485822 0 0 1 -0.465913,0.51215 0.47470412,0.5531303 0 0 0 -0.06153,0.79386 0.46591328,0.54288714 0 0 0 0.360422,0.19975 0.49668118,0.57873818 0 0 0 0.312076,-0.13318 6.3689471,7.4211648 0 0 0 0.54503,-0.60433 6.8436511,7.9742951 0 0 0 0.580195,-0.82971 0.48349495,0.56337346 0 0 0 -0.123067,-0.78872 z",
-                                id: "path68"
+                                id: "rect841-0-3",
+                                width: "15.518463",
+                                height: "9.6105976",
+                                x: "-1.8213768",
+                                y: "7.8415132",
+                                ry: "0.12085835",
+                                transform:
+                                  "matrix(0.99992374,-0.01235001,0.70867613,0.70553395,0,0)"
                               }
                             }),
                             _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
+                            _c("rect", {
+                              staticStyle: {
+                                opacity: "1",
+                                fill: "#ffffff",
+                                "fill-opacity": "1",
+                                stroke: "none",
+                                "stroke-width": "0.79678148",
+                                "stroke-opacity": "1"
+                              },
                               attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 17.726931,293.21974 v 0 a 0.47909954,0.55825186 0 0 0 0.193396,1.06528 0.48789034,0.56849502 0 0 0 0.189003,-0.0461 0.08790818,0.10243154 0 0 0 0.03517,0 0.48381714,0.56374887 0 1 0 -0.404379,-1.02432 z",
-                                id: "path70"
+                                id: "rect841-0-0",
+                                width: "9.711525",
+                                height: "7.0369492",
+                                x: "3.7671187",
+                                y: "5.4857626",
+                                ry: "0.08849337"
                               }
                             }),
                             _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
+                            _c("circle", {
+                              staticStyle: {
+                                opacity: "1",
+                                fill: "#ffffff",
+                                "fill-opacity": "1",
+                                stroke: "none",
+                                "stroke-opacity": "1"
+                              },
                               attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "M 24.029947,270.99209 H 2.4265123 a 1.4285078,1.6645124 0 0 0 -1.428508,1.66452 v 15.60031 a 1.4285078,1.6645124 0 0 0 1.428508,1.66452 H 12.483206 a 8.0084343,9.3315131 0 0 0 2.237263,4.54283 c 1.230716,1.39307 2.637246,2.13571 3.186674,2.13571 0.549425,0 1.951561,-0.74264 3.182274,-2.13571 a 7.9732711,9.2905403 0 0 0 2.237263,-4.54283 h 0.703267 a 1.4329032,1.669634 0 0 0 1.419715,-1.66452 v -15.60031 a 1.4329032,1.669634 0 0 0 -1.419715,-1.66452 z M 1.9518083,275.44274 H 24.50465 v 2.22789 H 1.9518083 Z m 0.474704,-3.33926 H 24.029947 a 0.47470412,0.5531303 0 0 1 0.474703,0.55313 v 1.67474 H 1.9518083 v -1.67474 a 0.47470412,0.5531303 0 0 1 0.474704,-0.55313 z M 20.447688,293.6141 a 6.0568729,7.0575329 0 0 1 -2.549338,1.85401 6.0348961,7.0319252 0 0 1 -2.558128,-1.81305 7.0722122,8.240617 0 0 1 -2.136168,-5.99736 v -2.76052 a 21.537501,25.095725 0 0 0 4.6899,-2.30983 22.152859,25.812747 0 0 0 4.698693,2.30983 v 2.74004 a 7.0722122,8.240617 0 0 1 -2.136168,6.01784 z m 3.573467,-4.82966 h -0.540637 a 8.197437,9.5517409 0 0 0 0.05715,-1.16772 v -3.14465 a 0.4703087,0.54800873 0 0 0 -0.351632,-0.51215 21.379266,24.911349 0 0 1 -5.050324,-2.47372 0.4703087,0.54800873 0 0 0 -0.479101,0 20.768304,24.199449 0 0 1 -5.041534,2.43787 0.4703087,0.54800873 0 0 0 -0.351632,0.51215 v 3.16515 a 8.197437,9.5517409 0 0 0 0.05715,1.16772 H 2.4265123 a 0.4703087,0.54800873 0 0 1 -0.474704,-0.54802 V 278.8025 H 24.50465 v 9.45442 a 0.47470412,0.5531303 0 0 1 -0.474703,0.54802 z",
-                                id: "path72"
+                                id: "path879",
+                                cx: "5.6029224",
+                                cy: "5.6181674",
+                                r: "5.0026026"
                               }
                             }),
                             _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 6.729618,282.68465 a 2.1977043,2.5607884 0 0 0 -0.835129,0.19462 2.1537501,2.5095725 0 0 0 -2.9844817,2.30983 2.1449594,2.4993295 0 0 0 2.9844817,2.30472 2.1054007,2.4532353 0 0 0 0.835129,0.19973 2.1493547,2.504451 0 0 0 0,-5.0089 z m -2.8658076,2.50445 a 1.1955511,1.3930689 0 1 1 1.1955506,1.38795 1.1955511,1.3930689 0 0 1 -1.1955506,-1.38795 z m 2.9844826,1.38284 a 2.1141914,2.4634784 0 0 0 0.360423,-1.38284 2.1361685,2.4890863 0 0 0 -0.360423,-1.38795 1.1955511,1.3930689 0 0 1 0,2.77079 z",
-                                id: "path74"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "M 3.3847113,281.29158 H 5.841744 a 0.47909954,0.55825186 0 1 0 0,-1.1165 H 3.3847113 a 0.47909954,0.55825186 0 0 0 0,1.1165 z",
-                                id: "path76"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 7.230693,281.29158 h 0.02637 a 0.47909954,0.55825186 0 0 0 0,-1.1165 h -0.02637 a 0.47909954,0.55825186 0 0 0 0,1.1165 z",
-                                id: "path78"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.474462" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 19.849913,286.35682 -2.553734,2.97564 -1.318622,-1.53648 a 0.47909954,0.55825186 0 0 0 -0.676893,0.78873 l 1.67465,1.95132 a 0.48789034,0.56849502 0 0 0 0.338447,0.16395 0.47909954,0.55825186 0 0 0 0.338448,-0.16395 l 2.892178,-3.37 a 0.47470412,0.5531303 0 0 0 0,-0.78873 0.48349495,0.56337346 0 0 0 -0.694474,-0.0205 z",
-                                id: "path80"
-                              }
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(
-                      "\r\n\t\t\t\t\t\t\t\t\tPagar Factura\r\n\t\t\t\t\t\t\t\t"
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "progressbar-item",
-                    attrs: { id: "purchase-completed" }
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        attrs: {
-                          "xmlns:dc": "http://purl.org/dc/elements/1.1/",
-                          "xmlns:cc": "http://creativecommons.org/ns#",
-                          "xmlns:rdf":
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                          "xmlns:svg": "http://www.w3.org/2000/svg",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          "xmlns:sodipodi":
-                            "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
-                          "xmlns:inkscape":
-                            "http://www.inkscape.org/namespaces/inkscape",
-                          width: "100",
-                          height: "100",
-                          viewBox: "0 0 26.458333 26.458334",
-                          version: "1.1",
-                          id: "svg954",
-                          "sodipodi:docname": "compra-completada-bio.svg",
-                          "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
-                        }
-                      },
-                      [
-                        _c("defs", { attrs: { id: "defs948" } }),
-                        _vm._v(" "),
-                        _c("sodipodi:namedview", {
-                          attrs: {
-                            id: "base",
-                            pagecolor: "#ffffff",
-                            bordercolor: "#666666",
-                            borderopacity: "1.0",
-                            "inkscape:pageopacity": "0.0",
-                            "inkscape:pageshadow": "2",
-                            "inkscape:zoom": "5.6",
-                            "inkscape:cx": "-1.5422546",
-                            "inkscape:cy": "38.724245",
-                            "inkscape:document-units": "mm",
-                            "inkscape:current-layer": "layer1",
-                            showgrid: "false",
-                            units: "px",
-                            "inkscape:window-width": "1920",
-                            "inkscape:window-height": "1017",
-                            "inkscape:window-x": "-8",
-                            "inkscape:window-y": "-8",
-                            "inkscape:window-maximized": "1"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "metadata",
-                          { attrs: { id: "metadata951" } },
-                          [
                             _c(
-                              "rdf:RDF",
-                              [
-                                _c(
-                                  "cc:Work",
-                                  { attrs: { "rdf:about": "" } },
-                                  [
-                                    _c("dc:format", [_vm._v("image/svg+xml")]),
-                                    _vm._v(" "),
-                                    _c("dc:type", {
-                                      attrs: {
-                                        "rdf:resource":
-                                          "http://purl.org/dc/dcmitype/StillImage"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("dc:title")
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "g",
-                          {
-                            attrs: {
-                              "inkscape:label": "Capa 1",
-                              "inkscape:groupmode": "layer",
-                              id: "layer1",
-                              transform: "translate(0,-270.54165)"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.26458332" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 152.47182,104.93479 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.071945 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.620385 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.845145 h 8.39787 v 3.704165 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
-                                id: "path18"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.26458332",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect815",
-                                width: "7.50734",
-                                height: "5.3258348",
-                                x: "9.7840652",
-                                y: "279.89655",
-                                ry: "0.017069498"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.20391062",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect835",
-                                width: "0.75056797",
-                                height: "5.325839",
-                                x: "17.102013",
-                                y: "280.09656",
-                                ry: "0.019711599"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.17213303",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect835-0",
-                                width: "0.70332098",
-                                height: "4.0501695",
-                                x: "17.653",
-                                y: "280.09656",
-                                ry: "0.014990185"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("rect", {
-                              staticStyle: {
-                                opacity: "1",
-                                fill: "#ffffff",
-                                "fill-opacity": "1",
-                                stroke: "none",
-                                "stroke-width": "0.15452284",
-                                "stroke-opacity": "1"
-                              },
-                              attrs: {
-                                id: "rect835-0-6",
-                                width: "1.0180732",
-                                height: "2.2547827",
-                                x: "17.852581",
-                                y: "280.09656",
-                                ry: "0.0083452333"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("path", {
-                              staticClass: "cls-1",
-                              staticStyle: { "stroke-width": "0.35029563" },
-                              attrs: {
-                                "inkscape:connector-curvature": "0",
-                                d:
-                                  "m 19.328808,279.8071 -7.972015,-0.35232 a 0.41133633,0.41612291 0 1 0 -0.03482,0.8315 l 7.428705,0.32413 -1.459273,4.61197 h -6.502298 l -1.1736883,-6.46873 a 0.41793009,0.42279337 0 0 0 -0.25424,-0.31357 l -1.925963,-0.76455 a 0.41133334,0.41611989 0 0 0 -0.299515,0.77512 l 1.71003,0.67998 1.1945843,6.58502 a 0.41096457,0.41574683 0 0 0 0.407481,0.35232 h 0.195035 l -0.449276,1.27191 a 0.34827506,0.35232779 0 0 0 0.0383,0.31709 0.34827506,0.35232779 0 0 0 0.282103,0.14799 h 0.31693 a 1.2363765,1.2507637 0 1 0 2.159305,0.83501 1.2259282,1.2401939 0 0 0 -0.320412,-0.83501 h 2.709579 a 1.2328937,1.2472405 0 0 0 0.915964,2.08577 1.2398592,1.254287 0 0 0 1.239858,-1.25076 1.2259282,1.2401939 0 0 0 -0.320413,-0.83501 h 0.386585 a 0.34827726,0.35233004 0 1 0 0,-0.70466 h -6.58588 l 0.369171,-1.05699 h 6.216709 a 0.41096457,0.41574683 0 0 0 0.39355,-0.28891 l 1.716997,-5.42233 a 0.41793009,0.42279337 0 0 0 -0.05224,-0.35232 0.42489559,0.42983994 0 0 0 -0.320413,-0.17969 z m -3.043925,8.27267 a 0.5502746,0.55667796 0 1 1 -0.546792,0.55667 0.5502746,0.55667796 0 0 1 0.546792,-0.55667 z m -4.527575,0 a 0.5502746,0.55667796 0 1 1 -0.553757,0.55667 0.54679186,0.55315466 0 0 1 0.553757,-0.55667 z m 6.488363,-13.7866 0.599035,-1.05697 a 0.40174511,0.40642006 0 1 1 0.696549,0.40518 l -0.599033,1.05698 a 0.39703356,0.40165372 0 0 1 -0.348274,0.20083 0.41096457,0.41574683 0 0 1 -0.198517,-0.0529 0.40051633,0.40517699 0 0 1 -0.146276,-0.55316 z m 3.876303,4.32307 a 0.40051633,0.40517699 0 0 1 0.146275,-0.55315 l 1.044826,-0.60601 a 0.40174672,0.4064217 0 1 1 0.400516,0.70466 l -1.044825,0.60599 a 0.34827506,0.35232779 0 0 1 -0.198517,0.0564 0.40051633,0.40517699 0 0 1 -0.348275,-0.20435 z m 3.357371,5.15456 a 0.40051633,0.40517699 0 0 1 -0.400517,0.40518 H 23.87728 a 0.40051932,0.40518001 0 0 1 0,-0.81036 h 1.201548 a 0.39703356,0.40165372 0 0 1 0.400517,0.40518 z m -1.633411,6.16573 a 0.40051633,0.40517699 0 0 1 -0.348274,0.20435 0.42141283,0.42631664 0 0 1 -0.201999,-0.0564 l -1.044826,-0.606 a 0.40051633,0.40517699 0 0 1 -0.146275,-0.55316 0.39703356,0.40165372 0 0 1 0.543309,-0.14797 l 1.044826,0.606 a 0.39703356,0.40165372 0 0 1 0.146275,0.55315 z m -4.315127,3.96017 a 0.40051633,0.40517699 0 0 1 -0.146276,0.55316 0.36917156,0.37346747 0 0 1 -0.198517,0.0529 0.39703356,0.40165372 0 0 1 -0.348274,-0.20082 l -0.599033,-1.05698 a 0.40174503,0.40641998 0 0 1 0.696549,-0.40518 z m -5.840572,0.58486 v 1.21553 a 0.40051659,0.40517725 0 1 1 -0.801033,0 v -1.21553 a 0.40051659,0.40517725 0 0 1 0.801033,0 z m -5.3460223,-1.23314 -0.602516,1.05698 a 0.40399906,0.40870026 0 0 1 -0.546792,0.14797 0.40399906,0.40870026 0 0 1 -0.146276,-0.55315 l 0.602516,-1.05698 a 0.40174598,0.40642095 0 1 1 0.696551,0.40518 z m -3.8763021,-4.32659 a 0.39703356,0.40165372 0 0 1 -0.1462754,0.55315 l -1.0448246,0.60953 a 0.41793009,0.42279337 0 0 1 -0.1985168,0.0564 0.40051633,0.40517699 0 0 1 -0.2019996,-0.7575 l 1.0448254,-0.60958 a 0.40399906,0.40870026 0 0 1 0.546791,0.14798 z M 2.7021567,284.17598 H 1.5006078 a 0.40051932,0.40518001 0 1 1 0,-0.81036 h 1.2015489 a 0.40051932,0.40518001 0 0 1 0,0.81036 z m 1.7657539,-5.55974 a 0.40051633,0.40517699 0 0 1 -0.3482742,0.20435 0.38310256,0.38756061 0 0 1 -0.1985168,-0.0564 l -1.0448254,-0.60596 a 0.40174476,0.40641971 0 0 1 0.4005164,-0.70465 l 1.0448246,0.606 a 0.40051633,0.40517699 0 0 1 0.1462754,0.55316 z m 2.5807181,-4.97135 a 0.40174545,0.40642043 0 0 1 0.69655,-0.40518 l 0.602517,1.05699 a 0.40051633,0.40517699 0 0 1 -0.146275,0.55316 0.41444733,0.4192701 0 0 1 -0.202001,0.0529 0.39703356,0.40165372 0 0 1 -0.348275,-0.20083 z m 5.8405733,-0.58486 v -1.21554 a 0.40051659,0.40517725 0 0 1 0.801033,0 v 1.21554 a 0.40051659,0.40517725 0 0 1 -0.801033,0 z",
-                                id: "path42"
-                              }
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(
-                      "\r\n\t\t\t\t\t\t\t\t\tCompra Completada\r\n\t\t\t\t\t\t\t\t"
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("fieldset", [
-                _c("div", { staticClass: "product-list" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12 col-lg-8" }, [
-                      _c(
-                        "div",
-                        { staticClass: "row" },
-                        [
-                          _c("div", { staticClass: "col-12" }, [
-                            _c("div", { staticClass: "wizard-title" }, [
-                              _c("h3", [
-                                _vm._v("Mi carrito de compras "),
-                                _c("span", { staticClass: "quantity-span" }, [
-                                  _vm._v(_vm._s(_vm.cant_cart))
-                                ])
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.products_cart, function(
-                            product_cart,
-                            index
-                          ) {
-                            return _c(
-                              "div",
+                              "g",
                               {
-                                key: product_cart.id,
-                                staticClass: "col-6 col-lg-12"
+                                attrs: {
+                                  id: "Capa_2",
+                                  "data-name": "Capa 2",
+                                  transform:
+                                    "translate(0.0033536,-1.0790039e-4)"
+                                }
                               },
                               [
-                                _c("div", { staticClass: "product-block" }, [
-                                  _c("div", { staticClass: "product-img" }, [
-                                    _c("img", {
+                                _c(
+                                  "g",
+                                  {
+                                    attrs: {
+                                      id: "Perfil_de_Usuario",
+                                      "data-name": "Perfil de Usuario"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      staticClass: "cls-1",
                                       attrs: {
-                                        src:
-                                          "storage/" +
-                                          product_cart.product.photo
+                                        "inkscape:connector-curvature": "0",
+                                        d:
+                                          "M 26,11 20.6,5.6 A 1.26,1.26 0 0 0 19.68,5.22 h -7.51 v 0.87 h 2.18 v 6.52 h 0.87 V 6.09 h 4.42 a 0.45,0.45 0 0 1 0.31,0.12 l 0.74,0.75 h -2 a 0.87,0.87 0 0 0 -0.87,0.87 v 3.91 a 0.87,0.87 0 0 0 0.87,0.87 h 6.52 v 3.48 a 0.44,0.44 0 0 1 -0.44,0.43 h -0.9 a 3,3 0 0 0 -6,0 H 11.7 a 3,3 0 0 0 -6,0 H 4.78 A 0.43,0.43 0 0 1 4.35,16.09 V 12.17 H 3.48 v 3.92 a 1.3,1.3 0 0 0 1.3,1.3 h 0.91 a 3,3 0 0 0 0.88,1.74 H 0 V 20 h 20.87 a 3,3 0 0 0 3,-2.61 h 0.9 a 1.31,1.31 0 0 0 1.31,-1.3 V 11.3 A 0.43,0.43 0 0 0 26,11 Z M 6.52,17 A 2.18,2.18 0 1 1 8.7,19.13 2.19,2.19 0 0 1 6.52,17 Z m 4.3,2.17 a 3,3 0 0 0 0.88,-1.74 h 6.16 a 3.13,3.13 0 0 0 0.88,1.74 z m 10.05,0 A 2.18,2.18 0 1 1 23,17 2.17,2.17 0 0 1 20.83,19.17 Z M 18.7,11.74 V 7.83 h 2.86 l 3.66,3.65 v 0.26 z",
+                                        id: "path8"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("path", {
+                                      staticClass: "cls-1",
+                                      attrs: {
+                                        "inkscape:connector-curvature": "0",
+                                        d:
+                                          "M 5.65,11.3 A 5.65,5.65 0 1 0 0,5.65 5.65,5.65 0 0 0 5.65,11.3 Z m 0,-10.43 A 4.78,4.78 0 1 1 0.87,5.65 4.78,4.78 0 0 1 5.65,0.87 Z",
+                                        id: "path20"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("path", {
+                                      staticClass: "cls-1",
+                                      attrs: {
+                                        "inkscape:connector-curvature": "0",
+                                        d:
+                                          "M 5.65,9.57 A 0.44,0.44 0 0 0 6,9.44 C 6.24,9.16 8.7,6.65 8.7,4.78 a 3.045,3.045 0 0 0 -6.09,0 c 0,1.87 2.45,4.38 2.73,4.66 a 0.48,0.48 0 0 0 0.31,0.13 z m 0,-7 A 2.18,2.18 0 0 1 7.83,4.78 C 7.83,5.9 6.46,7.62 5.65,8.5 4.85,7.62 3.48,5.9 3.48,4.78 A 2.17,2.17 0 0 1 5.65,2.61 Z",
+                                        id: "path22"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("path", {
+                                      staticClass: "cls-1",
+                                      attrs: {
+                                        "inkscape:connector-curvature": "0",
+                                        d:
+                                          "M 7,4.78 A 1.31,1.31 0 1 0 5.65,6.09 1.31,1.31 0 0 0 7,4.78 Z m -1.74,0 A 0.43,0.43 0 0 1 5.69,4.35 0.44,0.44 0 0 1 6.13,4.78 0.44,0.44 0 0 1 5.69,5.22 0.44,0.44 0 0 1 5.26,4.78 Z",
+                                        id: "path24"
                                       }
                                     })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "product-content" },
-                                    [
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "product-title",
-                                          attrs: { href: "#" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(product_cart.product.name)
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "span",
-                                        { staticClass: "product-info" },
-                                        [
-                                          _vm._v(
-                                            "Descripción: " +
-                                              _vm._s(
-                                                product_cart.description_short
-                                              )
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "product-quantity" },
-                                        [
-                                          _c("label", [_vm._v("Cantidad")]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass:
-                                                "product-quantity-group"
-                                            },
-                                            [
-                                              _c("input", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: product_cart.cant,
-                                                    expression:
-                                                      "product_cart.cant"
-                                                  }
-                                                ],
-                                                staticClass: "form-control",
-                                                attrs: {
-                                                  id: "quantity2",
-                                                  type: "text",
-                                                  name: "quantity"
-                                                },
-                                                domProps: {
-                                                  value: product_cart.cant
-                                                },
-                                                on: {
-                                                  input: function($event) {
-                                                    if (
-                                                      $event.target.composing
-                                                    ) {
-                                                      return
-                                                    }
-                                                    _vm.$set(
-                                                      product_cart,
-                                                      "cant",
-                                                      $event.target.value
-                                                    )
-                                                  }
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _vm._m(0, true)
-                                            ]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "product-prices" },
-                                        [
-                                          product_cart.product.discount > 0
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "product-descount"
-                                                },
-                                                [
-                                                  _vm._v(
-                                                    "$ 4 / " +
-                                                      _vm._s(
-                                                        _vm._f("FormatNumber")(
-                                                          product_cart.product
-                                                            .price
-                                                        )
-                                                      )
-                                                  )
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          product_cart.product.discount > 0
-                                            ? _c("p", [
-                                                _vm._v(
-                                                  "$ 3 / Bs " +
-                                                    _vm._s(
-                                                      _vm._f("FormatNumber")(
-                                                        product_cart.product
-                                                          .discount
-                                                      )
-                                                    )
-                                                )
-                                              ])
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          product_cart.product.price > 0 &&
-                                          product_cart.product.discount <= 0
-                                            ? _c("p", [
-                                                _vm._v(
-                                                  "$ 3 / Bs " +
-                                                    _vm._s(
-                                                      _vm._f("FormatNumber")(
-                                                        product_cart.product
-                                                          .price
-                                                      )
-                                                    )
-                                                )
-                                              ])
-                                            : _vm._e()
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "product-add" }, [
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "0.99999994px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d:
+                                  "m 1.3033536,11.739892 v 0.87 h 0.8700001 v -0.87 z",
+                                id: "path829",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "0.99999994px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d:
+                                  "m 8.2633536,16.519893 v 0.87 h 0.8700001 v -0.87 z",
+                                id: "path829-0",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "0.99999994px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d:
+                                  "m 20.433355,16.519893 v 0.87 h 0.87 v -0.87 z",
+                                id: "path829-0-9",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "1.2279979px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d:
+                                  "m 0.86141189,13.479892 v 0.87 H 2.1733537 v -0.87 z",
+                                id: "path829-3",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "1.58054018px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d: "m 0,15.219892 v 0.87 h 2.1733537 v -0.87 z",
+                                id: "path829-3-0",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("path", {
+                              staticStyle: {
+                                stroke: "none",
+                                "stroke-width": "1.41245294px",
+                                "stroke-linecap": "butt",
+                                "stroke-linejoin": "miter",
+                                "stroke-opacity": "1"
+                              },
+                              attrs: {
+                                d:
+                                  "m 16.523354,13.479892 v 0.87 h 1.735671 v -0.87 z",
+                                id: "path829-3-8",
+                                "inkscape:connector-curvature": "0"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tDatos de envío\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass: "progressbar-item",
+                        attrs: { id: "pay-invoice" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              "xmlns:dc": "http://purl.org/dc/elements/1.1/",
+                              "xmlns:cc": "http://creativecommons.org/ns#",
+                              "xmlns:rdf":
+                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+                              "xmlns:svg": "http://www.w3.org/2000/svg",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:sodipodi":
+                                "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+                              "xmlns:inkscape":
+                                "http://www.inkscape.org/namespaces/inkscape",
+                              width: "100",
+                              height: "100",
+                              viewBox: "0 0 26.458333 26.458334",
+                              version: "1.1",
+                              id: "svg954",
+                              "sodipodi:docname": "pagar-factura-bio.svg",
+                              "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
+                            }
+                          },
+                          [
+                            _c("defs", { attrs: { id: "defs948" } }),
+                            _vm._v(" "),
+                            _c("sodipodi:namedview", {
+                              attrs: {
+                                id: "base",
+                                pagecolor: "#ffffff",
+                                bordercolor: "#666666",
+                                borderopacity: "1.0",
+                                "inkscape:pageopacity": "0.0",
+                                "inkscape:pageshadow": "2",
+                                "inkscape:zoom": "5.6",
+                                "inkscape:cx": "-34.488683",
+                                "inkscape:cy": "38.724245",
+                                "inkscape:document-units": "mm",
+                                "inkscape:current-layer": "layer1",
+                                showgrid: "false",
+                                units: "px",
+                                "inkscape:window-width": "1920",
+                                "inkscape:window-height": "1017",
+                                "inkscape:window-x": "-8",
+                                "inkscape:window-y": "-8",
+                                "inkscape:window-maximized": "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "metadata",
+                              { attrs: { id: "metadata951" } },
+                              [
+                                _c(
+                                  "rdf:RDF",
+                                  [
+                                    _c(
+                                      "cc:Work",
+                                      { attrs: { "rdf:about": "" } },
+                                      [
+                                        _c("dc:format", [
+                                          _vm._v("image/svg+xml")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("dc:type", {
+                                          attrs: {
+                                            "rdf:resource":
+                                              "http://purl.org/dc/dcmitype/StillImage"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("dc:title")
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "g",
+                              {
+                                attrs: {
+                                  "inkscape:label": "Capa 1",
+                                  "inkscape:groupmode": "layer",
+                                  id: "layer1",
+                                  transform: "translate(0,-270.54165)"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.26458332" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 153.84198,107.43888 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.07194 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.62038 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.84514 h 8.39787 v 3.70416 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
+                                    id: "path18"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.27696145",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect820",
+                                    width: "23.020847",
+                                    height: "17.173929",
+                                    x: "1.6973457",
+                                    y: "271.86725"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 20.443293,290.98672 a 0.47909954,0.55825186 0 0 0 -0.663706,0.14344 5.305258,6.1817433 0 0 1 -0.483497,0.70676 5.1909776,6.0485822 0 0 1 -0.465913,0.51215 0.47470412,0.5531303 0 0 0 -0.06153,0.79386 0.46591328,0.54288714 0 0 0 0.360422,0.19975 0.49668118,0.57873818 0 0 0 0.312076,-0.13318 6.3689471,7.4211648 0 0 0 0.54503,-0.60433 6.8436511,7.9742951 0 0 0 0.580195,-0.82971 0.48349495,0.56337346 0 0 0 -0.123067,-0.78872 z",
+                                    id: "path68"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 17.726931,293.21974 v 0 a 0.47909954,0.55825186 0 0 0 0.193396,1.06528 0.48789034,0.56849502 0 0 0 0.189003,-0.0461 0.08790818,0.10243154 0 0 0 0.03517,0 0.48381714,0.56374887 0 1 0 -0.404379,-1.02432 z",
+                                    id: "path70"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "M 24.029947,270.99209 H 2.4265123 a 1.4285078,1.6645124 0 0 0 -1.428508,1.66452 v 15.60031 a 1.4285078,1.6645124 0 0 0 1.428508,1.66452 H 12.483206 a 8.0084343,9.3315131 0 0 0 2.237263,4.54283 c 1.230716,1.39307 2.637246,2.13571 3.186674,2.13571 0.549425,0 1.951561,-0.74264 3.182274,-2.13571 a 7.9732711,9.2905403 0 0 0 2.237263,-4.54283 h 0.703267 a 1.4329032,1.669634 0 0 0 1.419715,-1.66452 v -15.60031 a 1.4329032,1.669634 0 0 0 -1.419715,-1.66452 z M 1.9518083,275.44274 H 24.50465 v 2.22789 H 1.9518083 Z m 0.474704,-3.33926 H 24.029947 a 0.47470412,0.5531303 0 0 1 0.474703,0.55313 v 1.67474 H 1.9518083 v -1.67474 a 0.47470412,0.5531303 0 0 1 0.474704,-0.55313 z M 20.447688,293.6141 a 6.0568729,7.0575329 0 0 1 -2.549338,1.85401 6.0348961,7.0319252 0 0 1 -2.558128,-1.81305 7.0722122,8.240617 0 0 1 -2.136168,-5.99736 v -2.76052 a 21.537501,25.095725 0 0 0 4.6899,-2.30983 22.152859,25.812747 0 0 0 4.698693,2.30983 v 2.74004 a 7.0722122,8.240617 0 0 1 -2.136168,6.01784 z m 3.573467,-4.82966 h -0.540637 a 8.197437,9.5517409 0 0 0 0.05715,-1.16772 v -3.14465 a 0.4703087,0.54800873 0 0 0 -0.351632,-0.51215 21.379266,24.911349 0 0 1 -5.050324,-2.47372 0.4703087,0.54800873 0 0 0 -0.479101,0 20.768304,24.199449 0 0 1 -5.041534,2.43787 0.4703087,0.54800873 0 0 0 -0.351632,0.51215 v 3.16515 a 8.197437,9.5517409 0 0 0 0.05715,1.16772 H 2.4265123 a 0.4703087,0.54800873 0 0 1 -0.474704,-0.54802 V 278.8025 H 24.50465 v 9.45442 a 0.47470412,0.5531303 0 0 1 -0.474703,0.54802 z",
+                                    id: "path72"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 6.729618,282.68465 a 2.1977043,2.5607884 0 0 0 -0.835129,0.19462 2.1537501,2.5095725 0 0 0 -2.9844817,2.30983 2.1449594,2.4993295 0 0 0 2.9844817,2.30472 2.1054007,2.4532353 0 0 0 0.835129,0.19973 2.1493547,2.504451 0 0 0 0,-5.0089 z m -2.8658076,2.50445 a 1.1955511,1.3930689 0 1 1 1.1955506,1.38795 1.1955511,1.3930689 0 0 1 -1.1955506,-1.38795 z m 2.9844826,1.38284 a 2.1141914,2.4634784 0 0 0 0.360423,-1.38284 2.1361685,2.4890863 0 0 0 -0.360423,-1.38795 1.1955511,1.3930689 0 0 1 0,2.77079 z",
+                                    id: "path74"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "M 3.3847113,281.29158 H 5.841744 a 0.47909954,0.55825186 0 1 0 0,-1.1165 H 3.3847113 a 0.47909954,0.55825186 0 0 0 0,1.1165 z",
+                                    id: "path76"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 7.230693,281.29158 h 0.02637 a 0.47909954,0.55825186 0 0 0 0,-1.1165 h -0.02637 a 0.47909954,0.55825186 0 0 0 0,1.1165 z",
+                                    id: "path78"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.474462" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 19.849913,286.35682 -2.553734,2.97564 -1.318622,-1.53648 a 0.47909954,0.55825186 0 0 0 -0.676893,0.78873 l 1.67465,1.95132 a 0.48789034,0.56849502 0 0 0 0.338447,0.16395 0.47909954,0.55825186 0 0 0 0.338448,-0.16395 l 2.892178,-3.37 a 0.47470412,0.5531303 0 0 0 0,-0.78873 0.48349495,0.56337346 0 0 0 -0.694474,-0.0205 z",
+                                    id: "path80"
+                                  }
+                                })
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tPagar Factura\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        staticClass: "progressbar-item",
+                        attrs: { id: "purchase-completed" }
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            attrs: {
+                              "xmlns:dc": "http://purl.org/dc/elements/1.1/",
+                              "xmlns:cc": "http://creativecommons.org/ns#",
+                              "xmlns:rdf":
+                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+                              "xmlns:svg": "http://www.w3.org/2000/svg",
+                              xmlns: "http://www.w3.org/2000/svg",
+                              "xmlns:sodipodi":
+                                "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+                              "xmlns:inkscape":
+                                "http://www.inkscape.org/namespaces/inkscape",
+                              width: "100",
+                              height: "100",
+                              viewBox: "0 0 26.458333 26.458334",
+                              version: "1.1",
+                              id: "svg954",
+                              "sodipodi:docname": "compra-completada-bio.svg",
+                              "inkscape:version": "0.92.3 (2405546, 2018-03-11)"
+                            }
+                          },
+                          [
+                            _c("defs", { attrs: { id: "defs948" } }),
+                            _vm._v(" "),
+                            _c("sodipodi:namedview", {
+                              attrs: {
+                                id: "base",
+                                pagecolor: "#ffffff",
+                                bordercolor: "#666666",
+                                borderopacity: "1.0",
+                                "inkscape:pageopacity": "0.0",
+                                "inkscape:pageshadow": "2",
+                                "inkscape:zoom": "5.6",
+                                "inkscape:cx": "-1.5422546",
+                                "inkscape:cy": "38.724245",
+                                "inkscape:document-units": "mm",
+                                "inkscape:current-layer": "layer1",
+                                showgrid: "false",
+                                units: "px",
+                                "inkscape:window-width": "1920",
+                                "inkscape:window-height": "1017",
+                                "inkscape:window-x": "-8",
+                                "inkscape:window-y": "-8",
+                                "inkscape:window-maximized": "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "metadata",
+                              { attrs: { id: "metadata951" } },
+                              [
+                                _c(
+                                  "rdf:RDF",
+                                  [
+                                    _c(
+                                      "cc:Work",
+                                      { attrs: { "rdf:about": "" } },
+                                      [
+                                        _c("dc:format", [
+                                          _vm._v("image/svg+xml")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("dc:type", {
+                                          attrs: {
+                                            "rdf:resource":
+                                              "http://purl.org/dc/dcmitype/StillImage"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("dc:title")
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "g",
+                              {
+                                attrs: {
+                                  "inkscape:label": "Capa 1",
+                                  "inkscape:groupmode": "layer",
+                                  id: "layer1",
+                                  transform: "translate(0,-270.54165)"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.26458332" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 152.47182,104.93479 h -1.29117 v -0.57943 a 1.5266458,1.5266458 0 0 0 -1.16152,-1.47373 v -4.071945 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.38629 h -9.1731 a 0.38629167,0.38629167 0 0 0 -0.38629,0.38629 v 10.620385 a 0.38629167,0.38629167 0 0 0 0.38629,0.38893 h 5.969 v 0.31221 a 1.5213542,1.5213542 0 0 0 1.52135,1.51606 h 3.39461 a 1.5187083,1.5187083 0 0 0 1.51871,-1.51606 v -4.81012 a 0.38629167,0.38629167 0 0 0 -0.38894,-0.3863 z m -2.0664,-0.57943 v 0.57943 h -1.524 v -0.57943 a 0.762,0.762 0 0 1 1.524,0 z m -9.55939,4.68841 v -9.845145 h 8.39787 v 3.704165 a 1.524,1.524 0 0 0 -1.13771,1.4658 v 0.57943 h -1.29116 a 0.38629167,0.38629167 0 0 0 -0.38894,0.3863 v 3.70945 z m 11.2395,1.08744 a 0.74347917,0.74347917 0 0 1 -0.74348,0.74083 h -3.39461 a 0.74347917,0.74347917 0 0 1 -0.74612,-0.74083 v -4.42119 h 0.90487 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 1.524 v 1.0213 a 0.3889375,0.3889375 0 0 0 0.77523,0 v -1.0213 h 0.90488 z",
+                                    id: "path18"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.26458332",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect815",
+                                    width: "7.50734",
+                                    height: "5.3258348",
+                                    x: "9.7840652",
+                                    y: "279.89655",
+                                    ry: "0.017069498"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.20391062",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect835",
+                                    width: "0.75056797",
+                                    height: "5.325839",
+                                    x: "17.102013",
+                                    y: "280.09656",
+                                    ry: "0.019711599"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.17213303",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect835-0",
+                                    width: "0.70332098",
+                                    height: "4.0501695",
+                                    x: "17.653",
+                                    y: "280.09656",
+                                    ry: "0.014990185"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("rect", {
+                                  staticStyle: {
+                                    opacity: "1",
+                                    fill: "#ffffff",
+                                    "fill-opacity": "1",
+                                    stroke: "none",
+                                    "stroke-width": "0.15452284",
+                                    "stroke-opacity": "1"
+                                  },
+                                  attrs: {
+                                    id: "rect835-0-6",
+                                    width: "1.0180732",
+                                    height: "2.2547827",
+                                    x: "17.852581",
+                                    y: "280.09656",
+                                    ry: "0.0083452333"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  staticClass: "cls-1",
+                                  staticStyle: { "stroke-width": "0.35029563" },
+                                  attrs: {
+                                    "inkscape:connector-curvature": "0",
+                                    d:
+                                      "m 19.328808,279.8071 -7.972015,-0.35232 a 0.41133633,0.41612291 0 1 0 -0.03482,0.8315 l 7.428705,0.32413 -1.459273,4.61197 h -6.502298 l -1.1736883,-6.46873 a 0.41793009,0.42279337 0 0 0 -0.25424,-0.31357 l -1.925963,-0.76455 a 0.41133334,0.41611989 0 0 0 -0.299515,0.77512 l 1.71003,0.67998 1.1945843,6.58502 a 0.41096457,0.41574683 0 0 0 0.407481,0.35232 h 0.195035 l -0.449276,1.27191 a 0.34827506,0.35232779 0 0 0 0.0383,0.31709 0.34827506,0.35232779 0 0 0 0.282103,0.14799 h 0.31693 a 1.2363765,1.2507637 0 1 0 2.159305,0.83501 1.2259282,1.2401939 0 0 0 -0.320412,-0.83501 h 2.709579 a 1.2328937,1.2472405 0 0 0 0.915964,2.08577 1.2398592,1.254287 0 0 0 1.239858,-1.25076 1.2259282,1.2401939 0 0 0 -0.320413,-0.83501 h 0.386585 a 0.34827726,0.35233004 0 1 0 0,-0.70466 h -6.58588 l 0.369171,-1.05699 h 6.216709 a 0.41096457,0.41574683 0 0 0 0.39355,-0.28891 l 1.716997,-5.42233 a 0.41793009,0.42279337 0 0 0 -0.05224,-0.35232 0.42489559,0.42983994 0 0 0 -0.320413,-0.17969 z m -3.043925,8.27267 a 0.5502746,0.55667796 0 1 1 -0.546792,0.55667 0.5502746,0.55667796 0 0 1 0.546792,-0.55667 z m -4.527575,0 a 0.5502746,0.55667796 0 1 1 -0.553757,0.55667 0.54679186,0.55315466 0 0 1 0.553757,-0.55667 z m 6.488363,-13.7866 0.599035,-1.05697 a 0.40174511,0.40642006 0 1 1 0.696549,0.40518 l -0.599033,1.05698 a 0.39703356,0.40165372 0 0 1 -0.348274,0.20083 0.41096457,0.41574683 0 0 1 -0.198517,-0.0529 0.40051633,0.40517699 0 0 1 -0.146276,-0.55316 z m 3.876303,4.32307 a 0.40051633,0.40517699 0 0 1 0.146275,-0.55315 l 1.044826,-0.60601 a 0.40174672,0.4064217 0 1 1 0.400516,0.70466 l -1.044825,0.60599 a 0.34827506,0.35232779 0 0 1 -0.198517,0.0564 0.40051633,0.40517699 0 0 1 -0.348275,-0.20435 z m 3.357371,5.15456 a 0.40051633,0.40517699 0 0 1 -0.400517,0.40518 H 23.87728 a 0.40051932,0.40518001 0 0 1 0,-0.81036 h 1.201548 a 0.39703356,0.40165372 0 0 1 0.400517,0.40518 z m -1.633411,6.16573 a 0.40051633,0.40517699 0 0 1 -0.348274,0.20435 0.42141283,0.42631664 0 0 1 -0.201999,-0.0564 l -1.044826,-0.606 a 0.40051633,0.40517699 0 0 1 -0.146275,-0.55316 0.39703356,0.40165372 0 0 1 0.543309,-0.14797 l 1.044826,0.606 a 0.39703356,0.40165372 0 0 1 0.146275,0.55315 z m -4.315127,3.96017 a 0.40051633,0.40517699 0 0 1 -0.146276,0.55316 0.36917156,0.37346747 0 0 1 -0.198517,0.0529 0.39703356,0.40165372 0 0 1 -0.348274,-0.20082 l -0.599033,-1.05698 a 0.40174503,0.40641998 0 0 1 0.696549,-0.40518 z m -5.840572,0.58486 v 1.21553 a 0.40051659,0.40517725 0 1 1 -0.801033,0 v -1.21553 a 0.40051659,0.40517725 0 0 1 0.801033,0 z m -5.3460223,-1.23314 -0.602516,1.05698 a 0.40399906,0.40870026 0 0 1 -0.546792,0.14797 0.40399906,0.40870026 0 0 1 -0.146276,-0.55315 l 0.602516,-1.05698 a 0.40174598,0.40642095 0 1 1 0.696551,0.40518 z m -3.8763021,-4.32659 a 0.39703356,0.40165372 0 0 1 -0.1462754,0.55315 l -1.0448246,0.60953 a 0.41793009,0.42279337 0 0 1 -0.1985168,0.0564 0.40051633,0.40517699 0 0 1 -0.2019996,-0.7575 l 1.0448254,-0.60958 a 0.40399906,0.40870026 0 0 1 0.546791,0.14798 z M 2.7021567,284.17598 H 1.5006078 a 0.40051932,0.40518001 0 1 1 0,-0.81036 h 1.2015489 a 0.40051932,0.40518001 0 0 1 0,0.81036 z m 1.7657539,-5.55974 a 0.40051633,0.40517699 0 0 1 -0.3482742,0.20435 0.38310256,0.38756061 0 0 1 -0.1985168,-0.0564 l -1.0448254,-0.60596 a 0.40174476,0.40641971 0 0 1 0.4005164,-0.70465 l 1.0448246,0.606 a 0.40051633,0.40517699 0 0 1 0.1462754,0.55316 z m 2.5807181,-4.97135 a 0.40174545,0.40642043 0 0 1 0.69655,-0.40518 l 0.602517,1.05699 a 0.40051633,0.40517699 0 0 1 -0.146275,0.55316 0.41444733,0.4192701 0 0 1 -0.202001,0.0529 0.39703356,0.40165372 0 0 1 -0.348275,-0.20083 z m 5.8405733,-0.58486 v -1.21554 a 0.40051659,0.40517725 0 0 1 0.801033,0 v 1.21554 a 0.40051659,0.40517725 0 0 1 -0.801033,0 z",
+                                    id: "path42"
+                                  }
+                                })
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(
+                          "\n\t\t\t\t\t\t\t\t\tCompra Completada\n\t\t\t\t\t\t\t\t"
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("fieldset", [
+                    _c("div", { staticClass: "product-list" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12 col-lg-8" }, [
+                          _c(
+                            "div",
+                            { staticClass: "row" },
+                            [
+                              _c("div", { staticClass: "col-12" }, [
+                                _c("div", { staticClass: "wizard-title" }, [
+                                  _c("h3", [
+                                    _vm._v("Mi carrito de compras "),
                                     _c(
                                       "span",
-                                      { staticClass: "product-info" },
-                                      [_vm._v("Total a pagar: ")]
-                                    ),
-                                    _vm._v(" "),
+                                      { staticClass: "quantity-span" },
+                                      [_vm._v(_vm._s(_vm.cant_cart))]
+                                    )
+                                  ])
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.products_cart, function(
+                                product_cart,
+                                index
+                              ) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: product_cart.id,
+                                    staticClass: "col-6 col-lg-12"
+                                  },
+                                  [
                                     _c(
                                       "div",
-                                      { staticClass: "product-prices" },
-                                      [
-                                        product_cart.product.discount > 0
-                                          ? _c("p", [
-                                              _vm._v(
-                                                "$ 15 / Bs " +
-                                                  _vm._s(
-                                                    _vm._f("FormatNumber")(
-                                                      product_cart.product
-                                                        .discount *
-                                                        product_cart.cant
-                                                    )
-                                                  )
-                                              )
-                                            ])
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        product_cart.product.discount <= 0
-                                          ? _c("p", [
-                                              _vm._v(
-                                                "$ 15 / Bs " +
-                                                  _vm._s(
-                                                    _vm._f("FormatNumber")(
-                                                      product_cart.product
-                                                        .price *
-                                                        product_cart.cant
-                                                    )
-                                                  )
-                                              )
-                                            ])
-                                          : _vm._e()
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "remove-product" },
+                                      { staticClass: "product-block" },
                                       [
                                         _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-delete-section",
-                                            attrs: { type: "button" },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.removeCart(index)
-                                              }
-                                            }
-                                          },
+                                          "div",
+                                          { staticClass: "product-img" },
                                           [
-                                            _vm._v("Eliminar del carrito "),
                                             _c("img", {
                                               attrs: {
                                                 src:
-                                                  "assets/img/eliminar-bio-mercados.svg"
+                                                  "storage/" +
+                                                  product_cart.product.photo
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "product-content" },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass: "product-title",
+                                                attrs: { href: "#" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    product_cart.product.name
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              { staticClass: "product-info" },
+                                              [
+                                                _vm._v(
+                                                  "Descripción: " +
+                                                    _vm._s(
+                                                      product_cart.description_short
+                                                    )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass: "product-quantity"
+                                              },
+                                              [
+                                                _c("label", [
+                                                  _vm._v("Cantidad")
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "product-quantity-group"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            product_cart.cant,
+                                                          expression:
+                                                            "product_cart.cant"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        id: "quantity2",
+                                                        type: "text",
+                                                        name: "quantity"
+                                                      },
+                                                      domProps: {
+                                                        value: product_cart.cant
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            product_cart,
+                                                            "cant",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _vm._m(0, true)
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "product-prices" },
+                                              [
+                                                product_cart.product.discount >
+                                                0
+                                                  ? _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "product-descount"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "$ 4 / " +
+                                                            _vm._s(
+                                                              _vm._f(
+                                                                "FormatNumber"
+                                                              )(
+                                                                product_cart
+                                                                  .product.price
+                                                              )
+                                                            )
+                                                        )
+                                                      ]
+                                                    )
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                product_cart.product.discount >
+                                                0
+                                                  ? _c("p", [
+                                                      _vm._v(
+                                                        "$ 3 / Bs " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatNumber"
+                                                            )(
+                                                              product_cart
+                                                                .product
+                                                                .discount
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                product_cart.product.price >
+                                                  0 &&
+                                                product_cart.product.discount <=
+                                                  0
+                                                  ? _c("p", [
+                                                      _vm._v(
+                                                        "$ 3 / Bs " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatNumber"
+                                                            )(
+                                                              product_cart
+                                                                .product.price
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  : _vm._e()
+                                              ]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "product-add" },
+                                          [
+                                            _c(
+                                              "span",
+                                              { staticClass: "product-info" },
+                                              [_vm._v("Total a pagar: ")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "product-prices" },
+                                              [
+                                                product_cart.product.discount >
+                                                0
+                                                  ? _c("p", [
+                                                      _vm._v(
+                                                        "$ 15 / Bs " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatNumber"
+                                                            )(
+                                                              product_cart
+                                                                .product
+                                                                .discount *
+                                                                product_cart.cant
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                product_cart.product.discount <=
+                                                0
+                                                  ? _c("p", [
+                                                      _vm._v(
+                                                        "$ 15 / Bs " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatNumber"
+                                                            )(
+                                                              product_cart
+                                                                .product.price *
+                                                                product_cart.cant
+                                                            )
+                                                          )
+                                                      )
+                                                    ])
+                                                  : _vm._e()
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "remove-product" },
+                                              [
+                                                _c(
+                                                  "button",
+                                                  {
+                                                    staticClass:
+                                                      "btn btn-delete-section",
+                                                    attrs: { type: "button" },
+                                                    on: {
+                                                      click: function($event) {
+                                                        return _vm.removeCart(
+                                                          index
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "Eliminar del carrito "
+                                                    ),
+                                                    _c("img", {
+                                                      attrs: {
+                                                        src:
+                                                          "assets/img/eliminar-bio-mercados.svg"
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _vm._m(1)
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-lg-4" }, [
+                          _c("div", { staticClass: "card" }, [
+                            _c("div", { staticClass: "order-block" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-lg-12" }, [
+                                  _c(
+                                    "h3",
+                                    { staticClass: "order-number order-text" },
+                                    [_vm._v("Resumen de la compra")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "order-content" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "order-description" },
+                                      _vm._l(_vm.products_cart, function(
+                                        product_cart
+                                      ) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: product_cart.id,
+                                            staticClass: "row"
+                                          },
+                                          [
+                                            _c("p", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  product_cart.product.name
+                                                ) +
+                                                  " (" +
+                                                  _vm._s(product_cart.cant) +
+                                                  " Articulos)"
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            product_cart.product.discount > 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .discount
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            product_cart.product.discount <= 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .price
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "order-description order-total"
+                                      },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("p", [_vm._v("Total")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "h3",
+                                            { staticClass: "order-text" },
+                                            [
+                                              _vm._v(
+                                                "100$ / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      _vm.total_cart
+                                                    )
+                                                  ) +
+                                                  " "
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(2)
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("fieldset", [
+                    _c("div", { staticClass: "thanks" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12" }, [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "thanks-footer" }, [
+                            _c(
+                              "h3",
+                              {
+                                staticClass: "order-text",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#ModalOrder"
+                                }
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 21.43 19.97"
+                                    }
+                                  },
+                                  [
+                                    _c("title", [
+                                      _vm._v("mis-pedidos-bio-mercados")
+                                    ]),
+                                    _c(
+                                      "g",
+                                      {
+                                        attrs: {
+                                          id: "Capa_2",
+                                          "data-name": "Capa 2"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Perfil_de_Usuario",
+                                              "data-name": "Perfil de Usuario"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
+                                              }
+                                            }),
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"
                                               }
                                             })
                                           ]
                                         )
                                       ]
                                     )
-                                  ])
-                                ])
-                              ]
-                            )
-                          })
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-lg-4" }, [
-                      _c("div", { staticClass: "card" }, [
-                        _c("div", { staticClass: "order-block" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-lg-12" }, [
-                              _c(
-                                "h3",
-                                { staticClass: "order-number order-text" },
-                                [_vm._v("Resumen de la compra")]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "order-content" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "order-description" },
-                                  _vm._l(_vm.products_cart, function(
-                                    product_cart
-                                  ) {
-                                    return _c(
-                                      "div",
-                                      {
-                                        key: product_cart.id,
-                                        staticClass: "row"
-                                      },
-                                      [
-                                        _c("p", [
-                                          _vm._v(
-                                            _vm._s(product_cart.product.name) +
-                                              " (" +
-                                              _vm._s(product_cart.cant) +
-                                              " Articulos)"
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        product_cart.product.discount > 0
-                                          ? _c(
-                                              "h3",
-                                              { staticClass: "order-text" },
-                                              [
-                                                _vm._v(
-                                                  "10$ / Bs " +
-                                                    _vm._s(
-                                                      _vm._f("FormatNumber")(
-                                                        product_cart.product
-                                                          .discount
-                                                      )
-                                                    )
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        product_cart.product.discount <= 0
-                                          ? _c(
-                                              "h3",
-                                              { staticClass: "order-text" },
-                                              [
-                                                _vm._v(
-                                                  "10$ / Bs " +
-                                                    _vm._s(
-                                                      _vm._f("FormatNumber")(
-                                                        product_cart.product
-                                                          .price
-                                                      )
-                                                    )
-                                                )
-                                              ]
-                                            )
-                                          : _vm._e()
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "order-description order-total"
-                                  },
-                                  [
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("p", [_vm._v("Total")]),
-                                      _vm._v(" "),
-                                      _c("h3", { staticClass: "order-text" }, [
-                                        _vm._v(
-                                          "100$ / Bs " +
-                                            _vm._s(
-                                              _vm._f("FormatNumber")(
-                                                _vm.total_cart
-                                              )
-                                            ) +
-                                            " "
-                                        )
-                                      ])
-                                    ])
                                   ]
+                                ),
+                                _vm._v(
+                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\n\t\t\t\t\t\t\t\t\t\t\t\t"
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _vm._m(2)
-                            ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-submit",
+                                attrs: { href: "/catalago.php", type: "button" }
+                              },
+                              [_vm._v("SEGUIR COMPRANDO")]
+                            )
                           ])
                         ])
                       ])
                     ])
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
-              _vm._v(" "),
-              _c("fieldset", [
-                _c("div", { staticClass: "thanks" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "thanks-footer" }, [
-                        _c(
-                          "h3",
-                          {
-                            staticClass: "order-text",
-                            attrs: {
-                              "data-toggle": "modal",
-                              "data-target": "#ModalOrder"
-                            }
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 21.43 19.97"
-                                }
-                              },
-                              [
-                                _c("title", [
-                                  _vm._v("mis-pedidos-bio-mercados")
-                                ]),
-                                _c(
-                                  "g",
-                                  {
-                                    attrs: {
-                                      id: "Capa_2",
-                                      "data-name": "Capa 2"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Perfil_de_Usuario",
-                                          "data-name": "Perfil de Usuario"
-                                        }
-                                      },
-                                      [
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"
-                                          }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(
-                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-submit",
-                            attrs: { href: "/catalago.php", type: "button" }
-                          },
-                          [_vm._v("SEGUIR COMPRANDO")]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
               ])
             ])
-          ])
-        ])
+          : _vm._e()
       ])
     ])
   ])
@@ -44800,7 +44931,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -44847,7 +44978,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "paypal" } },
                       [
                         _c("span"),
-                        _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -44879,7 +45010,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "petro" } },
                       [
                         _c("span"),
-                        _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -44915,7 +45046,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -52277,7 +52408,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tDatos personales\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tDatos personales\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -52350,7 +52481,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis direcciones\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis direcciones\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -52457,7 +52588,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis pedidos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis pedidos\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -52546,7 +52677,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -52729,7 +52860,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -52893,7 +53024,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -52983,7 +53114,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -53139,7 +53270,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -53303,7 +53434,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -53410,7 +53541,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -53485,8 +53616,12 @@ var render = function() {
                                                     [
                                                       _c("img", {
                                                         attrs: {
-                                                          src:
-                                                            "storage/products/February2020/rxC19yA0bg8xoKiKqyRk.jpg"
+                                                          src: _vm._f(
+                                                            "MediumImage"
+                                                          )(
+                                                            "storage/" +
+                                                              favorite.photo
+                                                          )
                                                         }
                                                       }),
                                                       _vm._v(" "),
@@ -53786,7 +53921,61 @@ var render = function() {
                                                     ]
                                                   ),
                                                   _vm._v(" "),
-                                                  _vm._m(32, true),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "product-content"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "a",
+                                                        {
+                                                          staticClass:
+                                                            "product-title",
+                                                          attrs: { href: "#" }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              favorite.product_name
+                                                            )
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "product-info"
+                                                        },
+                                                        [_vm._v("500 g")]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "product-prices"
+                                                        },
+                                                        [
+                                                          _c("p", [
+                                                            _vm._v(
+                                                              "Bs " +
+                                                                _vm._s(
+                                                                  _vm._f(
+                                                                    "FormatNumber"
+                                                                  )(
+                                                                    favorite.price
+                                                                  )
+                                                                )
+                                                            )
+                                                          ])
+                                                        ]
+                                                      )
+                                                    ]
+                                                  ),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -53794,7 +53983,25 @@ var render = function() {
                                                       staticClass: "product-add"
                                                     },
                                                     [
-                                                      _vm._m(33, true),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            "product-info"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Disponibles: "
+                                                          ),
+                                                          _c("b", [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                favorite.qty_avaliable
+                                                              ) + " en Stock"
+                                                            )
+                                                          ])
+                                                        ]
+                                                      ),
                                                       _vm._v(" "),
                                                       _c(
                                                         "form",
@@ -53802,7 +54009,85 @@ var render = function() {
                                                           attrs: { action: "" }
                                                         },
                                                         [
-                                                          _vm._m(34, true),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "product-quantity"
+                                                            },
+                                                            [
+                                                              _c("label", [
+                                                                _vm._v(
+                                                                  "Cantidad"
+                                                                )
+                                                              ]),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "product-quantity-group"
+                                                                },
+                                                                [
+                                                                  _c("input", {
+                                                                    staticClass:
+                                                                      "form-control",
+                                                                    attrs: {
+                                                                      id:
+                                                                        "quantity2",
+                                                                      type:
+                                                                        "text",
+                                                                      name:
+                                                                        "quantity",
+                                                                      value: "1"
+                                                                    }
+                                                                  }),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "product-quantity-buttons"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "span",
+                                                                        {
+                                                                          staticClass:
+                                                                            "max-stock",
+                                                                          staticStyle: {
+                                                                            display:
+                                                                              "none"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            _vm._s(
+                                                                              favorite.qty_avaliable
+                                                                            )
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _vm._m(
+                                                                        32,
+                                                                        true
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _vm._m(
+                                                                        33,
+                                                                        true
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          ),
                                                           _vm._v(" "),
                                                           _c(
                                                             "div",
@@ -53819,6 +54104,15 @@ var render = function() {
                                                                   attrs: {
                                                                     type:
                                                                       "button"
+                                                                  },
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      return _vm.addToCart(
+                                                                        favorite
+                                                                      )
+                                                                    }
                                                                   }
                                                                 },
                                                                 [
@@ -53898,7 +54192,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -54018,7 +54312,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -54110,7 +54404,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               )
@@ -54145,16 +54439,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(35),
+                                  _vm._m(34),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(35),
+                                    _vm._v(" "),
                                     _vm._m(36),
                                     _vm._v(" "),
                                     _vm._m(37),
                                     _vm._v(" "),
                                     _vm._m(38),
-                                    _vm._v(" "),
-                                    _vm._m(39),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -54278,7 +54572,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -54287,13 +54581,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(39),
+                                    _vm._v(" "),
                                     _vm._m(40),
                                     _vm._v(" "),
                                     _vm._m(41),
                                     _vm._v(" "),
                                     _vm._m(42),
-                                    _vm._v(" "),
-                                    _vm._m(43),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -54442,7 +54736,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -54465,16 +54759,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(44),
+                                  _vm._m(43),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(44),
+                                    _vm._v(" "),
                                     _vm._m(45),
                                     _vm._v(" "),
                                     _vm._m(46),
                                     _vm._v(" "),
                                     _vm._m(47),
-                                    _vm._v(" "),
-                                    _vm._m(48),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -54549,7 +54843,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -57712,7 +58006,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57747,7 +58041,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57780,7 +58074,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57815,7 +58109,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57848,7 +58142,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57883,7 +58177,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57940,7 +58234,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -57975,7 +58269,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58008,7 +58302,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58043,7 +58337,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58100,7 +58394,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58135,7 +58429,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58181,72 +58475,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-content" }, [
-      _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
-        _vm._v("Harina Pan")
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "product-info" }, [_vm._v("500 g")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-prices" }, [
-        _c("p", [_vm._v("Bs 100.000,00")])
-      ])
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn increaseValue",
+        attrs: { type: "button", onclick: "" }
+      },
+      [
+        _c("img", {
+          attrs: { src: "assets/img/increase.png", alt: "Increase" }
+        })
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "product-info" }, [
-      _vm._v("Disponibles: "),
-      _c("b", [_vm._v("10 en Stock")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-quantity" }, [
-      _c("label", [_vm._v("Cantidad")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-quantity-group" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { id: "quantity2", type: "text", name: "quantity", value: "1" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "product-quantity-buttons" }, [
-          _c(
-            "span",
-            { staticClass: "max-stock", staticStyle: { display: "none" } },
-            [_vm._v("10")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn increaseValue",
-              attrs: { type: "button", onclick: "" }
-            },
-            [
-              _c("img", {
-                attrs: { src: "assets/img/increase.png", alt: "Increase" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn decreaseValue", attrs: { type: "button" } },
-            [
-              _c("img", {
-                attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-              })
-            ]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn decreaseValue", attrs: { type: "button" } },
+      [
+        _c("img", {
+          attrs: { src: "assets/img/decrease.png", alt: "decrease" }
+        })
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -58291,7 +58545,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58326,7 +58580,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58359,7 +58613,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58394,7 +58648,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58451,7 +58705,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -58486,7 +58740,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -71536,8 +71790,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
