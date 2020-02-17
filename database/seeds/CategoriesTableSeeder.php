@@ -19,16 +19,16 @@ class CategoriesTableSeeder extends Seeder
         \DB::table('categories')->insert(array (
             0 => 
             array (
-                'id' => 12,
-                'name' => 'Verduras, Frutas y Hortalizas',
+                'id' => 9,
+                'name' => 'Mascotas',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
                 'order' => 12,
                 'slug' => NULL,
                 'status' => 'A',
-                'created_at' => '2020-01-29 15:29:49',
-                'updated_at' => '2020-02-06 02:28:55',
+                'created_at' => '2020-01-29 15:28:51',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             1 => 
             array (
@@ -41,33 +41,33 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:41',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             2 => 
-            array (
-                'id' => 1,
-                'name' => 'Víveres',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => 1,
-                'order' => 2,
-                'slug' => 'bodegon',
-                'status' => 'A',
-                'created_at' => NULL,
-                'updated_at' => '2020-02-06 02:28:55',
-            ),
-            3 => 
             array (
                 'id' => 5,
                 'name' => 'Chocolates, Cereales y Snacks',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
-                'order' => 3,
+                'order' => 2,
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:12',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
+            ),
+            3 => 
+            array (
+                'id' => 1,
+                'name' => 'Víveres',
+                'description' => NULL,
+                'image' => NULL,
+                'parent_id' => 1,
+                'order' => 3,
+                'slug' => 'bodegon',
+                'status' => 'A',
+                'created_at' => NULL,
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             4 => 
             array (
@@ -80,7 +80,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => 'category-1',
                 'status' => 'A',
                 'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             5 => 
             array (
@@ -93,7 +93,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:28:12',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             6 => 
             array (
@@ -106,7 +106,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => 'category-2',
                 'status' => 'A',
                 'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             7 => 
             array (
@@ -119,7 +119,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:53:03',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             8 => 
             array (
@@ -132,46 +132,46 @@ class CategoriesTableSeeder extends Seeder
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-24 18:52:55',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
             9 => 
-            array (
-                'id' => 9,
-                'name' => 'Mascotas',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => NULL,
-                'order' => 9,
-                'slug' => NULL,
-                'status' => 'A',
-                'created_at' => '2020-01-29 15:28:51',
-                'updated_at' => '2020-02-06 02:28:55',
-            ),
-            10 => 
             array (
                 'id' => 10,
                 'name' => 'Quesos y Charcutería',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
-                'order' => 10,
+                'order' => 9,
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:29:17',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 11,
                 'name' => 'Pollo y Carnes',
                 'description' => NULL,
                 'image' => NULL,
                 'parent_id' => NULL,
-                'order' => 11,
+                'order' => 10,
                 'slug' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-01-29 15:29:30',
-                'updated_at' => '2020-02-06 02:28:55',
+                'updated_at' => '2020-02-16 20:39:30',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'Verduras, Frutas y Hortalizas',
+                'description' => NULL,
+                'image' => NULL,
+                'parent_id' => NULL,
+                'order' => 11,
+                'slug' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-01-29 15:29:49',
+                'updated_at' => '2020-02-16 20:39:30',
             ),
         ));
         

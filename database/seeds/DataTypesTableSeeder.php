@@ -379,24 +379,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             20 => 
             array (
-                'id' => 43,
-                'name' => 'advs',
-                'slug' => 'advs',
-                'display_name_singular' => 'Publicidad',
-                'display_name_plural' => 'Publicidades',
-                'icon' => NULL,
-                'model_name' => 'App\\Advs',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-01-29 02:11:23',
-                'updated_at' => '2020-02-06 02:42:01',
-                'server_side' => 0,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-            ),
-            21 => 
-            array (
                 'id' => 23,
                 'name' => 'packagings',
                 'slug' => 'packagings',
@@ -413,7 +395,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 20,
                 'name' => 'brands',
@@ -431,7 +413,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 45,
                 'name' => 'packages',
@@ -449,6 +431,24 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
+            23 => 
+            array (
+                'id' => 43,
+                'name' => 'advs',
+                'slug' => 'advs',
+                'display_name_singular' => 'Publicidad',
+                'display_name_plural' => 'Publicidades',
+                'icon' => NULL,
+                'model_name' => 'App\\Advs',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-01-29 02:11:23',
+                'updated_at' => '2020-02-17 13:28:31',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
             24 => 
             array (
                 'id' => 26,
@@ -461,7 +461,7 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => true,
                 'created_at' => '2020-01-24 15:05:08',
-                'updated_at' => '2020-02-11 15:10:46',
+                'updated_at' => '2020-02-17 18:45:54',
                 'server_side' => 0,
                 'controller' => NULL,
                 'policy_name' => NULL,
