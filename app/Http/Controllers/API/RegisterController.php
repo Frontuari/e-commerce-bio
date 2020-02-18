@@ -46,7 +46,7 @@ class RegisterController extends BaseController
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => password_hash($data['password'],PASSWORD_BCRYPT),
             'peoples_id' => $people->id,
             'groups_id' => '1',
             'coins_id' => '1'

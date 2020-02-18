@@ -59,14 +59,14 @@
 										<h3>Acceder a la cuenta</h3>
 										<div class="form-group">
 											<label>Correo electrónico</label>
-											<input type="text" class="form-control" name="email">
+											<input type="text" class="form-control" name="email" v-model="user.email">
 										</div>
 										<div class="form-group">
 											<label>Contraseña</label>
-											<input type="pass" class="form-control" name="password">
+											<input type="password" class="form-control" name="password" v-model="user.pass">
 										</div>
 										<div class="form-group">
-											<button type="submit" class="btn">Entrar</button>
+											<button type="button" @click="login()" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
 											<small>¿No tienes cuenta? <a  href="/join">Registrate aquí</a></small>
@@ -182,7 +182,13 @@ export default {
 			cant_cart: 0,
 			cant_favorite: 0,
 			categories: [],
-			products: []
+			products: [],
+			user: {
+				name: '',
+				email: '',
+				pass: ''
+			},
+			logged: false
         }
     },
     methods: {
@@ -200,6 +206,10 @@ export default {
 			}else {
 				this.cant_favorite = 0;
 			}
+		},
+		async login() {
+			const response = await axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass)
+			console.log("respuesta login::> ",response);
 		}
     },
     created() {

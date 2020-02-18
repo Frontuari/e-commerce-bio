@@ -1,5 +1,4 @@
 <template>
-	
 	<section id="catalogo" class="main-content">
 		<div class="container-fluid">
 			<div class="row">
@@ -298,14 +297,6 @@
 				localStorage.setItem('products', JSON.stringify(products));
 			}
         },
-        filters: {
-			FormatNumber: function (num) {
-				num = parseFloat(num).toFixed(2);
-				const arrNum = num.split(".");
-				const decimal = arrNum[1];
-				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			}
-		},
         mounted() {
 			this.getRecent();
 		},
