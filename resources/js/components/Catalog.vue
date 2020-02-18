@@ -312,7 +312,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("+")+"+limit="+this.limitP+"+order="+this.orderP+"+precio="+this.rangeP;
+				return this.filterP.join("+")+"+limit="+this.limitP+"+order="+this.orderP+"+precio="+this.min_price+","+this.max_price;
 			}
 		}
     }
