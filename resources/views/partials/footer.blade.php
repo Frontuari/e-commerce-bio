@@ -231,17 +231,77 @@
 
 </main>
 	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>	
-	<script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/popper.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
-	<!--<script type="text/javascript" src="{{ asset('assets/js/multirange.js') }}"></script>-->
-
-	<script type="text/javascript" src="{{ asset('assets/js/range.js') }}"></script>
 	@yield('js')
 	<script>
 
 		jQuery(document).ready(function($){
+
+			var $range = $(".js-range-slider");
+		    var $inputFrom = $(".js-input-from");
+		    var $inputTo = $(".js-input-to");
+		    var instance;
+		    var min = 50000;
+		    var max = 3000000;
+		    var from = 100000;
+		    var to = 800000;
+		    
+		    $range.ionRangeSlider({
+		        skin: "round",
+		        type: "double",
+		        min: min,
+		        max: max,
+		        from: from,
+		        to: to,
+		        prefix: "Bs",
+		        onStart: updateInputs,
+		        onChange: updateInputs,
+		        onFinish: updateInputs
+		    });
+		    instance = $range.data("ionRangeSlider");
+		    
+		    function updateInputs (data) {
+		        from = data.from;
+		        to = data.to;
+		    
+		        $inputFrom.prop("value", from);
+		        $inputTo.prop("value", to);
+		    }
+		    
+		    $inputFrom.on("change", function () {
+		        var val = $(this).prop("value");
+		    
+		        // validate
+		        if (val < min) {
+		            val = min;
+		        } else if (val > to) {
+		            val = to;
+		        }
+		    
+		        instance.update({
+		            from: val
+		        });
+		    
+		        $(this).prop("value", val);
+		    
+		    });
+		    
+		    $inputTo.on("change", function () {
+		        var val = $(this).prop("value");
+		    
+		        // validate
+		        if (val < from) {
+		            val = from;
+		        } else if (val > max) {
+		            val = max;
+		        }
+		    
+		        instance.update({
+		            to: val
+		        });
+		    
+		        $(this).prop("value", val);
+		    });
 
 			var modal_principal = localStorage.getItem("ModalPrincipal");
 			if(modal_principal == 'visto')

@@ -40,8 +40,8 @@
 								  <hr>
 								<div class="extra-controls">
 									  <div class="form-group">
-									    <input type="number" class="js-input-from form-control" value="0" />
-									    <input type="number" class="js-input-to form-control" value="0" />
+									    <input type="number" class="js-input-from form-control" value="0" v-model="min_price" />
+									    <input type="number" class="js-input-to form-control" value="0" v-model="max_price" />
 									</div>
 								 </div>
 								
@@ -233,6 +233,8 @@
 				limitP: 10,
 				orderP: 'AZasc',
 				rangeP: '',
+				min_price: 100000,
+				max_price: 800000
             }
         },
         methods: {

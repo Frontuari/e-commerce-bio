@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-Route::get('/catalog', function(){
-	return view('catalog');
-});
+Route::get('/catalog','CatalogController@index')->name("Catalog");
 
 Route::get('/join', function(){
 	return view('register');
