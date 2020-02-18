@@ -264,12 +264,12 @@
 		        from = data.from;
 		        to = data.to;
 		    
-		        $inputFrom.prop("value", from);
-		        $inputTo.prop("value", to);
+		        $inputFrom.val(from);
+		        $inputTo.val(to);
 		    }
 		    
 		    $inputFrom.on("change", function () {
-		        var val = $(this).prop("value");
+		        var val = $(this).val();
 		    
 		        // validate
 		        if (val < min) {
@@ -282,12 +282,12 @@
 		            from: val
 		        });
 		    
-		        $(this).prop("value", val);
+		        $(this).val(val);
 		    
 		    });
 		    
 		    $inputTo.on("change", function () {
-		        var val = $(this).prop("value");
+		        var val = $(this).val();
 		    
 		        // validate
 		        if (val < from) {
@@ -300,7 +300,7 @@
 		            to: val
 		        });
 		    
-		        $(this).prop("value", val);
+		        $(this).val(val);
 		    });
 
 			var modal_principal = localStorage.getItem("ModalPrincipal");
