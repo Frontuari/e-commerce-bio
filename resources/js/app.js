@@ -36,6 +36,9 @@ Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
 
+// Vue.component('modal-producto',require('./components/ModalProducto.vue').default,{ props:{product: Object} });
+Vue.component('modal-combo', require('./components/ModalCombo.vue').default);
+
 Vue.filter('FormatNumber',function(num) {
     num = parseFloat(num).toFixed(2);
     const arrNum = num.split(".");

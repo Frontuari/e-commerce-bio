@@ -122,7 +122,6 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
-var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
 var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
 var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
@@ -145,8 +144,7 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    var fullPath = buildFullPath(config.baseURL, config.url);
-    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -207,11 +205,7 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
-      if (config.timeoutErrorMessage) {
-        timeoutErrorMessage = config.timeoutErrorMessage;
-      }
-      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -225,7 +219,7 @@ module.exports = function xhrAdapter(config) {
       var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -248,8 +242,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (!utils.isUndefined(config.withCredentials)) {
-      request.withCredentials = !!config.withCredentials;
+    if (config.withCredentials) {
+      request.withCredentials = true;
     }
 
     // Add responseType to request if needed
@@ -528,15 +522,7 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-
-  // Set config.method
-  if (config.method) {
-    config.method = config.method.toLowerCase();
-  } else if (this.defaults.method) {
-    config.method = this.defaults.method.toLowerCase();
-  } else {
-    config.method = 'get';
-  }
+  config.method = config.method ? config.method.toLowerCase() : 'get';
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -653,38 +639,6 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ "./node_modules/axios/lib/core/buildFullPath.js":
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
-
-/**
- * Creates a new URL by combining the baseURL with the requestedURL,
- * only when the requestedURL is not already an absolute URL.
- * If the requestURL is absolute, this function returns the requestedURL untouched.
- *
- * @param {string} baseURL The base URL
- * @param {string} requestedURL Absolute or relative URL to combine
- * @returns {string} The combined full path
- */
-module.exports = function buildFullPath(baseURL, requestedURL) {
-  if (baseURL && !isAbsoluteURL(requestedURL)) {
-    return combineURLs(baseURL, requestedURL);
-  }
-  return requestedURL;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/lib/core/createError.js":
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
@@ -729,6 +683,8 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
 var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
 var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
+var isAbsoluteURL = __webpack_require__(/*! ./../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ./../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -748,6 +704,11 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
+  // Support baseURL config
+  if (config.baseURL && !isAbsoluteURL(config.url)) {
+    config.url = combineURLs(config.baseURL, config.url);
+  }
+
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -762,7 +723,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers
+    config.headers || {}
   );
 
   utils.forEach(
@@ -885,23 +846,13 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
-  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
-  var defaultToConfig2Keys = [
-    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
-    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
-    'httpsAgent', 'cancelToken', 'socketPath'
-  ];
-
-  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
+  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -913,25 +864,13 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
-
-  var axiosKeys = valueFromConfig2Keys
-    .concat(mergeDeepPropertiesKeys)
-    .concat(defaultToConfig2Keys);
-
-  var otherKeys = Object
-    .keys(config2)
-    .filter(function filterAxiosKeys(key) {
-      return axiosKeys.indexOf(key) === -1;
-    });
-
-  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
+  utils.forEach([
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
+    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
+    'socketPath'
+  ], function defaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -1039,12 +978,13 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
-  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+  // Only Node.JS has a process variable that is of [[Class]] process
+  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
     adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
   }
   return adapter;
 }
@@ -1566,6 +1506,7 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1581,27 +1522,6 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
-}
-
-/**
- * Determine if a value is a Buffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Buffer, otherwise false
- */
-function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1658,6 +1578,16 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
 }
 
 /**
@@ -3711,6 +3641,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cant_favorite: 0,
       categories: [],
       products: [],
+      searched: [],
       user: {
         name: '',
         email: '',
@@ -3720,10 +3651,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    getCategories: function getCategories() {
-      var _this = this;
-
-      return _asyncToGenerator(
+    getCategories: function () {
+      var _getCategories = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -3736,38 +3665,62 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.categories = response.data.data;
+                this.categories = response.data.data;
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
-      }))();
-    },
-    SearchProducts: function SearchProducts(e) {
-      return _asyncToGenerator(
+        }, _callee, this);
+      }));
+
+      function getCategories() {
+        return _getCategories.apply(this, arguments);
+      }
+
+      return getCategories;
+    }(),
+    SearchProducts: function () {
+      var _SearchProducts = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+        var len, val, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log(e.target.value);
+                len = e.target.value.length;
+                val = e.target.value;
 
-              case 1:
+                if (!(len >= 3)) {
+                  _context2.next = 7;
+                  break;
+                }
+
+                _context2.next = 5;
+                return axios.get(URLSERVER + "api/products/search/" + val);
+
+              case 5:
+                response = _context2.sent;
+                this.searched = response.data.data;
+
+              case 7:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
-      }))();
-    },
-    getFavorites: function getFavorites() {
-      var _this2 = this;
+        }, _callee2, this);
+      }));
 
-      return _asyncToGenerator(
+      function SearchProducts(_x) {
+        return _SearchProducts.apply(this, arguments);
+      }
+
+      return SearchProducts;
+    }(),
+    getFavorites: function () {
+      var _getFavorites = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -3782,9 +3735,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.data.data.length > 0) {
-                  _this2.cant_favorite = response.data.data.length;
+                  this.cant_favorite = response.data.data.length;
                 } else {
-                  _this2.cant_favorite = 0;
+                  this.cant_favorite = 0;
                 }
 
               case 4:
@@ -3792,13 +3745,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.stop();
             }
           }
-        }, _callee3);
-      }))();
-    },
-    login: function login() {
-      var _this3 = this;
+        }, _callee3, this);
+      }));
 
-      return _asyncToGenerator(
+      function getFavorites() {
+        return _getFavorites.apply(this, arguments);
+      }
+
+      return getFavorites;
+    }(),
+    login: function () {
+      var _login = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         var response;
@@ -3807,7 +3764,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + _this3.user.email + "&password=" + _this3.user.pass);
+                return axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass);
 
               case 2:
                 response = _context4.sent;
@@ -3818,18 +3775,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context4.stop();
             }
           }
-        }, _callee4);
-      }))();
-    }
+        }, _callee4, this);
+      }));
+
+      function login() {
+        return _login.apply(this, arguments);
+      }
+
+      return login;
+    }()
   },
   created: function created() {
-    var _this4 = this;
+    var _this = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this4.cant_cart = data;
+      _this.cant_cart = data;
     });
     EventBus.$on('update_cantFavorite', function (data) {
-      _this4.cant_favorite = data;
+      _this.cant_favorite = data;
     });
   },
   mounted: function mounted() {
@@ -3840,6 +3803,120 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
     } else {
       this.cant_cart = 0;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalCombo.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalCombo.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      data: []
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalProducto.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalProducto.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      cantModal: 1
+    };
+  },
+  props: {
+    product: Object
+  },
+  methods: {
+    count: function count(type) {
+      if (type == 1) this.cantModal += 1;else if (type == 2) {
+        if (this.cantModal > 1) this.cantModal -= 1;
+      }
+    }
+  },
+  computed: {
+    totalModal: function totalModal() {
+      return this.product.price * this.cantModal;
     }
   }
 });
@@ -3931,6 +4008,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ModalProducto_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalProducto.vue */ "./resources/js/components/ModalProducto.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4073,59 +4151,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4133,29 +4159,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       recent: [],
       sold: [],
       best_price: [],
-      product: [],
+      product: {},
       cantModal: 1
     };
+  },
+  components: {
+    ModalProducto: _ModalProducto_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     getProduct: function () {
       var _getProduct = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
-        var response;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(objP) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.get(URLSERVER + 'api/products/' + id);
+                this.product = objP;
+                console.log("products::> ", this.product); // const response = await axios.get(URLSERVER+'api/products/'+id);
+                // this.product = response.data.data;
+                // this.cantModal = 1;
 
               case 2:
-                response = _context.sent;
-                this.product = response.data.data;
-                this.cantModal = 1;
-
-              case 5:
               case "end":
                 return _context.stop();
             }
@@ -4290,11 +4315,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getBestPrice;
     }(),
-    count: function count(type) {
-      if (type == 1) this.cantModal += 1;else if (type == 2) {
-        if (this.cantModal > 1) this.cantModal -= 1;
-      }
-    },
     addToCart: function addToCart(product) {
       var cart = [];
 
@@ -4352,11 +4372,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getRecent();
     this.getSold();
     this.getBestPrice();
-  },
-  computed: {
-    totalModal: function totalModal() {
-      return this.product.price * this.cantModal;
-    }
   }
 });
 
@@ -12698,6 +12713,28 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Ion.RangeSlid
     }());
 
 }));
+
+
+/***/ }),
+
+/***/ "./node_modules/is-buffer/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/is-buffer/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
 
 
 /***/ }),
@@ -40439,7 +40476,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.1
+ * @version 1.16.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -40785,7 +40822,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -40940,8 +40977,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -40962,8 +40999,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop);
-    var marginLeft = parseFloat(styles.marginLeft);
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -41902,8 +41939,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -44672,7 +44709,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tVerificación del pedido\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tVerificación del pedido\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45022,7 +45059,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tDatos de envío\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tDatos de envío\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45238,7 +45275,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tPagar Factura\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tPagar Factura\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45446,7 +45483,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tCompra Completada\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tCompra Completada\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     )
@@ -45998,7 +46035,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                  "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -47431,7 +47468,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -47478,7 +47515,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "paypal" } },
                       [
                         _c("span"),
-                        _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -47510,7 +47547,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "petro" } },
                       [
                         _c("span"),
-                        _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -47546,7 +47583,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -52480,13 +52517,27 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(2),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c("div", { staticClass: "keyup_search" }, [
+                    _c(
+                      "ol",
+                      _vm._l(_vm.searched, function(s) {
+                        return _c("li", { key: s.id }, [
+                          _c("i", {
+                            staticClass: "fa fa-search",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" " + _vm._s(s.name))
+                        ])
+                      }),
+                      0
+                    )
+                  ])
                 ]
               )
             ]
           ),
           _vm._v(" "),
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c(
             "div",
@@ -52497,7 +52548,7 @@ var render = function() {
                   "li",
                   { staticClass: "dropdown", attrs: { id: "nav-login" } },
                   [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -52585,7 +52636,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(6)
+                          _vm._m(5)
                         ])
                       ]
                     )
@@ -52620,7 +52671,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(7)
+                _vm._m(6)
               ])
             ]
           )
@@ -52637,7 +52688,7 @@ var render = function() {
       [
         _c("div", { staticClass: "container-fluid" }, [
           _c("div", { attrs: { id: "mainNavbar" } }, [
-            _vm._m(8),
+            _vm._m(7),
             _vm._v(" "),
             _c(
               "ul",
@@ -52712,7 +52763,7 @@ var render = function() {
                     attrs: { id: "nav-all-categories" }
                   },
                   [
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -52736,7 +52787,7 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm._m(10)
+                _vm._m(9)
               ],
               2
             )
@@ -52801,22 +52852,6 @@ var staticRenderFns = [
       { staticClass: "btn btn-search", attrs: { type: "submit" } },
       [_c("img", { attrs: { src: "assets/img/busqueda-bio.svg" } })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "keyup_search" }, [
-      _c("ol", [
-        _c("li", [
-          _c("i", {
-            staticClass: "fa fa-search",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" Ejemplo")
-        ])
-      ])
-    ])
   },
   function() {
     var _vm = this
@@ -53081,6 +53116,293 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "ModalProd",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "ModalProdLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "product-block" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-5" }, [
+                  _c("div", { staticClass: "product-img" }, [
+                    _c("img", {
+                      attrs: { src: "storage/" + _vm.product.photo }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-7" }, [
+                  _c("div", { staticClass: "product-description" }, [
+                    _c(
+                      "a",
+                      { staticClass: "product-title", attrs: { href: "#" } },
+                      [_vm._v(_vm._s(_vm.product.name))]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-prices" }, [
+                      _c("p", [
+                        _vm._v(
+                          "Bs " +
+                            _vm._s(_vm._f("FormatNumber")(_vm.product.price))
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-options" }, [
+                    _c("form", { attrs: { action: "" } }, [
+                      _c("div", { staticClass: "product-quantity" }, [
+                        _c("label", [_vm._v("Cantidad")]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "product-quantity-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.cantModal,
+                                expression: "cantModal"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "quantity",
+                              type: "text",
+                              name: "quantity",
+                              value: "1"
+                            },
+                            domProps: { value: _vm.cantModal },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.cantModal = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "product-quantity-buttons" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.count(1)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/increase.png",
+                                      alt: "Increase"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.count(2)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "assets/img/decrease.png",
+                                      alt: "decrease"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "product-prices" }, [
+                        _c("p", [
+                          _c("b", [_vm._v("Total:")]),
+                          _vm._v(
+                            " Bs " +
+                              _vm._s(_vm._f("FormatNumber")(_vm.totalModal)) +
+                              " "
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "product-buttons" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            attrs: { type: "submit" },
+                            on: {
+                              click: function($event) {
+                                return _vm.addToCart(_vm.product)
+                              }
+                            }
+                          },
+                          [_vm._v("Añadir al carrito")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.addToFavorite(_vm.product)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 14.93 15"
+                                }
+                              },
+                              [
+                                _c("title", [_vm._v("añadir-favorito-bio")]),
+                                _c(
+                                  "g",
+                                  {
+                                    attrs: {
+                                      id: "Capa_2",
+                                      "data-name": "Capa 2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "g",
+                                      {
+                                        attrs: {
+                                          id: "Guias_y_recursos",
+                                          "data-name": "Guias y recursos"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Offers.vue?vue&type=template&id=f5a3877c&":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Offers.vue?vue&type=template&id=f5a3877c& ***!
@@ -53146,1361 +53468,1118 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "products" } }, [
-    _c("div", { staticClass: "container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "tab-content", attrs: { id: "ProductsContent" } },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "tab-pane fade show active",
-              attrs: {
-                id: "recents",
-                role: "tabpanel",
-                "aria-labelledby": "recents-tab"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.recent, function(product_recent) {
-                  return _c(
-                    "div",
-                    { key: product_recent.id, staticClass: "col-6 col-20" },
-                    [
-                      _c("div", { staticClass: "product-block" }, [
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", {
-                            attrs: {
-                              src: _vm._f("MediumImage")(
-                                "storage/" + product_recent.photo
-                              )
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "product-actions" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToCart(product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.31 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [_vm._v("añadir-carrito-bio")]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToFavorite(product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.93 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("añadir-favorito-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: {
-                                  type: "button",
-                                  "data-toggle": "modal",
-                                  "data-target": "#ModalProd"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.getProduct(product_recent.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 15.03 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("visualizar-producto-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "product-title",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(product_recent.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-prices" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Bs " +
-                                _vm._s(
-                                  _vm._f("FormatNumber")(product_recent.price)
-                                )
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "tab-pane fade",
-              attrs: {
-                id: "sellers",
-                role: "tabpanel",
-                "aria-labelledby": "sellers-tab"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.sold, function(product_sold) {
-                  return _c(
-                    "div",
-                    { key: product_sold.id, staticClass: "col-6 col-20" },
-                    [
-                      _c("div", { staticClass: "product-block" }, [
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", {
-                            attrs: {
-                              src: _vm._f("MediumImage")(
-                                "storage/" + product_sold.photo
-                              )
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "product-actions" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToCart(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.31 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [_vm._v("añadir-carrito-bio")]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToFavorite(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.93 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("añadir-favorito-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: {
-                                  type: "button",
-                                  "data-toggle": "modal",
-                                  "data-target": "#ModalProd"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.getProduct(_vm.product_recent.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 15.03 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("visualizar-producto-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "product-title",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(product_sold.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-prices" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Bs " +
-                                _vm._s(
-                                  _vm._f("FormatNumber")(product_sold.price)
-                                )
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "tab-pane fade",
-              attrs: {
-                id: "searched",
-                role: "tabpanel",
-                "aria-labelledby": "searched-tab"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.viewed, function(product_view) {
-                  return _c(
-                    "div",
-                    { key: product_view.id, staticClass: "col-6 col-20" },
-                    [
-                      _c("div", { staticClass: "product-block" }, [
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", {
-                            attrs: {
-                              src: _vm._f("MediumImage")(
-                                "storage/" + product_view.photo
-                              )
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "product-actions" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToCart(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.31 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [_vm._v("añadir-carrito-bio")]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToFavorite(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.93 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("añadir-favorito-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: {
-                                  type: "button",
-                                  "data-toggle": "modal",
-                                  "data-target": "#ModalProd"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.getProduct(_vm.product_recent.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 15.03 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("visualizar-producto-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "product-title",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(product_view.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-prices" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Bs " +
-                                _vm._s(
-                                  _vm._f("FormatNumber")(product_view.price)
-                                )
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "tab-pane fade",
-              attrs: {
-                id: "cost",
-                role: "tabpanel",
-                "aria-labelledby": "cost-tab"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(_vm.best_price, function(product_best) {
-                  return _c(
-                    "div",
-                    { key: product_best.id, staticClass: "col-6 col-20" },
-                    [
-                      _c("div", { staticClass: "product-block" }, [
-                        _c("div", { staticClass: "product-img" }, [
-                          _c("img", {
-                            attrs: {
-                              src: _vm._f("MediumImage")(
-                                "storage/" + product_best.photo
-                              )
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "product-actions" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToCart(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.31 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [_vm._v("añadir-carrito-bio")]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToFavorite(_vm.product_recent)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.93 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("añadir-favorito-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: {
-                                  type: "button",
-                                  "data-toggle": "modal",
-                                  "data-target": "#ModalProd"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.getProduct(_vm.product_recent.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 15.03 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("visualizar-producto-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "product-title",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(product_best.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-prices" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Bs " +
-                                _vm._s(
-                                  _vm._f("FormatNumber")(product_best.price)
-                                )
-                            )
-                          ])
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                0
-              )
-            ]
-          )
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "ModalProd",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "ModalProdLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
+  return _c(
+    "section",
+    { attrs: { id: "products" } },
+    [
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          { staticClass: "tab-content", attrs: { id: "ProductsContent" } },
           [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "product-block" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-lg-5" }, [
-                      _c("div", { staticClass: "product-img" }, [
-                        _c("img", {
-                          attrs: { src: "storage/" + _vm.product.photo }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-7" }, [
-                      _c("div", { staticClass: "product-description" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "product-title",
-                            attrs: { href: "#" }
-                          },
-                          [_vm._v(_vm._s(_vm.product.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-prices" }, [
-                          _c("p", [
-                            _vm._v(
-                              "Bs " +
-                                _vm._s(
-                                  _vm._f("FormatNumber")(_vm.product.price)
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade show active",
+                attrs: {
+                  id: "recents",
+                  role: "tabpanel",
+                  "aria-labelledby": "recents-tab"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.recent, function(product_recent) {
+                    return _c(
+                      "div",
+                      { key: product_recent.id, staticClass: "col-6 col-20" },
+                      [
+                        _c("div", { staticClass: "product-block" }, [
+                          _c("div", { staticClass: "product-img" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm._f("MediumImage")(
+                                  "storage/" + product_recent.photo
                                 )
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-options" }, [
-                        _c("form", { attrs: { action: "" } }, [
-                          _c("div", { staticClass: "product-quantity" }, [
-                            _c("label", [_vm._v("Cantidad")]),
+                              }
+                            }),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "product-quantity-group" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.cantModal,
-                                      expression: "cantModal"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    id: "quantity",
-                                    type: "text",
-                                    name: "quantity",
-                                    value: "1"
-                                  },
-                                  domProps: { value: _vm.cantModal },
+                            _c("div", { staticClass: "product-actions" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
                                   on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.cantModal = $event.target.value
+                                    click: function($event) {
+                                      return _vm.addToCart(product_recent)
                                     }
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "product-quantity-buttons" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.count(1)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("img", {
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.31 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-carrito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
                                           attrs: {
-                                            src: "assets/img/increase.png",
-                                            alt: "Increase"
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
                                           }
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.count(2)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _c("img", {
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToFavorite(product_recent)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.93 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-favorito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
                                           attrs: {
-                                            src: "assets/img/decrease.png",
-                                            alt: "decrease"
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
                                           }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "product-prices" }, [
-                            _c("p", [
-                              _c("b", [_vm._v("Total:")]),
-                              _vm._v(
-                                " Bs " +
-                                  _vm._s(
-                                    _vm._f("FormatNumber")(_vm.totalModal)
-                                  ) +
-                                  " "
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: {
+                                    type: "button",
+                                    "data-toggle": "modal",
+                                    "data-target": "#ModalProd"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.getProduct(product_recent)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 15.03 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("visualizar-producto-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
                               )
                             ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "product-buttons" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "submit" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToCart(_vm.product)
-                                  }
-                                }
-                              },
-                              [_vm._v("Añadir al carrito")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addToFavorite(_vm.product)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      viewBox: "0 0 14.93 15"
-                                    }
-                                  },
-                                  [
-                                    _c("title", [
-                                      _vm._v("añadir-favorito-bio")
-                                    ]),
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Capa_2",
-                                          "data-name": "Capa 2"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "g",
-                                          {
-                                            attrs: {
-                                              id: "Guias_y_recursos",
-                                              "data-name": "Guias y recursos"
-                                            }
-                                          },
-                                          [
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                              }
-                                            }),
-                                            _c("path", {
-                                              staticClass: "cls-1",
-                                              attrs: {
-                                                d:
-                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
+                          _c(
+                            "a",
+                            {
+                              staticClass: "product-title",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(product_recent.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "product-prices" }, [
+                            _c("p", [
+                              _vm._v(
+                                "Bs " +
+                                  _vm._s(
+                                    _vm._f("FormatNumber")(product_recent.price)
+                                  )
+                              )
+                            ])
                           ])
                         ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade",
+                attrs: {
+                  id: "sellers",
+                  role: "tabpanel",
+                  "aria-labelledby": "sellers-tab"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.sold, function(product_sold) {
+                    return _c(
+                      "div",
+                      { key: product_sold.id, staticClass: "col-6 col-20" },
+                      [
+                        _c("div", { staticClass: "product-block" }, [
+                          _c("div", { staticClass: "product-img" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm._f("MediumImage")(
+                                  "storage/" + product_sold.photo
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "product-actions" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToCart(product_sold)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.31 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-carrito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToFavorite(product_sold)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.93 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-favorito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: {
+                                    type: "button",
+                                    "data-toggle": "modal",
+                                    "data-target": "#ModalProd"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.getProduct(product_sold)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 15.03 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("visualizar-producto-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "product-title",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(product_sold.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "product-prices" }, [
+                            _c("p", [
+                              _vm._v(
+                                "Bs " +
+                                  _vm._s(
+                                    _vm._f("FormatNumber")(product_sold.price)
+                                  )
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade",
+                attrs: {
+                  id: "searched",
+                  role: "tabpanel",
+                  "aria-labelledby": "searched-tab"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.viewed, function(product_view) {
+                    return _c(
+                      "div",
+                      { key: product_view.id, staticClass: "col-6 col-20" },
+                      [
+                        _c("div", { staticClass: "product-block" }, [
+                          _c("div", { staticClass: "product-img" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm._f("MediumImage")(
+                                  "storage/" + product_view.photo
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "product-actions" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToCart(product_view)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.31 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-carrito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToFavorite(product_view)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.93 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-favorito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: {
+                                    type: "button",
+                                    "data-toggle": "modal",
+                                    "data-target": "#ModalProd"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.getProduct(product_view)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 15.03 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("visualizar-producto-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "product-title",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(product_view.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "product-prices" }, [
+                            _c("p", [
+                              _vm._v(
+                                "Bs " +
+                                  _vm._s(
+                                    _vm._f("FormatNumber")(product_view.price)
+                                  )
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "tab-pane fade",
+                attrs: {
+                  id: "cost",
+                  role: "tabpanel",
+                  "aria-labelledby": "cost-tab"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.best_price, function(product_best) {
+                    return _c(
+                      "div",
+                      { key: product_best.id, staticClass: "col-6 col-20" },
+                      [
+                        _c("div", { staticClass: "product-block" }, [
+                          _c("div", { staticClass: "product-img" }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm._f("MediumImage")(
+                                  "storage/" + product_best.photo
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "product-actions" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToCart(product_best)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.31 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-carrito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addToFavorite(product_best)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 14.93 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("añadir-favorito-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  attrs: {
+                                    type: "button",
+                                    "data-toggle": "modal",
+                                    "data-target": "#ModalProd"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.getProduct(product_best)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 15.03 15"
+                                      }
+                                    },
+                                    [
+                                      _c("title", [
+                                        _vm._v("visualizar-producto-bio")
+                                      ]),
+                                      _c(
+                                        "g",
+                                        {
+                                          attrs: {
+                                            id: "Capa_2",
+                                            "data-name": "Capa 2"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "g",
+                                            {
+                                              attrs: {
+                                                id: "Guias_y_recursos",
+                                                "data-name": "Guias y recursos"
+                                              }
+                                            },
+                                            [
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                }
+                                              }),
+                                              _c("path", {
+                                                staticClass: "cls-1",
+                                                attrs: {
+                                                  d:
+                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "product-title",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v(_vm._s(product_best.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "product-prices" }, [
+                            _c("p", [
+                              _vm._v(
+                                "Bs " +
+                                  _vm._s(
+                                    _vm._f("FormatNumber")(product_best.price)
+                                  )
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
           ]
         )
-      ]
-    )
-  ])
+      ]),
+      _vm._v(" "),
+      _c("ModalProducto", { attrs: { product: _vm.product } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -55127,7 +55206,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tDatos personales\n\t\t\t\t\t\t\t\t\t"
+                            "\r\n\t\t\t\t\t\t\t\t\t\tDatos personales\r\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55200,7 +55279,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tMis direcciones\n\t\t\t\t\t\t\t\t\t"
+                            "\r\n\t\t\t\t\t\t\t\t\t\tMis direcciones\r\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55307,7 +55386,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tMis pedidos\n\t\t\t\t\t\t\t\t\t"
+                            "\r\n\t\t\t\t\t\t\t\t\t\tMis pedidos\r\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55396,7 +55475,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\n\t\t\t\t\t\t\t\t\t"
+                            "\r\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\r\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55579,7 +55658,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -55743,7 +55822,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -55833,7 +55912,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -55989,7 +56068,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56153,7 +56232,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56260,7 +56339,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56911,7 +56990,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -57031,7 +57110,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -57123,7 +57202,7 @@ var render = function() {
                                                                     ]
                                                                   ),
                                                                   _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               )
@@ -57291,7 +57370,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -57455,7 +57534,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -57562,7 +57641,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -60725,7 +60804,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60760,7 +60839,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60793,7 +60872,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60828,7 +60907,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60861,7 +60940,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60896,7 +60975,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60953,7 +61032,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -60988,7 +61067,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61021,7 +61100,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61056,7 +61135,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61113,7 +61192,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61148,7 +61227,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61264,7 +61343,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61299,7 +61378,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61332,7 +61411,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61367,7 +61446,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61424,7 +61503,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61459,7 +61538,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -73688,7 +73767,9 @@ Vue.component('header-menu', __webpack_require__(/*! ./components/Header.vue */ 
 Vue.component('catalog', __webpack_require__(/*! ./components/Catalog.vue */ "./resources/js/components/Catalog.vue")["default"]);
 Vue.component('profile', __webpack_require__(/*! ./components/profile.vue */ "./resources/js/components/profile.vue")["default"]);
 Vue.component('cart', __webpack_require__(/*! ./components/Cart.vue */ "./resources/js/components/Cart.vue")["default"]);
-Vue.component('register', __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue")["default"]);
+Vue.component('register', __webpack_require__(/*! ./components/Register.vue */ "./resources/js/components/Register.vue")["default"]); // Vue.component('modal-producto',require('./components/ModalProducto.vue').default,{ props:{product: Object} });
+
+Vue.component('modal-combo', __webpack_require__(/*! ./components/ModalCombo.vue */ "./resources/js/components/ModalCombo.vue")["default"]);
 Vue.filter('FormatNumber', function (num) {
   num = parseFloat(num).toFixed(2);
   var arrNum = num.split(".");
@@ -74176,6 +74257,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ModalCombo.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/ModalCombo.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalCombo.vue?vue&type=template&id=ae0b81e8& */ "./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8&");
+/* harmony import */ var _ModalCombo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalCombo.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalCombo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModalCombo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ModalCombo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalCombo.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/ModalCombo.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCombo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCombo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalCombo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCombo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCombo.vue?vue&type=template&id=ae0b81e8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalCombo.vue?vue&type=template&id=ae0b81e8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCombo_vue_vue_type_template_id_ae0b81e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalProducto.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ModalProducto.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalProducto.vue?vue&type=template&id=a74c1f5c& */ "./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c&");
+/* harmony import */ var _ModalProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalProducto.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModalProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ModalProducto.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalProducto.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ModalProducto.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalProducto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalProducto.vue?vue&type=template&id=a74c1f5c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalProducto.vue?vue&type=template&id=a74c1f5c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalProducto_vue_vue_type_template_id_a74c1f5c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Offers.vue":
 /*!********************************************!*\
   !*** ./resources/js/components/Offers.vue ***!
@@ -74539,8 +74758,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

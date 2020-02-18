@@ -35,7 +35,7 @@
 
 							<div class="keyup_search">
 								<ol>
-									<li><i class="fa fa-search" aria-hidden="true"></i> Ejemplo</li>
+									<li v-for="s in searched" :key="s.id"><i class="fa fa-search" aria-hidden="true"></i> {{s.name}}</li>
 								</ol>
 							</div>
 
@@ -183,6 +183,7 @@ export default {
 			cant_favorite: 0,
 			categories: [],
 			products: [],
+			searched: [],
 			user: {
 				name: '',
 				email: '',
@@ -197,7 +198,12 @@ export default {
 			this.categories = response.data.data;
 		},
 		async SearchProducts(e) {
-			console.log(e.target.value);
+			const len = e.target.value.length;
+			const val = e.target.value;
+			if(len >= 3){
+				const response = await axios.get(URLSERVER+"api/products/search/"+val);
+				this.searched = response.data.data;
+			}
 		},
 		async getFavorites() {
 			const response = await axios.get(URLSERVER+"api/favorites");
