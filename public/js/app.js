@@ -3635,6 +3635,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3758,36 +3759,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getFavorites;
     }(),
-    login: function () {
-      var _login = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass);
-
-              case 2:
-                response = _context4.sent;
-                console.log("respuesta login::> ", response);
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function login() {
-        return _login.apply(this, arguments);
-      }
-
-      return login;
-    }()
+    login: function login() {
+      axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function () {
+        location.href = window.location.href;
+      });
+    }
   },
   created: function created() {
     var _this = this;
@@ -3808,8 +3784,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     } else {
       this.cant_cart = 0;
     }
-
-    console.log("userlogged::> ", this.userlogged);
   }
 });
 
@@ -52606,39 +52580,41 @@ var render = function() {
                   "li",
                   { staticClass: "dropdown", attrs: { id: "nav-login" } },
                   [
-                    _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: "#",
-                          id: "navbarLogin",
-                          role: "button",
-                          "data-toggle": "dropdown",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
-                        }
-                      },
-                      [
-                        !_vm.userlogged
-                          ? _c("span", { staticClass: "link-text" }, [
+                    !_vm.userlogged
+                      ? _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "#",
+                              id: "navbarLogin",
+                              role: "button",
+                              "data-toggle": "dropdown",
+                              "aria-haspopup": "true",
+                              "aria-expanded": "false"
+                            }
+                          },
+                          [
+                            _c("span", { staticClass: "link-text" }, [
                               _vm._v("Entrar / Registrarse")
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("img", {
-                          attrs: {
-                            src: "assets/img/login-bio.svg",
-                            alt: "Login"
-                          }
-                        }),
-                        _vm._v(" "),
-                        !!_vm.userlogged
-                          ? _c("span", { staticClass: "link-text" }, [
-                              _vm._v(" " + _vm._s(_vm.userlogged.nombre))
-                            ])
-                          : _vm._e()
-                      ]
-                    ),
+                            ]),
+                            _vm._v(" "),
+                            _c("img", {
+                              attrs: {
+                                src: "assets/img/login-bio.svg",
+                                alt: "Login"
+                              }
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !!_vm.userlogged
+                      ? _c("a", { attrs: { href: "/profile" } }, [
+                          _c("span", { staticClass: "link-text" }, [
+                            _vm._v(" " + _vm._s(_vm.userlogged.nombre))
+                          ])
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "div",

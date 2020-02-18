@@ -49,11 +49,12 @@
 						<ul>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
-								<a href="#" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span v-if="!userlogged" class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
-									<span v-if="!!userlogged" class="link-text"> {{userlogged.nombre}}</span>
+								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
-		
+								<a href="/profile" v-if="!!userlogged">
+									<span class="link-text"> {{userlogged.nombre}}</span>
+								</a>
 								<!-- el login-->
 								<div class="dropdown-menu  login_navbar" aria-labelledby="navbarLogin">
 									<form action="#">
@@ -217,9 +218,11 @@ export default {
 				this.cant_favorite = 0;
 			}
 		},
-		async login() {
-			const response = await axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass)
-			console.log("respuesta login::> ",response);
+		login() {
+			axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass).then( () => {
+				location.href = window.location.href;
+			});
+			
 		}
     },
     created() {
@@ -239,7 +242,6 @@ export default {
 		}else{
 			this.cant_cart = 0;
 		}
-		console.log("userlogged::> ",this.userlogged);
     }
 }
 </script>
