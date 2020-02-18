@@ -829,7 +829,7 @@
 											<div class="product-list" v-if="cant_favorites > 0">
 											    <div class="container-fluid">
 											        <div class="row">
-											            <div class="col-6 col-lg-12" v-for="favorite in favorites">
+											            <div class="col-6 col-lg-12" v-for="(favorite,index) in favorites">
 											                <div class="product-block">
 											                    <div class="product-img"><img   :src="'storage/'+favorite.photo | MediumImage" >
 											                        <div class="product-actions">
@@ -900,7 +900,7 @@
 											                                    </svg>
 											                                    Añadir al carrito
 											                                </button>
-											                                <button type="button" class="btn btn-addfavorite" @click="removeToFavorite(favorite.id, favorite.users_id)">
+											                                <button type="button" class="btn btn-addfavorite" @click="removeToFavorite(favorite.id, favorite.users_id,index)">
 											                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.93 15">
 											                                        <title>añadir-favorito-bio</title>
 											                                        <g id="Capa_2" data-name="Capa 2">
@@ -1105,17 +1105,20 @@
 				let products = storageProducts.filter(product => product.id !== id );
 				localStorage.setItem('products', JSON.stringify(products));
 			},
-			removeToFavorite(id,user_id)
+			removeToFavorite(id,user_id,index)
 			{
 				let products_id = id;
 				let users_id = user_id;
+				
+                this.favorites.splice(index,1);
+				this.cant_favorites = this.favorites.length;
 
 				axios.post(URLHOME+'api/favorites/delete/', {
                     products_id: products_id,
                     user_id: users_id
                 })
                 .then(function (response) {
-                	console.log(response);
+                	console.log(response.data);
                 	EventBus.$emit("update_cantFavorite",response.data);
                 })
                 .catch(function (error) {

@@ -5764,14 +5764,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
       localStorage.setItem('products', JSON.stringify(products));
     },
-    removeToFavorite: function removeToFavorite(id, user_id) {
+    removeToFavorite: function removeToFavorite(id, user_id, index) {
       var products_id = id;
       var users_id = user_id;
+      this.favorites.splice(index, 1);
+      this.cant_favorites = this.favorites.length;
       axios.post(URLHOME + 'api/favorites/delete/', {
         products_id: products_id,
         user_id: users_id
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data);
         EventBus.$emit("update_cantFavorite", response.data);
       })["catch"](function (error) {
         console.log(error);
@@ -56471,7 +56473,8 @@ var render = function() {
                                             "div",
                                             { staticClass: "row" },
                                             _vm._l(_vm.favorites, function(
-                                              favorite
+                                              favorite,
+                                              index
                                             ) {
                                               return _c(
                                                 "div",
@@ -57121,7 +57124,8 @@ var render = function() {
                                                                         ) {
                                                                           return _vm.removeToFavorite(
                                                                             favorite.id,
-                                                                            favorite.users_id
+                                                                            favorite.users_id,
+                                                                            index
                                                                           )
                                                                         }
                                                                       }
