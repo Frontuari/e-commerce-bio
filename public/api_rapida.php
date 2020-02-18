@@ -13,11 +13,14 @@ switch($_GET['evento']){
         $email=$_GET['email'];
         $clave=$_GET['password'];
         
-        $row=q("SELECT id,password,email FROM users WHERE email='$email'")[0];
+        $row=q("SELECT id,password,email,name FROM users WHERE email='$email'")[0];
        if($row['email']){
             if(password_verify($clave,$row['password'])){
-                $_SESSION['user_id']=$row['id'];
+                $_SESSION["usuario"]['user_id']=$row['id'];
+                $_SESSION["usuario"]['nombre']=$row['name'];
+                $_SESSION["usuario"]['email']=$row['email'];
                 $row['id_sesion']=session_id();
+                unset($row["password"]);
                 echo json_encode($row);
             }else{
                 //clave no valida
@@ -33,18 +36,6 @@ switch($_GET['evento']){
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function extraer_datos_db(){

@@ -16,4 +16,4 @@
 <body>
 
 <main id="app">
-	<header-menu></header-menu>
+	<header-menu :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></header-menu>

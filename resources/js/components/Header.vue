@@ -50,7 +50,8 @@
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
+									<span v-if="!userlogged" class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
+									<span v-if="!!userlogged" class="link-text"> {{userlogged.nombre}}</span>
 								</a>
 		
 								<!-- el login-->
@@ -191,7 +192,10 @@ export default {
 			},
 			logged: false
         }
-    },
+	},
+	props: {
+		userlogged: Object
+	},
     methods: {
         async getCategories() {
 			const response = await axios.get(URLSERVER+"api/categories");
@@ -235,6 +239,7 @@ export default {
 		}else{
 			this.cant_cart = 0;
 		}
+		console.log("userlogged::> ",this.userlogged);
     }
 }
 </script>
