@@ -11,7 +11,7 @@ switch($_GET['evento']){
 
     case 'login':
         $email=$_GET['email'];
-        $clave=$_GET['clave'];
+        $clave=$_GET['password'];
         
         $row=q("SELECT id,password,email FROM users WHERE email='$email'")[0];
        if($row['email']){
