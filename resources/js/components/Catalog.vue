@@ -299,14 +299,7 @@
 				localStorage.setItem('products', JSON.stringify(products));
 			}
         },
-<<<<<<< HEAD
         filters: {
-			FormatNumber: function (num) {
-				num = parseFloat(num).toFixed(2);
-				const arrNum = num.split(".");
-				const decimal = arrNum[1];
-				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			},
 			MediumImage: function(imageText)
 			{
 				imageText = imageText.split('.');
@@ -314,9 +307,6 @@
 				return newImageText;
 			}
 		},
-
-=======
->>>>>>> 941cd3789ff1b9cd7e310f112ba726746fda4d60
         mounted() {
 			this.getRecent();
 		},
