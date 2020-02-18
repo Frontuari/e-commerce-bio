@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/multirange.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/range.css') }}">
 	
 	<style>.cls-1{fill:#ccc;}</style>
 	@yield('css')

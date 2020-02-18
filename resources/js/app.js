@@ -34,6 +34,7 @@ Vue.component('header-menu', require('./components/Header.vue').default);
 Vue.component('catalog', require('./components/Catalog.vue').default);
 Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
+Vue.component('register', require('./components/Register.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

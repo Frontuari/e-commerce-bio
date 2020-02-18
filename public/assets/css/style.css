@@ -73,6 +73,38 @@
 		color: #fff;
 		filter: initial;
 	}
+
+
+	/*=============================================================*/
+	/*-------------------------RECURSOS IMPORTANTES-----------------*/
+	/*====================================================================*/
+	.cart-empty.bio-info
+	{
+		padding: 1em 2em 1em 3.5em!important;
+	    margin: 0 0 2em!important;
+	    position: relative;
+	    background-color: #f7f6f7;
+	    color: #515151;
+	    border-top: 3px solid #28b67a;
+	    list-style: none!important;
+	    width: auto;
+	    word-wrap: break-word;
+	}
+	.cart-empty.bio-info:before{
+	    content: "\e028";
+	    display: inline-block;
+	    position: absolute;
+	    top: 1em;
+	    left: 1.5em;
+	}
+	.cart-empty.bio-info:after{
+	    content: " ";
+   		display: table;
+		clear: both;
+	}
+
+
+
 	.social-nav{
 		display: flex;
 		align-items: center;
@@ -1021,11 +1053,17 @@
 		margin-bottom: .5rem;
 	}
 
-	#recents .row div div.product-block
+	#recents .row div div.product-block,
+	#sellers .row div div.product-block,
+	#searched .row div div.product-block,
+	#cost .row div div.product-block
 	{
 		border: 1px solid #ccc6;
 	}
-	#recents .row div div.product-block .product-title
+	#recents .row div div.product-block .product-title,
+	#sellers .row div div.product-block .product-title,
+	#searched .row div div.product-block .product-title,
+	#cost .row div div.product-block .product-title
 	{
 		font-size: 18px;
 	}

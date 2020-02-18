@@ -6,6 +6,7 @@ use Exception;
 use App\Favorites;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
+use Illuminate\Support\Facades\DB;
 //use App\Http\Resources\Favorite as FavoriteResource;
 class FavoritesController extends BaseController
 {
@@ -18,10 +19,12 @@ class FavoritesController extends BaseController
     {
         //$id_usuario=$request->user()->id;
         $id_usuario=1;
-        $a=Favorites::where('users_id',$id_usuario)->get();
-        return $this->sendResponse($a);        
-
-
+        $a=DB::table("favorites")
+        ->select("favorites.*","products.id as product_id","products.name as product_name","products.price as price","products.photo as photo", "products.qty_avaliable")
+        ->join("products","products.id","=","favorites.products_id")
+        ->where('users_id',$id_usuario)
+        ->get();
+        return $this->sendResponse($a);
     }
 
     /**

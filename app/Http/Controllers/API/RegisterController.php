@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\User;
+use App\UserRole;
 use App\People;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Validator;
    
 class RegisterController extends BaseController
@@ -36,9 +38,8 @@ class RegisterController extends BaseController
             'rif' => '11111',
             'name' => $data['name'],
             'sex' => $data["sex"],
-            'birthdate' => '01/01/2020',
-            'city_id' => '1',
-            'address' => 'direccion',
+            'birthdate' => '01/01/1990',
+            'cities_id' => '1',
             'phone' => ''
         ]);
 
@@ -46,13 +47,16 @@ class RegisterController extends BaseController
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'people_id' => $people->id,
-            'group_id' => '1',
-            'currency_id' => '1'
+            'peoples_id' => $people->id,
+            'groups_id' => '1',
+            'coins_id' => '1'
         ]);
+
+        DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
-        $success['token'] =  $user->createToken('Bio')->accessToken;
+        // $success['token'] =  $user->createToken('Bio')->accessToken;
         $success['name'] =  $user->name;
+        $success['user_id'] =  $user->id;
    
         return $this->sendResponse($success, 'User register successfully.');
     }
@@ -66,7 +70,7 @@ class RegisterController extends BaseController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
             $user = Auth::user(); 
-            $success['token'] =  $user->createToken('Bio')-> accessToken; 
+            // $success['token'] =  $user->createToken('Bio')-> accessToken; 
             $success['name'] =  $user->name;
    
             return $this->sendResponse($success, 'User login successfully.');

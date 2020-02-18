@@ -1,8 +1,7 @@
 @extends('partials.base')
-
 @section('title','Home')
-
 @section('body')
+
 	<slider></slider>
 
 	<combos></combos>
