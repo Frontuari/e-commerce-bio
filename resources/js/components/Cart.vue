@@ -629,14 +629,6 @@ export default {
 			EventBus.$emit("update_cantCart",this.products_cart.length);
 		}
     },
-    filters: {
-			FormatNumber: function (num) {
-				num = parseFloat(num).toFixed(2);
-				const arrNum = num.split(".");
-				const decimal = arrNum[1];
-				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			}
-	},
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;

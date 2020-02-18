@@ -36,6 +36,13 @@ Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
 
+Vue.filter('FormatNumber',function(num) {
+    num = parseFloat(num).toFixed(2);
+    const arrNum = num.split(".");
+    const decimal = arrNum[1];
+    return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
+});
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -44,4 +51,12 @@ Vue.component('register', require('./components/Register.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data(){
+        return {
+            loggedUser: ''
+        }
+    },
+    created() {
+        this.loggedUser = "Leonardo";
+    }
 });

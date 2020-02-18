@@ -1,5 +1,4 @@
 <template>
-	
 	<section id="catalogo" class="main-content">
 		<div class="container-fluid">
 			<div class="row">
@@ -41,8 +40,8 @@
 								  <hr>
 								<div class="extra-controls">
 									  <div class="form-group">
-									    <input type="number" class="js-input-from form-control" value="0" />
-									    <input type="number" class="js-input-to form-control" value="0" />
+									    <input type="number" class="js-input-from form-control" value="0" v-model="min_price" />
+									    <input type="number" class="js-input-to form-control" value="0" v-model="max_price" />
 									</div>
 								 </div>
 								
@@ -234,6 +233,8 @@
 				limitP: 10,
 				orderP: 'AZasc',
 				rangeP: '',
+				min_price: 100000,
+				max_price: 800000
             }
         },
         methods: {
@@ -298,6 +299,7 @@
 				localStorage.setItem('products', JSON.stringify(products));
 			}
         },
+<<<<<<< HEAD
         filters: {
 			FormatNumber: function (num) {
 				num = parseFloat(num).toFixed(2);
@@ -313,6 +315,8 @@
 			}
 		},
 
+=======
+>>>>>>> 941cd3789ff1b9cd7e310f112ba726746fda4d60
         mounted() {
 			this.getRecent();
 		},

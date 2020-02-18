@@ -273,12 +273,6 @@
 			}
 		},
 		filters: {
-			FormatNumber: function (num) {
-				num = parseFloat(num).toFixed(2);
-				const arrNum = num.split(".");
-				const decimal = arrNum[1];
-				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			},
 			MediumImage: function(imageText)
 			{
 				imageText = imageText.split('.');
