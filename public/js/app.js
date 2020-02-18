@@ -5763,6 +5763,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return product.id !== id;
       });
       localStorage.setItem('products', JSON.stringify(products));
+    },
+    removeToFavorite: function removeToFavorite(id, user_id) {
+      var products_id = id;
+      var users_id = user_id;
+      axios.post(URLHOME + 'api/favorites/delete/', {
+        products_id: products_id,
+        user_id: users_id
+      }).then(function (response) {
+        console.log(response);
+        EventBus.$emit("update_cantFavorite", response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   filters: {
@@ -57101,6 +57114,16 @@ var render = function() {
                                                                       attrs: {
                                                                         type:
                                                                           "button"
+                                                                      },
+                                                                      on: {
+                                                                        click: function(
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.removeToFavorite(
+                                                                            favorite.id,
+                                                                            favorite.users_id
+                                                                          )
+                                                                        }
                                                                       }
                                                                     },
                                                                     [

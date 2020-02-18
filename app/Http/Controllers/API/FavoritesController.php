@@ -99,6 +99,22 @@ class FavoritesController extends BaseController
     {
         //
     }
+    //Metodo para eliminar un favorito del carro
+    public function delete(Request $request)
+    {
+        $product_id = $request->products_id;
+        $user_id = $request->user_id;
+
+        $res=Favorites::where('id',$product_id)->where('users_id',$user_id)->delete();
+        if($res==0){
+            $result =  $this->sendError();
+        }else{
+            $a=Favorites::where('users_id',$user_id)->get();
+            $result = $a->count();
+        }
+        return $result;
+     
+    }
 
     /**
      * Remove the specified resource from storage.

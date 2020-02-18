@@ -51,6 +51,7 @@ Route::post('login', 'API\RegisterController@login');
 
     //FAVORITE PRODUCTS
     Route::resource('favorites', 'API\FavoritesController');
+    Route::post('favorites/delete/', 'API\FavoritesController@delete');
 
     //RATING PRODUCTS
     Route::resource('rating_products', 'API\RatingProductsController');
