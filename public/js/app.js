@@ -5662,10 +5662,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      favorites: []
+      favorites: [],
+      cant_favorites: 0
     };
   },
   methods: {
@@ -5684,9 +5689,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 this.favorites = response.data.data;
+                this.cant_favorites = response.data.data.length;
                 console.log(this.favorites);
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -56417,532 +56423,93 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("div", { staticClass: "product-list" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "container-fluid" },
-                                    [
+                                _vm.cant_favorites <= 0
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "col-md-12 mx-0" },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass: "cart-empty bio-info"
+                                          },
+                                          [_vm._v("Lista vacia.")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass: "button",
+                                            attrs: { href: "catalog" }
+                                          },
+                                          [_vm._v("Volver a la tienda")]
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.cant_favorites > 0
+                                  ? _c("div", { staticClass: "product-list" }, [
                                       _c(
                                         "div",
-                                        { staticClass: "row" },
-                                        _vm._l(_vm.favorites, function(
-                                          favorite
-                                        ) {
-                                          return _c(
+                                        { staticClass: "container-fluid" },
+                                        [
+                                          _c(
                                             "div",
-                                            { staticClass: "col-6 col-lg-12" },
-                                            [
-                                              _c(
+                                            { staticClass: "row" },
+                                            _vm._l(_vm.favorites, function(
+                                              favorite
+                                            ) {
+                                              return _c(
                                                 "div",
                                                 {
-                                                  staticClass: "product-block"
+                                                  staticClass: "col-6 col-lg-12"
                                                 },
                                                 [
                                                   _c(
                                                     "div",
                                                     {
-                                                      staticClass: "product-img"
-                                                    },
-                                                    [
-                                                      _c("img", {
-                                                        attrs: {
-                                                          src: _vm._f(
-                                                            "MediumImage"
-                                                          )(
-                                                            "storage/" +
-                                                              favorite.photo
-                                                          )
-                                                        }
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "div",
-                                                        {
-                                                          staticClass:
-                                                            "product-actions"
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "button",
-                                                            {
-                                                              staticClass:
-                                                                "btn",
-                                                              attrs: {
-                                                                type: "button",
-                                                                "data-toggle":
-                                                                  "modal",
-                                                                "data-target":
-                                                                  "#ModalProd"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "svg",
-                                                                {
-                                                                  attrs: {
-                                                                    xmlns:
-                                                                      "http://www.w3.org/2000/svg",
-                                                                    viewBox:
-                                                                      "0 0 14.31 15"
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _c("title", [
-                                                                    _vm._v(
-                                                                      "añadir-carrito-bio"
-                                                                    )
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "g",
-                                                                    {
-                                                                      attrs: {
-                                                                        id:
-                                                                          "Capa_2",
-                                                                        "data-name":
-                                                                          "Capa 2"
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "g",
-                                                                        {
-                                                                          attrs: {
-                                                                            id:
-                                                                              "Guias_y_recursos",
-                                                                            "data-name":
-                                                                              "Guias y recursos"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                                                              }
-                                                                            }
-                                                                          ),
-                                                                          _vm._v(
-                                                                            " "
-                                                                          ),
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ]
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "button",
-                                                            {
-                                                              staticClass:
-                                                                "btn",
-                                                              attrs: {
-                                                                type: "button"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "svg",
-                                                                {
-                                                                  attrs: {
-                                                                    xmlns:
-                                                                      "http://www.w3.org/2000/svg",
-                                                                    viewBox:
-                                                                      "0 0 14.93 15"
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _c("title", [
-                                                                    _vm._v(
-                                                                      "añadir-favorito-bio"
-                                                                    )
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "g",
-                                                                    {
-                                                                      attrs: {
-                                                                        id:
-                                                                          "Capa_2",
-                                                                        "data-name":
-                                                                          "Capa 2"
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "g",
-                                                                        {
-                                                                          attrs: {
-                                                                            id:
-                                                                              "Guias_y_recursos",
-                                                                            "data-name":
-                                                                              "Guias y recursos"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                                                              }
-                                                                            }
-                                                                          ),
-                                                                          _vm._v(
-                                                                            " "
-                                                                          ),
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                                                              }
-                                                                            }
-                                                                          ),
-                                                                          _vm._v(
-                                                                            " "
-                                                                          ),
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                                                              }
-                                                                            }
-                                                                          ),
-                                                                          _vm._v(
-                                                                            " "
-                                                                          ),
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ]
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _c(
-                                                            "button",
-                                                            {
-                                                              staticClass:
-                                                                "btn",
-                                                              attrs: {
-                                                                type: "button",
-                                                                "data-toggle":
-                                                                  "modal",
-                                                                "data-target":
-                                                                  "#ModalProd"
-                                                              }
-                                                            },
-                                                            [
-                                                              _c(
-                                                                "svg",
-                                                                {
-                                                                  attrs: {
-                                                                    xmlns:
-                                                                      "http://www.w3.org/2000/svg",
-                                                                    viewBox:
-                                                                      "0 0 15.03 15"
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _c("title", [
-                                                                    _vm._v(
-                                                                      "visualizar-producto-bio"
-                                                                    )
-                                                                  ]),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "g",
-                                                                    {
-                                                                      attrs: {
-                                                                        id:
-                                                                          "Capa_2",
-                                                                        "data-name":
-                                                                          "Capa 2"
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "g",
-                                                                        {
-                                                                          attrs: {
-                                                                            id:
-                                                                              "Guias_y_recursos",
-                                                                            "data-name":
-                                                                              "Guias y recursos"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                                                              }
-                                                                            }
-                                                                          ),
-                                                                          _vm._v(
-                                                                            " "
-                                                                          ),
-                                                                          _c(
-                                                                            "path",
-                                                                            {
-                                                                              staticClass:
-                                                                                "cls-1",
-                                                                              attrs: {
-                                                                                d:
-                                                                                  "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                                                              }
-                                                                            }
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ]
-                                                              )
-                                                            ]
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
                                                       staticClass:
-                                                        "product-content"
+                                                        "product-block"
                                                     },
                                                     [
-                                                      _c(
-                                                        "a",
-                                                        {
-                                                          staticClass:
-                                                            "product-title",
-                                                          attrs: { href: "#" }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            _vm._s(
-                                                              favorite.product_name
-                                                            )
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          staticClass:
-                                                            "product-info"
-                                                        },
-                                                        [_vm._v("500 g")]
-                                                      ),
-                                                      _vm._v(" "),
                                                       _c(
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "product-prices"
+                                                            "product-img"
                                                         },
                                                         [
-                                                          _c("p", [
-                                                            _vm._v(
-                                                              "Bs " +
-                                                                _vm._s(
-                                                                  _vm._f(
-                                                                    "FormatNumber"
-                                                                  )(
-                                                                    favorite.price
-                                                                  )
-                                                                )
-                                                            )
-                                                          ])
-                                                        ]
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass: "product-add"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          staticClass:
-                                                            "product-info"
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "Disponibles: "
-                                                          ),
-                                                          _c("b", [
-                                                            _vm._v(
-                                                              _vm._s(
-                                                                favorite.qty_avaliable
-                                                              ) + " en Stock"
-                                                            )
-                                                          ])
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "form",
-                                                        {
-                                                          attrs: { action: "" }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "div",
-                                                            {
-                                                              staticClass:
-                                                                "product-quantity"
-                                                            },
-                                                            [
-                                                              _c("label", [
-                                                                _vm._v(
-                                                                  "Cantidad"
-                                                                )
-                                                              ]),
-                                                              _vm._v(" "),
-                                                              _c(
-                                                                "div",
-                                                                {
-                                                                  staticClass:
-                                                                    "product-quantity-group"
-                                                                },
-                                                                [
-                                                                  _c("input", {
-                                                                    staticClass:
-                                                                      "form-control",
-                                                                    attrs: {
-                                                                      id:
-                                                                        "quantity2",
-                                                                      type:
-                                                                        "text",
-                                                                      name:
-                                                                        "quantity",
-                                                                      value: "1"
-                                                                    }
-                                                                  }),
-                                                                  _vm._v(" "),
-                                                                  _c(
-                                                                    "div",
-                                                                    {
-                                                                      staticClass:
-                                                                        "product-quantity-buttons"
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "span",
-                                                                        {
-                                                                          staticClass:
-                                                                            "max-stock",
-                                                                          staticStyle: {
-                                                                            display:
-                                                                              "none"
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _vm._v(
-                                                                            _vm._s(
-                                                                              favorite.qty_avaliable
-                                                                            )
-                                                                          )
-                                                                        ]
-                                                                      ),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      _vm._m(
-                                                                        32,
-                                                                        true
-                                                                      ),
-                                                                      _vm._v(
-                                                                        " "
-                                                                      ),
-                                                                      _vm._m(
-                                                                        33,
-                                                                        true
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ]
+                                                          _c("img", {
+                                                            attrs: {
+                                                              src: _vm._f(
+                                                                "MediumImage"
+                                                              )(
+                                                                "storage/" +
+                                                                  favorite.photo
                                                               )
-                                                            ]
-                                                          ),
+                                                            }
+                                                          }),
                                                           _vm._v(" "),
                                                           _c(
                                                             "div",
                                                             {
                                                               staticClass:
-                                                                "product-buttons"
+                                                                "product-actions"
                                                             },
                                                             [
                                                               _c(
                                                                 "button",
                                                                 {
                                                                   staticClass:
-                                                                    "btn btn-addcart-outline",
+                                                                    "btn",
                                                                   attrs: {
                                                                     type:
-                                                                      "button"
-                                                                  },
-                                                                  on: {
-                                                                    click: function(
-                                                                      $event
-                                                                    ) {
-                                                                      return _vm.addToCart(
-                                                                        favorite
-                                                                      )
-                                                                    }
+                                                                      "button",
+                                                                    "data-toggle":
+                                                                      "modal",
+                                                                    "data-target":
+                                                                      "#ModalProd"
                                                                   }
                                                                 },
                                                                 [
@@ -57020,9 +56587,6 @@ var render = function() {
                                                                         ]
                                                                       )
                                                                     ]
-                                                                  ),
-                                                                  _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -57031,7 +56595,7 @@ var render = function() {
                                                                 "button",
                                                                 {
                                                                   staticClass:
-                                                                    "btn btn-addfavorite",
+                                                                    "btn",
                                                                   attrs: {
                                                                     type:
                                                                       "button"
@@ -57140,9 +56704,6 @@ var render = function() {
                                                                         ]
                                                                       )
                                                                     ]
-                                                                  ),
-                                                                  _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                   )
                                                                 ]
                                                               ),
@@ -57151,10 +56712,14 @@ var render = function() {
                                                                 "button",
                                                                 {
                                                                   staticClass:
-                                                                    "btn btn-view",
+                                                                    "btn",
                                                                   attrs: {
                                                                     type:
-                                                                      "button"
+                                                                      "button",
+                                                                    "data-toggle":
+                                                                      "modal",
+                                                                    "data-target":
+                                                                      "#ModalProd"
                                                                   }
                                                                 },
                                                                 [
@@ -57232,9 +56797,512 @@ var render = function() {
                                                                         ]
                                                                       )
                                                                     ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "product-content"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "a",
+                                                            {
+                                                              staticClass:
+                                                                "product-title",
+                                                              attrs: {
+                                                                href: "#"
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  favorite.product_name
+                                                                )
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "product-info"
+                                                            },
+                                                            [_vm._v("500 g")]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "product-prices"
+                                                            },
+                                                            [
+                                                              _c("p", [
+                                                                _vm._v(
+                                                                  "Bs " +
+                                                                    _vm._s(
+                                                                      _vm._f(
+                                                                        "FormatNumber"
+                                                                      )(
+                                                                        favorite.price
+                                                                      )
+                                                                    )
+                                                                )
+                                                              ])
+                                                            ]
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "product-add"
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "product-info"
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Disponibles: "
+                                                              ),
+                                                              _c("b", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    favorite.qty_avaliable
+                                                                  ) +
+                                                                    " en Stock"
+                                                                )
+                                                              ])
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _c(
+                                                            "form",
+                                                            {
+                                                              attrs: {
+                                                                action: ""
+                                                              }
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "product-quantity"
+                                                                },
+                                                                [
+                                                                  _c("label", [
+                                                                    _vm._v(
+                                                                      "Cantidad"
+                                                                    )
+                                                                  ]),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "div",
+                                                                    {
+                                                                      staticClass:
+                                                                        "product-quantity-group"
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "input",
+                                                                        {
+                                                                          staticClass:
+                                                                            "form-control",
+                                                                          attrs: {
+                                                                            id:
+                                                                              "quantity2",
+                                                                            type:
+                                                                              "text",
+                                                                            name:
+                                                                              "quantity",
+                                                                            value:
+                                                                              "1"
+                                                                          }
+                                                                        }
+                                                                      ),
+                                                                      _vm._v(
+                                                                        " "
+                                                                      ),
+                                                                      _c(
+                                                                        "div",
+                                                                        {
+                                                                          staticClass:
+                                                                            "product-quantity-buttons"
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "span",
+                                                                            {
+                                                                              staticClass:
+                                                                                "max-stock",
+                                                                              staticStyle: {
+                                                                                display:
+                                                                                  "none"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _vm._v(
+                                                                                _vm._s(
+                                                                                  favorite.qty_avaliable
+                                                                                )
+                                                                              )
+                                                                            ]
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _vm._m(
+                                                                            32,
+                                                                            true
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _vm._m(
+                                                                            33,
+                                                                            true
+                                                                          )
+                                                                        ]
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "product-buttons"
+                                                                },
+                                                                [
+                                                                  _c(
+                                                                    "button",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-addcart-outline",
+                                                                      attrs: {
+                                                                        type:
+                                                                          "button"
+                                                                      },
+                                                                      on: {
+                                                                        click: function(
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.addToCart(
+                                                                            favorite
+                                                                          )
+                                                                        }
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "svg",
+                                                                        {
+                                                                          attrs: {
+                                                                            xmlns:
+                                                                              "http://www.w3.org/2000/svg",
+                                                                            viewBox:
+                                                                              "0 0 14.31 15"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "title",
+                                                                            [
+                                                                              _vm._v(
+                                                                                "añadir-carrito-bio"
+                                                                              )
+                                                                            ]
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Capa_2",
+                                                                                "data-name":
+                                                                                  "Capa 2"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "g",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    id:
+                                                                                      "Guias_y_recursos",
+                                                                                    "data-name":
+                                                                                      "Guias y recursos"
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                      )
+                                                                    ]
                                                                   ),
-                                                                  _vm._v(
-                                                                    "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "button",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-addfavorite",
+                                                                      attrs: {
+                                                                        type:
+                                                                          "button"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "svg",
+                                                                        {
+                                                                          attrs: {
+                                                                            xmlns:
+                                                                              "http://www.w3.org/2000/svg",
+                                                                            viewBox:
+                                                                              "0 0 14.93 15"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "title",
+                                                                            [
+                                                                              _vm._v(
+                                                                                "añadir-favorito-bio"
+                                                                              )
+                                                                            ]
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Capa_2",
+                                                                                "data-name":
+                                                                                  "Capa 2"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "g",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    id:
+                                                                                      "Guias_y_recursos",
+                                                                                    "data-name":
+                                                                                      "Guias y recursos"
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "button",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-view",
+                                                                      attrs: {
+                                                                        type:
+                                                                          "button"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c(
+                                                                        "svg",
+                                                                        {
+                                                                          attrs: {
+                                                                            xmlns:
+                                                                              "http://www.w3.org/2000/svg",
+                                                                            viewBox:
+                                                                              "0 0 15.03 15"
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _c(
+                                                                            "title",
+                                                                            [
+                                                                              _vm._v(
+                                                                                "visualizar-producto-bio"
+                                                                              )
+                                                                            ]
+                                                                          ),
+                                                                          _vm._v(
+                                                                            " "
+                                                                          ),
+                                                                          _c(
+                                                                            "g",
+                                                                            {
+                                                                              attrs: {
+                                                                                id:
+                                                                                  "Capa_2",
+                                                                                "data-name":
+                                                                                  "Capa 2"
+                                                                              }
+                                                                            },
+                                                                            [
+                                                                              _c(
+                                                                                "g",
+                                                                                {
+                                                                                  attrs: {
+                                                                                    id:
+                                                                                      "Guias_y_recursos",
+                                                                                    "data-name":
+                                                                                      "Guias y recursos"
+                                                                                  }
+                                                                                },
+                                                                                [
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                                                      }
+                                                                                    }
+                                                                                  ),
+                                                                                  _vm._v(
+                                                                                    " "
+                                                                                  ),
+                                                                                  _c(
+                                                                                    "path",
+                                                                                    {
+                                                                                      staticClass:
+                                                                                        "cls-1",
+                                                                                      attrs: {
+                                                                                        d:
+                                                                                          "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                                                      }
+                                                                                    }
+                                                                                  )
+                                                                                ]
+                                                                              )
+                                                                            ]
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _vm._v(
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                      )
+                                                                    ]
                                                                   )
                                                                 ]
                                                               )
@@ -57246,14 +57314,13 @@ var render = function() {
                                                   )
                                                 ]
                                               )
-                                            ]
+                                            }),
+                                            0
                                           )
-                                        }),
-                                        0
+                                        ]
                                       )
-                                    ]
-                                  )
-                                ])
+                                    ])
+                                  : _vm._e()
                               ]
                             ),
                             _vm._v(" "),

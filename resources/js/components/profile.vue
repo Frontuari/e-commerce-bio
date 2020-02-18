@@ -821,8 +821,12 @@
 									<div class="tab-content" id="orders-content">
 										<div class="tab-pane fade show active" id="all-orders" role="tabpanel" aria-labelledby="all-orders-tab">
 
+										<div  class="col-md-12 mx-0" v-if="cant_favorites <= 0">
+											<p class="cart-empty bio-info">Lista vacia.</p>
+											<a class="button" href="catalog">Volver a la tienda</a>
+										</div>
 
-											<div class="product-list">
+											<div class="product-list" v-if="cant_favorites > 0">
 											    <div class="container-fluid">
 											        <div class="row">
 											            <div class="col-6 col-lg-12" v-for="favorite in favorites">
@@ -1036,12 +1040,14 @@
         data() {
             return {
 				favorites: [],
+				cant_favorites : 0,
             }
         },
         methods: {
             getFavorites: async function () {
 				const response = await axios.get(URLHOME+'api/favorites');
 				this.favorites = response.data.data;
+				this.cant_favorites = response.data.data.length;
 				console.log(this.favorites);
 			},
 			addToCart(product) {
