@@ -51,7 +51,7 @@
 								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
-								<a href="/profile" v-if="!!userlogged">
+								<a href="/profile?tab=my-favorites" v-if="!!userlogged">
 									<span class="link-text"> {{userlogged.nombre}}</span>
 								</a>
 								<!-- el login-->
@@ -83,7 +83,7 @@
 							<!-- loggeado -->
 							
 							<li id="nav-cart"><a  href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
-							<li id="nav-fav"><a href="profile"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
+							<li id="nav-fav"><a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
 
 							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 
