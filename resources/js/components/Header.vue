@@ -32,10 +32,9 @@
 						<form class="form-inline" action="">
 							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)">
 							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
-
-							<div class="keyup_search">
+							<div class="keyup_search" :style="{ display: dSearch }">
 								<ol>
-									<li v-for="s in searched" :key="s.id"><i class="fa fa-search" aria-hidden="true"></i> {{s.name}}</li>
+									<li v-for="ser in searched" :key="ser.id"><i class="fa fa-search" aria-hidden="true"></i> {{ser.name}}</li>
 								</ol>
 							</div>
 
@@ -185,7 +184,8 @@ export default {
 			cant_favorite: 0,
 			categories: [],
 			products: [],
-			searched: [],
+			searched: {},
+			dSearch: 'none',
 			user: {
 				name: '',
 				email: '',
@@ -205,9 +205,13 @@ export default {
 		async SearchProducts(e) {
 			const len = e.target.value.length;
 			const val = e.target.value;
-			if(len >= 3){
+			this.searched = {};
+			if(len >= 3) {
 				const response = await axios.get(URLSERVER+"api/products/search/"+val);
 				this.searched = response.data.data;
+				this.dSearch = 'block';
+			} else {
+				this.dSearch = 'none';
 			}
 		},
 		async getFavorites() {

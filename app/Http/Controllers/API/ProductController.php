@@ -30,11 +30,11 @@ class ProductController extends BaseController
 
     public function search($name)
     {
-        $Product =  DB::table('products')->whereRaw('LOWER(name) LIKE ?', [trim(strtolower($name)).'%'])->take(10)->first();
+        $Product =  DB::table('products')->whereRaw('LOWER(name) LIKE ?', [trim(strtolower($name)).'%'])->take(10)->get();
         if (is_null($Product)) {
             return $this->sendError('Product not found.');
         }
-        return $this->sendResponse(new ProductResource($Product), 'Product retrieved successfully.');
+        return $this->sendResponse($Product, 'Product retrieved successfully.');
     }
 
     public function most_recent()

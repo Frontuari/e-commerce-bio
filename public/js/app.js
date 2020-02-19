@@ -3635,7 +3635,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3643,7 +3642,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cant_favorite: 0,
       categories: [],
       products: [],
-      searched: [],
+      searched: {},
+      dSearch: 'none',
       user: {
         name: '',
         email: '',
@@ -3697,20 +3697,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 len = e.target.value.length;
                 val = e.target.value;
+                this.searched = {};
 
                 if (!(len >= 3)) {
-                  _context2.next = 7;
+                  _context2.next = 11;
                   break;
                 }
 
-                _context2.next = 5;
+                _context2.next = 6;
                 return axios.get(URLSERVER + "api/products/search/" + val);
 
-              case 5:
+              case 6:
                 response = _context2.sent;
                 this.searched = response.data.data;
+                this.dSearch = 'block';
+                _context2.next = 12;
+                break;
 
-              case 7:
+              case 11:
+                this.dSearch = 'none';
+
+              case 12:
               case "end":
                 return _context2.stop();
             }
@@ -52549,21 +52556,28 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(2),
                   _vm._v(" "),
-                  _c("div", { staticClass: "keyup_search" }, [
-                    _c(
-                      "ol",
-                      _vm._l(_vm.searched, function(s) {
-                        return _c("li", { key: s.id }, [
-                          _c("i", {
-                            staticClass: "fa fa-search",
-                            attrs: { "aria-hidden": "true" }
-                          }),
-                          _vm._v(" " + _vm._s(s.name))
-                        ])
-                      }),
-                      0
-                    )
-                  ])
+                  _c(
+                    "div",
+                    {
+                      staticClass: "keyup_search",
+                      style: { display: _vm.dSearch }
+                    },
+                    [
+                      _c(
+                        "ol",
+                        _vm._l(_vm.searched, function(ser) {
+                          return _c("li", { key: ser.id }, [
+                            _c("i", {
+                              staticClass: "fa fa-search",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(" " + _vm._s(ser.name))
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
                 ]
               )
             ]
