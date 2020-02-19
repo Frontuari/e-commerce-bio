@@ -14,7 +14,7 @@ switch($_GET['evento']){
         $email=$_GET['email'];
         $clave=$_GET['password'];
         
-        $row=q("SELECT s.id,s.password,s.email,s.name,s.peoples_id, p.sex,p.birthdate,c.id as city_id,c.name as ciudad
+        $row=q("SELECT s.id,s.password,s.email,s.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad
         FROM users s
         INNER JOIN peoples p on p.id = s.peoples_id
         INNER JOIN cities c on c.id = p.cities_id

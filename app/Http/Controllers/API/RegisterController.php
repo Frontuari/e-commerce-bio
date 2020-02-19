@@ -81,4 +81,46 @@ class RegisterController extends BaseController
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
     }
+
+
+    /**
+     * Register Controller
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update_profile(Request $request)
+    {   
+        $data_user = $request->all();
+        //USER
+        DB::table('users')
+            ->where('id', $data_user['user_data']['id'])
+            ->update([
+                'name' => $data_user['user_data']['name'],
+            ]);
+        //PEOPLES
+        DB::table('peoples')
+            ->where('id', $data_user['user_data']['peoples_id'])
+            ->update([
+                'name' => $data_user['user_data']['name'],
+                'sex' => $data_user["user_data"]['sex'],
+                'birthdate' =>$data_user["user_data"]['birthdate'],
+                'cities_id' => $data_user["user_data"]['city_id'],
+                'phone' => ''
+            ]);
+
+
+        echo json_encode($this->getData($data_user["user_data"]["email"]));
+    }   
+
+    public function getData($email) {
+        $datos = User::select("users.id","users.email","users.name","users.peoples_id","peoples.sex","peoples.birthdate","cities.id as city_id","cities.name as ciudad")
+        ->join("peoples","peoples.id","=","users.peoples_id")
+        ->join("cities","cities.id","=","peoples.cities_id")
+        ->where("users.email",$email)
+        ->first();
+        $_SESSION["usuario"]=$datos;
+        return $datos;
+    }
+
+
 }

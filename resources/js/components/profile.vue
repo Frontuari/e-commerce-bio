@@ -5,7 +5,7 @@
 				<div class="col-12">
 					<div class="profile-header">
 						<div class="profile-img">
-							<img :src="'assets/img/profile-default.png'" :alt="userlogged.name">
+							<img :src="'assets/img/profile-default.png'" :alt="userData.name">
 							<form action="">
 								<div class="change-profile-img">
 									<button type="button" class="btn"><img src="assets/img/subir-archivo-bio-mercados.svg"></button>
@@ -13,7 +13,7 @@
 							</form>
 						</div>
 						<div class="profile-info">
-							<h2 class="profile-title">{{userlogged.name}}</h2>
+							<h2 class="profile-title">{{userData.name}}</h2>
 							<p class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
 						</div>
 					</div>
@@ -69,7 +69,7 @@
 																<label for="user-name">Nombre (s):</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="" v-model="userlogged.name">
+																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="" v-model="userData.name">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -85,7 +85,7 @@
 																<label for="user-email">Correo Electrónico:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" value="" v-model="userlogged.email">
+																<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" value="" v-model="userData.email">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -93,7 +93,7 @@
 																<label for="user-birthday">Cumpleaños:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY" v-model="userlogged.birthdate">
+																<input type="text" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY" v-model="userData.birthdate">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -101,17 +101,17 @@
 																<label for="user-gender">Sexo:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="user-gender" name="user-gender" disabled="disabled" value="Masculino">
+																<input :type="'text'" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="user-gender" name="user-gender" disabled="disabled" :value="(userData.sex == 'm')?'Masculino':'Femenino'" v-model="userData.sex">
 																<div class="dropdown-menu dropdown-menu-gender">
 																    <div class="dropdown-item">
 																		<div class="form-check form-check-radio">
-																			<input type="radio" class="form-check-input" id="man" name="radio-gender" value="Masculino">
+																			<input type="radio" class="form-check-input" id="man" name="radio-gender"  value="m" :checked="userData.sex == 'm'?true:false">
 																			<label for="man" class="custom-check"><span></span>Masculino</label>
 																		</div>
 																    </div>
 																    <div class="dropdown-item">
 																		<div class="form-check form-check-radio">
-																	    	<input type="radio" class="form-check-input" id="women" value="Femenino" name="radio-gender">
+																	    	<input type="radio" class="form-check-input" id="women" value="f" name="radio-gender" :checked="userData.sex == 'f'?true:false">
 																	    	<label for="women" class="custom-check"><span></span>Femenino</label>
 																		</div>
 																    </div>
@@ -136,7 +136,7 @@
 														</div>
 														<div class="col-lg-12">
 															<div class="form-group">
-																<button class="btn btn-submit" type="submit">GUARDAR CAMBIOS</button>
+																<button class="btn btn-submit" @click="update_profile(userData)" type="button">GUARDAR CAMBIOS</button>
 															</div>
 														</div>
 													</div>
@@ -160,7 +160,7 @@
 													</div>
 													<div class="mt-5"></div>
 													<div class="form-group">
-														<button class="btn btn-submit" type="submit">GUARDAR CAMBIOS</button>
+														<button class="btn btn-submit" type="button">GUARDAR CAMBIOS</button>
 													</div>
 												</div>
 											</form>
@@ -385,7 +385,7 @@
 															</div>
 															<div class="col-lg-12">
 																<div class="form-group">
-																	<button class="btn btn-submit" type="submit">GUARDAR CAMBIOS</button>
+																	<button class="btn btn-submit" type="button">GUARDAR CAMBIOS</button>
 																</div>
 															</div>
 															<div class="col-lg-12">
@@ -603,7 +603,7 @@
 															</div>
 															<div class="col-lg-12">
 																<div class="form-group">
-																	<button class="btn btn-submit" type="submit">GUARDAR CAMBIOS</button>
+																	<button class="btn btn-submit" type="button">GUARDAR CAMBIOS</button>
 																</div>
 															</div>
 															<div class="col-lg-12">
@@ -1042,6 +1042,7 @@
 				favorites: [],
 				cant_favorites : 0,
             	get_tab:'',
+            	userData: [],
             }
 		},
 		props: {
@@ -1141,19 +1142,31 @@
                 .catch(function (error) {
                 	console.log(error);
                 });
-			}
-        },
-        filters: {
-			MediumImage: function(imageText)
+			},
+			update_profile(user)
 			{
-				imageText = imageText.split('.');
-				let newImageText = imageText[0]+'-medium.'+imageText[1];
-				return newImageText;
-			}	
-		},
+				const that = this;
+				console.log(user);
+				axios.post(URLHOME+'api/update_profile', {
+                    user_data: user,
+                })
+                .then(function (response) {
+                	console.log(response.data);
+                	that.userData = response.data;
+                })
+                .catch(function (error) {
+                	console.log(error);
+                });
+			}
+
+
+        },
         mounted() {
 			this.getFavorites();
 			this.getTabUrl();
+		},
+		created() {
+			this.userData = this.userlogged;
 		}
 		
     }
