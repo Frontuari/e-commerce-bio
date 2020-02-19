@@ -9,14 +9,16 @@ $(function () {
     //--------------
 
     // Get context with jQuery - using jQuery's .get() method.
+    if (document.querySelector('#areaChart') !== null) {
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+    }
     // This will get the first returned node in the jQuery collection.
     //var areaChart       = new Chart(areaChartCanvas)
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
     //var areaChartData = $.get("http://127.0.0.1:8000/api/orders/estadistica/ano");
-
+    if (typeof APP_URL !== 'undefined') {
     var url=APP_URL+"/api/orders/estadistica/ano";
-
+    }
     $.getJSON( url, function( data ) {
       //alert(data.datasets[0].data);
       //alert(data);
