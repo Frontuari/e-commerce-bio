@@ -51,9 +51,7 @@
 								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
-								<a href="/profile" v-if="!!userlogged">
-									<span class="link-text"> {{userlogged.name}}</span>
-								</a>
+				
 								<!-- el login-->
 								<div class="dropdown-menu  login_navbar" aria-labelledby="navbarLogin">
 									<form action="#">
@@ -79,16 +77,18 @@
 							<!-- no loggeado -->
 						
 							<!-- loggeado -->
-							<!--<li id="nav-logged"><a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> <a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
+							<li id="nav-logged" v-if="!!userlogged"><a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text"> {{userlogged.name}}</span></a> <a href="javascript:void(0)" @click="logout()" class="logout">
+							<img src="assets/img/cerrar-sesion-bio.svg"></a></li>
 							<!-- loggeado -->
 							
 							<li id="nav-cart"><a  href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a></li>
-							<li id="nav-fav"><a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
 
-							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
+							<li id="nav-fav" v-if="!!userlogged"><a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a></li>
+
+							<li id="bio-wallet" v-if="!!userlogged"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 
 							<!-- loggeado -->
-							<!--<li id="nav-logout"><a href="#"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
+							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 						</ul>
 
@@ -227,6 +227,12 @@ export default {
 				location.href = window.location.href;
 			});
 			
+		},
+		logout()
+		{
+			axios.get(URLSERVER+"api_rapida.php?evento=logout").then( () => {
+				location.href = URLSERVER;
+			});
 		}
     },
     created() {

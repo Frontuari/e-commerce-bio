@@ -9,6 +9,7 @@ $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 switch($_GET['evento']){
 
+
     case 'login':
         $email=$_GET['email'];
         $clave=$_GET['password'];
@@ -36,6 +37,10 @@ switch($_GET['evento']){
     }
     break;
 
+    case 'logout':
+        session_destroy();
+        return 'success';
+    break;
 
 }
 

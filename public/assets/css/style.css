@@ -515,7 +515,7 @@
 	}
 
 	.logout{
-		display: none !important;
+		/*display: none !important;*/
 		margin-left: 5px;
 	}
 	@media (min-width: 992px){
