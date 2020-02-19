@@ -68,5 +68,6 @@ Route::post('login', 'API\RegisterController@login');
 
     //ADD VISIT USER PRODUCT
     Route::resource('user_visit_products', 'API\UserVisitProductsController');
-        
+    
+    Route::get('tasa','API\CoinController@index');
 //});

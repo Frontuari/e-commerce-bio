@@ -13,7 +13,7 @@
                             <div class="col-lg-7">
                                 <div class="product-description">
                                     <a href="#" class="product-title">{{product.name}}</a>
-                                    <!-- <span class="product-info">1 Kg</span> -->
+                                    <span class="product-info">{{product.description}}</span>
                                     <div class="product-prices">
                                         <!-- <span class="product-descount">$ 3 / Bs 135.000</span> -->
                                         <p>Bs {{ product.price | FormatNumber }}</p>

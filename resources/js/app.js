@@ -112,6 +112,10 @@ Vue.prototype.addToFavorite = globalFunc.addToFavorite;
 Vue.prototype.addToCart = globalFunc.addToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 
+axios.get(URLSERVER+'api/tasa').then( response => {
+    console.log(response.data);
+})
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
