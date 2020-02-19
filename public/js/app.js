@@ -2576,17 +2576,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     userlogged: Object
   },
-  methods: {
-    updateCart: function updateCart(data) {
-      console.log("entro por aqui por el on", data);
-    },
-    removeCart: function removeCart(index) {
-      this.products_cart.splice(index, 1);
-      localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
-      this.cant_cart = this.products_cart.length;
-      EventBus.$emit("update_cantCart", this.products_cart.length);
-    }
-  },
   created: function created() {
     var _this = this;
 
@@ -2910,72 +2899,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getRecent;
-    }(),
-    addToCart: function addToCart(product) {
-      var cart = [];
-
-      if (localStorage.getItem('cartNew')) {
-        cart = JSON.parse(localStorage.getItem('cartNew'));
-      }
-
-      cart = this.validateCart(product, cart); //cart.push(tmp);
-
-      localStorage.setItem('cartNew', JSON.stringify(cart));
-      EventBus.$emit("update_cantCart", cart.length);
-    },
-    validateCart: function validateCart(product, tmp) {
-      var exist = false;
-      tmp.forEach(function (a, b) {
-        if (a.product.id == product.id) {
-          tmp[b].cant++;
-          exist = true;
-        }
-      });
-
-      if (!exist) {
-        console.log("entro por aqui porque es primera vez");
-        tmp.push({
-          product: product,
-          cant: 1
-        });
-      }
-
-      return tmp;
-    },
-    addToFavorite: function addToFavorite(product) {
-      var favorite = []; //obtener la ID del producto
-
-      var products_id = product.id;
-      axios.post(URLHOME + 'api/favorites', {
-        products_id: products_id,
-        user_id: 1
-      }).then(function (response) {
-        console.log(response);
-
-        if (response.data != 'error') {
-          EventBus.$emit("update_cantFavorite", response.data);
-        } else {
-          console.log("El producto ya existe en favoritos");
-          alert("El producto ya existe en tus favoritos");
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    removeCart: function removeCart(id) {
-      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-      var products = storageProducts.filter(function (product) {
-        return product.id !== id;
-      });
-      localStorage.setItem('products', JSON.stringify(products));
-    }
-  },
-  filters: {
-    MediumImage: function MediumImage(imageText) {
-      imageText = imageText.split('.');
-      var newImageText = imageText[0] + '-medium.' + imageText[1];
-      return newImageText;
-    }
+    }()
   },
   mounted: function mounted() {
     this.getRecent();
@@ -3911,37 +3835,6 @@ __webpack_require__.r(__webpack_exports__);
       if (type == 1) this.cantModal += 1;else if (type == 2) {
         if (this.cantModal > 1) this.cantModal -= 1;
       }
-    },
-    addToCart: function addToCart(product) {
-      var cart = [];
-
-      if (localStorage.getItem('cartNew')) {
-        cart = JSON.parse(localStorage.getItem('cartNew'));
-      }
-
-      cart = this.validateCart(product, cart); //cart.push(tmp);
-
-      localStorage.setItem('cartNew', JSON.stringify(cart));
-      EventBus.$emit("update_cantCart", cart.length);
-    },
-    validateCart: function validateCart(product, tmp) {
-      var exist = false;
-      tmp.forEach(function (a, b) {
-        if (a.product.id == product.id) {
-          tmp[b].cant++;
-          exist = true;
-        }
-      });
-
-      if (!exist) {
-        console.log("entro por aqui porque es primera vez");
-        tmp.push({
-          product: product,
-          cant: 1
-        });
-      }
-
-      return tmp;
     }
   },
   computed: {
@@ -73910,8 +73803,6 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./globalFunctions */ "./resources/js/globalFunctions.js");
-
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.EventBus = new Vue();
 /**
@@ -73949,8 +73840,64 @@ Vue.filter('MediumImage', function (imageText) {
   var newImageText = imageText[0] + '-medium.' + imageText[1];
   return newImageText;
 });
-Vue.prototype.addToFavorite = addToFavorite;
-Vue.prototype.addToCart = addToCart;
+var globalFunc = {
+  addToFavorite: function addToFavorite(product, user_id) {
+    var products_id = product.id;
+    console.log("product::> ", products_id);
+    console.log("user_id::> ", user_id);
+    axios.post(URLHOME + 'api/favorites', {
+      products_id: products_id,
+      user_id: user_id
+    }).then(function (response) {
+      console.log(response.data);
+      EventBus.$emit("update_cantFavorite", response.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  addToCart: function addToCart(product) {
+    console.log("product::> ", product);
+    var cart = [];
+    console.log("cart-1::> ", cart);
+
+    if (window.localStorage.getItem('cartNew')) {
+      cart = JSON.parse(window.localStorage.getItem('cartNew'));
+    }
+
+    cart = globalFunc.validateCart(product, cart);
+    console.log("cart-2::> ", cart);
+    window.localStorage.setItem('cartNew', JSON.stringify(cart));
+    EventBus.$emit("update_cantCart", cart.length);
+  },
+  validateCart: function validateCart(product, tmp) {
+    var exist = false;
+    tmp.forEach(function (a, b) {
+      if (a.product.id == product.id) {
+        tmp[b].cant++;
+        exist = true;
+      }
+    });
+
+    if (!exist) {
+      console.log("entro por aqui porque es primera vez");
+      tmp.push({
+        product: product,
+        cant: 1
+      });
+    }
+
+    return tmp;
+  },
+  removeCart: function removeCart(index) {
+    this.products_cart.splice(index, 1);
+    localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
+    this.cant_cart = this.products_cart.length;
+    EventBus.$emit("update_cantCart", this.products_cart.length);
+  }
+};
+Vue.prototype.addToFavorite = globalFunc.addToFavorite;
+Vue.prototype.addToCart = globalFunc.addToCart;
+Vue.prototype.removeCart = globalFunc.removeCart;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -73958,15 +73905,7 @@ Vue.prototype.addToCart = addToCart;
  */
 
 var app = new Vue({
-  el: '#app',
-  data: function data() {
-    return {
-      loggedUser: ''
-    };
-  },
-  created: function created() {
-    this.loggedUser = "Leonardo";
-  }
+  el: '#app'
 });
 
 /***/ }),
@@ -74912,66 +74851,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_profile_vue_vue_type_template_id_7eab0eae___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/globalFunctions.js":
-/*!*****************************************!*\
-  !*** ./resources/js/globalFunctions.js ***!
-  \*****************************************/
-/*! exports provided: addToFavorite, addToCart */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToFavorite", function() { return addToFavorite; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToCart", function() { return addToCart; });
-var addToFavorite = {
-  addToFavorite: function addToFavorite(product, user_id) {
-    var products_id = product.id;
-    axios.post(URLHOME + 'api/favorites', {
-      products_id: products_id,
-      user_id: user_id
-    }).then(function (response) {
-      console.log(response); //AQUI FALTA TRAERSE LA CANTIDAD DE FAVORITOS
-      // EventBus.$emit("update_cantFavorite",cart.length);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
-};
-var addToCart = {
-  addToCart: function addToCart(product) {
-    var cart = [];
-
-    if (localStorage.getItem('cartNew')) {
-      cart = JSON.parse(localStorage.getItem('cartNew'));
-    }
-
-    cart = function cart(product, tmp) {
-      var exist = false;
-      tmp.forEach(function (a, b) {
-        if (a.product.id == product.id) {
-          tmp[b].cant++;
-          exist = true;
-        }
-      });
-
-      if (!exist) {
-        console.log("entro por aqui porque es primera vez");
-        tmp.push({
-          product: product,
-          cant: 1
-        });
-      }
-
-      return tmp;
-    };
-
-    localStorage.setItem('cartNew', JSON.stringify(cart));
-    EventBus.$emit("update_cantCart", cart.length);
-  }
-};
 
 /***/ }),
 

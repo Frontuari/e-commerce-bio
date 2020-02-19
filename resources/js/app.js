@@ -5,8 +5,6 @@
  */
 
 require('./bootstrap');
-require('./globalFunctions');
-
 
 window.Vue = require('vue');
 
@@ -54,8 +52,65 @@ Vue.filter('MediumImage',function(imageText) {
     return newImageText;
 });
 
-Vue.prototype.addToFavorite = addToFavorite; 
-Vue.prototype.addToCart = addToCart; 
+var globalFunc = {
+    addToFavorite: function(product,user_id) {
+        let products_id = product.id;
+        console.log("product::> ",products_id);
+        console.log("user_id::> ",user_id);
+        axios.post(URLHOME+'api/favorites', {
+            products_id: products_id,
+            user_id: user_id
+        })
+        .then(function (response) {
+            console.log(response.data);
+            
+            EventBus.$emit("update_cantFavorite",response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    addToCart: function(product) {
+        console.log("product::> ",product);
+        let cart = [];
+        console.log("cart-1::> ",cart);
+        if(window.localStorage.getItem('cartNew')) {
+            cart = JSON.parse(window.localStorage.getItem('cartNew'));
+        }
+
+        cart = globalFunc.validateCart(product,cart);       
+
+        console.log("cart-2::> ",cart);
+
+        window.localStorage.setItem('cartNew', JSON.stringify(cart));
+        EventBus.$emit("update_cantCart",cart.length);
+    },
+    validateCart: function(product,tmp) {
+        let exist = false;
+        tmp.forEach( (a,b) => {
+            if (a.product.id == product.id) {
+                tmp[b].cant++;
+                exist = true;
+            }
+        });
+        if(!exist) {
+            console.log("entro por aqui porque es primera vez");
+            tmp.push({product: product,cant: 1});
+        }
+        return tmp;
+    },
+    removeCart(index) {
+        this.products_cart.splice(index,1);
+        localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
+        this.cant_cart = this.products_cart.length;
+        EventBus.$emit("update_cantCart",this.products_cart.length);
+    }
+}
+
+Vue.prototype.addToFavorite = globalFunc.addToFavorite; 
+Vue.prototype.addToCart = globalFunc.addToCart;
+Vue.prototype.removeCart = globalFunc.removeCart;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -65,12 +120,4 @@ Vue.prototype.addToCart = addToCart;
 
 const app = new Vue({
     el: '#app',
-    data(){
-        return {
-            loggedUser: ''
-        }
-    },
-    created() {
-        this.loggedUser = "Leonardo";
-    }
 });

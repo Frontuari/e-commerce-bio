@@ -621,17 +621,6 @@ export default {
 	props: {
 		userlogged: Object
 	},
-    methods: {
-        updateCart(data) {
-            console.log("entro por aqui por el on",data);
-        },
-        removeCart(index) {
-			this.products_cart.splice(index,1);
-			localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
-			this.cant_cart = this.products_cart.length;
-			EventBus.$emit("update_cantCart",this.products_cart.length);
-		}
-    },
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;
@@ -660,8 +649,6 @@ export default {
 
 		//total general
 		console.log("Total General "+this.total_cart);
-		
-
     }
 }
 </script>

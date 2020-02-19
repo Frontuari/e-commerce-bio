@@ -55,7 +55,7 @@
     </div>
 </template>
 <script>
-    export default{
+    export default {
         data(){
             return {
                 cantModal: 1
@@ -73,33 +73,7 @@
 					if(this.cantModal > 1)
 						this.cantModal -= 1;
 				}
-            },
-            addToCart(product) {
-				let cart = [];
-				if(localStorage.getItem('cartNew')){
-					cart = JSON.parse(localStorage.getItem('cartNew'));
-				}
-
-				cart = this.validateCart(product,cart);
-
-				//cart.push(tmp);
-				localStorage.setItem('cartNew', JSON.stringify(cart));
-				EventBus.$emit("update_cantCart",cart.length);
-            },
-            validateCart(product,tmp) {
-				let exist = false;
-				tmp.forEach( (a,b) => {
-					if (a.product.id == product.id) {
-						tmp[b].cant++;
-						exist = true;
-					}
-				});
-				if(!exist) {
-					console.log("entro por aqui porque es primera vez");
-					tmp.push({product: product,cant: 1});
-				}
-				return tmp;
-			},
+            }
         },
         computed: {
 			totalModal: function() {

@@ -245,71 +245,8 @@
 				const response = await axios.get(URLHOME+'api/products/most/recent');
 				this.recent = response.data.data;
 				console.log(this.recent);
-			},
-			addToCart(product) {
-				let cart = [];
-				if(localStorage.getItem('cartNew')){
-					cart = JSON.parse(localStorage.getItem('cartNew'));
-				}
-
-				cart = this.validateCart(product,cart);
-
-				//cart.push(tmp);
-				localStorage.setItem('cartNew', JSON.stringify(cart));
-				EventBus.$emit("update_cantCart",cart.length);
-			},
-			validateCart(product,tmp) {
-				let exist = false;
-				tmp.forEach( (a,b) => {
-					if (a.product.id == product.id) {
-						tmp[b].cant++;
-						exist = true;
-					}
-				});
-				if(!exist) {
-					console.log("entro por aqui porque es primera vez");
-					tmp.push({product: product,cant: 1});
-				}
-				return tmp;
-			},
-			
-			addToFavorite(product) {
-				let favorite = [];
-				//obtener la ID del producto
-				let products_id = product.id;
-				axios.post(URLHOME+'api/favorites', {
-                    products_id: products_id,
-                    user_id: 1
-                })
-                .then(function (response) {
-                	console.log(response);
-                	if(response.data != 'error'){
-                		EventBus.$emit("update_cantFavorite",response.data);
-                	}else{
-                		console.log("El producto ya existe en favoritos");
-                		alert("El producto ya existe en tus favoritos");
-                	}
-                })
-                .catch(function (error) {
-                	console.log(error);
-                });
-
-
-			},
-			removeCart(id) {
-				let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-				let products = storageProducts.filter(product => product.id !== id );
-				localStorage.setItem('products', JSON.stringify(products));
 			}
         },
-        filters: {
-			MediumImage: function(imageText)
-			{
-				imageText = imageText.split('.');
-				let newImageText = imageText[0]+'-medium.'+imageText[1];
-				return newImageText;
-			}
-		},
         mounted() {
 			this.getRecent();
 		},
