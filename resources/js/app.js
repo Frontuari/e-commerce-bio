@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('./globalFunctions');
+
 
 window.Vue = require('vue');
 
@@ -45,6 +47,15 @@ Vue.filter('FormatNumber',function(num) {
     const decimal = arrNum[1];
     return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
 });
+
+Vue.filter('MediumImage',function(imageText) {
+    imageText = imageText.split('.');
+    let newImageText = imageText[0]+'-medium.'+imageText[1];
+    return newImageText;
+});
+
+Vue.prototype.addToFavorite = addToFavorite; 
+Vue.prototype.addToCart = addToCart; 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
