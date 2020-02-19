@@ -52671,15 +52671,11 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     !!_vm.userlogged
-                      ? _c(
-                          "a",
-                          { attrs: { href: "/profile?tab=my-favorites" } },
-                          [
-                            _c("span", { staticClass: "link-text" }, [
-                              _vm._v(" " + _vm._s(_vm.userlogged.nombre))
-                            ])
-                          ]
-                        )
+                      ? _c("a", { attrs: { href: "/profile" } }, [
+                          _c("span", { staticClass: "link-text" }, [
+                            _vm._v(" " + _vm._s(_vm.userlogged.nombre))
+                          ])
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _c(

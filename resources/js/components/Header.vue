@@ -51,7 +51,7 @@
 								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
-								<a href="/profile?tab=my-favorites" v-if="!!userlogged">
+								<a href="/profile" v-if="!!userlogged">
 									<span class="link-text"> {{userlogged.nombre}}</span>
 								</a>
 								<!-- el login-->
