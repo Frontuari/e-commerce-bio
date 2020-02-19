@@ -5,11 +5,11 @@
             <div class="gender">
                 <label>Seleccione sexo</label>
                 <div class="form-check form-check-radio">
-                    <input type="radio" class="form-check-input" id="man" name="gender" v-model="User.sex">
+                    <input type="radio" class="form-check-input" id="man" name="gender" value="m" v-model="User.sex">
                     <label for="man" class="custom-check"><span></span>Hombre</label>
                 </div>
                 <div class="form-check form-check-radio">
-                    <input type="radio" class="form-check-input" id="women" name="gender" v-model="User.sex">
+                    <input type="radio" class="form-check-input" id="women" name="gender" value="f" v-model="User.sex">
                     <label for="women" class="custom-check"><span></span>Mujer</label>
                 </div>
             </div>
@@ -23,11 +23,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="text" class="form-control" id="password" name="password" v-model="User.password">
+                <input type="password" class="form-control" id="password" name="password" v-model="User.password">
             </div>
             <div class="form-group">
                 <label for="password2">Repite la contraseña:</label>
-                <input type="text" class="form-control" id="password2" name="password2" v-model="User.c_password">
+                <input type="password" class="form-control" id="password2" name="password2" v-model="User.c_password">
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="terms" name="terms">
@@ -54,8 +54,10 @@
                     email: '',
                     sex: '',
                 }
-                
             }
+        },
+        props: {
+            userlogged: Object
         },
         methods: {
             saveData() {
@@ -66,8 +68,8 @@
                     email: this.User.email,
                     sex: this.User.sex,
                 }).then( (data) => {
-                    console.log("data ::> ",data);
                     alert("Usuario Registrado Exitosamente");
+                    location.href=window.location.href;
                 })
             }
         }

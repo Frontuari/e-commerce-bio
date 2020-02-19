@@ -10,7 +10,7 @@
 
 	<offers></offers>
 
-	<nuestros-productos></nuestros-productos>
+	<nuestros-productos :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></nuestros-productos>
 
 	<footer-ad></footer-ad>
 @stop

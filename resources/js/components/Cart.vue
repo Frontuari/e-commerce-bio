@@ -618,6 +618,9 @@ export default {
             total_cart:0,
         }
     },
+	props: {
+		userlogged: Object
+	},
     methods: {
         updateCart(data) {
             console.log("entro por aqui por el on",data);

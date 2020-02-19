@@ -52,7 +52,7 @@
 									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
 								</a>
 								<a href="/profile" v-if="!!userlogged">
-									<span class="link-text"> {{userlogged.nombre}}</span>
+									<span class="link-text"> {{userlogged.name}}</span>
 								</a>
 								<!-- el login-->
 								<div class="dropdown-menu  login_navbar" aria-labelledby="navbarLogin">

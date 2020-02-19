@@ -43,6 +43,8 @@ class RegisterController extends BaseController
             'phone' => ''
         ]);
 
+        var_dump($people->id);
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

@@ -5,7 +5,7 @@
 				<div class="col-12">
 					<div class="profile-header">
 						<div class="profile-img">
-							<img src="assets/img/profile-default.png" alt="Pablo Mendoza">
+							<img :src="'assets/img/profile-default.png'" :alt="userlogged.name">
 							<form action="">
 								<div class="change-profile-img">
 									<button type="button" class="btn"><img src="assets/img/subir-archivo-bio-mercados.svg"></button>
@@ -13,8 +13,8 @@
 							</form>
 						</div>
 						<div class="profile-info">
-							<h2 class="profile-title">Pablo Mendoza</h2>
-							<p class="bio-points">Mis Puntos bio<span class="quantity-span">253<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
+							<h2 class="profile-title">{{userlogged.name}}</h2>
+							<p class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
 						</div>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 																<label for="user-name">Nombre (s):</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="Pablo">
+																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="" v-model="userlogged.name">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -77,7 +77,7 @@
 																<label for="user-lastname">Apellido (s):</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-lastname" name="user-lastname" disabled="disabled" value="Mendoza">
+																<input type="text" class="form-control" id="user-lastname" name="user-lastname" disabled="disabled" value="">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -85,7 +85,7 @@
 																<label for="user-email">Correo Electrónico:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" value="micorreo@gmail.com">
+																<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" value="" v-model="userlogged.email">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -93,7 +93,7 @@
 																<label for="user-birthday">Cumpleaños:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY">
+																<input type="text" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY" v-model="userlogged.birthdate">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -1043,7 +1043,10 @@
 				cant_favorites : 0,
             	get_tab:'',
             }
-        },
+		},
+		props: {
+			userlogged: Object
+		},
         methods: {
             getFavorites: async function () {
 				const response = await axios.get(URLHOME+'api/favorites');
@@ -1141,12 +1144,6 @@
 			}
         },
         filters: {
-			FormatNumber: function (num) {
-				num = parseFloat(num).toFixed(2);
-				const arrNum = num.split(".");
-				const decimal = arrNum[1];
-				return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
-			},
 			MediumImage: function(imageText)
 			{
 				imageText = imageText.split('.');

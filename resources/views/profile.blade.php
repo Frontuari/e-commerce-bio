@@ -13,7 +13,7 @@
 		</div>
 	</section>
 	
-	<profile></profile>
+	<profile :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></profile>
 
 
 @stop

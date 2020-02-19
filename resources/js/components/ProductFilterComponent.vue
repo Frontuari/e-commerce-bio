@@ -153,6 +153,9 @@
 		components:{
 			ModalProducto
 		},
+		props: {
+			userlogged: Object
+		},
 		methods: {
 			getProduct: async function(objP) {
 				this.product = objP;

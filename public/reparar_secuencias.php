@@ -11,7 +11,7 @@ $puerto=getenv("DB_PORT"):
 $base_dato=$_GET['db'];
 $usuario=$_GET['user'];
 $clave=$_GET['clave'];
-$puerto="5432";
+$puerto=$_GET["puerto"];
 
 $dbconn = pg_connect("host=127.0.0.1 dbname=$base_dato user=$usuario password=$clave port=$puerto")
 or die('No se ha podido conectar: ' . pg_last_error());

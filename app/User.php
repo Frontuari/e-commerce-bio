@@ -26,7 +26,7 @@ class User extends \TCG\Voyager\Models\User implements AuthenticatableContract {
     use Authenticatable;
     
     protected $fillable = [
-        'name', 'email', 'password','people_id','group_id','currency_id'
+        'name', 'email', 'password','peoples_id','groups_id','coins_id'
     ];
 
     /**

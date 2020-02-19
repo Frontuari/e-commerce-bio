@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="col-12 col-lg-6">
-					<register></register>
+					<register :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></register>
 				</div>
 			</div>
 		</div>

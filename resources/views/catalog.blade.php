@@ -8,5 +8,5 @@
 			</div>
 		</div>
 	</div>
-	<catalog></catalog>
+	<catalog :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></catalog>
 @stop

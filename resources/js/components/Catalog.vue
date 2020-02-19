@@ -236,7 +236,10 @@
 				min_price: 100000,
 				max_price: 800000
             }
-        },
+		},
+		props: {
+			userlogged: Object
+		},
         methods: {
             getRecent: async function () {
 				const response = await axios.get(URLHOME+'api/products/most/recent');

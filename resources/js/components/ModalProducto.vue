@@ -62,7 +62,8 @@
             }
         },
         props: {
-            product: Object
+            product: Object,
+            userlogged: Object
         },
         methods: {
             count: function (type) {
