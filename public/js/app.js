@@ -53993,7 +53993,7 @@ var render = function() {
                                       product_sold.price / _vm.tasadolar
                                     )
                                   ) +
-                                  " Bs " +
+                                  " / Bs " +
                                   _vm._s(
                                     _vm._f("FormatNumber")(product_sold.price)
                                   )
@@ -54275,7 +54275,7 @@ var render = function() {
                                       product_view.price / _vm.tasadolar
                                     )
                                   ) +
-                                  " Bs " +
+                                  " / Bs " +
                                   _vm._s(
                                     _vm._f("FormatNumber")(product_view.price)
                                   )
@@ -54557,7 +54557,7 @@ var render = function() {
                                       product_best.price / _vm.tasadolar
                                     )
                                   ) +
-                                  " Bs " +
+                                  " / Bs " +
                                   _vm._s(
                                     _vm._f("FormatNumber")(product_best.price)
                                   )

@@ -67,7 +67,7 @@
 								<a href="#" class="product-title">{{ product_sold.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
 								<div class="product-prices">
-									<p>${{ (product_sold.price / tasadolar) | FormatDolar}} Bs {{ product_sold.price | FormatNumber }}</p>
+									<p>${{ (product_sold.price / tasadolar) | FormatDolar}} / Bs {{ product_sold.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -94,7 +94,7 @@
 								<a href="#" class="product-title">{{ product_view.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
 								<div class="product-prices">
-									<p>${{ (product_view.price / tasadolar) | FormatDolar}} Bs {{ product_view.price | FormatNumber }}</p>
+									<p>${{ (product_view.price / tasadolar) | FormatDolar}} / Bs {{ product_view.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 								<a href="#" class="product-title">{{ product_best.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
 								<div class="product-prices">
-									<p>${{ (product_best.price / tasadolar) | FormatDolar}} Bs {{ product_best.price | FormatNumber }}</p>
+									<p>${{ (product_best.price / tasadolar) | FormatDolar}} / Bs {{ product_best.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
