@@ -10,11 +10,9 @@ window.Vue = require('vue');
 
 window.EventBus = new Vue();
 
-
 /**
  * Detectar URL automaticamente del servidor
  */
-
 const host = window.location.host;
 const path = window.location.pathname.split("/")[1];
 const protocolo = window.location.protocol;
@@ -45,6 +43,11 @@ Vue.filter('FormatNumber',function(num) {
     const decimal = arrNum[1];
     return arrNum[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")+","+decimal;
 });
+
+Vue.filter('FormatDolar',function(num) {
+    return parseFloat(num).toFixed(2);
+});
+
 
 Vue.filter('MediumImage',function(imageText) {
     imageText = imageText.split('.');
@@ -112,9 +115,7 @@ Vue.prototype.addToFavorite = globalFunc.addToFavorite;
 Vue.prototype.addToCart = globalFunc.addToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 
-axios.get(URLSERVER+'api/tasa').then( response => {
-    console.log(response.data);
-})
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

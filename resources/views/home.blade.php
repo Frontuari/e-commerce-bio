@@ -10,7 +10,7 @@
 
 	<offers></offers>
 
-	<nuestros-productos :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></nuestros-productos>
+	<nuestros-productos :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></nuestros-productos>
 
 	<footer-ad></footer-ad>
 @stop

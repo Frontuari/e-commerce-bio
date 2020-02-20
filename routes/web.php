@@ -11,9 +11,7 @@ session_start();
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name("home");
+Route::get('/',"HomeController@index")->name("home");
 
 Route::get('/catalog','CatalogController@index')->name("Catalog");
 
@@ -30,8 +28,6 @@ Route::get('/cart', function(){
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('dashboard');
 
 
 Route::group(['prefix' => 'admin'], function () {

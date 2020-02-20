@@ -18,6 +18,8 @@
 				$title = 'Catalogo';
 			}
 			
-			return view("catalog",["title"=>$title]);
+			$Coin = Coin::where("id",1)->first();
+
+			return view("catalog",["title"=>$title,"tasa_dolar"=>$Coin->rate]);
 		}
 	}
