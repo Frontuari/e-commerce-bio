@@ -2826,13 +2826,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _filterProducts = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 console.log("filtros ha sido cambiada::> ", this.filtros);
+                _context2.next = 3;
+                return axios.get(URLSERVER + 'api/products/filter/' + this.filtros);
 
-              case 1:
+              case 3:
+                response = _context2.sent;
+                console.log("response filter::> ", response.data.data); // this.products = response.data.data;
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -2856,7 +2863,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    this.getDebounceProducts = _.debounce(this.filterProducts, 500);
+    this.getDebounceProducts = _.debounce(this.filterProducts, 300);
   },
   watch: {
     filtros: function filtros() {
