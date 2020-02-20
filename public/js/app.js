@@ -2856,7 +2856,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      recent: [],
+      products: [],
       filterP: [],
       limitP: 10,
       orderP: 'AZasc',
@@ -2866,11 +2866,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   props: {
-    userlogged: Object
+    userlogged: Object,
+    tasadolar: Number
   },
   methods: {
-    getRecent: function () {
-      var _getRecent = _asyncToGenerator(
+    getproducts: function () {
+      var _getproducts = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -2879,12 +2880,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get(URLHOME + 'api/products/most/recent');
+                return axios.get(URLHOME + 'api/products');
 
               case 2:
                 response = _context.sent;
-                this.recent = response.data.data;
-                console.log(this.recent);
+                this.products = response.data.data;
+                console.log(this.products);
 
               case 5:
               case "end":
@@ -2894,15 +2895,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function getRecent() {
-        return _getRecent.apply(this, arguments);
+      function getproducts() {
+        return _getproducts.apply(this, arguments);
       }
 
-      return getRecent;
+      return getproducts;
     }()
   },
   mounted: function mounted() {
-    this.getRecent();
+    this.getproducts();
   },
   computed: {
     filtros: function filtros() {
@@ -48227,20 +48228,17 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "row" },
-                  _vm._l(_vm.recent, function(product_recent) {
+                  _vm._l(_vm.products, function(product) {
                     return _c(
                       "div",
-                      {
-                        key: product_recent.id,
-                        staticClass: "col-6 col-lg-12"
-                      },
+                      { key: product.id, staticClass: "col-6 col-lg-12" },
                       [
                         _c("div", { staticClass: "product-block" }, [
                           _c("div", { staticClass: "product-img" }, [
                             _c("img", {
                               attrs: {
                                 src: _vm._f("MediumImage")(
-                                  "storage/" + product_recent.photo
+                                  "storage/" + product.photo
                                 )
                               }
                             }),
@@ -48457,7 +48455,7 @@ var render = function() {
                                 staticClass: "product-title",
                                 attrs: { href: "#" }
                               },
-                              [_vm._v(_vm._s(product_recent.name))]
+                              [_vm._v(_vm._s(product.name))]
                             ),
                             _vm._v(" "),
                             _c("span", { staticClass: "product-info" }, [
@@ -48467,11 +48465,15 @@ var render = function() {
                             _c("div", { staticClass: "product-prices" }, [
                               _c("p", [
                                 _vm._v(
-                                  "Bs " +
+                                  " $" +
                                     _vm._s(
-                                      _vm._f("FormatNumber")(
-                                        product_recent.price
+                                      _vm._f("FormatDolar")(
+                                        product.price / _vm.tasadolar
                                       )
+                                    ) +
+                                    " / Bs " +
+                                    _vm._s(
+                                      _vm._f("FormatNumber")(product.price)
                                     )
                                 )
                               ])
@@ -48479,12 +48481,12 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "product-add" }, [
-                            product_recent.qty_avaliable > 0
+                            product.qty_avaliable > 0
                               ? _c("span", { staticClass: "product-info" }, [
                                   _vm._v("Disponibles: "),
                                   _c("b", [
                                     _vm._v(
-                                      _vm._s(product_recent.qty_avaliable) +
+                                      _vm._s(product.qty_avaliable) +
                                         " en Stock"
                                     )
                                   ])
@@ -48495,7 +48497,7 @@ var render = function() {
                                 ]),
                             _vm._v(" "),
                             _c("form", { attrs: { action: "" } }, [
-                              product_recent.qty_avaliable > 0
+                              product.qty_avaliable > 0
                                 ? _c(
                                     "div",
                                     { staticClass: "product-quantity" },
@@ -48536,7 +48538,7 @@ var render = function() {
                                                 [
                                                   _vm._v(
                                                     _vm._s(
-                                                      product_recent.qty_avaliable
+                                                      product.qty_avaliable
                                                     )
                                                   )
                                                 ]
@@ -48554,7 +48556,7 @@ var render = function() {
                                 : _vm._e(),
                               _vm._v(" "),
                               _c("div", { staticClass: "product-buttons" }, [
-                                product_recent.qty_avaliable > 0
+                                product.qty_avaliable > 0
                                   ? _c(
                                       "button",
                                       {
@@ -48562,7 +48564,7 @@ var render = function() {
                                         attrs: { type: "button" },
                                         on: {
                                           click: function($event) {
-                                            return _vm.addToCart(product_recent)
+                                            return _vm.addToCart(product)
                                           }
                                         }
                                       },
@@ -48633,7 +48635,7 @@ var render = function() {
                                     attrs: { type: "button" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.addToFavorite(product_recent)
+                                        return _vm.addToFavorite(product)
                                       }
                                     }
                                   },
