@@ -4103,9 +4103,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 this.product = objP;
-                console.log("products::> ", this.product);
 
-              case 2:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -4224,9 +4223,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context5.sent;
                 this.best_price = response.data.data;
-                console.log(this.best_price);
 
-              case 5:
+              case 4:
               case "end":
                 return _context5.stop();
             }
@@ -52640,25 +52638,21 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                !!_vm.userlogged
-                  ? _c("li", { attrs: { id: "nav-fav" } }, [
-                      _c("a", { attrs: { href: "profile?tab=my-favorites" } }, [
-                        _c("img", {
-                          attrs: {
-                            src: "assets/img/favoritos-bio.svg",
-                            alt: "Favorites"
-                          }
-                        }),
-                        _c("span", { staticClass: "quantity-span" }, [
-                          _vm._v(_vm._s(_vm.cant_favorite))
-                        ])
-                      ])
+                _c("li", { attrs: { id: "nav-fav" } }, [
+                  _c("a", { attrs: { href: "profile?tab=my-favorites" } }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/favoritos-bio.svg",
+                        alt: "Favorites"
+                      }
+                    }),
+                    _c("span", { staticClass: "quantity-span" }, [
+                      _vm._v(_vm._s(_vm.cant_favorite))
                     ])
-                  : _vm._e(),
+                  ])
+                ]),
                 _vm._v(" "),
-                !!_vm.userlogged
-                  ? _c("li", { attrs: { id: "bio-wallet" } }, [_vm._m(5)])
-                  : _vm._e()
+                _vm._m(5)
               ])
             ]
           )
@@ -52874,14 +52868,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "bio-points", attrs: { href: "#" } }, [
-      _c("span", { staticClass: "quantity-span" }, [
-        _vm._v("0"),
-        _c("img", {
-          attrs: { src: "assets/img/icono-puntos-bio.svg", alt: "Bio Points" }
-        })
-      ]),
-      _vm._v("bio Wallet")
+    return _c("li", { attrs: { id: "bio-wallet" } }, [
+      _c("a", { staticClass: "bio-points", attrs: { href: "#" } }, [
+        _c("span", { staticClass: "quantity-span" }, [
+          _vm._v("0"),
+          _c("img", {
+            attrs: { src: "assets/img/icono-puntos-bio.svg", alt: "Bio Points" }
+          })
+        ]),
+        _vm._v("bio Wallet")
+      ])
     ])
   },
   function() {
@@ -74003,7 +73999,12 @@ var globalFunc = {
       user_id: user_id
     }).then(function (response) {
       console.log(response.data);
-      EventBus.$emit("update_cantFavorite", response.data);
+
+      if (response.data == 'error') {
+        alert("debe estar logeado para agregar a favoritos");
+      } else {
+        EventBus.$emit("update_cantFavorite", response.data);
+      }
     })["catch"](function (error) {
       console.log(error);
     });
@@ -74032,7 +74033,6 @@ var globalFunc = {
     });
 
     if (!exist) {
-      console.log("entro por aqui porque es primera vez");
       tmp.push({
         product: product,
         cant: 1

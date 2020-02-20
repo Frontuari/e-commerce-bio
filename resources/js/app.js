@@ -66,8 +66,12 @@ var globalFunc = {
         })
         .then(function (response) {
             console.log(response.data);
+            if(response.data == 'error') {
+                alert("debe estar logeado para agregar a favoritos");
+            }else {
+                EventBus.$emit("update_cantFavorite",response.data);
+            }
             
-            EventBus.$emit("update_cantFavorite",response.data);
         })
         .catch(function (error) {
             console.log(error);
@@ -98,7 +102,6 @@ var globalFunc = {
             }
         });
         if(!exist) {
-            console.log("entro por aqui porque es primera vez");
             tmp.push({product: product,cant: 1});
         }
         return tmp;

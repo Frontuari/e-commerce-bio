@@ -158,7 +158,6 @@
 		methods: {
 			getProduct: async function(objP) {
 				this.product = objP;
-				console.log("products::> ",this.product);
 			},
 			getViewed: async function () {
 				const response = await axios.get(URLSERVER+'api/products/most/viewed');
@@ -175,7 +174,6 @@
 			getBestPrice: async function () {
 				const response = await axios.get(URLSERVER+'api/products/best/price');
 				this.best_price = response.data.data;
-				console.log(this.best_price);
 			}
 		},
         mounted(){
