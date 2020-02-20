@@ -17,13 +17,16 @@ class FavoritesController extends BaseController
      */
     public function index(Request $request)
     {
-        //$id_usuario=$request->user()->id;
-        $id_usuario=1;
-        $a=DB::table("favorites")
-        ->select("favorites.*","products.id as product_id","products.name as product_name","products.price as price","products.photo as photo", "products.qty_avaliable")
-        ->join("products","products.id","=","favorites.products_id")
-        ->where('users_id',$id_usuario)
-        ->get();
+        $id_usuario=($_SESSION["usuario"]["id"] ?? '');
+        if(isset($_SESSION["usuario"]["id"]) && !empty($_SESSION["usuario"]["id"])) {
+            $a=DB::table("favorites")
+            ->select("favorites.*","products.id as product_id","products.name as product_name","products.price as price","products.photo as photo", "products.qty_avaliable")
+            ->join("products","products.id","=","favorites.products_id")
+            ->where('users_id',$id_usuario)
+            ->get();
+        }else {
+            $a = [];
+        }
         return $this->sendResponse($a);
     }
 
