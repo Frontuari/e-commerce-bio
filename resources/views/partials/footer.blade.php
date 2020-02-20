@@ -237,6 +237,11 @@
 
 		jQuery(document).ready(function($){
 
+			setTimeout(function(){
+				$('body').addClass('loaded');
+				$('h1').css('color','#222222');
+			}, 4000);
+
 			var $range = $(".js-range-slider");
 		    var $inputFrom = $(".js-input-from");
 		    var $inputTo = $(".js-input-to");
@@ -380,38 +385,6 @@
 			});
 
 		});
-
-		/*function increaseValue() {
-		  var value = parseInt(document.getElementById('quantity').value, 10);
-		  value = isNaN(value) ? 0 : value;
-		  value++;
-		  document.getElementById('quantity').value = value;
-		}*/
-
-		/*function decreaseValue() {
-		  var value = parseInt(document.getElementById('quantity').value, 10);
-		  value = isNaN(value) ? 0 : value;
-		  value < 1 ? value = 1 : '';
-		  value--;
-		  document.getElementById('quantity').value = value;
-		}*/
-
-		/*function increaseValue2(e) {
-		  //var value = parseInt(document.getElementById('quantity2').value, 10);
-		 console.log(e);
-		  var value = parseInt(e.value,10);
-		  value = isNaN(value) ? 0 : value;
-		  value++;
-		  document.getElementById('quantity2').value = value;
-		}*/
-
-		/*function decreaseValue2() {
-		  var value = parseInt(document.getElementById('quantity2').value, 10);
-		  value = isNaN(value) ? 0 : value;
-		  value < 1 ? value = 1 : '';
-		  value--;
-		  document.getElementById('quantity2').value = value;
-		}*/
 
 		$(window).scroll(function() {    
 		    var scroll = $(window).scrollTop();
