@@ -4,6 +4,7 @@
 
 	use Illuminate\Http\Request;
 	use App\ProductCategory;
+	use App\Coin;
 
 	class CatalogController extends Controller
 	{
