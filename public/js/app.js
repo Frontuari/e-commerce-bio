@@ -53990,7 +53990,7 @@ var render = function() {
                                 "$" +
                                   _vm._s(
                                     _vm._f("FormatDolar")(
-                                      _vm.product_recent.price / _vm.tasadolar
+                                      product_sold.price / _vm.tasadolar
                                     )
                                   ) +
                                   " Bs " +
@@ -54272,7 +54272,7 @@ var render = function() {
                                 "$" +
                                   _vm._s(
                                     _vm._f("FormatDolar")(
-                                      _vm.product_recent.price / _vm.tasadolar
+                                      product_view.price / _vm.tasadolar
                                     )
                                   ) +
                                   " Bs " +
@@ -54554,7 +54554,7 @@ var render = function() {
                                 "$" +
                                   _vm._s(
                                     _vm._f("FormatDolar")(
-                                      _vm.product_recent.price / _vm.tasadolar
+                                      product_best.price / _vm.tasadolar
                                     )
                                   ) +
                                   " Bs " +
