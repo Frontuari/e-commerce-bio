@@ -5,16 +5,20 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Product;
+use App\Filters\ProductFilters;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends BaseController
 {
-    public function index()
+    public function index(Request $request,ProductFilters $filters)
     {
-        $Products = Product::where('status','A')->get();
-        return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
+        $data = $request->all();
+        $limit = ($data["limit"] ?? 10);
+        
+        $Products = Product::filter($filters)->where('status','A')->paginate($limit);
+        return $this->sendResponse($Products, 'Product retrieved successfully.');
     }
 
     public function show($id)
@@ -59,13 +63,4 @@ class ProductController extends BaseController
         $Products = Product::where('status','A')->orderBy('price','asc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
-    
-    public function filter($filter) {
-
-        $filtros = explode("+",$filter);
-        
-
-        return $this->sendResponse($filtros,'filtros');
-    }
-
 }

@@ -2771,13 +2771,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      products: [],
+      products: {},
       filterP: [],
-      limitP: 10,
+      limitP: 5,
       orderP: 'AZasc',
       rangeP: '',
       min_price: 100000,
@@ -2831,15 +2832,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log("filtros ha sido cambiada::> ", this.filtros);
-                _context2.next = 3;
-                return axios.get(URLSERVER + 'api/products/filter/' + this.filtros);
+                _context2.next = 2;
+                return axios.get(URLSERVER + 'api/products?' + this.filtros);
 
-              case 3:
+              case 2:
                 response = _context2.sent;
-                console.log("response filter::> ", response.data.data); // this.products = response.data.data;
+                this.products = response.data.data;
 
-              case 5:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -2854,16 +2854,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return filterProducts;
     }()
   },
-  mounted: function mounted() {
-    this.getproducts();
+  mounted: function mounted() {// this.getproducts();
   },
   computed: {
     filtros: function filtros() {
-      return this.filterP.join("+") + "+limit=" + this.limitP + "+order=" + this.orderP + "+precio=" + this.min_price + "," + this.max_price;
+      return this.filterP.join("&") + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price;
     }
   },
   created: function created() {
-    this.getDebounceProducts = _.debounce(this.filterProducts, 300);
+    this.getDebounceProducts = _.debounce(this.filterProducts, 500);
   },
   watch: {
     filtros: function filtros() {
@@ -3974,8 +3973,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3983,7 +3980,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    products: Array,
+    products: Object,
     tasadolar: Number
   }
 });
@@ -47836,6 +47833,8 @@ var render = function() {
                     }
                   },
                   [
+                    _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
                     _vm._v(" "),
                     _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
@@ -47848,7 +47847,9 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c("span", [_vm._v("Resultados de 253")])
+                _c("span", [
+                  _vm._v("Resultados de " + _vm._s(_vm.products.total))
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -47969,11 +47970,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "filter filter-offers" }, [
                     _c("h4", [_vm._v("Ofertas")]),
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\tFILTROS: " +
-                        _vm._s(_vm.filtros) +
-                        " XXXX\n\t\t\t\t\t\t\t"
-                    ),
+                    _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("input", {
                         directives: [
@@ -48227,6 +48224,8 @@ var render = function() {
                       }
                     },
                     [
+                      _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
+                      _vm._v(" "),
                       _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
@@ -48243,7 +48242,9 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("span", [_vm._v("Resultados de 253")])
+                  _c("span", [
+                    _vm._v("Resultados de " + _vm._s(_vm.products.total))
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -48302,7 +48303,7 @@ var render = function() {
               _c("ProductList", {
                 attrs: { tasadolar: _vm.tasadolar, products: _vm.products }
               }),
-              _vm._v(">\n\n\t\t\t\t"),
+              _vm._v(" "),
               _vm._m(4)
             ],
             1
@@ -52881,7 +52882,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row" },
-        _vm._l(_vm.products, function(product) {
+        _vm._l(_vm.products.data, function(product) {
           return _c(
             "div",
             { key: product.id, staticClass: "col-6 col-lg-12" },
@@ -53370,7 +53371,29 @@ var render = function() {
         0
       ),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "pagination" }, [
+            _c(
+              "ul",
+              [
+                _vm._m(2),
+                _vm._v(" "),
+                _vm._l(_vm.products.last_page - 1, function(index) {
+                  return _c("li", { key: index }, [
+                    _c("a", { staticClass: "active", attrs: { href: "#" } }, [
+                      _vm._v(_vm._s(index))
+                    ])
+                  ])
+                }),
+                _vm._v(" "),
+                _vm._m(3)
+              ],
+              2
+            )
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -53410,39 +53433,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "pagination" }, [
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("img", {
-                  attrs: { src: "assets/img/prev.png", alt: "Prev" }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("1")])]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { staticClass: "active", attrs: { href: "#" } }, [
-                _vm._v("2")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("3")])]),
-            _vm._v(" "),
-            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("4")])]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("img", {
-                  attrs: { src: "assets/img/next.png", alt: "Next" }
-                })
-              ])
-            ])
-          ])
-        ])
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("img", { attrs: { src: "assets/img/prev.png", alt: "Prev" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("img", { attrs: { src: "assets/img/next.png", alt: "Next" } })
       ])
     ])
   }
@@ -75134,8 +75137,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

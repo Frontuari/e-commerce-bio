@@ -246,10 +246,10 @@
 		    var $inputFrom = $(".js-input-from");
 		    var $inputTo = $(".js-input-to");
 		    var instance;
-		    var min = 50000;
-		    var max = 3000000;
-		    var from = 100000;
-		    var to = 800000;
+		    var min = 0;
+		    var max = 200;
+		    var from = 0;
+		    var to = 100;
 		    
 		    $range.ionRangeSlider({
 		        skin: "round",
@@ -258,7 +258,7 @@
 		        max: max,
 		        from: from,
 		        to: to,
-		        prefix: "Bs",
+		        prefix: "$",
 		        onStart: updateInputs,
 		        onChange: updateInputs,
 		        onFinish: updateInputs
@@ -267,10 +267,16 @@
 		    
 		    function updateInputs (data) {
 		        from = data.from;
-		        to = data.to;
+				to = data.to;
+				min_range = data.from;
+				max_range = data.to;
+
 		    
 		        $inputFrom.val(from);
-		        $inputTo.val(to);
+				$inputTo.val(to);
+
+				$('.js-input-from')[0].dispatchEvent(new CustomEvent('input'));
+				$('.js-input-to')[0].dispatchEvent(new CustomEvent('input'));
 		    }
 		    
 		    $inputFrom.on("change", function () {
@@ -288,7 +294,6 @@
 		        });
 		    
 		        $(this).val(val);
-		    
 		    });
 		    
 		    $inputTo.on("change", function () {
@@ -305,7 +310,8 @@
 		            to: val
 		        });
 		    
-		        $(this).val(val);
+				$(this).val(val);
+
 		    });
 
 			var modal_principal = localStorage.getItem("ModalPrincipal");

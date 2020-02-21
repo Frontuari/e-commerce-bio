@@ -10,6 +10,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
 	
 	<style>.cls-1{fill:#ccc;}</style>
+	<script>
+		var min_range, max_range;
+	</script>
 	@yield('css')
 </head>
 

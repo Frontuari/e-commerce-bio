@@ -7,13 +7,14 @@
 						<div class="form-group">
 							<span>Mostrando</span>
 							<select id="show" class="form-control" v-model="limitP">
+								<option value="5">5</option>
 								<option value="10">10</option>
 								<option value="20">20</option>
 								<option value="50">50</option>
 								<option value="100">100</option>
 								<option value="-1">Todos</option>
 							</select>
-							<span>Resultados de 253</span>
+							<span>Resultados de {{products.total}}</span>
 						</div>
 						<div class="form-group">
 							<h5>Organizar por:</h5>
@@ -49,7 +50,6 @@
 							</div>
 							<div class="filter filter-offers">
 								<h4>Ofertas</h4>
-								FILTROS: {{filtros}} XXXX
 								<div class="form-group">
 									<input type="checkbox" class="check-box" id="mas-reciente" title="Mas Recientes" name="mas-reciente" value="mr" v-model="filterP">
 									<label for="mas-reciente">Más Recientes</label>
@@ -102,13 +102,14 @@
 						<div class="form-group">
 							<span>Mostrando</span>
 							<select id="show" class="form-control" v-model="limitP">
+								<option value="5">5</option>
 								<option value="10">10</option>
 								<option value="20">20</option>
 								<option value="50">50</option>
 								<option value="100">100</option>
 								<option value="-1">Todos</option>
 							</select>
-							<span>Resultados de 253</span>
+							<span>Resultados de {{products.total}}</span>
 						</div>
 						<div class="form-group">
 							<h5>Organizar por:</h5>
@@ -123,7 +124,7 @@
 						</div>
 					</div>
 
-					<ProductList :tasadolar="tasadolar" :products="products"></ProductList>>
+					<ProductList :tasadolar="tasadolar" :products="products"></ProductList>
 
 					<div class="bio-ads">
 						<div class="ad-box">
@@ -147,9 +148,9 @@
     export default {
         data() {
             return {
-				products: [],
+				products: {},
 				filterP: [],
-				limitP: 10,
+				limitP: 5,
 				orderP: 'AZasc',
 				rangeP: '',
 				min_price: 100000,
@@ -169,22 +170,20 @@
 				this.products = response.data.data;
 			},
 			filterProducts: async function() {
-				console.log("filtros ha sido cambiada::> ",this.filtros);
-				const response = await axios.get(URLSERVER+'api/products/filter/'+this.filtros);
-				console.log("response filter::> ",response.data.data);
-				// this.products = response.data.data;
+				const response = await axios.get(URLSERVER+'api/products?'+this.filtros);
+				this.products = response.data.data;
 			}
         },
         mounted() {
-			this.getproducts();
+			// this.getproducts();
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("+")+"+limit="+this.limitP+"+order="+this.orderP+"+precio="+this.min_price+","+this.max_price;
+				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price;
 			}
 		},
 		created: function() {
-			this.getDebounceProducts = _.debounce(this.filterProducts,300);
+			this.getDebounceProducts = _.debounce(this.filterProducts,500);
 		},
 		watch: {
 			filtros: function() {

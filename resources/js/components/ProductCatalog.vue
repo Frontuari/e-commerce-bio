@@ -2,7 +2,7 @@
     <div class="product-list">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6 col-lg-12" v-for="product in products" v-bind:key="product.id">
+                <div class="col-6 col-lg-12" v-for="product in products.data" v-bind:key="product.id">
                     <div class="product-block">
                         <div class="product-img">
                             <img :src="'storage/'+product.photo | MediumImage">
@@ -72,10 +72,8 @@
                     <div class="pagination">
                         <ul>
                             <li><a href="#"><img src="assets/img/prev.png" alt="Prev"></a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#" class="active">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
+                            <li v-for="index in (products.last_page - 1)" :key="index"><a href="#" class="active">{{index}}</a></li>
+                            
                             <li><a href="#"><img src="assets/img/next.png" alt="Next"></a></li>
                         </ul>
                     </div>
@@ -92,7 +90,7 @@
             }
         },
         props: {
-            products: Array,
+            products: Object,
             tasadolar: Number
         }
     }
