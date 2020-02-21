@@ -71,10 +71,19 @@
                 <div class="col-12">
                     <div class="pagination">
                         <ul>
-                            <li><a href="#"><img src="assets/img/prev.png" alt="Prev"></a></li>
-                            <li v-for="index in (products.last_page - 1)" :key="index"><a href="#" class="active">{{index}}</a></li>
+                            <li v-if="!!products.prev_page_url">
+                                <a href="#"><img src="assets/img/prev.png" alt="Prev"></a>
+                            </li>
+
+                            <li v-for="index in (products.last_page - 1)" :key="index">
+                                <a href="#" :class="products.current_page == index ? 'active' : ''">
+                                    {{index}}
+                                </a>
+                            </li>
                             
-                            <li><a href="#"><img src="assets/img/next.png" alt="Next"></a></li>
+                            <li v-if="!!products.next_page_url">
+                                <a href="#"><img src="assets/img/next.png" alt="Next"></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
