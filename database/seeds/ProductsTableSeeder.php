@@ -43,30 +43,6 @@ class ProductsTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 1,
-                'name' => 'Harina Pan',
-                'description_short' => 'Harina de Maíz Blanco',
-                'description' => '<p>oio</p>',
-                'price' => '100000.000000',
-                'qty_avaliable' => 10,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => '123412343',
-                'promote' => 0,
-                'discount' => '99.900000',
-                'photo' => 'products\\February2020\\uEp1voHoZlMyrqFBNmHv.jpg',
-                'stores_id' => 1,
-                'brands_id' => 2,
-                'created_at' => NULL,
-                'updated_at' => '2020-02-17 18:50:28',
-            ),
-            2 => 
-            array (
                 'id' => 12,
                 'name' => 'Salsa Heinz 230g',
                 'description_short' => 'Salsa de tomate heinz',
@@ -88,6 +64,30 @@ class ProductsTableSeeder extends Seeder
                 'brands_id' => 3,
                 'created_at' => '2020-02-04 22:41:48',
                 'updated_at' => '2020-02-17 18:51:11',
+            ),
+            2 => 
+            array (
+                'id' => 1,
+                'name' => 'Harina Pan',
+                'description_short' => 'Harina de Maíz Blanco',
+                'description' => '<p>oio</p>',
+                'price' => '100000.000000',
+                'qty_avaliable' => 10,
+                'qty_sold' => 0,
+                'qty_view' => 0,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => '123412343',
+                'promote' => 0,
+                'discount' => '99.900000',
+                'photo' => 'products\\February2020\\uEp1voHoZlMyrqFBNmHv.jpg',
+                'stores_id' => 1,
+                'brands_id' => 2,
+                'created_at' => NULL,
+                'updated_at' => '2020-02-21 20:13:16',
             ),
             3 => 
             array (
@@ -111,7 +111,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:34:04',
-                'updated_at' => '2020-02-17 18:51:24',
+                'updated_at' => '2020-02-21 20:13:41',
             ),
             4 => 
             array (
@@ -135,7 +135,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:29:20',
-                'updated_at' => '2020-02-17 18:52:00',
+                'updated_at' => '2020-02-21 20:13:58',
             ),
             5 => 
             array (
@@ -159,7 +159,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:23:30',
-                'updated_at' => '2020-02-17 18:52:11',
+                'updated_at' => '2020-02-21 20:14:13',
             ),
             6 => 
             array (
@@ -183,7 +183,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:17:59',
-                'updated_at' => '2020-02-17 18:52:24',
+                'updated_at' => '2020-02-21 20:14:25',
             ),
             7 => 
             array (
@@ -207,7 +207,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:13:58',
-                'updated_at' => '2020-02-17 18:52:35',
+                'updated_at' => '2020-02-21 20:14:40',
             ),
             8 => 
             array (
@@ -231,7 +231,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:11:39',
-                'updated_at' => '2020-02-17 18:52:46',
+                'updated_at' => '2020-02-21 20:14:54',
             ),
             9 => 
             array (
@@ -255,7 +255,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:08:14',
-                'updated_at' => '2020-02-17 18:52:56',
+                'updated_at' => '2020-02-21 20:15:05',
             ),
             10 => 
             array (
@@ -279,7 +279,7 @@ class ProductsTableSeeder extends Seeder
                 'stores_id' => 1,
                 'brands_id' => NULL,
                 'created_at' => '2020-01-29 17:02:15',
-                'updated_at' => '2020-02-17 18:53:08',
+                'updated_at' => '2020-02-21 20:15:17',
             ),
         ));
         

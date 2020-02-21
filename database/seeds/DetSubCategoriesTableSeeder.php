@@ -49,6 +49,78 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            4 => 
+            array (
+                'id' => 5,
+                'products_id' => 1,
+                'sub_categories_id' => 4,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'products_id' => 10,
+                'sub_categories_id' => 7,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'products_id' => 9,
+                'sub_categories_id' => 8,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'products_id' => 8,
+                'sub_categories_id' => 8,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'products_id' => 7,
+                'sub_categories_id' => 7,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'products_id' => 6,
+                'sub_categories_id' => 6,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'products_id' => 5,
+                'sub_categories_id' => 5,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'products_id' => 4,
+                'sub_categories_id' => 3,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            12 => 
+            array (
+                'id' => 13,
+                'products_id' => 3,
+                'sub_categories_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         
