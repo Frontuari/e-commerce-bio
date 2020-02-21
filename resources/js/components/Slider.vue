@@ -16,11 +16,11 @@
                         </div>-->
 
                         <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
-                           <a href="#" class="btn">Comprar</a>
+                           <a  v-bind:href="slider.url" href="#" class="btn">Comprar</a>
                         </div>
 
                          <div class="carousel-caption caption-right" v-if="slider.order == 'der'">
-                           <a href="#" class="btn">Comprar</a>
+                           <a  v-bind:href="slider.url"  class="btn">Comprar</a>
                         </div>
 
 

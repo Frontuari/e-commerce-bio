@@ -55202,7 +55202,10 @@ var render = function() {
                         [
                           _c(
                             "a",
-                            { staticClass: "btn", attrs: { href: "#" } },
+                            {
+                              staticClass: "btn",
+                              attrs: { href: slider.url, href: "#" }
+                            },
                             [_vm._v("Comprar")]
                           )
                         ]
@@ -55216,7 +55219,7 @@ var render = function() {
                         [
                           _c(
                             "a",
-                            { staticClass: "btn", attrs: { href: "#" } },
+                            { staticClass: "btn", attrs: { href: slider.url } },
                             [_vm._v("Comprar")]
                           )
                         ]
