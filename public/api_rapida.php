@@ -24,27 +24,38 @@ switch($_GET['evento']){
                 unset($row["password"]);
                 $_SESSION["usuario"]=$row;
                 $row['id_sesion']=session_id();
-                echo json_encode($row);
+                salida($row,"Bienvenido",true);
             }else{
-                //clave no valida
-                echo "clave no valida";
-                return false;
+                salida($row,"Contraseña no válida",false);
             }
        }else{
-           //email no valido
-           echo "email no valido";
-       return false;
+        salida($row,"Correo electrónico no valido",false);
     }
     break;
 
     case 'logout':
         session_destroy();
-        return 'success';
+        salida($row,"Hasta pronto",true);
     break;
 
 }
+salida($row,"Disculpe debe enviar un evento",false);
 
 
+
+
+function salida($row,$msj_general="",$bueno=true){
+    $row['success']=$bueno;
+    $row['msj_general']=$msj_general;
+    echo json_encode($row);
+    exit();
+
+
+
+
+
+
+}
 function extraer_datos_db(){
     $gestor = @fopen("../.env", "r");
     if ($gestor) {
