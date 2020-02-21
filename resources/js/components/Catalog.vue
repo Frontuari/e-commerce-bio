@@ -124,7 +124,7 @@
 						</div>
 					</div>
 
-					<ProductList :tasadolar="tasadolar" :products="products"></ProductList>
+					<ProductList v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
 
 					<div class="bio-ads">
 						<div class="ad-box">
@@ -140,6 +140,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</section>
 </template>
 <script>
@@ -154,11 +155,12 @@
 				orderP: 'AZasc',
 				rangeP: '',
 				min_price: 100000,
-				max_price: 800000
+				max_price: 800000,
+				page: 1
             }
 		},
 		components: {
-            ProductList
+			ProductList
         },
 		props: {
 			userlogged: Object,
@@ -172,6 +174,10 @@
 			filterProducts: async function() {
 				const response = await axios.get(URLSERVER+'api/products?'+this.filtros);
 				this.products = response.data.data;
+			},
+			pageclick(value) {
+				console.log("value emit::> ",value);
+				this.page = value;
 			}
         },
         mounted() {
@@ -179,7 +185,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price;
+				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page;
 			}
 		},
 		created: function() {
