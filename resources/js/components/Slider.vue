@@ -8,16 +8,22 @@
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
                     <a v-bind:href="slider.url"><img class="d-block w-100" :src="'storage/'+slider.image" alt="First slide"></a>
                     <div class="container">
-                        <div class="carousel-caption caption-left" v-if="slider.text_position=='left'">
+                        <!--<div class="carousel-caption caption-left" >
                             <h5>¡Aprovecha nuestros combos!</h5>
                             <h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
                             <p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
-                            <!--<a href="#" class="btn">Comprar</a>-->
+                            <a href="#" class="btn">Comprar</a>
+                        </div>-->
+
+                        <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
+                           <a href="#" class="btn">Comprar</a>
                         </div>
 
-                        <!--<div class="carousel-caption caption-right" v-else>
+                         <div class="carousel-caption caption-right" v-if="slider.order == 'der'">
                            <a href="#" class="btn">Comprar</a>
-                        </div>-->
+                        </div>
+
+
                     </div>
                 </div>
             </div>

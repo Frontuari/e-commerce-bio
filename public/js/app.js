@@ -122,6 +122,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
 var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
 var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
@@ -144,7 +145,8 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -205,7 +207,11 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -219,7 +225,7 @@ module.exports = function xhrAdapter(config) {
       var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -242,8 +248,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
     }
 
     // Add responseType to request if needed
@@ -522,7 +528,15 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-  config.method = config.method ? config.method.toLowerCase() : 'get';
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -639,6 +653,38 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
+/***/ "./node_modules/axios/lib/core/buildFullPath.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/core/createError.js":
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
@@ -683,8 +729,6 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
 var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
 var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
-var isAbsoluteURL = __webpack_require__(/*! ./../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-var combineURLs = __webpack_require__(/*! ./../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -704,11 +748,6 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
-  // Support baseURL config
-  if (config.baseURL && !isAbsoluteURL(config.url)) {
-    config.url = combineURLs(config.baseURL, config.url);
-  }
-
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -723,7 +762,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers || {}
+    config.headers
   );
 
   utils.forEach(
@@ -846,13 +885,23 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
+  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
+    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath'
+  ];
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
+  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -864,13 +913,25 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach([
-    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
-    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
-    'socketPath'
-  ], function defaultToConfig2(prop) {
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys);
+
+  var otherKeys = Object
+    .keys(config2)
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -978,13 +1039,12 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  // Only Node.JS has a process variable that is of [[Class]] process
-  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
-  } else if (typeof XMLHttpRequest !== 'undefined') {
+  if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
     adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
   }
   return adapter;
 }
@@ -1506,7 +1566,6 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1522,6 +1581,27 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1578,16 +1658,6 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
 }
 
 /**
@@ -3552,8 +3622,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     userlogged: Object
   },
   methods: {
-    getCategories: function () {
-      var _getCategories = _asyncToGenerator(
+    getCategories: function getCategories() {
+      var _this = this;
+
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -3566,26 +3638,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                this.categories = response.data.data;
+                _this.categories = response.data.data;
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
+        }, _callee);
+      }))();
+    },
+    SearchProducts: function SearchProducts(e) {
+      var _this2 = this;
 
-      function getCategories() {
-        return _getCategories.apply(this, arguments);
-      }
-
-      return getCategories;
-    }(),
-    SearchProducts: function () {
-      var _SearchProducts = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var len, val, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -3593,7 +3661,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 len = e.target.value.length;
                 val = e.target.value;
-                this.searched = {};
+                _this2.searched = {};
 
                 if (!(len >= 3)) {
                   _context2.next = 11;
@@ -3605,30 +3673,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 response = _context2.sent;
-                this.searched = response.data.data;
-                this.dSearch = 'block';
+                _this2.searched = response.data.data;
+                _this2.dSearch = 'block';
                 _context2.next = 12;
                 break;
 
               case 11:
-                this.dSearch = 'none';
+                _this2.dSearch = 'none';
 
               case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
-      }));
+        }, _callee2);
+      }))();
+    },
+    getFavorites: function getFavorites() {
+      var _this3 = this;
 
-      function SearchProducts(_x) {
-        return _SearchProducts.apply(this, arguments);
-      }
-
-      return SearchProducts;
-    }(),
-    getFavorites: function () {
-      var _getFavorites = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -3643,9 +3707,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.data.data.length > 0) {
-                  this.cant_favorite = response.data.data.length;
+                  _this3.cant_favorite = response.data.data.length;
                 } else {
-                  this.cant_favorite = 0;
+                  _this3.cant_favorite = 0;
                 }
 
               case 4:
@@ -3653,15 +3717,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
-      }));
-
-      function getFavorites() {
-        return _getFavorites.apply(this, arguments);
-      }
-
-      return getFavorites;
-    }(),
+        }, _callee3);
+      }))();
+    },
     login: function login() {
       axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function () {
         location.href = window.location.href;
@@ -3674,13 +3732,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this = this;
+    var _this4 = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this.cant_cart = data;
+      _this4.cant_cart = data;
     });
     EventBus.$on('update_cantFavorite', function (data) {
-      _this.cant_favorite = data;
+      _this4.cant_favorite = data;
     });
   },
   mounted: function mounted() {
@@ -4452,6 +4510,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12726,28 +12790,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Ion.RangeSlid
     }());
 
 }));
-
-
-/***/ }),
-
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-module.exports = function isBuffer (obj) {
-  return obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
 
 
 /***/ }),
@@ -40489,7 +40531,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.0
+ * @version 1.16.1
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -40835,7 +40877,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -40990,8 +41032,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+  var borderTopWidth = parseFloat(styles.borderTopWidth);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -41012,8 +41054,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop, 10);
-    var marginLeft = parseFloat(styles.marginLeft, 10);
+    var marginTop = parseFloat(styles.marginTop);
+    var marginLeft = parseFloat(styles.marginLeft);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -41952,8 +41994,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -44722,7 +44764,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tVerificación del pedido\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tVerificación del pedido\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45072,7 +45114,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tDatos de envío\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tDatos de envío\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45288,7 +45330,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tPagar Factura\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tPagar Factura\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -45496,7 +45538,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tCompra Completada\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tCompra Completada\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     )
@@ -46048,7 +46090,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\n\t\t\t\t\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -47481,7 +47523,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -47528,7 +47570,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "paypal" } },
                       [
                         _c("span"),
-                        _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -47560,7 +47602,7 @@ var staticRenderFns = [
                       { staticClass: "custom-check", attrs: { for: "petro" } },
                       [
                         _c("span"),
-                        _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                        _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
                             attrs: {
@@ -47596,7 +47638,7 @@ var staticRenderFns = [
                       [
                         _c("span"),
                         _vm._v(
-                          "Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                          "Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                         ),
                         _c("div", { staticClass: "payment-imgs-group" }, [
                           _c("img", {
@@ -55153,16 +55195,30 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
-                  slider.text_position == "left"
+                  slider.order == "izq"
                     ? _c(
                         "div",
                         { staticClass: "carousel-caption caption-left" },
                         [
-                          _c("h5", [_vm._v("¡Aprovecha nuestros combos!")]),
-                          _vm._v(" "),
-                          _vm._m(0, true),
-                          _vm._v(" "),
-                          _vm._m(1, true)
+                          _c(
+                            "a",
+                            { staticClass: "btn", attrs: { href: "#" } },
+                            [_vm._v("Comprar")]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  slider.order == "der"
+                    ? _c(
+                        "div",
+                        { staticClass: "carousel-caption caption-right" },
+                        [
+                          _c(
+                            "a",
+                            { staticClass: "btn", attrs: { href: "#" } },
+                            [_vm._v("Comprar")]
+                          )
                         ]
                       )
                     : _vm._e()
@@ -55173,37 +55229,14 @@ var render = function() {
           0
         ),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(0),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(1)
       ]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", [
-      _vm._v("Carnes "),
-      _c("img", {
-        staticClass: "ico-text",
-        attrs: { src: "assets/img/icono-bio.svg" }
-      }),
-      _vm._v("io")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("Compra una gran variedad de tipos "),
-      _c("br"),
-      _vm._v("de carnes a un excelente precio.")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -55374,7 +55407,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tDatos personales\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tDatos personales\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55447,7 +55480,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis direcciones\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis direcciones\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55554,7 +55587,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis pedidos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis pedidos\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -55644,7 +55677,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\n\t\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -56207,7 +56240,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56371,7 +56404,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56461,7 +56494,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56617,7 +56650,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56781,7 +56814,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -56888,7 +56921,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -57600,7 +57633,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   ),
@@ -57731,7 +57764,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   ),
@@ -57823,7 +57856,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   )
@@ -57992,7 +58025,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -58156,7 +58189,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -58263,7 +58296,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -61160,7 +61193,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61195,7 +61228,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61228,7 +61261,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61263,7 +61296,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61296,7 +61329,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61331,7 +61364,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61388,7 +61421,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61423,7 +61456,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61456,7 +61489,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61491,7 +61524,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61548,7 +61581,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61583,7 +61616,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61699,7 +61732,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61734,7 +61767,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61767,7 +61800,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61802,7 +61835,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61859,7 +61892,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -61894,7 +61927,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -75245,8 +75278,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
