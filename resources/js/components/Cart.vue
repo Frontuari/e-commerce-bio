@@ -540,7 +540,7 @@
 																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
-																
+
 																<div class="order-description">
 																	<div class="row">
 																		<label class="order-text">Datos Personales</label>
