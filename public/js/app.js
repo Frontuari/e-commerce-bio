@@ -2622,19 +2622,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -46080,15 +46067,267 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _c("fieldset", [
+                    _c("div", { staticClass: "user-profile" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-lg-4" }, [
+                          _c("div", { staticClass: "card" }, [
+                            _c("div", { staticClass: "order-block" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-lg-12" }, [
+                                  _c(
+                                    "h3",
+                                    { staticClass: "order-number order-text" },
+                                    [_vm._v("Resumen de la compra")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "order-content" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "order-description" },
+                                      _vm._l(_vm.products_cart, function(
+                                        product_cart
+                                      ) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: product_cart.id,
+                                            staticClass: "row"
+                                          },
+                                          [
+                                            _c("p", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  product_cart.product.name
+                                                ) +
+                                                  " (" +
+                                                  _vm._s(product_cart.cant) +
+                                                  " Articulos)"
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            product_cart.product.discount > 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .discount
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            product_cart.product.discount <= 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .price
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "order-description order-total"
+                                      },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("p", [_vm._v("Total")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "h3",
+                                            { staticClass: "order-text" },
+                                            [
+                                              _vm._v(
+                                                "100$ / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      _vm.total_cart
+                                                    )
+                                                  ) +
+                                                  " "
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(3)
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _c("fieldset", [
+                    _c("div", { staticClass: "payment-methods" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 col-lg-4" }, [
+                          _c("div", { staticClass: "card" }, [
+                            _c("div", { staticClass: "order-block" }, [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-lg-12" }, [
+                                  _c(
+                                    "h3",
+                                    { staticClass: "order-number order-text" },
+                                    [_vm._v("Resumen de la compra")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "order-content" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "order-description" },
+                                      _vm._l(_vm.products_cart, function(
+                                        product_cart
+                                      ) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: product_cart.id,
+                                            staticClass: "row"
+                                          },
+                                          [
+                                            _c("p", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  product_cart.product.name
+                                                ) +
+                                                  " (" +
+                                                  _vm._s(product_cart.cant) +
+                                                  " Articulos)"
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            product_cart.product.discount > 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .discount
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            product_cart.product.discount <= 0
+                                              ? _c(
+                                                  "h3",
+                                                  { staticClass: "order-text" },
+                                                  [
+                                                    _vm._v(
+                                                      "10$ / Bs " +
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(
+                                                            product_cart.product
+                                                              .price
+                                                          )
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      }),
+                                      0
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "order-description order-total"
+                                      },
+                                      [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c("p", [_vm._v("Total")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "h3",
+                                            { staticClass: "order-text" },
+                                            [
+                                              _vm._v(
+                                                "100$ / Bs " +
+                                                  _vm._s(
+                                                    _vm._f("FormatNumber")(
+                                                      _vm.total_cart
+                                                    )
+                                                  ) +
+                                                  " "
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._m(5),
+                                    _vm._v(" "),
+                                    _vm._m(6)
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(7)
+                                ])
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("fieldset", [
                     _c("div", { staticClass: "thanks" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
-                          _vm._m(4),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c("div", { staticClass: "thanks-footer" }, [
                             _c(
@@ -46277,1288 +46516,1174 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", [
-      _c("div", { staticClass: "user-profile" }, [
+    return _c("div", { staticClass: "col-12 col-lg-8" }, [
+      _c("div", { staticClass: "info-block" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 col-lg-8" }, [
-            _c("div", { staticClass: "info-block" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _c("h5", [_vm._v("Datos personales")])
+          _c("div", { staticClass: "col-12" }, [
+            _c("h5", [_vm._v("Datos personales")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "user-name" } }, [
+                _vm._v("Nombre (s):")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "user-name",
+                  name: "user-name",
+                  disabled: "disabled",
+                  value: "Pablo"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "user-lastname" } }, [
+                _vm._v("Apellido (s):")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "user-lastname",
+                  name: "user-lastname",
+                  disabled: "disabled",
+                  value: "Mendoza"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "user-email" } }, [
+                _vm._v("Correo Electrónico:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  id: "user-email",
+                  name: "user-email",
+                  disabled: "disabled",
+                  value: "micorreo@gmail.com"
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "user-contact-phone" } }, [
+                _vm._v("Teléfono de Contacto:")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "user-contact-phone",
+                  name: "user-contact-phone",
+                  disabled: "disabled",
+                  value: "04XX XXX XXXX"
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "info-block", attrs: { id: "info-block-address" } },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("h5", [_vm._v("Dirección de Envío")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-name" } }, [
+                  _vm._v("Elegir Dirección:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "user-name" } }, [
-                      _vm._v("Nombre (s):")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "user-name",
-                        name: "user-name",
-                        disabled: "disabled",
-                        value: "Pablo"
-                      }
-                    })
-                  ])
-                ]),
+                _c("input", {
+                  staticClass: "form-control dropdown-toggle",
+                  attrs: {
+                    type: "text",
+                    "data-toggle": "dropdown",
+                    "aria-expanded": "false",
+                    id: "address-name",
+                    name: "address-name",
+                    value: "Mi Casa"
+                  }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "user-lastname" } }, [
-                      _vm._v("Apellido (s):")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "user-lastname",
-                        name: "user-lastname",
-                        disabled: "disabled",
-                        value: "Mendoza"
-                      }
-                    })
-                  ])
-                ]),
+                _c("span", {
+                  staticClass: "dropdown-arrow dropdown-toggle",
+                  attrs: { "data-toggle": "dropdown", "aria-expanded": "false" }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "user-email" } }, [
-                      _vm._v("Correo Electrónico:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        id: "user-email",
-                        name: "user-email",
-                        disabled: "disabled",
-                        value: "micorreo@gmail.com"
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "user-contact-phone" } }, [
-                      _vm._v("Teléfono de Contacto:")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "user-contact-phone",
-                        name: "user-contact-phone",
-                        disabled: "disabled",
-                        value: "04XX XXX XXXX"
-                      }
-                    })
+                _c("div", { staticClass: "dropdown-menu" }, [
+                  _c("div", { staticClass: "dropdown-item" }, [
+                    _c("div", { staticClass: "form-check form-check-radio" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          id: "mi-casa",
+                          name: "radio-address",
+                          value: "1"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-check",
+                          attrs: { for: "mi-casa" }
+                        },
+                        [_vm._v("Mi Casa")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown-item" }, [
+                    _c("div", { staticClass: "form-check form-check-radio" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          id: "mi-oficina",
+                          name: "radio-address",
+                          value: "2"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-check",
+                          attrs: { for: "mi-oficina" }
+                        },
+                        [_vm._v("Mi Oficina")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown-item" }, [
+                    _c("div", { staticClass: "form-check form-check-radio" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          id: "customized",
+                          name: "radio-address",
+                          value: "0"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "custom-check",
+                          attrs: { for: "customized" }
+                        },
+                        [_vm._v("Personalizada")]
+                      )
+                    ])
                   ])
                 ])
               ])
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "info-block",
-                attrs: { id: "info-block-address" }
-              },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("h5", [_vm._v("Dirección de Envío")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-name" } }, [
-                        _vm._v("Elegir Dirección:")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control dropdown-toggle",
-                        attrs: {
-                          type: "text",
-                          "data-toggle": "dropdown",
-                          "aria-expanded": "false",
-                          id: "address-name",
-                          name: "address-name",
-                          value: "Mi Casa"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "dropdown-arrow dropdown-toggle",
-                        attrs: {
-                          "data-toggle": "dropdown",
-                          "aria-expanded": "false"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "dropdown-menu" }, [
-                        _c("div", { staticClass: "dropdown-item" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-check form-check-radio" },
-                            [
-                              _c("input", {
-                                staticClass: "form-check-input",
-                                attrs: {
-                                  type: "radio",
-                                  id: "mi-casa",
-                                  name: "radio-address",
-                                  value: "1"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "custom-check",
-                                  attrs: { for: "mi-casa" }
-                                },
-                                [_vm._v("Mi Casa")]
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "dropdown-item" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-check form-check-radio" },
-                            [
-                              _c("input", {
-                                staticClass: "form-check-input",
-                                attrs: {
-                                  type: "radio",
-                                  id: "mi-oficina",
-                                  name: "radio-address",
-                                  value: "2"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "custom-check",
-                                  attrs: { for: "mi-oficina" }
-                                },
-                                [_vm._v("Mi Oficina")]
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "dropdown-item" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-check form-check-radio" },
-                            [
-                              _c("input", {
-                                staticClass: "form-check-input",
-                                attrs: {
-                                  type: "radio",
-                                  id: "customized",
-                                  name: "radio-address",
-                                  value: "0"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "custom-check",
-                                  attrs: { for: "customized" }
-                                },
-                                [_vm._v("Personalizada")]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-urb" } }, [
-                        _vm._v("Urbanización / Barrio / Empresa:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-urb",
-                          name: "address-urb",
-                          disabled: "disabled",
-                          value: "Urb Zaragoza"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-av" } }, [
-                        _vm._v("Sector, Avenida, calles, veredas:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-av",
-                          name: "address-av",
-                          disabled: "disabled",
-                          value: "Avenida 1, entre calles 10 y 11"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-num" } }, [
-                        _vm._v("Número de casa/local:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-num",
-                          name: "address-num",
-                          disabled: "disabled",
-                          value: "Casa 57"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-prov" } }, [
-                        _vm._v("Municipio/Provincia:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-prov",
-                          name: "address-prov",
-                          disabled: "disabled",
-                          value: "Araure"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-state" } }, [
-                        _vm._v("Estado:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control dropdown-toggle",
-                        attrs: {
-                          type: "text",
-                          "data-toggle": "dropdown",
-                          "aria-expanded": "false",
-                          id: "address-state",
-                          name: "address-state",
-                          disabled: "disabled",
-                          value: ""
-                        }
-                      }),
-                      _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-urb" } }, [
+                  _vm._v("Urbanización / Barrio / Empresa:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-urb",
+                    name: "address-urb",
+                    disabled: "disabled",
+                    value: "Urb Zaragoza"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-av" } }, [
+                  _vm._v("Sector, Avenida, calles, veredas:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-av",
+                    name: "address-av",
+                    disabled: "disabled",
+                    value: "Avenida 1, entre calles 10 y 11"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-num" } }, [
+                  _vm._v("Número de casa/local:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-num",
+                    name: "address-num",
+                    disabled: "disabled",
+                    value: "Casa 57"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-prov" } }, [
+                  _vm._v("Municipio/Provincia:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-prov",
+                    name: "address-prov",
+                    disabled: "disabled",
+                    value: "Araure"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-state" } }, [
+                  _vm._v("Estado:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control dropdown-toggle",
+                  attrs: {
+                    type: "text",
+                    "data-toggle": "dropdown",
+                    "aria-expanded": "false",
+                    id: "address-state",
+                    name: "address-state",
+                    disabled: "disabled",
+                    value: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "dropdown-menu dropdown-menu-state" },
+                  [
+                    _c("div", { staticClass: "dropdown-item" }, [
                       _c(
                         "div",
-                        { staticClass: "dropdown-menu dropdown-menu-state" },
+                        { staticClass: "form-check form-check-radio" },
                         [
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "amazonas",
-                                    name: "radio-state",
-                                    value: "Amazonas",
-                                    checked: "checked"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "amazonas" }
-                                  },
-                                  [_vm._v("Amazonas")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "amazonas",
+                              name: "radio-state",
+                              value: "Amazonas",
+                              checked: "checked"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "anzoategui",
-                                    name: "radio-state",
-                                    value: "Anzoátegui"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "anzoategui" }
-                                  },
-                                  [_vm._v("Anzoátegui")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "amazonas" }
+                            },
+                            [_vm._v("Amazonas")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "anzoategui",
+                              name: "radio-state",
+                              value: "Anzoátegui"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "apure",
-                                    name: "radio-state",
-                                    value: "Apure"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "apure" }
-                                  },
-                                  [_vm._v("Apure")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "anzoategui" }
+                            },
+                            [_vm._v("Anzoátegui")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "apure",
+                              name: "radio-state",
+                              value: "Apure"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "aragua",
-                                    name: "radio-state",
-                                    value: "Aragua"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "aragua" }
-                                  },
-                                  [_vm._v("Aragua")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "apure" }
+                            },
+                            [_vm._v("Apure")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "aragua",
+                              name: "radio-state",
+                              value: "Aragua"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "bolivar",
-                                    name: "radio-state",
-                                    value: "Barinas"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "barinas" }
-                                  },
-                                  [_vm._v("Barinas")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "aragua" }
+                            },
+                            [_vm._v("Aragua")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "bolivar",
+                              name: "radio-state",
+                              value: "Barinas"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "bolivar",
-                                    name: "radio-state",
-                                    value: "Bolívar"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "bolivar" }
-                                  },
-                                  [_vm._v("Bolívar")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "barinas" }
+                            },
+                            [_vm._v("Barinas")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "bolivar",
+                              name: "radio-state",
+                              value: "Bolívar"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "carabobo",
-                                    name: "radio-state",
-                                    value: "Carabobo"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "carabobo" }
-                                  },
-                                  [_vm._v("Carabobo")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "bolivar" }
+                            },
+                            [_vm._v("Bolívar")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "carabobo",
+                              name: "radio-state",
+                              value: "Carabobo"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "cojedes",
-                                    name: "radio-state",
-                                    value: "Cojedes"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "cojedes" }
-                                  },
-                                  [_vm._v("Cojedes")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "carabobo" }
+                            },
+                            [_vm._v("Carabobo")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "cojedes",
+                              name: "radio-state",
+                              value: "Cojedes"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "delta-amacuro",
-                                    name: "radio-state",
-                                    value: "Delta Amacuro"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "delta-amacuro" }
-                                  },
-                                  [_vm._v("Delta Amacuro")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "cojedes" }
+                            },
+                            [_vm._v("Cojedes")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "delta-amacuro",
+                              name: "radio-state",
+                              value: "Delta Amacuro"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "falcon",
-                                    name: "radio-state",
-                                    value: "Falcón"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "falcon" }
-                                  },
-                                  [_vm._v("Falcón")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "delta-amacuro" }
+                            },
+                            [_vm._v("Delta Amacuro")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "falcon",
+                              name: "radio-state",
+                              value: "Falcón"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "distrito-capital",
-                                    name: "radio-state",
-                                    value: "Distrito Capital"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "distrito-capital" }
-                                  },
-                                  [_vm._v("Distrito Capital")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "falcon" }
+                            },
+                            [_vm._v("Falcón")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "distrito-capital",
+                              name: "radio-state",
+                              value: "Distrito Capital"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "guarico",
-                                    name: "radio-state",
-                                    value: "Guárico"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "guarico" }
-                                  },
-                                  [_vm._v("Guárico")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "distrito-capital" }
+                            },
+                            [_vm._v("Distrito Capital")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "guarico",
+                              name: "radio-state",
+                              value: "Guárico"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "lara",
-                                    name: "radio-state",
-                                    value: "Lara"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "lara" }
-                                  },
-                                  [_vm._v("Lara")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "guarico" }
+                            },
+                            [_vm._v("Guárico")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "lara",
+                              name: "radio-state",
+                              value: "Lara"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "merida",
-                                    name: "radio-state",
-                                    value: "Mérida"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "merida" }
-                                  },
-                                  [_vm._v("Mérida")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "lara" }
+                            },
+                            [_vm._v("Lara")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "merida",
+                              name: "radio-state",
+                              value: "Mérida"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "miranda",
-                                    name: "radio-state",
-                                    value: "Miranda"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "miranda" }
-                                  },
-                                  [_vm._v("Miranda")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "merida" }
+                            },
+                            [_vm._v("Mérida")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "miranda",
+                              name: "radio-state",
+                              value: "Miranda"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "monagas",
-                                    name: "radio-state",
-                                    value: "Monagas"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "monagas" }
-                                  },
-                                  [_vm._v("Monagas")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "miranda" }
+                            },
+                            [_vm._v("Miranda")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "monagas",
+                              name: "radio-state",
+                              value: "Monagas"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "nueva-esparta",
-                                    name: "radio-state",
-                                    value: "Nueva Esparta"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "nueva-esparta" }
-                                  },
-                                  [_vm._v("Nueva Esparta")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "monagas" }
+                            },
+                            [_vm._v("Monagas")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "nueva-esparta",
+                              name: "radio-state",
+                              value: "Nueva Esparta"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "portuguesa",
-                                    name: "radio-state",
-                                    value: "Portuguesa"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "portuguesa" }
-                                  },
-                                  [_vm._v("Portuguesa")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "nueva-esparta" }
+                            },
+                            [_vm._v("Nueva Esparta")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "portuguesa",
+                              name: "radio-state",
+                              value: "Portuguesa"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "tachira",
-                                    name: "radio-state",
-                                    value: "Táchira"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "tachira" }
-                                  },
-                                  [_vm._v("Táchira")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "portuguesa" }
+                            },
+                            [_vm._v("Portuguesa")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "tachira",
+                              name: "radio-state",
+                              value: "Táchira"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "trujillo",
-                                    name: "radio-state",
-                                    value: "Trujillo"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "trujillo" }
-                                  },
-                                  [_vm._v("Trujillo")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "tachira" }
+                            },
+                            [_vm._v("Táchira")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "trujillo",
+                              name: "radio-state",
+                              value: "Trujillo"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "vargas",
-                                    name: "radio-state",
-                                    value: "Vargas"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "vargas" }
-                                  },
-                                  [_vm._v("Vargas")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "trujillo" }
+                            },
+                            [_vm._v("Trujillo")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "vargas",
+                              name: "radio-state",
+                              value: "Vargas"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "yaracuy",
-                                    name: "radio-state",
-                                    value: "Yaracuy"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "yaracuy" }
-                                  },
-                                  [_vm._v("Yaracuy")]
-                                )
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "vargas" }
+                            },
+                            [_vm._v("Vargas")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "yaracuy",
+                              name: "radio-state",
+                              value: "Yaracuy"
+                            }
+                          }),
                           _vm._v(" "),
-                          _c("div", { staticClass: "dropdown-item" }, [
-                            _c(
-                              "div",
-                              { staticClass: "form-check form-check-radio" },
-                              [
-                                _c("input", {
-                                  staticClass: "form-check-input",
-                                  attrs: {
-                                    type: "radio",
-                                    id: "zulia",
-                                    name: "radio-state",
-                                    value: "Zulia"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "custom-check",
-                                    attrs: { for: "zulia" }
-                                  },
-                                  [_vm._v("Zulia")]
-                                )
-                              ]
-                            )
-                          ])
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "yaracuy" }
+                            },
+                            [_vm._v("Yaracuy")]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-item" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-check form-check-radio" },
+                        [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "radio",
+                              id: "zulia",
+                              name: "radio-state",
+                              value: "Zulia"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-check",
+                              attrs: { for: "zulia" }
+                            },
+                            [_vm._v("Zulia")]
+                          )
                         ]
                       )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-post" } }, [
-                        _vm._v("Código postal:")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-post",
-                          name: "address-post",
-                          disabled: "disabled",
-                          value: "3303"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "address-ref" } }, [
-                        _vm._v("Punto de Referencia (opcional):")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-edit-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: { src: "assets/img/editar-bio-mercados.svg" }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-confirm-info",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/confirmar-bio-mercados.svg"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          id: "address-ref",
-                          name: "address-ref",
-                          disabled: "disabled",
-                          value: "A lado de bodegon Girasol"
-                        }
-                      })
-                    ])
-                  ])
-                ])
-              ]
-            ),
+                  ]
+                )
+              ])
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [
-                _c("div", { staticClass: "wizard-footer-buttons" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-link",
-                      attrs: { href: "/catalog", type: "button" }
-                    },
-                    [_vm._v("Seguir comprando")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "action-buttons-group" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link previous action-button",
-                        attrs: { type: "button", name: "previous" }
-                      },
-                      [_vm._v("Volver atras")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-submit next action-button",
-                        attrs: { type: "button", name: "next" }
-                      },
-                      [_vm._v("CONFIRMAR DIRECCIÓN")]
-                    )
-                  ])
-                ])
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-post" } }, [
+                  _vm._v("Código postal:")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-post",
+                    name: "address-post",
+                    disabled: "disabled",
+                    value: "3303"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-6" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "address-ref" } }, [
+                  _vm._v("Punto de Referencia (opcional):")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-edit-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/editar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-confirm-info",
+                    attrs: { type: "button" }
+                  },
+                  [
+                    _c("img", {
+                      attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "address-ref",
+                    name: "address-ref",
+                    disabled: "disabled",
+                    value: "A lado de bodegon Girasol"
+                  }
+                })
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-4" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "order-block" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("h3", { staticClass: "order-number order-text" }, [
-                      _vm._v("Resumen de la compra")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-content" }, [
-                      _c("div", { staticClass: "order-description" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("25 Artículos")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("34$ / Bs 1.535.000")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("Pizza Bio (11 Articulos)")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("10$ / Bs 450.000")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("25 Artículos")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("2$ / Bs 90.000")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "order-description order-total" },
-                        [
-                          _c("div", { staticClass: "row" }, [
-                            _c("p", [_vm._v("Total")]),
-                            _vm._v(" "),
-                            _c("h3", { staticClass: "order-text" }, [
-                              _vm._v("Bs 5.000.000 / 100$")
-                            ])
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-footer-buttons" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-submit next action-button",
-                          attrs: { type: "button", name: "next" }
-                        },
-                        [_vm._v("CONFIRMAR DIRECCIÓN")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-link",
-                          attrs: { href: "/catalago.php", type: "button" }
-                        },
-                        [_vm._v("Seguir comprando")]
-                      )
-                    ])
-                  ])
-                ])
-              ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "wizard-footer-buttons" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-link",
+                attrs: { href: "/catalog", type: "button" }
+              },
+              [_vm._v("Seguir comprando")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "action-buttons-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link previous action-button",
+                  attrs: { type: "button", name: "previous" }
+                },
+                [_vm._v("Volver atras")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-submit next action-button",
+                  attrs: { type: "button", name: "next" }
+                },
+                [_vm._v("CONFIRMAR DIRECCIÓN")]
+              )
             ])
           ])
         ])
@@ -47569,332 +47694,293 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", [
-      _c("div", { staticClass: "payment-methods" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 col-lg-8" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [
-                _c("h5", [_vm._v("Elige el Método de Pago")])
-              ]),
+    return _c("div", { staticClass: "order-footer-buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-submit next action-button",
+          attrs: { type: "button", name: "next" }
+        },
+        [_vm._v("CONFIRMAR PEDIDO")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-link",
+          attrs: { href: "/catalago.php", type: "button" }
+        },
+        [_vm._v("Seguir comprando")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 col-lg-8" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("h5", [_vm._v("Elige el Método de Pago")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("div", { staticClass: "payment-option" }, [
+            _c("div", { staticClass: "form-check form-check-radio" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  id: "credit-card",
+                  name: "payment-method"
+                }
+              }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "payment-option" }, [
-                  _c("div", { staticClass: "form-check form-check-radio" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        id: "credit-card",
-                        name: "payment-method"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-check",
-                        attrs: { for: "credit-card" }
-                      },
-                      [
-                        _c("span"),
-                        _vm._v(
-                          "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                        ),
-                        _c("div", { staticClass: "payment-imgs-group" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/master-bio-mercados.svg",
-                              alt: "Master Card"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/visa-bio-mercados.svg",
-                              alt: "Visa"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/american-bio-mercados.svg",
-                              alt: "American Express"
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "payment-option" }, [
-                  _c("div", { staticClass: "form-check form-check-radio" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        id: "paypal",
-                        name: "payment-method"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "custom-check", attrs: { for: "paypal" } },
-                      [
-                        _c("span"),
-                        _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
-                        _c("div", { staticClass: "payment-imgs-group" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/paypal-bio-mercados.svg",
-                              alt: "PayPal"
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "payment-option" }, [
-                  _c("div", { staticClass: "form-check form-check-radio" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        id: "petro",
-                        name: "payment-method"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "custom-check", attrs: { for: "petro" } },
-                      [
-                        _c("span"),
-                        _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
-                        _c("div", { staticClass: "payment-imgs-group" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/petro-bio-mercados.svg",
-                              alt: "Petro"
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "payment-option" }, [
-                  _c("div", { staticClass: "form-check form-check-radio" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "radio",
-                        id: "cryptocurrency",
-                        name: "payment-method"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-check",
-                        attrs: { for: "cryptocurrency" }
-                      },
-                      [
-                        _c("span"),
-                        _vm._v(
-                          "Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                        ),
-                        _c("div", { staticClass: "payment-imgs-group" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/bitcoin-bio-mercados.svg",
-                              alt: "Bitcoin"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/ethereum-bio-mercaods.svg",
-                              alt: "Ethereum"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("img", {
-                            attrs: {
-                              src: "assets/img/dash-bio-mercados.svg",
-                              alt: "Dash"
-                            }
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12" }, [
-                _c("div", { staticClass: "wizard-footer-buttons" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-link",
-                      attrs: { href: "/catalog", type: "button" }
-                    },
-                    [_vm._v("Seguir comprando")]
+              _c(
+                "label",
+                { staticClass: "custom-check", attrs: { for: "credit-card" } },
+                [
+                  _c("span"),
+                  _vm._v(
+                    "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "action-buttons-group" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-link previous action-button",
-                        attrs: { type: "button", name: "previous" }
-                      },
-                      [_vm._v("Volver atras")]
-                    ),
+                  _c("div", { staticClass: "payment-imgs-group" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/master-bio-mercados.svg",
+                        alt: "Master Card"
+                      }
+                    }),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-submit next action-button",
-                        attrs: { type: "button", name: "next" }
-                      },
-                      [_vm._v("CONFIRMAR PAGO")]
-                    )
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/visa-bio-mercados.svg",
+                        alt: "Visa"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/american-bio-mercados.svg",
+                        alt: "American Express"
+                      }
+                    })
                   ])
-                ])
-              ])
+                ]
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-12 col-lg-4" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "order-block" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-12" }, [
-                    _c("h3", { staticClass: "order-number order-text" }, [
-                      _vm._v("Resumen de la compra")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-content" }, [
-                      _c("div", { staticClass: "order-description" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("25 Artículos")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("34$ / Bs 1.535.000")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("Pizza Bio (11 Articulos)")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("10$ / Bs 450.000")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "row" }, [
-                          _c("p", [_vm._v("25 Artículos")]),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "order-text" }, [
-                            _vm._v("2$ / Bs 90.000")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "order-description order-total" },
-                        [
-                          _c("div", { staticClass: "row" }, [
-                            _c("p", [_vm._v("Total")]),
-                            _vm._v(" "),
-                            _c("h3", { staticClass: "order-text" }, [
-                              _vm._v("Bs 5.000.000 / 100$")
-                            ])
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "order-description" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("label", { staticClass: "order-text" }, [
-                            _vm._v("Datos Personales")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _c("b", [_vm._v("Nombre y Apellido: ")]),
-                            _vm._v("Pablo Mendoza")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _c("b", [_vm._v("Teléfono de Contacto: ")]),
-                            _vm._v("0414 123 4567")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _c("b", [_vm._v("Correo Electrónico: ")]),
-                            _vm._v("micorreo@gmail.com")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "order-description" }, [
-                        _c("div", { staticClass: "row" }, [
-                          _c("label", { staticClass: "order-text" }, [
-                            _vm._v("Dirección de envío")
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)."
-                            )
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "order-footer-buttons" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-submit next action-button",
-                          attrs: { type: "button", name: "next" }
-                        },
-                        [_vm._v("CONFIRMAR PAGO")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link previous action-button",
-                          attrs: { type: "button", name: "previous" }
-                        },
-                        [_vm._v("Volver atras")]
-                      )
-                    ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("div", { staticClass: "payment-option" }, [
+            _c("div", { staticClass: "form-check form-check-radio" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", id: "paypal", name: "payment-method" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "custom-check", attrs: { for: "paypal" } },
+                [
+                  _c("span"),
+                  _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _c("div", { staticClass: "payment-imgs-group" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/paypal-bio-mercados.svg",
+                        alt: "PayPal"
+                      }
+                    })
                   ])
-                ])
-              ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("div", { staticClass: "payment-option" }, [
+            _c("div", { staticClass: "form-check form-check-radio" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: { type: "radio", id: "petro", name: "payment-method" }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "custom-check", attrs: { for: "petro" } },
+                [
+                  _c("span"),
+                  _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _c("div", { staticClass: "payment-imgs-group" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/petro-bio-mercados.svg",
+                        alt: "Petro"
+                      }
+                    })
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-12" }, [
+          _c("div", { staticClass: "payment-option" }, [
+            _c("div", { staticClass: "form-check form-check-radio" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  id: "cryptocurrency",
+                  name: "payment-method"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "custom-check",
+                  attrs: { for: "cryptocurrency" }
+                },
+                [
+                  _c("span"),
+                  _vm._v("Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _c("div", { staticClass: "payment-imgs-group" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/bitcoin-bio-mercados.svg",
+                        alt: "Bitcoin"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/ethereum-bio-mercaods.svg",
+                        alt: "Ethereum"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("img", {
+                      attrs: {
+                        src: "assets/img/dash-bio-mercados.svg",
+                        alt: "Dash"
+                      }
+                    })
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "wizard-footer-buttons" }, [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-link",
+                attrs: { href: "/catalog", type: "button" }
+              },
+              [_vm._v("Seguir comprando")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "action-buttons-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-link previous action-button",
+                  attrs: { type: "button", name: "previous" }
+                },
+                [_vm._v("Volver atras")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-submit next action-button",
+                  attrs: { type: "button", name: "next" }
+                },
+                [_vm._v("CONFIRMAR PAGO")]
+              )
             ])
           ])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order-description" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("label", { staticClass: "order-text" }, [
+          _vm._v("Datos Personales")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("b", [_vm._v("Nombre y Apellido: ")]),
+          _vm._v("Pablo Mendoza")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("b", [_vm._v("Teléfono de Contacto: ")]),
+          _vm._v("0414 123 4567")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("b", [_vm._v("Correo Electrónico: ")]),
+          _vm._v("micorreo@gmail.com")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order-description" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("label", { staticClass: "order-text" }, [
+          _vm._v("Dirección de envío")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)."
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "order-footer-buttons" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-submit next action-button",
+          attrs: { type: "button", name: "next" }
+        },
+        [_vm._v("CONFIRMAR PAGO")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-link previous action-button",
+          attrs: { type: "button", name: "previous" }
+        },
+        [_vm._v("Volver atras")]
+      )
     ])
   },
   function() {

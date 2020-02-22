@@ -107,16 +107,11 @@
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
 																<div class="order-description">
-																
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		
 																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-
 																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
-
 																	</div>
-																
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
@@ -422,28 +417,26 @@
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
 																<div class="order-description">
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">34$ / Bs 1.535.000</h3>
+																
+																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
+																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
+																		
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
+
 																	</div>
-																	<div class="row">
-																		<p>Pizza Bio (11 Articulos)</p>
-																		<h3 class="order-text">10$ / Bs 450.000</h3>
-																	</div>
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">2$ / Bs 90.000</h3>
-																	</div>
+																
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">Bs 5.000.000 / 100$</h3>
+																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 															</div>
 															<div class="order-footer-buttons">
-																<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR DIRECCIÓN</button>
+																<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PEDIDO</button>
 																<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
 															</div>
 														</div>
@@ -535,25 +528,19 @@
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
 																<div class="order-description">
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">34$ / Bs 1.535.000</h3>
-																	</div>
-																	<div class="row">
-																		<p>Pizza Bio (11 Articulos)</p>
-																		<h3 class="order-text">10$ / Bs 450.000</h3>
-																	</div>
-																	<div class="row">
-																		<p>25 Artículos</p>
-																		<h3 class="order-text">2$ / Bs 90.000</h3>
+																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
+																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
 																	</div>
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">Bs 5.000.000 / 100$</h3>
+																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
+																
 																<div class="order-description">
 																	<div class="row">
 																		<label class="order-text">Datos Personales</label>
