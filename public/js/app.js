@@ -2646,6 +2646,41 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     userlogged: Object
   },
+  methods: {
+    increaseValue: function increaseValue(value, product_id) {
+      for (var i = 0; i < this.cant_cart; i++) {
+        if (this.products_cart[i].product.id == product_id) {
+          this.products_cart[i].cant = parseInt(this.products_cart[i].cant) + 1;
+        }
+      } //actualizar el carro
+
+
+      this.updateCartTotal();
+    },
+    decreaseValue: function decreaseValue(value, product_id) {
+      if (value > 1) {
+        for (var i = 0; i < this.cant_cart; i++) {
+          if (this.products_cart[i].product.id == product_id) {
+            this.products_cart[i].cant = parseInt(this.products_cart[i].cant) - 1;
+          }
+        } //actualizar el carro
+
+
+        this.updateCartTotal();
+      }
+    },
+    updateCartTotal: function updateCartTotal() {
+      this.total_cart = 0;
+
+      for (var i = 0; i < this.cant_cart; i++) {
+        if (this.products_cart[i].product.discount > 0) {
+          this.total_cart += parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
+        } else {
+          this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
+        }
+      }
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -2665,11 +2700,9 @@ __webpack_require__.r(__webpack_exports__);
 
     for (var i = 0; i < this.cant_cart; i++) {
       if (this.products_cart[i].product.discount > 0) {
-        console.log("Cantidad " + this.products_cart[i].product.discount);
-        this.total_cart += parseFloat(this.products_cart[i].product.discount);
+        this.total_cart += parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
       } else {
-        console.log("Cantidad " + this.products_cart[i].product.price);
-        this.total_cart += parseFloat(this.products_cart[i].product.price);
+        this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
       }
     } //total general
 
@@ -45683,7 +45716,74 @@ var render = function() {
                                                       }
                                                     }),
                                                     _vm._v(" "),
-                                                    _vm._m(0, true)
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "product-quantity-buttons"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass: "btn",
+                                                            attrs: {
+                                                              type: "button"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.increaseValue(
+                                                                  product_cart.cant,
+                                                                  product_cart
+                                                                    .product.id
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("img", {
+                                                              attrs: {
+                                                                src:
+                                                                  "assets/img/increase.png",
+                                                                alt: "Increase"
+                                                              }
+                                                            })
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "button",
+                                                          {
+                                                            staticClass: "btn",
+                                                            attrs: {
+                                                              type: "button"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.decreaseValue(
+                                                                  product_cart.cant,
+                                                                  product_cart
+                                                                    .product.id
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _c("img", {
+                                                              attrs: {
+                                                                src:
+                                                                  "assets/img/decrease.png",
+                                                                alt: "decrease"
+                                                              }
+                                                            })
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
                                                   ]
                                                 )
                                               ]
@@ -45854,7 +45954,7 @@ var render = function() {
                             2
                           ),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _vm._m(0)
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
@@ -45968,7 +46068,7 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(2)
+                                  _vm._m(1)
                                 ])
                               ])
                             ])
@@ -45978,15 +46078,15 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(2),
                   _vm._v(" "),
-                  _vm._m(4),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("fieldset", [
                     _c("div", { staticClass: "thanks" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
-                          _vm._m(5),
+                          _vm._m(4),
                           _vm._v(" "),
                           _c("div", { staticClass: "thanks-footer" }, [
                             _c(
@@ -46117,32 +46217,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-quantity-buttons" }, [
-      _c(
-        "button",
-        { staticClass: "btn increaseValue", attrs: { type: "button" } },
-        [
-          _c("img", {
-            attrs: { src: "assets/img/increase.png", alt: "Increase" }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn decreaseValue", attrs: { type: "button" } },
-        [
-          _c("img", {
-            attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-          })
-        ]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

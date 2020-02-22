@@ -54,10 +54,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" v-model="product_cart.cant">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn increaseValue">
+																		<button type="button" class="btn" @click="increaseValue(product_cart.cant,product_cart.product.id)">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn decreaseValue">
+																		<button type="button" class="btn" @click="decreaseValue(product_cart.cant,product_cart.product.id)">
 																			<img   src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
@@ -621,12 +621,55 @@ export default {
 	props: {
 		userlogged: Object
 	},
+	methods:{
+		increaseValue(value,product_id)
+		{
+			for(let i = 0; i<this.cant_cart; i++)
+			{
+				if(this.products_cart[i].product.id == product_id)
+				{
+					this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
+				}
+			}
+			//actualizar el carro
+			this.updateCartTotal();
+		},
+		decreaseValue(value,product_id)
+		{	
+			if(value>1)
+			{
+				for(let i = 0; i<this.cant_cart; i++)
+				{
+					if(this.products_cart[i].product.id == product_id)
+					{
+						this.products_cart[i].cant = parseInt(this.products_cart[i].cant)-1;
+					}
+				}
+				//actualizar el carro
+				this.updateCartTotal();
+			}
+		},
+		updateCartTotal()
+		{
+			this.total_cart = 0;
+			for(let i = 0; i<this.cant_cart; i++)
+			{
+				if(this.products_cart[i].product.discount>0)
+				{
+					this.total_cart+=parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
+				}else{
+					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
+				}
+			}
+		},
+	},
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;
         });
     },
-    mounted() {
+    mounted() 
+    {
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
@@ -639,11 +682,9 @@ export default {
 		{
 			if(this.products_cart[i].product.discount>0)
 			{
-				console.log("Cantidad "+this.products_cart[i].product.discount);
-				this.total_cart+=parseFloat(this.products_cart[i].product.discount);
+				this.total_cart+=parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
 			}else{
-				console.log("Cantidad "+this.products_cart[i].product.price);
-				this.total_cart+=parseFloat(this.products_cart[i].product.price);
+				this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 			}
 		}
 
