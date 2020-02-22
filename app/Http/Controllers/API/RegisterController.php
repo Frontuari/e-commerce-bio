@@ -45,19 +45,19 @@ class RegisterController extends BaseController
         //     'phone' => ''
         // ]);
 
-        // $user = User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => password_hash($data['password'],PASSWORD_BCRYPT),
-        //     'peoples_id' => $people->id,
-        //     'groups_id' => '1',
-        //     'coins_id' => '1'
-        // ]);
+         $user = User::create([
+             'name' => $data['name'],
+             'email' => $data['email'],
+             'password' => password_hash($data['password'],PASSWORD_BCRYPT),
+             'peoples_id' => $people->id,
+             'groups_id' => '1',
+            'coins_id' => '1'
+         ]);
 
         // DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
         // $success['token'] =  $user->createToken('Bio')->accessToken;
-        Mail::to($data["email"])->queue(new UsuarioRegistro());
+        //Mail::to($data["email"])->queue(new UsuarioRegistro());
         // $success['name'] =  $user->name;
         // $success['user_id'] =  $user->id;
         $success = [];
