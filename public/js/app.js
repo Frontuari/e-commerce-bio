@@ -2655,6 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
       } //actualizar el carro
 
 
+      window.localStorage.setItem("cartNew", JSON.stringify(this.products_cart));
       this.updateCartTotal();
     },
     decreaseValue: function decreaseValue(value, product_id) {
@@ -2666,6 +2667,7 @@ __webpack_require__.r(__webpack_exports__);
         } //actualizar el carro
 
 
+        window.localStorage.setItem("cartNew", JSON.stringify(this.products_cart));
         this.updateCartTotal();
       }
     },
@@ -74306,7 +74308,27 @@ var globalFunc = {
     this.products_cart.splice(index, 1);
     localStorage.setItem('cartNew', JSON.stringify(this.products_cart));
     this.cant_cart = this.products_cart.length;
+    this.total_cart = 0;
+    this.updateCartTotal();
     EventBus.$emit("update_cantCart", this.products_cart.length);
+  },
+  updateCartTotal: function updateCartTotal() {
+    if (window.localStorage.getItem("cartNew")) {
+      this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
+      this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
+      console.log(this.products_cart);
+    } else {
+      this.cant_cart = 0;
+    } //For para sacar el total del carro de compras
+
+
+    for (var i = 0; i < this.cant_cart; i++) {
+      if (this.products_cart[i].product.discount > 0) {
+        this.total_cart += parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
+      } else {
+        this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
+      }
+    }
   }
 };
 Vue.prototype.addToFavorite = globalFunc.addToFavorite;

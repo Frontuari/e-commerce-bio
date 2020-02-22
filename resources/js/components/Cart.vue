@@ -632,7 +632,9 @@ export default {
 				}
 			}
 			//actualizar el carro
+			window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
 			this.updateCartTotal();
+
 		},
 		decreaseValue(value,product_id)
 		{	
@@ -646,11 +648,13 @@ export default {
 					}
 				}
 				//actualizar el carro
+				window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
 				this.updateCartTotal();
 			}
 		},
 		updateCartTotal()
 		{
+				
 			this.total_cart = 0;
 			for(let i = 0; i<this.cant_cart; i++)
 			{
@@ -661,6 +665,7 @@ export default {
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
 			}
+
 		},
 	},
     created() {
