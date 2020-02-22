@@ -23,7 +23,7 @@ class RegisterController extends BaseController
      */
     public function register(Request $request)
     {
-        /*$validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
@@ -32,34 +32,35 @@ class RegisterController extends BaseController
    
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
-        }*/
+        }
         
         $data = $request->all();
 
-        // $people = People::create([
-        //     'rif' => '11111',
-        //     'name' => $data['name'],
-        //     'sex' => $data["sex"],
-        //     'birthdate' => '01/01/1990',
-        //     'cities_id' => '1',
-        //     'phone' => ''
-        // ]);
+         $people = People::create([
+             'rif' => '11111',
+            'name' => $data['name'],
+            'sex' => $data["sex"],
+             'birthdate' => '01/01/1990',
+             'cities_id' => '1',
+             'phone' => ''
+         ]);
 
          $user = User::create([
+             'id'=>'15',
              'name' => $data['name'],
              'email' => $data['email'],
              'password' => password_hash($data['password'],PASSWORD_BCRYPT),
              'peoples_id' => $people->id,
              'groups_id' => '1',
-            'coins_id' => '1'
+             'coins_id' => '1'
          ]);
 
-        // DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
+         DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
-        // $success['token'] =  $user->createToken('Bio')->accessToken;
+        $success['token'] =  $user->createToken('Bio')->accessToken;
         //Mail::to($data["email"])->queue(new UsuarioRegistro());
-        // $success['name'] =  $user->name;
-        // $success['user_id'] =  $user->id;
+         $success['name'] =  $user->name;
+         $success['user_id'] =  $user->id;
         $success = [];
         return $this->sendResponse($success, 'User register successfully.');
     }
