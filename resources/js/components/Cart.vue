@@ -93,7 +93,8 @@
 													<div class="wizard-footer-buttons">
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
-															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PEDIDO</button>
+															<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
+															<p v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
 														</div>
 													</div>
 												</div>
@@ -121,7 +122,8 @@
 																</div>
 															</div>
 															<div class="order-footer-buttons">
-																<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PEDIDO</button>
+																<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
+																<p v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
 																<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
 															</div>
 														</div>
@@ -436,7 +438,8 @@
 																</div>
 															</div>
 															<div class="order-footer-buttons">
-																<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PEDIDO</button>
+																<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
+																<p  v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
 																<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
 															</div>
 														</div>
@@ -603,12 +606,18 @@ export default {
             cant_cart: 0,
             products_cart:0,
             total_cart:0,
+            datauser:[],
         }
     },
 	props: {
 		userlogged: Object
 	},
 	methods:{
+
+		isObject: function(o) 
+		{ 
+			return typeof o == "object" 
+		},
 		increaseValue(value,product_id)
 		{
 			for(let i = 0; i<this.cant_cart; i++)
@@ -682,6 +691,12 @@ export default {
 
 		//total general
 		console.log("Total General "+this.total_cart);
+		if(this.isObject(this.userlogged)){
+			console.log("existe");
+			this.datauser = this.userlogged;
+		}else{
+			this.datauser.id = 'undefined';
+		}		
     }
 }
 </script>

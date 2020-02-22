@@ -2024,6 +2024,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
 //
 //
 //
@@ -2627,13 +2632,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       cant_cart: 0,
       products_cart: 0,
-      total_cart: 0
+      total_cart: 0,
+      datauser: []
     };
   },
   props: {
     userlogged: Object
   },
   methods: {
+    isObject: function isObject(o) {
+      return _typeof(o) == "object";
+    },
     increaseValue: function increaseValue(value, product_id) {
       for (var i = 0; i < this.cant_cart; i++) {
         if (this.products_cart[i].product.id == product_id) {
@@ -2697,6 +2706,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
     console.log("Total General " + this.total_cart);
+
+    if (this.isObject(this.userlogged)) {
+      console.log("existe");
+      this.datauser = this.userlogged;
+    } else {
+      this.datauser.id = 'undefined';
+    }
   }
 });
 
@@ -45943,7 +45959,56 @@ var render = function() {
                             2
                           ),
                           _vm._v(" "),
-                          _vm._m(0)
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-12" }, [
+                              _c(
+                                "div",
+                                { staticClass: "wizard-footer-buttons" },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-link",
+                                      attrs: {
+                                        href: "/catalog",
+                                        type: "button"
+                                      }
+                                    },
+                                    [_vm._v("Seguir comprando")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "action-buttons-group" },
+                                    [
+                                      this.datauser.id !== "undefined"
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-submit next action-button",
+                                              attrs: {
+                                                type: "button",
+                                                name: "next"
+                                              }
+                                            },
+                                            [_vm._v("CONFIRMAR PEDIDO")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      this.datauser.id == "undefined"
+                                        ? _c("p", [
+                                            _vm._v(
+                                              "Inicie sesion para confirmar"
+                                            )
+                                          ])
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
@@ -46057,7 +46122,46 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(1)
+                                  _c(
+                                    "div",
+                                    { staticClass: "order-footer-buttons" },
+                                    [
+                                      this.datauser.id !== "undefined"
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-submit next action-button",
+                                              attrs: {
+                                                type: "button",
+                                                name: "next"
+                                              }
+                                            },
+                                            [_vm._v("CONFIRMAR PEDIDO")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      this.datauser.id == "undefined"
+                                        ? _c("p", [
+                                            _vm._v(
+                                              "Inicie sesion para confirmar"
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "btn btn-link",
+                                          attrs: {
+                                            href: "/catalago.php",
+                                            type: "button"
+                                          }
+                                        },
+                                        [_vm._v("Seguir comprando")]
+                                      )
+                                    ]
+                                  )
                                 ])
                               ])
                             ])
@@ -46070,7 +46174,7 @@ var render = function() {
                   _c("fieldset", [
                     _c("div", { staticClass: "user-profile" }, [
                       _c("div", { staticClass: "row" }, [
-                        _vm._m(2),
+                        _vm._m(0),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
                           _c("div", { staticClass: "card" }, [
@@ -46183,7 +46287,46 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(3)
+                                  _c(
+                                    "div",
+                                    { staticClass: "order-footer-buttons" },
+                                    [
+                                      this.datauser.id !== "undefined"
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-submit next action-button",
+                                              attrs: {
+                                                type: "button",
+                                                name: "next"
+                                              }
+                                            },
+                                            [_vm._v("CONFIRMAR PEDIDO")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      this.datauser.id == "undefined"
+                                        ? _c("p", [
+                                            _vm._v(
+                                              "Inicie sesion para confirmar"
+                                            )
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "btn btn-link",
+                                          attrs: {
+                                            href: "/catalago.php",
+                                            type: "button"
+                                          }
+                                        },
+                                        [_vm._v("Seguir comprando")]
+                                      )
+                                    ]
+                                  )
                                 ])
                               ])
                             ])
@@ -46196,7 +46339,7 @@ var render = function() {
                   _c("fieldset", [
                     _c("div", { staticClass: "payment-methods" }, [
                       _c("div", { staticClass: "row" }, [
-                        _vm._m(4),
+                        _vm._m(1),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
                           _c("div", { staticClass: "card" }, [
@@ -46308,12 +46451,12 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(5),
+                                    _vm._m(2),
                                     _vm._v(" "),
-                                    _vm._m(6)
+                                    _vm._m(3)
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(7)
+                                  _vm._m(4)
                                 ])
                               ])
                             ])
@@ -46327,7 +46470,7 @@ var render = function() {
                     _c("div", { staticClass: "thanks" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
-                          _vm._m(8),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c("div", { staticClass: "thanks-footer" }, [
                             _c(
@@ -46458,60 +46601,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "wizard-footer-buttons" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-link",
-              attrs: { href: "/catalog", type: "button" }
-            },
-            [_vm._v("Seguir comprando")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "action-buttons-group" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-submit next action-button",
-                attrs: { type: "button", name: "next" }
-              },
-              [_vm._v("CONFIRMAR PEDIDO")]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order-footer-buttons" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-submit next action-button",
-          attrs: { type: "button", name: "next" }
-        },
-        [_vm._v("CONFIRMAR PEDIDO")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-link",
-          attrs: { href: "/catalago.php", type: "button" }
-        },
-        [_vm._v("Seguir comprando")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -47688,30 +47777,6 @@ var staticRenderFns = [
           ])
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "order-footer-buttons" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-submit next action-button",
-          attrs: { type: "button", name: "next" }
-        },
-        [_vm._v("CONFIRMAR PEDIDO")]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-link",
-          attrs: { href: "/catalago.php", type: "button" }
-        },
-        [_vm._v("Seguir comprando")]
-      )
     ])
   },
   function() {
