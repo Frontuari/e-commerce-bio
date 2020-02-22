@@ -146,7 +146,7 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="user-name">Nombre (s):</label>
-															<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="Pablo">
+															<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" v-model="this.datauser.name">
 														</div>
 													</div>
 													<div class="col-lg-6">
@@ -158,7 +158,7 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="user-email">Correo Electrónico:</label>
-															<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" value="micorreo@gmail.com">
+															<input type="email" class="form-control" id="user-email" name="user-email" disabled="disabled" v-model="this.datauser.email">
 														</div>
 													</div>
 													<div class="col-lg-6">
@@ -547,9 +547,9 @@
 																<div class="order-description">
 																	<div class="row">
 																		<label class="order-text">Datos Personales</label>
-																		<p><b>Nombre y Apellido: </b>Pablo Mendoza</p>
+																		<p><b>Nombre y Apellido: </b>{{this.datauser.name}}</p>
 																		<p><b>Teléfono de Contacto: </b>0414 123 4567</p>
-																		<p><b>Correo Electrónico: </b>micorreo@gmail.com</p>
+																		<p><b>Correo Electrónico: </b>{{this.datauser.email}}</p>
 																	</div>
 																</div>
 																<div class="order-description">
@@ -619,12 +619,15 @@ export default {
 			return typeof o == "object" 
 		},
 		increaseValue(value,product_id)
-		{
+		{	
 			for(let i = 0; i<this.cant_cart; i++)
 			{
 				if(this.products_cart[i].product.id == product_id)
 				{
-					this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
+					if(parseInt(value) < parseInt(this.products_cart[i].product.qty_avaliable))
+					{
+						this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
+					}
 				}
 			}
 			//actualizar el carro
@@ -694,6 +697,7 @@ export default {
 		if(this.isObject(this.userlogged)){
 			console.log("existe");
 			this.datauser = this.userlogged;
+			console.log(this.datauser);
 		}else{
 			this.datauser.id = 'undefined';
 		}		
