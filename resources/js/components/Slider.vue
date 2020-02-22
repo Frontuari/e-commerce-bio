@@ -47,10 +47,10 @@
         },
         methods: {
             getSliders: async function() {
-				const response = await axios.get(URLSERVER+'api/advs/type/top');
+                const response = await axios.get(URLSERVER+'api/advs/type/top');
                 this.sliders = response.data.data;
                 console.log(this.sliders);
-			},
+            },
         },
         mounted() {
             this.getSliders();

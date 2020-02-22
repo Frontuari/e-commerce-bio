@@ -7,6 +7,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\User;
 use App\UserRole;
 use App\People;
+use App\Mail\UsuarioRegistro;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -34,32 +36,31 @@ class RegisterController extends BaseController
         
         $data = $request->all();
 
-        $people = People::create([
-            'rif' => '11111',
-            'name' => $data['name'],
-            'sex' => $data["sex"],
-            'birthdate' => '01/01/1990',
-            'cities_id' => '1',
-            'phone' => ''
-        ]);
+        // $people = People::create([
+        //     'rif' => '11111',
+        //     'name' => $data['name'],
+        //     'sex' => $data["sex"],
+        //     'birthdate' => '01/01/1990',
+        //     'cities_id' => '1',
+        //     'phone' => ''
+        // ]);
 
-        var_dump($people->id);
+        // $user = User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => password_hash($data['password'],PASSWORD_BCRYPT),
+        //     'peoples_id' => $people->id,
+        //     'groups_id' => '1',
+        //     'coins_id' => '1'
+        // ]);
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => password_hash($data['password'],PASSWORD_BCRYPT),
-            'peoples_id' => $people->id,
-            'groups_id' => '1',
-            'coins_id' => '1'
-        ]);
-
-        DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
+        // DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
         // $success['token'] =  $user->createToken('Bio')->accessToken;
-        $success['name'] =  $user->name;
-        $success['user_id'] =  $user->id;
-   
+        Mail::to($data["email"])->queue(new UsuarioRegistro());
+        // $success['name'] =  $user->name;
+        // $success['user_id'] =  $user->id;
+        $success = [];
         return $this->sendResponse($success, 'User register successfully.');
     }
    
@@ -108,7 +109,6 @@ class RegisterController extends BaseController
                 'phone' => ''
             ]);
 
-
         echo json_encode($this->getData($data_user["user_data"]["email"]));
     }   
 
@@ -121,6 +121,5 @@ class RegisterController extends BaseController
         $_SESSION["usuario"]=$datos;
         return $datos;
     }
-
 
 }
