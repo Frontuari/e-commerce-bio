@@ -140,7 +140,7 @@
 	.jumbotron h1{
 		font-weight: 400;
 		margin-bottom: 0;
-		color: #e1251b;
+		color: #e1251b !important;
 	}
 	.section-title{
 		text-align: center;
