@@ -48968,7 +48968,18 @@ var render = function() {
                                                 0
                                                   ? _c("p", [
                                                       _vm._v(
-                                                        "$ 3 / Bs " +
+                                                        "$ " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatDolar"
+                                                            )(
+                                                              product_cart
+                                                                .product
+                                                                .discount /
+                                                                _vm.tasadolar
+                                                            )
+                                                          ) +
+                                                          " / Bs " +
                                                           _vm._s(
                                                             _vm._f(
                                                               "FormatNumber"
@@ -48988,7 +48999,17 @@ var render = function() {
                                                   0
                                                   ? _c("p", [
                                                       _vm._v(
-                                                        "$ 3 / Bs " +
+                                                        "$ " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatDolar"
+                                                            )(
+                                                              product_cart
+                                                                .product.price /
+                                                                _vm.tasadolar
+                                                            )
+                                                          ) +
+                                                          " / Bs " +
                                                           _vm._s(
                                                             _vm._f(
                                                               "FormatNumber"
@@ -49023,7 +49044,19 @@ var render = function() {
                                                 0
                                                   ? _c("p", [
                                                       _vm._v(
-                                                        "$ 15 / Bs " +
+                                                        "$ " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatDolar"
+                                                            )(
+                                                              (product_cart
+                                                                .product
+                                                                .discount *
+                                                                product_cart.cant) /
+                                                                _vm.tasadolar
+                                                            )
+                                                          ) +
+                                                          " / Bs " +
                                                           _vm._s(
                                                             _vm._f(
                                                               "FormatNumber"
@@ -49042,7 +49075,18 @@ var render = function() {
                                                 0
                                                   ? _c("p", [
                                                       _vm._v(
-                                                        "$ 15 / Bs " +
+                                                        "$ " +
+                                                          _vm._s(
+                                                            _vm._f(
+                                                              "FormatDolar"
+                                                            )(
+                                                              (product_cart
+                                                                .product.price *
+                                                                product_cart.cant) /
+                                                                _vm.tasadolar
+                                                            )
+                                                          ) +
+                                                          " / Bs " +
                                                           _vm._s(
                                                             _vm._f(
                                                               "FormatNumber"
@@ -49249,7 +49293,13 @@ var render = function() {
                                             { staticClass: "order-text" },
                                             [
                                               _vm._v(
-                                                "100$ / Bs " +
+                                                _vm._s(
+                                                  _vm._f("FormatDolar")(
+                                                    _vm.total_cart /
+                                                      _vm.tasadolar
+                                                  )
+                                                ) +
+                                                  "/ Bs " +
                                                   _vm._s(
                                                     _vm._f("FormatNumber")(
                                                       _vm.total_cart

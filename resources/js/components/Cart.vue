@@ -67,18 +67,18 @@
 
 																<span class="product-descount" v-if="product_cart.product.discount > 0">$ 4 / {{ product_cart.product.price | FormatNumber }}</span>
 
-																<p v-if="product_cart.product.discount > 0">$ 3 / Bs {{ product_cart.product.discount | FormatNumber }}</p>
+																<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.discount | FormatNumber }}</p>
 
-																<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ 3 / Bs {{ product_cart.product.price | FormatNumber }}</p>
+																<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ {{ (product_cart.product.price  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.price | FormatNumber }}</p>
 
 															</div>
 														</div>
 														<div class="product-add">
 															<span class="product-info">Total a pagar: </span>
 															<div class="product-prices">
-																<p v-if="product_cart.product.discount > 0">$ 15 / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
+																<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
 
-																<p v-if="product_cart.product.discount <= 0">$ 15 / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
+																<p v-if="product_cart.product.discount <= 0">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
 															</div>
 															<div class="remove-product">
 																<button class="btn btn-delete-section"  @click="removeCart(index)" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
@@ -117,7 +117,7 @@
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">{{(total_cart) / tasadolar | FormatDolar}}/ Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 															</div>
