@@ -33,6 +33,7 @@
 							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)">
 							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
 							<div class="keyup_search" :style="{ display: dSearch }">
+								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
 									<li v-for="ser in searched" :key="ser.id"><i class="fa fa-search" aria-hidden="true"></i> {{ser.name}}</li>
 								</ol>
@@ -41,7 +42,6 @@
 						</form>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						
 						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="nav-header" class="col-lg-5 col-4">
@@ -72,10 +72,8 @@
 										</div>
 									</form>
 								</div>
-								
 							</li>
 							<!-- no loggeado -->
-						
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged"><a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text"> {{userlogged.name}}</span></a> <a href="javascript:void(0)" @click="logout()" class="logout">
 							<img src="assets/img/cerrar-sesion-bio.svg"></a></li>
@@ -186,6 +184,7 @@ export default {
 			products: [],
 			searched: {},
 			dSearch: 'none',
+			gifSearch:'none',
 			user: {
 				name: '',
 				email: '',
@@ -204,14 +203,20 @@ export default {
 		},
 		async SearchProducts(e) {
 			const len = e.target.value.length;
+			let loader = this.gifSearch;
 			const val = e.target.value;
 			this.searched = {};
 			if(len >= 3) {
+				this.gifSearch = 'block';
 				const response = await axios.get(URLSERVER+"api/products/search/"+val);
 				this.searched = response.data.data;
 				this.dSearch = 'block';
+				this.gifSearch = 'none';
+
 			} else {
 				this.dSearch = 'none';
+				this.gifSearch = 'none';
+				
 			}
 		},
 		async getFavorites() {
@@ -226,7 +231,14 @@ export default {
 			axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass).then( (response) => {
 				if(response.data.success == false)
 				{
-					alert(response.data.msj_general);
+					Swal.fire({
+					  icon: 'error',
+					  title: 'Error',
+					  text: response.data.msj_general,
+					  //footer: '<a href>Why do I have this issue?</a>'
+					})
+
+
 				}else{
 					location.href = window.location.href;
 				}
