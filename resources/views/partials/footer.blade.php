@@ -234,8 +234,10 @@
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
 	@yield('js')
 	<script>
-
+		
 		jQuery(document).ready(function($){
+
+			// Swal.fire("probando");
 
 			setTimeout(function(){
 				$('body').addClass('loaded');

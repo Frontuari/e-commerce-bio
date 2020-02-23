@@ -610,7 +610,8 @@ export default {
         }
     },
 	props: {
-		userlogged: Object
+		userlogged: Object,
+		tasadolar: Number
 	},
 	methods:{
 

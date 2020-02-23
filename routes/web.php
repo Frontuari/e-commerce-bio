@@ -28,9 +28,9 @@ Route::get('/profile', function() {
 	
 });
 
-Route::get('/cart', function(){
-	return view('cart');
-});
+
+Route::get('/cart','CartController@index')->name("cart");
+
 
 Auth::routes();
 

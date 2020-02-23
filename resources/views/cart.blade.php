@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</section>
-	<cart :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></cart>
+	<cart :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></cart>
 </main>
 <!-- CIERRE DEL MAIN-->
 @stop
