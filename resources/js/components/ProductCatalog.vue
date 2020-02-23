@@ -34,13 +34,13 @@
                                 <div class="product-quantity" v-if="product.qty_avaliable > 0">
                                     <label>Cantidad</label>
                                     <div class="product-quantity-group">
-                                        <input id="quantity2" class="form-control" type="text" name="quantity" value="1">
+                                        <input id="quantity2" :class="'cantidad_'+product.id" class="form-control" type="text" name="quantity" value="1">
                                         <div class="product-quantity-buttons">
                                             <span class="max-stock" style="display:none;">{{product.qty_avaliable}}</span>
-                                            <button type="button" class="btn increaseValue" onclick="">
+                                            <button type="button" class="btn " @click="increaseValue(product.id,product.qty_avaliable)">
                                                 <img src="assets/img/increase.png" alt="Increase">
                                             </button>
-                                            <button type="button" class="btn decreaseValue" >
+                                            <button type="button" class="btn" @click="decreaseValue(product.id,product.qty_avaliable)" >
                                                 <img src="assets/img/decrease.png" alt="decrease">
                                             </button>
                                         </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="product-buttons">
                                     
-                                    <button type="button" class="btn btn-addcart-outline"  v-if="product.qty_avaliable > 0" @click="addToCart(product)">
+                                    <button type="button" class="btn btn-addcart-outline"  v-if="product.qty_avaliable > 0" @click="addToCart(product,cant_product[product.id])">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
                                         Añadir al carrito
                                     </button>
@@ -98,7 +98,8 @@
         data() {
             return {
                 oneproduct: {},
-                page: 1
+                page: 1,
+                cant_product:[],
             }
         },
         components:{
@@ -112,7 +113,59 @@
                 this.page = index;
                 console.log("this.page::> ",this.page);
                 this.$emit("getpage",this.page);
-            }
+            },
+            increaseValue(productID,qty_avaliable)
+            {
+                if(parseInt(document.querySelector('.cantidad_'+productID).value) < qty_avaliable ){
+                     document.querySelector('.cantidad_'+productID).value = parseInt(document.querySelector('.cantidad_'+productID).value) + 1;
+                     this.cant_product[productID] = parseInt(document.querySelector('.cantidad_'+productID).value);
+                } 
+            },
+            decreaseValue(productID,qty_avaliable)
+            {
+                if(parseInt(document.querySelector('.cantidad_'+productID).value) > 1 ){
+                     document.querySelector('.cantidad_'+productID).value = parseInt(document.querySelector('.cantidad_'+productID).value) - 1;
+                     this.cant_product[productID] = parseInt(document.querySelector('.cantidad_'+productID).value);
+                } 
+            },
+
+            addToCart(product,cantidad) 
+            {
+                console.log("Cantidad "+cantidad);
+                console.log("product::> ", product);
+                var cart = [];
+                console.log("cart-1::> ", cart);
+
+                if (window.localStorage.getItem('cartNew')) {
+                  cart = JSON.parse(window.localStorage.getItem('cartNew'));
+                }
+
+                cart = this.validateCart(product, cart,cantidad);
+                console.log("cart-2::> ", cart);
+                window.localStorage.setItem('cartNew', JSON.stringify(cart));
+                EventBus.$emit("update_cantCart", cart.length);
+              },
+             validateCart: function validateCart(product, tmp,cantidad) {
+                var exist = false;
+                tmp.forEach(function (a, b) {
+                  if (a.product.id == product.id) {
+                    tmp[b].cant = parseInt(tmp[b].cant) + cantidad;
+                    exist = true;
+                  }
+                });
+
+                if (!exist) {
+                  tmp.push({
+                    product: product,
+                    cant: cantidad,
+                  });
+                }
+
+                return tmp;
+              }
+
+
+
         },
         props: {
             products: Object,

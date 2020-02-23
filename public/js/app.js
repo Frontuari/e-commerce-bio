@@ -2735,6 +2735,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductCatalog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductCatalog.vue */ "./resources/js/components/ProductCatalog.vue");
 
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -2895,7 +2897,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       rangeP: '',
       min_price: 100000,
       max_price: 800000,
-      page: 1
+      page: 1,
+      datauser: []
     };
   },
   components: {
@@ -2969,9 +2972,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     pageclick: function pageclick(value) {
       console.log("value emit::> ", value);
       this.page = value;
+    },
+    isObject: function isObject(o) {
+      return _typeof(o) == "object";
     }
   },
-  mounted: function mounted() {// this.getproducts();
+  mounted: function mounted() {
+    // this.getproducts();
+    if (this.isObject(this.userlogged)) {
+      console.log("existe");
+      this.datauser = this.userlogged;
+      console.log(this.datauser);
+    } else {
+      console.log("Not logout");
+      this.datauser.id = 'undefined';
+    }
   },
   computed: {
     filtros: function filtros() {
@@ -4094,7 +4109,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       oneproduct: {},
-      page: 1
+      page: 1,
+      cant_product: []
     };
   },
   components: {
@@ -4108,6 +4124,51 @@ __webpack_require__.r(__webpack_exports__);
       this.page = index;
       console.log("this.page::> ", this.page);
       this.$emit("getpage", this.page);
+    },
+    increaseValue: function increaseValue(productID, qty_avaliable) {
+      if (parseInt(document.querySelector('.cantidad_' + productID).value) < qty_avaliable) {
+        document.querySelector('.cantidad_' + productID).value = parseInt(document.querySelector('.cantidad_' + productID).value) + 1;
+        this.cant_product[productID] = parseInt(document.querySelector('.cantidad_' + productID).value);
+      }
+    },
+    decreaseValue: function decreaseValue(productID, qty_avaliable) {
+      if (parseInt(document.querySelector('.cantidad_' + productID).value) > 1) {
+        document.querySelector('.cantidad_' + productID).value = parseInt(document.querySelector('.cantidad_' + productID).value) - 1;
+        this.cant_product[productID] = parseInt(document.querySelector('.cantidad_' + productID).value);
+      }
+    },
+    addToCart: function addToCart(product, cantidad) {
+      console.log("Cantidad " + cantidad);
+      console.log("product::> ", product);
+      var cart = [];
+      console.log("cart-1::> ", cart);
+
+      if (window.localStorage.getItem('cartNew')) {
+        cart = JSON.parse(window.localStorage.getItem('cartNew'));
+      }
+
+      cart = this.validateCart(product, cart, cantidad);
+      console.log("cart-2::> ", cart);
+      window.localStorage.setItem('cartNew', JSON.stringify(cart));
+      EventBus.$emit("update_cantCart", cart.length);
+    },
+    validateCart: function validateCart(product, tmp, cantidad) {
+      var exist = false;
+      tmp.forEach(function (a, b) {
+        if (a.product.id == product.id) {
+          tmp[b].cant = parseInt(tmp[b].cant) + cantidad;
+          exist = true;
+        }
+      });
+
+      if (!exist) {
+        tmp.push({
+          product: product,
+          cant: cantidad
+        });
+      }
+
+      return tmp;
     }
   },
   props: {
@@ -53385,6 +53446,7 @@ var render = function() {
                               [
                                 _c("input", {
                                   staticClass: "form-control",
+                                  class: "cantidad_" + product.id,
                                   attrs: {
                                     id: "quantity2",
                                     type: "text",
@@ -53406,9 +53468,53 @@ var render = function() {
                                       [_vm._v(_vm._s(product.qty_avaliable))]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(0, true),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn ",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.increaseValue(
+                                              product.id,
+                                              product.qty_avaliable
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src: "assets/img/increase.png",
+                                            alt: "Increase"
+                                          }
+                                        })
+                                      ]
+                                    ),
                                     _vm._v(" "),
-                                    _vm._m(1, true)
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.decreaseValue(
+                                              product.id,
+                                              product.qty_avaliable
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src: "assets/img/decrease.png",
+                                            alt: "decrease"
+                                          }
+                                        })
+                                      ]
+                                    )
                                   ]
                                 )
                               ]
@@ -53425,7 +53531,10 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.addToCart(product)
+                                    return _vm.addToCart(
+                                      product,
+                                      _vm.cant_product[product.id]
+                                    )
                                   }
                                 }
                               },
@@ -53735,39 +53844,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn increaseValue",
-        attrs: { type: "button", onclick: "" }
-      },
-      [
-        _c("img", {
-          attrs: { src: "assets/img/increase.png", alt: "Increase" }
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn decreaseValue", attrs: { type: "button" } },
-      [
-        _c("img", {
-          attrs: { src: "assets/img/decrease.png", alt: "decrease" }
-        })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

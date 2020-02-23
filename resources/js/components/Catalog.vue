@@ -156,7 +156,9 @@
 				rangeP: '',
 				min_price: 100000,
 				max_price: 800000,
-				page: 1
+				page: 1,
+            	datauser:[],
+
             }
 		},
 		components: {
@@ -178,10 +180,23 @@
 			pageclick(value) {
 				console.log("value emit::> ",value);
 				this.page = value;
+			},
+			isObject: function(o) 
+			{ 
+				return typeof o == "object" 
 			}
+
         },
         mounted() {
 			// this.getproducts();
+			if(this.isObject(this.userlogged)){
+				console.log("existe");
+				this.datauser = this.userlogged;
+				console.log(this.datauser);
+			}else{
+				console.log("Not logout");
+				this.datauser.id = 'undefined';
+			}
 		},
 		computed: {
 			filtros: function() {
