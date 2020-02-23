@@ -177,14 +177,14 @@
 										<div class="tab-pane fade show active" id="address" role="tabpanel" aria-labelledby="address-tab">
 											<form action="">
 												<div class="col-12">
-													<div id="address-1" class="address-section">
+													<div v-for="(direction,index) in userlogged.directions" :key="direction.id" :id="'address-'+index" class="address-section">
 														<div class="row">
 															<div class="col-lg-6">
 																<div class="form-group">
 																	<label for="address-name">Dirección Corta (ejm: Mi Casa, Mi Oficina):</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" value="Mi casa">
+																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" :value="direction.address">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -192,7 +192,7 @@
 																	<label for="address-urb">Urbanización / Barrio / Empresa:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="Urb Zaragoza">
+																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -200,7 +200,7 @@
 																	<label for="address-av">Sector, Avenida, calles, veredas:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="Avenida 1, entre calles 10 y 11">
+																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -208,7 +208,7 @@
 																	<label for="address-num">Número de casa/local:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="Casa 57">
+																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -216,7 +216,7 @@
 																	<label for="address-prov">Municipio/Provincia:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" value="Araure">
+																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" :value="direction.ciudad">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -372,7 +372,7 @@
 																	<label for="address-post">Código postal:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="3303">
+																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -380,225 +380,7 @@
 																	<label for="address-ref">Punto de Referencia (opcional):</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="A lado de bodegon Girasol">
-																</div>
-															</div>
-															<div class="col-lg-12">
-																<div class="form-group">
-																	<button class="btn btn-submit" type="button">GUARDAR CAMBIOS</button>
-																</div>
-															</div>
-															<div class="col-lg-12">
-																<div class="form-group">
-																	<button class="btn btn-delete-section" type="button">Eliminar Dirección <img src="assets/img/eliminar-bio-mercados.svg"></button>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div id="address-2" class="address-section">
-														<div class="row">
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-name">Dirección Corta (ejm: Mi Casa, Mi Oficina):</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" value="Mi oficina">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-urb">Urbanización / Barrio / Empresa:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="Inversiones JM C.A">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-av">Sector, Avenida, calles, veredas:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="Sector Centro, Av 34 entre calles 8 y 9">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-num">Número de casa/local:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="Local H-21">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-prov">Municipio/Provincia:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" value="Acarigua">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-2-state">Estado:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-2-state" name="address-2-state" disabled="disabled" value="Portuguesa">
-																	<div class="dropdown-menu dropdown-menu-state">
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="amazonas-address-2" name="radio-address-2" value="Amazonas">
-																				<label for="amazonas-address-2" class="custom-check">Amazonas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="anzoategui-address-2" name="radio-address-2" value="Anzoátegui">
-																				<label for="anzoategui-address-2" class="custom-check">Anzoátegui</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="apure-address-2" name="radio-address-2" value="Apure">
-																				<label for="apure-address-2" class="custom-check">Apure</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="aragua-address-2" name="radio-address-2" value="Aragua">
-																				<label for="aragua-address-2" class="custom-check">Aragua</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="barinas-address-2" name="radio-address-2" value="Barinas">
-																				<label for="barinas-address-2" class="custom-check">Barinas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="bolivar-address-2" name="radio-address-2" value="Bolívar">
-																				<label for="bolivar-address-2" class="custom-check">Bolívar</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="carabobo-address-2" name="radio-address-2" value="Carabobo">
-																				<label for="carabobo-address-2" class="custom-check">Carabobo</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="cojedes-address-2" name="radio-address-2" value="Cojedes">
-																				<label for="cojedes-address-2" class="custom-check">Cojedes</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="delta-amacuro-address-2" name="radio-address-2" value="Delta Amacuro">
-																				<label for="delta-amacuro-address-2" class="custom-check">Delta Amacuro</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="falcon-address-2" name="radio-address-2" value="Falcón">
-																				<label for="falcon-address-2" class="custom-check">Falcón</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="distrito-capital-address-2" name="radio-address-2" value="Distrito Capital">
-																				<label for="distrito-capital-address-2" class="custom-check">Distrito Capital</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="guarico-address-2" name="radio-address-2" value="Guárico">
-																				<label for="guarico-address-2" class="custom-check">Guárico</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="lara-address-2" name="radio-address-2" value="Lara">
-																				<label for="lara-address-2" class="custom-check">Lara</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="merida-address-2" name="radio-address-2" value="Mérida">
-																				<label for="merida-address-2" class="custom-check">Mérida</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="miranda-address-2" name="radio-address-2" value="Miranda">
-																				<label for="miranda-address-2" class="custom-check">Miranda</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="monagas-address-2" name="radio-address-2" value="Monagas">
-																				<label for="monagas-address-2" class="custom-check">Monagas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="nueva-esparta-address-2" name="radio-address-2" value="Nueva Esparta">
-																				<label for="nueva-esparta-address-2" class="custom-check">Nueva Esparta</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="portuguesa-address-2" name="radio-address-2" value="Portuguesa">
-																				<label for="portuguesa-address-2" class="custom-check">Portuguesa</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="tachira-address-2" name="radio-address-2" value="Táchira">
-																				<label for="tachira-address-2" class="custom-check">Táchira</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="trujillo-address-2" name="radio-address-2" value="Trujillo">
-																				<label for="trujillo-address-2" class="custom-check">Trujillo</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="vargas-address-2" name="radio-address-2" value="Vargas">
-																				<label for="vargas-address-2" class="custom-check">Vargas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="yaracuy-address-2" name="radio-address-2" value="Yaracuy">
-																				<label for="yaracuy-address-2" class="custom-check">Yaracuy</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="zulia-address-2" name="radio-address-2" value="Zulia">
-																				<label for="zulia-address-2" class="custom-check">Zulia</label>
-																			</div>
-																	    </div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-post">Código postal:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="3301">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-ref">Punto de Referencia (opcional):</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="Frente a Traki">
+																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="">
 																</div>
 															</div>
 															<div class="col-lg-12">
@@ -829,7 +611,7 @@
 											<div class="product-list" v-if="cant_favorites > 0">
 											    <div class="container-fluid">
 											        <div class="row">
-											            <div class="col-6 col-lg-12" v-for="(favorite,index) in favorites">
+											            <div class="col-6 col-lg-12" v-for="(favorite,index) in favorites" :key="favorite.id">
 											                <div class="product-block">
 											                    <div class="product-img"><img   :src="'storage/'+favorite.photo | MediumImage" >
 											                        <div class="product-actions">
@@ -1167,6 +949,7 @@
 		},
 		created() {
 			this.userData = this.userlogged;
+			console.log("this.userData::> ",this.userData);
 		}
 		
     }

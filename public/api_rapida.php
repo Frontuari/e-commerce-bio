@@ -7,9 +7,7 @@ $datos=run();
 session_start();
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
-switch($_GET['evento']){
-
-
+switch($_GET['evento']) {
     case 'login':
         $email=$_GET['email'];
         $clave=$_GET['password'];
@@ -19,10 +17,17 @@ switch($_GET['evento']){
         INNER JOIN peoples p on p.id = s.peoples_id
         INNER JOIN cities c on c.id = p.cities_id
         WHERE s.email='$email'")[0];
+
+        $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+            INNER JOIN cities c on c.id = o.cities_id
+            WHERE o.users_id = ".$row['id']." and o.status = 'A'
+        ");
+
        if($row['email']){
             if(password_verify($clave,$row['password'])){
                 unset($row["password"]);
                 $_SESSION["usuario"]=$row;
+                $_SESSION["usuario"]["directions"]=$directions;
                 $row['id_sesion']=session_id();
                 salida($row,"Bienvenido",true);
             }else{
@@ -41,22 +46,14 @@ switch($_GET['evento']){
 }
 salida($row,"Disculpe debe enviar un evento",false);
 
-
-
-
 function salida($row,$msj_general="",$bueno=true){
     $row['success']=$bueno;
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $row['msj_general']=$msj_general;
     echo json_encode($row);
     exit();
-
-
-
-
-
-
 }
+
 function extraer_datos_db(){
     $gestor = @fopen("../.env", "r");
     if ($gestor) {

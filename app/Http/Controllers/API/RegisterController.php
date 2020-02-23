@@ -59,9 +59,8 @@ class RegisterController extends BaseController
         
         $success['token'] =  $user->createToken('Bio')->accessToken;
         //Mail::to($data["email"])->queue(new UsuarioRegistro());
-         $success['name'] =  $user->name;
-         $success['user_id'] =  $user->id;
-        $success = [];
+        $success['name'] =  $user->name;
+        $success['user_id'] =  $user->id;
         return $this->sendResponse($success, 'User register successfully.');
     }
    
