@@ -68,7 +68,7 @@
                     email: this.User.email,
                     sex: this.User.sex,
                 }).then( (data) => {
-                    alert("Usuario Registrado Exitosamente");
+                    Swal.fire("Usuario Registrado Exitosamente");
                     location.href=window.location.href;
                 })
             }
