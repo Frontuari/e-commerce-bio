@@ -1105,6 +1105,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
+            136 => 
+            array (
+                'id' => 147,
+                'key' => 'browse_order_address',
+                'table_name' => 'order_address',
+                'created_at' => '2020-02-23 21:17:16',
+                'updated_at' => '2020-02-23 21:17:16',
+            ),
+            137 => 
+            array (
+                'id' => 148,
+                'key' => 'read_order_address',
+                'table_name' => 'order_address',
+                'created_at' => '2020-02-23 21:17:16',
+                'updated_at' => '2020-02-23 21:17:16',
+            ),
+            138 => 
+            array (
+                'id' => 149,
+                'key' => 'edit_order_address',
+                'table_name' => 'order_address',
+                'created_at' => '2020-02-23 21:17:16',
+                'updated_at' => '2020-02-23 21:17:16',
+            ),
+            139 => 
+            array (
+                'id' => 150,
+                'key' => 'add_order_address',
+                'table_name' => 'order_address',
+                'created_at' => '2020-02-23 21:17:16',
+                'updated_at' => '2020-02-23 21:17:16',
+            ),
+            140 => 
+            array (
+                'id' => 151,
+                'key' => 'delete_order_address',
+                'table_name' => 'order_address',
+                'created_at' => '2020-02-23 21:17:16',
+                'updated_at' => '2020-02-23 21:17:16',
+            ),
         ));
         
         

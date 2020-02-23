@@ -46,6 +46,7 @@ salida($row,"Disculpe debe enviar un evento",false);
 
 function salida($row,$msj_general="",$bueno=true){
     $row['success']=$bueno;
+    if(!$bueno) header('HTTP/1.1 409 Conflict');
     $row['msj_general']=$msj_general;
     echo json_encode($row);
     exit();
@@ -91,6 +92,7 @@ function cabecera($error="Off"){
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
     header("Access-Control-Allow-Headers: content-type, authorization");
+    //header('Content-type: text/html; charset=utf-8');
     ini_set('display_errors',$error);
     error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
 }
