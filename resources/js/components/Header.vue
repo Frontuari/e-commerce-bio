@@ -223,8 +223,13 @@ export default {
 			}
 		},
 		login() {
-			axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass).then( () => {
-				location.href = window.location.href;
+			axios.get(URLSERVER+"api_rapida.php?evento=login&email="+this.user.email+"&password="+this.user.pass).then( (response) => {
+				if(response.data.success == false)
+				{
+					alert(response.data.msj_general);
+				}else{
+					location.href = window.location.href;
+				}
 			});
 			
 		},

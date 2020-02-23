@@ -3777,8 +3777,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     login: function login() {
-      axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function () {
-        location.href = window.location.href;
+      axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function (response) {
+        if (response.data.success == false) {
+          alert(response.data.msj_general);
+        } else {
+          location.href = window.location.href;
+        }
       });
     },
     logout: function logout() {
