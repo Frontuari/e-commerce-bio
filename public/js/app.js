@@ -122,6 +122,7 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
 var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
 var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
@@ -144,7 +145,8 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -205,7 +207,11 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -219,7 +225,7 @@ module.exports = function xhrAdapter(config) {
       var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -242,8 +248,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (config.withCredentials) {
-      request.withCredentials = true;
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
     }
 
     // Add responseType to request if needed
@@ -522,7 +528,15 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-  config.method = config.method ? config.method.toLowerCase() : 'get';
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -639,6 +653,38 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
+/***/ "./node_modules/axios/lib/core/buildFullPath.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/lib/core/createError.js":
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
@@ -683,8 +729,6 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
 var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
 var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
-var isAbsoluteURL = __webpack_require__(/*! ./../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-var combineURLs = __webpack_require__(/*! ./../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -704,11 +748,6 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
-  // Support baseURL config
-  if (config.baseURL && !isAbsoluteURL(config.url)) {
-    config.url = combineURLs(config.baseURL, config.url);
-  }
-
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -723,7 +762,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers || {}
+    config.headers
   );
 
   utils.forEach(
@@ -846,13 +885,23 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
+  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
+    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath'
+  ];
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
+  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -864,13 +913,25 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach([
-    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
-    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
-    'socketPath'
-  ], function defaultToConfig2(prop) {
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys);
+
+  var otherKeys = Object
+    .keys(config2)
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -978,13 +1039,12 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  // Only Node.JS has a process variable that is of [[Class]] process
-  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
-  } else if (typeof XMLHttpRequest !== 'undefined') {
+  if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
     adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
   }
   return adapter;
 }
@@ -1506,7 +1566,6 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1522,6 +1581,27 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1578,16 +1658,6 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
 }
 
 /**
@@ -1954,7 +2024,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 //
 //
@@ -2666,7 +2736,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductCatalog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductCatalog.vue */ "./resources/js/components/ProductCatalog.vue");
 
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3608,8 +3678,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     userlogged: Object
   },
   methods: {
-    getCategories: function () {
-      var _getCategories = _asyncToGenerator(
+    getCategories: function getCategories() {
+      var _this = this;
+
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -3622,73 +3694,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                this.categories = response.data.data;
+                _this.categories = response.data.data;
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
-      }));
+        }, _callee);
+      }))();
+    },
+    SearchProducts: function SearchProducts(e) {
+      var _this2 = this;
 
-      function getCategories() {
-        return _getCategories.apply(this, arguments);
-      }
-
-      return getCategories;
-    }(),
-    SearchProducts: function () {
-      var _SearchProducts = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var len, loader, val, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 len = e.target.value.length;
-                loader = this.gifSearch;
+                loader = _this2.gifSearch;
                 val = e.target.value;
-                this.searched = {};
+                _this2.searched = {};
 
                 if (!(len >= 3)) {
                   _context2.next = 14;
                   break;
                 }
 
-                this.gifSearch = 'block';
+                _this2.gifSearch = 'block';
                 _context2.next = 8;
                 return axios.get(URLSERVER + "api/products/search/" + val);
 
               case 8:
                 response = _context2.sent;
-                this.searched = response.data.data;
-                this.dSearch = 'block';
-                this.gifSearch = 'none';
+                _this2.searched = response.data.data;
+                _this2.dSearch = 'block';
+                _this2.gifSearch = 'none';
                 _context2.next = 16;
                 break;
 
               case 14:
-                this.dSearch = 'none';
-                this.gifSearch = 'none';
+                _this2.dSearch = 'none';
+                _this2.gifSearch = 'none';
 
               case 16:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
-      }));
+        }, _callee2);
+      }))();
+    },
+    getFavorites: function getFavorites() {
+      var _this3 = this;
 
-      function SearchProducts(_x) {
-        return _SearchProducts.apply(this, arguments);
-      }
-
-      return SearchProducts;
-    }(),
-    getFavorites: function () {
-      var _getFavorites = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -3703,9 +3767,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.data.data.length > 0) {
-                  this.cant_favorite = response.data.data.length;
+                  _this3.cant_favorite = response.data.data.length;
                 } else {
-                  this.cant_favorite = 0;
+                  _this3.cant_favorite = 0;
                 }
 
               case 4:
@@ -3713,15 +3777,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
-      }));
-
-      function getFavorites() {
-        return _getFavorites.apply(this, arguments);
-      }
-
-      return getFavorites;
-    }(),
+        }, _callee3);
+      }))();
+    },
     login: function login() {
       axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function (response) {
         if (response.data.success == false) {
@@ -3743,13 +3801,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this = this;
+    var _this4 = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this.cant_cart = data;
+      _this4.cant_cart = data;
     });
     EventBus.$on('update_cantFavorite', function (data) {
-      _this.cant_favorite = data;
+      _this4.cant_favorite = data;
     });
   },
   mounted: function mounted() {
@@ -5439,8 +5497,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    getStates: function () {
-      var _getStates = _asyncToGenerator(
+    getStates: function getStates() {
+      var _this = this;
+
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
@@ -5453,24 +5513,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                this.states = response.data.data;
+                _this.states = response.data.data;
 
               case 4:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
-      }));
+        }, _callee2);
+      }))();
+    },
+    getPedidos: function getPedidos() {
+      var _this2 = this;
 
-      function getStates() {
-        return _getStates.apply(this, arguments);
-      }
-
-      return getStates;
-    }(),
-    getPedidos: function () {
-      var _getPedidos = _asyncToGenerator(
+      return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -5483,22 +5539,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context3.sent;
-                this.orders = response.data.data;
+                _this2.orders = response.data.data;
 
               case 4:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
-      }));
-
-      function getPedidos() {
-        return _getPedidos.apply(this, arguments);
-      }
-
-      return getPedidos;
-    }()
+        }, _callee3);
+      }))();
+    },
+    saveDirection: function saveDirection(direction, index) {
+      var that = this;
+      axios.put(URLHOME + 'api/user_address/' + direction.id, {
+        id: direction.id,
+        cities_id: direction.cities_id,
+        address: direction.address,
+        status: direction.status,
+        users_id: direction.users_id,
+        created_at: direction.created_at,
+        updated_at: direction.updated_at,
+        zip_code: direction.zip_code,
+        urb: direction.urb,
+        sector: direction.sector,
+        nro_home: direction.nro_home,
+        reference_point: direction.reference_point,
+        city_id: direction.city_id,
+        ciudad: direction.ciudad
+      }).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   },
   mounted: function mounted() {
     this.getFavorites();
@@ -12501,28 +12574,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Ion.RangeSlid
     }());
 
 }));
-
-
-/***/ }),
-
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-module.exports = function isBuffer (obj) {
-  return obj != null && obj.constructor != null &&
-    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
 
 
 /***/ }),
@@ -40264,7 +40315,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.0
+ * @version 1.16.1
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -40610,7 +40661,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -40765,8 +40816,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+  var borderTopWidth = parseFloat(styles.borderTopWidth);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -40787,8 +40838,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop, 10);
-    var marginLeft = parseFloat(styles.marginLeft, 10);
+    var marginTop = parseFloat(styles.marginTop);
+    var marginLeft = parseFloat(styles.marginLeft);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -41727,8 +41778,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -47562,7 +47613,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tVerificación del pedido\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tVerificación del pedido\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -47912,7 +47963,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tDatos de envío\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tDatos de envío\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -48128,7 +48179,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tPagar Factura\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tPagar Factura\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -48336,7 +48387,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\r\n\t\t\t\t\t\t\t\t\tCompra Completada\r\n\t\t\t\t\t\t\t\t"
+                          "\n\t\t\t\t\t\t\t\t\tCompra Completada\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     )
@@ -49506,7 +49557,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(
-                                  "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\n\t\t\t\t\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -50573,7 +50624,7 @@ var staticRenderFns = [
                 [
                   _c("span"),
                   _vm._v(
-                    "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                    "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                   ),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
@@ -50616,7 +50667,7 @@ var staticRenderFns = [
                 { staticClass: "custom-check", attrs: { for: "paypal" } },
                 [
                   _c("span"),
-                  _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -50644,7 +50695,7 @@ var staticRenderFns = [
                 { staticClass: "custom-check", attrs: { for: "petro" } },
                 [
                   _c("span"),
-                  _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -50679,7 +50730,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("span"),
-                  _vm._v("Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -59146,6 +59197,16 @@ var render = function() {
                                                     _vm._m(19, true),
                                                     _vm._v(" "),
                                                     _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.address,
+                                                          expression:
+                                                            "direction.address"
+                                                        }
+                                                      ],
                                                       staticClass:
                                                         "form-control",
                                                       attrs: {
@@ -59156,6 +59217,23 @@ var render = function() {
                                                       },
                                                       domProps: {
                                                         value: direction.address
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "address",
+                                                            $event.target.value
+                                                          )
+                                                        }
                                                       }
                                                     })
                                                   ]
@@ -59163,11 +59241,218 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(20, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-urb"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Urbanización / Barrio / Empresa:"
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(20, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(21, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value: direction.urb,
+                                                          expression:
+                                                            "direction.urb"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "address-urb",
+                                                        name: "address-urb",
+                                                        disabled: "disabled"
+                                                      },
+                                                      domProps: {
+                                                        value: direction.urb
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "urb",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
-                                            _vm._m(21, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-av"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Sector, Avenida, calles, veredas:"
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(22, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(23, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.sector,
+                                                          expression:
+                                                            "direction.sector"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "address-av",
+                                                        name: "address-av",
+                                                        disabled: "disabled"
+                                                      },
+                                                      domProps: {
+                                                        value: direction.sector
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "sector",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
-                                            _vm._m(22, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-num"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Número de casa/local:"
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(24, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(25, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.nro_home,
+                                                          expression:
+                                                            "direction.nro_home"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "address-num",
+                                                        name: "address-num",
+                                                        disabled: "disabled"
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          direction.nro_home
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "nro_home",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
                                             _c(
                                               "div",
@@ -59191,11 +59476,21 @@ var render = function() {
                                                       ]
                                                     ),
                                                     _vm._v(" "),
-                                                    _vm._m(23, true),
+                                                    _vm._m(26, true),
                                                     _vm._v(" "),
-                                                    _vm._m(24, true),
+                                                    _vm._m(27, true),
                                                     _vm._v(" "),
                                                     _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.ciudad,
+                                                          expression:
+                                                            "direction.ciudad"
+                                                        }
+                                                      ],
                                                       staticClass:
                                                         "form-control",
                                                       attrs: {
@@ -59206,6 +59501,23 @@ var render = function() {
                                                       },
                                                       domProps: {
                                                         value: direction.ciudad
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "ciudad",
+                                                            $event.target.value
+                                                          )
+                                                        }
                                                       }
                                                     })
                                                   ]
@@ -59231,9 +59543,9 @@ var render = function() {
                                                       [_vm._v("Estado:")]
                                                     ),
                                                     _vm._v(" "),
-                                                    _vm._m(25, true),
+                                                    _vm._m(28, true),
                                                     _vm._v(" "),
-                                                    _vm._m(26, true),
+                                                    _vm._m(29, true),
                                                     _vm._v(" "),
                                                     _c("input", {
                                                       staticClass:
@@ -59247,7 +59559,6 @@ var render = function() {
                                                         id: "address-1-state",
                                                         name: "address-1-state",
                                                         disabled: "disabled",
-                                                        value: "Portuguesa",
                                                         autocomplete: "off"
                                                       }
                                                     }),
@@ -59277,6 +59588,18 @@ var render = function() {
                                                                 },
                                                                 [
                                                                   _c("input", {
+                                                                    directives: [
+                                                                      {
+                                                                        name:
+                                                                          "model",
+                                                                        rawName:
+                                                                          "v-model",
+                                                                        value:
+                                                                          state.name,
+                                                                        expression:
+                                                                          "state.name"
+                                                                      }
+                                                                    ],
                                                                     staticClass:
                                                                       "form-check-input",
                                                                     attrs: {
@@ -59289,8 +59612,21 @@ var render = function() {
                                                                         "radio-address-1"
                                                                     },
                                                                     domProps: {
-                                                                      value:
-                                                                        state.name
+                                                                      checked: _vm._q(
+                                                                        state.name,
+                                                                        null
+                                                                      )
+                                                                    },
+                                                                    on: {
+                                                                      change: function(
+                                                                        $event
+                                                                      ) {
+                                                                        return _vm.$set(
+                                                                          state,
+                                                                          "name",
+                                                                          null
+                                                                        )
+                                                                      }
                                                                     }
                                                                   }),
                                                                   _vm._v(" "),
@@ -59326,13 +59662,185 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(27, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-post"
+                                                        }
+                                                      },
+                                                      [_vm._v("Código postal:")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(30, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(31, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.zip_code,
+                                                          expression:
+                                                            "direction.zip_code"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "address-post",
+                                                        name: "address-post",
+                                                        disabled: "disabled"
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          direction.zip_code
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "zip_code",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
-                                            _vm._m(28, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-ref"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Punto de Referencia (opcional):"
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(32, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(33, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            direction.reference_point,
+                                                          expression:
+                                                            "direction.reference_point"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "address-ref",
+                                                        name: "address-ref",
+                                                        disabled: "disabled"
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          direction.reference_point
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            direction,
+                                                            "reference_point",
+                                                            $event.target.value
+                                                          )
+                                                        }
+                                                      }
+                                                    })
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
-                                            _vm._m(29, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-12" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        staticClass:
+                                                          "btn btn-submit",
+                                                        attrs: {
+                                                          type: "button"
+                                                        },
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            return _vm.saveDirection(
+                                                              direction,
+                                                              index
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "GUARDAR CAMBIOS"
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
-                                            _vm._m(30, true)
+                                            _vm._m(34, true)
                                           ])
                                         ]
                                       )
@@ -59340,7 +59848,7 @@ var render = function() {
                                     0
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(31)
+                                  _vm._m(35)
                                 ])
                               ]
                             )
@@ -59360,7 +59868,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(32),
+                        _vm._m(36),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -59381,16 +59889,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(33),
+                                  _vm._m(37),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(34),
+                                    _vm._m(38),
                                     _vm._v(" "),
-                                    _vm._m(35),
+                                    _vm._m(39),
                                     _vm._v(" "),
-                                    _vm._m(36),
+                                    _vm._m(40),
                                     _vm._v(" "),
-                                    _vm._m(37),
+                                    _vm._m(41),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59523,13 +60031,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(38),
+                                    _vm._m(42),
                                     _vm._v(" "),
-                                    _vm._m(39),
+                                    _vm._m(43),
                                     _vm._v(" "),
-                                    _vm._m(40),
+                                    _vm._m(44),
                                     _vm._v(" "),
-                                    _vm._m(41),
+                                    _vm._m(45),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59687,13 +60195,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(42),
+                                    _vm._m(46),
                                     _vm._v(" "),
-                                    _vm._m(43),
+                                    _vm._m(47),
                                     _vm._v(" "),
-                                    _vm._m(44),
+                                    _vm._m(48),
                                     _vm._v(" "),
-                                    _vm._m(45),
+                                    _vm._m(49),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59791,16 +60299,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(46),
+                                  _vm._m(50),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(47),
+                                    _vm._m(51),
                                     _vm._v(" "),
-                                    _vm._m(48),
+                                    _vm._m(52),
                                     _vm._v(" "),
-                                    _vm._m(49),
+                                    _vm._m(53),
                                     _vm._v(" "),
-                                    _vm._m(50),
+                                    _vm._m(54),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59933,13 +60441,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(51),
+                                    _vm._m(55),
                                     _vm._v(" "),
-                                    _vm._m(52),
+                                    _vm._m(56),
                                     _vm._v(" "),
-                                    _vm._m(53),
+                                    _vm._m(57),
                                     _vm._v(" "),
-                                    _vm._m(54),
+                                    _vm._m(58),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60111,16 +60619,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(55),
+                                  _vm._m(59),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(56),
+                                    _vm._m(60),
                                     _vm._v(" "),
-                                    _vm._m(57),
+                                    _vm._m(61),
                                     _vm._v(" "),
-                                    _vm._m(58),
+                                    _vm._m(62),
                                     _vm._v(" "),
-                                    _vm._m(59),
+                                    _vm._m(63),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60221,7 +60729,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(60),
+                        _vm._m(64),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -60788,14 +61296,14 @@ var render = function() {
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            61,
+                                                                            65,
                                                                             true
                                                                           ),
                                                                           _vm._v(
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            62,
+                                                                            66,
                                                                             true
                                                                           )
                                                                         ]
@@ -61167,16 +61675,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(63),
+                                  _vm._m(67),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(64),
+                                    _vm._m(68),
                                     _vm._v(" "),
-                                    _vm._m(65),
+                                    _vm._m(69),
                                     _vm._v(" "),
-                                    _vm._m(66),
+                                    _vm._m(70),
                                     _vm._v(" "),
-                                    _vm._m(67),
+                                    _vm._m(71),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61309,13 +61817,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(68),
+                                    _vm._m(72),
                                     _vm._v(" "),
-                                    _vm._m(69),
+                                    _vm._m(73),
                                     _vm._v(" "),
-                                    _vm._m(70),
+                                    _vm._m(74),
                                     _vm._v(" "),
-                                    _vm._m(71),
+                                    _vm._m(75),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61487,16 +61995,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(72),
+                                  _vm._m(76),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(73),
+                                    _vm._m(77),
                                     _vm._v(" "),
-                                    _vm._m(74),
+                                    _vm._m(78),
                                     _vm._v(" "),
-                                    _vm._m(75),
+                                    _vm._m(79),
                                     _vm._v(" "),
-                                    _vm._m(76),
+                                    _vm._m(80),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -62017,118 +62525,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-urb" } }, [
-          _vm._v("Urbanización / Barrio / Empresa:")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "address-urb",
-            name: "address-urb",
-            disabled: "disabled",
-            value: "direction.urb"
-          }
-        })
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-av" } }, [
-          _vm._v("Sector, Avenida, calles, veredas:")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "address-av",
-            name: "address-av",
-            disabled: "disabled",
-            value: "direction.sector"
-          }
-        })
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-num" } }, [
-          _vm._v("Número de casa/local:")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "address-num",
-            name: "address-num",
-            disabled: "disabled",
-            value: "direction.nro_home"
-          }
-        })
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
@@ -62174,93 +62605,61 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-post" } }, [
-          _vm._v("Código postal:")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "address-post",
-            name: "address-post",
-            disabled: "disabled",
-            value: "direction.zip_code"
-          }
-        })
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-ref" } }, [
-          _vm._v("Punto de Referencia (opcional):")
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "address-ref",
-            name: "address-ref",
-            disabled: "disabled",
-            value: "direction.reference_point"
-          }
-        })
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-submit", attrs: { type: "button" } },
-          [_vm._v("GUARDAR CAMBIOS")]
-        )
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
@@ -76514,8 +76913,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

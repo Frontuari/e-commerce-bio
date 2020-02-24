@@ -184,7 +184,7 @@
 																	<label for="address-name">Dirección Corta (ejm: Mi Casa, Mi Oficina):</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" :value="direction.address">
+																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" v-model="direction.address">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -192,7 +192,7 @@
 																	<label for="address-urb">Urbanización / Barrio / Empresa:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="direction.urb">
+																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="direction.urb">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -200,7 +200,7 @@
 																	<label for="address-av">Sector, Avenida, calles, veredas:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="direction.sector">
+																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" v-model="direction.sector">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -208,7 +208,7 @@
 																	<label for="address-num">Número de casa/local:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="direction.nro_home">
+																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" v-model="direction.nro_home">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -216,7 +216,7 @@
 																	<label for="address-prov">Municipio/Provincia:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" :value="direction.ciudad">
+																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -224,11 +224,11 @@
 																	<label for="address-1-state">Estado:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled" value="Portuguesa" autocomplete="off">
+																	<input type="text" class="form-control dropdown-toggle"  data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled"  autocomplete="off">
 																	<div class="dropdown-menu dropdown-menu-state">
 																	    <div class="dropdown-item" v-for="state in states" :key="state.id">
 																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" :value="state.name">
+																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" v-model="state.name">
 																				<label :for="state.name+'-address-1'" class="custom-check">{{state.name}}</label>
 																			</div>
 																	    </div>
@@ -240,7 +240,7 @@
 																	<label for="address-post">Código postal:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="direction.zip_code">
+																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" v-model="direction.zip_code">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -248,12 +248,12 @@
 																	<label for="address-ref">Punto de Referencia (opcional):</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="direction.reference_point">
+																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" v-model="direction.reference_point">
 																</div>
 															</div>
 															<div class="col-lg-12">
 																<div class="form-group">
-																	<button class="btn btn-submit" type="button">GUARDAR CAMBIOS</button>
+																	<button class="btn btn-submit" @click="saveDirection(direction,index)" type="button">GUARDAR CAMBIOS</button>
 																</div>
 															</div>
 															<div class="col-lg-12">
@@ -759,8 +759,34 @@
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
 				this.orders = response.data.data;
-			}
+			},
+			saveDirection(direction,index)
+			{	
+				const that = this;				
+				axios.put(URLHOME+'api/user_address/'+direction.id, {
+					id: direction.id,
+					cities_id: direction.cities_id,
+					address: direction.address,
+					status: direction.status,
+					users_id: direction.users_id,
+					created_at: direction.created_at,
+					updated_at: direction.updated_at,
+					zip_code: direction.zip_code,
+					urb: direction.urb,
+					sector: direction.sector,
+					nro_home: direction.nro_home,
+					reference_point: direction.reference_point,
+					city_id: direction.city_id,
+					ciudad: direction.ciudad,
+                })
+                .then(function (response) {
+                	console.log(response.data);
+                })
+                .catch(function (error) {
+                	console.log(error);
+                });
 
+			},
         },
         mounted() {
 			this.getFavorites();
