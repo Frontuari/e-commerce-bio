@@ -258,7 +258,7 @@
 															</div>
 															<div class="col-lg-12">
 																<div class="form-group">
-																	<button class="btn btn-delete-section" type="button">Eliminar Dirección <img src="assets/img/eliminar-bio-mercados.svg"></button>
+																	<button class="btn btn-delete-section"  @click="deleteDirection(direction,index)" type="button">Eliminar Dirección <img src="assets/img/eliminar-bio-mercados.svg"></button>
 																</div>
 															</div>
 														</div>
@@ -780,6 +780,7 @@
 					ciudad: direction.ciudad,
                 })
                 .then(function (response) {
+                	Swal.fire("Direccion Actualizada exitosamente");
                 	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
                 })
                 .catch(function (error) {
@@ -787,6 +788,22 @@
                 });
 
 			},
+			deleteDirection(direction,index)
+			{
+
+				//eliminamos el elemento
+                this.userlogged.directions.splice(index,1);
+
+				axios.delete(URLHOME+'api/user_address/'+direction.id, {
+					id: direction.id,
+                })
+                .then(function (response) {
+                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
+                })
+                .catch(function (error) {
+                	console.log(error);
+                });
+			}
         },
         mounted() {
 			this.getFavorites();
