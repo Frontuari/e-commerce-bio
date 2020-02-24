@@ -26,6 +26,11 @@ class OrderAddressTableSeeder extends Seeder
                 'users_id' => 16,
                 'created_at' => '2020-02-23 21:39:56',
                 'updated_at' => '2020-02-23 21:39:56',
+                'zip_code' => NULL,
+                'urb' => NULL,
+                'sector' => NULL,
+                'nro_home' => NULL,
+                'reference_point' => NULL,
             ),
             1 => 
             array (
@@ -36,6 +41,11 @@ class OrderAddressTableSeeder extends Seeder
                 'users_id' => 16,
                 'created_at' => '2020-02-23 21:40:22',
                 'updated_at' => '2020-02-23 21:40:22',
+                'zip_code' => NULL,
+                'urb' => NULL,
+                'sector' => NULL,
+                'nro_home' => NULL,
+                'reference_point' => NULL,
             ),
             2 => 
             array (
@@ -45,7 +55,12 @@ class OrderAddressTableSeeder extends Seeder
                 'status' => 'A',
                 'users_id' => 16,
                 'created_at' => NULL,
-                'updated_at' => '2020-02-23 21:54:58',
+                'updated_at' => '2020-02-24 14:47:07',
+                'zip_code' => NULL,
+                'urb' => 'La virginia',
+                'sector' => '1',
+                'nro_home' => '12',
+                'reference_point' => 'al lado de que gofy',
             ),
         ));
         

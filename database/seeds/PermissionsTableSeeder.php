@@ -1145,6 +1145,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
+            141 => 
+            array (
+                'id' => 152,
+                'key' => 'browse_order_products',
+                'table_name' => 'order_products',
+                'created_at' => '2020-02-24 14:38:45',
+                'updated_at' => '2020-02-24 14:38:45',
+            ),
+            142 => 
+            array (
+                'id' => 153,
+                'key' => 'read_order_products',
+                'table_name' => 'order_products',
+                'created_at' => '2020-02-24 14:38:45',
+                'updated_at' => '2020-02-24 14:38:45',
+            ),
+            143 => 
+            array (
+                'id' => 154,
+                'key' => 'edit_order_products',
+                'table_name' => 'order_products',
+                'created_at' => '2020-02-24 14:38:45',
+                'updated_at' => '2020-02-24 14:38:45',
+            ),
+            144 => 
+            array (
+                'id' => 155,
+                'key' => 'add_order_products',
+                'table_name' => 'order_products',
+                'created_at' => '2020-02-24 14:38:45',
+                'updated_at' => '2020-02-24 14:38:45',
+            ),
+            145 => 
+            array (
+                'id' => 156,
+                'key' => 'delete_order_products',
+                'table_name' => 'order_products',
+                'created_at' => '2020-02-24 14:38:45',
+                'updated_at' => '2020-02-24 14:38:45',
+            ),
         ));
         
         
