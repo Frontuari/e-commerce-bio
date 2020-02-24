@@ -69,11 +69,11 @@ var globalFunc = {
             if(response.data == 'error') {
                 //alert("debe estar logeado para agregar a favoritos");
                 Swal.fire({
-                      icon: 'error',
-                      title: 'Error',
-                      text: 'Debes estar logueado para agregar a favoritos',
-                      //footer: '<a href>Why do I have this issue?</a>'
-                 });
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Debes estar logueado para agregar a favoritos',
+                    //footer: '<a href>Why do I have this issue?</a>'
+                });
             }else {
                 EventBus.$emit("update_cantFavorite",response.data);
             }

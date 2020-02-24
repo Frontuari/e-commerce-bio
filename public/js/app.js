@@ -5354,148 +5354,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       favorites: [],
       cant_favorites: 0,
       get_tab: '',
-      userData: []
+      userData: [],
+      states: []
     };
   },
   props: {
@@ -5544,64 +5410,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.$refs.favoriteLink.click();
       }
     },
-    addToCart: function addToCart(product) {
-      var cart = [];
-
-      if (localStorage.getItem('cartNew')) {
-        cart = JSON.parse(localStorage.getItem('cartNew'));
-      }
-
-      cart = this.validateCart(product, cart); //cart.push(tmp);
-
-      localStorage.setItem('cartNew', JSON.stringify(cart));
-      EventBus.$emit("update_cantCart", cart.length);
-    },
-    validateCart: function validateCart(product, tmp) {
-      var exist = false;
-      tmp.forEach(function (a, b) {
-        if (a.product.id == product.id) {
-          tmp[b].cant++;
-          exist = true;
-        }
-      });
-
-      if (!exist) {
-        console.log("entro por aqui porque es primera vez");
-        tmp.push({
-          product: product,
-          cant: 1
-        });
-      }
-
-      return tmp;
-    },
-    addToFavorite: function addToFavorite(product) {
-      var favorite = []; //obtener la ID del producto
-
-      var products_id = product.id;
-      axios.post(URLHOME + 'api/favorites', {
-        products_id: products_id,
-        user_id: 1
-      }).then(function (response) {
-        console.log(response);
-
-        if (response.data != 'error') {
-          EventBus.$emit("update_cantFavorite", response.data);
-        } else {
-          console.log("El producto ya existe en favoritos");
-          alert("El producto ya existe en tus favoritos");
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    removeCart: function removeCart(id) {
-      var storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-      var products = storageProducts.filter(function (product) {
-        return product.id !== id;
-      });
-      localStorage.setItem('products', JSON.stringify(products));
-    },
     removeToFavorite: function removeToFavorite(id, user_id, index) {
       var products_id = id;
       var users_id = user_id;
@@ -5628,11 +5436,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (error) {
         console.log(error);
       });
-    }
+    },
+    getStates: function () {
+      var _getStates = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get(URLSERVER + "api/states");
+
+              case 2:
+                response = _context2.sent;
+                this.states = response.data.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getStates() {
+        return _getStates.apply(this, arguments);
+      }
+
+      return getStates;
+    }()
   },
   mounted: function mounted() {
     this.getFavorites();
     this.getTabUrl();
+    this.getStates();
   },
   created: function created() {
     this.userData = this.userlogged;
@@ -58534,7 +58373,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tDatos personales\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\tDatos personales\n\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -58607,7 +58446,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis direcciones\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\tMis direcciones\n\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -58714,7 +58553,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis pedidos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\tMis pedidos\n\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -58804,7 +58643,7 @@ var render = function() {
                             ]
                           ),
                           _vm._v(
-                            "\r\n\t\t\t\t\t\t\t\t\t\tMis Favoritos\r\n\t\t\t\t\t\t\t\t\t"
+                            "\n\t\t\t\t\t\t\t\t\tMis Favoritos\n\t\t\t\t\t\t\t\t"
                           )
                         ]
                       )
@@ -59342,15 +59181,126 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(" "),
-                                            _vm._m(25, true),
-                                            _vm._v(" "),
-                                            _vm._m(26, true),
+                                            _c(
+                                              "div",
+                                              { staticClass: "col-lg-6" },
+                                              [
+                                                _c(
+                                                  "div",
+                                                  { staticClass: "form-group" },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: {
+                                                          for: "address-1-state"
+                                                        }
+                                                      },
+                                                      [_vm._v("Estado:")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._m(25, true),
+                                                    _vm._v(" "),
+                                                    _vm._m(26, true),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      staticClass:
+                                                        "form-control dropdown-toggle",
+                                                      attrs: {
+                                                        type: "text",
+                                                        "data-toggle":
+                                                          "dropdown",
+                                                        "aria-expanded":
+                                                          "false",
+                                                        id: "address-1-state",
+                                                        name: "address-1-state",
+                                                        disabled: "disabled",
+                                                        value: "Portuguesa",
+                                                        autocomplete: "off"
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "dropdown-menu dropdown-menu-state"
+                                                      },
+                                                      _vm._l(
+                                                        _vm.states,
+                                                        function(state) {
+                                                          return _c(
+                                                            "div",
+                                                            {
+                                                              key: state.id,
+                                                              staticClass:
+                                                                "dropdown-item"
+                                                            },
+                                                            [
+                                                              _c(
+                                                                "div",
+                                                                {
+                                                                  staticClass:
+                                                                    "form-check form-check-radio"
+                                                                },
+                                                                [
+                                                                  _c("input", {
+                                                                    staticClass:
+                                                                      "form-check-input",
+                                                                    attrs: {
+                                                                      type:
+                                                                        "radio",
+                                                                      id:
+                                                                        state.name +
+                                                                        "-address-1",
+                                                                      name:
+                                                                        "radio-address-1"
+                                                                    },
+                                                                    domProps: {
+                                                                      value:
+                                                                        state.name
+                                                                    }
+                                                                  }),
+                                                                  _vm._v(" "),
+                                                                  _c(
+                                                                    "label",
+                                                                    {
+                                                                      staticClass:
+                                                                        "custom-check",
+                                                                      attrs: {
+                                                                        for:
+                                                                          state.name +
+                                                                          "-address-1"
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          state.name
+                                                                        )
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        }
+                                                      ),
+                                                      0
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
                                             _vm._v(" "),
                                             _vm._m(27, true),
                                             _vm._v(" "),
                                             _vm._m(28, true),
                                             _vm._v(" "),
-                                            _vm._m(29, true)
+                                            _vm._m(29, true),
+                                            _vm._v(" "),
+                                            _vm._m(30, true)
                                           ])
                                         ]
                                       )
@@ -59358,7 +59308,7 @@ var render = function() {
                                     0
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(30)
+                                  _vm._m(31)
                                 ])
                               ]
                             )
@@ -59378,7 +59328,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(31),
+                        _vm._m(32),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -59399,16 +59349,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(32),
+                                  _vm._m(33),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(33),
-                                    _vm._v(" "),
                                     _vm._m(34),
                                     _vm._v(" "),
                                     _vm._m(35),
                                     _vm._v(" "),
                                     _vm._m(36),
+                                    _vm._v(" "),
+                                    _vm._m(37),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59532,7 +59482,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -59541,13 +59491,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(37),
-                                    _vm._v(" "),
                                     _vm._m(38),
                                     _vm._v(" "),
                                     _vm._m(39),
                                     _vm._v(" "),
                                     _vm._m(40),
+                                    _vm._v(" "),
+                                    _vm._m(41),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59696,7 +59646,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -59705,13 +59655,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(41),
-                                    _vm._v(" "),
                                     _vm._m(42),
                                     _vm._v(" "),
                                     _vm._m(43),
                                     _vm._v(" "),
                                     _vm._m(44),
+                                    _vm._v(" "),
+                                    _vm._m(45),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59786,7 +59736,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -59809,16 +59759,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(45),
+                                  _vm._m(46),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(46),
-                                    _vm._v(" "),
                                     _vm._m(47),
                                     _vm._v(" "),
                                     _vm._m(48),
                                     _vm._v(" "),
                                     _vm._m(49),
+                                    _vm._v(" "),
+                                    _vm._m(50),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -59942,7 +59892,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -59951,13 +59901,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(50),
-                                    _vm._v(" "),
                                     _vm._m(51),
                                     _vm._v(" "),
                                     _vm._m(52),
                                     _vm._v(" "),
                                     _vm._m(53),
+                                    _vm._v(" "),
+                                    _vm._m(54),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60106,7 +60056,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -60129,16 +60079,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(54),
+                                  _vm._m(55),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(55),
-                                    _vm._v(" "),
                                     _vm._m(56),
                                     _vm._v(" "),
                                     _vm._m(57),
                                     _vm._v(" "),
                                     _vm._m(58),
+                                    _vm._v(" "),
+                                    _vm._m(59),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60213,7 +60163,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -60239,7 +60189,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(59),
+                        _vm._m(60),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -60806,14 +60756,14 @@ var render = function() {
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            60,
+                                                                            61,
                                                                             true
                                                                           ),
                                                                           _vm._v(
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            61,
+                                                                            62,
                                                                             true
                                                                           )
                                                                         ]
@@ -60926,7 +60876,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t                                    Añadir al carrito\n\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   ),
@@ -61057,7 +61007,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t                                    Quitar de Favoritos\n\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   ),
@@ -61149,7 +61099,7 @@ var render = function() {
                                                                         ]
                                                                       ),
                                                                       _vm._v(
-                                                                        "\r\n\t\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\r\n\t\t\t\t\t\t\t\t\t\t\t                                "
+                                                                        "\n\t\t\t\t\t\t\t\t\t\t                                    Ver Producto\n\t\t\t\t\t\t\t\t\t\t                                "
                                                                       )
                                                                     ]
                                                                   )
@@ -61185,16 +61135,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(62),
+                                  _vm._m(63),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(63),
-                                    _vm._v(" "),
                                     _vm._m(64),
                                     _vm._v(" "),
                                     _vm._m(65),
                                     _vm._v(" "),
                                     _vm._m(66),
+                                    _vm._v(" "),
+                                    _vm._m(67),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61318,7 +61268,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -61327,13 +61277,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(67),
-                                    _vm._v(" "),
                                     _vm._m(68),
                                     _vm._v(" "),
                                     _vm._m(69),
                                     _vm._v(" "),
                                     _vm._m(70),
+                                    _vm._v(" "),
+                                    _vm._m(71),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61482,7 +61432,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -61505,16 +61455,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(71),
+                                  _vm._m(72),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(72),
-                                    _vm._v(" "),
                                     _vm._m(73),
                                     _vm._v(" "),
                                     _vm._m(74),
                                     _vm._v(" "),
                                     _vm._m(75),
+                                    _vm._v(" "),
+                                    _vm._m(76),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61589,7 +61539,7 @@ var render = function() {
                                               ]
                                             ),
                                             _vm._v(
-                                              "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                             )
                                           ]
                                         )
@@ -62064,7 +62014,7 @@ var staticRenderFns = [
             id: "address-urb",
             name: "address-urb",
             disabled: "disabled",
-            value: ""
+            value: "direction.urb"
           }
         })
       ])
@@ -62103,7 +62053,7 @@ var staticRenderFns = [
             id: "address-av",
             name: "address-av",
             disabled: "disabled",
-            value: ""
+            value: "direction.sector"
           }
         })
       ])
@@ -62142,7 +62092,7 @@ var staticRenderFns = [
             id: "address-num",
             name: "address-num",
             disabled: "disabled",
-            value: ""
+            value: "direction.nro_home"
           }
         })
       ])
@@ -62172,571 +62122,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "address-1-state" } }, [_vm._v("Estado:")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
-          [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "assets/img/confirmar-bio-mercados.svg" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control dropdown-toggle",
-          attrs: {
-            type: "text",
-            "data-toggle": "dropdown",
-            "aria-expanded": "false",
-            id: "address-1-state",
-            name: "address-1-state",
-            disabled: "disabled",
-            value: "Portuguesa"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "dropdown-menu dropdown-menu-state" }, [
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "amazonas-address-1",
-                  name: "radio-address-1",
-                  value: "Amazonas"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "amazonas-address-1" }
-                },
-                [_vm._v("Amazonas")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "anzoategui-address-1",
-                  name: "radio-address-1",
-                  value: "Anzoátegui"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "anzoategui-address-1" }
-                },
-                [_vm._v("Anzoátegui")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "apure-address-1",
-                  name: "radio-address-1",
-                  value: "Apure"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "apure-address-1" }
-                },
-                [_vm._v("Apure")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "aragua-address-1",
-                  name: "radio-address-1",
-                  value: "Aragua"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "aragua-address-1" }
-                },
-                [_vm._v("Aragua")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "barinas-address-1",
-                  name: "radio-address-1",
-                  value: "Barinas"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "barinas-address-1" }
-                },
-                [_vm._v("Barinas")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "bolivar-address-1",
-                  name: "radio-address-1",
-                  value: "Bolívar"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "bolivar-address-1" }
-                },
-                [_vm._v("Bolívar")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "carabobo-address-1",
-                  name: "radio-address-1",
-                  value: "Carabobo"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "carabobo-address-1" }
-                },
-                [_vm._v("Carabobo")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "cojedes-address-1",
-                  name: "radio-address-1",
-                  value: "Cojedes"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "cojedes-address-1" }
-                },
-                [_vm._v("Cojedes")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "delta-amacuro-address-1",
-                  name: "radio-address-1",
-                  value: "Delta Amacuro"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "delta-amacuro-address-1" }
-                },
-                [_vm._v("Delta Amacuro")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "falcon-address-1",
-                  name: "radio-address-1",
-                  value: "Falcón"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "falcon-address-1" }
-                },
-                [_vm._v("Falcón")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "distrito-capital-address-1",
-                  name: "radio-address-1",
-                  value: "Distrito Capital"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "distrito-capital-address-1" }
-                },
-                [_vm._v("Distrito Capital")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "guarico-address-1",
-                  name: "radio-address-1",
-                  value: "Guárico"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "guarico-address-1" }
-                },
-                [_vm._v("Guárico")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "lara-address-1",
-                  name: "radio-address-1",
-                  value: "Lara"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "lara-address-1" }
-                },
-                [_vm._v("Lara")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "merida-address-1",
-                  name: "radio-address-1",
-                  value: "Mérida"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "merida-address-1" }
-                },
-                [_vm._v("Mérida")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "miranda-address-1",
-                  name: "radio-address-1",
-                  value: "Miranda"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "miranda-address-1" }
-                },
-                [_vm._v("Miranda")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "monagas-address-1",
-                  name: "radio-address-1",
-                  value: "Monagas"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "monagas-address-1" }
-                },
-                [_vm._v("Monagas")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "nueva-esparta-address-1",
-                  name: "radio-address-1",
-                  value: "Nueva Esparta"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "nueva-esparta-address-1" }
-                },
-                [_vm._v("Nueva Esparta")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "portuguesa-address-1",
-                  name: "radio-address-1",
-                  value: "Portuguesa"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "portuguesa-address-1" }
-                },
-                [_vm._v("Portuguesa")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "tachira-address-1",
-                  name: "radio-address-1",
-                  value: "Táchira"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "tachira-address-1" }
-                },
-                [_vm._v("Táchira")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "trujillo-address-1",
-                  name: "radio-address-1",
-                  value: "Trujillo"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "trujillo-address-1" }
-                },
-                [_vm._v("Trujillo")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "vargas-address-1",
-                  name: "radio-address-1",
-                  value: "Vargas"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "vargas-address-1" }
-                },
-                [_vm._v("Vargas")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "yaracuy-address-1",
-                  name: "radio-address-1",
-                  value: "Yaracuy"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "yaracuy-address-1" }
-                },
-                [_vm._v("Yaracuy")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-item" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "zulia-address-1",
-                  name: "radio-address-1",
-                  value: "Zulia"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "zulia-address-1" }
-                },
-                [_vm._v("Zulia")]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn btn-edit-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/editar-bio-mercados.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
+      [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
+    )
   },
   function() {
     var _vm = this
@@ -62771,7 +62171,7 @@ var staticRenderFns = [
             id: "address-post",
             name: "address-post",
             disabled: "disabled",
-            value: ""
+            value: "direction.zip_code"
           }
         })
       ])
@@ -62810,7 +62210,7 @@ var staticRenderFns = [
             id: "address-ref",
             name: "address-ref",
             disabled: "disabled",
-            value: ""
+            value: "direction.reference_point"
           }
         })
       ])
@@ -62969,7 +62369,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63004,7 +62404,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63037,7 +62437,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63072,7 +62472,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63105,7 +62505,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63140,7 +62540,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63197,7 +62597,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63232,7 +62632,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63265,7 +62665,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63300,7 +62700,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63357,7 +62757,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63392,7 +62792,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63508,7 +62908,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #2235\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63543,7 +62943,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63576,7 +62976,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #4452\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63611,7 +63011,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi Oficina\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63668,7 +63068,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Número de Pedido")
           ]),
-          _vm._v(" #3602\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])
@@ -63703,7 +63103,7 @@ var staticRenderFns = [
           _c("span", { staticClass: "order-span" }, [
             _vm._v("Dirección de entrega")
           ]),
-          _vm._v("Mi casa\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
+          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
     ])

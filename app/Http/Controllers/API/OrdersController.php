@@ -16,6 +16,14 @@ class OrdersController extends BaseController
     public function index()
     {
         $a=Orders::get();
+        if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])) {
+            $a = DB::table('orders')
+            ->select("orders.*")
+            ->join("order_address","orders.order_address_id","=","order_address.id")
+            ->join("users","users.id","=","order_address.users_id")
+            ->where("users_id",$_SESSION["usuario"]["id"])
+            ->get();
+        }
         return $this->sendResponse($a);
     }
     public function estadistica_ano(){

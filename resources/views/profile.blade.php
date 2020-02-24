@@ -4,7 +4,6 @@
 
 @section('body')
 
-
 	<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
 		<div class="container">
 			<div class="text-center">
@@ -14,6 +13,5 @@
 	</section>
 	
 	<profile :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></profile>
-
 
 @stop

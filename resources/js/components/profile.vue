@@ -1,5 +1,5 @@
 <template>
-<section id="user-profile" class="user-profile">
+	<section id="user-profile" class="user-profile">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -192,7 +192,7 @@
 																	<label for="address-urb">Urbanización / Barrio / Empresa:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="">
+																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="direction.urb">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -200,7 +200,7 @@
 																	<label for="address-av">Sector, Avenida, calles, veredas:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="">
+																	<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="direction.sector">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -208,7 +208,7 @@
 																	<label for="address-num">Número de casa/local:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="">
+																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="direction.nro_home">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -224,144 +224,12 @@
 																	<label for="address-1-state">Estado:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled" value="Portuguesa">
+																	<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled" value="Portuguesa" autocomplete="off">
 																	<div class="dropdown-menu dropdown-menu-state">
-																	    <div class="dropdown-item">
+																	    <div class="dropdown-item" v-for="state in states" :key="state.id">
 																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="amazonas-address-1" name="radio-address-1" value="Amazonas">
-																				<label for="amazonas-address-1" class="custom-check">Amazonas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="anzoategui-address-1" name="radio-address-1" value="Anzoátegui">
-																				<label for="anzoategui-address-1" class="custom-check">Anzoátegui</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="apure-address-1" name="radio-address-1" value="Apure">
-																				<label for="apure-address-1" class="custom-check">Apure</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="aragua-address-1" name="radio-address-1" value="Aragua">
-																				<label for="aragua-address-1" class="custom-check">Aragua</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="barinas-address-1" name="radio-address-1" value="Barinas">
-																				<label for="barinas-address-1" class="custom-check">Barinas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="bolivar-address-1" name="radio-address-1" value="Bolívar">
-																				<label for="bolivar-address-1" class="custom-check">Bolívar</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="carabobo-address-1" name="radio-address-1" value="Carabobo">
-																				<label for="carabobo-address-1" class="custom-check">Carabobo</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="cojedes-address-1" name="radio-address-1" value="Cojedes">
-																				<label for="cojedes-address-1" class="custom-check">Cojedes</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="delta-amacuro-address-1" name="radio-address-1" value="Delta Amacuro">
-																				<label for="delta-amacuro-address-1" class="custom-check">Delta Amacuro</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="falcon-address-1" name="radio-address-1" value="Falcón">
-																				<label for="falcon-address-1" class="custom-check">Falcón</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="distrito-capital-address-1" name="radio-address-1" value="Distrito Capital">
-																				<label for="distrito-capital-address-1" class="custom-check">Distrito Capital</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="guarico-address-1" name="radio-address-1" value="Guárico">
-																				<label for="guarico-address-1" class="custom-check">Guárico</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="lara-address-1" name="radio-address-1" value="Lara">
-																				<label for="lara-address-1" class="custom-check">Lara</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="merida-address-1" name="radio-address-1" value="Mérida">
-																				<label for="merida-address-1" class="custom-check">Mérida</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="miranda-address-1" name="radio-address-1" value="Miranda">
-																				<label for="miranda-address-1" class="custom-check">Miranda</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="monagas-address-1" name="radio-address-1" value="Monagas">
-																				<label for="monagas-address-1" class="custom-check">Monagas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="nueva-esparta-address-1" name="radio-address-1" value="Nueva Esparta">
-																				<label for="nueva-esparta-address-1" class="custom-check">Nueva Esparta</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="portuguesa-address-1" name="radio-address-1" value="Portuguesa">
-																				<label for="portuguesa-address-1" class="custom-check">Portuguesa</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="tachira-address-1" name="radio-address-1" value="Táchira">
-																				<label for="tachira-address-1" class="custom-check">Táchira</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="trujillo-address-1" name="radio-address-1" value="Trujillo">
-																				<label for="trujillo-address-1" class="custom-check">Trujillo</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="vargas-address-1" name="radio-address-1" value="Vargas">
-																				<label for="vargas-address-1" class="custom-check">Vargas</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="yaracuy-address-1" name="radio-address-1" value="Yaracuy">
-																				<label for="yaracuy-address-1" class="custom-check">Yaracuy</label>
-																			</div>
-																	    </div>
-																	    <div class="dropdown-item">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" id="zulia-address-1" name="radio-address-1" value="Zulia">
-																				<label for="zulia-address-1" class="custom-check">Zulia</label>
+																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" :value="state.name">
+																				<label :for="state.name+'-address-1'" class="custom-check">{{state.name}}</label>
 																			</div>
 																	    </div>
 																	</div>
@@ -372,7 +240,7 @@
 																	<label for="address-post">Código postal:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="">
+																	<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="direction.zip_code">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -380,7 +248,7 @@
 																	<label for="address-ref">Punto de Referencia (opcional):</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="">
+																	<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="direction.reference_point">
 																</div>
 															</div>
 															<div class="col-lg-12">
@@ -586,9 +454,6 @@
 									</div>
 								</div>
 								<!-- CIERRE DEL ORDER TAB-->
-
-
-
 
 								<!-- ############################### SECCION DE MIS FAVORITO ######################################## -->
 
@@ -824,7 +689,11 @@
 				favorites: [],
 				cant_favorites : 0,
             	get_tab:'',
-            	userData: [],
+				userData: [],
+				states: [],
+				orders: [],
+				en_proceso: [],
+				completos: []
             }
 		},
 		props: {
@@ -835,7 +704,6 @@
 				const response = await axios.get(URLHOME+'api/favorites');
 				this.favorites = response.data.data;
 				this.cant_favorites = response.data.data.length;
-				console.log(this.favorites);
 			},
 			getTabUrl: function()
 			{
@@ -848,62 +716,6 @@
 				{
 					this.$refs.favoriteLink.click();
 				}
-			},
-
-			addToCart(product) {
-				let cart = [];
-				if(localStorage.getItem('cartNew')){
-					cart = JSON.parse(localStorage.getItem('cartNew'));
-				}
-
-				cart = this.validateCart(product,cart);
-
-				//cart.push(tmp);
-				localStorage.setItem('cartNew', JSON.stringify(cart));
-				EventBus.$emit("update_cantCart",cart.length);
-			},
-			validateCart(product,tmp) {
-				let exist = false;
-				tmp.forEach( (a,b) => {
-					if (a.product.id == product.id) {
-						tmp[b].cant++;
-						exist = true;
-					}
-				});
-				if(!exist) {
-					console.log("entro por aqui porque es primera vez");
-					tmp.push({product: product,cant: 1});
-				}
-				return tmp;
-			},
-			
-			addToFavorite(product) {
-				let favorite = [];
-				//obtener la ID del producto
-				let products_id = product.id;
-				axios.post(URLHOME+'api/favorites', {
-                    products_id: products_id,
-                    user_id: 1
-                })
-                .then(function (response) {
-                	console.log(response);
-                	if(response.data != 'error'){
-                		EventBus.$emit("update_cantFavorite",response.data);
-                	}else{
-                		console.log("El producto ya existe en favoritos");
-                		alert("El producto ya existe en tus favoritos");
-                	}
-                })
-                .catch(function (error) {
-                	console.log(error);
-                });
-
-
-			},
-			removeCart(id) {
-				let storageProducts = JSON.parse(localStorage.getItem('cartNew'));
-				let products = storageProducts.filter(product => product.id !== id );
-				localStorage.setItem('products', JSON.stringify(products));
 			},
 			removeToFavorite(id,user_id,index)
 			{
@@ -939,13 +751,21 @@
                 .catch(function (error) {
                 	console.log(error);
                 });
+			},
+			async getStates() {
+				const response = await axios.get(URLSERVER+"api/states");
+				this.states = response.data.data;
+			},
+			async getPedidos() {
+				const response = await axios.get(URLSERVER+"api/orders");
+				this.orders = response.data.data;
 			}
-
 
         },
         mounted() {
 			this.getFavorites();
 			this.getTabUrl();
+			this.getStates();
 		},
 		created() {
 			this.userData = this.userlogged;

@@ -69,3 +69,8 @@ Route::resource('orders', 'API\OrdersController');
 Route::resource('user_visit_products', 'API\UserVisitProductsController');
 
 Route::get('tasa','API\CoinController@index');
+
+//LOCATION
+Route::get('cities','API\LocationController@getCities');
+Route::get('states','API\LocationController@getStates');
+Route::get('regions','API\LocationController@getRegions');
