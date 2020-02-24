@@ -26,7 +26,7 @@ class CreateTrackingsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('orders_id');
             $table->unsignedBigInteger('orders_status_id');
-            $table->unsignedInteger('users_id');
+            $table->unsignedInteger('users_id')->nulleable();
             $table->timestamps();
 
             $table->index(["users_id"], 'fk_trackings_users1_idx');

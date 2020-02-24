@@ -1185,6 +1185,86 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
+            146 => 
+            array (
+                'id' => 177,
+                'key' => 'browse_orders_status',
+                'table_name' => 'orders_status',
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:28:11',
+            ),
+            147 => 
+            array (
+                'id' => 178,
+                'key' => 'read_orders_status',
+                'table_name' => 'orders_status',
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:28:11',
+            ),
+            148 => 
+            array (
+                'id' => 179,
+                'key' => 'edit_orders_status',
+                'table_name' => 'orders_status',
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:28:11',
+            ),
+            149 => 
+            array (
+                'id' => 180,
+                'key' => 'add_orders_status',
+                'table_name' => 'orders_status',
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:28:11',
+            ),
+            150 => 
+            array (
+                'id' => 181,
+                'key' => 'delete_orders_status',
+                'table_name' => 'orders_status',
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:28:11',
+            ),
+            151 => 
+            array (
+                'id' => 182,
+                'key' => 'browse_trackings',
+                'table_name' => 'trackings',
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:02:15',
+            ),
+            152 => 
+            array (
+                'id' => 183,
+                'key' => 'read_trackings',
+                'table_name' => 'trackings',
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:02:15',
+            ),
+            153 => 
+            array (
+                'id' => 184,
+                'key' => 'edit_trackings',
+                'table_name' => 'trackings',
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:02:15',
+            ),
+            154 => 
+            array (
+                'id' => 185,
+                'key' => 'add_trackings',
+                'table_name' => 'trackings',
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:02:15',
+            ),
+            155 => 
+            array (
+                'id' => 186,
+                'key' => 'delete_trackings',
+                'table_name' => 'trackings',
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:02:15',
+            ),
         ));
         
         

@@ -503,6 +503,42 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
+            27 => 
+            array (
+                'id' => 53,
+                'name' => 'orders_status',
+                'slug' => 'orders-status',
+                'display_name_singular' => 'Estatus de la orden',
+                'display_name_plural' => 'Estatus de las ordenes',
+                'icon' => NULL,
+                'model_name' => 'App\\OrdersStatus',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-02-24 18:50:05',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            28 => 
+            array (
+                'id' => 54,
+                'name' => 'trackings',
+                'slug' => 'trackings',
+                'display_name_singular' => 'Tracking',
+                'display_name_plural' => 'Trackings',
+                'icon' => NULL,
+                'model_name' => 'App\\Trackings',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-02-24 19:23:49',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
         ));
         
         
