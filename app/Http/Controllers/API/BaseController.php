@@ -60,6 +60,9 @@ class BaseController extends Controller
                 case 42703: return "Debe completar todos los campos obligatorios.";
             break;
                 case 23503: return "Disculpe, pero uno de los datos introducidos es incorrecto.";
+            break;
+                case 101: return "Debe estar logeado";
+
             default:
                 return  "Disculpe intente nuevamente.";
 

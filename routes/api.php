@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 Route::post('update_profile', 'API\RegisterController@update_profile');
+Route::resource("user_address",'API\OrderAddressController');
 
 //ADVS
 Route::resource('advs', 'API\AdvsController');

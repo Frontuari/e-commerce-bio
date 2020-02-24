@@ -5361,7 +5361,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cant_favorites: 0,
       get_tab: '',
       userData: [],
-      states: []
+      states: [],
+      orders: [],
+      en_proceso: [],
+      completos: []
     };
   },
   props: {
@@ -5384,9 +5387,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 this.favorites = response.data.data;
                 this.cant_favorites = response.data.data.length;
-                console.log(this.favorites);
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -5466,6 +5468,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getStates;
+    }(),
+    getPedidos: function () {
+      var _getPedidos = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.get(URLSERVER + "api/orders");
+
+              case 2:
+                response = _context3.sent;
+                this.orders = response.data.data;
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getPedidos() {
+        return _getPedidos.apply(this, arguments);
+      }
+
+      return getPedidos;
     }()
   },
   mounted: function mounted() {
