@@ -780,7 +780,7 @@
 					ciudad: direction.ciudad,
                 })
                 .then(function (response) {
-                	console.log(response.data);
+                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
                 })
                 .catch(function (error) {
                 	console.log(error);
