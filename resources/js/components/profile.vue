@@ -265,7 +265,7 @@
 													</div>
 												</div>
 												<div class="col-12">
-													<button class="btn btn-add-section">Agregar nueva dirección <img src="assets/img/nueva-direccion-bio-mercados.svg"></button>
+													<button type="button" @click="showAddDirection()" class="btn btn-add-section">Agregar nueva dirección <img src="assets/img/nueva-direccion-bio-mercados.svg"></button>
 												</div>
 											</form>
 										</div>
@@ -693,7 +693,8 @@
 				states: [],
 				orders: [],
 				en_proceso: [],
-				completos: []
+				completos: [],
+				newDirection: 'none',
             }
 		},
 		props: {
@@ -762,30 +763,61 @@
 			},
 			saveDirection(direction,index)
 			{	
-				const that = this;				
-				axios.put(URLHOME+'api/user_address/'+direction.id, {
-					id: direction.id,
-					cities_id: direction.cities_id,
-					address: direction.address,
-					status: direction.status,
-					users_id: direction.users_id,
-					created_at: direction.created_at,
-					updated_at: direction.updated_at,
-					zip_code: direction.zip_code,
-					urb: direction.urb,
-					sector: direction.sector,
-					nro_home: direction.nro_home,
-					reference_point: direction.reference_point,
-					city_id: direction.city_id,
-					ciudad: direction.ciudad,
-                })
-                .then(function (response) {
-                	Swal.fire("Direccion Actualizada exitosamente");
-                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
-                })
-                .catch(function (error) {
-                	console.log(error);
-                });
+				const that = this;		
+				if(typeof direction.action === 'undefined'){
+
+					axios.put(URLHOME+'api/user_address/'+direction.id, {
+						id: direction.id,
+						cities_id: direction.cities_id,
+						address: direction.address,
+						status: direction.status,
+						users_id: direction.users_id,
+						created_at: direction.created_at,
+						updated_at: direction.updated_at,
+						zip_code: direction.zip_code,
+						urb: direction.urb,
+						sector: direction.sector,
+						nro_home: direction.nro_home,
+						reference_point: direction.reference_point,
+						city_id: direction.city_id,
+						ciudad: direction.ciudad,
+	                })
+	                .then(function (response) {
+	                	Swal.fire("Direccion Actualizada exitosamente");
+	                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
+	                })
+	                .catch(function (error) {
+	                	console.log(error);
+	                });
+
+	            }else{
+	            	console.log("Guardarems");
+	            	console.log(direction);
+	            	axios.post(URLHOME+'api/user_address/'+direction.id, {
+						id: direction.id,
+						cities_id: direction.cities_id,
+						address: direction.address,
+						status: direction.status,
+						users_id: direction.users_id,
+					//	updated_at: direction.updated_at,
+						zip_code: direction.zip_code,
+						urb: direction.urb,
+						sector: direction.sector,
+						nro_home: direction.nro_home,
+						reference_point: direction.reference_point,
+						city_id: direction.city_id,
+						ciudad: direction.ciudad,
+	                })
+	                .then(function (response) {
+	                	console.log(response);
+	                	Swal.fire("Direccion Actualizada exitosamente");
+	                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
+	                })
+	                .catch(function (error) {
+	                	console.log(error);
+	                });
+
+	            }
 
 			},
 			deleteDirection(direction,index)
@@ -803,7 +835,29 @@
                 .catch(function (error) {
                 	console.log(error);
                 });
+			},
+			showAddDirection()
+			{
+				this.userlogged.directions.push({
+					id: '',
+					cities_id: '1',
+					address: '',
+					status: '',
+					users_id: this.userData.id,
+					created_at: '',
+					updated_at: '',
+					zip_code: '',
+					urb: '',
+					sector: '',
+					nro_home: '',
+					reference_point: '',
+					city_id: '',
+					ciudad: '',
+					action:'update',
+				});
+				this.userData = this.userlogged;
 			}
+
         },
         mounted() {
 			this.getFavorites();

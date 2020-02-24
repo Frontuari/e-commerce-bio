@@ -5422,7 +5422,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       states: [],
       orders: [],
       en_proceso: [],
-      completos: []
+      completos: [],
+      newDirection: 'none'
     };
   },
   props: {
@@ -5551,27 +5552,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     saveDirection: function saveDirection(direction, index) {
       var that = this;
-      axios.put(URLHOME + 'api/user_address/' + direction.id, {
-        id: direction.id,
-        cities_id: direction.cities_id,
-        address: direction.address,
-        status: direction.status,
-        users_id: direction.users_id,
-        created_at: direction.created_at,
-        updated_at: direction.updated_at,
-        zip_code: direction.zip_code,
-        urb: direction.urb,
-        sector: direction.sector,
-        nro_home: direction.nro_home,
-        reference_point: direction.reference_point,
-        city_id: direction.city_id,
-        ciudad: direction.ciudad
-      }).then(function (response) {
-        Swal.fire("Direccion Actualizada exitosamente");
-        fetch(URLHOME + "api_rapida.php?evento=obtenerDireccion");
-      })["catch"](function (error) {
-        console.log(error);
-      });
+
+      if (typeof direction.action === 'undefined') {
+        axios.put(URLHOME + 'api/user_address/' + direction.id, {
+          id: direction.id,
+          cities_id: direction.cities_id,
+          address: direction.address,
+          status: direction.status,
+          users_id: direction.users_id,
+          created_at: direction.created_at,
+          updated_at: direction.updated_at,
+          zip_code: direction.zip_code,
+          urb: direction.urb,
+          sector: direction.sector,
+          nro_home: direction.nro_home,
+          reference_point: direction.reference_point,
+          city_id: direction.city_id,
+          ciudad: direction.ciudad
+        }).then(function (response) {
+          Swal.fire("Direccion Actualizada exitosamente");
+          fetch(URLHOME + "api_rapida.php?evento=obtenerDireccion");
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        console.log("Guardarems");
+        console.log(direction);
+        axios.post(URLHOME + 'api/user_address/' + direction.id, {
+          id: direction.id,
+          cities_id: direction.cities_id,
+          address: direction.address,
+          status: direction.status,
+          users_id: direction.users_id,
+          //	updated_at: direction.updated_at,
+          zip_code: direction.zip_code,
+          urb: direction.urb,
+          sector: direction.sector,
+          nro_home: direction.nro_home,
+          reference_point: direction.reference_point,
+          city_id: direction.city_id,
+          ciudad: direction.ciudad
+        }).then(function (response) {
+          console.log(response);
+          Swal.fire("Direccion Actualizada exitosamente");
+          fetch(URLHOME + "api_rapida.php?evento=obtenerDireccion");
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     deleteDirection: function deleteDirection(direction, index) {
       //eliminamos el elemento
@@ -5583,6 +5611,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    showAddDirection: function showAddDirection() {
+      this.userlogged.directions.push({
+        id: '',
+        cities_id: '1',
+        address: '',
+        status: '',
+        users_id: this.userData.id,
+        created_at: '',
+        updated_at: '',
+        zip_code: '',
+        urb: '',
+        sector: '',
+        nro_home: '',
+        reference_point: '',
+        city_id: '',
+        ciudad: '',
+        action: 'update'
+      });
+      this.userData = this.userlogged;
     }
   },
   mounted: function mounted() {
@@ -59902,7 +59950,29 @@ var render = function() {
                                     0
                                   ),
                                   _vm._v(" "),
-                                  _vm._m(34)
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-add-section",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.showAddDirection()
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v("Agregar nueva dirección "),
+                                        _c("img", {
+                                          attrs: {
+                                            src:
+                                              "assets/img/nueva-direccion-bio-mercados.svg"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ])
                                 ])
                               ]
                             )
@@ -59922,7 +59992,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(35),
+                        _vm._m(34),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -59943,16 +60013,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(36),
+                                  _vm._m(35),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(36),
+                                    _vm._v(" "),
                                     _vm._m(37),
                                     _vm._v(" "),
                                     _vm._m(38),
                                     _vm._v(" "),
                                     _vm._m(39),
-                                    _vm._v(" "),
-                                    _vm._m(40),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60085,13 +60155,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(40),
+                                    _vm._v(" "),
                                     _vm._m(41),
                                     _vm._v(" "),
                                     _vm._m(42),
                                     _vm._v(" "),
                                     _vm._m(43),
-                                    _vm._v(" "),
-                                    _vm._m(44),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60249,13 +60319,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(44),
+                                    _vm._v(" "),
                                     _vm._m(45),
                                     _vm._v(" "),
                                     _vm._m(46),
                                     _vm._v(" "),
                                     _vm._m(47),
-                                    _vm._v(" "),
-                                    _vm._m(48),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60353,16 +60423,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(49),
+                                  _vm._m(48),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(49),
+                                    _vm._v(" "),
                                     _vm._m(50),
                                     _vm._v(" "),
                                     _vm._m(51),
                                     _vm._v(" "),
                                     _vm._m(52),
-                                    _vm._v(" "),
-                                    _vm._m(53),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60495,13 +60565,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(53),
+                                    _vm._v(" "),
                                     _vm._m(54),
                                     _vm._v(" "),
                                     _vm._m(55),
                                     _vm._v(" "),
                                     _vm._m(56),
-                                    _vm._v(" "),
-                                    _vm._m(57),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60673,16 +60743,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(58),
+                                  _vm._m(57),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(58),
+                                    _vm._v(" "),
                                     _vm._m(59),
                                     _vm._v(" "),
                                     _vm._m(60),
                                     _vm._v(" "),
                                     _vm._m(61),
-                                    _vm._v(" "),
-                                    _vm._m(62),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -60783,7 +60853,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(63),
+                        _vm._m(62),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -61350,14 +61420,14 @@ var render = function() {
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            64,
+                                                                            63,
                                                                             true
                                                                           ),
                                                                           _vm._v(
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            65,
+                                                                            64,
                                                                             true
                                                                           )
                                                                         ]
@@ -61729,16 +61799,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(66),
+                                  _vm._m(65),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(66),
+                                    _vm._v(" "),
                                     _vm._m(67),
                                     _vm._v(" "),
                                     _vm._m(68),
                                     _vm._v(" "),
                                     _vm._m(69),
-                                    _vm._v(" "),
-                                    _vm._m(70),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61871,13 +61941,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(70),
+                                    _vm._v(" "),
                                     _vm._m(71),
                                     _vm._v(" "),
                                     _vm._m(72),
                                     _vm._v(" "),
                                     _vm._m(73),
-                                    _vm._v(" "),
-                                    _vm._m(74),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -62049,16 +62119,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(75),
+                                  _vm._m(74),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(75),
+                                    _vm._v(" "),
                                     _vm._m(76),
                                     _vm._v(" "),
                                     _vm._m(77),
                                     _vm._v(" "),
                                     _vm._m(78),
-                                    _vm._v(" "),
-                                    _vm._m(79),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -62714,19 +62784,6 @@ var staticRenderFns = [
       { staticClass: "btn btn-confirm-info", attrs: { type: "button" } },
       [_c("img", { attrs: { src: "assets/img/confirmar-bio-mercados.svg" } })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("button", { staticClass: "btn btn-add-section" }, [
-        _vm._v("Agregar nueva dirección "),
-        _c("img", {
-          attrs: { src: "assets/img/nueva-direccion-bio-mercados.svg" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
