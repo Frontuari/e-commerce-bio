@@ -649,6 +649,8 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\API\\CoinController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CoinController.php',
         'App\\Http\\Controllers\\API\\DetProductPackagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/DetProductPackagesController.php',
         'App\\Http\\Controllers\\API\\FavoritesController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/FavoritesController.php',
+        'App\\Http\\Controllers\\API\\LocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/LocationController.php',
+        'App\\Http\\Controllers\\API\\OrderAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/OrderAddressController.php',
         'App\\Http\\Controllers\\API\\OrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/OrdersController.php',
         'App\\Http\\Controllers\\API\\PackageCotroller' => __DIR__ . '/../..' . '/app/Http/Controllers/API/PackageCotroller.php',
         'App\\Http\\Controllers\\API\\PaymentMethodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/PaymentMethodsController.php',

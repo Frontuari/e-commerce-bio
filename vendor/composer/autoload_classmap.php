@@ -42,6 +42,8 @@ return array(
     'App\\Http\\Controllers\\API\\CoinController' => $baseDir . '/app/Http/Controllers/API/CoinController.php',
     'App\\Http\\Controllers\\API\\DetProductPackagesController' => $baseDir . '/app/Http/Controllers/API/DetProductPackagesController.php',
     'App\\Http\\Controllers\\API\\FavoritesController' => $baseDir . '/app/Http/Controllers/API/FavoritesController.php',
+    'App\\Http\\Controllers\\API\\LocationController' => $baseDir . '/app/Http/Controllers/API/LocationController.php',
+    'App\\Http\\Controllers\\API\\OrderAddressController' => $baseDir . '/app/Http/Controllers/API/OrderAddressController.php',
     'App\\Http\\Controllers\\API\\OrdersController' => $baseDir . '/app/Http/Controllers/API/OrdersController.php',
     'App\\Http\\Controllers\\API\\PackageCotroller' => $baseDir . '/app/Http/Controllers/API/PackageCotroller.php',
     'App\\Http\\Controllers\\API\\PaymentMethodsController' => $baseDir . '/app/Http/Controllers/API/PaymentMethodsController.php',
