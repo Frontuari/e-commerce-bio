@@ -18,7 +18,10 @@ class OrdersController extends BaseController
         $a=Orders::get();
         if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])) {
             $a = DB::table('orders')
-            ->select("orders.*")
+            ->select("orders.*",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
+            FROM trackings 
+            WHERE trackings.orders_id = orders.id
+            order by created_at DESC Limit 1) AS namestatus"))
             ->join("order_address","orders.order_address_id","=","order_address.id")
             ->join("users","users.id","=","order_address.users_id")
             ->where("users_id",$_SESSION["usuario"]["id"])

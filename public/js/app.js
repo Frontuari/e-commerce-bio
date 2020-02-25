@@ -122,7 +122,6 @@ module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/li
 var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
 var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
 var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
-var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
 var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
 var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
 var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
@@ -145,8 +144,7 @@ module.exports = function xhrAdapter(config) {
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
-    var fullPath = buildFullPath(config.baseURL, config.url);
-    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
 
     // Set the request timeout in MS
     request.timeout = config.timeout;
@@ -207,11 +205,7 @@ module.exports = function xhrAdapter(config) {
 
     // Handle timeout
     request.ontimeout = function handleTimeout() {
-      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
-      if (config.timeoutErrorMessage) {
-        timeoutErrorMessage = config.timeoutErrorMessage;
-      }
-      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED',
         request));
 
       // Clean up request
@@ -225,7 +219,7 @@ module.exports = function xhrAdapter(config) {
       var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
 
       // Add xsrf header
-      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
         cookies.read(config.xsrfCookieName) :
         undefined;
 
@@ -248,8 +242,8 @@ module.exports = function xhrAdapter(config) {
     }
 
     // Add withCredentials to request if needed
-    if (!utils.isUndefined(config.withCredentials)) {
-      request.withCredentials = !!config.withCredentials;
+    if (config.withCredentials) {
+      request.withCredentials = true;
     }
 
     // Add responseType to request if needed
@@ -528,15 +522,7 @@ Axios.prototype.request = function request(config) {
   }
 
   config = mergeConfig(this.defaults, config);
-
-  // Set config.method
-  if (config.method) {
-    config.method = config.method.toLowerCase();
-  } else if (this.defaults.method) {
-    config.method = this.defaults.method.toLowerCase();
-  } else {
-    config.method = 'get';
-  }
+  config.method = config.method ? config.method.toLowerCase() : 'get';
 
   // Hook up interceptors middleware
   var chain = [dispatchRequest, undefined];
@@ -653,38 +639,6 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ "./node_modules/axios/lib/core/buildFullPath.js":
-/*!******************************************************!*\
-  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
-var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
-
-/**
- * Creates a new URL by combining the baseURL with the requestedURL,
- * only when the requestedURL is not already an absolute URL.
- * If the requestURL is absolute, this function returns the requestedURL untouched.
- *
- * @param {string} baseURL The base URL
- * @param {string} requestedURL Absolute or relative URL to combine
- * @returns {string} The combined full path
- */
-module.exports = function buildFullPath(baseURL, requestedURL) {
-  if (baseURL && !isAbsoluteURL(requestedURL)) {
-    return combineURLs(baseURL, requestedURL);
-  }
-  return requestedURL;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/lib/core/createError.js":
 /*!****************************************************!*\
   !*** ./node_modules/axios/lib/core/createError.js ***!
@@ -729,6 +683,8 @@ var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/util
 var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
 var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
 var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
+var isAbsoluteURL = __webpack_require__(/*! ./../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ./../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -748,6 +704,11 @@ function throwIfCancellationRequested(config) {
 module.exports = function dispatchRequest(config) {
   throwIfCancellationRequested(config);
 
+  // Support baseURL config
+  if (config.baseURL && !isAbsoluteURL(config.url)) {
+    config.url = combineURLs(config.baseURL, config.url);
+  }
+
   // Ensure headers exist
   config.headers = config.headers || {};
 
@@ -762,7 +723,7 @@ module.exports = function dispatchRequest(config) {
   config.headers = utils.merge(
     config.headers.common || {},
     config.headers[config.method] || {},
-    config.headers
+    config.headers || {}
   );
 
   utils.forEach(
@@ -885,23 +846,13 @@ module.exports = function mergeConfig(config1, config2) {
   config2 = config2 || {};
   var config = {};
 
-  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
-  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
-  var defaultToConfig2Keys = [
-    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
-    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
-    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
-    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
-    'httpsAgent', 'cancelToken', 'socketPath'
-  ];
-
-  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+  utils.forEach(['url', 'method', 'params', 'data'], function valueFromConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     }
   });
 
-  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
+  utils.forEach(['headers', 'auth', 'proxy'], function mergeDeepProperties(prop) {
     if (utils.isObject(config2[prop])) {
       config[prop] = utils.deepMerge(config1[prop], config2[prop]);
     } else if (typeof config2[prop] !== 'undefined') {
@@ -913,25 +864,13 @@ module.exports = function mergeConfig(config1, config2) {
     }
   });
 
-  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
-    if (typeof config2[prop] !== 'undefined') {
-      config[prop] = config2[prop];
-    } else if (typeof config1[prop] !== 'undefined') {
-      config[prop] = config1[prop];
-    }
-  });
-
-  var axiosKeys = valueFromConfig2Keys
-    .concat(mergeDeepPropertiesKeys)
-    .concat(defaultToConfig2Keys);
-
-  var otherKeys = Object
-    .keys(config2)
-    .filter(function filterAxiosKeys(key) {
-      return axiosKeys.indexOf(key) === -1;
-    });
-
-  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
+  utils.forEach([
+    'baseURL', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress', 'maxContentLength',
+    'validateStatus', 'maxRedirects', 'httpAgent', 'httpsAgent', 'cancelToken',
+    'socketPath'
+  ], function defaultToConfig2(prop) {
     if (typeof config2[prop] !== 'undefined') {
       config[prop] = config2[prop];
     } else if (typeof config1[prop] !== 'undefined') {
@@ -1039,12 +978,13 @@ function setContentTypeIfUnset(headers, value) {
 
 function getDefaultAdapter() {
   var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
-  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+  // Only Node.JS has a process variable that is of [[Class]] process
+  if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
     adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
   }
   return adapter;
 }
@@ -1566,6 +1506,7 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1581,27 +1522,6 @@ var toString = Object.prototype.toString;
  */
 function isArray(val) {
   return toString.call(val) === '[object Array]';
-}
-
-/**
- * Determine if a value is undefined
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if the value is undefined, otherwise false
- */
-function isUndefined(val) {
-  return typeof val === 'undefined';
-}
-
-/**
- * Determine if a value is a Buffer
- *
- * @param {Object} val The value to test
- * @returns {boolean} True if value is a Buffer, otherwise false
- */
-function isBuffer(val) {
-  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
-    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
 }
 
 /**
@@ -1658,6 +1578,16 @@ function isString(val) {
  */
 function isNumber(val) {
   return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
 }
 
 /**
@@ -2024,7 +1954,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 //
 //
@@ -2736,7 +2666,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductCatalog_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductCatalog.vue */ "./resources/js/components/ProductCatalog.vue");
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -3678,10 +3608,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     userlogged: Object
   },
   methods: {
-    getCategories: function getCategories() {
-      var _this = this;
-
-      return _asyncToGenerator(
+    getCategories: function () {
+      var _getCategories = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -3694,65 +3622,73 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.categories = response.data.data;
+                this.categories = response.data.data;
 
               case 4:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
-      }))();
-    },
-    SearchProducts: function SearchProducts(e) {
-      var _this2 = this;
+        }, _callee, this);
+      }));
 
-      return _asyncToGenerator(
+      function getCategories() {
+        return _getCategories.apply(this, arguments);
+      }
+
+      return getCategories;
+    }(),
+    SearchProducts: function () {
+      var _SearchProducts = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
         var len, loader, val, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 len = e.target.value.length;
-                loader = _this2.gifSearch;
+                loader = this.gifSearch;
                 val = e.target.value;
-                _this2.searched = {};
+                this.searched = {};
 
                 if (!(len >= 3)) {
                   _context2.next = 14;
                   break;
                 }
 
-                _this2.gifSearch = 'block';
+                this.gifSearch = 'block';
                 _context2.next = 8;
                 return axios.get(URLSERVER + "api/products/search/" + val);
 
               case 8:
                 response = _context2.sent;
-                _this2.searched = response.data.data;
-                _this2.dSearch = 'block';
-                _this2.gifSearch = 'none';
+                this.searched = response.data.data;
+                this.dSearch = 'block';
+                this.gifSearch = 'none';
                 _context2.next = 16;
                 break;
 
               case 14:
-                _this2.dSearch = 'none';
-                _this2.gifSearch = 'none';
+                this.dSearch = 'none';
+                this.gifSearch = 'none';
 
               case 16:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
-      }))();
-    },
-    getFavorites: function getFavorites() {
-      var _this3 = this;
+        }, _callee2, this);
+      }));
 
-      return _asyncToGenerator(
+      function SearchProducts(_x) {
+        return _SearchProducts.apply(this, arguments);
+      }
+
+      return SearchProducts;
+    }(),
+    getFavorites: function () {
+      var _getFavorites = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -3767,9 +3703,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context3.sent;
 
                 if (response.data.data.length > 0) {
-                  _this3.cant_favorite = response.data.data.length;
+                  this.cant_favorite = response.data.data.length;
                 } else {
-                  _this3.cant_favorite = 0;
+                  this.cant_favorite = 0;
                 }
 
               case 4:
@@ -3777,9 +3713,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.stop();
             }
           }
-        }, _callee3);
-      }))();
-    },
+        }, _callee3, this);
+      }));
+
+      function getFavorites() {
+        return _getFavorites.apply(this, arguments);
+      }
+
+      return getFavorites;
+    }(),
     login: function login() {
       axios.get(URLSERVER + "api_rapida.php?evento=login&email=" + this.user.email + "&password=" + this.user.pass).then(function (response) {
         if (response.data.success == false) {
@@ -3801,13 +3743,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this4.cant_cart = data;
+      _this.cant_cart = data;
     });
     EventBus.$on('update_cantFavorite', function (data) {
-      _this4.cant_favorite = data;
+      _this.cant_favorite = data;
     });
   },
   mounted: function mounted() {
@@ -5350,68 +5292,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5497,10 +5377,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    getStates: function getStates() {
-      var _this = this;
-
-      return _asyncToGenerator(
+    getStates: function () {
+      var _getStates = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var response;
@@ -5513,20 +5391,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                _this.states = response.data.data;
+                this.states = response.data.data;
 
               case 4:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
-      }))();
-    },
-    getPedidos: function getPedidos() {
-      var _this2 = this;
+        }, _callee2, this);
+      }));
 
-      return _asyncToGenerator(
+      function getStates() {
+        return _getStates.apply(this, arguments);
+      }
+
+      return getStates;
+    }(),
+    getPedidos: function () {
+      var _getPedidos = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var response;
@@ -5539,16 +5421,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context3.sent;
-                _this2.orders = response.data.data;
+                this.orders = response.data.data;
+                this.completos = this.orders.filter(function (lista) {
+                  return lista.namestatus == "Entregado";
+                });
+                this.en_proceso = this.orders.filter(function (lista) {
+                  return lista.namestatus != "Entregado";
+                });
 
-              case 4:
+              case 6:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3);
-      }))();
-    },
+        }, _callee3, this);
+      }));
+
+      function getPedidos() {
+        return _getPedidos.apply(this, arguments);
+      }
+
+      return getPedidos;
+    }(),
     saveDirection: function saveDirection(direction, index) {
       var that = this;
       axios.put(URLHOME + 'api/user_address/' + direction.id, {
@@ -5589,6 +5483,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getFavorites();
     this.getTabUrl();
     this.getStates();
+    this.getPedidos();
   },
   created: function created() {
     this.userData = this.userlogged;
@@ -12586,6 +12481,28 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Ion.RangeSlid
     }());
 
 }));
+
+
+/***/ }),
+
+/***/ "./node_modules/is-buffer/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/is-buffer/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
 
 
 /***/ }),
@@ -40327,7 +40244,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.16.1
+ * @version 1.16.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -40673,7 +40590,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
 }
 
 function getSize(axis, body, html, computedStyle) {
@@ -40828,8 +40745,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = parseFloat(styles.borderTopWidth);
-  var borderLeftWidth = parseFloat(styles.borderLeftWidth);
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   // In cases where the parent is fixed, we must ignore negative scroll in offset calc
   if (fixedPosition && isHTML) {
@@ -40850,8 +40767,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = parseFloat(styles.marginTop);
-    var marginLeft = parseFloat(styles.marginLeft);
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -41790,8 +41707,8 @@ function arrow(data, options) {
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
   var css = getStyleComputedProperty(data.instance.popper);
-  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);
-  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
@@ -47625,7 +47542,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tVerificación del pedido\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tVerificación del pedido\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -47975,7 +47892,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tDatos de envío\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tDatos de envío\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -48191,7 +48108,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tPagar Factura\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tPagar Factura\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     ),
@@ -48399,7 +48316,7 @@ var render = function() {
                           1
                         ),
                         _vm._v(
-                          "\n\t\t\t\t\t\t\t\t\tCompra Completada\n\t\t\t\t\t\t\t\t"
+                          "\r\n\t\t\t\t\t\t\t\t\tCompra Completada\r\n\t\t\t\t\t\t\t\t"
                         )
                       ]
                     )
@@ -49569,7 +49486,7 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(
-                                  "\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\n\t\t\t\t\t\t\t\t\t\t\t\t"
+                                  "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\tOrden #3362\r\n\t\t\t\t\t\t\t\t\t\t\t\t"
                                 )
                               ]
                             ),
@@ -50636,7 +50553,7 @@ var staticRenderFns = [
                 [
                   _c("span"),
                   _vm._v(
-                    "Tarjeta de credito\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                    "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
                   ),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
@@ -50679,7 +50596,7 @@ var staticRenderFns = [
                 { staticClass: "custom-check", attrs: { for: "paypal" } },
                 [
                   _c("span"),
-                  _vm._v("PayPal\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -50707,7 +50624,7 @@ var staticRenderFns = [
                 { staticClass: "custom-check", attrs: { for: "petro" } },
                 [
                   _c("span"),
-                  _vm._v("Petro\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -50742,7 +50659,7 @@ var staticRenderFns = [
                 },
                 [
                   _c("span"),
-                  _vm._v("Criptomoneda\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
+                  _vm._v("Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
                   _c("div", { staticClass: "payment-imgs-group" }, [
                     _c("img", {
                       attrs: {
@@ -59942,402 +59859,117 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(36),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(37),
+                                _c(
+                                  "div",
+                                  { staticClass: "order-table" },
+                                  [
+                                    _vm._m(36),
                                     _vm._v(" "),
-                                    _vm._m(38),
-                                    _vm._v(" "),
-                                    _vm._m(39),
-                                    _vm._v(" "),
-                                    _vm._m(40),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status in-process",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "Su pedido se está procesando para ser enviado"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 20.12 19.97"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
+                                    _vm._l(_vm.orders, function(order) {
+                                      return _c(
+                                        "div",
+                                        { key: order.id, staticClass: "row" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-12 col-lg-20" },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn",
+                                                  attrs: {
+                                                    type: "button",
+                                                    "data-toggle": "modal",
+                                                    "data-target": "#ModalOrder"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "order-span"
+                                                    },
+                                                    [_vm._v("Número de Pedido")]
+                                                  ),
                                                   _vm._v(
-                                                    "en-proceso-bio-mercados"
+                                                    " " +
+                                                      _vm._s(order.id) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                   )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(41),
-                                    _vm._v(" "),
-                                    _vm._m(42),
-                                    _vm._v(" "),
-                                    _vm._m(43),
-                                    _vm._v(" "),
-                                    _vm._m(44),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status en-route",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "Su pedido ya esta en camino hacia el destino"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 26.09 20"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha")]
+                                              ),
+                                              _vm._v(_vm._s(order.created_at))
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(37, true),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha de entrega")]
+                                              ),
+                                              _vm._v(
+                                                _vm._s(order.delivery_time_date)
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Estado")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "process-status in-process",
+                                                  attrs: {
+                                                    "data-toggle": "tooltip",
+                                                    "data-placement": "bottom",
+                                                    title:
+                                                      "Su pedido se está procesando para ser enviado"
+                                                  }
+                                                },
+                                                [
                                                   _vm._v(
-                                                    "en-camino-bio-mercados"
+                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                      _vm._s(order.namestatus) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                   )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "8.26",
-                                                            y: "16.52",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "20.43",
-                                                            y: "16.52",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            y: "15.22",
-                                                            width: "2.17",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "0.87",
-                                                            y: "13.48",
-                                                            width: "1.3",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "1.3",
-                                                            y: "11.74",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "16.52",
-                                                            y: "13.48",
-                                                            width: "1.74",
-                                                            height: "0.87"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(45),
-                                    _vm._v(" "),
-                                    _vm._m(46),
-                                    _vm._v(" "),
-                                    _vm._m(47),
-                                    _vm._v(" "),
-                                    _vm._m(48),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status complete",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "El pedido ya ha sido entregado"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 24.75 19.44"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
-                                                  _vm._v(
-                                                    "confirmar-bio-mercados"
-                                                  )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
                               ]
                             ),
                             _vm._v(" "),
@@ -60352,312 +59984,117 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(49),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(50),
+                                _c(
+                                  "div",
+                                  { staticClass: "order-table" },
+                                  [
+                                    _vm._m(38),
                                     _vm._v(" "),
-                                    _vm._m(51),
-                                    _vm._v(" "),
-                                    _vm._m(52),
-                                    _vm._v(" "),
-                                    _vm._m(53),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status in-process",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "Su pedido se está procesando para ser enviado"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 20.12 19.97"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
+                                    _vm._l(_vm.en_proceso, function(order) {
+                                      return _c(
+                                        "div",
+                                        { key: order.id, staticClass: "row" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-12 col-lg-20" },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn",
+                                                  attrs: {
+                                                    type: "button",
+                                                    "data-toggle": "modal",
+                                                    "data-target": "#ModalOrder"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "order-span"
+                                                    },
+                                                    [_vm._v("Número de Pedido")]
+                                                  ),
                                                   _vm._v(
-                                                    "en-proceso-bio-mercados"
+                                                    " " +
+                                                      _vm._s(order.id) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                   )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Proceso\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(54),
-                                    _vm._v(" "),
-                                    _vm._m(55),
-                                    _vm._v(" "),
-                                    _vm._m(56),
-                                    _vm._v(" "),
-                                    _vm._m(57),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status en-route",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "Su pedido ya esta en camino hacia el destino"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 26.09 20"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha")]
+                                              ),
+                                              _vm._v(_vm._s(order.created_at))
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(39, true),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha de entrega")]
+                                              ),
+                                              _vm._v(
+                                                _vm._s(order.delivery_time_date)
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Estado")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "process-status in-process",
+                                                  attrs: {
+                                                    "data-toggle": "tooltip",
+                                                    "data-placement": "bottom",
+                                                    title:
+                                                      "Su pedido se está procesando para ser enviado"
+                                                  }
+                                                },
+                                                [
                                                   _vm._v(
-                                                    "en-camino-bio-mercados"
+                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                      _vm._s(order.namestatus) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                   )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M26,11l-5.4-5.4a1.26,1.26,0,0,0-.92-.38H12.17v.87h2.18v6.52h.87V6.09h4.42a.45.45,0,0,1,.31.12l.74.75h-2a.87.87,0,0,0-.87.87v3.91a.87.87,0,0,0,.87.87h6.52v3.48a.44.44,0,0,1-.44.43h-.9a3,3,0,0,0-6,0H11.7a3,3,0,0,0-6,0H4.78a.43.43,0,0,1-.43-.43V12.17H3.48v3.92a1.3,1.3,0,0,0,1.3,1.3h.91a3,3,0,0,0,.88,1.74H0V20H20.87a3,3,0,0,0,3-2.61h.9a1.31,1.31,0,0,0,1.31-1.3V11.3A.43.43,0,0,0,26,11ZM6.52,17A2.18,2.18,0,1,1,8.7,19.13,2.19,2.19,0,0,1,6.52,17Zm4.3,2.17a3,3,0,0,0,.88-1.74h6.16a3.13,3.13,0,0,0,.88,1.74Zm10.05,0A2.18,2.18,0,1,1,23,17a2.17,2.17,0,0,1-2.17,2.17ZM18.7,11.74V7.83h2.86l3.66,3.65v.26Z"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "8.26",
-                                                            y: "16.52",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "20.43",
-                                                            y: "16.52",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            y: "15.22",
-                                                            width: "2.17",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "0.87",
-                                                            y: "13.48",
-                                                            width: "1.3",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "1.3",
-                                                            y: "11.74",
-                                                            width: "0.87",
-                                                            height: "0.87"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M5.65,11.3A5.65,5.65,0,1,0,0,5.65,5.65,5.65,0,0,0,5.65,11.3ZM5.65.87A4.78,4.78,0,1,1,.87,5.65,4.78,4.78,0,0,1,5.65.87Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M5.65,9.57A.44.44,0,0,0,6,9.44C6.24,9.16,8.7,6.65,8.7,4.78a3,3,0,0,0-6.09,0c0,1.87,2.45,4.38,2.73,4.66a.48.48,0,0,0,.31.13Zm0-7A2.18,2.18,0,0,1,7.83,4.78c0,1.12-1.37,2.84-2.18,3.72-.8-.88-2.17-2.6-2.17-3.72A2.17,2.17,0,0,1,5.65,2.61Z"
-                                                          }
-                                                        }),
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M7,4.78A1.31,1.31,0,1,0,5.65,6.09,1.31,1.31,0,0,0,7,4.78Zm-1.74,0a.43.43,0,0,1,.43-.43.44.44,0,0,1,.44.43.44.44,0,0,1-.44.44.44.44,0,0,1-.43-.44Z"
-                                                          }
-                                                        }),
-                                                        _c("rect", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            x: "16.52",
-                                                            y: "13.48",
-                                                            width: "1.74",
-                                                            height: "0.87"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tEn Camino\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
                               ]
                             ),
                             _vm._v(" "),
@@ -60672,99 +60109,117 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(58),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "row" }, [
-                                    _vm._m(59),
+                                _c(
+                                  "div",
+                                  { staticClass: "order-table" },
+                                  [
+                                    _vm._m(40),
                                     _vm._v(" "),
-                                    _vm._m(60),
-                                    _vm._v(" "),
-                                    _vm._m(61),
-                                    _vm._v(" "),
-                                    _vm._m(62),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col-6 col-lg-20" },
-                                      [
-                                        _c(
-                                          "span",
-                                          { staticClass: "order-span" },
-                                          [_vm._v("Estado")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "process-status complete",
-                                            attrs: {
-                                              "data-toggle": "tooltip",
-                                              "data-placement": "bottom",
-                                              title:
-                                                "El pedido ya ha sido entregado"
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "svg",
-                                              {
-                                                attrs: {
-                                                  xmlns:
-                                                    "http://www.w3.org/2000/svg",
-                                                  viewBox: "0 0 24.75 19.44"
-                                                }
-                                              },
-                                              [
-                                                _c("defs"),
-                                                _c("title", [
+                                    _vm._l(_vm.completos, function(order) {
+                                      return _c(
+                                        "div",
+                                        { key: order.id, staticClass: "row" },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-12 col-lg-20" },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn",
+                                                  attrs: {
+                                                    type: "button",
+                                                    "data-toggle": "modal",
+                                                    "data-target": "#ModalOrder"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "order-span"
+                                                    },
+                                                    [_vm._v("Número de Pedido")]
+                                                  ),
                                                   _vm._v(
-                                                    "confirmar-bio-mercados"
+                                                    " " +
+                                                      _vm._s(order.id) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
                                                   )
-                                                ]),
-                                                _c(
-                                                  "g",
-                                                  {
-                                                    attrs: {
-                                                      id: "Capa_2",
-                                                      "data-name": "Capa 2"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "g",
-                                                      {
-                                                        attrs: {
-                                                          id:
-                                                            "Perfil_de_Usuario",
-                                                          "data-name":
-                                                            "Perfil de Usuario"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c("path", {
-                                                          staticClass: "cls-1",
-                                                          attrs: {
-                                                            d:
-                                                              "M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tCompletado\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ]
-                                    )
-                                  ])
-                                ])
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha")]
+                                              ),
+                                              _vm._v(_vm._s(order.created_at))
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._m(41, true),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Fecha de entrega")]
+                                              ),
+                                              _vm._v(
+                                                _vm._s(order.delivery_time_date)
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-20" },
+                                            [
+                                              _c(
+                                                "span",
+                                                { staticClass: "order-span" },
+                                                [_vm._v("Estado")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass:
+                                                    "process-status complete",
+                                                  attrs: {
+                                                    "data-toggle": "tooltip",
+                                                    "data-placement": "bottom",
+                                                    title:
+                                                      "El pedido ya ha sido entregado"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                      _vm._s(order.namestatus) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
                               ]
                             )
                           ]
@@ -60783,7 +60238,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(63),
+                        _vm._m(42),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -61350,14 +60805,14 @@ var render = function() {
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            64,
+                                                                            43,
                                                                             true
                                                                           ),
                                                                           _vm._v(
                                                                             " "
                                                                           ),
                                                                           _vm._m(
-                                                                            65,
+                                                                            44,
                                                                             true
                                                                           )
                                                                         ]
@@ -61729,16 +61184,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(66),
+                                  _vm._m(45),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(67),
+                                    _vm._m(46),
                                     _vm._v(" "),
-                                    _vm._m(68),
+                                    _vm._m(47),
                                     _vm._v(" "),
-                                    _vm._m(69),
+                                    _vm._m(48),
                                     _vm._v(" "),
-                                    _vm._m(70),
+                                    _vm._m(49),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -61871,13 +61326,13 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(71),
+                                    _vm._m(50),
                                     _vm._v(" "),
-                                    _vm._m(72),
+                                    _vm._m(51),
                                     _vm._v(" "),
-                                    _vm._m(73),
+                                    _vm._m(52),
                                     _vm._v(" "),
-                                    _vm._m(74),
+                                    _vm._m(53),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -62049,16 +61504,16 @@ var render = function() {
                               },
                               [
                                 _c("div", { staticClass: "order-table" }, [
-                                  _vm._m(75),
+                                  _vm._m(54),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
-                                    _vm._m(76),
+                                    _vm._m(55),
                                     _vm._v(" "),
-                                    _vm._m(77),
+                                    _vm._m(56),
                                     _vm._v(" "),
-                                    _vm._m(78),
+                                    _vm._m(57),
                                     _vm._v(" "),
-                                    _vm._m(79),
+                                    _vm._m(58),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -62820,39 +62275,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("01/01/2020")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-6 col-lg-20" }, [
       _c(
         "button",
@@ -62873,151 +62295,6 @@ var staticRenderFns = [
           _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("04/01/2020")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("23/12/2019")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "bottom",
-            title:
-              "Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Dirección de entrega")
-          ]),
-          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("26/12/2019")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("05/12/2019")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "bottom",
-            title:
-              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Dirección de entrega")
-          ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("08/12/2019")
     ])
   },
   function() {
@@ -63048,39 +62325,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #2235\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("01/01/2020")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-6 col-lg-20" }, [
       _c(
         "button",
@@ -63101,83 +62345,6 @@ var staticRenderFns = [
           _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("04/01/2020")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #4452\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("23/12/2019")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "bottom",
-            title:
-              "Inversiones JM C.A, Sector Centro, Av 34 entre calles 8 y 9, Local H-21, Acarigua, Estado Portugesa 3301 (Frente a Traki)"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Dirección de entrega")
-          ]),
-          _vm._v("Mi Oficina\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("26/12/2019")
     ])
   },
   function() {
@@ -63208,39 +62375,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-20" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#ModalOrder"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Número de Pedido")
-          ]),
-          _vm._v(" #3602\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha")]),
-      _vm._v("05/12/2019")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-6 col-lg-20" }, [
       _c(
         "button",
@@ -63261,15 +62395,6 @@ var staticRenderFns = [
           _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t")
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-20" }, [
-      _c("span", { staticClass: "order-span" }, [_vm._v("Fecha de entrega")]),
-      _vm._v("08/12/2019")
     ])
   },
   function() {
@@ -76948,8 +76073,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/e-commerce-bio_no/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
