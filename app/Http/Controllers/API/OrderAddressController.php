@@ -34,7 +34,6 @@ class OrderAddressController extends BaseController
             $user_id = $_SESSION["usuario"]["id"];
             $datos = $request->all();
             $order = new OrderAddress;
-
             $order->cities_id = $datos["cities_id"];
             $order->address = $datos["address"];
             $order->status = $datos["status"];
@@ -46,8 +45,9 @@ class OrderAddressController extends BaseController
             $order->reference_point = $datos["reference_point"];
             $order->save();
             return $this->sendResponse($order);
+            
         }
-        return $this->sendError(101);
+        //return $this->sendError(101);
     }
 
     function destroy($id) {

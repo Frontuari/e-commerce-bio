@@ -13,7 +13,7 @@ $(document).ready(function () {
 	======================================================
 */	
 	/*Click button to edit the user info*/
-	$('.btn-edit-info').on('click', function(){
+	$(document).on('click','.btn-edit-info', function(){
 		$(this).hide();
 		$(this).parent().find('.btn-confirm-info').show();
 		$(this).parent().find('input').removeAttr('disabled');
