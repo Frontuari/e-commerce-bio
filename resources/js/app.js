@@ -84,31 +84,25 @@ var globalFunc = {
         });
     },
 
-    addToCart: function(product) {
-        console.log("product::> ",product);
+    addToCart: function(product,cantidad) {
         let cart = [];
-        console.log("cart-1::> ",cart);
         if(window.localStorage.getItem('cartNew')) {
             cart = JSON.parse(window.localStorage.getItem('cartNew'));
         }
-
-        cart = globalFunc.validateCart(product,cart);       
-
-        console.log("cart-2::> ",cart);
-
+        cart = globalFunc.validateCart(product,cart,cantidad);       
         window.localStorage.setItem('cartNew', JSON.stringify(cart));
         EventBus.$emit("update_cantCart",cart.length);
     },
-    validateCart: function(product,tmp) {
+    validateCart: function(product,tmp,cantidad) {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                tmp[b].cant++;
+                tmp[b] = parseInt(tmp[b].cant) + cantidad;
                 exist = true;
             }
         });
         if(!exist) {
-            tmp.push({product: product,cant: 1});
+            tmp.push({product: product,cant: cantidad});
         }
         return tmp;
     },

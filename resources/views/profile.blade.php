@@ -12,6 +12,6 @@
 		</div>
 	</section>
 	
-	<profile :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></profile>
+	<profile :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></profile>
 
 @stop

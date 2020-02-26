@@ -123,7 +123,7 @@
 																<label for="user-contact-phone">Teléfono de Contacto:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-contact-phone" name="user-contact-phone" disabled="disabled" value="04XX XXX XXXX">
+																<input type="text" class="form-control" id="user-contact-phone" name="user-contact-phone" disabled="disabled" v-model="userData.phone">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -131,7 +131,7 @@
 																<label for="user-office-phone">Teléfono de Oficina:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-office-phone" name="user-office-phone" disabled="disabled" value="02XX XXX XXXX">
+																<input type="text" class="form-control" id="user-office-phone" name="user-office-phone" disabled="disabled" v-model="userData.phone_home">
 															</div>
 														</div>
 														<div class="col-lg-12">
@@ -455,9 +455,11 @@
 											                            </button>
 											                        </div>
 											                    </div>
-											                    <div class="product-content"><a href="#" class="product-title">{{favorite.product_name}}</a> <span class="product-info">500 g</span>
+											                    <div class="product-content">
+																	<a href="#" class="product-title">{{favorite.product_name}}</a> 
+																	<!-- <span class="product-info">500 g</span> -->
 											                        <div class="product-prices">
-											                            <p>Bs {{favorite.price | FormatNumber }}</p>
+											                            <p>{{favorite.price / tasadolar | FormatDolar}} / Bs {{favorite.price | FormatNumber }}</p>
 											                        </div>
 											                    </div>
 											                    <div class="product-add"><span class="product-info">Disponibles: <b>{{favorite.qty_avaliable}} en Stock</b></span>
@@ -465,15 +467,15 @@
 											                            <div class="product-quantity">
 											                                <label>Cantidad</label>
 											                                <div class="product-quantity-group">
-											                                    <input id="quantity2" type="text" name="quantity" value="1" class="form-control">
+											                                    <input :class="'cantidad_'+favorite.id" type="text" name="quantity" value="1" class="form-control" v-model="cant_product[favorite.id]">
 											                                    <div class="product-quantity-buttons"><span class="max-stock" style="display: none;">{{favorite.qty_avaliable}}</span>
-											                                        <button type="button" onclick="" class="btn increaseValue"><img src="assets/img/increase.png" alt="Increase"></button>
-											                                        <button type="button" class="btn decreaseValue"><img src="assets/img/decrease.png" alt="decrease"></button>
+											                                        <button type="button" @click="increaseValue(favorite)" class="btn"><img src="assets/img/increase.png" alt="Increase"></button>
+											                                        <button type="button" @click="decreaseValue(favorite)" class="btn"><img src="assets/img/decrease.png" alt="decrease"></button>
 											                                    </div>
 											                                </div>
 											                            </div>
 											                            <div class="product-buttons">
-											                                <button type="button" class="btn btn-addcart-outline" @click="addToCart(favorite)">
+											                                <button type="button" class="btn btn-addcart-outline" @click="addToCart(favorite,cant_product[favorite.id])">
 											                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
 											                                        <title>añadir-carrito-bio</title>
 											                                        <g id="Capa_2" data-name="Capa 2">
@@ -633,10 +635,12 @@
 				en_proceso: [],
 				completos: [],
 				newDirection: 'none',
+				cant_product: []
             }
 		},
 		props: {
-			userlogged: Object
+			userlogged: Object,
+			tasadolar: Number
 		},
         methods: {
             getFavorites: async function () {
@@ -685,7 +689,8 @@
                 })
                 .then(function (response) {
                 	console.log(response.data);
-                	that.userData = response.data;
+					that.userData = response.data;
+					fetch(URLHOME+"api_rapida.php?evento=obtenerTodo");
                 })
                 .catch(function (error) {
                 	console.log(error);
@@ -737,8 +742,6 @@
 	                });
 
 	            }else{
-	            	console.log("Guardarems");
-	            	console.log(direction);
 	            	axios.post(URLHOME+'api/user_address/'+direction.id, {
 						id: direction.id,
 						cities_id: direction.cities_id,
@@ -802,7 +805,27 @@
 					action:'update',
 				});
 				this.userData = this.userlogged;
-			}
+			},
+			increaseValue(product)
+            {
+                const productID = product.id;
+                const qty_avaliable = product.qty_avaliable;
+                if(this.cant_product[productID] < qty_avaliable ) {
+                    this.cant_product[productID]++;
+                }
+                $('.cantidad_'+productID).val(this.cant_product[productID]);
+                $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
+            },
+            decreaseValue(product)
+            {
+                const productID = product.id;
+                const qty_avaliable = product.qty_avaliable;
+                if(this.cant_product[productID] > 1 ) {
+                    this.cant_product[productID]--;
+                }
+                $('.cantidad_'+productID).val(this.cant_product[productID]);
+                $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
+            }
 
         },
         mounted() {
@@ -813,7 +836,9 @@
 		},
 		created() {
 			this.userData = this.userlogged;
-			console.log("this.userData::> ",this.userData);
+			for(let i = 0;i<100;i++) {
+                this.cant_product[i] = 1;
+            }
 		}
 		
     }

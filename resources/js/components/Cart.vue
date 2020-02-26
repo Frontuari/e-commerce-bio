@@ -110,14 +110,14 @@
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ product_cart.product.price / tasadolar | FormatDolar}} / Bs {{product_cart.product.price | FormatNumber}}</h3>
 																	</div>
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">{{(total_cart) / tasadolar | FormatDolar}}/ Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">{{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 															</div>

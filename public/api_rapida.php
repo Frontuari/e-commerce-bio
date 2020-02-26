@@ -8,17 +8,36 @@ session_start();
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 switch($_GET['evento']) {
+    case 'obtenerTodo':
+
+        $row_usuario=q("SELECT s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+        FROM users s
+        INNER JOIN peoples p on p.id = s.peoples_id
+        INNER JOIN cities c on c.id = p.cities_id
+        WHERE s.email='".$_SESSION['usuario']['email']."'")[0];
+
+        $row_direccions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+        INNER JOIN cities c on c.id = o.cities_id
+        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
+        ");
+        $_SESSION["usuario"]=$row_usuario;
+        $_SESSION["usuario"]["directions"] = $row_direccions;
+
+        salida($row_usuario,"Datos actualizados",true);
+    break;
     case 'obtenerDireccion':
         $row = q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
         INNER JOIN cities c on c.id = o.cities_id
-        WHERE o.users_id = ".$_SESSION["usuario"]["id"]." and o.status = 'A'");
+        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
+        ");
         $_SESSION["usuario"]["directions"] = $row;
+        salida($row,"Direcciones actualizadas",true);
     break;
     case 'login':
         $email=$_GET['email'];
         $clave=$_GET['password'];
         
-        $row=q("SELECT s.id,s.password,s.email,s.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad
+        $row=q("SELECT s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
         FROM users s
         INNER JOIN peoples p on p.id = s.peoples_id
         INNER JOIN cities c on c.id = p.cities_id
@@ -53,9 +72,10 @@ switch($_GET['evento']) {
         session_destroy();
         salida($row,"Hasta pronto",true);
     break;
-
+    default:
+        salida($row,"Disculpe debe enviar un evento",false);
 }
-salida($row,"Disculpe debe enviar un evento",false);
+
 function recortar_imagen($row){
     foreach($row as $id=>$value){
         $arr=explode(".",$value['image']);

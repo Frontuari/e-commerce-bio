@@ -20,7 +20,7 @@ class FavoritesController extends BaseController
         $id_usuario=($_SESSION["usuario"]["id"] ?? '');
         if(isset($_SESSION["usuario"]["id"]) && !empty($_SESSION["usuario"]["id"])) {
             $a=DB::table("favorites")
-            ->select("favorites.*","products.id as product_id","products.name as product_name","products.price as price","products.photo as photo", "products.qty_avaliable")
+            ->select("products.*")
             ->join("products","products.id","=","favorites.products_id")
             ->where('users_id',$id_usuario)
             ->get();
@@ -49,7 +49,7 @@ class FavoritesController extends BaseController
     public function store(Request $request)
     {
         $favorite = new Favorites;
-        $favorite->users_id=1;
+        $favorite->users_id=$_SESSION["usuario"]["id"];
         if($request->products_id and $favorite->users_id){
             $favorite->products_id=$request->products_id;   
             $id_usuario = $favorite->users_id;

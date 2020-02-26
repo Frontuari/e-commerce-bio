@@ -19,15 +19,7 @@ Route::get('/join', function(){
 	return view('register');
 });
 
-Route::get('/profile', function() {
-	if(!isset($_SESSION["usuario"]) && empty($_SESSION["usuario"]) && empty($_SESSION["usuario"]["id"])){
-		return redirect()->action('HomeController@index');
-	}else{
-		return view('profile');
-	}
-	
-});
-
+Route::get('/profile','ProfileController@index')->name("profile");
 
 Route::get('/cart','CartController@index')->name("cart");
 

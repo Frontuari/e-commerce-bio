@@ -42,7 +42,8 @@ class RegisterController extends BaseController
             'sex' => $data["sex"],
              'birthdate' => '01/01/1990',
              'cities_id' => '1',
-             'phone' => ''
+             'phone' => '',
+             'phone_home' => '',
          ]);
 
          $user = User::create([
@@ -58,7 +59,7 @@ class RegisterController extends BaseController
          DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
         $success['token'] =  $user->createToken('Bio')->accessToken;
-        //Mail::to($data["email"])->queue(new UsuarioRegistro());
+        Mail::to($data["email"])->queue(new UsuarioRegistro());
         $success['name'] =  $user->name;
         $success['user_id'] =  $user->id;
         return $this->sendResponse($success, 'User register successfully.');
@@ -106,19 +107,22 @@ class RegisterController extends BaseController
                 'sex' => $data_user["user_data"]['sex'],
                 'birthdate' =>$data_user["user_data"]['birthdate'],
                 'cities_id' => $data_user["user_data"]['city_id'],
-                'phone' => ''
+                'phone' => $data_user["user_data"]['phone'],
+                'phone_home' => $data_user["user_data"]['phone_home'],
             ]);
-
+        
+        // return $this->sendResponse(["success"=>true]);
+        // return $this->sendResponse($this->getData($data_user["user_data"]["email"]));
         echo json_encode($this->getData($data_user["user_data"]["email"]));
     }   
 
     public function getData($email) {
-        $datos = User::select("users.id","users.email","users.name","users.peoples_id","peoples.sex","peoples.birthdate","cities.id as city_id","cities.name as ciudad")
+        $datos = User::select("users.id","users.email","peoples.name","users.peoples_id","peoples.sex","peoples.birthdate","peoples.phone","peoples.phone_home","cities.id as city_id","cities.name as ciudad")
         ->join("peoples","peoples.id","=","users.peoples_id")
         ->join("cities","cities.id","=","peoples.cities_id")
         ->where("users.email",$email)
         ->first();
-        $_SESSION["usuario"]=$datos;
+        // $_SESSION["usuario"]=$datos;
         return $datos;
     }
 

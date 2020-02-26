@@ -15,7 +15,7 @@ class OrderAddressController extends BaseController
             $order = OrderAddress::find($id);
             $order->cities_id = $datos["cities_id"];
             $order->address = $datos["address"];
-            $order->status = $datos["status"];
+            $order->status = 'A';
             $order->users_id = $datos["users_id"];
             $order->zip_code = $datos["zip_code"];
             $order->urb = $datos["urb"];
@@ -36,7 +36,7 @@ class OrderAddressController extends BaseController
             $order = new OrderAddress;
             $order->cities_id = $datos["cities_id"];
             $order->address = $datos["address"];
-            $order->status = $datos["status"];
+            $order->status = 'A';
             $order->users_id = $datos["users_id"];
             $order->zip_code = $datos["zip_code"];
             $order->urb = $datos["urb"];
@@ -47,7 +47,7 @@ class OrderAddressController extends BaseController
             return $this->sendResponse($order);
             
         }
-        //return $this->sendError(101);
+        return $this->sendError(101);
     }
 
     function destroy($id) {

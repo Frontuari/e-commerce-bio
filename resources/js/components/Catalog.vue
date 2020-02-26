@@ -124,7 +124,7 @@
 						</div>
 					</div>
 
-					<ProductList v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
+					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
 
 					<div class="bio-ads">
 						<div class="ad-box">
@@ -169,10 +169,6 @@
 			tasadolar: Number
 		},
         methods: {
-            getproducts: async function () {
-				const response = await axios.get(URLHOME+'api/products');
-				this.products = response.data.data;
-			},
 			filterProducts: async function() {
 				const response = await axios.get(URLSERVER+'api/products?'+this.filtros);
 				this.products = response.data.data;
@@ -188,11 +184,8 @@
 
         },
         mounted() {
-			// this.getproducts();
 			if(this.isObject(this.userlogged)){
-				console.log("existe");
 				this.datauser = this.userlogged;
-				console.log(this.datauser);
 			}else{
 				console.log("Not logout");
 				this.datauser.id = 'undefined';
@@ -204,11 +197,12 @@
 			}
 		},
 		created: function() {
-			this.getDebounceProducts = _.debounce(this.filterProducts,500);
+			// this.getDebounceProducts = _.debounce(this.filterProducts,100);
 		},
 		watch: {
 			filtros: function() {
-				this.getDebounceProducts();
+				this.filterProducts();
+				// this.getDebounceProducts();
 			}
 		}
     }
