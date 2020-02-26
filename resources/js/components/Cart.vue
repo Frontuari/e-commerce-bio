@@ -164,7 +164,7 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="user-contact-phone">Teléfono de Contacto:</label>
-															<input type="text" class="form-control" id="user-contact-phone" name="user-contact-phone" disabled="disabled" value="04XX XXX XXXX">
+															<input type="text" class="form-control" id="user-contact-phone" name="user-contact-phone" disabled="disabled" v-model="datauser.phone">
 														</div>
 													</div>
 												</div>
@@ -458,21 +458,21 @@
 												<div class="col-12">
 													<h5>Elige el Método de Pago</h5>
 												</div>
-												<div class="col-lg-12">
+												<div class="col-lg-12" v-for="pay in payments" :key="pay.id">
 													<div class="payment-option">
 														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" id="credit-card" name="payment-method">
-															<label for="credit-card" class="custom-check"><span></span>Tarjeta de credito
-																<div class="payment-imgs-group">
+															<input type="radio" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method">
+															<label :for="'credit-card'+pay.id" class="custom-check"><span></span>{{pay.name}}
+																<!-- <div class="payment-imgs-group">
 																	<img src="assets/img/master-bio-mercados.svg" alt="Master Card">
 																	<img src="assets/img/visa-bio-mercados.svg" alt="Visa">
 																	<img src="assets/img/american-bio-mercados.svg" alt="American Express">
-																</div>
+																</div> -->
 															</label>
 														</div>
 													</div>
 												</div>
-												<div class="col-lg-12">
+												<!-- <div class="col-lg-12">
 													<div class="payment-option">
 														<div class="form-check form-check-radio">
 															<input type="radio" class="form-check-input" id="paypal" name="payment-method">
@@ -509,7 +509,7 @@
 															</label>
 														</div>
 													</div>
-												</div>
+												</div> -->
 											</div>
 											<div class="row">
 												<div class="col-12">
@@ -548,7 +548,7 @@
 																	<div class="row">
 																		<label class="order-text">Datos Personales</label>
 																		<p><b>Nombre y Apellido: </b>{{this.datauser.name}}</p>
-																		<p><b>Teléfono de Contacto: </b>0414 123 4567</p>
+																		<p><b>Teléfono de Contacto: </b>{{this.datauser.phone}}7</p>
 																		<p><b>Correo Electrónico: </b>{{this.datauser.email}}</p>
 																	</div>
 																</div>
@@ -606,7 +606,8 @@ export default {
             cant_cart: 0,
             products_cart:0,
             total_cart:0,
-            datauser:[],
+			datauser:[],
+			payments: []
         }
     },
 	props: {
@@ -614,7 +615,10 @@ export default {
 		tasadolar: Number
 	},
 	methods:{
-
+		async getPayments() {
+			const response = await axios.get(URLSERVER+"api/payment_methods");
+			this.payments = response.data.data;
+		},
 		isObject: function(o) 
 		{ 
 			return typeof o == "object" 
@@ -671,7 +675,8 @@ export default {
     created() {
         EventBus.$on('update_cantCart', data => {
             this.cant_cart = data;
-        });
+		});
+		this.getPayments();
     },
     mounted() 
     {

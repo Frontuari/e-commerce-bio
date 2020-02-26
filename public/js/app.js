@@ -1954,7 +1954,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //
 //
@@ -2563,7 +2571,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       cant_cart: 0,
       products_cart: 0,
       total_cart: 0,
-      datauser: []
+      datauser: [],
+      payments: []
     };
   },
   props: {
@@ -2571,6 +2580,36 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     tasadolar: Number
   },
   methods: {
+    getPayments: function () {
+      var _getPayments = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get(URLSERVER + "api/payment_methods");
+
+              case 2:
+                response = _context.sent;
+                this.payments = response.data.data;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getPayments() {
+        return _getPayments.apply(this, arguments);
+      }
+
+      return getPayments;
+    }(),
     isObject: function isObject(o) {
       return _typeof(o) == "object";
     },
@@ -2618,6 +2657,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     EventBus.$on('update_cantCart', function (data) {
       _this.cant_cart = data;
     });
+    this.getPayments();
   },
   mounted: function mounted() {
     if (window.localStorage.getItem("cartNew")) {
@@ -49088,13 +49128,52 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _vm._m(2)
+                              _c("div", { staticClass: "col-lg-6" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "user-contact-phone" } },
+                                    [_vm._v("Teléfono de Contacto:")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.datauser.phone,
+                                        expression: "datauser.phone"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      id: "user-contact-phone",
+                                      name: "user-contact-phone",
+                                      disabled: "disabled"
+                                    },
+                                    domProps: { value: _vm.datauser.phone },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.datauser,
+                                          "phone",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(3),
+                          _vm._m(2),
                           _vm._v(" "),
-                          _vm._m(4)
+                          _vm._m(3)
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
@@ -49260,7 +49339,67 @@ var render = function() {
                   _c("fieldset", [
                     _c("div", { staticClass: "payment-methods" }, [
                       _c("div", { staticClass: "row" }, [
-                        _vm._m(5),
+                        _c("div", { staticClass: "col-12 col-lg-8" }, [
+                          _c(
+                            "div",
+                            { staticClass: "row" },
+                            [
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _vm._l(_vm.payments, function(pay) {
+                                return _c(
+                                  "div",
+                                  { key: pay.id, staticClass: "col-lg-12" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "payment-option" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "form-check form-check-radio"
+                                          },
+                                          [
+                                            _c("input", {
+                                              staticClass: "form-check-input",
+                                              attrs: {
+                                                type: "radio",
+                                                id: "credit-card" + pay.id,
+                                                name: "payment-method"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "custom-check",
+                                                attrs: {
+                                                  for: "credit-card" + pay.id
+                                                }
+                                              },
+                                              [
+                                                _c("span"),
+                                                _vm._v(
+                                                  _vm._s(pay.name) +
+                                                    "\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                )
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _vm._m(5)
+                        ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-12 col-lg-4" }, [
                           _c("div", { staticClass: "card" }, [
@@ -49390,7 +49529,14 @@ var render = function() {
                                             _vm._v(_vm._s(this.datauser.name))
                                           ]),
                                           _vm._v(" "),
-                                          _vm._m(6),
+                                          _c("p", [
+                                            _c("b", [
+                                              _vm._v("Teléfono de Contacto: ")
+                                            ]),
+                                            _vm._v(
+                                              _vm._s(this.datauser.phone) + "7"
+                                            )
+                                          ]),
                                           _vm._v(" "),
                                           _c("p", [
                                             _c("b", [
@@ -49402,10 +49548,10 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _vm._m(7)
+                                    _vm._m(6)
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(8)
+                                  _vm._m(7)
                                 ])
                               ])
                             ])
@@ -49419,7 +49565,7 @@ var render = function() {
                     _c("div", { staticClass: "thanks" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
-                          _vm._m(9),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c("div", { staticClass: "thanks-footer" }, [
                             _c(
@@ -49576,29 +49722,6 @@ var staticRenderFns = [
             name: "user-lastname",
             disabled: "disabled",
             value: "Mendoza"
-          }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "user-contact-phone" } }, [
-          _vm._v("Teléfono de Contacto:")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "user-contact-phone",
-            name: "user-contact-phone",
-            disabled: "disabled",
-            value: "04XX XXX XXXX"
           }
         })
       ])
@@ -50566,209 +50689,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-lg-8" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("h5", [_vm._v("Elige el Método de Pago")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "payment-option" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "credit-card",
-                  name: "payment-method"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "custom-check", attrs: { for: "credit-card" } },
-                [
-                  _c("span"),
-                  _vm._v(
-                    "Tarjeta de credito\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-                  ),
-                  _c("div", { staticClass: "payment-imgs-group" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/master-bio-mercados.svg",
-                        alt: "Master Card"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/visa-bio-mercados.svg",
-                        alt: "Visa"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/american-bio-mercados.svg",
-                        alt: "American Express"
-                      }
-                    })
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "payment-option" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", id: "paypal", name: "payment-method" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "custom-check", attrs: { for: "paypal" } },
-                [
-                  _c("span"),
-                  _vm._v("PayPal\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
-                  _c("div", { staticClass: "payment-imgs-group" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/paypal-bio-mercados.svg",
-                        alt: "PayPal"
-                      }
-                    })
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "payment-option" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: { type: "radio", id: "petro", name: "payment-method" }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                { staticClass: "custom-check", attrs: { for: "petro" } },
-                [
-                  _c("span"),
-                  _vm._v("Petro\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
-                  _c("div", { staticClass: "payment-imgs-group" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/petro-bio-mercados.svg",
-                        alt: "Petro"
-                      }
-                    })
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12" }, [
-          _c("div", { staticClass: "payment-option" }, [
-            _c("div", { staticClass: "form-check form-check-radio" }, [
-              _c("input", {
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "radio",
-                  id: "cryptocurrency",
-                  name: "payment-method"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "custom-check",
-                  attrs: { for: "cryptocurrency" }
-                },
-                [
-                  _c("span"),
-                  _vm._v("Criptomoneda\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"),
-                  _c("div", { staticClass: "payment-imgs-group" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/bitcoin-bio-mercados.svg",
-                        alt: "Bitcoin"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/ethereum-bio-mercaods.svg",
-                        alt: "Ethereum"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("img", {
-                      attrs: {
-                        src: "assets/img/dash-bio-mercados.svg",
-                        alt: "Dash"
-                      }
-                    })
-                  ])
-                ]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "wizard-footer-buttons" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-link",
-                attrs: { href: "/catalog", type: "button" }
-              },
-              [_vm._v("Seguir comprando")]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "action-buttons-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-link previous action-button",
-                  attrs: { type: "button", name: "previous" }
-                },
-                [_vm._v("Volver atras")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-submit next action-button",
-                  attrs: { type: "button", name: "next" }
-                },
-                [_vm._v("CONFIRMAR PAGO")]
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h5", [_vm._v("Elige el Método de Pago")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("b", [_vm._v("Teléfono de Contacto: ")]),
-      _vm._v("0414 123 4567")
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "wizard-footer-buttons" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-link",
+              attrs: { href: "/catalog", type: "button" }
+            },
+            [_vm._v("Seguir comprando")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "action-buttons-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-link previous action-button",
+                attrs: { type: "button", name: "previous" }
+              },
+              [_vm._v("Volver atras")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-submit next action-button",
+                attrs: { type: "button", name: "next" }
+              },
+              [_vm._v("CONFIRMAR PAGO")]
+            )
+          ])
+        ])
+      ])
     ])
   },
   function() {
