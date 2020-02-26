@@ -41,28 +41,6 @@ class UsersTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 14,
-                'last_ip' => NULL,
-                'last_activity' => '2020-01-23 14:45:09',
-                'password' => '$2y$10$tLtJbxbUpUcYzEFWAG/TN.mM5y6qSmPvSAvzYbZX7slH/p35RlIG6',
-                'cant_orders' => 0,
-                'peoples_id' => NULL,
-                'coins_id' => NULL,
-                'groups_id' => NULL,
-                'name' => 'Administrador',
-                'email' => 'admin@admin.com',
-                'email_verified_at' => NULL,
-                'failed_attempts' => 0,
-                'purchase_quantity' => 0,
-                'remember_token' => 'VK89zXStfkweol8SG7wAaLjhp9hFG4b7I42ID319IEvi1j7GoycbNAO767HT',
-                'created_at' => '2020-01-23 18:45:09',
-                'updated_at' => '2020-01-27 00:04:52',
-                'avatar' => 'users/default.png',
-                'role_id' => 3,
-                'settings' => '{"locale":"es"}',
-            ),
-            2 => 
-            array (
                 'id' => 15,
                 'last_ip' => NULL,
                 'last_activity' => '2020-02-21 18:19:10',
@@ -83,7 +61,7 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 2,
                 'settings' => NULL,
             ),
-            3 => 
+            2 => 
             array (
                 'id' => 16,
                 'last_ip' => NULL,
@@ -105,6 +83,28 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 2,
                 'settings' => '{"locale":"es"}',
             ),
+            3 => 
+            array (
+                'id' => 14,
+                'last_ip' => NULL,
+                'last_activity' => '2020-01-23 14:45:09',
+                'password' => '$2y$10$tLtJbxbUpUcYzEFWAG/TN.mM5y6qSmPvSAvzYbZX7slH/p35RlIG6',
+                'cant_orders' => 0,
+                'peoples_id' => NULL,
+                'coins_id' => NULL,
+                'groups_id' => NULL,
+                'name' => 'Administrador',
+                'email' => 'admin@admin.com',
+                'email_verified_at' => NULL,
+                'failed_attempts' => 0,
+                'purchase_quantity' => 0,
+                'remember_token' => 'hXYSNdoHMkyBlmR8vU1dnKB14KKXZazxhdOGi6pNUPflYPK9ECPJCVOrw3mC',
+                'created_at' => '2020-01-23 18:45:09',
+                'updated_at' => '2020-01-27 00:04:52',
+                'avatar' => 'users/default.png',
+                'role_id' => 3,
+                'settings' => '{"locale":"es"}',
+            ),
             4 => 
             array (
                 'id' => 13,
@@ -120,7 +120,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'failed_attempts' => NULL,
                 'purchase_quantity' => NULL,
-                'remember_token' => '0bejV7eX7HCQoC2YsF8o392ellUWuegB4gPdcoOiRj5XopDYpTthfUAigmgE',
+                'remember_token' => '5cliNNEwafxXQDyyR2pbrYkMCOWqRM0AOyrpURwPIMRRIuTgfVKrXXUQu03c',
                 'created_at' => '2020-01-23 03:04:38',
                 'updated_at' => '2020-01-24 12:49:36',
                 'avatar' => 'users/default.png',

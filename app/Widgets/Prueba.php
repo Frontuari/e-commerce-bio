@@ -16,7 +16,10 @@ class Prueba extends BaseDimmer
      * @var array
      */
     protected $config = [];
-
+    
+    //public function Prueba(){
+      //echo run();
+   // }
     /**
      * Treat this method as a controller action.
      * Return view() or other content to display.
@@ -43,6 +46,7 @@ class Prueba extends BaseDimmer
      */
     public function shouldBeDisplayed()
     {
+        return true;
         return Auth::user()->can('browse', Voyager::model('User'));
     }
     public function productos(){
@@ -115,7 +119,7 @@ var APP_URL = "'.url("/").'";
     }
     public function ventas(){
         $orders= new Orders;
-        $count = $orders->count();
+        $count = $orders->where('status','=','NU')->count();
         $url="/admin/orders";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">

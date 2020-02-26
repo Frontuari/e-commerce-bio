@@ -88,6 +88,7 @@ return array(
     'App\\Http\\Controllers\\PackagingsController' => $baseDir . '/app/Http/Controllers/PackagingsController.php',
     'App\\Http\\Controllers\\PeoplesController' => $baseDir . '/app/Http/Controllers/PeoplesController.php',
     'App\\Http\\Controllers\\ProductsController' => $baseDir . '/app/Http/Controllers/ProductsController.php',
+    'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\RegionsController' => $baseDir . '/app/Http/Controllers/RegionsController.php',
     'App\\Http\\Controllers\\StatesController' => $baseDir . '/app/Http/Controllers/StatesController.php',
     'App\\Http\\Controllers\\StoresController' => $baseDir . '/app/Http/Controllers/StoresController.php',
