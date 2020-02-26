@@ -43,6 +43,11 @@ switch($_GET['evento']) {
         salida($row,"Correo electrónico no valido",false);
     }
     break;
+    case 'listar_categorias_movil':
+        $row=q("SELECT name,image,id FROM categories");
+        $row=recortar_imagen($row);
+        salida_movil($row,"Listado de categorias",true);
+    break;
 
     case 'logout':
         session_destroy();
@@ -51,11 +56,25 @@ switch($_GET['evento']) {
 
 }
 salida($row,"Disculpe debe enviar un evento",false);
+function recortar_imagen($row){
+    foreach($row as $id=>$value){
+        $arr=explode(".",$value['image']);
 
+        $row[$id]['image']=$arr[0].'-cropped.'.$arr[1];
+        $row[$id]['name']=substr($value['name'],0,21);
+    }
+     return $row;
+    
+}
 function salida($row,$msj_general="",$bueno=true){
     $row['success']=$bueno;
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $row['msj_general']=$msj_general;
+    echo json_encode($row);
+    exit();
+}
+function salida_movil($row,$msj_general="",$bueno=true){
+    if(!$bueno) header('HTTP/1.1 409 Conflict');
     echo json_encode($row);
     exit();
 }

@@ -120,7 +120,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => NULL,
                 'failed_attempts' => NULL,
                 'purchase_quantity' => NULL,
-                'remember_token' => 'W5rRA4lq2onDIr4t5AUKOk7ERSTcw6rsC25M2ZnWOJc3K6scVgy71fEtd5fC',
+                'remember_token' => '0bejV7eX7HCQoC2YsF8o392ellUWuegB4gPdcoOiRj5XopDYpTthfUAigmgE',
                 'created_at' => '2020-01-23 03:04:38',
                 'updated_at' => '2020-01-24 12:49:36',
                 'avatar' => 'users/default.png',
