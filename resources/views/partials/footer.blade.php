@@ -242,7 +242,7 @@
 			setTimeout(function(){
 				$('body').addClass('loaded');
 				$('h1').css('color','#222222');
-			}, 4000);
+			}, 2000);
 
 			var $range = $(".js-range-slider");
 		    var $inputFrom = $(".js-input-from");
