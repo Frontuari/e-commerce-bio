@@ -19,13 +19,14 @@ export default {
     },
     methods: {
         getFoot: async function() {
-            const response = await axios.get(URLSERVER+'api/advs/type/footer');
-            const foot = response.data.data[0];
-            this.background = 'url(storage/'+foot.image+')';
+            this.background = 'url(storage/'+this.ads[0].image+')';
         },
     },
     mounted() {
         this.getFoot();
+    },
+    props: {
+        ads: Array
     }
 }
 </script>

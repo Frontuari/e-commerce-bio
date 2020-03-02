@@ -17,14 +17,15 @@ export default {
         }
     },
     methods: {
-		getAds: async function() {
-            const response = await axios.get(URLSERVER+'api/advs/type/medio_bajo');
-			const medio = response.data.data;
-			this.backgrounds.push('url(storage/'+medio[0].image+')');
+		getAds: function() {
+			this.backgrounds.push('url(storage/'+this.medio_bajo[0].image+')');
         }
     },
     mounted() {
         this.getAds();
+    },
+    props: {
+        medio_bajo: Array
     }
 }
 </script>

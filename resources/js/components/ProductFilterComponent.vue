@@ -139,10 +139,6 @@
     export default {
         data() {
             return {
-                viewed: [],
-                recent: [],
-                sold: [],
-                best_price: [],
 				product: {},
 				cantModal: 1,
 				tasa: 0
@@ -153,34 +149,40 @@
 		},
 		props: {
 			userlogged: Object,
-			tasadolar: Number
+			tasadolar: Number,
+			recent: Array,
+			viewed: Array,
+			sold: Array,
+			best_price: Array
 		},
 		methods: {
 			getProduct: async function(objP) {
 				this.product = objP;
 			},
-			getViewed: async function () {
-				const response = await axios.get(URLSERVER+'api/products/most/viewed');
-				this.viewed = response.data.data;
-			},
-			getRecent: async function () {
-				const response = await axios.get(URLSERVER+'api/products/most/recent');
-				this.recent = response.data.data;
-			},
-			getSold: async function () {
-				const response = await axios.get(URLSERVER+'api/products/most/sold');
-				this.sold = response.data.data;	
-			},
-			getBestPrice: async function () {
-				const response = await axios.get(URLSERVER+'api/products/best/price');
-				this.best_price = response.data.data;
-			}
+			// getViewed: async function () {
+			// 	const response = await axios.get(URLSERVER+'api/products/most/viewed');
+			// 	this.viewed = response.data.data;
+			// },
+			// getRecent: async function () {
+			// 	const response = await axios.get(URLSERVER+'api/products/most/recent');
+			// 	this.recent = response.data.data;
+			// },
+			// getSold: async function () {
+			// 	const response = await axios.get(URLSERVER+'api/products/most/sold');
+			// 	this.sold = response.data.data;	
+			// },
+			// getBestPrice: async function () {
+			// 	const response = await axios.get(URLSERVER+'api/products/best/price');
+			// 	this.best_price = response.data.data;
+			// }
 		},
         mounted(){
-			this.getViewed();
-			this.getRecent();
-			this.getSold();
-			this.getBestPrice();
+			// console.log("productos::> ",productos);
+			// console.log("productos.recent::> ",productos.recent);
+			// this.getViewed();
+			// this.getRecent();
+			// this.getSold();
+			// this.getBestPrice();
 		}
     }
 </script>

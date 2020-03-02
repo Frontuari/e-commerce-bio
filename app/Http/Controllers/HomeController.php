@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Coin;
+use App\Advs;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,26 @@ class HomeController extends Controller
     public function index()
     {
         $Coin = Coin::where("id",1)->first();
-        return view("home",["tasa_dolar"=>$Coin->rate]);
+        
+        $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
+        $Medio = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio")).'%'])->orderBy('order','ASC')->get();
+        $Medio_Bajo = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
+        $footer = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
+
+        $MostRecent = Product::where('status','A')->orderBy('created_at','desc')->take(10)->get();
+        $MostView = Product::where('status','A')->orderBy('qty_view','desc')->take(10)->get();
+        $MostSold = Product::where('status','A')->orderBy('qty_sold','desc')->take(10)->get();
+        $BestPrice = Product::where('status','A')->orderBy('price','asc')->take(10)->get();
+
+        return view("home",[
+            "tasa_dolar"=>$Coin->rate,
+            "sliders"=>$Slider,
+            "medio"=>$Medio,
+            "medio_bajo"=>$Medio_Bajo,
+            "recent"=>$MostRecent,
+            "viewed"=>$MostView,
+            "sold"=>$MostSold,"bestprice"=>$BestPrice,
+            "footer"=>$footer
+        ]);
     }
 }

@@ -10,17 +10,24 @@
 	
 	</div>
 
-	<slider></slider>
+	<slider :sliders="{{ $sliders }}"></slider>
 
 	<combos></combos>
 
-	<ads></ads>
+	<ads :ads="{{ $medio }}"></ads>
 
-	<offers></offers>
+	<offers :medio_bajo="{{ $medio_bajo }}"></offers>
 
-	<nuestros-productos :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></nuestros-productos>
+	<nuestros-productos 
+		:recent="{{ $recent }}"
+		:viewed="{{ $viewed }}"
+		:sold="{{ $sold }}"
+		:best_price="{{ $bestprice }}"
+		:tasadolar="{{$tasa_dolar}}" 
+		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
+	</nuestros-productos>
 
-	<footer-ad></footer-ad>
+	<footer-ad :ads="{{ $footer }}"></footer-ad>
 
 @stop
 

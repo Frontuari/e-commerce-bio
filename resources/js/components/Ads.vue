@@ -44,17 +44,18 @@ export default {
         }
     },
     methods: {
-		getAds: async function() {
-            const response = await axios.get(URLSERVER+'api/advs/type/medio');
-			const medio = response.data.data;
-			this.backgrounds.push('url(storage/'+medio[0].image+')');
-			this.backgrounds.push('url(storage/'+medio[1].image+')');
-			this.backgrounds.push('url(storage/'+medio[2].image+')');
-			this.backgrounds.push('url(storage/'+medio[3].image+')');
+		getAds: function() {
+			this.backgrounds.push('url(storage/'+this.ads[0].image+')');
+			this.backgrounds.push('url(storage/'+this.ads[1].image+')');
+			this.backgrounds.push('url(storage/'+this.ads[2].image+')');
+			this.backgrounds.push('url(storage/'+this.ads[3].image+')');
         }
     },
     mounted() {
         this.getAds();
-    }
+	},
+	props: {
+		ads: Array
+	}
 }
 </script>

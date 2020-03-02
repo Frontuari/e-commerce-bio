@@ -16,7 +16,7 @@
                         </div>-->
 
                         <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
-                           <a  v-bind:href="slider.url" href="#" class="btn">Comprar</a>
+                           <a  v-bind:href="slider.url" class="btn">Comprar</a>
                         </div>
 
                          <div class="carousel-caption caption-right" v-if="slider.order == 'der'">
@@ -40,20 +40,8 @@
 </template>
 <script>
     export default {
-        data() {
-            return {
-                sliders: []
-            }
-        },
-        methods: {
-            getSliders: async function() {
-                const response = await axios.get(URLSERVER+'api/advs/type/top');
-                this.sliders = response.data.data;
-                console.log(this.sliders);
-            },
-        },
-        mounted() {
-            this.getSliders();
+        props: {
+            sliders: Array
         }
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <header id="myHeader">
-		<div class="top-header color-white">
+		<!-- <div class="top-header color-white">
 			<div class="container-fluid">
 				<div class="row align-items-center">
 					<div class="col-md-6">
@@ -9,17 +9,17 @@
 							<a href="tel:584241234567">+58 424 123 4567</a>
 						</div>
 					</div>
-					<!--<div class="col-md-6">
+					<div class="col-md-6">
 						<ul class="social-nav">
 							<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
 							<li><a href="#"><img src="assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
 							<li><a href="#"><img src="assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
 							<li><a href="#"><img src="assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 						</ul>
-					</div>-->
+					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
@@ -28,7 +28,10 @@
 							<img src="assets/img/menu-movil-bio.svg" alt="Menu Bars">
 						</button>
 					</div>
-					<div id="search-header" class="col-lg-5 col-md-12">
+					<div id="brand-header" class="col-lg-2 col-4">
+						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
+					</div>
+					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" action="">
 							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)">
 							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
@@ -41,10 +44,8 @@
 
 						</form>
 					</div>
-					<div id="brand-header" class="col-lg-2 col-4">
-						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
-					</div>
-					<div id="nav-header" class="col-lg-5 col-4">
+					
+					<div id="nav-header" class="col-lg-4 col-4">
 						<ul>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
