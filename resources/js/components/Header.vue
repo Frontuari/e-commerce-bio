@@ -32,13 +32,16 @@
 						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="search-header" class="col-lg-6 col-md-12">
-						<form class="form-inline" action="">
-							<input class="form-control" type="search" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)">
-							<button class="btn btn-search" type="submit"><img src="assets/img/busqueda-bio.svg"></button>
+						<form class="form-inline" v-on:submit="search()">
+							<input class="form-control" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
+							<button class="btn btn-search" type="button" @click="search()"><img src="assets/img/busqueda-bio.svg"></button>
 							<div class="keyup_search" :style="{ display: dSearch }">
 								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
-									<li v-for="ser in searched" :key="ser.id"><i class="fa fa-search" aria-hidden="true"></i> {{ser.name}}</li>
+									<li v-for="ser in searched" :key="ser.id">
+										<img :style="{width: '6%'}" :src="'storage/'+ser.photo | MediumImage">
+										{{ser.name}}
+									</li>
 								</ol>
 							</div>
 
@@ -186,6 +189,7 @@ export default {
 			searched: {},
 			dSearch: 'none',
 			gifSearch:'none',
+			searchText: '',
 			user: {
 				name: '',
 				email: '',
@@ -198,6 +202,11 @@ export default {
 		userlogged: Object
 	},
     methods: {
+		search() {
+			const route = "/catalog?search="+this.searchText;
+			window.location.href = route;
+			event.preventDefault();
+		},
         async getCategories() {
 			const response = await axios.get(URLSERVER+"api/categories");
 			this.categories = response.data.data;
