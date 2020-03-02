@@ -1393,16 +1393,16 @@
 			display: none;
 		}
 		#combo-group-1{
-			background-image: url('../img/combo-bio-1.jpg');
+			/* background-image: url('../img/combo-bio-1.jpg'); */
 			height: 100%;
 			margin: 0;
 		}
 		#combo-group-2{
-			background-image: url('../img/combo-bio-2.jpg');
+			/* background-image: url('../img/combo-bio-2.jpg'); */
 			margin-bottom: 2rem;
 		}
 		#combo-group-3{
-			background-image: url('../img/combo-bio-3.jpg');
+			/* background-image: url('../img/combo-bio-3.jpg'); */
 		}
 	}
 	@media (max-width: 991px){
