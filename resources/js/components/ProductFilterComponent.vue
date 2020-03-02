@@ -39,7 +39,13 @@
 								</div>
 								<a href="#" class="product-title">{{ product_recent.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
-								<div class="product-prices">
+								<div class="product-prices" v-if="product_recent.impuesto > 0">
+									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="product_recent.impuesto > 0">
+									<p> ${{ (product_recent.calculado / tasadolar) | FormatDolar}} / Bs {{ product_recent.calculado | FormatNumber }}</p>
+								</div>
+								<div class="product-prices" v-if="!product_recent.impuesto">
 									<p> ${{ (product_recent.price / tasadolar) | FormatDolar}} / Bs {{ product_recent.price | FormatNumber }}</p>
 								</div>
 							</div>
@@ -66,8 +72,14 @@
 								</div>
 								<a href="#" class="product-title">{{ product_sold.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
-								<div class="product-prices">
-									<p>${{ (product_sold.price / tasadolar) | FormatDolar}} / Bs {{ product_sold.price | FormatNumber }}</p>
+								<div class="product-prices" v-if="product_sold.impuesto > 0">
+									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="product_sold.impuesto > 0">
+									<p> ${{ (product_sold.calculado / tasadolar) | FormatDolar}} / Bs {{ product_sold.calculado | FormatNumber }}</p>
+								</div>
+								<div class="product-prices" v-if="!product_sold.impuesto">
+									<p> ${{ (product_sold.price / tasadolar) | FormatDolar}} / Bs {{ product_sold.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -93,8 +105,14 @@
 								</div>
 								<a href="#" class="product-title">{{ product_view.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
-								<div class="product-prices">
-									<p>${{ (product_view.price / tasadolar) | FormatDolar}} / Bs {{ product_view.price | FormatNumber }}</p>
+								<div class="product-prices" v-if="product_view.impuesto > 0">
+									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="product_view.impuesto > 0">
+									<p> ${{ (product_view.calculado / tasadolar) | FormatDolar}} / Bs {{ product_view.calculado | FormatNumber }}</p>
+								</div>
+								<div class="product-prices" v-if="!product_view.impuesto">
+									<p> ${{ (product_view.price / tasadolar) | FormatDolar}} / Bs {{ product_view.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -120,8 +138,14 @@
 								</div>
 								<a href="#" class="product-title">{{ product_best.name }}</a>
 								<!-- <span class="product-info">500 g</span> -->
-								<div class="product-prices">
-									<p>${{ (product_best.price / tasadolar) | FormatDolar}} / Bs {{ product_best.price | FormatNumber }}</p>
+								<div class="product-prices" v-if="product_best.impuesto > 0">
+									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="product_best.impuesto > 0">
+									<p> ${{ (product_best.calculado / tasadolar) | FormatDolar}} / Bs {{ product_best.calculado | FormatNumber }}</p>
+								</div>
+								<div class="product-prices" v-if="!product_best.impuesto">
+									<p> ${{ (product_best.price / tasadolar) | FormatDolar}} / Bs {{ product_best.price | FormatNumber }}</p>
 								</div>
 							</div>
 						</div>
@@ -158,31 +182,10 @@
 		methods: {
 			getProduct: async function(objP) {
 				this.product = objP;
-			},
-			// getViewed: async function () {
-			// 	const response = await axios.get(URLSERVER+'api/products/most/viewed');
-			// 	this.viewed = response.data.data;
-			// },
-			// getRecent: async function () {
-			// 	const response = await axios.get(URLSERVER+'api/products/most/recent');
-			// 	this.recent = response.data.data;
-			// },
-			// getSold: async function () {
-			// 	const response = await axios.get(URLSERVER+'api/products/most/sold');
-			// 	this.sold = response.data.data;	
-			// },
-			// getBestPrice: async function () {
-			// 	const response = await axios.get(URLSERVER+'api/products/best/price');
-			// 	this.best_price = response.data.data;
-			// }
+			}
 		},
-        mounted(){
-			// console.log("productos::> ",productos);
-			// console.log("productos.recent::> ",productos.recent);
-			// this.getViewed();
-			// this.getRecent();
-			// this.getSold();
-			// this.getBestPrice();
+		mounted() {
+			console.log("recent::> ",this.recent);
 		}
     }
 </script>

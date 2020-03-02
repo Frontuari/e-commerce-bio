@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Coin;
 use App\Advs;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,10 +34,37 @@ class HomeController extends Controller
         $Medio_Bajo = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
         $footer = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
 
-        $MostRecent = Product::where('status','A')->orderBy('created_at','desc')->take(10)->get();
-        $MostView = Product::where('status','A')->orderBy('qty_view','desc')->take(10)->get();
-        $MostSold = Product::where('status','A')->orderBy('qty_sold','desc')->take(10)->get();
-        $BestPrice = Product::where('status','A')->orderBy('price','asc')->take(10)->get();
+        $MostRecent = Product::where('products.status','A')
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->orderBy('created_at','desc')
+        ->take(10)
+        ->get();
+
+        $MostView = Product::where('products.status','A')
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->orderBy('qty_view','desc')
+        ->take(10)
+        ->get();
+
+        $MostSold = Product::where('products.status','A')
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->orderBy('qty_sold','desc')
+        ->take(10)
+        ->get();
+
+        $BestPrice = Product::where('products.status','A')
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->orderBy('price','asc')
+        ->take(10)
+        ->get();
 
         return view("home",[
             "tasa_dolar"=>$Coin->rate,

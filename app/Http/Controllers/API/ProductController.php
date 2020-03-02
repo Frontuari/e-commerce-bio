@@ -17,7 +17,11 @@ class ProductController extends BaseController
         $data = $request->all();
         $limit = ($data["limit"] ?? 10);
         
-        $Products = Product::filter($filters)->where('status','A')->paginate($limit);
+        $Products = Product::filter($filters)
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->where('products.status','A')->paginate($limit);
         return $this->sendResponse($Products, 'Product retrieved successfully.');
     }
 
