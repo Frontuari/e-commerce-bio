@@ -330,7 +330,7 @@
 		bottom: -16px;
 		width: 150px;
 		height: 80px;
-		background-image: url('../img/fondo_cabecera_nuevo.svg');
+		/*background-image: url('../img/fondo_cabecera_nuevo.svg');*/
 	}
 	.middle-header .container{
 		position: relative;
@@ -473,6 +473,7 @@
 	}
 	.navbar-custom{
 		height: 25px;
+		border-bottom: 1px solid #ccc;
 	}
 	#search-header form{
 		/* max-width: 350px; */
@@ -2967,9 +2968,9 @@
 		}
 	}
 
-	.container-fluid{
+	/*.container-fluid{
 		width:90% !important;
-	}
+	}*/
 
 	.product-list .container-fluid{
 		width: 100% !important;

@@ -89,9 +89,12 @@ var globalFunc = {
         if(window.localStorage.getItem('cartNew')) {
             cart = JSON.parse(window.localStorage.getItem('cartNew'));
         }
-        cart = globalFunc.validateCart(product,cart,cantidad);       
+        cart = globalFunc.validateCart(product,cart,cantidad);
         window.localStorage.setItem('cartNew', JSON.stringify(cart));
-        EventBus.$emit("update_cantCart",cart.length);
+        console.log("cart::> ",cart);
+        const cantUpdate = globalFunc.getCartCant(cart);
+        console.log("cantUpdate::> ",cantUpdate);
+        EventBus.$emit("update_cantCart",cantUpdate);
     },
     validateCart: function(product,tmp,cantidad) {
         let exist = false;
@@ -105,6 +108,13 @@ var globalFunc = {
             tmp.push({product: product,cant: cantidad});
         }
         return tmp;
+    },
+    getCartCant: function(cart) {
+        let cant = 0;;
+        cart.forEach( (a) => {
+            cant += a.cant
+        });
+        return cant;
     },
     removeCart(index) {
         this.products_cart.splice(index,1);

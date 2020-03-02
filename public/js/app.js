@@ -74896,7 +74896,10 @@ var globalFunc = {
 
     cart = globalFunc.validateCart(product, cart, cantidad);
     window.localStorage.setItem('cartNew', JSON.stringify(cart));
-    EventBus.$emit("update_cantCart", cart.length);
+    console.log("cart::> ", cart);
+    var cantUpdate = globalFunc.getCartCant(cart);
+    console.log("cantUpdate::> ", cantUpdate);
+    EventBus.$emit("update_cantCart", cantUpdate);
   },
   validateCart: function validateCart(product, tmp, cantidad) {
     var exist = false;
@@ -74915,6 +74918,14 @@ var globalFunc = {
     }
 
     return tmp;
+  },
+  getCartCant: function getCartCant(cart) {
+    var cant = 0;
+    ;
+    cart.forEach(function (a) {
+      cant += a.cant;
+    });
+    return cant;
   },
   removeCart: function removeCart(index) {
     this.products_cart.splice(index, 1);
