@@ -2804,7 +2804,7 @@
 		position: absolute;
 		right: 0;
 		bottom: 0;
-		background-image: url('../img/fondo-pie-pagina-bio.png');
+		/* background-image: url('../img/fondo-pie-pagina-bio.png'); */
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;

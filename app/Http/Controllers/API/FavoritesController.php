@@ -107,8 +107,12 @@ class FavoritesController extends BaseController
     {
         $product_id = $request->products_id;
         $user_id = $request->user_id;
-
-        $res=Favorites::where('id',$product_id)->where('users_id',$user_id)->delete();
+        
+        $res = DB::table('favorites')
+        ->where('products_id', '=', $product_id)
+        ->where('users_id', '=', $user_id)
+        ->delete();
+        
         if($res==0){
             $result =  $this->sendError();
         }else{

@@ -662,23 +662,36 @@
 			},
 			removeToFavorite(id,user_id,index)
 			{
-				let products_id = id;
-				let users_id = user_id;
-				
-                this.favorites.splice(index,1);
-				this.cant_favorites = this.favorites.length;
+				Swal.fire({
+					title: 'Eliminar Favorito',
+					text: "¿Desea eliminar su producto de Favoritos?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Eliminar!',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.value) {
+						const products_id = id;
+						const users_id = this.userData.id;
+						
+						this.favorites.splice(index,1);
+						this.cant_favorites = this.favorites.length;
 
-				axios.post(URLHOME+'api/favorites/delete/', {
-                    products_id: products_id,
-                    user_id: users_id
-                })
-                .then(function (response) {
-                	console.log(response.data);
-                	EventBus.$emit("update_cantFavorite",response.data);
-                })
-                .catch(function (error) {
-                	console.log(error);
-                });
+						axios.post(URLHOME+'api/favorites/delete', {
+							products_id: products_id,
+							user_id: users_id
+						})
+						.then(function (response) {
+							console.log(response.data);
+							EventBus.$emit("update_cantFavorite",response.data);
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+					}
+				});
 			},
 			update_profile(user)
 			{
@@ -772,18 +785,37 @@
 			deleteDirection(direction,index)
 			{
 
-				//eliminamos el elemento
-                this.userlogged.directions.splice(index,1);
+				Swal.fire({
+					title: 'Eliminar Dirección',
+					text: "¿Desea eliminar su dirección?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Eliminar!',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.value) {
+						this.userlogged.directions.splice(index,1);
 
-				axios.delete(URLHOME+'api/user_address/'+direction.id, {
-					id: direction.id,
-                })
-                .then(function (response) {
-                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
-                })
-                .catch(function (error) {
-                	console.log(error);
-                });
+						axios.delete(URLHOME+'api/user_address/'+direction.id, {
+							id: direction.id,
+						})
+						.then(function (response) {
+							fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+						Swal.fire(
+							'Eliminado!',
+							'Su dirección ha sido borrada.',
+							'success'
+						)
+					}
+				})
+
+
 			},
 			showAddDirection()
 			{
@@ -836,6 +868,7 @@
 		},
 		created() {
 			this.userData = this.userlogged;
+			console.log("this.userData::> ",this.userData);
 			for(let i = 0;i<100;i++) {
                 this.cant_product[i] = 1;
             }

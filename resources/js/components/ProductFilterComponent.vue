@@ -183,9 +183,6 @@
 			getProduct: async function(objP) {
 				this.product = objP;
 			}
-		},
-		mounted() {
-			console.log("recent::> ",this.recent);
 		}
     }
 </script>
