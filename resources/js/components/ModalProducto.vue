@@ -24,7 +24,7 @@
                                         <div class="product-quantity">
                                             <label>Cantidad</label>
                                             <div class="product-quantity-group">
-                                                <input id="quantity" class="form-control" type="text" name="quantity" v-model="cantModal" value="1">
+                                                <input id="quantity" class="form-control" type="number" name="quantity" v-model="cantModal" value="1">
                                                 <div class="product-quantity-buttons">
                                                     <button type="button" class="btn" @click="count(1)">
                                                         <img src="assets/img/increase.png" alt="Increase">

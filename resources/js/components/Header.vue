@@ -275,7 +275,13 @@ export default {
 		this.getCategories();
 		this.getFavorites();
 		if( window.localStorage.getItem("cartNew") ){
-			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
+			const _this = this;
+			JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {
+				console.log("a::> ",a);
+				_this.cant_cart += parseInt(a.cant);
+			})
+
+			
 		}else{
 			this.cant_cart = 0;
 		}

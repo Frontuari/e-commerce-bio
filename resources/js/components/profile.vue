@@ -819,6 +819,9 @@
 			},
 			showAddDirection()
 			{
+				if(!this.userlogged.directions){
+					this.userlogged.directions = [];
+				}
 				this.userlogged.directions.push({
 					id: '',
 					cities_id: '1',
@@ -868,7 +871,6 @@
 		},
 		created() {
 			this.userData = this.userlogged;
-			console.log("this.userData::> ",this.userData);
 			for(let i = 0;i<100;i++) {
                 this.cant_product[i] = 1;
             }

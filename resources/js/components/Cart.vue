@@ -177,10 +177,16 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="address-name">Elegir Dirección:</label>
-															<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-name" name="address-name" value="Mi Casa">
+															<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-name" name="address-name" value="Seleccionar">
 															<span class="dropdown-arrow dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></span>
 															<div class="dropdown-menu">
-															    <div class="dropdown-item">
+																<div class="dropdown-item" v-for="direction in userlogged.directions">
+																	<div class="form-check form-check-radio">
+																		<input type="radio" class="form-check-input" id="customized" name="radio-address" :value="direction.id">
+																		<label for="customized" class="custom-check">{{direction.address}}</label>
+																	</div>
+															    </div>
+															    <!-- <div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="mi-casa" name="radio-address" value="1">
 																		<label for="mi-casa" class="custom-check">Mi Casa</label>
@@ -191,11 +197,11 @@
 																		<input type="radio" class="form-check-input" id="mi-oficina" name="radio-address" value="2">
 																		<label for="mi-oficina" class="custom-check">Mi Oficina</label>
 																	</div>
-															    </div>
+															    </div> -->
 															    <div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="customized" name="radio-address" value="0">
-																		<label for="customized" class="custom-check">Personalizada</label>
+																		<label for="customized" class="custom-check">Pick Up</label>
 																	</div>
 															    </div>
 															</div>
@@ -699,9 +705,9 @@ export default {
 		}
 
 		//total general
-		console.log("Total General "+this.total_cart);
+		// console.log("Total General "+this.total_cart);
 		if(this.isObject(this.userlogged)){
-			console.log("existe");
+			// console.log("existe");
 			this.datauser = this.userlogged;
 			console.log(this.datauser);
 		}else{

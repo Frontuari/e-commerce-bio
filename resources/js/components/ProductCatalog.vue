@@ -21,7 +21,14 @@
                         <div class="product-content" >
                             <a href="#" class="product-title">{{ product.name }}</a>
                             <!-- <span class="product-info">500 g</span> -->
-                            <div class="product-prices">
+
+                            <div class="product-prices" v-if="product.impuesto > 0">
+                                <p>IVA INCLUIDO</p>
+                            </div>
+                            <div class="product-prices" v-if="product.impuesto > 0">
+                                <p> ${{ (product.calculado / tasadolar) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
+                            </div>
+                            <div class="product-prices" v-if="!product.impuesto">
                                 <p> ${{ (product.price / tasadolar) | FormatDolar}} / Bs {{ product.price | FormatNumber }}</p>
                             </div>
                         </div>

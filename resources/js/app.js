@@ -100,12 +100,12 @@ var globalFunc = {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                tmp[b] = parseInt(tmp[b].cant) + cantidad;
+                tmp[b] = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
                 exist = true;
             }
         });
         if(!exist) {
-            tmp.push({product: product,cant: cantidad});
+            tmp.push({product: product,cant: parseInt(cantidad)});
         }
         return tmp;
     },
