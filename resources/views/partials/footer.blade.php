@@ -237,12 +237,17 @@
 		
 		jQuery(document).ready(function($){
 
-			// Swal.fire("probando");
+			$(".select2").select2({
+				placeholder: 'Selecccione',
+				width: '100%'
+			});
+
+			$('[data-toggle="tooltip"]').tooltip();
 
 			setTimeout(function(){
 				$('body').addClass('loaded');
 				$('h1').css('color','#222222');
-			}, 1500);
+			}, 1200);
 
 			var $range = $(".js-range-slider");
 		    var $inputFrom = $(".js-input-from");

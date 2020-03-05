@@ -7,11 +7,12 @@ window._ = require('lodash');
  */
 
 try {
+    require('bootstrap');
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
     require('ion-rangeslider');
     window.Swal = require('sweetalert2');
-    require('bootstrap');
+    require('select2');
 } catch (e) {}
 
 /**

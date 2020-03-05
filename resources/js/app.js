@@ -55,6 +55,21 @@ Vue.filter('MediumImage',function(imageText) {
     return newImageText;
 });
 
+Vue.directive('select2', {
+    inserted(el) {
+        $(el).on('select2:select', () => {
+            const event = new Event('change', { bubbles: true, cancelable: true });
+            el.dispatchEvent(event);
+        });
+
+        $(el).on('select2:unselect', () => {
+            const event = new Event('change', {bubbles: true, cancelable: true})
+            el.dispatchEvent(event)
+        })
+    },
+});
+
+
 var globalFunc = {
     addToFavorite: function(product,user_id) {
         let products_id = product.id;
@@ -67,12 +82,10 @@ var globalFunc = {
         .then(function (response) {
             console.log(response.data);
             if(response.data == 'error') {
-                //alert("debe estar logeado para agregar a favoritos");
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Debes estar logueado para agregar a favoritos',
-                    //footer: '<a href>Why do I have this issue?</a>'
                 });
             }else {
                 EventBus.$emit("update_cantFavorite",response.data);
@@ -93,7 +106,7 @@ var globalFunc = {
         window.localStorage.setItem('cartNew', JSON.stringify(cart));
         console.log("cart::> ",cart);
         const cantUpdate = globalFunc.getCartCant(cart);
-        console.log("cantUpdate::> ",cantUpdate);
+        
         EventBus.$emit("update_cantCart",cantUpdate);
     },
     validateCart: function(product,tmp,cantidad) {
@@ -133,7 +146,8 @@ var globalFunc = {
                 this.cant_cart = this.products_cart.length;
                 this.total_cart = 0;
                 this.updateCartTotal();
-                EventBus.$emit("update_cantCart",this.products_cart.length);
+                const cantUpdate = globalFunc.getCartCant(cart);
+                EventBus.$emit("update_cantCart",cantUpdate);
             }
         })
             
@@ -144,11 +158,9 @@ var globalFunc = {
         if( window.localStorage.getItem("cartNew") ){
             this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
             this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
-            console.log(this.products_cart);
         }else{
             this.cant_cart = 0;
         }
-        //For para sacar el total del carro de compras
         for(let i = 0; i<this.cant_cart; i++)
         {
             if(this.products_cart[i].product.discount>0)

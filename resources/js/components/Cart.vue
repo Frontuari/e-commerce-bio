@@ -177,37 +177,21 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="address-name">Elegir Dirección:</label>
-															<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-name" name="address-name" value="Seleccionar">
-															<span class="dropdown-arrow dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></span>
-															<div class="dropdown-menu">
-																<div class="dropdown-item" v-for="direction in userlogged.directions">
-																	<div class="form-check form-check-radio">
-																		<input type="radio" class="form-check-input" id="customized" name="radio-address" :value="direction.id">
-																		<label for="customized" class="custom-check">{{direction.address}}</label>
-																	</div>
-															    </div>
-															    <!-- <div class="dropdown-item">
-																	<div class="form-check form-check-radio">
-																		<input type="radio" class="form-check-input" id="mi-casa" name="radio-address" value="1">
-																		<label for="mi-casa" class="custom-check">Mi Casa</label>
-																	</div>
-															    </div>
-															    <div class="dropdown-item">
-																	<div class="form-check form-check-radio">
-																		<input type="radio" class="form-check-input" id="mi-oficina" name="radio-address" value="2">
-																		<label for="mi-oficina" class="custom-check">Mi Oficina</label>
-																	</div>
-															    </div> -->
-															    <div class="dropdown-item">
-																	<div class="form-check form-check-radio">
-																		<input type="radio" class="form-check-input" id="customized" name="radio-address" value="0">
-																		<label for="customized" class="custom-check">Pick Up</label>
-																	</div>
-															    </div>
-															</div>
+															<select v-model="selectedDirection" v-select2 class="select2">
+																<option value='0'>Pick - Up</option>
+																<option v-for="direction in userlogged.directions" :key="direction.id" :value='direction.id'>{{direction.address}}</option>
+															</select>
 														</div>
 													</div>
-													<div class="col-lg-6">
+													
+													<div class="col-lg-6" v-if="selectedDirection == 0">
+														<div class="form-group">
+															<label for="address-urb">Hora y Fecha:</label>
+															<input type="text" class="form-control" id="timepick" name="timepick" value="">
+														</div>
+													</div>
+													
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-urb">Urbanización / Barrio / Empresa:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -215,7 +199,7 @@
 															<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="Urb Zaragoza">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-av">Sector, Avenida, calles, veredas:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -223,7 +207,7 @@
 															<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="Avenida 1, entre calles 10 y 11">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-num">Número de casa/local:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -231,7 +215,7 @@
 															<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="Casa 57">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-prov">Municipio/Provincia:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -239,155 +223,155 @@
 															<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" value="Araure">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-state">Estado:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
 															<input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="address-state" name="address-state" disabled="disabled" value="">
 															<div class="dropdown-menu dropdown-menu-state">
-															    <div class="dropdown-item">
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="amazonas" name="radio-state" value="Amazonas" checked="checked">
 																		<label for="amazonas" class="custom-check">Amazonas</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="anzoategui" name="radio-state" value="Anzoátegui">
 																		<label for="anzoategui" class="custom-check">Anzoátegui</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="apure" name="radio-state" value="Apure">
 																		<label for="apure" class="custom-check">Apure</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="aragua" name="radio-state" value="Aragua">
 																		<label for="aragua" class="custom-check">Aragua</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="bolivar" name="radio-state" value="Barinas">
 																		<label for="barinas" class="custom-check">Barinas</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="bolivar" name="radio-state" value="Bolívar">
 																		<label for="bolivar" class="custom-check">Bolívar</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="carabobo" name="radio-state" value="Carabobo">
 																		<label for="carabobo" class="custom-check">Carabobo</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="cojedes" name="radio-state" value="Cojedes">
 																		<label for="cojedes" class="custom-check">Cojedes</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="delta-amacuro" name="radio-state" value="Delta Amacuro">
 																		<label for="delta-amacuro" class="custom-check">Delta Amacuro</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="falcon" name="radio-state" value="Falcón">
 																		<label for="falcon" class="custom-check">Falcón</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="distrito-capital" name="radio-state" value="Distrito Capital">
 																		<label for="distrito-capital" class="custom-check">Distrito Capital</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="guarico" name="radio-state" value="Guárico">
 																		<label for="guarico" class="custom-check">Guárico</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="lara" name="radio-state" value="Lara">
 																		<label for="lara" class="custom-check">Lara</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="merida" name="radio-state" value="Mérida">
 																		<label for="merida" class="custom-check">Mérida</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="miranda" name="radio-state" value="Miranda">
 																		<label for="miranda" class="custom-check">Miranda</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="monagas" name="radio-state" value="Monagas">
 																		<label for="monagas" class="custom-check">Monagas</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="nueva-esparta" name="radio-state" value="Nueva Esparta">
 																		<label for="nueva-esparta" class="custom-check">Nueva Esparta</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="portuguesa" name="radio-state" value="Portuguesa">
 																		<label for="portuguesa" class="custom-check">Portuguesa</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="tachira" name="radio-state" value="Táchira">
 																		<label for="tachira" class="custom-check">Táchira</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="trujillo" name="radio-state" value="Trujillo">
 																		<label for="trujillo" class="custom-check">Trujillo</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="vargas" name="radio-state" value="Vargas">
 																		<label for="vargas" class="custom-check">Vargas</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="yaracuy" name="radio-state" value="Yaracuy">
 																		<label for="yaracuy" class="custom-check">Yaracuy</label>
 																	</div>
-															    </div>
-															    <div class="dropdown-item">
+																</div>
+																<div class="dropdown-item">
 																	<div class="form-check form-check-radio">
 																		<input type="radio" class="form-check-input" id="zulia" name="radio-state" value="Zulia">
 																		<label for="zulia" class="custom-check">Zulia</label>
 																	</div>
-															    </div>
+																</div>
 															</div>
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-post">Código postal:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -395,7 +379,7 @@
 															<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="3303">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-ref">Punto de Referencia (opcional):</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
@@ -613,7 +597,8 @@ export default {
             products_cart:0,
             total_cart:0,
 			datauser:[],
-			payments: []
+			payments: [],
+			selectedDirection: ''
         }
     },
 	props: {

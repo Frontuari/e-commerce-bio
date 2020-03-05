@@ -6,7 +6,9 @@
             </ol>
             <div class="carousel-inner">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
-                    <a v-bind:href="slider.url"><img class="d-block w-100" :src="'storage/'+slider.image" alt="First slide"></a>
+                    <a v-bind:href="slider.url">
+                        <img class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
+                    </a>
                     <div class="container">
                         <!--<div class="carousel-caption caption-left" >
                             <h5>¡Aprovecha nuestros combos!</h5>
@@ -15,13 +17,13 @@
                             <a href="#" class="btn">Comprar</a>
                         </div>-->
 
-                        <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
+                        <!-- <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
                            <a  v-bind:href="slider.url" class="btn">Comprar</a>
                         </div>
 
                          <div class="carousel-caption caption-right" v-if="slider.order == 'der'">
                            <a  v-bind:href="slider.url"  class="btn">Comprar</a>
-                        </div>
+                        </div> -->
 
 
                     </div>
