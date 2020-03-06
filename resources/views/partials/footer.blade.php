@@ -242,6 +242,13 @@
 				width: '100%'
 			});
 
+			$('.datetimepicker').daterangepicker({
+				"singleDatePicker": true,
+			    "timePicker": true,
+			    "startDate": "02/28/2020",
+			    "endDate": "03/05/2020"
+			});
+
 			$('[data-toggle="tooltip"]').tooltip();
 
 			setTimeout(function(){
@@ -452,8 +459,7 @@
 		});
 
 		//Elementos que se ejecutaran en el carro de compras
-		$(".btn.btn-submit.next.action-button,btn.btn-link.previous.action-button").click(function()
-		{
+		$(".btn.btn-submit.next.action-button,btn.btn-link.previous.action-button").click( () => {
 			$(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		});
 

@@ -13,6 +13,8 @@ try {
     require('ion-rangeslider');
     window.Swal = require('sweetalert2');
     require('select2');
+    window.moment = require('moment');
+    require('daterangepicker');
 } catch (e) {}
 
 /**

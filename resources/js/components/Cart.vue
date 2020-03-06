@@ -1,5 +1,5 @@
 <template>
-<section id="cart" class="cart">
+	<section id="cart" class="cart">
 		<div class="container">
 			<div class="row">
 				<div  class="col-md-12 mx-0" v-if="cant_cart <= 0">
@@ -124,7 +124,7 @@
 															<div class="order-footer-buttons">
 																<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
 																<p v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
-																<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
+																<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 															</div>
 														</div>
 													</div>
@@ -183,20 +183,18 @@
 															</select>
 														</div>
 													</div>
-													
 													<div class="col-lg-6" v-if="selectedDirection == 0">
 														<div class="form-group">
 															<label for="address-urb">Hora y Fecha:</label>
-															<input type="text" class="form-control" id="timepick" name="timepick" value="">
+															<input type="text" class="form-control datetimepicker" name="timepick" v-model="order.datetime">
 														</div>
-													</div>
-													
+													</div>													
 													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-urb">Urbanización / Barrio / Empresa:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" value="Urb Zaragoza">
+															<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" :value="objDirection.urb">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -204,7 +202,7 @@
 															<label for="address-av">Sector, Avenida, calles, veredas:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" value="Avenida 1, entre calles 10 y 11">
+															<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" :value="objDirection.sector">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -212,7 +210,7 @@
 															<label for="address-num">Número de casa/local:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" value="Casa 57">
+															<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" :value="objDirection.nro_home">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -220,7 +218,7 @@
 															<label for="address-prov">Municipio/Provincia:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" value="Araure">
+															<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" value="">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -376,7 +374,7 @@
 															<label for="address-post">Código postal:</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" value="3303">
+															<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" :value="objDirection.zip_code">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -384,7 +382,7 @@
 															<label for="address-ref">Punto de Referencia (opcional):</label>
 															<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 															<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-															<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" value="A lado de bodegon Girasol">
+															<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" :value="objDirection.reference_point">
 														</div>
 													</div>
 												</div>
@@ -413,9 +411,9 @@
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
 																		
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.discount * product_cart.cant) | FormatNumber}}</h3>
 
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ (product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.price * product_cart.cant) | FormatNumber}}</h3>
 
 																	</div>
 																
@@ -423,7 +421,7 @@
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 															</div>
@@ -451,7 +449,7 @@
 												<div class="col-lg-12" v-for="pay in payments" :key="pay.id">
 													<div class="payment-option">
 														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method">
+															<input type="radio" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id" v-model="selectedPayment">
 															<label :for="'credit-card'+pay.id" class="custom-check"><span></span>{{pay.name}}
 																<!-- <div class="payment-imgs-group">
 																	<img src="assets/img/master-bio-mercados.svg" alt="Master Card">
@@ -507,7 +505,7 @@
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
-															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>
+															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>
 														</div>
 													</div>
 												</div>
@@ -523,14 +521,14 @@
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">10$ / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">10$ / Bs {{product_cart.product.price | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{product_cart.product.price / tasadolar | FormatDolar }} / Bs {{product_cart.product.price | FormatNumber}}</h3>
 																	</div>
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">100$ / Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																	</div>
 																</div>
 
@@ -538,7 +536,7 @@
 																	<div class="row">
 																		<label class="order-text">Datos Personales</label>
 																		<p><b>Nombre y Apellido: </b>{{this.datauser.name}}</p>
-																		<p><b>Teléfono de Contacto: </b>{{this.datauser.phone}}7</p>
+																		<p><b>Teléfono de Contacto: </b>{{this.datauser.phone}}</p>
 																		<p><b>Correo Electrónico: </b>{{this.datauser.email}}</p>
 																	</div>
 																</div>
@@ -550,7 +548,7 @@
 																</div>
 															</div>
 															<div class="order-footer-buttons">
-																<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>
+																<button type="button" @click="saveOrder()" class="btn btn-submit">CONFIRMAR PAGO</button>
 																<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
 															</div>
 														</div>
@@ -575,7 +573,7 @@
 													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.43 19.97"><title>mis-pedidos-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path d="M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"/><path d="M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"/><path d="M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"/><path d="M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"/><path d="M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"/><path d="M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"/><path d="M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"/></g></g></svg>
 													Orden #3362
 												</h3>
-												<a href="/catalago.php" type="button" class="btn btn-submit">SEGUIR COMPRANDO</a>
+												<a href="/catalog" type="button" class="btn btn-submit">SEGUIR COMPRANDO</a>
 											</div>
 										</div>
 									</div>
@@ -598,7 +596,9 @@ export default {
             total_cart:0,
 			datauser:[],
 			payments: [],
-			selectedDirection: ''
+			selectedDirection: '',
+			selectedPayment: '',
+			order: {}
         }
     },
 	props: {
@@ -609,6 +609,10 @@ export default {
 		async getPayments() {
 			const response = await axios.get(URLSERVER+"api/payment_methods");
 			this.payments = response.data.data;
+		},
+		saveOrder() {
+			console.log("Order::> ",this.order);
+			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		},
 		isObject: function(o) 
 		{ 
@@ -670,7 +674,8 @@ export default {
 		this.getPayments();
     },
     mounted() 
-    {
+    {    	
+
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
@@ -689,15 +694,37 @@ export default {
 			}
 		}
 
-		//total general
-		// console.log("Total General "+this.total_cart);
 		if(this.isObject(this.userlogged)){
-			// console.log("existe");
 			this.datauser = this.userlogged;
-			console.log(this.datauser);
 		}else{
 			this.datauser.id = 'undefined';
-		}		
+		}
+
+		this.order = {
+			user_id: this.datauser.id,
+			direction: this.selectedDirection,
+			datetime: 'dd/mm/YYYY',
+			products: this.products_cart,
+			payment: this.selectedPayment
+    	};
+    },
+    computed: {
+    	objDirection: function() {
+    		const len = this.userlogged.directions.length;
+    		let id = -1;
+    		for(let i = 0; i<len ; i++) {
+    			if(this.userlogged.directions[i].id == this.selectedDirection) {    				
+    				id = i;
+    				break;
+    			}
+    		}
+    		if(id == -1){
+    			return '';
+    		}else{
+    			return this.userlogged.directions[id];	
+    		}
+    		
+    	}
     }
 }
 </script>
