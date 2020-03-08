@@ -9,15 +9,15 @@
     class UsuarioRegistro extends Mailable {
 
         use Queueable, SerializesModels;
-
+        public $link;
         /**
          * Create a new message instance.
          *
          * @return void
          */
-        public function __construct()
+        public function __construct($link)
         {
-        
+            $this->link = $link;
         }
 
         /**

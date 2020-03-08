@@ -30,36 +30,40 @@ class RegisterController extends BaseController
             'c_password' => 'required|same:password',
         ]);
    
-        if($validator->fails()){
+        if($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());       
         }
         
         $data = $request->all();
 
-         $people = People::create([
-             'rif' => '11111',
+        $people = People::create([
+            'rif' => '11111',
             'name' => $data['name'],
             'sex' => $data["sex"],
-             'birthdate' => '01/01/1990',
-             'cities_id' => '1',
-             'phone' => '',
-             'phone_home' => '',
-         ]);
+            'birthdate' => '01/01/1990',
+            'cities_id' => '1',
+            'phone' => '',
+            'phone_home' => '',
+        ]);
 
-         $user = User::create([
-             'id'=>'15',
-             'name' => $data['name'],
-             'email' => $data['email'],
-             'password' => password_hash($data['password'],PASSWORD_BCRYPT),
-             'peoples_id' => $people->id,
-             'groups_id' => '1',
-             'coins_id' => '1'
-         ]);
+        $tokenRegister = password_hash($data['email'],PASSWORD_BCRYPT);
 
-         DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
+        $user = User::create([
+            'id'=>'15',
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'validateemail' => $tokenRegister,
+            'password' => password_hash($data['password'],PASSWORD_BCRYPT),
+            'peoples_id' => $people->id,
+            'groups_id' => '1',
+            'coins_id' => '1'
+        ]);
+
+        DB::table("user_roles")->insert(["user_id" => $user->id, 'role_id' => '2']);
         
-        $success['token'] =  $user->createToken('Bio')->accessToken;
-        Mail::to($data["email"])->queue(new UsuarioRegistro());
+        // $success['token'] =  $user->createToken('Bio')->accessToken;
+        $link = env("APP_URL")."validateUser/".$tokenRegister;
+        Mail::to($data["email"])->queue(new UsuarioRegistro($link));
         $success['name'] =  $user->name;
         $success['user_id'] =  $user->id;
         return $this->sendResponse($success, 'User register successfully.');
@@ -124,6 +128,31 @@ class RegisterController extends BaseController
         ->first();
         // $_SESSION["usuario"]=$datos;
         return $datos;
+    }
+
+    public function validateUser($token) {
+        $datos = DB::table("users")->where("validateemail",$token)->first();
+        $_SESSION['usuario']["email"] = $datos->email;
+        $_SESSION['usuario']["id"] = $datos->id;
+
+        DB::table("users")
+        ->where("validateemail",$token)
+        ->update([
+            'validateemail' => '';
+        ]);
+
+        if($datos->email) {
+            $url = env("APP_URL");
+            echo "redireccionando a Biomercados...";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url."/api_rapida.php?evento=obtenerTodo");
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            $dataCurl= curl_exec($ch);
+            dd($dataCurl);
+            curl_close($ch);
+            return redirect()->route("home");
+        }
+        return "Token invalido";
     }
 
 }

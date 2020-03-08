@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('groups_id')->nullable();
             $table->string('name', 200)->nullable();
             $table->string('email', 200);
+            $table->string('validateemail', 255)->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('failed_attempts')->nullable()->default('0');
             $table->unsignedInteger('purchase_quantity')->nullable()->default('0');

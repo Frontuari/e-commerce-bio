@@ -23,9 +23,9 @@ Route::get('/profile','ProfileController@index')->name("profile");
 
 Route::get('/cart','CartController@index')->name("cart");
 
+Route::get('/validateUser/{hash}','API\RegisterController@validateUser');
 
-Auth::routes();
-
+// Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
