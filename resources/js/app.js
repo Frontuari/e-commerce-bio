@@ -73,14 +73,14 @@ Vue.directive('select2', {
 var globalFunc = {
     addToFavorite: function(product,user_id) {
         let products_id = product.id;
-        console.log("product::> ",products_id);
-        console.log("user_id::> ",user_id);
+        // console.log("product::> ",products_id);
+        // console.log("user_id::> ",user_id);
         axios.post(URLHOME+'api/favorites', {
             products_id: products_id,
             user_id: user_id
         })
         .then(function (response) {
-            console.log(response.data);
+            // console.log(response.data);
             if(response.data == 'error') {
                 Swal.fire({
                     icon: 'error',
@@ -104,7 +104,7 @@ var globalFunc = {
         }
         cart = globalFunc.validateCart(product,cart,cantidad);
         window.localStorage.setItem('cartNew', JSON.stringify(cart));
-        console.log("cart::> ",cart);
+        // console.log("cart::> ",cart);
         const cantUpdate = globalFunc.getCartCant(cart);
         
         EventBus.$emit("update_cantCart",cantUpdate);
@@ -121,6 +121,10 @@ var globalFunc = {
             tmp.push({product: product,cant: parseInt(cantidad)});
         }
         return tmp;
+    },
+    dropCart: function() {
+        window.localStorage.removeItem('cartNew');
+        EventBus.$emit("update_cantCart",0);
     },
     getCartCant: function(cart) {
         let cant = 0;;
@@ -146,6 +150,7 @@ var globalFunc = {
                 this.cant_cart = this.products_cart.length;
                 this.total_cart = 0;
                 this.updateCartTotal();
+                let cart = JSON.parse(window.localStorage.getItem('cartNew'));
                 const cantUpdate = globalFunc.getCartCant(cart);
                 EventBus.$emit("update_cantCart",cantUpdate);
             }
@@ -176,6 +181,8 @@ var globalFunc = {
 Vue.prototype.addToFavorite = globalFunc.addToFavorite; 
 Vue.prototype.addToCart = globalFunc.addToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
+Vue.prototype.dropCart = globalFunc.dropCart;
+
 
 
 

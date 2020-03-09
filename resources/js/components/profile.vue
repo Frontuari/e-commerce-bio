@@ -320,7 +320,7 @@
 														</div>
 													</div>
 													<div class="col-6 col-lg-16">
-														<button class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
+														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
 															Repetir orden
 														</button>
 													</div>
@@ -745,7 +745,11 @@
 					cancelButtonText: 'Cancelar'
 				}).then((result) => {
 					axios.get(URLSERVER+"api/orders/products/"+id).then( (response) => {
-						_this.data_products = response.data.data;
+						_this.dropCart();
+						response.data.data.forEach( (a,b) => {
+							console.log("a::> ",a);
+							_this.addToCart(a,a.cantidad);
+						});
 						
 						Swal.fire(
 							'Agregado!',

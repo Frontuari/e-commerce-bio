@@ -34,7 +34,7 @@ class OrdersController extends BaseController
         $a = NULL;
         if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])) {
             $a = DB::table("order_products")
-            ->select("products.name","order_products.cant","order_products.price","order_products.deduction","order_products.total")
+            ->select("products.*","order_products.cant as cantidad")
             ->join("products","products.id","=","order_products.products_id")
             ->where("order_products.orders",$id)
             ->get();
