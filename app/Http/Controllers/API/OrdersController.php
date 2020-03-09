@@ -29,6 +29,19 @@ class OrdersController extends BaseController
         }
         return $this->sendResponse($a);
     }
+
+    public function getProducts($id) {
+        $a = NULL;
+        if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])) {
+            $a = DB::table("order_products")
+            ->select("products.name","order_products.cant","order_products.price","order_products.deduction","order_products.total")
+            ->join("products","products.id","=","order_products.products_id")
+            ->where("order_products.orders",$id)
+            ->get();
+        }
+        return $this->sendResponse($a);
+    }
+
     public function estadistica_ano(){
         $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
 

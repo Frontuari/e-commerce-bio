@@ -2413,6 +2413,22 @@
 			text-align: center;
 			margin: 0 !important;
 		}
+		.col-lg-15{
+			-ms-flex: 0 0 15%;
+			flex: 0 0 15%;
+			max-width: 15%;
+			padding: 0 15px;
+			text-align: center;
+			margin: 0 !important;
+		}
+		.col-lg-16{
+			-ms-flex: 0 0 16.66666667%;
+			flex: 0 0 16.66666667%;
+			max-width: 16.66666667%;
+			padding: 0 15px;
+			text-align: center;
+			margin: 0 !important;
+		}
 		.order-span{
 			visibility: hidden;
 			opacity: 0;

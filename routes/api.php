@@ -61,6 +61,8 @@ Route::resource('trackings', 'API\TrackingsController');
 
 //ORDERS
 Route::resource('orders', 'API\OrdersController');
+    //PRODUCTS
+    Route::get('orders/products/{id}','API\OrdersController@getProducts');
     //ADD QUALIFY ORDER
     Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
     //Estadistica del año

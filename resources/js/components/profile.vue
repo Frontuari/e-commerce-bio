@@ -290,33 +290,39 @@
 											<div class="order-table">
 												<div class="thead-bio">
 													<div class="row">
-														<div class="col-6 col-lg-20">Número de Pedido</div>
-														<div class="col-6 col-lg-20">Fecha</div>
-														<div class="col-6 col-lg-20">Dirección de entrega</div>
-														<div class="col-6 col-lg-20">Fecha de entrega</div>
-														<div class="col-6 col-lg-20">Estado</div>
+														<div class="col-6 col-lg-16">Número de Pedido</div>
+														<div class="col-6 col-lg-16">Fecha</div>
+														<div class="col-6 col-lg-16">Dirección de entrega</div>
+														<div class="col-6 col-lg-16">Fecha de entrega</div>
+														<div class="col-6 col-lg-16">Estado</div>
+														<div class="col-6 col-lg-16">Repetir</div>
 													</div>
 												</div>
 
 												<div class="row" v-for="order in orders" :key="order.id">
-													<div class="col-12 col-lg-20">
+													<div class="col-6 col-lg-16">
 														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>
-													<div class="col-6 col-lg-20"><span class="order-span">Fecha</span>{{order.created_at}}</div>
-													<div class="col-6 col-lg-20">
+													<div class="col-6 col-lg-16"><span class="order-span">Fecha</span>{{order.created_at}}</div>
+													<div class="col-6 col-lg-16">
 														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
 															<span class="order-span">Dirección de entrega</span>Mi casa
 														</button>
 													</div>
-													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>{{order.delivery_time_date}}</div>
-													<div class="col-6 col-lg-20">
+													<div class="col-6 col-lg-16"><span class="order-span">Fecha de entrega</span>{{order.delivery_time_date}}</div>
+													<div class="col-6 col-lg-16">
 														<span class="order-span">Estado</span>
 														<div class="process-status in-process" data-toggle="tooltip" data-placement="bottom" title="Su pedido se está procesando para ser enviado">
 															<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.12 19.97"><defs></defs><title>en-proceso-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M12.09,18.25l-.5.11A.81.81,0,1,0,11.88,20l.6-.13a.81.81,0,0,0-.39-1.57Z"/><path class="cls-1" d="M18.07,7.41a.9.9,0,0,0,.3.41.79.79,0,0,0,.72.1.8.8,0,0,0,.52-1c-.07-.19-.14-.39-.21-.57a.81.81,0,0,0-1.51.6,4.68,4.68,0,0,1,.18.48Z"/><path class="cls-1" d="M14.72,17.1l-.44.27a.8.8,0,0,0-.3,1.1.86.86,0,0,0,.24.26.83.83,0,0,0,.87,0c.17-.1.35-.21.52-.33a.8.8,0,1,0-.89-1.34Z"/><path class="cls-1" d="M20.11,9.67a.81.81,0,0,0-1.62.06c0,.17,0,.35,0,.52a.8.8,0,0,0,.34.68.77.77,0,0,0,.45.14.8.8,0,0,0,.82-.79c0-.2,0-.41,0-.61Z"/><path class="cls-1" d="M9.56,3.52a.66.66,0,0,0-.65.66V10.7l6,3.08a.66.66,0,0,0,.88-.28.65.65,0,0,0-.28-.88L10.22,9.9V4.18a.67.67,0,0,0-.66-.66Z"/><path class="cls-1" d="M19.13,12a.82.82,0,0,0-1,.53c-.05.17-.1.33-.16.49a.81.81,0,0,0,.28.95.76.76,0,0,0,.18.09.82.82,0,0,0,1.05-.46c.07-.19.14-.39.2-.58a.82.82,0,0,0-.53-1Z"/><path class="cls-1" d="M8.56,18.37a8.33,8.33,0,0,1-2.07-.66l0,0c-.16-.07-.31-.15-.46-.23H6c-.27-.15-.54-.32-.8-.5a8.46,8.46,0,0,1,0-13.83l0,0A8.48,8.48,0,0,1,14.74,3L14.1,4c-.17.26-.06.44.24.41l2.75-.24a.46.46,0,0,0,.41-.59L16.76.87c-.08-.3-.29-.33-.47-.08l-.63.92A10,10,0,0,0,8.34.15L7.57.31h0A9.94,9.94,0,0,0,2,4l0,0-.14.19-.21.32,0,0A10.08,10.08,0,0,0,0,10.49v0c0,.2,0,.4,0,.61v0c0,.2.05.4.09.61A10,10,0,0,0,3,17.19H3a9.71,9.71,0,0,0,1.29,1.08,10,10,0,0,0,4,1.68.81.81,0,1,0,.28-1.59Z"/><path class="cls-1" d="M17.94,15a.8.8,0,0,0-1.13.16l-.32.4a.81.81,0,0,0,.09,1.14l.06,0a.81.81,0,0,0,1.08-.14l.38-.48A.8.8,0,0,0,17.94,15Z"/></g></g></svg> -->
 															{{order.namestatus}}
 														</div>
+													</div>
+													<div class="col-6 col-lg-16">
+														<button class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
+															Repetir orden
+														</button>
 													</div>
 												</div>
 											</div>
@@ -632,6 +638,7 @@
 				userData: [],
 				states: [],
 				orders: [],
+				data_products: [],
 				en_proceso: [],
 				completos: [],
 				newDirection: 'none',
@@ -723,6 +730,31 @@
 
 				this.en_proceso = this.orders.filter( lista => {
 					return lista.namestatus != "Entregado"
+				});
+			},
+			repeatOrder(id) {
+				const _this = this;
+				Swal.fire({
+					title: 'Repertir orden',
+					text: "Al repetir la orden, borrara su carrito actual, ¿Deséa repetir la order "+id+"?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Repetir!',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					axios.get(URLSERVER+"api/orders/products/"+id).then( (response) => {
+						_this.data_products = response.data.data;
+						
+						Swal.fire(
+							'Agregado!',
+							'La orden ha sido agregada al carrito.',
+							'success'
+						);
+					});
+					
+					
 				});
 			},
 			saveDirection(direction,index)
