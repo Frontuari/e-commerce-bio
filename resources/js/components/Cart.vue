@@ -611,6 +611,13 @@ export default {
 			this.payments = response.data.data;
 		},
 		saveOrder() {
+			this.order = {
+				user_id: this.datauser.id,
+				direction: this.selectedDirection,
+				datetime: 'dd/mm/YYYY',
+				products: this.products_cart,
+				payment: this.selectedPayment
+			}
 			console.log("Order::> ",this.order);
 			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		},
@@ -679,7 +686,7 @@ export default {
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
-			console.log(this.products_cart);
+			// console.log(this.products_cart);
 		}else{
 			this.cant_cart = 0;
 		}

@@ -138,7 +138,7 @@ class RegisterController extends BaseController
         DB::table("users")
         ->where("validateemail",$token)
         ->update([
-            'validateemail' => '';
+            'validateemail' => '',
         ]);
 
         if($datos->email) {

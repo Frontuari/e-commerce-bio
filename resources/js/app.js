@@ -101,13 +101,16 @@ var globalFunc = {
         let cart = [];
         if(window.localStorage.getItem('cartNew')) {
             cart = JSON.parse(window.localStorage.getItem('cartNew'));
+            cart = globalFunc.validateCart(product,cart,cantidad);
+            window.localStorage.setItem('cartNew', JSON.stringify(cart));
+            const cantUpdate = globalFunc.getCartCant(cart);
+            EventBus.$emit("update_cantCart",cantUpdate);
+        }else {
+            cart.push({product: product,cant: parseInt(cantidad)});
+            window.localStorage.setItem('cartNew', JSON.stringify(cart));
+            EventBus.$emit("update_cantCart",cantidad);
         }
-        cart = globalFunc.validateCart(product,cart,cantidad);
-        window.localStorage.setItem('cartNew', JSON.stringify(cart));
-        // console.log("cart::> ",cart);
-        const cantUpdate = globalFunc.getCartCant(cart);
         
-        EventBus.$emit("update_cantCart",cantUpdate);
     },
     validateCart: function(product,tmp,cantidad) {
         let exist = false;
@@ -127,7 +130,7 @@ var globalFunc = {
         EventBus.$emit("update_cantCart",0);
     },
     getCartCant: function(cart) {
-        let cant = 0;;
+        let cant = 0;
         cart.forEach( (a) => {
             cant += a.cant
         });
