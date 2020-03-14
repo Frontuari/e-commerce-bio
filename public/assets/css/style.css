@@ -3104,6 +3104,12 @@
 	    border-top-color: #7fbc01 !important;
 	}
 	.extra-controls{
-		width: 70%;
+		width: 100% !important;
     	margin: 0px auto;
+    	float: left !important;
+	}
+	.extra-controls:after
+	{
+		clear: both !important;
+		width: 100%;
 	}
