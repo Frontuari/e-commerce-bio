@@ -1668,6 +1668,12 @@
 		margin-right: 10px;
 		border: 1px solid #d9d9d9;
 		margin: 5px 0;
+		cursor: pointer;
+	}
+	.hashtag_active{
+		background-color: #80bb00 ;
+	    color: white;
+	    border: 1px solid #7baf0b;
 	}
 	.filter{
 		margin-bottom: 30px;

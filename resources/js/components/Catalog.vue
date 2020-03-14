@@ -69,12 +69,12 @@
 							</div>
 							<div class="filter filter-tags">
 								<h4>Por Etiquetas</h4>
-								<span class="hashtag">#Enlatados</span>
-								<span class="hashtag">#Pastas</span>
-								<span class="hashtag">#Harinas</span>
-								<span class="hashtag">#Arroz</span>
-								<span class="hashtag">#Salsas</span>
-								<span class="hashtag">#Aceites</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Enlatados</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Pastas</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Harinas</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Arroz</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Salsas</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Aceites</span>
 							</div>
 						</div>
 					</div>
@@ -180,8 +180,8 @@
 			isObject: function(o) 
 			{ 
 				return typeof o == "object" 
-			}
-
+			},
+		
         },
         mounted() {
 			if(this.isObject(this.userlogged)){

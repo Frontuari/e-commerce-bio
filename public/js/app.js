@@ -76514,12 +76514,104 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "filter filter-tags" }, [
+                    _c("h4", [_vm._v("Por Etiquetas")]),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Enlatados")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Pastas")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Harinas")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Arroz")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Salsas")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "hashtag",
+                        on: {
+                          click: function($event) {
+                            return $event.target.classList.toggle(
+                              "hashtag_active"
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("#Aceites")]
+                    )
+                  ])
                 ]
               )
             ]),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(2)
           ]),
           _vm._v(" "),
           _c(
@@ -76645,7 +76737,7 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(3)
             ],
             1
           )
@@ -76690,26 +76782,6 @@ var staticRenderFns = [
         staticClass: "js-range-slider",
         attrs: { type: "text", value: "" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "filter filter-tags" }, [
-      _c("h4", [_vm._v("Por Etiquetas")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Enlatados")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Pastas")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Harinas")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Arroz")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Salsas")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "hashtag" }, [_vm._v("#Aceites")])
     ])
   },
   function() {
