@@ -3103,3 +3103,7 @@
 	    border: 3px solid transparent;
 	    border-top-color: #7fbc01 !important;
 	}
+	.extra-controls{
+		width: 70%;
+    	margin: 0px auto;
+	}
