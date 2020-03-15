@@ -1,5 +1,5 @@
 <?php
-   
+
 namespace App\Http\Controllers\API;
    
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'c_password' => 'required|same:password',
+            //'c_password' => 'required|same:password', VALIDAR LA CONFIRMACIÓN SOLO DEL LADO DEL CLIENTE!!
         ]);
    
         if($validator->fails()) {
@@ -35,9 +35,9 @@ class RegisterController extends BaseController
         }
         
         $data = $request->all();
-
+        if($data['rif'] and $data['tipoRif']) $rif=$data['tipoRif'].'-'.$data['rif']; else $rif=rand(1111,999999);
         $people = People::create([
-            'rif' => '11111',
+            'rif' => $rif,
             'name' => $data['name'],
             'sex' => $data["sex"],
             'birthdate' => '01/01/1990',

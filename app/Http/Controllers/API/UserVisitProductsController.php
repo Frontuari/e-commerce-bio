@@ -15,7 +15,8 @@ class UserVisitProductsController extends BaseController
      */
     public function index(UserVisitProducts $uvp)
     {
-        $users_id=1; #Id del usuario logueado
+        //$users_id=1; #Id del usuario logueado
+        $users_id=($_SESSION["usuario"]["id"] ?? '');
         $cant_mostrar=20;
 
         try{
