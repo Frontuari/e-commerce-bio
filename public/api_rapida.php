@@ -2,11 +2,12 @@
 cabecera('On');
 
 $a=extraer_datos_db();
-conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
+$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
 session_start();
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
+
 switch($_GET['evento']) {
     case 'obtenerTodo':
 
@@ -56,6 +57,7 @@ switch($_GET['evento']) {
                 $row['id_sesion']=session_id();
                 salida($row,"Bienvenido",true);
             }else{
+                $row=null;
                 salida($row,"Contraseña no válida",false);
             }
        }else{
@@ -67,7 +69,21 @@ switch($_GET['evento']) {
         $row=recortar_imagen($row);
         salida_movil($row,"Listado de categorias",true);
     break;
-
+    case 'registrarUsuario':
+        echo registrarUsuario();
+    break;
+    case 'confirmarCorreo':
+        echo confirmarCorreo();
+    break;
+    case 'enviarCodRecuperacion':
+        echo enviarCodRecuperacion();
+    break;
+    case 'confirmarCodRecuperacion':
+        echo confirmarCodRecuperacion();
+    break;
+    case 'cambiarClavePublico':
+        echo cambiarClavePublico();
+    break;
     case 'logout':
         session_destroy();
         salida($row,"Hasta pronto",true);
@@ -75,7 +91,90 @@ switch($_GET['evento']) {
     default:
         salida($row,"Disculpe debe enviar un evento",false);
 }
+function cambiarClavePublico(){
+    $email  =$_POST['email'];
+    $codigoCorreo=$_POST['codigoCorreo']; 
+    $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
+    q("UPDATE users SET password='$password' WHERE email='$email' AND validateemail='$codigoCorreo'");
+    salida(null,"Su cuenta ha sido recuperada.");
+}
+function confirmarCodRecuperacion(){
+    $email  =$_POST['email'];
+    $codigoCorreo=$_POST['codigoCorreo'];
+    $res=q("SELECT 1 FROM users WHERE validateemail='$codigoCorreo' AND email='$email'");
+    if(is_array($res)){
+        salida(null,"Código Verificado correctamente.");
+    }else{
+        salida(null,"Código invalido, intente nuevamente.",false);
+    }
 
+}
+function enviarCodRecuperacion(){
+    $email  =$_GET['email'];
+    $res=q("SELECT 1 FROM users WHERE email='$email'");
+    $codigoCorreo=rand(0,999999);
+    if(is_array($res)){
+        q("UPDATE users SET validateemail='$codigoCorreo' WHERE email='$email'");
+        //ENVIAR CORREO
+        salida(null,"Verifique su correo electrónico.");
+    }else{
+        salida(null,"El correo no existe, intente nuevamente.",false);
+    }
+}
+function confirmarCorreo(){
+    $email  =$_POST['email'];
+    $codigoCorreo=$_POST['codigoCorreo'];
+    $res=q("SELECT 1 FROM users WHERE validateemail='$codigoCorreo' AND email='$email'");
+    if(is_array($res)){
+        q("UPDATE users SET email_verified_at=NOW() WHERE validateemail='$codigoCorreo' AND email='$email'");
+        salida(null,"Código Verificado correctamente.");
+    }else{
+        salida(null,"Código invalido, intente nuevamente.".$_SESSION['email'],false);
+    }
+
+}
+function registrarUsuario(){
+   
+    $name       =$_POST['name'];
+    $rif        =$_POST['rif'];
+    $email      =$_POST['email'];
+    $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $sex        =$_POST['sex'];
+    $cities     =1;
+    
+    $codigoCorreo=generarCodigoVerificacion($email);
+
+$res=q("SELECT validateemail FROM users WHERE email='$email' and email_verified_at IS NULL");
+if(is_array($res)){
+    enviarCorreo($correo);
+    $_SESSION['email']=$email;
+    q("UPDATE users SET password='$password' WHERE email='$email' and email_verified_at IS NULL");
+    salida(null,"Le hemos enviado nuevamente un email de confirmación.");
+}
+
+
+
+    $res=q("INSERT INTO peoples (name,rif,sex,cities_id) VALUES ('$name','$rif','$sex','$cities') RETURNING id");
+    if(is_array($res)){
+        $peoples_id=$res[0]['id'];
+        $res=q("INSERT INTO users (password,email,peoples_id,name,validateemail) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo')");
+        if($res){
+            enviarCorreo($correo);
+            salida(null,"Le hemos enviado un email de confirmación.");
+        }else{
+            salida(null,"Intente de nuevo",false);
+        }
+    }else{
+        salida(null,"Intente de nuevo",false);
+    }
+    
+}
+function enviarCorreo($correo){
+    
+}
+function generarCodigoVerificacion($data){
+return hexdec( substr(sha1($data), 0, 5) );
+}
 function recortar_imagen($row){
     foreach($row as $id=>$value){
         $arr=explode(".",$value['image']);
@@ -120,13 +219,44 @@ function limpiar($var){
 function conectar_db($host,$base_dato,$usuario,$clave,$puerto){
     $dbconn = pg_connect("host=".$host." dbname=$base_dato user=$usuario password=$clave port=$puerto")
     or die('No se ha podido conectar: ' . pg_last_error());
+    return $dbconn;
 }
 function q($sql){
-    $result = pg_query($sql) or die(false);
-    while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-        $arr[]=$line;
-    }
-    return $arr;
+    $arr=array();
+   // $result = pg_query($sql) or die(false);
+   $con=$GLOBALS["con"];
+    if (pg_send_query($con,$sql)) {
+        $res=pg_get_result($con);
+        if ($res) {
+          $state = pg_result_error_field($res, PGSQL_DIAG_SQLSTATE);
+          if ($state==0) {
+            while ($line = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+                $arr[]=$line;
+            }
+            if(count($arr)){
+                return $arr;
+            }else{
+                return true;
+            }
+          }
+          else {
+              switch($state){
+                  case 23505:
+                    salida(null,"El registro ya existe, intente de nuevo.",false);
+                  break;
+                  case '22P02':
+                    salida(null,"Ingrese todos los campos obligatorios.",false);
+                    
+                  break;
+                  default:
+                    salida(null,"Error en la consulta.",false);
+              }
+          }
+        }  
+      }
+      salida_movil('',"Disculpe, intente de nuevo",false);
+
+
 }
 function cabecera($error="Off"){
     header('Access-Control-Allow-Origin: *');

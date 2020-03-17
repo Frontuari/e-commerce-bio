@@ -35,7 +35,7 @@ class RegisterController extends BaseController
         }
         
         $data = $request->all();
-        if($data['rif'] and $data['tipoRif']) $rif=$data['tipoRif'].'-'.$data['rif']; else $rif=rand(1111,999999);
+        if($data['rif']) $rif=$data['rif']; else $rif=rand(1111,999999);
         $people = People::create([
             'rif' => $rif,
             'name' => $data['name'],
