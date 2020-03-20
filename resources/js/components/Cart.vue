@@ -61,7 +61,7 @@
 																			<img   src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
-																</div>										
+																</div>
 															</div>
 															<div class="product-prices">
 
@@ -86,7 +86,7 @@
 														</div>
 													</div>
 												</div>
-								
+
 											</div>
 											<div class="row">
 												<div class="col-12">
@@ -110,8 +110,8 @@
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ product_cart.product.price / tasadolar | FormatDolar}} / Bs {{product_cart.product.price | FormatNumber}}</h3>
+                                                                        <h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</h3>
 																	</div>
 																</div>
 																<div class="order-description order-total">
@@ -183,12 +183,18 @@
 															</select>
 														</div>
 													</div>
-													<div class="col-lg-6" v-if="selectedDirection == 0">
+													<div class="col-lg-3" v-if="selectedDirection == 0">
 														<div class="form-group">
-															<label for="address-urb">Hora y Fecha:</label>
-															<input type="text" class="form-control datetimepicker" name="timepick" v-model="order.datetime">
+															<label for="address-urb">Fecha:</label>
+															<input type="text" class="form-control datetimepicker" name="timepick" v-model="order.datetime" >
 														</div>
-													</div>													
+													</div>
+    												<div class="col-lg-3" v-if="selectedDirection == 0">
+														<div class="form-group">
+															<label for="address-urb">Hora:</label>
+															<input type="time" class="form-control timepicker" name="TimeControl">
+														</div>
+													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
 														<div class="form-group">
 															<label for="address-urb">Urbanización / Barrio / Empresa:</label>
@@ -407,16 +413,16 @@
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
 																<div class="order-description">
-																
+
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		
+
 																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.discount * product_cart.cant) | FormatNumber}}</h3>
 
 																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ (product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.price * product_cart.cant) | FormatNumber}}</h3>
 
 																	</div>
-																
+
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
@@ -588,6 +594,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -614,19 +621,19 @@ export default {
 			this.order = {
 				user_id: this.datauser.id,
 				direction: this.selectedDirection,
-				datetime: 'dd/mm/YYYY',
+				datetime: moment().format("DD/MM/YYYY"),
 				products: this.products_cart,
 				payment: this.selectedPayment
 			}
 			console.log("Order::> ",this.order);
 			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		},
-		isObject: function(o) 
-		{ 
-			return typeof o == "object" 
+		isObject: function(o)
+		{
+			return typeof o == "object"
 		},
 		increaseValue(value,product_id)
-		{	
+		{
 			for(let i = 0; i<this.cant_cart; i++)
 			{
 				if(this.products_cart[i].product.id == product_id)
@@ -643,7 +650,7 @@ export default {
 
 		},
 		decreaseValue(value,product_id)
-		{	
+		{
 			if(value>1)
 			{
 				for(let i = 0; i<this.cant_cart; i++)
@@ -660,7 +667,7 @@ export default {
 		},
 		updateCartTotal()
 		{
-				
+
 			this.total_cart = 0;
 			for(let i = 0; i<this.cant_cart; i++)
 			{
@@ -680,8 +687,8 @@ export default {
 		});
 		this.getPayments();
     },
-    mounted() 
-    {    	
+    mounted()
+    {
 
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
@@ -720,7 +727,7 @@ export default {
     		const len = this.userlogged.directions.length;
     		let id = -1;
     		for(let i = 0; i<len ; i++) {
-    			if(this.userlogged.directions[i].id == this.selectedDirection) {    				
+    			if(this.userlogged.directions[i].id == this.selectedDirection) {
     				id = i;
     				break;
     			}
@@ -728,9 +735,9 @@ export default {
     		if(id == -1){
     			return '';
     		}else{
-    			return this.userlogged.directions[id];	
+    			return this.userlogged.directions[id];
     		}
-    		
+
     	}
     }
 }

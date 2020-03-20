@@ -70,7 +70,7 @@
 		</div>
 	</footer>
 
-	
+
 
 	<div class="modal fade" id="ModalProdCombo" tabindex="-1" role="dialog" aria-labelledby="ModalProdComboLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -119,7 +119,7 @@
 														<img src="assets/img/decrease.png" alt="decrease">
 													</button>
 												</div>
-											</div>										
+											</div>
 										</div>
 										<div class="product-prices">
 											<p><b>Total:</b> $ 2 / Bs 90.000</p>
@@ -139,7 +139,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal modal-order fade" id="ModalOrder" tabindex="-1" role="dialog" aria-labelledby="ModalOrderLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -230,11 +230,29 @@
 	<div class="over toggle-menu"></div>
 
 </main>
-	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>	
+	<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
 	@yield('js')
 	<script>
-		
+	//******************************************************************
+	// Determinar valores de fecha y hora para la recojer el pedido
+		hoy= new moment().format("MM/DD/YYYY");
+		m=new moment().add(1,"d").format("MM/DD/YYYY");
+		hora=new moment().format("HH");
+		if (parseInt(hora)>18)
+		{
+			hoy= new moment().add(1,"d").format("MM/DD/YYYY");
+			m=hoy;
+			minHora= "08:00";
+		}
+		else {
+			hoy= new moment().format("MM/DD/YYYY");
+			m=new moment().add(1,"d").format("MM/DD/YYYY");
+			minHora=new moment().add(2,"h").format("HH:mm");
+		}
+		maxHora= "20:00";
+	//******************************************************************
+
 		jQuery(document).ready(function($){
 
 			$(".select2").select2({
@@ -244,10 +262,14 @@
 
 			$('.datetimepicker').daterangepicker({
 				"singleDatePicker": true,
-			    "timePicker": true,
-			    "startDate": "02/28/2020",
-			    "endDate": "03/05/2020"
+			    "startDate": hoy,
+			    "endDate": m,
+				"minDate":hoy,
+				"maxDate":m
 			});
+
+			alert(minHora)
+            $('.timepicker').val(minHora);
 
 			$('[data-toggle="tooltip"]').tooltip();
 
@@ -264,7 +286,7 @@
 		    var max = 200;
 		    var from = 0;
 		    var to = 100;
-		    
+
 		    $range.ionRangeSlider({
 		        skin: "round",
 		        type: "double",
@@ -278,52 +300,52 @@
 		        onFinish: updateInputs
 		    });
 		    instance = $range.data("ionRangeSlider");
-		    
+
 		    function updateInputs (data) {
 		        from = data.from;
 				to = data.to;
 				min_range = data.from;
 				max_range = data.to;
 
-		    
+
 		        $inputFrom.val(from);
 				$inputTo.val(to);
 
 				$('.js-input-from')[0].dispatchEvent(new CustomEvent('input'));
 				$('.js-input-to')[0].dispatchEvent(new CustomEvent('input'));
 		    }
-		    
+
 		    $inputFrom.on("change", function () {
 		        var val = $(this).val();
-		    
+
 		        // validate
 		        if (val < min) {
 		            val = min;
 		        } else if (val > to) {
 		            val = to;
 		        }
-		    
+
 		        instance.update({
 		            from: val
 		        });
-		    
+
 		        $(this).val(val);
 		    });
-		    
+
 		    $inputTo.on("change", function () {
 		        var val = $(this).val();
-		    
+
 		        // validate
 		        if (val < from) {
 		            val = from;
 		        } else if (val > max) {
 		            val = max;
 		        }
-		    
+
 		        instance.update({
 		            to: val
 		        });
-		    
+
 				$(this).val(val);
 
 		    });
@@ -377,7 +399,7 @@
 
 			/*Elementos a usar al momento de incrementar el valor*/
 			$(document).on('click','.increaseValue',function()
-			{	
+			{
 				quantity = parseInt($(this).parent().parent().find('input[name=quantity]').val());
 
 				if($(this).parent().find('span.max-stock').text()!=''){
@@ -406,7 +428,7 @@
 
 		});
 
-		$(window).scroll(function() {    
+		$(window).scroll(function() {
 		    var scroll = $(window).scrollTop();
 
 		     //>=, not <=
@@ -418,7 +440,7 @@
 		        $(".jumbotron").css({'margin-top':(height_header)+'px'});
 		        $("#main-slider").css({'margin-top':(height_header)+'px'});
 		        //$("#combos-bio").css({'margin-top':(height_header)+'px'});
-		        
+
 		    }
 
 		    if(scroll == 0){
