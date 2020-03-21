@@ -183,16 +183,10 @@
 															</select>
 														</div>
 													</div>
-													<div class="col-lg-3" v-if="selectedDirection == 0">
+													<div class="col-lg-6" v-if="selectedDirection == 0">
 														<div class="form-group">
 															<label for="address-urb">Fecha:</label>
 															<input type="text" class="form-control datetimepicker" name="timepick" v-model="order.datetime" >
-														</div>
-													</div>
-    												<div class="col-lg-3" v-if="selectedDirection == 0">
-														<div class="form-group">
-															<label for="address-urb">Hora:</label>
-															<input type="time" class="form-control timepicker" name="TimeControl">
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -444,7 +438,8 @@
 									</div>
 								</div>
 							</fieldset>
-							<fieldset>
+							<!-- Carga de formas de pago-->
+                            <fieldset>
 								<div class="payment-methods">
 									<div class="row">
 										<div class="col-12 col-lg-8">
@@ -457,53 +452,38 @@
 														<div class="form-check form-check-radio">
 															<input type="radio" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id" v-model="selectedPayment">
 															<label :for="'credit-card'+pay.id" class="custom-check"><span></span>{{pay.name}}
-																<!-- <div class="payment-imgs-group">
-																	<img src="assets/img/master-bio-mercados.svg" alt="Master Card">
-																	<img src="assets/img/visa-bio-mercados.svg" alt="Visa">
-																	<img src="assets/img/american-bio-mercados.svg" alt="American Express">
-																</div> -->
 															</label>
 														</div>
 													</div>
+                                                    <template v-if="selectedPayment==2" >
+                                                        <div class="col-lg-12">
+                                                            <div class="row" v-if="pay.id===2">
+                                                                <div class="form-group col-lg-6" >
+                                                                    <label for="referencia-pago">Número de Referencia:</label>
+                                                                    <input type="text" name="referencia-pago" class="form-control" v-model="payment_ref">
+                                                                </div>
+                                                                <div class="form-group col-lg-6">
+                                                                    <label for="img-referencia">Imagen:</label>
+                                                                    <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                    <template v-if="selectedPayment==1">
+                                                        <div class="col-lg-12">
+                                                            <div class="row" v-if="pay.id===1">
+                                                                <div class="form-group  col-lg-6">
+                                                                    <label for="referencia-pago">Número de Referencia:</label>
+                                                                    <input type="text" name="referencia-pago" class="form-control" v-model="payment_ref">
+                                                                </div>
+                                                                <div class="form-group  col-lg-6">
+                                                                    <label for="img-referencia">Imagen de Pago:</label>
+                                                                    <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
 												</div>
-												<!-- <div class="col-lg-12">
-													<div class="payment-option">
-														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" id="paypal" name="payment-method">
-															<label for="paypal" class="custom-check"><span></span>PayPal
-																<div class="payment-imgs-group">
-																	<img src="assets/img/paypal-bio-mercados.svg" alt="PayPal">
-																</div>
-															</label>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-12">
-													<div class="payment-option">
-														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" id="petro" name="payment-method">
-															<label for="petro" class="custom-check"><span></span>Petro
-																<div class="payment-imgs-group">
-																	<img src="assets/img/petro-bio-mercados.svg" alt="Petro">
-																</div>
-															</label>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-12">
-													<div class="payment-option">
-														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" id="cryptocurrency" name="payment-method">
-															<label for="cryptocurrency" class="custom-check"><span></span>Criptomoneda
-																<div class="payment-imgs-group">
-																	<img src="assets/img/bitcoin-bio-mercados.svg" alt="Bitcoin">
-																	<img src="assets/img/ethereum-bio-mercaods.svg" alt="Ethereum">
-																	<img src="assets/img/dash-bio-mercados.svg" alt="Dash">
-																</div>
-															</label>
-														</div>
-													</div>
-												</div> -->
 											</div>
 											<div class="row">
 												<div class="col-12">
@@ -623,7 +603,8 @@ export default {
 				direction: this.selectedDirection,
 				datetime: moment().format("DD/MM/YYYY"),
 				products: this.products_cart,
-				payment: this.selectedPayment
+                payment: this.selectedPayment,
+                payment_ref: this.payment_ref
 			}
 			console.log("Order::> ",this.order);
 			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
@@ -667,7 +648,6 @@ export default {
 		},
 		updateCartTotal()
 		{
-
 			this.total_cart = 0;
 			for(let i = 0; i<this.cant_cart; i++)
 			{
@@ -678,7 +658,6 @@ export default {
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
 			}
-
 		},
 	},
     created() {
@@ -689,7 +668,6 @@ export default {
     },
     mounted()
     {
-
 		if( window.localStorage.getItem("cartNew") ){
 			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
 			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
@@ -715,11 +693,12 @@ export default {
 		}
 
 		this.order = {
-			user_id: this.datauser.id,
-			direction: this.selectedDirection,
-			datetime: 'dd/mm/YYYY',
-			products: this.products_cart,
-			payment: this.selectedPayment
+			user_id     : this.datauser.id,
+			direction   : this.selectedDirection,
+			datetime    : "dd/mm/yyyy HH:mm",
+			products    : this.products_cart,
+            payment     : this.selectedPayment,
+            payment_ref : this.payment_ref
     	};
     },
     computed: {
@@ -737,7 +716,6 @@ export default {
     		}else{
     			return this.userlogged.directions[id];
     		}
-
     	}
     }
 }

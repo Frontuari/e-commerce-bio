@@ -226,7 +226,6 @@
 		</div>
 	</div>
 
-
 	<div class="over toggle-menu"></div>
 
 </main>
@@ -234,21 +233,22 @@
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
 	@yield('js')
 	<script>
+
 	//******************************************************************
 	// Determinar valores de fecha y hora para la recojer el pedido
-		hoy= new moment().format("MM/DD/YYYY");
-		m=new moment().add(1,"d").format("MM/DD/YYYY");
 		hora=new moment().format("HH");
+
 		if (parseInt(hora)>18)
 		{
-			hoy= new moment().add(1,"d").format("MM/DD/YYYY");
-			m=hoy;
-			minHora= "08:00";
+			hoy     =   new moment().add(1,"d").format("DD/MM/YYYY") ;
+			m       =   hoy;
+            //hoy     =   hoy ;
+            minHora =   "08:00";
 		}
 		else {
-			hoy= new moment().format("MM/DD/YYYY");
-			m=new moment().add(1,"d").format("MM/DD/YYYY");
-			minHora=new moment().add(2,"h").format("HH:mm");
+			hoy     =   new moment().startOf().add(2, 'hour');
+			m       =   new moment().add(1,"d");
+			minHora =   new moment().add(2,"h").format("HH:mm");
 		}
 		maxHora= "20:00";
 	//******************************************************************
@@ -261,17 +261,22 @@
 			});
 
 			$('.datetimepicker').daterangepicker({
-				"singleDatePicker": true,
-			    "startDate": hoy,
-			    "endDate": m,
-				"minDate":hoy,
-				"maxDate":m
+				"singleDatePicker"  : true,
+                "timePicker"        : true,
+                "locale"            : {format: 'DD/MM/YYYY HH:mm'},
+				"minDate"	        : hoy,
+				"maxDate"	        : m,
+                "startDate"	        : hoy,
+			    "endDate"	        : m
+
 			});
 
-			alert(minHora)
-            $('.timepicker').val(minHora);
+            picker=$('input[name="timepick"]');
+            picker.attr("min",minHora);
+            picker.attr("max",maxHora);
 
-			$('[data-toggle="tooltip"]').tooltip();
+
+            $('[data-toggle="tooltip"]').tooltip();
 
 			setTimeout(function(){
 				$('body').addClass('loaded');
