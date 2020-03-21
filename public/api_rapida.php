@@ -65,9 +65,7 @@ switch($_GET['evento']) {
     }
     break;
     case 'listar_categorias_movil':
-        $row=q("SELECT name,image,id FROM categories");
-        $row=recortar_imagen($row);
-        salida_movil($row,"Listado de categorias",true);
+        listar_categorias_movil();
     break;
     case 'registrarUsuario':
         echo registrarUsuario();
@@ -88,8 +86,124 @@ switch($_GET['evento']) {
         session_destroy();
         salida($row,"Hasta pronto",true);
     break;
+    case 'cambiarClave':
+        echo cambiarClave();
+    break;
+    case 'getCities':
+        echo getCities();
+    break;
+    case 'getRegions':
+        echo getRegions();
+    break;
+    case 'getStates':
+        echo getStates();
+    break;
+    case 'guardarDireccion':
+        echo guardarDireccion();
+    break;
+    case 'getAdreess':
+        echo getAdreess();
+    break;
+    case 'eliminarDireccion':
+        echo eliminarDireccion();
+    break;
+    case 'listarProductos':
+        listarProductos();
+    break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
+}
+function listarProductos(){
+    //SELECT SUM(t.value) total_impuesto,((p.price*SUM(t.value)/100)+p.price) precio_impuesto, p.name,p.photo as image, p.id, p.price, ROUND(p.user_rating) as rating FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A'  WHERE p.status='A' AND p.qty_avaliable>0 GROUP BY p.id
+    //$row=q("SELECT name,photo as image,id,price,ROUND(user_rating) as rating FROM products WHERE status='A' AND qty_avaliable>0");
+    $row=q("SELECT p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A'  WHERE p.status='A' AND p.qty_avaliable>0 GROUP BY p.id");
+    $row=recortar_imagen($row);
+    salida_movil($row);
+}
+function listar_categorias_movil(){
+    $row=q("SELECT name,image,id FROM categories WHERE status='A'");
+    $row=recortar_imagen($row);
+    salida_movil($row,"Listado de categorias",true);
+}
+function eliminarDireccion(){
+    $users_id=$_SESSION['usuario']['id'];
+    $id=$_GET['id'];
+    $arr=q("UPDATE order_address SET status='I' WHERE users_id='$users_id' AND id='$id'");
+    salida($row,"Eliminado correctamente");
+}
+function getAdreess(){
+    $users_id=$_SESSION['usuario']['id'];
+    $arr=q("SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE oa.users_id='$users_id' AND oa.status='A'");
+    if(is_array($arr)){
+        salida_list($arr);
+    }else{
+        salida($row,"Disculpe no hay direcciones.",false);
+    }
+}
+function guardarDireccion(){
+    $users_id=$_SESSION['usuario']['id'];
+    $cities_id=$_POST['cities_id'];
+    $address=$_POST['address'];
+    $zip_code=$_POST['zip_code'];
+    $urb=$_POST['urb'];
+    $sector=$_POST['sector'];
+    $nro_home=$_POST['nro_home'];
+    $reference_point=$_POST['reference_point'];
+    $id=$_GET['id'];
+    if($id){//Actualiza
+        $arr=q("UPDATE order_address SET cities_id='$cities_id',address='$address',zip_code='$zip_code',urb='$urb',sector='$sector',nro_home='$nro_home',reference_point='$reference_point' WHERE users_id='$users_id' AND id='$id' RETURNING id");
+    }else{//Registra
+        $arr=q("INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point' ) RETURNING id");
+    }
+    if(is_array($arr)){
+        salida(null,"Guardado exitosamente");
+    }else{
+        salida(null,"Disculpe, intente mas tarde",false);
+    }
+
+}
+function getStates(){
+    $arr=q("SELECT id,name FROM states WHERE status='A' ORDER BY name");
+    if(is_array($arr)){
+        salida_list($arr);
+    }else{
+        salida(null,"No se cargaron los estados",false);
+    }
+}
+function getCities(){
+    
+    $regions_id=$_GET['regions_id'];
+    $arr=q("SELECT id,name,regions_id FROM cities WHERE status='A' AND regions_id='$regions_id' ORDER BY name");
+    if(is_array($arr)){
+        salida_list($arr);
+    }else{
+        salida(null,"No se cargaron las parroquias",false);
+    }
+}
+function getRegions(){
+    $states_id=$_GET['states_id'];
+    $arr=q("SELECT id,name,states_id FROM regions WHERE status='A' AND states_id='$states_id' ORDER BY name");
+    if(is_array($arr)){
+        salida_list($arr);
+    }else{
+        salida(null,"No se cargaron los municipios",false);
+    }
+}
+function cambiarClave(){
+    $email  =$_SESSION['usuario']['email'];
+    $passwordActual=$_POST['passwordActual']; 
+    $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $res=q("SELECT password FROM users WHERE email='$email'");
+    if(is_array($res)){
+        if(password_verify($passwordActual,$res[0]['password'])){
+            q("UPDATE users SET password='$password' WHERE email='$email'");
+            salida(null,"Su contraseña ha sido cambiada.");
+        }else{
+            salida(null,"Contraseña actual invalida.",false);
+        }
+    }else{
+        salida(null,"Por favor inicie de nuevo la sesión.",false);
+    }
 }
 function cambiarClavePublico(){
     $email  =$_POST['email'];
@@ -180,7 +294,11 @@ function recortar_imagen($row){
         $arr=explode(".",$value['image']);
 
         $row[$id]['image']=$arr[0].'-cropped.'.$arr[1];
-        $row[$id]['name']=substr($value['name'],0,21);
+        $row[$id]['image_grande']=$value['image'];
+        //$row[$id]['name']=substr($value['name'],0,21);
+        $row[$id]['name']=ucwords(mb_strtolower($value['name']));
+        $row[$id]['description_short']=ucfirst(mb_strtolower($value['description_short']));
+        
     }
      return $row;
     
@@ -197,7 +315,11 @@ function salida_movil($row,$msj_general="",$bueno=true){
     echo json_encode($row);
     exit();
 }
-
+function salida_list($row,$bueno=true){
+    if(!$bueno) header('HTTP/1.1 409 Conflict');
+    echo json_encode($row);
+    exit();
+}
 function extraer_datos_db(){
     $gestor = @fopen("../.env", "r");
     if ($gestor) {
