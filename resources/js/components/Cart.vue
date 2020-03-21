@@ -585,7 +585,8 @@ export default {
 			payments: [],
 			selectedDirection: '',
 			selectedPayment: '',
-			order: {}
+            order: {},
+            payment_img:""
         }
     },
 	props: {
@@ -593,19 +594,29 @@ export default {
 		tasadolar: Number
 	},
 	methods:{
+
+        LoadImageFile(){
+            this.payment_img = this.$refs.file.files[0];
+        },
 		async getPayments() {
 			const response = await axios.get(URLSERVER+"api/payment_methods");
 			this.payments = response.data.data;
 		},
 		saveOrder() {
 			this.order = {
-				user_id: this.datauser.id,
-				direction: this.selectedDirection,
-				datetime: moment().format("DD/MM/YYYY"),
-				products: this.products_cart,
-                payment: this.selectedPayment,
-                payment_ref: this.payment_ref
-			}
+				user_id     : this.datauser.id,
+				direction   : this.selectedDirection,
+				datetime    : this.datetime,
+				products    : this.products_cart,
+                payment     : this.selectedPayment,
+                payment_ref : this.payment_ref
+            };
+        //*************    Modulo para enviar el archivo de la imagen ********************************/
+            let formData    = new FormData();
+            formData.append("payment_img",this.payment_img);
+            axios.post( "/order", formData, { headers: {'Content-Type': 'multipart/form-data'}});
+
+
 			console.log("Order::> ",this.order);
 			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		},
@@ -720,3 +731,7 @@ export default {
     }
 }
 </script>
+
+  function newFunction() {
+    return '/single-file';
+  }

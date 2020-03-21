@@ -2516,7 +2516,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       payments: [],
       selectedDirection: '',
       selectedPayment: '',
-      order: {}
+      order: {},
+      payment_img: ""
     };
   },
   props: {
@@ -2524,6 +2525,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     tasadolar: Number
   },
   methods: {
+    LoadImageFile: function LoadImageFile() {
+      this.payment_img = this.$refs.file.files[0];
+    },
     getPayments: function () {
       var _getPayments = _asyncToGenerator(
       /*#__PURE__*/
@@ -2558,11 +2562,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.order = {
         user_id: this.datauser.id,
         direction: this.selectedDirection,
-        datetime: moment().format("DD/MM/YYYY"),
+        datetime: this.datetime,
         products: this.products_cart,
         payment: this.selectedPayment,
         payment_ref: this.payment_ref
-      };
+      }; //*************    Modulo para enviar el archivo de la imagen ********************************/
+
+      var formData = new FormData();
+      formData.append("payment_img", this.payment_img);
+      axios.post("/order", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log("Order::> ", this.order); // $(window).scrollTop(parseInt($(".jumbotron").offset().top));
     },
     isObject: function isObject(o) {
