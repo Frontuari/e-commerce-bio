@@ -30,6 +30,31 @@ Rif: J40355966',
                 'payment_methods_id' => 1,
                 'coins_id' => 2,
             ),
+            1 => 
+            array (
+                'id' => 2,
+                'titular' => 'Biomercado LLC',
+                'description' => '123456789',
+                'account_type' => 'C',
+                'banks_id' => 1,
+                'created_at' => '2020-01-24 20:56:21',
+                'updated_at' => '2020-01-24 20:56:21',
+                'payment_methods_id' => 1,
+                'coins_id' => 1,
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'titular' => 'Biomercado C.A.',
+                'description' => '0102-2344-2342-1234-1234
+Rif: J40355966',
+                'account_type' => 'C',
+                'banks_id' => 2,
+                'created_at' => '2020-01-24 20:56:21',
+                'updated_at' => '2020-01-24 20:56:21',
+                'payment_methods_id' => 1,
+                'coins_id' => 2,
+            ),
         ));
         
         

@@ -22,6 +22,10 @@ Route::resource("user_address",'API\OrderAddressController');
 Route::resource('advs', 'API\AdvsController');
 Route::get('advs/type/{type}','API\AdvsController@ByType')->name("adv_type");
 
+//bank
+Route::resource('banks', 'API\BanksController');
+
+
 //CATEGORIES
 Route::resource('categories', 'API\CategoryController');
 
