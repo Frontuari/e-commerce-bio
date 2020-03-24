@@ -107,12 +107,67 @@ switch($_GET['evento']) {
     case 'eliminarDireccion':
         echo eliminarDireccion();
     break;
+    case 'listarFavoritos':
+        $users_id=$_SESSION['usuario']['id'];
+        $join="INNER JOIN  favorites f ON f.products_id=p.id";
+        $where="AND f.users_id='$users_id'";
+        listarProductos($join,$where);
+    break;
+    case 'listarProductosPorCategoria':
+        $categories_id=$_GET['categories_id'];
+        $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
+        $where="AND sc.categories_id='$categories_id'";
+        listarProductos($join,$where);
+    break;
     case 'listarProductos':
         listarProductos();
+    break;
+    case 'guardarFavorito':
+        guardarFavorito();
+    break;
+    case 'consultarFavorito':
+        consultarFavorito();
     break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
 }
+function listarProductos($join='',$where=''){
+    $row=q("SELECT p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id");
+    if(is_array($row)){
+        $row=recortar_imagen($row);
+        salidaNueva($row);
+    }else{
+        salidaNueva(null,"No hay productos disponibles",false);
+    }
+}
+function consultarFavorito(){
+    $users_id=$_SESSION['usuario']['id'];
+    $products_id=$_GET['products_id'];
+    $arr=q("SELECT id FROM favorites WHERE products_id='$products_id' AND users_id='$users_id'");
+    if(is_array($arr)){
+        salidaNueva($row,"Consulta procesada");
+    }else{
+        salidaNueva(null,"No es su favorito",false);
+    }   
+}
+function guardarFavorito(){
+    $users_id=$_SESSION['usuario']['id'];
+    $products_id=$_GET['products_id'];
+    $arr=q("SELECT id FROM favorites WHERE products_id='$products_id' AND users_id='$users_id'");
+    if(is_array($arr)){
+        $id=$arr[0]['id'];
+        $arr=q("DELETE FROM favorites WHERE id='$id' RETURNING id");
+    }else{
+        $arr=q("INSERT INTO favorites (users_id,products_id) VALUES ('$users_id','$products_id') RETURNING id");
+
+    }
+    if(is_array($arr)){
+        salida(null,"Modificado exitosamente");
+    }else{
+        salida(null,"Disculpe, intente mas tarde",false);
+    }   
+}
+/*
 function listarProductos(){
     //SELECT SUM(t.value) total_impuesto,((p.price*SUM(t.value)/100)+p.price) precio_impuesto, p.name,p.photo as image, p.id, p.price, ROUND(p.user_rating) as rating FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A'  WHERE p.status='A' AND p.qty_avaliable>0 GROUP BY p.id
     //$row=q("SELECT name,photo as image,id,price,ROUND(user_rating) as rating FROM products WHERE status='A' AND qty_avaliable>0");
@@ -120,6 +175,7 @@ function listarProductos(){
     $row=recortar_imagen($row);
     salida_movil($row);
 }
+*/
 function listar_categorias_movil(){
     $row=q("SELECT name,image,id FROM categories WHERE status='A'");
     $row=recortar_imagen($row);
@@ -308,6 +364,14 @@ function salida($row,$msj_general="",$bueno=true){
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $row['msj_general']=$msj_general;
     echo json_encode($row);
+    exit();
+}
+function salidaNueva($row,$msj_general="",$bueno=true){
+    $rowa['success']=$bueno;
+    if(!$bueno) header('HTTP/1.1 409 Conflict');
+    $rowa['msj_general']=$msj_general;
+    $rowa['data']=$row;
+    echo json_encode($rowa);
     exit();
 }
 function salida_movil($row,$msj_general="",$bueno=true){
