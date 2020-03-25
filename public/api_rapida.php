@@ -111,16 +111,43 @@ switch($_GET['evento']) {
         $users_id=$_SESSION['usuario']['id'];
         $join="INNER JOIN  favorites f ON f.products_id=p.id";
         $where="AND f.users_id='$users_id'";
-        listarProductos($join,$where);
+        $sql=getSqlListarProductos($join,$where);
+        listarProductos($sql);
+    break;
+    case 'listarProductosFiltrados':
+        $precioInicial=$_GET['precioInicial'];
+        $precioFinal=$_GET['precioFinal'];
+        $tipo=$_GET['tipo'];
+       
+        switch($tipo){
+            case 'Mas vendidos':
+                $order='ORDER BY qty_sold DESC';
+                $sql=getSqlListarProductos('','',$order);
+            break;
+            case 'Mejores precios':
+                $order='ORDER BY p.price ASC';
+                $sql=getSqlListarProductos('','',$order);
+            break;
+            default:
+            
+            $sql=getSqlListarProductos();
+        }
+        
+        
+        $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+        //exit($sql);
+        listarProductos($sql);
     break;
     case 'listarProductosPorCategoria':
         $categories_id=$_GET['categories_id'];
         $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
         $where="AND sc.categories_id='$categories_id'";
-        listarProductos($join,$where);
+        $sql=getSqlListarProductos($join,$where);
+        listarProductos($sql);
     break;
     case 'listarProductos':
-        listarProductos();
+        $sql=getSqlListarProductos();
+        listarProductos($sql);
     break;
     case 'guardarFavorito':
         guardarFavorito();
@@ -128,11 +155,124 @@ switch($_GET['evento']) {
     case 'consultarFavorito':
         consultarFavorito();
     break;
+    case 'listarProductosIA':
+        listarProductosIA();
+    break;
+    case 'guardarCalificacion':
+        guardarCalificacion();
+    break;
+    case 'guardarOpinion':
+        guardarOpinion();
+    break;
+    case 'guardarVisitaProducto':
+        guardarVisitaProducto();
+    break;
+    case 'buscarProducto':
+        buscarProducto();
+    break;
+    case 'listarProductosPorBusqueda':
+        listarProductosPorBusqueda();
+    break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
 }
-function listarProductos($join='',$where=''){
-    $row=q("SELECT p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id");
+function listarProductosPorBusqueda(){
+    $texto=strtolower($_GET['texto']);
+    $where="AND LOWER(p.name) LIKE '%$texto%'";
+
+    $sql=getSqlListarProductos('',$where,'');
+    //exit($sql);
+    listarProductos($sql);    
+}
+function buscarProducto(){
+  
+    $texto=strtolower($_GET['texto']);
+    $arr=q("SELECT name,price FROM products WHERE LOWER(name) LIKE '%$texto%'");
+    if(is_array($arr)){
+        salidaNueva($arr,"Coincidencia");
+    }else{
+        salidaNueva(null,"No se encuentran productos",false);
+    }
+}
+function guardarVisitaProducto(){
+    $users_id   =$_SESSION['usuario']['id'];
+    $products_id=$_GET['products_id'];
+    $arr=q("SELECT 1 FROM user_visit_products WHERE products_id='$products_id' AND users_id='$users_id'");
+    if(is_array($arr)){
+        q("UPDATE user_visit_products SET updated_at=NOW() WHERE products_id='$products_id' AND users_id='$users_id'");
+    }else{
+        q("INSERT INTO user_visit_products (products_id,users_id,created_at,updated_at) VALUES ('$products_id','$users_id',NOW(),NOW())");
+    }
+}
+function guardarOpinion(){
+    $users_id   =$_SESSION['usuario']['id'];
+    $products_id=$_GET['products_id'];
+    $opinion=$_GET['opinion'];
+    $arr=q("UPDATE rating_products SET opinion='$opinion' WHERE users_id='$users_id' AND products_id='$products_id' RETURNING id");
+if(is_array($arr)){
+    salidaNueva(null,"Gracias por su comentario.");
+}
+salidaNueva(null,"Disculpe, intente nuevamente.",false);
+}
+function guardarCalificacion(){
+    $users_id   =$_SESSION['usuario']['id'];
+    $products_id=$_GET['products_id'];
+    $rating     =$_GET['rating'];
+    q("DELETE FROM rating_products WHERE users_id='$users_id' AND products_id='$products_id'");
+    $arr=q("INSERT INTO rating_products (users_id,products_id,rating) VALUES('$users_id','$products_id','$rating') RETURNING id");
+    
+    if(is_array($arr)){
+        salidaNueva(null,"Calificado exitosamente");
+    }else{
+        salidaNueva(null,"Ha fallado la calificación",false);
+    }
+}
+function listarProductosIA(){
+    $users_id=$_SESSION['usuario']['id'];
+    //$users_id=1;
+    $cant_mostrar=20;
+
+    try{
+        $arr=q('SELECT p.name, p.description_short, p.keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 50');
+        $string="";
+        if(is_array($arr)){
+            foreach ($arr as $obj){
+                $string.=$obj['name']." ".$obj['description_short']." ".$obj['keyword']." ";
+            }
+        }else{
+            $order='ORDER BY RANDOM()';
+            $sql=getSqlListarProductos('','',$order);
+            listarProductos($sql);
+        }
+    }
+    catch(\Exception $e){
+        salidaNueva(null,"disculpe, intente nuevamente");
+    }
+
+   $texto_formateado_para_buscar=str_replace(" "," | ",preg_replace('/\s+/', ' ', trim($string)));
+   try{
+       $sql="SELECT p.id, p.name, ts_rank_cd(to_tsvector(description_short), query) AS rank
+       FROM products p, to_tsquery('$texto_formateado_para_buscar') query
+       WHERE query @@ to_tsvector(description_short)
+       ORDER BY rank DESC
+       LIMIT $cant_mostrar";
+      $join="INNER JOIN ($sql) as r ON r.id=p.id";
+      $sql=getSqlListarProductos($join);
+      listarProductos($sql);
+    }
+    catch(\Exception $e){
+        salidaNueva(null,"disculpe, intente nuevamente 2");
+    }
+}
+function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
+    $users_id=$_SESSION['usuario']['id'];
+    $sql="SELECT p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT 1 FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $limit $order";
+ 
+    return $sql;
+}
+function listarProductos($sql){
+    
+    $row=q($sql);
     if(is_array($row)){
         $row=recortar_imagen($row);
         salidaNueva($row);
