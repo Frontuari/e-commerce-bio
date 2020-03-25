@@ -2506,6 +2506,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2517,7 +2520,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selectedDirection: '',
       selectedPayment: '',
       order: {},
-      payment_img: ""
+      payment_img: "",
+      banks: []
     };
   },
   props: {
@@ -2616,7 +2620,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
         }
       }
-    }
+    },
+    showBanksInfo: function () {
+      var _showBanksInfo = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, banks, DatosCuentas, DatosCuentasArr, Mensaje, i, a;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get(URLSERVER + 'api/banks');
+
+              case 2:
+                response = _context2.sent;
+                banks = response.data.data;
+                DatosCuentas = Array;
+                DatosCuentasArr = Array;
+                Mensaje = "";
+                i = 0;
+
+                for (i = 0; i < banks.length; i++) {
+                  a = 0;
+                  DatosCuentas = banks[i].cuentas.split("||");
+
+                  for (a = 0; a < DatosCuentas.length; a++) {
+                    DatosCuentasArr = DatosCuentas[a].split("/n");
+                    if (a == 0) Mensaje += "<div><p><h4 class='order-number order-text'>" + banks[i].name + "</h4><br>";
+                    Mensaje += DatosCuentasArr[0] + "<br><br>";
+                  }
+
+                  Mensaje += "</p></div>";
+                }
+
+                window.Swal.fire({
+                  title: "Nuestras Cuentas Bancarias",
+                  html: Mensaje
+                });
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function showBanksInfo() {
+        return _showBanksInfo.apply(this, arguments);
+      }
+
+      return showBanksInfo;
+    }()
   },
   created: function created() {
     var _this = this;
@@ -74934,7 +74990,7 @@ var render = function() {
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "form-group col-lg-6"
+                                                            "form-group col-lg-3"
                                                         },
                                                         [
                                                           _c(
@@ -74997,7 +75053,7 @@ var render = function() {
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "form-group col-lg-6"
+                                                            "form-group col-lg-7"
                                                         },
                                                         [
                                                           _c(
@@ -75029,6 +75085,33 @@ var render = function() {
                                                             }
                                                           })
                                                         ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-lg-2 float-right mx-auto"
+                                                        },
+                                                        [
+                                                          _c("br"),
+                                                          _c("input", {
+                                                            staticClass:
+                                                              "btn btn-submit",
+                                                            attrs: {
+                                                              type: "button",
+                                                              value:
+                                                                "Nuestras Cuentas"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.showBanksInfo()
+                                                              }
+                                                            }
+                                                          })
+                                                        ]
                                                       )
                                                     ]
                                                   )
@@ -75053,7 +75136,7 @@ var render = function() {
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "form-group  col-lg-6"
+                                                            "form-group col-lg-3"
                                                         },
                                                         [
                                                           _c(
@@ -75116,7 +75199,7 @@ var render = function() {
                                                         "div",
                                                         {
                                                           staticClass:
-                                                            "form-group  col-lg-6"
+                                                            "form-group col-lg-7"
                                                         },
                                                         [
                                                           _c(
@@ -75127,11 +75210,7 @@ var render = function() {
                                                                   "img-referencia"
                                                               }
                                                             },
-                                                            [
-                                                              _vm._v(
-                                                                "Imagen de Pago:"
-                                                              )
-                                                            ]
+                                                            [_vm._v("Imagen:")]
                                                           ),
                                                           _vm._v(" "),
                                                           _c("input", {
@@ -75149,6 +75228,33 @@ var render = function() {
                                                             on: {
                                                               change:
                                                                 _vm.LoadImageFile
+                                                            }
+                                                          })
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-lg-2 float-right mx-auto"
+                                                        },
+                                                        [
+                                                          _c("br"),
+                                                          _c("input", {
+                                                            staticClass:
+                                                              "btn btn-submit",
+                                                            attrs: {
+                                                              type: "button",
+                                                              value:
+                                                                "Nuestras Cuentas"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.showBanksInfo()
+                                                              }
                                                             }
                                                           })
                                                         ]

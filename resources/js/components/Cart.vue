@@ -438,7 +438,8 @@
 									</div>
 								</div>
 							</fieldset>
-							<!-- Carga de formas de pago-->
+
+<!-- Carga de formas de pago-->
                             <fieldset>
 								<div class="payment-methods">
 									<div class="row">
@@ -455,31 +456,33 @@
 															</label>
 														</div>
 													</div>
-                                                    <template v-if="selectedPayment==2" >
+                                                    <template v-if="selectedPayment==2">
                                                         <div class="col-lg-12">
                                                             <div class="row" v-if="pay.id===2">
-                                                                <div class="form-group col-lg-6" >
+                                                                <div class="form-group col-lg-3" >
                                                                     <label for="referencia-pago">Número de Referencia:</label>
                                                                     <input type="text" name="referencia-pago" class="form-control" v-model="payment_ref">
                                                                 </div>
-                                                                <div class="form-group col-lg-6">
+                                                                <div class="form-group col-lg-7">
                                                                     <label for="img-referencia">Imagen:</label>
                                                                     <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile">
                                                                 </div>
+                                                                <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Nuestras Cuentas" @click="showBanksInfo()"></div>
                                                             </div>
                                                         </div>
                                                     </template>
-                                                    <template v-if="selectedPayment==1">
+                                                    <template v-if="selectedPayment==1" >
                                                         <div class="col-lg-12">
                                                             <div class="row" v-if="pay.id===1">
-                                                                <div class="form-group  col-lg-6">
+                                                                <div class="form-group col-lg-3" >
                                                                     <label for="referencia-pago">Número de Referencia:</label>
                                                                     <input type="text" name="referencia-pago" class="form-control" v-model="payment_ref">
                                                                 </div>
-                                                                <div class="form-group  col-lg-6">
-                                                                    <label for="img-referencia">Imagen de Pago:</label>
+                                                                <div class="form-group col-lg-7">
+                                                                    <label for="img-referencia">Imagen:</label>
                                                                     <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile">
                                                                 </div>
+                                                                <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Nuestras Cuentas" @click="showBanksInfo()"></div>
                                                             </div>
                                                         </div>
                                                     </template>
@@ -586,7 +589,8 @@ export default {
 			selectedDirection: '',
 			selectedPayment: '',
             order: {},
-            payment_img:""
+            payment_img:"",
+            banks:[]
         }
     },
 	props: {
@@ -615,7 +619,6 @@ export default {
             let formData    = new FormData();
             formData.append("payment_img",this.payment_img);
             axios.post( "/order", formData, { headers: {'Content-Type': 'multipart/form-data'}});
-
 
 			console.log("Order::> ",this.order);
 			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
@@ -669,7 +672,34 @@ export default {
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
 			}
-		},
+        },
+        showBanksInfo: async function()
+        {
+            const response  =   await axios.get(URLSERVER+'api/banks');
+            var banks       =   response.data.data;
+            var DatosCuentas=   Array;
+			var DatosCuentasArr=   Array;
+            var Mensaje     =   "";
+            var i           =   0;
+
+            for(i=0; i<banks.length;i++)
+            {
+                var a = 0;
+                DatosCuentas=banks[i].cuentas.split("||");
+                for(a=0; a<DatosCuentas.length ; a++)
+                {
+					DatosCuentasArr=DatosCuentas[a].split("/n");
+                    if (a==0)
+                        Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
+					Mensaje+=DatosCuentasArr[0]+"<br><br>";
+                }
+                Mensaje+="</p></div>";
+            }
+            window.Swal.fire({
+                title:"Nuestras Cuentas Bancarias",
+                html:Mensaje,
+            });
+        },
 	},
     created() {
         EventBus.$on('update_cantCart', data => {
@@ -727,7 +757,7 @@ export default {
     		}else{
     			return this.userlogged.directions[id];
     		}
-    	}
+        },
     }
 }
 </script>
