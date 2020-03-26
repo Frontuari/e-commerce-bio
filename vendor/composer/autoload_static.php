@@ -643,6 +643,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Groups' => __DIR__ . '/../..' . '/app/Groups.php',
         'App\\HomePages' => __DIR__ . '/../..' . '/app/HomePages.php',
         'App\\Http\\Controllers\\API\\AdvsController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/AdvsController.php',
+        'App\\Http\\Controllers\\API\\BanksController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BanksController.php',
         'App\\Http\\Controllers\\API\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BaseController.php',
         'App\\Http\\Controllers\\API\\BrandController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/BrandController.php',
         'App\\Http\\Controllers\\API\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/CategoryController.php',

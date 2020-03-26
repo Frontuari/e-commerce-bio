@@ -1265,6 +1265,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
+            156 => 
+            array (
+                'id' => 187,
+                'key' => 'browse_det_bank_orders',
+                'table_name' => 'det_bank_orders',
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+            ),
+            157 => 
+            array (
+                'id' => 188,
+                'key' => 'read_det_bank_orders',
+                'table_name' => 'det_bank_orders',
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+            ),
+            158 => 
+            array (
+                'id' => 189,
+                'key' => 'edit_det_bank_orders',
+                'table_name' => 'det_bank_orders',
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+            ),
+            159 => 
+            array (
+                'id' => 190,
+                'key' => 'add_det_bank_orders',
+                'table_name' => 'det_bank_orders',
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+            ),
+            160 => 
+            array (
+                'id' => 191,
+                'key' => 'delete_det_bank_orders',
+                'table_name' => 'det_bank_orders',
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+            ),
         ));
         
         

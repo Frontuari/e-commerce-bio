@@ -961,6 +961,22 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.order-products.index',
                 'parameters' => NULL,
             ),
+            59 => 
+            array (
+                'id' => 72,
+                'menu_id' => 3,
+                'title' => 'Verificar pagos',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-paypal',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 21,
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-03-26 01:01:30',
+                'route' => 'voyager.det-bank-orders.index',
+                'parameters' => NULL,
+            ),
         ));
         
         

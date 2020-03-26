@@ -36,6 +36,7 @@ return array(
     'App\\Groups' => $baseDir . '/app/Groups.php',
     'App\\HomePages' => $baseDir . '/app/HomePages.php',
     'App\\Http\\Controllers\\API\\AdvsController' => $baseDir . '/app/Http/Controllers/API/AdvsController.php',
+    'App\\Http\\Controllers\\API\\BanksController' => $baseDir . '/app/Http/Controllers/API/BanksController.php',
     'App\\Http\\Controllers\\API\\BaseController' => $baseDir . '/app/Http/Controllers/API/BaseController.php',
     'App\\Http\\Controllers\\API\\BrandController' => $baseDir . '/app/Http/Controllers/API/BrandController.php',
     'App\\Http\\Controllers\\API\\CategoryController' => $baseDir . '/app/Http/Controllers/API/CategoryController.php',
