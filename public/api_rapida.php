@@ -5,6 +5,8 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
 session_start();
+
+$json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
@@ -173,8 +175,57 @@ switch($_GET['evento']) {
     case 'listarProductosPorBusqueda':
         listarProductosPorBusqueda();
     break;
+    case 'listarProductosCarrito':
+        listarProductosCarrito($json);
+    break;
+    case 'listarMetodosDePago':
+        $arr=q("SELECT id,name,description,image FROM payment_methods WHERE status='A'");
+        if(is_array($arr)){
+            salidaNueva($arr,"Listando metodos de pago");
+        }else{
+            salidaNueva(null,"Disculpe, intente de nuevo",false);
+        }
+    break;
+    case 'listarOrdenes':
+        $arr=q("SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id ORDER BY o.id DESC");
+        if(is_array($arr)){
+            salidaNueva($arr,"Listando ordenes");
+        }else{
+            salidaNueva(null,"Disculpe, intente de nuevo",false);
+        }
+    break;
+    case 'crearOrden':
+        crearOrden($json);
+    break;
+    case 'consultarOrden':
+        $id=$_GET['id'];
+        $arr=q("SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,TO_CHAR(o.delivery_time_date :: DATE, 'dd/mm/yyyy') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id WHERE o.id='$id'");
+        if(is_array($arr)){
+            salidaNueva($arr,"Orden consultada");
+        }else{
+            salidaNueva(null,"Disculpe, intente de nuevo",false);
+        }
+    break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
+}
+function crearOrden($json){
+
+}
+function listarProductosCarrito($json){
+
+    $productos=json_decode($json);
+   
+    foreach($productos as $id=>$cant){
+        if($cant>0){
+        $where.=' p.id='.$id.' OR';
+        $arr[$id]=$cant;
+        }
+        
+    }
+    $where='AND ('.rtrim($where,' OR').')';
+    $sql=getSqlListarProductos('',trim($where));
+    listarProductos($sql,$arr);
 }
 function listarProductosPorBusqueda(){
     $texto=strtolower($_GET['texto']);
@@ -270,11 +321,11 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
  
     return $sql;
 }
-function listarProductos($sql){
+function listarProductos($sql,$agregarCantidad=false){
     
     $row=q($sql);
     if(is_array($row)){
-        $row=recortar_imagen($row);
+        $row=recortar_imagen($row,$agregarCantidad);
         salidaNueva($row);
     }else{
         salidaNueva(null,"No hay productos disponibles",false);
@@ -349,7 +400,10 @@ function guardarDireccion(){
     if($id){//Actualiza
         $arr=q("UPDATE order_address SET cities_id='$cities_id',address='$address',zip_code='$zip_code',urb='$urb',sector='$sector',nro_home='$nro_home',reference_point='$reference_point' WHERE users_id='$users_id' AND id='$id' RETURNING id");
     }else{//Registra
-        $arr=q("INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point' ) RETURNING id");
+        $sql="INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point' ) RETURNING id";
+   // exit();
+        //salida(null,$sql,false);
+        $arr=q($sql);
     }
     if(is_array($arr)){
         salida(null,"Guardado exitosamente");
@@ -485,15 +539,23 @@ function enviarCorreo($correo){
 function generarCodigoVerificacion($data){
 return hexdec( substr(sha1($data), 0, 5) );
 }
-function recortar_imagen($row){
+function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
-        $arr=explode(".",$value['image']);
+        $img=json_decode($value['image']);
+        if(is_array($img)){
+            $imgLista=$img[0];
+        }else{
+            $imgLista=$value['image'];
+        }
+        $arr=explode(".",$imgLista);
 
         $row[$id]['image']=$arr[0].'-cropped.'.$arr[1];
         $row[$id]['image_grande']=$value['image'];
-        //$row[$id]['name']=substr($value['name'],0,21);
         $row[$id]['name']=ucwords(mb_strtolower($value['name']));
         $row[$id]['description_short']=ucfirst(mb_strtolower($value['description_short']));
+        if(is_array($cant)){
+            $row[$id]['cant']=$cant[$value['id']];
+        }
         
     }
      return $row;

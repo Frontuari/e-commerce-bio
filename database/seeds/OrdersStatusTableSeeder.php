@@ -20,7 +20,7 @@ class OrdersStatusTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Nuevo',
+                'name' => 'Esperando el pago',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:51:56',
@@ -29,7 +29,7 @@ class OrdersStatusTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Preparando',
+                'name' => 'Verificando su pago',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:12',
@@ -38,7 +38,7 @@ class OrdersStatusTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'En despacho',
+                'name' => 'Pago rechazado',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:23',
@@ -47,7 +47,7 @@ class OrdersStatusTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'name' => 'Entregado',
+                'name' => 'Preparando su orden',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:29',
@@ -56,7 +56,7 @@ class OrdersStatusTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'name' => 'Devuelto',
+                'name' => 'Retirar en tienda',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:36',
@@ -65,7 +65,7 @@ class OrdersStatusTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'name' => 'Retirar en tienda',
+                'name' => 'Preparado para despacho',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:45',
@@ -74,11 +74,56 @@ class OrdersStatusTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'name' => 'Pago no procesado',
+                'name' => 'Entregando',
                 'description' => NULL,
                 'status' => 'A',
                 'created_at' => '2020-02-24 18:52:53',
                 'updated_at' => '2020-02-24 18:52:53',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'Entregado',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:53',
+                'updated_at' => '2020-02-24 18:52:53',
+            ),
+            8 => 
+            array (
+                'id' => 9,
+                'name' => 'Devuelto',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:53',
+                'updated_at' => '2020-02-24 18:52:53',
+            ),
+            9 => 
+            array (
+                'id' => 10,
+                'name' => 'Reenviado',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:53',
+                'updated_at' => '2020-02-24 18:52:53',
+            ),
+            10 => 
+            array (
+                'id' => 11,
+                'name' => 'Cancelado por el usuario',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:53',
+                'updated_at' => '2020-02-24 18:52:53',
+            ),
+            11 => 
+            array (
+                'id' => 12,
+                'name' => 'Cancelado por Biomercados',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => NULL,
+                'updated_at' => NULL,
             ),
         ));
         
