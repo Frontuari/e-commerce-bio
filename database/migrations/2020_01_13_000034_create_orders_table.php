@@ -28,9 +28,9 @@ class CreateOrdersTable extends Migration
             $table->decimal('total_tax', 20, 6);
             $table->decimal('total_packaging', 20, 6)->nullable()->default('0');
             $table->decimal('total_transport', 20, 6)->nullable()->default('0');
-            $table->unsignedBigInteger('order_address_id');
+            $table->unsignedBigInteger('order_address_id')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');
-            $table->unsignedBigInteger('transports_id');
+            $table->unsignedBigInteger('transports_id')->nullable();
             $table->unsignedTinyInteger('user_rating')->nullable()->default('0');
             $table->dateTime('delivery_time_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('discount', 20, 6)->nullable()->default('0')->comment('para los combos');
@@ -38,7 +38,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('currency_rate', 20, 6)->nullable()->default('1');
             $table->string('opinion')->nullable()->comment('Comentario del usuario para calificando el pedido');
             $table->unsignedInteger('coins_id');
-
+            $table->unsignedBigInteger('users_id')->nullable();
             $table->index(["coins_id"], 'fk_orders_coins1_idx');
 
             $table->index(["order_address_id"], 'fk_pedido_direccion_pedido1_idx');
