@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-6 col-lg-12" v-for="product in products.data" v-bind:key="product.id">
                     <div class="product-block">
-                        <div class="product-img" v-for="product in itemsProductos" v-bind:key="product.id">
+                        <div class="product-img" >
                             <!--Reemplazar imagen por carrusel de imagenes>--
                             <img :src="'storage/'+product.fotos | MediumImage"-->
                             <div :id="'slider'+product.id" class="carousel slide" data-ride="carousel">
@@ -173,9 +173,9 @@
         },
         computed:{
              itemsProductos(){
-                console.log(this.products.data.map( product => {
+                this.products.data=this.products.data.map( product => {
                     return Object.assign( product, { fotos: JSON.parse( product.photo )})
-               }))
+               })
             }
         },
         created() {
