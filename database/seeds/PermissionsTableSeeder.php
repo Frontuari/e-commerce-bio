@@ -1305,6 +1305,46 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
+            161 => 
+            array (
+                'id' => 192,
+                'key' => 'browse_calendars',
+                'table_name' => 'calendars',
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:41:13',
+            ),
+            162 => 
+            array (
+                'id' => 193,
+                'key' => 'read_calendars',
+                'table_name' => 'calendars',
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:41:13',
+            ),
+            163 => 
+            array (
+                'id' => 194,
+                'key' => 'edit_calendars',
+                'table_name' => 'calendars',
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:41:13',
+            ),
+            164 => 
+            array (
+                'id' => 195,
+                'key' => 'add_calendars',
+                'table_name' => 'calendars',
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:41:13',
+            ),
+            165 => 
+            array (
+                'id' => 196,
+                'key' => 'delete_calendars',
+                'table_name' => 'calendars',
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:41:13',
+            ),
         ));
         
         

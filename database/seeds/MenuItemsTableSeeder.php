@@ -499,22 +499,6 @@ class MenuItemsTableSeeder extends Seeder
             ),
             30 => 
             array (
-                'id' => 43,
-                'menu_id' => 3,
-                'title' => 'Transportes',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-truck',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 1,
-                'created_at' => '2020-01-24 14:47:07',
-                'updated_at' => '2020-01-28 20:57:44',
-                'route' => 'voyager.transports.index',
-                'parameters' => 'null',
-            ),
-            31 => 
-            array (
                 'id' => 46,
                 'menu_id' => 3,
                 'title' => 'Opiniones',
@@ -529,7 +513,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.rating-products.index',
                 'parameters' => 'null',
             ),
-            32 => 
+            31 => 
             array (
                 'id' => 41,
                 'menu_id' => 3,
@@ -545,7 +529,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.payment-methods.index',
                 'parameters' => 'null',
             ),
-            33 => 
+            32 => 
             array (
                 'id' => 16,
                 'menu_id' => 3,
@@ -561,7 +545,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.roles.index',
                 'parameters' => NULL,
             ),
-            34 => 
+            33 => 
             array (
                 'id' => 14,
                 'menu_id' => 3,
@@ -577,7 +561,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.media.index',
                 'parameters' => NULL,
             ),
-            35 => 
+            34 => 
             array (
                 'id' => 28,
                 'menu_id' => 3,
@@ -593,7 +577,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.posts.index',
                 'parameters' => NULL,
             ),
-            36 => 
+            35 => 
             array (
                 'id' => 29,
                 'menu_id' => 3,
@@ -609,7 +593,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.pages.index',
                 'parameters' => NULL,
             ),
-            37 => 
+            36 => 
             array (
                 'id' => 17,
                 'menu_id' => 3,
@@ -625,7 +609,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => NULL,
             ),
-            38 => 
+            37 => 
             array (
                 'id' => 23,
                 'menu_id' => 3,
@@ -641,7 +625,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.hooks',
                 'parameters' => NULL,
             ),
-            39 => 
+            38 => 
             array (
                 'id' => 22,
                 'menu_id' => 3,
@@ -657,7 +641,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.settings.index',
                 'parameters' => NULL,
             ),
-            40 => 
+            39 => 
             array (
                 'id' => 60,
                 'menu_id' => 3,
@@ -673,7 +657,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.orders.index',
                 'parameters' => 'null',
             ),
-            41 => 
+            40 => 
             array (
                 'id' => 47,
                 'menu_id' => 3,
@@ -689,71 +673,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.products.index',
                 'parameters' => 'null',
             ),
-            42 => 
-            array (
-                'id' => 40,
-                'menu_id' => 3,
-                'title' => 'Tiendas',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-shop',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 4,
-                'created_at' => '2020-01-24 14:31:55',
-                'updated_at' => '2020-02-26 01:03:42',
-                'route' => 'voyager.stores.index',
-                'parameters' => 'null',
-            ),
-            43 => 
-            array (
-                'id' => 26,
-                'menu_id' => 3,
-                'title' => 'Estados',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-list-add',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 5,
-                'created_at' => '2020-01-23 21:36:08',
-                'updated_at' => '2020-02-26 01:03:42',
-                'route' => 'voyager.states.index',
-                'parameters' => 'null',
-            ),
-            44 => 
-            array (
-                'id' => 25,
-                'menu_id' => 3,
-                'title' => 'Municipios',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-list-add',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 6,
-                'created_at' => '2020-01-23 21:33:52',
-                'updated_at' => '2020-02-26 01:03:42',
-                'route' => 'voyager.regions.index',
-                'parameters' => 'null',
-            ),
-            45 => 
-            array (
-                'id' => 24,
-                'menu_id' => 3,
-                'title' => 'Parroquias',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-list-add',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 7,
-                'created_at' => '2020-01-23 21:21:05',
-                'updated_at' => '2020-02-26 01:03:42',
-                'route' => 'voyager.cities.index',
-                'parameters' => 'null',
-            ),
-            46 => 
+            41 => 
             array (
                 'id' => 71,
                 'menu_id' => 3,
@@ -769,7 +689,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.trackings.index',
                 'parameters' => 'null',
             ),
-            47 => 
+            42 => 
             array (
                 'id' => 59,
                 'menu_id' => 3,
@@ -785,23 +705,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => '',
             ),
-            48 => 
-            array (
-                'id' => 44,
-                'menu_id' => 3,
-                'title' => 'Embalajes',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-umbrella',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 3,
-                'created_at' => '2020-01-24 14:49:33',
-                'updated_at' => '2020-02-26 01:03:42',
-                'route' => 'voyager.packagings.index',
-                'parameters' => 'null',
-            ),
-            49 => 
+            43 => 
             array (
                 'id' => 54,
                 'menu_id' => 3,
@@ -817,23 +721,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => '',
             ),
-            50 => 
-            array (
-                'id' => 70,
-                'menu_id' => 3,
-                'title' => 'Estatus del tracking',
-                'url' => '',
-                'target' => '_self',
-                'icon_class' => 'voyager-check-circle',
-                'color' => '#000000',
-                'parent_id' => 58,
-                'order' => 2,
-                'created_at' => '2020-02-24 18:28:11',
-                'updated_at' => '2020-02-26 13:44:58',
-                'route' => 'voyager.orders-status.index',
-                'parameters' => 'null',
-            ),
-            51 => 
+            44 => 
             array (
                 'id' => 53,
                 'menu_id' => 3,
@@ -849,7 +737,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => '',
             ),
-            52 => 
+            45 => 
             array (
                 'id' => 57,
                 'menu_id' => 3,
@@ -865,7 +753,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => '',
             ),
-            53 => 
+            46 => 
             array (
                 'id' => 61,
                 'menu_id' => 3,
@@ -881,7 +769,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.taxes.index',
                 'parameters' => 'null',
             ),
-            54 => 
+            47 => 
             array (
                 'id' => 58,
                 'menu_id' => 3,
@@ -897,7 +785,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => NULL,
                 'parameters' => '',
             ),
-            55 => 
+            48 => 
             array (
                 'id' => 62,
                 'menu_id' => 3,
@@ -913,7 +801,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.advs.index',
                 'parameters' => 'null',
             ),
-            56 => 
+            49 => 
             array (
                 'id' => 63,
                 'menu_id' => 3,
@@ -929,7 +817,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.packages.index',
                 'parameters' => 'null',
             ),
-            57 => 
+            50 => 
             array (
                 'id' => 64,
                 'menu_id' => 3,
@@ -945,7 +833,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.order-address.index',
                 'parameters' => NULL,
             ),
-            58 => 
+            51 => 
             array (
                 'id' => 65,
                 'menu_id' => 3,
@@ -961,7 +849,7 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.order-products.index',
                 'parameters' => NULL,
             ),
-            59 => 
+            52 => 
             array (
                 'id' => 72,
                 'menu_id' => 3,
@@ -976,6 +864,134 @@ class MenuItemsTableSeeder extends Seeder
                 'updated_at' => '2020-03-26 01:01:30',
                 'route' => 'voyager.det-bank-orders.index',
                 'parameters' => NULL,
+            ),
+            53 => 
+            array (
+                'id' => 43,
+                'menu_id' => 3,
+                'title' => 'Transportes',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-truck',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 2,
+                'created_at' => '2020-01-24 14:47:07',
+                'updated_at' => '2020-03-31 15:43:50',
+                'route' => 'voyager.transports.index',
+                'parameters' => 'null',
+            ),
+            54 => 
+            array (
+                'id' => 44,
+                'menu_id' => 3,
+                'title' => 'Embalajes',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-umbrella',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 4,
+                'created_at' => '2020-01-24 14:49:33',
+                'updated_at' => '2020-03-31 15:43:35',
+                'route' => 'voyager.packagings.index',
+                'parameters' => 'null',
+            ),
+            55 => 
+            array (
+                'id' => 40,
+                'menu_id' => 3,
+                'title' => 'Tiendas',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-shop',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 5,
+                'created_at' => '2020-01-24 14:31:55',
+                'updated_at' => '2020-03-31 15:43:35',
+                'route' => 'voyager.stores.index',
+                'parameters' => 'null',
+            ),
+            56 => 
+            array (
+                'id' => 26,
+                'menu_id' => 3,
+                'title' => 'Estados',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-list-add',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 6,
+                'created_at' => '2020-01-23 21:36:08',
+                'updated_at' => '2020-03-31 15:43:35',
+                'route' => 'voyager.states.index',
+                'parameters' => 'null',
+            ),
+            57 => 
+            array (
+                'id' => 25,
+                'menu_id' => 3,
+                'title' => 'Municipios',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-list-add',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 7,
+                'created_at' => '2020-01-23 21:33:52',
+                'updated_at' => '2020-03-31 15:43:35',
+                'route' => 'voyager.regions.index',
+                'parameters' => 'null',
+            ),
+            58 => 
+            array (
+                'id' => 24,
+                'menu_id' => 3,
+                'title' => 'Parroquias',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-list-add',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 8,
+                'created_at' => '2020-01-23 21:21:05',
+                'updated_at' => '2020-03-31 15:43:35',
+                'route' => 'voyager.cities.index',
+                'parameters' => 'null',
+            ),
+            59 => 
+            array (
+                'id' => 70,
+                'menu_id' => 3,
+                'title' => 'Estatus del tracking',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-check-circle',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 3,
+                'created_at' => '2020-02-24 18:28:11',
+                'updated_at' => '2020-03-31 15:43:50',
+                'route' => 'voyager.orders-status.index',
+                'parameters' => 'null',
+            ),
+            60 => 
+            array (
+                'id' => 73,
+                'menu_id' => 3,
+                'title' => 'Horarios para despachos',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-alarm-clock',
+                'color' => '#000000',
+                'parent_id' => 58,
+                'order' => 1,
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 15:45:38',
+                'route' => 'voyager.calendars.index',
+                'parameters' => 'null',
             ),
         ));
         

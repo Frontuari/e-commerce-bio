@@ -199,17 +199,63 @@ switch($_GET['evento']) {
     break;
     case 'consultarOrden':
         $id=$_GET['id'];
-        $arr=q("SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,TO_CHAR(o.delivery_time_date :: DATE, 'dd/mm/yyyy') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id WHERE o.id='$id'");
+        $arr=q("SELECT (SELECT json_agg(
+            json_build_object(
+            'id', op.products_id, 
+            'cant', op.cant,
+            'image',p.photo,
+            'name',p.name,
+            'price',op.price
+        )
+        
+) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) productos,(SELECT rate FROM coins WHERE id='1') rate,oa.address, p.name as nombre_usuario, o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,TO_CHAR(o.delivery_time_date :: DATE, 'dd/mm/yyyy') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE o.id='$id'");
         if(is_array($arr)){
             salidaNueva($arr,"Orden consultada");
         }else{
             salidaNueva(null,"Disculpe, intente de nuevo",false);
         }
     break;
+    case 'recargoEnvio':
+        $arr[0]['precio']=20000.00000001;
+        salidaNueva($arr,"Recargo envio");
+    break;
+    case 'horasDisponiblesEntrega':
+        $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
+        $iniciarDespuesDe=2; //Horas
+        $timenow = time();
+        $index=0;
+            for ($i = $iniciarDespuesDe; $i < 24; $i ++) {
+                $ago = strtotime("+ $i hours",$timenow);
+                $hora=strftime('%H',$ago);
+                $diaActual=strftime('%d',$timenow);
+              
+                if(!in_array($hora,$horasNoDisponibles)){
+                    $diaDisponible=strftime('%d',$ago);
+                    //$horas[]['id']='A';
+                    $horas[$index]['id']=$index;
+                    $horas[$index]['time']=$ago;
+                    $msjHora=date('h:iA',$ago);
+                    if($diaActual==$diaDisponible){
+                        $msj="Hoy";
+                    }else{
+                        $msj="Mañana";
+                    }
+                    $horas[$index]['name']=$msj." - ".$msjHora;
+                    $index++;
+                }
+             
+            }
+   
+       // array('1','2','3','4','5','6','7','8','9','10');
+        //$horas[]['id']='A';
+       // $horas[]['id']='B';
+        salidaNueva($horas,"Listando horas disponible para entrega");
+    break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
 }
 function crearOrden($json){
+    exit($json);
 
 }
 function listarProductosCarrito($json){
