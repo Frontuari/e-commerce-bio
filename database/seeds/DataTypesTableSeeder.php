@@ -557,6 +557,24 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":"status","order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
             ),
+            30 => 
+            array (
+                'id' => 56,
+                'name' => 'calendars',
+                'slug' => 'calendars',
+                'display_name_singular' => 'Horario de despacho',
+                'display_name_plural' => 'Horarios para despachos',
+                'icon' => NULL,
+                'model_name' => 'App\\Calendar',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-03-31 14:41:13',
+                'updated_at' => '2020-03-31 14:49:38',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
         ));
         
         
