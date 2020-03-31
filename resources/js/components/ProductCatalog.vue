@@ -4,8 +4,37 @@
             <div class="row">
                 <div class="col-6 col-lg-12" v-for="product in products.data" v-bind:key="product.id">
                     <div class="product-block">
-                        <div class="product-img">
-                            <img :src="'storage/'+product.photo | MediumImage">
+                        <div class="product-img" v-for="product in itemsProductos" v-bind:key="product.id">
+                            <!--Reemplazar imagen por carrusel de imagenes>--
+                            <img :src="'storage/'+product.fotos | MediumImage"-->
+                            <div :id="'slider'+product.id" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ul class="carousel-indicators"  v-for="(foto,index) in product.fotos" v-bind:key="index">
+                                    <li :data-target="'#slider'+product.id" :data-slide-to="fotos.index" ></li>
+                                </ul>
+                                <!-- The slideshow -->
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" v-for="(foto,index) in product.fotos" v-bind:key="index"  >
+                                        <img :src="'storage/'+ product.foto | MediumImage">
+                                        <!--<img src="la.jpg" alt="Los Angeles" width="1100" height="500">-->
+                                    </div>
+                                </div>
+                                <!-- Left and right controls -->
+                                <a class="carousel-control-prev" :href="'#slider'+product.id" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" :href="'#slider'+product.id" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+
+                            <!-- fin del carrusel-->
                             <div class="product-actions">
                                 <button type="button" class="btn" @click="addToCart(product,cant_product[product.id])">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -51,10 +80,10 @@
                                                 <img src="assets/img/decrease.png" alt="decrease">
                                             </button>
                                         </div>
-                                    </div>										
+                                    </div>
                                 </div>
                                 <div class="product-buttons">
-                                    
+
                                     <button type="button" class="btn btn-addcart-outline"  v-if="product.qty_avaliable > 0" @click="addToCart(product,cant_product[product.id])">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
                                         Añadir al carrito
@@ -87,7 +116,7 @@
                                     {{index}}
                                 </a>
                             </li>
-                            
+
                             <li v-if="!!products.next_page_url">
                                 <a href="javascript:void(0)" @click="getpage(products.current_page + 1)"><img src="assets/img/next.png" alt="Next"></a>
                             </li>
@@ -115,6 +144,7 @@
         methods: {
             getProduct: function(objP) {
 				this.oneproduct = objP;
+
             },
             getpage(index) {
                 this.page = index;
@@ -141,6 +171,13 @@
                 $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
             }
         },
+        computed:{
+             itemsProductos(){
+                console.log(this.products.data.map( product => {
+                    return Object.assign( product, { fotos: JSON.parse( product.photo )})
+               }))
+            }
+        },
         created() {
             for(let i = 0;i<100;i++) {
                 this.cant_product[i] = 1;
@@ -148,6 +185,7 @@
         },
         props: {
             products: Object,
+            images   : Array,
             tasadolar: Number
         }
     }
