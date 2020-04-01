@@ -505,24 +505,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             27 => 
             array (
-                'id' => 26,
-                'name' => 'products',
-                'slug' => 'products',
-                'display_name_singular' => 'Producto',
-                'display_name_plural' => 'Productos',
-                'icon' => NULL,
-                'model_name' => 'App\\Products',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-01-24 15:05:08',
-                'updated_at' => '2020-03-26 00:32:13',
-                'server_side' => 0,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
-            ),
-            28 => 
-            array (
                 'id' => 55,
                 'name' => 'det_bank_orders',
                 'slug' => 'det-bank-orders',
@@ -539,7 +521,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":"status","scope":null}',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 34,
                 'name' => 'orders',
@@ -557,7 +539,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":"status","order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
             ),
-            30 => 
+            29 => 
             array (
                 'id' => 56,
                 'name' => 'calendars',
@@ -570,6 +552,24 @@ class DataTypesTableSeeder extends Seeder
                 'generate_permissions' => true,
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:49:38',
+                'server_side' => 0,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            30 => 
+            array (
+                'id' => 26,
+                'name' => 'products',
+                'slug' => 'products',
+                'display_name_singular' => 'Producto',
+                'display_name_plural' => 'Productos',
+                'icon' => NULL,
+                'model_name' => 'App\\Products',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-01-24 15:05:08',
+                'updated_at' => '2020-04-01 13:24:01',
                 'server_side' => 0,
                 'controller' => NULL,
                 'policy_name' => NULL,

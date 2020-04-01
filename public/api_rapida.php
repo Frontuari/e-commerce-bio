@@ -13,7 +13,7 @@ $_POST=seguro($_POST);
 switch($_GET['evento']) {
     case 'obtenerTodo':
 
-        $row_usuario=q("SELECT s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+        $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
         FROM users s
         INNER JOIN peoples p on p.id = s.peoples_id
         INNER JOIN cities c on c.id = p.cities_id
@@ -40,7 +40,7 @@ switch($_GET['evento']) {
         $email=$_GET['email'];
         $clave=$_GET['password'];
         
-        $row=q("SELECT s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+        $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
         FROM users s
         INNER JOIN peoples p on p.id = s.peoples_id
         INNER JOIN cities c on c.id = p.cities_id
@@ -250,6 +250,30 @@ switch($_GET['evento']) {
         //$horas[]['id']='A';
        // $horas[]['id']='B';
         salidaNueva($horas,"Listando horas disponible para entrega");
+    break;
+    case 'getPerfil':
+        $users_id=$_SESSION['usuario']['id'];
+        $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
+        if(is_array($arr)){
+            salidaNueva($arr,"Perfil");
+       }else{
+        salidaNueva(null,"Disculpe, intente de nuevo",false);
+       }
+    break;
+    case 'actualizarPerfil':
+        $rif=$_POST['rif'];
+        $sex=$_POST['sex'];
+        $name=$_POST['name'];
+        $users_id=$_SESSION['usuario']['id'];
+        $sql="UPDATE peoples SET rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+      //  salidaNueva(null,$sql,false);
+       $arr=q($sql);
+       if(is_array($arr)){
+            salidaNueva($arr,"Perfil actualizado correctamente");
+       }else{
+        salidaNueva(null,"Disculpe, intente de nuevo",false);
+       }
+        
     break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
