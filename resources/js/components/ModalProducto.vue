@@ -4,13 +4,30 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="product-block">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-img">
-                                    <img :src="'storage/'+product.photo">
+
+                            <div class=" col-lg-4">
+                                <div :id="'modalslider'+product.id" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ul class="carousel-indicators" >
+                                        <li v-for="(foto,index) in JSON.parse(product.photo)" v-bind:key="index" :data-target="'#modalslider'+product.id" :data-slide-to="index" :class="(index==0)?'active':''"></li>
+                                    </ul>
+                                    <!-- The slideshow -->
+                                    <div class="carousel-inner">
+                                        <div :class="(index==0)?'carousel-item active':'carousel-item'" v-for="(photo,index) in JSON.parse(product.photo)" v-bind:key="index">
+                                            <img :src="'storage/'+ photo | MediumImage">
+                                        </div>
+                                    </div>
+                                    <!-- Left and right controls -->
+                                    <a class="carousel-control-prev" :href="'#modalslider'+product.id" data-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </a>
+                                    <a class="carousel-control-next" :href="'#modalslider'+product.id" data-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-lg-7">
+<!-- fin del carrusel-->
+                            <div class="col-lg-8">
                                 <div class="product-description">
                                     <a href="#" class="product-title">{{product.name}}</a>
                                     <span class="product-info">{{product.description}}</span>
@@ -47,7 +64,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -79,7 +96,7 @@
 			totalModal: function() {
 				return this.product.price * this.cantModal;
 			}
-			
+
 		}
     }
 </script>

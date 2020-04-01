@@ -3921,6 +3921,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4118,16 +4135,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4169,15 +4176,6 @@ __webpack_require__.r(__webpack_exports__);
 
       $('.cantidad_' + productID).val(this.cant_product[productID]);
       $('.cantidad_' + productID)[0].dispatchEvent(new CustomEvent('input'));
-    }
-  },
-  computed: {
-    itemsProductos: function itemsProductos() {
-      this.products.data = this.products.data.map(function (product) {
-        return Object.assign(product, {
-          fotos: JSON.parse(product.photo)
-        });
-      });
     }
   },
   created: function created() {
@@ -73695,7 +73693,9 @@ var render = function() {
                                               attrs: {
                                                 src:
                                                   "storage/" +
-                                                  product_cart.product.photo
+                                                  JSON.parse(
+                                                    product_cart.product.photo
+                                                  )[0]
                                               }
                                             })
                                           ]
@@ -81401,223 +81401,299 @@ var render = function() {
         _c("div", { staticClass: "modal-content" }, [
           _c("div", { staticClass: "modal-body" }, [
             _c("div", { staticClass: "product-block" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-lg-5" }, [
-                  _c("div", { staticClass: "product-img" }, [
-                    _c("img", {
-                      attrs: { src: "storage/" + _vm.product.photo }
-                    })
+              _c("div", { staticClass: " col-lg-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "carousel slide",
+                    attrs: {
+                      id: "modalslider" + _vm.product.id,
+                      "data-ride": "carousel"
+                    }
+                  },
+                  [
+                    _c(
+                      "ul",
+                      { staticClass: "carousel-indicators" },
+                      _vm._l(JSON.parse(_vm.product.photo), function(
+                        foto,
+                        index
+                      ) {
+                        return _c("li", {
+                          key: index,
+                          class: index == 0 ? "active" : "",
+                          attrs: {
+                            "data-target": "#modalslider" + _vm.product.id,
+                            "data-slide-to": index
+                          }
+                        })
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "carousel-inner" },
+                      _vm._l(JSON.parse(_vm.product.photo), function(
+                        photo,
+                        index
+                      ) {
+                        return _c(
+                          "div",
+                          {
+                            key: index,
+                            class:
+                              index == 0
+                                ? "carousel-item active"
+                                : "carousel-item"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: _vm._f("MediumImage")("storage/" + photo)
+                              }
+                            })
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "carousel-control-prev",
+                        attrs: {
+                          href: "#modalslider" + _vm.product.id,
+                          "data-slide": "prev"
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "carousel-control-prev-icon"
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "carousel-control-next",
+                        attrs: {
+                          href: "#modalslider" + _vm.product.id,
+                          "data-slide": "next"
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "carousel-control-next-icon"
+                        })
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-8" }, [
+                _c("div", { staticClass: "product-description" }, [
+                  _c(
+                    "a",
+                    { staticClass: "product-title", attrs: { href: "#" } },
+                    [_vm._v(_vm._s(_vm.product.name))]
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "product-info" }, [
+                    _vm._v(_vm._s(_vm.product.description))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-prices" }, [
+                    _c("p", [
+                      _vm._v(
+                        "Bs " +
+                          _vm._s(_vm._f("FormatNumber")(_vm.product.price))
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-7" }, [
-                  _c("div", { staticClass: "product-description" }, [
-                    _c(
-                      "a",
-                      { staticClass: "product-title", attrs: { href: "#" } },
-                      [_vm._v(_vm._s(_vm.product.name))]
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-info" }, [
-                      _vm._v(_vm._s(_vm.product.description))
+                _c("div", { staticClass: "product-options" }, [
+                  _c("form", { attrs: { action: "" } }, [
+                    _c("div", { staticClass: "product-quantity" }, [
+                      _c("label", [_vm._v("Cantidad")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "product-quantity-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.cantModal,
+                              expression: "cantModal"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "quantity",
+                            type: "number",
+                            name: "quantity",
+                            value: "1"
+                          },
+                          domProps: { value: _vm.cantModal },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.cantModal = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "product-quantity-buttons" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.count(1)
+                                }
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/increase.png",
+                                  alt: "Increase"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.count(2)
+                                }
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "assets/img/decrease.png",
+                                  alt: "decrease"
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "product-prices" }, [
                       _c("p", [
+                        _c("b", [_vm._v("Total:")]),
                         _vm._v(
-                          "Bs " +
-                            _vm._s(_vm._f("FormatNumber")(_vm.product.price))
+                          " Bs " +
+                            _vm._s(_vm._f("FormatNumber")(_vm.totalModal)) +
+                            " "
                         )
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-options" }, [
-                    _c("form", { attrs: { action: "" } }, [
-                      _c("div", { staticClass: "product-quantity" }, [
-                        _c("label", [_vm._v("Cantidad")]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-quantity-group" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.cantModal,
-                                expression: "cantModal"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              id: "quantity",
-                              type: "number",
-                              name: "quantity",
-                              value: "1"
-                            },
-                            domProps: { value: _vm.cantModal },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.cantModal = $event.target.value
-                              }
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-buttons" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addToCart(_vm.product, _vm.cantModal)
                             }
-                          }),
-                          _vm._v(" "),
+                          }
+                        },
+                        [_vm._v("Añadir al carrito")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.addToFavorite(_vm.product)
+                            }
+                          }
+                        },
+                        [
                           _c(
-                            "div",
-                            { staticClass: "product-quantity-buttons" },
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 14.93 15"
+                              }
+                            },
                             [
+                              _c("title", [_vm._v("añadir-favorito-bio")]),
                               _c(
-                                "button",
+                                "g",
                                 {
-                                  staticClass: "btn",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.count(1)
-                                    }
-                                  }
+                                  attrs: { id: "Capa_2", "data-name": "Capa 2" }
                                 },
                                 [
-                                  _c("img", {
-                                    attrs: {
-                                      src: "assets/img/increase.png",
-                                      alt: "Increase"
-                                    }
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.count(2)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("img", {
-                                    attrs: {
-                                      src: "assets/img/decrease.png",
-                                      alt: "decrease"
-                                    }
-                                  })
+                                  _c(
+                                    "g",
+                                    {
+                                      attrs: {
+                                        id: "Guias_y_recursos",
+                                        "data-name": "Guias y recursos"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        staticClass: "cls-1",
+                                        attrs: {
+                                          d:
+                                            "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                        }
+                                      })
+                                    ]
+                                  )
                                 ]
                               )
                             ]
                           )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-prices" }, [
-                        _c("p", [
-                          _c("b", [_vm._v("Total:")]),
-                          _vm._v(
-                            " Bs " +
-                              _vm._s(_vm._f("FormatNumber")(_vm.totalModal)) +
-                              " "
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-buttons" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addToCart(_vm.product, _vm.cantModal)
-                              }
-                            }
-                          },
-                          [_vm._v("Añadir al carrito")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.addToFavorite(_vm.product)
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 14.93 15"
-                                }
-                              },
-                              [
-                                _c("title", [_vm._v("añadir-favorito-bio")]),
-                                _c(
-                                  "g",
-                                  {
-                                    attrs: {
-                                      id: "Capa_2",
-                                      "data-name": "Capa 2"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "g",
-                                      {
-                                        attrs: {
-                                          id: "Guias_y_recursos",
-                                          "data-name": "Guias y recursos"
-                                        }
-                                      },
-                                      [
-                                        _c("path", {
-                                          staticClass: "cls-1",
-                                          attrs: {
-                                            d:
-                                              "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          staticClass: "cls-1",
-                                          attrs: {
-                                            d:
-                                              "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          staticClass: "cls-1",
-                                          attrs: {
-                                            d:
-                                              "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                          }
-                                        }),
-                                        _c("path", {
-                                          staticClass: "cls-1",
-                                          attrs: {
-                                            d:
-                                              "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                          }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -81726,36 +81802,46 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._l(product.fotos, function(foto, index) {
-                          return _c(
-                            "ul",
-                            { key: index, staticClass: "carousel-indicators" },
-                            [
-                              _c("li", {
-                                attrs: {
-                                  "data-target": "#slider" + product.id,
-                                  "data-slide-to": _vm.fotos.index
-                                }
-                              })
-                            ]
-                          )
-                        }),
+                        _c(
+                          "ul",
+                          { staticClass: "carousel-indicators" },
+                          _vm._l(JSON.parse(product.photo), function(
+                            foto,
+                            index
+                          ) {
+                            return _c("li", {
+                              key: index,
+                              class: index == 0 ? "active" : "",
+                              attrs: {
+                                "data-target": "#slider" + product.id,
+                                "data-slide-to": index
+                              }
+                            })
+                          }),
+                          0
+                        ),
                         _vm._v(" "),
                         _c(
                           "div",
                           { staticClass: "carousel-inner" },
-                          _vm._l(product.fotos, function(foto, index) {
+                          _vm._l(JSON.parse(product.photo), function(
+                            photo,
+                            index
+                          ) {
                             return _c(
                               "div",
                               {
                                 key: index,
-                                staticClass: "carousel-item active"
+                                class:
+                                  index == 0
+                                    ? "carousel-item active"
+                                    : "carousel-item"
                               },
                               [
                                 _c("img", {
                                   attrs: {
                                     src: _vm._f("MediumImage")(
-                                      "storage/" + product.foto
+                                      "storage/" + photo
                                     )
                                   }
                                 })
@@ -81796,8 +81882,7 @@ var render = function() {
                             })
                           ]
                         )
-                      ],
-                      2
+                      ]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "product-actions" }, [
@@ -82539,7 +82624,8 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src: _vm._f("MediumImage")(
-                                  "storage/" + product_recent.photo
+                                  "storage/" +
+                                    JSON.parse(product_recent.photo)[0]
                                 )
                               }
                             }),
@@ -82853,7 +82939,7 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src: _vm._f("MediumImage")(
-                                  "storage/" + product_sold.photo
+                                  "storage/" + JSON.parse(product_sold.photo)[0]
                                 )
                               }
                             }),
@@ -83166,7 +83252,7 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src: _vm._f("MediumImage")(
-                                  "storage/" + product_view.photo
+                                  "storage/" + JSON.parse(product_view.photo)[0]
                                 )
                               }
                             }),
@@ -83479,7 +83565,7 @@ var render = function() {
                             _c("img", {
                               attrs: {
                                 src: _vm._f("MediumImage")(
-                                  "storage/" + product_best.photo
+                                  "storage/" + JSON.parse(product_best.photo)[0]
                                 )
                               }
                             }),
@@ -101954,14 +102040,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/ProductCatalog.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductCatalog_vue_vue_type_template_id_14f5d655___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductCatalog.vue?vue&type=template&id=14f5d655& */ "./resources/js/components/ProductCatalog.vue?vue&type=template&id=14f5d655&");
 /* harmony import */ var _ProductCatalog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductCatalog.vue?vue&type=script&lang=js& */ "./resources/js/components/ProductCatalog.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ProductCatalog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ProductCatalog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -101991,7 +102078,7 @@ component.options.__file = "resources/js/components/ProductCatalog.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/ProductCatalog.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

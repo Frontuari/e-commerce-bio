@@ -4,36 +4,26 @@
             <div class="row">
                 <div class="col-6 col-lg-12" v-for="product in products.data" v-bind:key="product.id">
                     <div class="product-block">
-                        <div class="product-img" >
-                            <!--Reemplazar imagen por carrusel de imagenes>--
-                            <img :src="'storage/'+product.fotos | MediumImage"-->
+                        <div class="product-img">
                             <div :id="'slider'+product.id" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
-                                <ul class="carousel-indicators"  v-for="(foto,index) in product.fotos" v-bind:key="index">
-                                    <li :data-target="'#slider'+product.id" :data-slide-to="fotos.index" ></li>
+                                <ul class="carousel-indicators" >
+                                    <li v-for="(foto,index) in JSON.parse(product.photo)" v-bind:key="index" :data-target="'#slider'+product.id" :data-slide-to="index" :class="(index==0)?'active':''"></li>
                                 </ul>
                                 <!-- The slideshow -->
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active" v-for="(foto,index) in product.fotos" v-bind:key="index"  >
-                                        <img :src="'storage/'+ product.foto | MediumImage">
-                                        <!--<img src="la.jpg" alt="Los Angeles" width="1100" height="500">-->
+                                    <div :class="(index==0)?'carousel-item active':'carousel-item'" v-for="(photo,index) in JSON.parse(product.photo)" v-bind:key="index">
+                                        <img :src="'storage/'+ photo | MediumImage">
                                     </div>
                                 </div>
                                 <!-- Left and right controls -->
                                 <a class="carousel-control-prev" :href="'#slider'+product.id" data-slide="prev">
-                                    <span class="carousel-control-prev-icon"></span>
+                                    <span class="carousel-control-prev-icon" ></span>
                                 </a>
                                 <a class="carousel-control-next" :href="'#slider'+product.id" data-slide="next">
                                     <span class="carousel-control-next-icon"></span>
                                 </a>
                             </div>
-
-
-
-
-
-
-
                             <!-- fin del carrusel-->
                             <div class="product-actions">
                                 <button type="button" class="btn" @click="addToCart(product,cant_product[product.id])">
@@ -169,13 +159,6 @@
                 }
                 $('.cantidad_'+productID).val(this.cant_product[productID]);
                 $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
-            }
-        },
-        computed:{
-             itemsProductos(){
-                this.products.data=this.products.data.map( product => {
-                    return Object.assign( product, { fotos: JSON.parse( product.photo )})
-               })
             }
         },
         created() {
