@@ -220,35 +220,42 @@ switch($_GET['evento']) {
         salidaNueva($arr,"Recargo envio");
     break;
     case 'horasDisponiblesEntrega':
+        $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
+        $arr=q("SELECT * FROM calendars WHERE status='A'");
         $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
         $iniciarDespuesDe=2; //Horas
         $timenow = time();
         $index=0;
-            for ($i = $iniciarDespuesDe; $i < 24; $i ++) {
-                $ago = strtotime("+ $i hours",$timenow);
-                $hora=strftime('%H',$ago);
-                $diaActual=strftime('%d',$timenow);
-              
-                if(!in_array($hora,$horasNoDisponibles)){
-                    $diaDisponible=strftime('%d',$ago);
-                    //$horas[]['id']='A';
-                    $horas[$index]['id']=$index;
-                    $horas[$index]['time']=$ago;
-                    $msjHora=date('h:iA',$ago);
-                    if($diaActual==$diaDisponible){
-                        $msj="Hoy";
-                    }else{
-                        $msj="Mañana";
-                    }
-                    $horas[$index]['name']=$msj." - ".$msjHora;
-                    $index++;
+        $maxApartado=24;
+        $o=0;//hora apartada
+        $i=2;//hora inicial
+        while($o<$maxApartado){          
+
+            $fechaComprobar = strtotime("+ $i hours",$timenow);
+            $horaComprobar=date('H:i',$fechaComprobar);
+            $diaComprobar=date('N',$fechaComprobar);
+            $diaActual=strftime('%d',$timenow);
+            if(comprobarDia($diaComprobar,$horaComprobar,$arr)){
+                $o++;
+                $diaDisponible=strftime('%d',$fechaComprobar);
+                //$horas[]['id']='A';
+                $horas[$index]['id']=$index;
+                $horas[$index]['time']=$fechaComprobar;
+                $msjHora=date('h:iA',$fechaComprobar);
+                if($diaActual==$diaDisponible){
+                    $msj="Hoy";
+                }else{
+                    $msj=$diassemana[$diaComprobar-1];
                 }
-             
+                $horas[$index]['name']=$msj." - ".$msjHora;
+                $index++;
             }
-   
-       // array('1','2','3','4','5','6','7','8','9','10');
-        //$horas[]['id']='A';
-       // $horas[]['id']='B';
+            $i++;
+            if($i==168){ //Para que no quede en un ciclo en caso de que esten cerrados los despachos
+                break;
+            }
+        }
+
         salidaNueva($horas,"Listando horas disponible para entrega");
     break;
     case 'getPerfil':
@@ -278,9 +285,106 @@ switch($_GET['evento']) {
     default:
         salida($row,"Disculpe debe enviar un evento",false);
 }
-function crearOrden($json){
-    exit($json);
+function comprobarDia($diaComprobar,$horaComprobar,$arrs){
+    foreach($arrs as $arr){
+        if($arr['day']==$diaComprobar){
+          //  exit($arr['hours_start']." - ".$arr['hours_end']." - ".$horaComprobar);
+            if(compararHora($arr['hours_start'], $arr['hours_end'], $horaComprobar)){
+                return true;
+            }else{
+                return false;
+            }
 
+        }
+    }
+}
+
+function compararHora($from, $to, $input) {
+    $dateFrom = DateTime::createFromFormat('!H:i', $from);
+    $dateTo = DateTime::createFromFormat('!H:i', $to);
+    $dateInput = DateTime::createFromFormat('!H:i', $input);
+    if ($dateFrom > $dateTo) $dateTo->modify('+1 day');
+    return ($dateFrom <= $dateInput && $dateInput <= $dateTo) || ($dateFrom <= $dateInput->modify('+1 day') && $dateInput <= $dateTo);
+}
+function crearOrden($json){
+    
+    //{"estado":16,"productos":{"20":3},"direccion":"3","hora_entrega":"1585872508"}
+    $orden=json_decode($json,true);
+    $users_id   =$_SESSION['usuario']['id'];
+    $order_address_id=$orden['direccion'] ?? "NULL";
+    $delivery_time_date=Date("Y-m-d h:i:s",$orden['hora_entrega']);
+    $arrProductos=$orden['productos'];
+    
+    $coins_id=1;
+    $packagings_id=1;
+    $total_transport=0;
+    $total_pay=0;
+    $sub_total=0;
+    $total_tax=0;
+    $rate_json=getRateJson();
+    if($order_address_id){
+        $transports_id=2;
+    }else{
+        $transports_id=1;
+        $order_address_id=NULL;
+    }
+    $where=armarWhereProductos($arrProductos);
+    $sql="SELECT p.qty_min, p.qty_max,p.qty_avaliable,p.name, coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
+   
+    $arrs=q($sql);
+    //Validaciones
+    if(!is_array($arrs)){
+        salidaNueva(null,"Disculpe intente mas tarde",false);
+    }
+    foreach($arrs as $pro){
+        $total_tax+=$pro['total_impuesto'];
+        $total_pay+=$pro['total_precio'];
+        $sub_total+=$pro['price'];
+        $cant=$arrProductos[$pro['id']];
+        //exit("PRODUCTO cant ".$cant);
+        if($pro['qty_avaliable']<$cant){
+            salidaNueva(null,"No hay cantidad suficiente para el producto".$pro['name'],false);
+        }    
+        if($pro['qty_min']>$cant){
+            salidaNueva(null,"El pedido min. de "+$pro['name']+" debe ser: ".$pro['qty_min'],false);
+        }    
+        if($pro['qty_max']<$cant and $pro['qty_max']!=0){
+            salidaNueva(null,"No puede comprar mas de ".$pro['qty_max']." ".$pro['name'],false);
+        }    
+    }
+    //GUARDAR
+   
+    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,(SELECT price FROM transports WHERE id=$transports_id),(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay) RETURNING id";
+//EXIT($sql);
+q("BEGIN");
+    $res=q($sql);
+    $orders=$res[0]['id'];
+    foreach($arrs as $pro){
+        $cant=$arrProductos[$pro['id']];
+        $price=$pro['price'];
+        $total=$pro['total_precio'];
+        $deduction=0;
+        $products_id=$pro['id'];
+        $sql="INSERT INTO order_products (cant,price,total,orders,deduction,cod_combo,products_id) VALUES ($cant,$price,$total,$orders,$deduction,NULL,$products_id) RETURNING id";
+        //EXIT($sql);
+        $arr=q($sql);
+    }
+    q("COMMIT");
+  salidaNueva($res,"Su orden ha sido procesada!");
+
+}
+function getRateJson(){
+    $arr=q("SELECT id,name,symbol,rate FROM coins WHERE status='A'");
+    return json_encode($arr);
+}
+function armarWhereProductos($arrProductos){
+    foreach($arrProductos as $id=>$cant){
+        if($cant>0){
+        $where.=' p.id='.$id.' OR';
+        }
+    }
+    $where='AND ('.rtrim($where,' OR').')';
+    return trim($where);
 }
 function listarProductosCarrito($json){
 
@@ -339,7 +443,9 @@ function guardarCalificacion(){
     $users_id   =$_SESSION['usuario']['id'];
     $products_id=$_GET['products_id'];
     $rating     =$_GET['rating'];
-    q("DELETE FROM rating_products WHERE users_id='$users_id' AND products_id='$products_id'");
+    $sql="DELETE FROM rating_products WHERE users_id='$users_id' AND products_id='$products_id'";
+ 
+    q($sql);
     $arr=q("INSERT INTO rating_products (users_id,products_id,rating) VALUES('$users_id','$products_id','$rating') RETURNING id");
     
     if(is_array($arr)){
@@ -377,8 +483,9 @@ function listarProductosIA(){
        WHERE query @@ to_tsvector(description_short)
        ORDER BY rank DESC
        LIMIT $cant_mostrar";
+       $order='ORDER BY RANDOM()';
       $join="INNER JOIN ($sql) as r ON r.id=p.id";
-      $sql=getSqlListarProductos($join);
+      $sql=getSqlListarProductos($join,'',$order);
       listarProductos($sql);
     }
     catch(\Exception $e){
@@ -387,7 +494,7 @@ function listarProductosIA(){
 }
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT 1 FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $limit $order";
+    $sql="SELECT p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $limit $order";
  
     return $sql;
 }
@@ -625,6 +732,12 @@ function recortar_imagen($row,$cant=null){
         $row[$id]['description_short']=ucfirst(mb_strtolower($value['description_short']));
         if(is_array($cant)){
             $row[$id]['cant']=$cant[$value['id']];
+        }
+        if($value['rating']==null){
+            $row[$id]['rating']='0';
+        }
+        if($value['calificado_por_mi']==null){
+            $row[$id]['calificado_por_mi']='0';
         }
         
     }

@@ -65,29 +65,6 @@ class UsersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 16,
-                'last_ip' => NULL,
-                'last_activity' => '2020-02-23 15:44:31',
-                'password' => '$2y$10$UGUBw1GJtCofbYeI.AMJQec8vyqQfkKk1ERRNx1WMKSgbUcjfRVrO',
-                'cant_orders' => 0,
-                'peoples_id' => 3,
-                'coins_id' => NULL,
-                'groups_id' => NULL,
-                'name' => 'Francisco suarez',
-                'email' => 'prueba@prueba.com',
-                'validateemail' => NULL,
-                'email_verified_at' => NULL,
-                'failed_attempts' => 0,
-                'purchase_quantity' => 0,
-                'remember_token' => NULL,
-                'created_at' => '2020-02-23 19:44:30',
-                'updated_at' => '2020-02-23 21:41:13',
-                'avatar' => 'users/default.png',
-                'role_id' => 2,
-                'settings' => '{"locale":"es"}',
-            ),
-            3 => 
-            array (
                 'id' => 14,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-23 14:45:09',
@@ -109,7 +86,7 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 3,
                 'settings' => '{"locale":"es"}',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 13,
                 'last_ip' => NULL,
@@ -130,6 +107,29 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2020-01-24 12:49:36',
                 'avatar' => 'users/default.png',
                 'role_id' => 1,
+                'settings' => '{"locale":"es"}',
+            ),
+            4 => 
+            array (
+                'id' => 16,
+                'last_ip' => NULL,
+                'last_activity' => '2020-02-23 15:44:31',
+                'password' => '$2y$10$UGUBw1GJtCofbYeI.AMJQec8vyqQfkKk1ERRNx1WMKSgbUcjfRVrO',
+                'cant_orders' => 0,
+                'peoples_id' => 3,
+                'coins_id' => NULL,
+                'groups_id' => NULL,
+                'name' => 'Francisco suarez',
+                'email' => 'prueba@prueba.com',
+                'validateemail' => NULL,
+                'email_verified_at' => NULL,
+                'failed_attempts' => 0,
+                'purchase_quantity' => 1,
+                'remember_token' => NULL,
+                'created_at' => '2020-02-23 19:44:30',
+                'updated_at' => '2020-02-23 21:41:13',
+                'avatar' => 'users/default.png',
+                'role_id' => 2,
                 'settings' => '{"locale":"es"}',
             ),
         ));
