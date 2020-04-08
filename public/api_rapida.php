@@ -338,14 +338,16 @@ function guardarPago(){
     $sql="INSERT INTO det_bank_orders (status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
    // exit($sql);
     $arr=q($sql);
-    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id)+$amount)"; 
+    if(is_array($arr)) $pagoAbonado=true;
+
+    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
     $arr=q($sql);
 
     if(is_array($arr)){
         $order_status_id=4;
         $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
     }else{
-        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
+        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id))";
     
         $arr=q($sql);
         if(is_array($arr)){
@@ -355,8 +357,8 @@ function guardarPago(){
     }
    // exit();
     q("COMMIT");
-    if(is_array($arr)){
-        salidaNueva($arr,"Su pago ha sido guardado");
+    if($pagoAbonado){
+        salidaNueva($arr,"Su pago ha sido abonado".$sql);
    }else{
          salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
