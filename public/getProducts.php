@@ -1,5 +1,5 @@
 <?php
-	header("Content-type: application/json; charset=utf-8");
+	// header("Content-type: application/json; charset=utf-8");
 	ini_set("display_errors", "on");
 	error_reporting(-1);
 	class functions {
@@ -21,12 +21,14 @@
 
 	class api {
 		private $uri;
-		private $token;
+		private $user;
+		private $pass;
 		private $url;
 		public function __construct() {
-			$this->uri = "http://200.8.18.230:9000/api/v1/getProducts/dortiz/";
-			$this->token = "aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp";
-			$this->url = $this->uri.$this->token;
+			$this->uri = "200.8.18.230:9000/api/v1/getProducts";
+			$this->user = "dortiz";
+			$this->pass = "aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp";
+			$this->url = "http://".$this->user.":".$this->pass."@".$this->uri;
 		}
 
 		public function getDatos() {
