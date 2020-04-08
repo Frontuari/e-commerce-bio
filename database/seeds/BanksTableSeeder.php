@@ -41,6 +41,22 @@ class BanksTableSeeder extends Seeder
                 'created_at' => '2020-04-07 18:24:55',
                 'updated_at' => '2020-04-07 18:24:55',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'Banesco Panamá',
+                'status' => 'A',
+                'created_at' => '2020-04-08 16:31:15',
+                'updated_at' => '2020-04-08 16:31:15',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'Bank of America',
+                'status' => 'A',
+                'created_at' => '2020-04-08 16:33:22',
+                'updated_at' => '2020-04-08 16:33:22',
+            ),
         ));
         
         

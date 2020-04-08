@@ -322,7 +322,7 @@ switch($_GET['evento']) {
         salida($row,"Disculpe debe enviar un evento",false);
 }
 function guardarPago(){
-    $amount=$_GET['amount'];
+    $amount=$_GET['amount']+0.004;
     $orders_id=$_GET['orders_id'];
     $bank_datas_id=$_GET['bank_datas_id'];
     $ref=$_GET['ref'];
@@ -340,11 +340,13 @@ function guardarPago(){
     $arr=q($sql);
     $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id)+$amount)"; 
     $arr=q($sql);
+
     if(is_array($arr)){
         $order_status_id=4;
         $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
     }else{
         $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
+    
         $arr=q($sql);
         if(is_array($arr)){
             $order_status_id=2;
@@ -529,6 +531,24 @@ function armarWhereProductos($arrProductos){
     }
     $where='AND ('.rtrim($where,' OR').')';
     return trim($where);
+}
+function set_formato_moneda($value){
+    $listo=null;
+    $patróna = '/[\s]/';
+    $patrón = '/[,\.]/';
+    $va=preg_replace($patróna,"",trim($value));
+    $va=preg_replace($patrón," ",$va);
+    $arr=explode(" ",$va);
+    $total=count($arr);
+    if($total>1){
+        $arr[$total-1]=".".$arr[$total-1];
+        foreach($arr as $valor) $listo.=$valor;
+    }else{
+
+        $listo=$va;
+    }
+   
+    return $listo;
 }
 function listarProductosCarrito($json){
 
@@ -859,7 +879,8 @@ function enviarCorreo($correo){
     
 }
 function generarCodigoVerificacion($data){
-return hexdec( substr(sha1($data), 0, 5) );
+return "90000";
+//return hexdec( substr(sha1($data), 0, 5) );
 }
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){

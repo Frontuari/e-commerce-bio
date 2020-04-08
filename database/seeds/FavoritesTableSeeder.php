@@ -41,6 +41,14 @@ class FavoritesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            3 => 
+            array (
+                'id' => 5,
+                'users_id' => 16,
+                'products_id' => 6,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

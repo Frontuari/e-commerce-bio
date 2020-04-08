@@ -767,6 +767,266 @@ class TrackingsTableSeeder extends Seeder
                 'created_at' => '2020-04-07 14:36:10',
                 'updated_at' => NULL,
             ),
+            75 => 
+            array (
+                'id' => 76,
+                'description' => NULL,
+                'orders_id' => 71,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-07 16:34:56',
+                'updated_at' => NULL,
+            ),
+            76 => 
+            array (
+                'id' => 77,
+                'description' => NULL,
+                'orders_id' => 72,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:01:35',
+                'updated_at' => NULL,
+            ),
+            77 => 
+            array (
+                'id' => 78,
+                'description' => NULL,
+                'orders_id' => 72,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:02:28',
+                'updated_at' => '2020-04-08 12:02:28',
+            ),
+            78 => 
+            array (
+                'id' => 79,
+                'description' => NULL,
+                'orders_id' => 69,
+                'orders_status_id' => 11,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:04:47',
+                'updated_at' => NULL,
+            ),
+            79 => 
+            array (
+                'id' => 80,
+                'description' => NULL,
+                'orders_id' => 70,
+                'orders_status_id' => 11,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:04:49',
+                'updated_at' => NULL,
+            ),
+            80 => 
+            array (
+                'id' => 81,
+                'description' => NULL,
+                'orders_id' => 71,
+                'orders_status_id' => 11,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:04:53',
+                'updated_at' => NULL,
+            ),
+            81 => 
+            array (
+                'id' => 82,
+                'description' => NULL,
+                'orders_id' => 73,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:05:08',
+                'updated_at' => NULL,
+            ),
+            82 => 
+            array (
+                'id' => 83,
+                'description' => NULL,
+                'orders_id' => 73,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:05:30',
+                'updated_at' => '2020-04-08 12:05:30',
+            ),
+            83 => 
+            array (
+                'id' => 84,
+                'description' => NULL,
+                'orders_id' => 74,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:10:50',
+                'updated_at' => NULL,
+            ),
+            84 => 
+            array (
+                'id' => 85,
+                'description' => NULL,
+                'orders_id' => 74,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:17:14',
+                'updated_at' => '2020-04-08 12:17:14',
+            ),
+            85 => 
+            array (
+                'id' => 86,
+                'description' => NULL,
+                'orders_id' => 75,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:22:11',
+                'updated_at' => NULL,
+            ),
+            86 => 
+            array (
+                'id' => 87,
+                'description' => NULL,
+                'orders_id' => 75,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:22:58',
+                'updated_at' => '2020-04-08 12:22:58',
+            ),
+            87 => 
+            array (
+                'id' => 88,
+                'description' => NULL,
+                'orders_id' => 76,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:27:57',
+                'updated_at' => NULL,
+            ),
+            88 => 
+            array (
+                'id' => 89,
+                'description' => NULL,
+                'orders_id' => 76,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:42:28',
+                'updated_at' => '2020-04-08 12:42:28',
+            ),
+            89 => 
+            array (
+                'id' => 90,
+                'description' => NULL,
+                'orders_id' => 77,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:42:54',
+                'updated_at' => NULL,
+            ),
+            90 => 
+            array (
+                'id' => 91,
+                'description' => NULL,
+                'orders_id' => 77,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:43:06',
+                'updated_at' => '2020-04-08 12:43:06',
+            ),
+            91 => 
+            array (
+                'id' => 92,
+                'description' => NULL,
+                'orders_id' => 78,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 12:43:43',
+                'updated_at' => NULL,
+            ),
+            92 => 
+            array (
+                'id' => 93,
+                'description' => NULL,
+                'orders_id' => 78,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:34:52',
+                'updated_at' => '2020-04-08 13:34:52',
+            ),
+            93 => 
+            array (
+                'id' => 94,
+                'description' => NULL,
+                'orders_id' => 78,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:35:03',
+                'updated_at' => '2020-04-08 13:35:03',
+            ),
+            94 => 
+            array (
+                'id' => 95,
+                'description' => NULL,
+                'orders_id' => 79,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:35:36',
+                'updated_at' => NULL,
+            ),
+            95 => 
+            array (
+                'id' => 96,
+                'description' => NULL,
+                'orders_id' => 79,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:35:51',
+                'updated_at' => '2020-04-08 13:35:51',
+            ),
+            96 => 
+            array (
+                'id' => 97,
+                'description' => NULL,
+                'orders_id' => 79,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:40:23',
+                'updated_at' => '2020-04-08 13:40:23',
+            ),
+            97 => 
+            array (
+                'id' => 98,
+                'description' => NULL,
+                'orders_id' => 79,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:40:41',
+                'updated_at' => '2020-04-08 13:40:41',
+            ),
+            98 => 
+            array (
+                'id' => 99,
+                'description' => NULL,
+                'orders_id' => 80,
+                'orders_status_id' => 1,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:42:17',
+                'updated_at' => NULL,
+            ),
+            99 => 
+            array (
+                'id' => 100,
+                'description' => NULL,
+                'orders_id' => 80,
+                'orders_status_id' => 2,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:42:29',
+                'updated_at' => '2020-04-08 13:42:29',
+            ),
+            100 => 
+            array (
+                'id' => 101,
+                'description' => NULL,
+                'orders_id' => 56,
+                'orders_status_id' => 11,
+                'users_id' => 16,
+                'created_at' => '2020-04-08 13:42:44',
+                'updated_at' => NULL,
+            ),
         ));
         
         

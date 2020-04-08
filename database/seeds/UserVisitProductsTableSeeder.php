@@ -83,21 +83,13 @@ class UserVisitProductsTableSeeder extends Seeder
             ),
             8 => 
             array (
-                'id' => 31,
-                'products_id' => 19,
-                'users_id' => 16,
-                'created_at' => '2020-04-04 23:02:57',
-                'updated_at' => '2020-04-07 15:25:33',
-            ),
-            9 => 
-            array (
                 'id' => 35,
                 'products_id' => 7,
                 'users_id' => 16,
                 'created_at' => '2020-04-06 14:04:02',
                 'updated_at' => '2020-04-06 18:53:40',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 1,
                 'products_id' => 9,
@@ -105,7 +97,7 @@ class UserVisitProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-03 19:29:20',
                 'updated_at' => '2020-04-06 18:53:41',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 24,
                 'products_id' => 8,
@@ -113,7 +105,7 @@ class UserVisitProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-03 18:45:14',
                 'updated_at' => '2020-04-06 18:53:43',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 34,
                 'products_id' => 3,
@@ -121,15 +113,7 @@ class UserVisitProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-06 12:59:06',
                 'updated_at' => '2020-04-06 21:10:30',
             ),
-            13 => 
-            array (
-                'id' => 23,
-                'products_id' => 13,
-                'users_id' => 16,
-                'created_at' => '2020-04-03 18:44:51',
-                'updated_at' => '2020-04-06 22:44:19',
-            ),
-            14 => 
+            12 => 
             array (
                 'id' => 25,
                 'products_id' => 1,
@@ -137,13 +121,45 @@ class UserVisitProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-03 18:48:14',
                 'updated_at' => '2020-04-06 22:44:20',
             ),
+            13 => 
+            array (
+                'id' => 37,
+                'products_id' => 13,
+                'users_id' => 18,
+                'created_at' => '2020-04-08 13:46:02',
+                'updated_at' => '2020-04-08 13:49:08',
+            ),
+            14 => 
+            array (
+                'id' => 36,
+                'products_id' => 6,
+                'users_id' => 18,
+                'created_at' => '2020-04-08 13:46:02',
+                'updated_at' => '2020-04-08 13:49:08',
+            ),
             15 => 
+            array (
+                'id' => 31,
+                'products_id' => 19,
+                'users_id' => 16,
+                'created_at' => '2020-04-04 23:02:57',
+                'updated_at' => '2020-04-07 16:50:52',
+            ),
+            16 => 
+            array (
+                'id' => 23,
+                'products_id' => 13,
+                'users_id' => 16,
+                'created_at' => '2020-04-03 18:44:51',
+                'updated_at' => '2020-04-08 13:40:13',
+            ),
+            17 => 
             array (
                 'id' => 33,
                 'products_id' => 6,
                 'users_id' => 16,
                 'created_at' => '2020-04-06 12:32:43',
-                'updated_at' => '2020-04-07 12:43:08',
+                'updated_at' => '2020-04-08 13:42:12',
             ),
         ));
         

@@ -45,10 +45,10 @@ class CoinsTableSeeder extends Seeder
                 'name' => 'Dólares',
                 'symbol' => '$',
                 'status' => 'A',
-                'rate' => '81000.000000000',
+                'rate' => '110000.000000000',
                 'coins_id' => 1,
                 'created_at' => NULL,
-                'updated_at' => '2020-04-07 18:38:32',
+                'updated_at' => '2020-04-08 16:37:10',
             ),
         ));
         

@@ -69,6 +69,19 @@ class PeoplesTableSeeder extends Seeder
                 'updated_at' => NULL,
                 'phone_home' => NULL,
             ),
+            4 => 
+            array (
+                'id' => 5,
+                'rif' => 'V-18671980',
+                'name' => 'maria',
+                'sex' => 'm',
+                'birthdate' => NULL,
+                'phone' => '04145138790 ',
+                'cities_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'phone_home' => NULL,
+            ),
         ));
         
         
