@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="product-block">
-
+                        <div class="row">
                             <div class=" col-lg-4">
                                 <div :id="'modalslider'+product.id" class="carousel slide" data-ride="carousel">
                                     <!-- Indicators -->
@@ -26,7 +26,7 @@
                                     </a>
                                 </div>
                             </div>
-<!-- fin del carrusel-->
+                            <!-- fin del carrusel-->
                             <div class="col-lg-8">
                                 <div class="product-description">
                                     <a href="#" class="product-title">{{product.name}}</a>
@@ -64,7 +64,7 @@
                                     </form>
                                 </div>
                             </div>
-
+                        </div>
                     </div>
                 </div>
             </div>

@@ -35,6 +35,7 @@ class HomeController extends Controller
         $footer = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
 
         $MostRecent = Product::where('products.status','A')
+        ->where('is_combo',false)
         ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
@@ -43,6 +44,7 @@ class HomeController extends Controller
         ->get();
 
         $MostView = Product::where('products.status','A')
+        ->where('is_combo',false)
         ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
@@ -51,6 +53,7 @@ class HomeController extends Controller
         ->get();
 
         $MostSold = Product::where('products.status','A')
+        ->where('is_combo',false)
         ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
@@ -59,6 +62,7 @@ class HomeController extends Controller
         ->get();
 
         $BestPrice = Product::where('products.status','A')
+        ->where('is_combo',false)
         ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")

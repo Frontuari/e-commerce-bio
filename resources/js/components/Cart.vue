@@ -186,7 +186,7 @@
 													<div class="col-lg-6" v-if="selectedDirection == 0">
 														<div class="form-group">
 															<label for="address-urb">Fecha:</label>
-															<input type="text" class="form-control datetimepicker" name="timepick" v-model="order.datetime" >
+															<input type="text" class="form-control datetimepicker" name="timepick" v-model="datetime" >
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">
@@ -465,7 +465,7 @@
                                                                 </div>
                                                                 <div class="form-group col-lg-7">
                                                                     <label for="img-referencia">Imagen:</label>
-                                                                    <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile">
+                                                                    <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile($event)">
                                                                 </div>
                                                                 <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Nuestras Cuentas" @click="showBanksInfo()"></div>
                                                             </div>
@@ -495,6 +495,7 @@
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
 															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>
+															<!-- <button type="button" @click="saveOrder()" name="next" class="btn btn-submit">CONFIRMAR PAGO</button> -->
 														</div>
 													</div>
 												</div>
@@ -555,12 +556,12 @@
 											<div class="thanks-content">
 												<img src="assets/img/compra-bio-mercados.svg" alt="Gracias por su compra">
 												<h2 class="thanks-title">¡Gracias Por Su Compra!</h2>
-												<p>La compra fue completada con éxito, bajo la orden número #3362, puede ver el estado de su pedido presionando clic en el número de orden o puede ir a su perfil > Mis pedidos.</p>
+												<p>La compra fue completada con éxito, bajo la orden número {{num_order}}, puede ver el estado de su pedido presionando clic en el número de orden o puede ir a su perfil > Mis pedidos.</p>
 											</div>
 											<div class="thanks-footer">
 												<h3 class="order-text" data-toggle="modal" data-target="#ModalOrder">
 													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.43 19.97"><title>mis-pedidos-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path d="M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"/><path d="M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"/><path d="M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"/><path d="M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"/><path d="M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"/><path d="M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"/><path d="M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"/></g></g></svg>
-													Orden #3362
+													Orden {{num_order}}
 												</h3>
 												<a href="/catalog" type="button" class="btn btn-submit">SEGUIR COMPRANDO</a>
 											</div>
@@ -589,7 +590,10 @@ export default {
 			selectedDirection: '',
 			selectedPayment: '',
             order: {},
-            payment_img:"",
+			payment_img:'',
+			payment_ref: '',
+			datetime: '',
+			num_order: 0,
             banks:[]
         }
     },
@@ -599,8 +603,8 @@ export default {
 	},
 	methods:{
 
-        LoadImageFile(){
-            this.payment_img = this.$refs.file.files[0];
+        LoadImageFile(event) {
+            this.payment_img = event.target.files[0];
         },
 		async getPayments() {
 			const response = await axios.get(URLSERVER+"api/payment_methods");
@@ -613,15 +617,17 @@ export default {
 				datetime    : this.datetime,
 				products    : this.products_cart,
                 payment     : this.selectedPayment,
-                payment_ref : this.payment_ref
+				payment_ref : this.payment_ref,
+				total       : this.total_cart
             };
-        //*************    Modulo para enviar el archivo de la imagen ********************************/
-            let formData    = new FormData();
+			let formData    = new FormData();
+			formData.append("order",JSON.stringify(this.order));
             formData.append("payment_img",this.payment_img);
-            axios.post( "/order", formData, { headers: {'Content-Type': 'multipart/form-data'}});
+            axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
+				this.num_order = datos.data.data.order.id;
+				jQuery(window).scrollTop(parseInt($(".jumbotron").offset().top));
+			});
 
-			console.log("Order::> ",this.order);
-			// $(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		},
 		isObject: function(o)
 		{
@@ -736,7 +742,7 @@ export default {
 		this.order = {
 			user_id     : this.datauser.id,
 			direction   : this.selectedDirection,
-			datetime    : "dd/mm/yyyy HH:mm",
+			datetime    : "",
 			products    : this.products_cart,
             payment     : this.selectedPayment,
             payment_ref : this.payment_ref
@@ -761,7 +767,3 @@ export default {
     }
 }
 </script>
-
-  function newFunction() {
-    return '/single-file';
-  }

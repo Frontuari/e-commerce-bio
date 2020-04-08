@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Orders;
+use App\OrderProducts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\DB;
@@ -96,40 +97,56 @@ class OrdersController extends BaseController
      */
     public function store(Request $r)
     {
-       $orden = new Orders;
-     //   $orden->users_id=1;  #ID DEL USUARIO LOGUEADO
+        $orden = new Orders;
+        $ordenProduct = new OrderProducts;
+        $datum = $r->all();
+        $order = json_decode($datum["order"]);
+        $image = $r->file('payment_img');
+        $destinationPath = 'storage';
+        
+        $orden->users_id = $order->user_id;
+        $orden->sub_total = $order->total;
+        $orden->total_pay = $order->total;
+        $orden->total_tax = 0;
+        $orden->total_packaging = 0;
+        $orden->total_transport = 0;
+        if($order->direction == 0 )
+            $orden->order_address_id = NULL;
+        else
+            $orden->order_address_id = $order->direction;
+        $orden->transports_id = 1;
+        $orden->user_rating = 0;
+        $orden->delivery_time_date = date("Y-m-d H:i:s",strtotime("+2 hours"));
+        $orden->discount = 0;
+        $orden->exento = 0;
+        $orden->bi = 0;
+        $orden->packagings_id = 1;
+        $orden->currency_rate = 0;
+        $orden->opinion = '';
+        $orden->coins_id = 1;
+        $orden->rate_json = NULL;
 
-        if($r->sub_total){
-
-            try{
-                $orden->sub_total=$r->sub_total;
-                $orden->total_pay=$r->total_pay;
-                $orden->total_tax=$r->total_tax;
-                $orden->total_packaging=$r->total_packaging;
-                $orden->order_address_id=$r->order_address_id;
-                $orden->transports_id=$r->transports_id;
-                $orden->delivery_time_date=$r->delivery_time_date;
-                $orden->discount=$r->discount;
-                $orden->packagings_id=$r->packagings_id;
-                $orden->currency_rate=$r->currency_rate;
-                $orden->coins_id=$r->coins_id;
-
-                $orden->save();
-             }
-             catch(\Exception $e){
-               
-                return $this->sendError($this->manejar_error($e));
-             }
-
-
-           
-            return $this->sendResponse($orden);
-
+        $orden->save();
+        $productsReturn = [];
+        foreach ($order->products as $key => $product) {
+            $cantidad = $product->cant;
+            $producto = $product->product;
             
-        }else{
-            
-            return $this->sendError();
+            $ordenProduct->cant = $cantidad;
+            $ordenProduct->price = $producto->price;
+            $ordenProduct->total = $producto->price * $cantidad;
+            $ordenProduct->orders = $orden->id;
+            $ordenProduct->deduction = 0; 
+            $ordenProduct->products_id = $producto->id;
+            $ordenProduct->save();
+            array_push($productsReturn,$ordenProduct);
         }
+
+        $image->move($destinationPath,$image->getClientOriginalName());
+        $response = [];
+        $response["order"] = $orden;
+        $response["productos"] = $productsReturn;
+        return $this->sendResponse($response);
     }
 
     /**
