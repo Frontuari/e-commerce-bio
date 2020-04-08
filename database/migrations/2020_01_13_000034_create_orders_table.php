@@ -39,7 +39,7 @@ class CreateOrdersTable extends Migration
             $table->string('opinion')->nullable()->comment('Comentario del usuario para calificando el pedido');
             $table->unsignedInteger('coins_id');
             $table->unsignedBigInteger('users_id')->nullable();
-            $table->string('rate_json')->nullable();
+            $table->text('rate_json')->nullable();
             $table->index(["coins_id"], 'fk_orders_coins1_idx');
 
             $table->index(["order_address_id"], 'fk_pedido_direccion_pedido1_idx');

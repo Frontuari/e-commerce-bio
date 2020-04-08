@@ -42,7 +42,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('stores_id');
             $table->unsignedInteger('brands_id')->nullable();
             $table->unsignedInteger('sub_categories_id');
-
+            $table->boolean('is_combo')->default('0');
             $table->index(["sub_categories_id"], 'fk_products_sub_categories1_idx');
 
             $table->index(["stores_id"], 'fk_products_stores1_idx');

@@ -43,21 +43,13 @@ class DetSubCategoriesTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
-                'products_id' => 13,
-                'sub_categories_id' => 7,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            4 => 
-            array (
                 'id' => 5,
                 'products_id' => 1,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 6,
                 'products_id' => 10,
@@ -65,7 +57,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 7,
                 'products_id' => 9,
@@ -73,7 +65,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 8,
                 'products_id' => 8,
@@ -81,7 +73,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 9,
                 'products_id' => 7,
@@ -89,7 +81,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 10,
                 'products_id' => 6,
@@ -97,7 +89,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 11,
                 'products_id' => 5,
@@ -105,7 +97,7 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'products_id' => 4,
@@ -113,11 +105,75 @@ class DetSubCategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'products_id' => 3,
                 'sub_categories_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            12 => 
+            array (
+                'id' => 14,
+                'products_id' => 13,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            13 => 
+            array (
+                'id' => 15,
+                'products_id' => 14,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            14 => 
+            array (
+                'id' => 16,
+                'products_id' => 15,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            15 => 
+            array (
+                'id' => 17,
+                'products_id' => 16,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            16 => 
+            array (
+                'id' => 18,
+                'products_id' => 17,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            17 => 
+            array (
+                'id' => 19,
+                'products_id' => 18,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            18 => 
+            array (
+                'id' => 20,
+                'products_id' => 19,
+                'sub_categories_id' => 10,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
+            19 => 
+            array (
+                'id' => 21,
+                'products_id' => 20,
+                'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
