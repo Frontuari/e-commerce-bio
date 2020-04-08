@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PackagingsTableSeeder extends Seeder
+class DetTaxTransportsTableSeeder extends Seeder
 {
 
     /**
@@ -14,17 +14,16 @@ class PackagingsTableSeeder extends Seeder
     {
         
 
-        \DB::table('packagings')->delete();
+        \DB::table('det_tax_transports')->delete();
         
-        \DB::table('packagings')->insert(array (
+        \DB::table('det_tax_transports')->insert(array (
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Bolsas',
-                'value' => '0.000000',
-                'status' => 'A',
+                'taxes_id' => 1,
+                'transports_id' => 2,
                 'created_at' => NULL,
-                'updated_at' => '2020-04-07 18:24:00',
+                'updated_at' => NULL,
             ),
         ));
         

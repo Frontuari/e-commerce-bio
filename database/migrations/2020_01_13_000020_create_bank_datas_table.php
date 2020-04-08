@@ -28,7 +28,7 @@ class CreateBankDatasTable extends Migration
             $table->char('account_type', 1)->nullable()->default(null);
             $table->integer('banks_id');
             $table->integer('det_payment_methods_id');
-
+            $table->enum('status', ['A', 'I'])->nullable()->default('A');
             $table->index(["det_payment_methods_id"], 'fk_bank_data_det_payment_methods1_idx');
 
             $table->index(["banks_id"], 'fk_bank_data_banks1_idx');

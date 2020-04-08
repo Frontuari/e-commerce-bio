@@ -55,6 +55,44 @@ Rif: J40355966',
                 'payment_methods_id' => 1,
                 'coins_id' => 2,
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'titular' => 'Biomercados',
+                'description' => 'Teléfono: 04145138790
+Cédula: 18671986
+Código del banco: 0102',
+                'account_type' => 'O',
+                'banks_id' => 2,
+                'created_at' => '2020-04-07 16:33:42',
+                'updated_at' => '2020-04-07 16:33:42',
+                'payment_methods_id' => 2,
+                'coins_id' => 2,
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'titular' => '-',
+                'description' => NULL,
+                'account_type' => 'O',
+                'banks_id' => 3,
+                'created_at' => '2020-04-07 18:29:19',
+                'updated_at' => '2020-04-07 18:29:19',
+                'payment_methods_id' => 3,
+                'coins_id' => 1,
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'titular' => '-',
+                'description' => NULL,
+                'account_type' => 'O',
+                'banks_id' => 3,
+                'created_at' => '2020-04-07 18:29:53',
+                'updated_at' => '2020-04-07 18:29:53',
+                'payment_methods_id' => 3,
+                'coins_id' => 2,
+            ),
         ));
         
         

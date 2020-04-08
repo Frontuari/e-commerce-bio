@@ -27,7 +27,7 @@ class CreateDetBankOrdersTable extends Migration
             $table->integer('orders_id');
             $table->unsignedInteger('bank_datas_id');
             $table->string('status', 45)->nullable()->default('nuevo');
-
+            $table->string('ref', 200)->nullable();
             $table->index(["bank_datas_id"], 'fk_det_bank_orders_bank_datas1_idx');
 
             $table->index(["orders_id"], 'fk_det_bank_orders_orders1_idx');

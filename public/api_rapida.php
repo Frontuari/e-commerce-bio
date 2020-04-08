@@ -187,7 +187,11 @@ switch($_GET['evento']) {
         }
     break;
     case 'listarOrdenes':
-        $arr=q("SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id ORDER BY o.id DESC");
+        $users_id=$_SESSION['usuario']['id'];
+        $sql="SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id WHERE o.users_id='$users_id' ORDER BY o.id DESC";
+   // exit($sql);
+        $arr=q($sql);
+   
         if(is_array($arr)){
             salidaNueva($arr,"Listando ordenes");
         }else{
@@ -208,7 +212,7 @@ switch($_GET['evento']) {
             'price',op.price
         )
         
-) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) productos,(SELECT rate FROM coins WHERE id='1') rate,oa.address, p.name as nombre_usuario, o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,TO_CHAR(o.delivery_time_date :: DATE, 'dd/mm/yyyy') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE o.id='$id'");
+) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) productos,oa.address, p.name as nombre_usuario, o.*,TO_CHAR(o.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha,TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE o.id='$id'");
         if(is_array($arr)){
             salidaNueva($arr,"Orden consultada");
         }else{
@@ -216,7 +220,9 @@ switch($_GET['evento']) {
         }
     break;
     case 'recargoEnvio':
-        $arr[0]['precio']=20000.00000001;
+        $transports_id=2;
+        $coins_id=1;
+        $arr=q("SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p");
         salidaNueva($arr,"Recargo envio");
     break;
     case 'horasDisponiblesEntrega':
@@ -258,6 +264,16 @@ switch($_GET['evento']) {
 
         salidaNueva($horas,"Listando horas disponible para entrega");
     break;
+    case 'listarTracking':
+        $users_id=$_SESSION['usuario']['id'];
+        $orders_id=$_GET['orders_id'];
+        $arr=q("SELECT t.description,os.name,TO_CHAR(t.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha FROM trackings t INNER JOIN orders_status os ON os.id=t.orders_status_id INNER JOIN orders o ON o.id=t.orders_id WHERE o.users_id='$users_id' AND o.id='$orders_id' ORDER BY t.id DESC");
+        if(is_array($arr)){
+            salidaNueva($arr,"Listando Tracking");
+       }else{
+        salidaNueva(null,"No hay datos disponibles",false);
+       }
+    break;
     case 'getPerfil':
         $users_id=$_SESSION['usuario']['id'];
         $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
@@ -282,8 +298,106 @@ switch($_GET['evento']) {
        }
         
     break;
+    case 'totalPagar':
+        totalPagar();
+    break;
+    case 'cancelarOrden':{
+        cancelarOrden();
+    }
+    case 'guardarPago':
+        guardarPago();
+    break;
+    case 'listarBancosdelMetododePago':{
+        $payment_methods_id=$_GET['payment_methods_id'];
+        $sql="SELECT c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE payment_methods_id=$payment_methods_id";
+        $arr=q($sql);
+        if(is_array($arr)){
+            salidaNueva($arr,"Listando datos bancarios");
+       }else{
+             salidaNueva(null,"Disculpe, intente de nuevo",false);
+       }
+    }
+    break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
+}
+function guardarPago(){
+    $amount=$_GET['amount'];
+    $orders_id=$_GET['orders_id'];
+    $bank_datas_id=$_GET['bank_datas_id'];
+    $ref=$_GET['ref'];
+    $status='nuevo';
+    if($ref==''){
+        $ref="EFECTIVO";
+        $status='efectivo';
+    }
+    $users_id=$_SESSION['usuario']['id'];
+   // $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay>=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
+    //exit($sql);
+    q("BEGIN");
+    $sql="INSERT INTO det_bank_orders (status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
+   // exit($sql);
+    $arr=q($sql);
+    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id)+$amount)"; 
+    $arr=q($sql);
+    if(is_array($arr)){
+        $order_status_id=4;
+        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+    }else{
+        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
+        $arr=q($sql);
+        if(is_array($arr)){
+            $order_status_id=2;
+            $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+        }
+    }
+   // exit();
+    q("COMMIT");
+    if(is_array($arr)){
+        salidaNueva($arr,"Su pago ha sido guardado");
+   }else{
+         salidaNueva(null,"Disculpe, intente de nuevo",false);
+   } 
+}
+function totalPagar(){
+    $orders_id=$_GET['orders_id'];
+    $users_id=$_SESSION['usuario']['id'];
+    $sql="SELECT total_pay,total_packaging,total_transport,rate_json, 
+    (SELECT json_agg(
+                json_build_object(
+                'id', dbo.id, 
+                'amount', dbo.amount,
+                'status',dbo.status
+            )
+            
+    ) FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id) pago_json
+    
+    FROM orders WHERE id=$orders_id AND users_id=$users_id";
+   // exit($sql);
+    $arr=q($sql);
+    
+    if(is_array($arr)){
+        salidaNueva($arr,"Listando pagos");
+   }else{
+         salidaNueva(null,"Disculpe, intente de nuevo",false);
+   }
+}
+
+function cancelarOrden(){
+    $users_id=$_SESSION['usuario']['id'];
+    $orders_id=$_GET['orders_id'];
+    $orders_status_id=11;
+   // salidaNueva(null,"SELECT 1 FROM orders WHERE orders_id=$orders_id AND users_id=$users_id",false);
+    $arr=q("SELECT 1 FROM orders WHERE id=$orders_id AND users_id=$users_id");//SEGURIDAD
+    if(is_array($arr)){
+      
+        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
+        if(is_array($arr)){
+            salidaNueva($arr,"Orden cancelada exitosamente");
+        }else{
+                salidaNueva(null,"Disculpe, no podemos cancelar su orden",false);
+        }  
+    }
 }
 function comprobarDia($diaComprobar,$horaComprobar,$arrs){
     foreach($arrs as $arr){
@@ -321,15 +435,18 @@ function crearOrden($json){
     $total_pay=0;
     $sub_total=0;
     $total_tax=0;
+    $base_imponible=0.00;
+    $exento=0.00;
     $rate_json=getRateJson();
-    if($order_address_id){
+    if($order_address_id!=null and $order_address_id!="null" and $order_address_id!="NULL" and $order_address_id!=0){
         $transports_id=2;
     }else{
         $transports_id=1;
-        $order_address_id=NULL;
+        $order_address_id="NULL";
     }
+    
     $where=armarWhereProductos($arrProductos);
-    $sql="SELECT p.qty_min, p.qty_max,p.qty_avaliable,p.name, coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
+    $sql="SELECT p.qty_min, p.qty_max,p.qty_avaliable,p.name, ((coalesce(SUM(t.value),0.000000)*p.price)/100) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
    
     $arrs=q($sql);
     //Validaciones
@@ -337,10 +454,18 @@ function crearOrden($json){
         salidaNueva(null,"Disculpe intente mas tarde",false);
     }
     foreach($arrs as $pro){
-        $total_tax+=$pro['total_impuesto'];
-        $total_pay+=$pro['total_precio'];
-        $sub_total+=$pro['price'];
         $cant=$arrProductos[$pro['id']];
+        $impuesto=$pro['total_impuesto']*$cant;
+        $total_tax+=$impuesto;
+        $precio=$pro['price']*$cant;
+        if($impuesto>0){
+            $base_imponible+=$precio;
+        }else{
+            $exento+=$precio;
+        }
+        //$total_pay+=$pro['total_precio']*$cant;
+        $sub_total+=$precio;
+       
         //exit("PRODUCTO cant ".$cant);
         if($pro['qty_avaliable']<$cant){
             salidaNueva(null,"No hay cantidad suficiente para el producto".$pro['name'],false);
@@ -352,9 +477,24 @@ function crearOrden($json){
             salidaNueva(null,"No puede comprar mas de ".$pro['qty_max']." ".$pro['name'],false);
         }    
     }
+   //TRANSPORTS
+   $sql="SELECT price,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
+
+    $arr=q($sql);
+    if(is_array($arr)){
+        $total_transport=$arr[0]['price'];
+        $impuesto=$arr[0]['impuesto'];
+        if($impuesto>0){
+            $base_imponible+=$total_transport;
+            $total_tax+=$impuesto;
+        }else{
+            $exento+=$total_transport;
+        }
+    }
+    $total_pay=$sub_total+$total_tax+$total_transport;
     //GUARDAR
    
-    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,(SELECT price FROM transports WHERE id=$transports_id),(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay) RETURNING id";
+    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay,bi,exento)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,$total_transport,(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay,$base_imponible,$exento) RETURNING id";
 //EXIT($sql);
 q("BEGIN");
     $res=q($sql);
@@ -369,6 +509,10 @@ q("BEGIN");
         //EXIT($sql);
         $arr=q($sql);
     }
+    //if($order_address_id=="NULL") $orders_status_id=5; else 
+    $orders_status_id=1;
+    $sql="INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders,$orders_status_id,$users_id,NOW())";
+    q($sql);
     q("COMMIT");
   salidaNueva($res,"Su orden ha sido procesada!");
 
@@ -670,7 +814,7 @@ function confirmarCorreo(){
         q("UPDATE users SET email_verified_at=NOW() WHERE validateemail='$codigoCorreo' AND email='$email'");
         salida(null,"Código Verificado correctamente.");
     }else{
-        salida(null,"Código invalido, intente nuevamente.".$_SESSION['email'],false);
+        salida(null,"Código invalido, intente nuevamente.",false);
     }
 
 }
@@ -681,13 +825,14 @@ function registrarUsuario(){
     $email      =$_POST['email'];
     $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
     $sex        =$_POST['sex'];
+    $tlf        =$_POST['tlf'];
     $cities     =1;
     
     $codigoCorreo=generarCodigoVerificacion($email);
 
 $res=q("SELECT validateemail FROM users WHERE email='$email' and email_verified_at IS NULL");
 if(is_array($res)){
-    enviarCorreo($correo);
+    enviarCorreo($email);
     $_SESSION['email']=$email;
     q("UPDATE users SET password='$password' WHERE email='$email' and email_verified_at IS NULL");
     salida(null,"Le hemos enviado nuevamente un email de confirmación.");
@@ -695,12 +840,12 @@ if(is_array($res)){
 
 
 
-    $res=q("INSERT INTO peoples (name,rif,sex,cities_id) VALUES ('$name','$rif','$sex','$cities') RETURNING id");
+    $res=q("INSERT INTO peoples (name,rif,sex,cities_id,phone) VALUES ('$name','$rif','$sex','$cities','$tlf') RETURNING id");
     if(is_array($res)){
         $peoples_id=$res[0]['id'];
         $res=q("INSERT INTO users (password,email,peoples_id,name,validateemail) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo')");
         if($res){
-            enviarCorreo($correo);
+            enviarCorreo($email);
             salida(null,"Le hemos enviado un email de confirmación.");
         }else{
             salida(null,"Intente de nuevo",false);

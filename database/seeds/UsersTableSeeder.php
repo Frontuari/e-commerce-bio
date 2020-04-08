@@ -132,6 +132,29 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 2,
                 'settings' => '{"locale":"es"}',
             ),
+            5 => 
+            array (
+                'id' => 17,
+                'last_ip' => NULL,
+                'last_activity' => '2020-04-06 23:03:08',
+                'password' => '$2y$10$OZGKHaDlkPrHhOmX2j24murWV0gokpTQrYiiZV6GU1Ra5l/B3GQ8.',
+                'cant_orders' => 0,
+                'peoples_id' => 4,
+                'coins_id' => NULL,
+                'groups_id' => NULL,
+                'name' => 'papita mani',
+                'email' => 'ab@ab.com',
+                'validateemail' => '767915',
+                'email_verified_at' => '2020-04-06 23:03:49',
+                'failed_attempts' => 0,
+                'purchase_quantity' => 0,
+                'remember_token' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'avatar' => 'users/default.png',
+                'role_id' => NULL,
+                'settings' => NULL,
+            ),
         ));
         
         

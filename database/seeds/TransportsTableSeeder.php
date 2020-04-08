@@ -26,18 +26,18 @@ class TransportsTableSeeder extends Seeder
                 'time_minutes' => 0,
                 'status' => 'A',
                 'created_at' => '2020-01-24 16:11:50',
-                'updated_at' => '2020-01-24 16:11:50',
+                'updated_at' => '2020-04-06 16:23:45',
             ),
             1 => 
             array (
                 'id' => 1,
                 'name' => 'Retirar en tienda',
                 'description' => 'Debe esperar por lo menos 30 minutos antes de dirigirse a nuestra tienda Bio y retirar su pedido.',
-                'price' => '200000.000000',
+                'price' => '0.000000',
                 'time_minutes' => 30,
                 'status' => 'A',
                 'created_at' => NULL,
-                'updated_at' => '2020-01-28 18:35:36',
+                'updated_at' => '2020-04-06 16:30:56',
             ),
         ));
         

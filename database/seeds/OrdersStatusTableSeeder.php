@@ -64,24 +64,6 @@ class OrdersStatusTableSeeder extends Seeder
             ),
             5 => 
             array (
-                'id' => 6,
-                'name' => 'Preparado para despacho',
-                'description' => NULL,
-                'status' => 'A',
-                'created_at' => '2020-02-24 18:52:45',
-                'updated_at' => '2020-02-24 18:52:45',
-            ),
-            6 => 
-            array (
-                'id' => 7,
-                'name' => 'Entregando',
-                'description' => NULL,
-                'status' => 'A',
-                'created_at' => '2020-02-24 18:52:53',
-                'updated_at' => '2020-02-24 18:52:53',
-            ),
-            7 => 
-            array (
                 'id' => 8,
                 'name' => 'Entregado',
                 'description' => NULL,
@@ -89,7 +71,7 @@ class OrdersStatusTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:52:53',
                 'updated_at' => '2020-02-24 18:52:53',
             ),
-            8 => 
+            6 => 
             array (
                 'id' => 9,
                 'name' => 'Devuelto',
@@ -98,7 +80,7 @@ class OrdersStatusTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:52:53',
                 'updated_at' => '2020-02-24 18:52:53',
             ),
-            9 => 
+            7 => 
             array (
                 'id' => 10,
                 'name' => 'Reenviado',
@@ -107,7 +89,7 @@ class OrdersStatusTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:52:53',
                 'updated_at' => '2020-02-24 18:52:53',
             ),
-            10 => 
+            8 => 
             array (
                 'id' => 11,
                 'name' => 'Cancelado por el usuario',
@@ -116,7 +98,7 @@ class OrdersStatusTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:52:53',
                 'updated_at' => '2020-02-24 18:52:53',
             ),
-            11 => 
+            9 => 
             array (
                 'id' => 12,
                 'name' => 'Cancelado por Biomercados',
@@ -124,6 +106,24 @@ class OrdersStatusTableSeeder extends Seeder
                 'status' => 'A',
                 'created_at' => NULL,
                 'updated_at' => NULL,
+            ),
+            10 => 
+            array (
+                'id' => 6,
+                'name' => 'Listo para enviar',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:45',
+                'updated_at' => '2020-02-24 18:52:45',
+            ),
+            11 => 
+            array (
+                'id' => 7,
+                'name' => 'Enviando',
+                'description' => NULL,
+                'status' => 'A',
+                'created_at' => '2020-02-24 18:52:53',
+                'updated_at' => '2020-02-24 18:52:53',
             ),
         ));
         

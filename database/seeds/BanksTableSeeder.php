@@ -33,6 +33,14 @@ class BanksTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:14:14',
                 'updated_at' => '2020-01-24 16:14:14',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'Efectivo',
+                'status' => 'A',
+                'created_at' => '2020-04-07 18:24:55',
+                'updated_at' => '2020-04-07 18:24:55',
+            ),
         ));
         
         

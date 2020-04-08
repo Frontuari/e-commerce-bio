@@ -4961,6 +4961,22 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"display":{"width":"4"},"default":"0","options":{"0":"No","1":"Si"}}',
                 'order' => 20,
             ),
+            309 => 
+            array (
+                'id' => 376,
+                'data_type_id' => 21,
+                'field' => 'transport_belongstomany_tax_relationship',
+                'type' => 'relationship',
+                'display_name' => 'Impuestos',
+                'required' => false,
+                'browse' => true,
+                'read' => true,
+                'edit' => true,
+                'add' => true,
+                'delete' => true,
+                'details' => '{"model":"App\\\\Taxes","table":"taxes","type":"belongsToMany","column":"id","key":"id","label":"short_name","pivot_table":"det_tax_transports","pivot":"1","taggable":"0"}',
+                'order' => 10,
+            ),
         ));
         
         

@@ -19,17 +19,6 @@ class CoinsTableSeeder extends Seeder
         \DB::table('coins')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'name' => 'USD',
-                'symbol' => '$',
-                'status' => 'A',
-                'rate' => '81000.000000000',
-                'coins_id' => 1,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            1 => 
-            array (
                 'id' => 2,
                 'name' => 'Bolívares',
                 'symbol' => 'Bs',
@@ -39,7 +28,7 @@ class CoinsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:04:24',
                 'updated_at' => '2020-01-24 16:04:24',
             ),
-            2 => 
+            1 => 
             array (
                 'id' => 4,
                 'name' => 'Bitcoin',
@@ -49,6 +38,17 @@ class CoinsTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'created_at' => '2020-01-24 19:45:35',
                 'updated_at' => '2020-02-06 14:12:07',
+            ),
+            2 => 
+            array (
+                'id' => 1,
+                'name' => 'Dólares',
+                'symbol' => '$',
+                'status' => 'A',
+                'rate' => '81000.000000000',
+                'coins_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => '2020-04-07 18:38:32',
             ),
         ));
         

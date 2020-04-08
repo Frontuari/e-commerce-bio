@@ -34,6 +34,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedTinyInteger('user_rating')->nullable()->default('0');
             $table->dateTime('delivery_time_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('discount', 20, 6)->nullable()->default('0')->comment('para los combos');
+            $table->decimal('exento', 20, 6)->nullable()->default('0')->comment('exento de impuesto');
+            $table->decimal('bi', 20, 6)->nullable()->default('0')->comment('base imponible');
             $table->unsignedBigInteger('packagings_id');
             $table->decimal('currency_rate', 20, 6)->nullable()->default('1');
             $table->string('opinion')->nullable()->comment('Comentario del usuario para calificando el pedido');
