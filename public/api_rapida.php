@@ -871,8 +871,8 @@ function recortar_imagen($row,$cant=null){
         }
         $arr=explode(".",$imgLista);
 
-        $row[$id]['image']=$arr[0].'-cropped.'.$arr[1];
-        $row[$id]['image_grande']=$value['image'];
+        $row[$id]['image']=cambiarBarra($arr[0].'-cropped.'.$arr[1]);
+        $row[$id]['image_grande']=cambiarBarra($value['image']);
         $row[$id]['name']=ucwords(mb_strtolower($value['name']));
         $row[$id]['description_short']=ucfirst(mb_strtolower($value['description_short']));
         if(is_array($cant)){
@@ -888,6 +888,9 @@ function recortar_imagen($row,$cant=null){
     }
      return $row;
     
+}
+function cambiarBarra($url){
+    return str_replace("\\", "/", $url);
 }
 function salida($row,$msj_general="",$bueno=true){
     $row['success']=$bueno;
