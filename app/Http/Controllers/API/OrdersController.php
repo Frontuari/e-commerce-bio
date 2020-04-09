@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace App\Http\Controllers\API;
 
@@ -25,7 +25,7 @@ class OrdersController extends BaseController
             order by created_at DESC Limit 1) AS namestatus"))
             ->join("order_address","orders.order_address_id","=","order_address.id")
             ->join("users","users.id","=","order_address.users_id")
-            ->where("users_id",$_SESSION["usuario"]["id"])
+            ->where("orders.users_id",$_SESSION["usuario"]["id"])
             ->get();
         }
         return $this->sendResponse($a);
@@ -158,8 +158,26 @@ class OrdersController extends BaseController
      */
     public function show(Orders $orders,$id)
     {
-        $a= $orders->where('id',$id)->get();
-        return $this->sendResponse($a);
+        $response = [];
+        $a = DB::table('orders')
+        ->select("orders.*","order_address.*",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
+        FROM trackings 
+        WHERE trackings.orders_id = orders.id
+        order by created_at DESC Limit 1) AS namestatus"))
+        ->join("order_address","orders.order_address_id","=","order_address.id")
+        ->join("users","users.id","=","order_address.users_id")
+        ->where("orders.id",$id)
+        ->get();
+
+        $products = DB::table("order_products")
+        ->select("products.id","products.name as nombre","order_products.cant as cantidad")
+        ->join("products","products.id","=","order_products.products_id")
+        ->where("order_products.orders",$id)
+        ->get();
+
+        $response["order"] = $a[0];
+        $response["products"] = $products;
+        return $this->sendResponse($response);
     }
 
 

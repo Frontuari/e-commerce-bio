@@ -6,7 +6,7 @@
 					<div class="order-block">
 						<div class="row">
 							<div class="col-lg-12">
-								<h3 class="order-number order-text">Orden #</h3>
+								<h3 class="order-number order-text">Orden #{{order.num_order}}</h3>
 								<div class="order-description">
 									<div class="row">
 										<div class="col-6"><label class="order-text">Detalles de la orden</label></div>
@@ -14,7 +14,7 @@
 									</div>
 									<div class="row" v-for="product in order.products" :key="product.id">
 										<div class="col-6"><p>{{product.nombre}}</p></div>
-										<div class="col-6"><p>X{{product.cantidad}}</p></div>
+										<div class="col-6"><p>{{product.cantidad}}</p></div>
 									</div>
 								</div>
 								<div class="order-total">

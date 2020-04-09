@@ -301,7 +301,7 @@
 
 												<div class="row" v-for="order in orders" :key="order.id">
 													<div class="col-6 col-lg-16">
-														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+														<button class="btn" type="button" data-toggle="modal" @click="getOrder(order.id)" data-target="#ModalOrder">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>
@@ -340,7 +340,7 @@
 												</div>
 												<div class="row" v-for="order in en_proceso" :key="order.id">
 													<div class="col-12 col-lg-20">
-														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+														<button class="btn" type="button" data-toggle="modal" @click="getOrder(order.id)" data-target="#ModalOrder">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>
@@ -374,7 +374,7 @@
 												</div>
 												<div class="row" v-for="order in completos" :key="order.id">
 													<div class="col-12 col-lg-20">
-														<button class="btn" type="button" data-toggle="modal" data-target="#ModalOrder">
+														<button class="btn" type="button" data-toggle="modal" @click="getOrder(order.id)" data-target="#ModalOrder">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>
@@ -401,7 +401,7 @@
 
 								<!-- ############################### SECCION DE MIS FAVORITO ######################################## -->
 
-								<!-- ORDER TAB-->
+								<!-- FAVORITE TAB-->
 								<div class="tab-pane" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites">
 									<ul class="nav nav-tabs" id="" role="tablist">
 										<li class="nav-item">
@@ -412,17 +412,17 @@
 									<div class="tab-content" id="orders-content">
 										<div class="tab-pane fade show active" id="all-orders" role="tabpanel" aria-labelledby="all-orders-tab">
 
-										<div  class="col-md-12 mx-0" v-if="cant_favorites <= 0">
-											<p class="cart-empty bio-info">Lista vacia.</p>
-											<a class="button" href="catalog">Volver a la tienda</a>
-										</div>
+											<div  class="col-md-12 mx-0" v-if="cant_favorites <= 0">
+												<p class="cart-empty bio-info">Lista vacia.</p>
+												<a class="button" href="catalog">Volver a la tienda</a>
+											</div>
 
 											<div class="product-list" v-if="cant_favorites > 0">
 											    <div class="container-fluid">
 											        <div class="row">
 											            <div class="col-6 col-lg-12" v-for="(favorite,index) in favorites" :key="favorite.id">
 											                <div class="product-block">
-											                    <div class="product-img"><img   :src="'storage/'+favorite.photo | MediumImage" >
+											                    <div class="product-img"><img   :src="'storage/'+JSON.parse(favorite.photo)[0] | MediumImage" >
 											                        <div class="product-actions">
 											                            <button type="button" data-toggle="modal" data-target="#ModalProd" class="btn">
 											                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
@@ -529,7 +529,7 @@
 											</div>
 
 										</div>
-										<div class="tab-pane fade" id="order-in-process" role="tabpanel" aria-labelledby="order-in-process-tab">
+										<!-- <div class="tab-pane fade" id="order-in-process" role="tabpanel" aria-labelledby="order-in-process-tab">
 											<div class="order-table">
 												<div class="thead-bio">
 													<div class="row">
@@ -617,7 +617,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -626,9 +626,11 @@
 				</div>
 			</div>
 		</div>
+		<ModalOrder :tasadolar="currency_rate" :order="tmpOrder"></ModalOrder>
 	</section>
 </template>
 <script>
+	import ModalOrder from './ModalOrder.vue';
     export default {
         data() {
             return {
@@ -642,14 +644,35 @@
 				en_proceso: [],
 				completos: [],
 				newDirection: 'none',
-				cant_product: []
+				cant_product: [],
+				currency_rate: 0,
+				tmpOrder: {},
             }
+		},
+		components: {
+			ModalOrder
 		},
 		props: {
 			userlogged: Object,
 			tasadolar: Number
 		},
         methods: {
+			getOrder: async function(id) {
+				axios.get(URLHOME+'api/orders/'+id).then( datos => {
+					const order = datos.data.data.order;
+					const products = datos.data.data.products;
+					this.tmpOrder = {
+						num_order: order.id,
+						products: products,
+						total: Number(order.total_pay),
+						direction: order.order_address_id,
+						direction_text: order.address+" "+order.sector+" "+order.nro_home+" "+order.zip_code+" "+order.reference_point,
+						status: order.namestatus
+					};
+					console.log("tmpOrder::> ",this.tmpOrder)
+					this.currency_rate = Number(order.currency_rate);
+				})
+			},
             getFavorites: async function () {
 				const response = await axios.get(URLHOME+'api/favorites');
 				this.favorites = response.data.data;

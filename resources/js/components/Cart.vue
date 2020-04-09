@@ -645,7 +645,6 @@
 						direction_text: this.objDirection.urb+" "+this.objDirection.sector+" "+this.objDirection.nro_home+" "+this.objDirection.zip_code+" "+this.objDirection.reference_point,
 						status: "En Proceso"
 					};
-					console.log("tmpOrder::> ",this.tmpOrder);
 				});
 
 			},
