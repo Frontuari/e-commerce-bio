@@ -125,6 +125,7 @@ class OrdersController extends BaseController
         $orden->opinion = '';
         $orden->coins_id = 1;
         $orden->rate_json = NULL;
+        $orde->image = "/".$destinationPath."/".$image->getClientOriginalName();
 
         $orden->save();
         $productsReturn = [];

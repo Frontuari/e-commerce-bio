@@ -533,7 +533,12 @@
 																<div class="order-description">
 																	<div class="row">
 																		<label class="order-text">Dirección de envío</label>
-																		<p>Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol).</p>
+																		<p v-if="selectedDirection == 0">
+																			Pick-Up
+																		</p>
+																		<p v-if="selectedDirection > 0">
+																			{{objDirection.urb}} {{objDirection.sector}}  {{objDirection.nro_home}}  {{objDirection.zip_code}}  {{objDirection.reference_point}}
+																		</p>
 																	</div>
 																</div>
 															</div>
@@ -574,101 +579,170 @@
 				</div>
 			</div>
 		</div>
+		<ModalOrder :tasadolar="tasadolar" :order="tmpOrder"></ModalOrder>
 	</section>
 </template>
 
 <script>
+	import ModalOrder from './ModalOrder.vue';
 
-export default {
-    data() {
-        return {
-            cant_cart: 0,
-            products_cart:0,
-            total_cart:0,
-			datauser:[],
-			payments: [],
-			selectedDirection: '',
-			selectedPayment: '',
-            order: {},
-			payment_img:'',
-			payment_ref: '',
-			datetime: '',
-			num_order: 0,
-            banks:[]
-        }
-    },
-	props: {
-		userlogged: Object,
-		tasadolar: Number
-	},
-	methods:{
-
-        LoadImageFile(event) {
-            this.payment_img = event.target.files[0];
-        },
-		async getPayments() {
-			const response = await axios.get(URLSERVER+"api/payment_methods");
-			this.payments = response.data.data;
-		},
-		saveOrder() {
-			this.order = {
-				user_id     : this.datauser.id,
-				direction   : this.selectedDirection,
-				datetime    : this.datetime,
-				products    : this.products_cart,
-                payment     : this.selectedPayment,
-				payment_ref : this.payment_ref,
-				total       : this.total_cart
-            };
-			let formData    = new FormData();
-			formData.append("order",JSON.stringify(this.order));
-            formData.append("payment_img",this.payment_img);
-            axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
-				this.num_order = datos.data.data.order.id;
-				jQuery(window).scrollTop(parseInt($(".jumbotron").offset().top));
-			});
-
-		},
-		isObject: function(o)
-		{
-			return typeof o == "object"
-		},
-		increaseValue(value,product_id)
-		{
-			for(let i = 0; i<this.cant_cart; i++)
-			{
-				if(this.products_cart[i].product.id == product_id)
-				{
-					if(parseInt(value) < parseInt(this.products_cart[i].product.qty_avaliable))
-					{
-						this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
-					}
-				}
+	export default {
+		data() {
+			return {
+				cant_cart: 0,
+				products_cart:0,
+				total_cart:0,
+				datauser:[],
+				payments: [],
+				selectedDirection: '',
+				selectedPayment: '',
+				order: {},
+				payment_img:'',
+				payment_ref: '',
+				datetime: '',
+				num_order: 0,
+				tmpOrder: {},
+				banks:[]
 			}
-			//actualizar el carro
-			window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
-			this.updateCartTotal();
-
 		},
-		decreaseValue(value,product_id)
-		{
-			if(value>1)
+		components:{
+			ModalOrder
+		},
+		props: {
+			userlogged: Object,
+			tasadolar: Number
+		},
+		methods:{
+
+			LoadImageFile(event) {
+				this.payment_img = event.target.files[0];
+			},
+			async getPayments() {
+				const response = await axios.get(URLSERVER+"api/payment_methods");
+				this.payments = response.data.data;
+			},
+			saveOrder() {
+				this.order = {
+					user_id     : this.datauser.id,
+					direction   : this.selectedDirection,
+					datetime    : this.datetime,
+					products    : this.products_cart,
+					payment     : this.selectedPayment,
+					payment_ref : this.payment_ref,
+					total       : this.total_cart
+				};
+				let formData    = new FormData();
+				formData.append("order",JSON.stringify(this.order));
+				formData.append("payment_img",this.payment_img);
+				axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
+					this.num_order = datos.data.data.order.id;
+
+					this.tmpOrder = {
+						num_order: this.num_order,
+						products:this.products_cart,
+						total:this.total_cart,
+						direction: this.selectedDirection,
+						direction_text: this.objDirection.urb+" "+this.objDirection.sector+" "+this.objDirection.nro_home+" "+this.objDirection.zip_code+" "+this.objDirection.reference_point,
+						status: "En Proceso"
+					};
+					console.log("tmpOrder::> ",this.tmpOrder);
+				});
+
+			},
+			isObject: function(o)
+			{
+				return typeof o == "object"
+			},
+			increaseValue(value,product_id)
 			{
 				for(let i = 0; i<this.cant_cart; i++)
 				{
 					if(this.products_cart[i].product.id == product_id)
 					{
-						this.products_cart[i].cant = parseInt(this.products_cart[i].cant)-1;
+						if(parseInt(value) < parseInt(this.products_cart[i].product.qty_avaliable))
+						{
+							this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
+						}
 					}
 				}
 				//actualizar el carro
 				window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
 				this.updateCartTotal();
-			}
+
+			},
+			decreaseValue(value,product_id)
+			{
+				if(value>1)
+				{
+					for(let i = 0; i<this.cant_cart; i++)
+					{
+						if(this.products_cart[i].product.id == product_id)
+						{
+							this.products_cart[i].cant = parseInt(this.products_cart[i].cant)-1;
+						}
+					}
+					//actualizar el carro
+					window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
+					this.updateCartTotal();
+				}
+			},
+			updateCartTotal()
+			{
+				this.total_cart = 0;
+				for(let i = 0; i<this.cant_cart; i++)
+				{
+					if(this.products_cart[i].product.discount>0)
+					{
+						this.total_cart+=parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
+					}else{
+						this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
+					}
+				}
+			},
+			showBanksInfo: async function()
+			{
+				const response  =   await axios.get(URLSERVER+'api/banks');
+				var banks       =   response.data.data;
+				var DatosCuentas=   Array;
+				var DatosCuentasArr=   Array;
+				var Mensaje     =   "";
+				var i           =   0;
+
+				for(i=0; i<banks.length;i++)
+				{
+					var a = 0;
+					DatosCuentas=banks[i].cuentas.split("||");
+					for(a=0; a<DatosCuentas.length ; a++)
+					{
+						DatosCuentasArr=DatosCuentas[a].split("/n");
+						if (a==0)
+							Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
+						Mensaje+=DatosCuentasArr[0]+"<br><br>";
+					}
+					Mensaje+="</p></div>";
+				}
+				window.Swal.fire({
+					title:"Nuestras Cuentas Bancarias",
+					html:Mensaje,
+				});
+			},
 		},
-		updateCartTotal()
+		created() {
+			EventBus.$on('update_cantCart', data => {
+				this.cant_cart = data;
+			});
+			this.getPayments();
+		},
+		mounted()
 		{
-			this.total_cart = 0;
+			if( window.localStorage.getItem("cartNew") ){
+				this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
+				this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
+				// console.log(this.products_cart);
+			}else{
+				this.cant_cart = 0;
+			}
+			//For para sacar el total del carro de compras
 			for(let i = 0; i<this.cant_cart; i++)
 			{
 				if(this.products_cart[i].product.discount>0)
@@ -678,92 +752,38 @@ export default {
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
 			}
-        },
-        showBanksInfo: async function()
-        {
-            const response  =   await axios.get(URLSERVER+'api/banks');
-            var banks       =   response.data.data;
-            var DatosCuentas=   Array;
-			var DatosCuentasArr=   Array;
-            var Mensaje     =   "";
-            var i           =   0;
 
-            for(i=0; i<banks.length;i++)
-            {
-                var a = 0;
-                DatosCuentas=banks[i].cuentas.split("||");
-                for(a=0; a<DatosCuentas.length ; a++)
-                {
-					DatosCuentasArr=DatosCuentas[a].split("/n");
-                    if (a==0)
-                        Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
-					Mensaje+=DatosCuentasArr[0]+"<br><br>";
-                }
-                Mensaje+="</p></div>";
-            }
-            window.Swal.fire({
-                title:"Nuestras Cuentas Bancarias",
-                html:Mensaje,
-            });
-        },
-	},
-    created() {
-        EventBus.$on('update_cantCart', data => {
-            this.cant_cart = data;
-		});
-		this.getPayments();
-    },
-    mounted()
-    {
-		if( window.localStorage.getItem("cartNew") ){
-			this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
-			this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
-			// console.log(this.products_cart);
-		}else{
-			this.cant_cart = 0;
-		}
-		//For para sacar el total del carro de compras
-		for(let i = 0; i<this.cant_cart; i++)
-		{
-			if(this.products_cart[i].product.discount>0)
-			{
-				this.total_cart+=parseFloat(this.products_cart[i].product.discount) * parseInt(this.products_cart[i].cant);
+			if(this.isObject(this.userlogged)){
+				this.datauser = this.userlogged;
 			}else{
-				this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
+				this.datauser.id = 'undefined';
 			}
-		}
 
-		if(this.isObject(this.userlogged)){
-			this.datauser = this.userlogged;
-		}else{
-			this.datauser.id = 'undefined';
+			this.order = {
+				user_id     : this.datauser.id,
+				direction   : this.selectedDirection,
+				datetime    : "",
+				products    : this.products_cart,
+				payment     : this.selectedPayment,
+				payment_ref : this.payment_ref
+			};
+		},
+		computed: {
+			objDirection: function() {
+				const len = this.userlogged.directions.length;
+				let id = -1;
+				for(let i = 0; i<len ; i++) {
+					if(this.userlogged.directions[i].id == this.selectedDirection) {
+						id = i;
+						break;
+					}
+				}
+				if(id == -1){
+					return '';
+				}else{
+					return this.userlogged.directions[id];
+				}
+			},
 		}
-
-		this.order = {
-			user_id     : this.datauser.id,
-			direction   : this.selectedDirection,
-			datetime    : "",
-			products    : this.products_cart,
-            payment     : this.selectedPayment,
-            payment_ref : this.payment_ref
-    	};
-    },
-    computed: {
-    	objDirection: function() {
-    		const len = this.userlogged.directions.length;
-    		let id = -1;
-    		for(let i = 0; i<len ; i++) {
-    			if(this.userlogged.directions[i].id == this.selectedDirection) {
-    				id = i;
-    				break;
-    			}
-    		}
-    		if(id == -1){
-    			return '';
-    		}else{
-    			return this.userlogged.directions[id];
-    		}
-        },
-    }
-}
+	}
 </script>
