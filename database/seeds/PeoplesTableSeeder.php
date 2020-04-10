@@ -45,19 +45,6 @@ class PeoplesTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 3,
-                'rif' => 'V-18671985',
-                'name' => 'Francisco suares',
-                'sex' => 'm',
-                'birthdate' => '1988-07-20',
-                'phone' => '04145138790 ',
-                'cities_id' => 722,
-                'created_at' => '2020-02-23 19:46:07',
-                'updated_at' => '2020-02-23 21:45:40',
-                'phone_home' => NULL,
-            ),
-            3 => 
-            array (
                 'id' => 4,
                 'rif' => 'V-18671988',
                 'name' => 'papita mani',
@@ -69,7 +56,7 @@ class PeoplesTableSeeder extends Seeder
                 'updated_at' => NULL,
                 'phone_home' => NULL,
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 5,
                 'rif' => 'V-18671980',
@@ -80,6 +67,19 @@ class PeoplesTableSeeder extends Seeder
                 'cities_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
+                'phone_home' => NULL,
+            ),
+            4 => 
+            array (
+                'id' => 3,
+                'rif' => 'V-18671985',
+                'name' => 'Francisco suares',
+                'sex' => 'f',
+                'birthdate' => '1988-07-20',
+                'phone' => '04145138790 ',
+                'cities_id' => 722,
+                'created_at' => '2020-02-23 19:46:07',
+                'updated_at' => '2020-02-23 21:45:40',
                 'phone_home' => NULL,
             ),
         ));

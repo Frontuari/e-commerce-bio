@@ -39,7 +39,7 @@ class CreateProductsTable extends Migration
             $table->integer('sku')->nullable();
             $table->tinyInteger('promote')->nullable()->default('0');
             $table->decimal('discount', 20, 6)->nullable()->default('0');
-            $table->string('photo', 200)->nullable()->default('["products\\imagenNoDisponible.png"]');
+            $table->string('photo', 200)->nullable()->default(json_encode(['products/imagenNoDisponible.png']));
             $table->unsignedInteger('stores_id');
             $table->unsignedInteger('brands_id')->nullable();
             $table->unsignedInteger('sub_categories_id');

@@ -12,6 +12,8 @@ $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
+
+
 switch($_GET['evento']) {
     case 'obtenerTodo':
 
@@ -67,6 +69,10 @@ switch($_GET['evento']) {
        }else{
         salida($row,"Correo electrónico no valido",false);
     }
+    break;
+    case 'loginMovil':
+        loginMovil();
+
     break;
     case 'listar_categorias_movil':
         listar_categorias_movil();
@@ -322,6 +328,30 @@ switch($_GET['evento']) {
     break;
     default:
         salida($row,"Disculpe debe enviar un evento",false);
+}
+function loginMovil(){
+    $email=$_GET['email'];
+    $clave=$_GET['password'];
+    
+    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    FROM users s
+    INNER JOIN peoples p on p.id = s.peoples_id
+    INNER JOIN cities c on c.id = p.cities_id
+    WHERE s.email='$email'")[0];
+
+   if($row['email']){
+        if(password_verify($clave,$row['password'])){
+            unset($row["password"]);
+            $_SESSION["usuario"]=$row;
+            $row['id_sesion']=session_id();
+            salida($row,"Bienvenido",true);
+        }else{
+            $row=null;
+            salida($row,"Contraseña incorrecta",false);
+        }
+   }else{
+    salida($row,"Correo electrónico no valido",false);
+}
 }
 function guardarPago(){
     $amount=$_GET['amount']+0.004;
@@ -661,8 +691,9 @@ function listarProductosIA(){
     }
 }
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
+    $limit='LIMIT 100';
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $limit $order";
+    $sql="SELECT p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
@@ -821,11 +852,17 @@ function confirmarCodRecuperacion(){
 function enviarCodRecuperacion(){
     $email  =$_GET['email'];
     $res=q("SELECT 1 FROM users WHERE email='$email'");
-    $codigoCorreo=rand(0,999999);
+    $codigoCorreo=generarCodigoVerificacion($email);
     if(is_array($res)){
+        $res=enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
+if($res){
         q("UPDATE users SET validateemail='$codigoCorreo' WHERE email='$email'");
+        
         //ENVIAR CORREO
         salida(null,"Verifique su correo electrónico.");
+}else{
+    salida(null,"Disculpe, intente mas tarde.",false);
+}
     }else{
         salida(null,"El correo no existe, intente nuevamente.",false);
     }
@@ -902,7 +939,7 @@ try {
     $mail->SMTPDebug = 0;
     $mail->CharSet = 'UTF-8';
     //Recipients
-    $mail->setFrom('bio_no-reply@gmail.com', 'Biomercados - Bio en linea');
+    $mail->setFrom('bio_no-reply@gmail.com', 'Biomercados - Bio en línea');
     $mail->addAddress($correo);     // Add a recipient
     //$mail->addAddress('ellen@example.com');               // Name is optional
    // $mail->addReplyTo('info@example.com', 'Information');
@@ -920,9 +957,9 @@ try {
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
-    echo 'Message has been sent';
+    return true;
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    return false;
 }
 
 }
@@ -997,7 +1034,7 @@ function plantillaCodigo($codigo){
     Bienvenido a nuestra red Biomercados<br><br>Su codigo verificación es: <br>
     <b><span style="font-size:25px">'.$codigo.'</span></b>
     <br>
-    Recuerda revisar tu bandeja <b>spam<b> o correos no deseados
+    Recuerde revisar tu bandeja <b>spam<b> o correos no deseados
     <br><hr><a href="http://www.biomercados.com.ve">www.biomercados.com.ve</a>
     </div> 
     
