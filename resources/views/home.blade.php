@@ -12,7 +12,7 @@
 
 	<slider :sliders="{{ $sliders }}"></slider>
 
-	<combos></combos>
+	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
 
 	<ads :ads="{{ $medio }}"></ads>
 

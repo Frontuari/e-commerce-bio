@@ -162,7 +162,7 @@
             }
         },
         created() {
-            for(let i = 0;i<100;i++) {
+            for(let i = 0;i<1000;i++) {
                 this.cant_product[i] = 1;
             }
         },

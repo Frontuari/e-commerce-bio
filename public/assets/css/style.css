@@ -1239,6 +1239,7 @@ header .dropdown-menu a:focus {
 .product-block {
     /* text-align: center; */
     margin-left: 5px;
+    height: 95%;
 }
 
 div[class*="col-"]:not(:last-child) .product-block {
@@ -1285,6 +1286,12 @@ div[class*="col-"]:not(:last-child) .product-block {
     font-size: 18px;
 }
 
+.product-data{
+    height: 21%;
+}
+
+.product-iva {}
+
 .product-block .product-info {
     font-size: 14px;
     margin-bottom: 0;
@@ -1305,6 +1312,14 @@ div[class*="col-"]:not(:last-child) .product-block {
 }
 
 .product-block .product-prices p {
+    font-size: 16px;
+    color: gray;
+    margin-bottom: 0;
+    display: block;
+    line-height: 1.2;
+}
+
+.product-block .product-iva p {
     font-size: 16px;
     color: gray;
     margin-bottom: 0;
@@ -1587,6 +1602,10 @@ div[class*="col-"]:not(:last-child) .product-block {
     .product-block .product-prices p {
         font-size: 18px;
     }
+
+    .product-block .product-iva p {
+        font-size: 18px;
+    }
 }
 
 
@@ -1662,7 +1681,7 @@ div[class*="col-"]:not(:last-child) .product-block {
 @media (max-width: 991px) {
     .combo-group-big {
         padding: 3rem 0;
-        background-image: url('../img/combo-bio-1.jpg');
+        /* background-image: url('../img/combo-bio-1.jpg'); */
         background-position: center bottom;
         background-size: cover;
         background-repeat: no-repeat;
@@ -1825,10 +1844,12 @@ div[class*="col-"]:not(:last-child) .product-block {
 }
 
 .modal .product-block .product-title,
-.modal .product-block .product-prices {
+.modal .product-block .product-prices,
+.modal .product-block .product-iva {
     line-height: 1;
 }
 
+.modal .product-block .product-description .product-prices,
 .modal .product-block .product-description .product-prices {
     margin-top: .5rem;
 }
@@ -3047,7 +3068,8 @@ label.order-text {
     min-height: 17px;
 }
 
-.wizard .product-block .product-prices p {
+.wizard .product-block .product-prices p,
+.wizard .product-block .product-iva p {
     margin-top: auto;
     margin-bottom: 1rem;
 }
@@ -3636,25 +3658,4 @@ ul#selected-filters li a.remove-filter-selected {
 
 .extra-controls {
     width: 100% !important;
-    margin: 0px auto;
-    float: left !important;
-}
-
-.extra-controls:after {
-    clear: both !important;
-    width: 100%;
-}
-
-.extra-controls .form-group input {
-    width: 50% !important;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
+    margi

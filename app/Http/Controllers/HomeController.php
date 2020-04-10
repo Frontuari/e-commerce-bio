@@ -70,6 +70,14 @@ class HomeController extends Controller
         ->take(10)
         ->get();
 
+        $Combos = Product::where('products.status','A')
+        ->where('is_combo',true)
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->take(8)
+        ->get();
+
         return view("home",[
             "tasa_dolar"=>$Coin->rate,
             "sliders"=>$Slider,
@@ -77,7 +85,9 @@ class HomeController extends Controller
             "medio_bajo"=>$Medio_Bajo,
             "recent"=>$MostRecent,
             "viewed"=>$MostView,
-            "sold"=>$MostSold,"bestprice"=>$BestPrice,
+            "sold"=>$MostSold,
+            "bestprice"=>$BestPrice,
+            "combos"=>$Combos,
             "footer"=>$footer
         ]);
     }
