@@ -1,6 +1,8 @@
 <?php
 cabecera('On');
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
@@ -679,7 +681,7 @@ function consultarFavorito(){
     $products_id=$_GET['products_id'];
     $arr=q("SELECT id FROM favorites WHERE products_id='$products_id' AND users_id='$users_id'");
     if(is_array($arr)){
-        salidaNueva($row,"Consulta procesada");
+        salidaNueva($arr,"Consulta procesada");
     }else{
         salidaNueva(null,"No es su favorito",false);
     }   
@@ -719,7 +721,7 @@ function eliminarDireccion(){
     $users_id=$_SESSION['usuario']['id'];
     $id=$_GET['id'];
     $arr=q("UPDATE order_address SET status='I' WHERE users_id='$users_id' AND id='$id'");
-    salida($row,"Eliminado correctamente");
+    salida(null,"Eliminado correctamente");
 }
 function getAdreess(){
     $users_id=$_SESSION['usuario']['id'];
@@ -727,7 +729,7 @@ function getAdreess(){
     if(is_array($arr)){
         salida_list($arr);
     }else{
-        salida($row,"Disculpe no hay direcciones.",false);
+        salida(null,"Disculpe no hay direcciones.",false);
     }
 }
 function guardarDireccion(){
@@ -828,6 +830,7 @@ function enviarCodRecuperacion(){
         salida(null,"El correo no existe, intente nuevamente.",false);
     }
 }
+
 function confirmarCorreo(){
     $email  =$_POST['email'];
     $codigoCorreo=$_POST['codigoCorreo'];
@@ -854,7 +857,7 @@ function registrarUsuario(){
 
 $res=q("SELECT validateemail FROM users WHERE email='$email' and email_verified_at IS NULL");
 if(is_array($res)){
-    enviarCorreo($email);
+    enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
     $_SESSION['email']=$email;
     q("UPDATE users SET password='$password' WHERE email='$email' and email_verified_at IS NULL");
     salida(null,"Le hemos enviado nuevamente un email de confirmación.");
@@ -867,7 +870,7 @@ if(is_array($res)){
         $peoples_id=$res[0]['id'];
         $res=q("INSERT INTO users (password,email,peoples_id,name,validateemail) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo')");
         if($res){
-            enviarCorreo($email);
+            enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
             salida(null,"Le hemos enviado un email de confirmación.");
         }else{
             salida(null,"Intente de nuevo",false);
@@ -877,12 +880,55 @@ if(is_array($res)){
     }
     
 }
-function enviarCorreo($correo){
-    
+function enviarCorreo($correo,$titulo,$body){
+
+    require __DIR__.'/../vendor/autoload.php';
+   // echo is_file(__DIR__.'/../vendor/autoload.php');
+
+
+// Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+    $mail->isSMTP();                                            // Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = 'bio.noreply@gmail.com';                     // SMTP username
+    $mail->Password   = 'bio12345678';                               // SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+    $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+    $mail->SMTPDebug = 0;
+    $mail->CharSet = 'UTF-8';
+    //Recipients
+    $mail->setFrom('bio_no-reply@gmail.com', 'Biomercados - Bio en linea');
+    $mail->addAddress($correo);     // Add a recipient
+    //$mail->addAddress('ellen@example.com');               // Name is optional
+   // $mail->addReplyTo('info@example.com', 'Information');
+    //$mail->addCC('cc@example.com');
+    //$mail->addBCC('bcc@example.com');
+
+    // Attachments
+    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    http://199.188.204.152/assets/img/logo-bio-mercados.svg
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = $titulo;
+    $mail->Body    = $body;
+    //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
 }
 function generarCodigoVerificacion($data){
-return "90000";
-//return hexdec( substr(sha1($data), 0, 5) );
+//return "90000";
+return hexdec( substr(sha1($data), 0, 5) );
 }
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
@@ -939,6 +985,24 @@ function salida_list($row,$bueno=true){
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     echo json_encode($row);
     exit();
+}
+function plantillaCodigo($codigo){
+    return '
+    <div style="text-align:center; background-color: #7FBC01;">
+    <img width="200" src="https://i.imgur.com/bqhoBSp.png" titñe="Bio en Línea">
+    
+    </div>
+    <br>
+    <div style="text-align:center">
+    Bienvenido a nuestra red Biomercados<br><br>Su codigo verificación es: <br>
+    <b><span style="font-size:25px">'.$codigo.'</span></b>
+    <br>
+    Recuerda revisar tu bandeja <b>spam<b> o correos no deseados
+    <br><hr><a href="http://www.biomercados.com.ve">www.biomercados.com.ve</a>
+    </div> 
+    
+ ';
+
 }
 function extraer_datos_db(){
     $gestor = @fopen("../.env", "r");

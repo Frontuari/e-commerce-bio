@@ -25,6 +25,7 @@ class CreateStoresTable extends Migration
             $table->increments('id');
             $table->string('name', 60);
             $table->string('logo')->nullable();
+            $table->unsignedBigInteger('nro_tienda')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');
             $table->timestamps();
         });

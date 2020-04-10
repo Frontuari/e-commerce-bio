@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-          
+            
             $table->bigIncrements('id');
             $table->string('name', 100);
             $table->string('description_short')->nullable();
@@ -36,9 +36,10 @@ class CreateProductsTable extends Migration
             $table->string('keyword')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('1');
             $table->integer('EAN')->nullable()->comment('codigo de barras');
+            $table->integer('sku')->nullable();
             $table->tinyInteger('promote')->nullable()->default('0');
             $table->decimal('discount', 20, 6)->nullable()->default('0');
-            $table->string('photo', 200)->nullable();
+            $table->string('photo', 200)->nullable()->default('["products\\imagenNoDisponible.png"]');
             $table->unsignedInteger('stores_id');
             $table->unsignedInteger('brands_id')->nullable();
             $table->unsignedInteger('sub_categories_id');
