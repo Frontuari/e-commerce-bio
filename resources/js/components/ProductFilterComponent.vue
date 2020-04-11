@@ -153,7 +153,7 @@
 				</div>
 			</div>
 		</div>
-		<ModalProducto :product="product"></ModalProducto>
+		<ModalProducto :tasadolar="tasadolar" :product="product"></ModalProducto>
 	</section>
 </template>
 

@@ -33,7 +33,7 @@
                                     <span class="product-info">{{product.description}}</span>
                                     <div class="product-prices">
                                         <!-- <span class="product-descount">$ 3 / Bs 135.000</span> -->
-                                        <p>Bs {{ product.price | FormatNumber }}</p>
+                                        <p>$ {{ (product.price / tasadolar)  | FormatDolar }} / Bs {{ product.price | FormatNumber }}</p>
                                     </div>
                                 </div>
                                 <div class="product-options">
@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                         <div class="product-prices">
-                                            <p><b>Total:</b> Bs {{totalModal | FormatNumber}} </p>
+                                            <p><b>Total:</b> $ {{ (totalModal / tasadolar) | FormatDolar}} / Bs {{totalModal | FormatNumber}} </p>
                                         </div>
                                         <div class="product-buttons">
                                             <button type="button" class="btn" @click="addToCart(product,cantModal)">Añadir al carrito</button>
@@ -80,7 +80,8 @@
         },
         props: {
             product: Object,
-            userlogged: Object
+            userlogged: Object,
+            tasadolar: Number
         },
         methods: {
             count: function (type) {

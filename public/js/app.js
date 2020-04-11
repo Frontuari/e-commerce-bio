@@ -3024,6 +3024,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ModalCombo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalCombo.vue */ "./resources/js/components/ModalCombo.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3134,15 +3143,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      combo: {}
+    };
   },
   props: {
-    combo_product: Object,
+    combo_product: Array,
     tasadolar: Number
   },
-  methods: {},
+  components: {
+    ModalCombo: _ModalCombo_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: {
+    getProduct: function () {
+      var _getProduct = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(objP) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.combo = objP;
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getProduct(_x) {
+        return _getProduct.apply(this, arguments);
+      }
+
+      return getProduct;
+    }()
+  },
   mounted: function mounted() {}
 });
 
@@ -3625,11 +3672,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       data: []
     };
+  },
+  props: {
+    combo: Object
   }
 });
 
@@ -3791,7 +3905,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     product: Object,
-    userlogged: Object
+    userlogged: Object,
+    tasadolar: Number
   },
   methods: {
     count: function count(type) {
@@ -77326,817 +77441,948 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { attrs: { id: "combos-bio" } }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "combo-group-big" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
+  return _c(
+    "section",
+    { attrs: { id: "combos-bio" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "combo-group-big" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "row combo-group",
+                  attrs: { id: "combo-group-1" }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "row combos-on-mobile" },
+                    _vm._l(_vm.combo_product.slice(0, 8), function(com) {
+                      return _c(
+                        "div",
+                        { key: com.id, staticClass: "col-6 col-lg-4" },
+                        [
+                          _c("div", { staticClass: "product-block" }, [
+                            _c("div", { staticClass: "product-img" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm._f("MediumImage")(
+                                    "storage/" + JSON.parse(com.photo)[0]
+                                  )
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "product-actions" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToCart(com, 1)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.31 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-carrito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToFavorite(
+                                          com,
+                                          _vm.userlogged.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.93 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-favorito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#ModalProd"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getProduct(com)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 15.03 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("visualizar-producto-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "product-title",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v(_vm._s(com.name))]
+                            ),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [_vm._v("IVA INCLUIDO")])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.calculado / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.calculado)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !com.impuesto
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.price / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.price)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
             _c(
               "div",
-              {
-                staticClass: "row combo-group",
-                attrs: { id: "combo-group-1" }
-              },
+              { staticClass: "col-lg-12", attrs: { id: "right-combos" } },
               [
-                _c("div", { staticClass: "row combos-on-mobile" }, [
-                  _c("div", { staticClass: "col-6 col-lg-4" }, [
-                    _c("div", { staticClass: "product-block" }, [
-                      _c("div", { staticClass: "product-img" }, [
-                        _c("img", {
-                          attrs: { src: "assets/img/combo-bio-003.jpg" }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "product-actions" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn",
-                              attrs: {
-                                type: "button",
-                                "data-toggle": "modal",
-                                "data-target": "#ModalProdCombo"
-                              }
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 14.31 15"
-                                  }
-                                },
-                                [
-                                  _c("title", [_vm._v("añadir-carrito-bio")]),
-                                  _c(
-                                    "g",
-                                    {
-                                      attrs: {
-                                        id: "Capa_2",
-                                        "data-name": "Capa 2"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Guias_y_recursos",
-                                            "data-name": "Guias y recursos"
-                                          }
-                                        },
-                                        [
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                            }
-                                          }),
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                            }
-                                          })
-                                        ]
-                                      )
-                                    ]
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "combo-group",
+                      attrs: { id: "combo-group-2" }
+                    },
+                    _vm._l(_vm.combo_product.slice(0, 4), function(com) {
+                      return _c(
+                        "div",
+                        { key: com.id, staticClass: "col-6 col-lg-3" },
+                        [
+                          _c("div", { staticClass: "product-block" }, [
+                            _c("div", { staticClass: "product-img" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm._f("MediumImage")(
+                                    "storage/" + JSON.parse(com.photo)[0]
                                   )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            { staticClass: "btn", attrs: { type: "button" } },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 14.93 15"
-                                  }
-                                },
-                                [
-                                  _c("title", [_vm._v("añadir-favorito-bio")]),
-                                  _c(
-                                    "g",
-                                    {
-                                      attrs: {
-                                        id: "Capa_2",
-                                        "data-name": "Capa 2"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "product-actions" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToCart(com, 1)
                                       }
-                                    },
-                                    [
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Guias_y_recursos",
-                                            "data-name": "Guias y recursos"
-                                          }
-                                        },
-                                        [
-                                          _c("path", {
-                                            staticClass: "cls-1",
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.31 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-carrito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
                                             attrs: {
-                                              d:
-                                                "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
                                             }
-                                          }),
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                            }
-                                          }),
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                            }
-                                          }),
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                            }
-                                          })
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn",
-                              attrs: {
-                                type: "button",
-                                "data-toggle": "modal",
-                                "data-target": "#ModalProdCombo"
-                              }
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 15.03 15"
-                                  }
-                                },
-                                [
-                                  _c("title", [
-                                    _vm._v("visualizar-producto-bio")
-                                  ]),
-                                  _c(
-                                    "g",
-                                    {
-                                      attrs: {
-                                        id: "Capa_2",
-                                        "data-name": "Capa 2"
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToFavorite(
+                                          com,
+                                          _vm.userlogged.id
+                                        )
                                       }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.93 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-favorito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#ModalProd"
                                     },
-                                    [
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Guias_y_recursos",
-                                            "data-name": "Guias y recursos"
-                                          }
-                                        },
-                                        [
-                                          _c("path", {
-                                            staticClass: "cls-1",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getProduct(com)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 15.03 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("visualizar-producto-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
                                             attrs: {
-                                              d:
-                                                "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
                                             }
-                                          }),
-                                          _c("path", {
-                                            staticClass: "cls-1",
-                                            attrs: {
-                                              d:
-                                                "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                            }
-                                          })
-                                        ]
-                                      )
-                                    ]
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "product-title",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v(_vm._s(com.name))]
+                            ),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [_vm._v("IVA INCLUIDO")])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.calculado / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.calculado)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !com.impuesto
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.price / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.price)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "combo-group",
+                      attrs: { id: "combo-group-3" }
+                    },
+                    _vm._l(_vm.combo_product.slice(4, 8), function(com) {
+                      return _c(
+                        "div",
+                        { key: com.id, staticClass: "col-6 col-lg-3" },
+                        [
+                          _c("div", { staticClass: "product-block" }, [
+                            _c("div", { staticClass: "product-img" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: _vm._f("MediumImage")(
+                                    "storage/" + JSON.parse(com.photo)[0]
                                   )
-                                ]
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { staticClass: "product-title", attrs: { href: "#" } },
-                        [_vm._v("Pollo bio")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "product-info" }, [
-                        _vm._v("4 Productos")
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ])
-                  ])
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "product-actions" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToCart(com, 1)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.31 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-carrito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addToFavorite(
+                                          com,
+                                          _vm.userlogged.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 14.93 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("añadir-favorito-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn",
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#ModalProdCombo"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getProduct(com)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 15.03 15"
+                                        }
+                                      },
+                                      [
+                                        _c("title", [
+                                          _vm._v("visualizar-producto-bio")
+                                        ]),
+                                        _c(
+                                          "g",
+                                          {
+                                            attrs: {
+                                              id: "Capa_2",
+                                              "data-name": "Capa 2"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "g",
+                                              {
+                                                attrs: {
+                                                  id: "Guias_y_recursos",
+                                                  "data-name":
+                                                    "Guias y recursos"
+                                                }
+                                              },
+                                              [
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
+                                                  }
+                                                }),
+                                                _c("path", {
+                                                  staticClass: "cls-1",
+                                                  attrs: {
+                                                    d:
+                                                      "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "product-title",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v(_vm._s(com.name))]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "product-info" }, [
+                              _vm._v("11 Productos")
+                            ]),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [_vm._v("IVA INCLUIDO")])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            com.impuesto > 0
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.calculado / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.calculado)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !com.impuesto
+                              ? _c("div", { staticClass: "product-prices" }, [
+                                  _c("p", [
+                                    _vm._v(
+                                      " $" +
+                                        _vm._s(
+                                          _vm._f("FormatDolar")(
+                                            com.price / _vm.tasadolar
+                                          )
+                                        ) +
+                                        " / Bs " +
+                                        _vm._s(
+                                          _vm._f("FormatNumber")(com.price)
+                                        )
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
+                          ])
+                        ]
+                      )
+                    }),
+                    0
+                  )
                 ])
               ]
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-12", attrs: { id: "right-combos" } },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass: "combo-group",
-                    attrs: { id: "combo-group-2" }
-                  },
-                  _vm._l(_vm.combo_product.slice(0, 4), function(com) {
-                    return _c(
-                      "div",
-                      { key: com.id, staticClass: "col-6 col-lg-3" },
-                      [
-                        _c("div", { staticClass: "product-block" }, [
-                          _c("div", { staticClass: "product-img" }, [
-                            _c("img", {
-                              attrs: { src: "assets/img/combo-bio-003.jpg" }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "product-actions" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#ModalProdCombo"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 14.31 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("añadir-carrito-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: { type: "button" }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 14.93 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("añadir-favorito-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#ModalProdCombo"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 15.03 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("visualizar-producto-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "product-title",
-                              attrs: { href: "#" }
-                            },
-                            [_vm._v(_vm._s(com.name))]
-                          ),
-                          _vm._v(" "),
-                          com.impuesto > 0
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [_vm._v("IVA INCLUIDO")])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          com.impuesto > 0
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [
-                                  _vm._v(
-                                    " $" +
-                                      _vm._s(
-                                        _vm._f("FormatDolar")(
-                                          com.calculado / _vm.tasadolar
-                                        )
-                                      ) +
-                                      " / Bs " +
-                                      _vm._s(
-                                        _vm._f("FormatNumber")(com.calculado)
-                                      )
-                                  )
-                                ])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !com.impuesto
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [
-                                  _vm._v(
-                                    " $" +
-                                      _vm._s(
-                                        _vm._f("FormatDolar")(
-                                          com.price / _vm.tasadolar
-                                        )
-                                      ) +
-                                      " / Bs " +
-                                      _vm._s(_vm._f("FormatNumber")(com.price))
-                                  )
-                                ])
-                              ])
-                            : _vm._e()
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "combo-group",
-                    attrs: { id: "combo-group-3" }
-                  },
-                  _vm._l(_vm.combo_product.slice(4, 8), function(com) {
-                    return _c(
-                      "div",
-                      { key: com.id, staticClass: "col-6 col-lg-3" },
-                      [
-                        _c("div", { staticClass: "product-block" }, [
-                          _c("div", { staticClass: "product-img" }, [
-                            _c("img", {
-                              attrs: { src: "assets/img/combo-bio-006.jpg" }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "product-actions" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#ModalProdCombo"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 14.31 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("añadir-carrito-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: { type: "button" }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 14.93 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("añadir-favorito-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#ModalProdCombo"
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "svg",
-                                    {
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 15.03 15"
-                                      }
-                                    },
-                                    [
-                                      _c("title", [
-                                        _vm._v("visualizar-producto-bio")
-                                      ]),
-                                      _c(
-                                        "g",
-                                        {
-                                          attrs: {
-                                            id: "Capa_2",
-                                            "data-name": "Capa 2"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "g",
-                                            {
-                                              attrs: {
-                                                id: "Guias_y_recursos",
-                                                "data-name": "Guias y recursos"
-                                              }
-                                            },
-                                            [
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M5.77,11.54A5.77,5.77,0,0,1,1.69,1.69,5.77,5.77,0,0,1,9.85,9.85,5.74,5.74,0,0,1,5.77,11.54ZM5.77.77A5,5,0,1,0,9.3,2.23,5,5,0,0,0,5.77.77Z"
-                                                }
-                                              }),
-                                              _c("path", {
-                                                staticClass: "cls-1",
-                                                attrs: {
-                                                  d:
-                                                    "M14.64,15a.4.4,0,0,1-.27-.11l-5.06-5a.37.37,0,0,1,0-.54.39.39,0,0,1,.55,0l5.06,5a.39.39,0,0,1,0,.55A.39.39,0,0,1,14.64,15Z"
-                                                }
-                                              })
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "product-title",
-                              attrs: { href: "#" }
-                            },
-                            [_vm._v(_vm._s(com.name))]
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "product-info" }, [
-                            _vm._v("11 Productos")
-                          ]),
-                          _vm._v(" "),
-                          com.impuesto > 0
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [_vm._v("IVA INCLUIDO")])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          com.impuesto > 0
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [
-                                  _vm._v(
-                                    " $" +
-                                      _vm._s(
-                                        _vm._f("FormatDolar")(
-                                          com.calculado / _vm.tasadolar
-                                        )
-                                      ) +
-                                      " / Bs " +
-                                      _vm._s(
-                                        _vm._f("FormatNumber")(com.calculado)
-                                      )
-                                  )
-                                ])
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          !com.impuesto
-                            ? _c("div", { staticClass: "product-prices" }, [
-                                _c("p", [
-                                  _vm._v(
-                                    " $" +
-                                      _vm._s(
-                                        _vm._f("FormatDolar")(
-                                          com.price / _vm.tasadolar
-                                        )
-                                      ) +
-                                      " / Bs " +
-                                      _vm._s(_vm._f("FormatNumber")(com.price))
-                                  )
-                                ])
-                              ])
-                            : _vm._e()
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ])
-            ]
-          )
+          ])
         ])
-      ])
-    ])
-  ])
+      ]),
+      _vm._v(" "),
+      _c("ModalCombo", { attrs: { combo: _vm.combo } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -78150,14 +78396,6 @@ var staticRenderFns = [
           _c("img", { attrs: { src: "assets/img/boton-circular-bio.svg" } })
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-prices" }, [
-      _c("p", [_vm._v("$ 1.5 / Bs 67.500")])
     ])
   }
 ]
@@ -78970,9 +79208,253 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "ModalProdCombo",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "ModalProdComboLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "product-block" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-7" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-options" }, [
+                    _c("form", { attrs: { action: "" } }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "product-buttons" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-addcart",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Añadir al carrito")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-addfavorite",
+                            attrs: { type: "button" }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 14.93 15"
+                                }
+                              },
+                              [
+                                _c("title", [_vm._v("añadir-favorito-bio")]),
+                                _c(
+                                  "g",
+                                  {
+                                    attrs: {
+                                      id: "Capa_2",
+                                      "data-name": "Capa 2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "g",
+                                      {
+                                        attrs: {
+                                          id: "Guias_y_recursos",
+                                          "data-name": "Guias y recursos"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticClass: "cls-1",
+                                          attrs: {
+                                            d:
+                                              "M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-5" }, [
+      _c("div", { staticClass: "product-img" }, [
+        _c("img", { attrs: { src: "assets/img/combo-bio-001.jpg" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-description" }, [
+      _c("a", { staticClass: "product-title", attrs: { href: "#" } }, [
+        _vm._v("Cesta bio")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("2 Harinas de maíz blanco - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Arroz blanco tipo 1 - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Pasta larga o corto - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Margarina - 500 g")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Aceite de maíz o soya - 1 L")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Harina de trigo - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Azúcar refinada - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Sal de mar - 1 kg")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [_vm._v("1 Café - 500 g")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Vinagre - 500 ml")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [_vm._v("1 Fororo - 900 g")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("1 Leche en polvo - 400 g")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [
+        _vm._v("2 Sardinas de lata - 260 g")
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "product-info" }, [_vm._v("1 Granos - 500 g")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-prices" }, [
+        _c("span", { staticClass: "product-descount" }, [
+          _vm._v("$ 3 / Bs 135.000")
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("$ 2 / Bs 90.000")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-quantity" }, [
+      _c("label", [_vm._v("Cantidad")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-quantity-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { id: "quantity2", type: "text", name: "quantity", value: "1" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "product-quantity-buttons" }, [
+          _c(
+            "button",
+            { staticClass: "btn increaseValue", attrs: { type: "button" } },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/increase.png", alt: "Increase" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn decreaseValue", attrs: { type: "button" } },
+            [
+              _c("img", {
+                attrs: { src: "assets/img/decrease.png", alt: "decrease" }
+              })
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-prices" }, [
+      _c("p", [_c("b", [_vm._v("Total:")]), _vm._v(" $ 2 / Bs 90.000")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -79278,7 +79760,13 @@ var render = function() {
                     _c("div", { staticClass: "product-prices" }, [
                       _c("p", [
                         _vm._v(
-                          "Bs " +
+                          "$ " +
+                            _vm._s(
+                              _vm._f("FormatDolar")(
+                                _vm.product.price / _vm.tasadolar
+                              )
+                            ) +
+                            " / Bs " +
                             _vm._s(_vm._f("FormatNumber")(_vm.product.price))
                         )
                       ])
@@ -79372,7 +79860,13 @@ var render = function() {
                         _c("p", [
                           _c("b", [_vm._v("Total:")]),
                           _vm._v(
-                            " Bs " +
+                            " $ " +
+                              _vm._s(
+                                _vm._f("FormatDolar")(
+                                  _vm.totalModal / _vm.tasadolar
+                                )
+                              ) +
+                              " / Bs " +
                               _vm._s(_vm._f("FormatNumber")(_vm.totalModal)) +
                               " "
                           )
@@ -81634,7 +82128,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("ModalProducto", { attrs: { product: _vm.product } })
+      _c("ModalProducto", {
+        attrs: { tasadolar: _vm.tasadolar, product: _vm.product }
+      })
     ],
     1
   )

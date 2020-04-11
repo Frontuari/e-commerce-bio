@@ -3658,4 +3658,25 @@ ul#selected-filters li a.remove-filter-selected {
 
 .extra-controls {
     width: 100% !important;
-    margi
+    margin: 0px auto;
+    float: left !important;
+}
+
+.extra-controls:after {
+    clear: both !important;
+    width: 100%;
+}
+
+.extra-controls .form-group input {
+    width: 50% !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
