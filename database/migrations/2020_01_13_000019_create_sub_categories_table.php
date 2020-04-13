@@ -28,7 +28,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('image')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');
             $table->unsignedInteger('categories_id');
-
+            $table->integer('c_elementvalue_id_n4')->unsigned()->nullable()->default(null);
             $table->index(["categories_id"], 'fk_sub_categories_categories1_idx');
             $table->timestamps();
 

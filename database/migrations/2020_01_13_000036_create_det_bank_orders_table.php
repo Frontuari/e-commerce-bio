@@ -23,7 +23,7 @@ class CreateDetBankOrdersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
 
             $table->increments('id');
-            $table->decimal('amount', 20, 6)->nullable();
+            $table->decimal('amount', 20, 2)->nullable();
             $table->integer('orders_id');
             $table->unsignedInteger('bank_datas_id');
             $table->string('status', 45)->nullable()->default('nuevo');

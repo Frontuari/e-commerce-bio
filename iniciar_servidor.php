@@ -1,4 +1,5 @@
 <?php
+//ini_set('max_execution_time', '600');
 error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
 		
 openlog("Biomercados",LOG_PERROR, LOG_DAEMON);
@@ -46,29 +47,80 @@ sleep($retraso_general);
 }while(true);
 closelog();
 
+
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
 	$url_productos="$ip/example_api_bio/getProducts.json";
+	
+	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
+	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
 	$data=leer("Productos",$url_productos);
+	
 	if($data!=false){
+		
 		$arr=q("SELECT id,nro_tienda FROM stores");
 		$tienda=crearArreglo($arr);
 		if(is_array($arr)){
 			q("BEGIN");
 			foreach($data->item as $obj){
 				if($obj->ad_org_id==1000004){
-				
+			
 				
 				if(is_numeric($obj->sku) and isset($obj->item_name) and is_numeric($obj->sugerido) and $obj->sugerido>=0 and $obj->price>0 and is_numeric($obj->ad_org_id)){
+					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
+				
+					$arr_ca=q($sql);
+					
+					
+					if(!is_array($arr_ca)) {
+						$name_ca=explode("-",$obj->Nivel3)[1];
+						$arr_insert_ca=q("INSERT INTO categories (name,c_elementvalue_id_n3) VALUES ('$name_ca',$obj->c_elementvalue_id_N3) RETURNING id");
+						if(!is_array($arr_insert_ca)){
+							$malo=true;
+							msj("MALO insertar categoria");
+							break;
+						}else{
+						
+							$id_ca=$arr_insert_ca[0]['id'];
+						
+						}
+					}else{
+						
+						$id_ca=$arr_ca[0]['id'];
+					}					
+					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";
+					
+					$arr_sub_ca=q($sql);
+				
+					$name_sub_ca=explode("-",$obj->Nivel4)[1];
+					if(!is_array($arr_sub_ca)) {
+						$sql="INSERT INTO sub_categories (name,categories_id,c_elementvalue_id_n4) VALUES ('$name_sub_ca',$id_ca,$obj->c_elementvalue_id_N4) RETURNING id";
+						
+						$arr_insert_sub_ca=q($sql);
+						if(!is_array($arr_insert_sub_ca)){
+							$malo=true;
+							msj("MALO");
+							break;
+						}else{
+							$id_sub_ca=$arr_insert_sub_ca[0]['id'];
+						}
+					}else{
+						$id_sub_ca=$arr_sub_ca[0]['id'];
+					}
+					
+
+
+
 					//echo $obj->ad_org_id." $obj->organizacion $obj->sku $obj->sugerido\n";
 					$tienda_id=$tienda[$obj->ad_org_id];
-					$sql="SELECT 1 FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
+					$sql="SELECT id FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
 					//echo " Consultando: ".$sql."\n";
 					$arr=q($sql);
 					//print_r($tienda);
 					//exit();
 					if(is_array($arr)){
+						$products_id=$arr[0]['id'];
 						$sql="UPDATE products SET price='$obj->price',name='$obj->item_name', qty_avaliable='$obj->sugerido', description_short='$obj->item_description', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						//exit($sql);
 						$valido=q($sql);
@@ -79,6 +131,7 @@ function actualizarProductos($ip){
 						$sql="INSERT INTO products (sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ($obj->sku,'$obj->item_name','$obj->item_description','$obj->price','$obj->sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
+						$products_id=$valido[0]['id'];
 						$msj="error al insertar! ID: $obj->m_product_id SQL: ".$sql;
 					}
 					if(!is_array($valido)){
@@ -88,6 +141,21 @@ function actualizarProductos($ip){
 						break;
 						$malo=true;
 					}
+
+
+
+					
+
+					$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id=$id_sub_ca";
+				
+					$arr_det=q($sql);
+					
+					if(!is_array($arr_det)){
+						q("INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$id_sub_ca)");
+					}
+
+
+
 				}else{
 					//$msj="SKU invalido o inventario -1: ".$obj->sku."";
 					//msj($msj);
@@ -95,6 +163,8 @@ function actualizarProductos($ip){
 				}
 	
 				}
+
+
 			}
 			if($malo){
 				q("ROLLBACK");

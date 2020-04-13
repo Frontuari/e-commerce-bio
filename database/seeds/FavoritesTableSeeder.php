@@ -16,40 +16,6 @@ class FavoritesTableSeeder extends Seeder
 
         \DB::table('favorites')->delete();
         
-        \DB::table('favorites')->insert(array (
-            0 => 
-            array (
-                'id' => 1,
-                'users_id' => 16,
-                'products_id' => 12,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            1 => 
-            array (
-                'id' => 3,
-                'users_id' => 16,
-                'products_id' => 18,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            2 => 
-            array (
-                'id' => 4,
-                'users_id' => 16,
-                'products_id' => 9,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            3 => 
-            array (
-                'id' => 5,
-                'users_id' => 16,
-                'products_id' => 6,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-        ));
         
         
     }

@@ -354,7 +354,7 @@ function loginMovil(){
 }
 }
 function guardarPago(){
-    $amount=$_GET['amount']+0.004;
+    $amount=$_GET['amount'];
     $orders_id=$_GET['orders_id'];
     $bank_datas_id=$_GET['bank_datas_id'];
     $ref=$_GET['ref'];

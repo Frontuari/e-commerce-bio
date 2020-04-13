@@ -25,12 +25,13 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 45);
             $table->text('description')->nullable();
-            $table->string('image', 200)->nullable();
+            
+            $table->string('image', 200)->nullable()->default('products/imagen_no_disponible_combo.png');
             $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->tinyInteger('order')->nullable()->default('1');
             $table->string('slug')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');
-
+            $table->integer('c_elementvalue_id_n3')->unsigned()->nullable()->default(null);
             $table->index(["parent_id"], 'fk_categories_categories1_idx');
             $table->timestamps();
 

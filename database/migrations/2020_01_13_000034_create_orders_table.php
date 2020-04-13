@@ -23,21 +23,21 @@ class CreateOrdersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
            
             $table->increments('id');
-            $table->decimal('sub_total', 20, 6);
-            $table->decimal('total_pay', 20, 6);
-            $table->decimal('total_tax', 20, 6);
-            $table->decimal('total_packaging', 20, 6)->nullable()->default('0');
-            $table->decimal('total_transport', 20, 6)->nullable()->default('0');
+            $table->decimal('sub_total', 20, 2);
+            $table->decimal('total_pay', 20, 2);
+            $table->decimal('total_tax', 20, 2);
+            $table->decimal('total_packaging', 20, 2)->nullable()->default('0');
+            $table->decimal('total_transport', 20, 2)->nullable()->default('0');
             $table->unsignedBigInteger('order_address_id')->nullable();
             $table->enum('status', ['A', 'I'])->nullable()->default('A');
             $table->unsignedBigInteger('transports_id')->nullable();
             $table->unsignedTinyInteger('user_rating')->nullable()->default('0');
             $table->dateTime('delivery_time_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->decimal('discount', 20, 6)->nullable()->default('0')->comment('para los combos');
-            $table->decimal('exento', 20, 6)->nullable()->default('0')->comment('exento de impuesto');
-            $table->decimal('bi', 20, 6)->nullable()->default('0')->comment('base imponible');
+            $table->decimal('discount', 20, 2)->nullable()->default('0')->comment('para los combos');
+            $table->decimal('exento', 20, 2)->nullable()->default('0')->comment('exento de impuesto');
+            $table->decimal('bi', 20, 2)->nullable()->default('0')->comment('base imponible');
             $table->unsignedBigInteger('packagings_id');
-            $table->decimal('currency_rate', 20, 6)->nullable()->default('1');
+            $table->decimal('currency_rate', 20, 2)->nullable()->default('1');
             $table->string('opinion')->nullable()->comment('Comentario del usuario para calificando el pedido');
             $table->unsignedInteger('coins_id');
             $table->unsignedBigInteger('users_id')->nullable();
