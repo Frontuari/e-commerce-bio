@@ -21,6 +21,7 @@
 
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/app_voyager_css.php') }}">
 
     @yield('css')
     @if(__('voyager::generic.is_rtl') == 'true')
