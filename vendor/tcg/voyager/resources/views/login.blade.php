@@ -99,7 +99,7 @@ box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
 
               </form>
 
-              <div style="clear:both"></div>
+              <div style="cleara:botha"></div>
 
               @if(!$errors->isEmpty())
               <div class="alert alert-red">

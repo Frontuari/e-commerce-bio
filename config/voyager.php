@@ -196,6 +196,7 @@ return [
         'js/Chart.min.js',
         'js/autonumeric.js',
         'js/final.js',
+        
     ],
 
     'googlemaps' => [

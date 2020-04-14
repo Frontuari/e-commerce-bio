@@ -87,14 +87,17 @@ body{
     color: #000;
 }
 a{
-    color: #80bc00;
+    color: #000;
     font-weight: 300;
     text-decoration: none;
     transition: color .3s ease;
     transition: filter .3s ease;
 }
+#dataTable a{
+    font-weight: bold;
+}
 a:hover{
-    color: #80bc00;
+    color: #1e2c00;
     filter: brightness(85%);
     text-decoration: none;
 }
