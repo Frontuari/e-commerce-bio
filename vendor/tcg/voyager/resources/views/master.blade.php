@@ -118,6 +118,7 @@ if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Ill
 
 
 <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ url('/js/app_voyager_js.php') }}"></script>
 
 <script>
     @if(Session::has('alerts'))
