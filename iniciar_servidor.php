@@ -121,7 +121,7 @@ function actualizarProductos($ip){
 					//exit();
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
-						$sql="UPDATE products SET price='$obj->price',name='$obj->item_name', qty_avaliable='$obj->sugerido', description_short='$obj->item_description', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						$sql="UPDATE products SET price='$obj->price',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						//exit($sql);
 						$valido=q($sql);
 						$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;

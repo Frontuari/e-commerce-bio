@@ -610,7 +610,7 @@ function listarProductosPorBusqueda(){
 function buscarProducto(){
   
     $texto=strtolower($_GET['texto']);
-    $arr=q("SELECT name,price FROM products WHERE LOWER(name) LIKE '%$texto%'");
+    $arr=q("SELECT name,price,sku FROM products WHERE LOWER(name) LIKE '%$texto%' or sku='$texto'");
     if(is_array($arr)){
         salidaNueva($arr,"Coincidencia");
     }else{
@@ -958,6 +958,8 @@ return hexdec( substr(sha1($data), 0, 5) );
 }
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
+        $no_image[0]='products/imagenNoDisponible.png';
+        if($value['image']==null) $value['image']=json_encode($no_image);
         $img=json_decode($value['image']);
         if(is_array($img)){
             $imgLista=$img[0];

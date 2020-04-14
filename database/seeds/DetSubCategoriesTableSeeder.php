@@ -19,4000 +19,4000 @@ class DetSubCategoriesTableSeeder extends Seeder
         \DB::table('det_sub_categories')->insert(array (
             0 => 
             array (
-                'id' => 1,
-                'products_id' => 1,
+                'id' => 634,
+                'products_id' => 634,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             1 => 
             array (
-                'id' => 2,
-                'products_id' => 2,
+                'id' => 635,
+                'products_id' => 635,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             2 => 
             array (
-                'id' => 3,
-                'products_id' => 3,
+                'id' => 636,
+                'products_id' => 636,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             3 => 
             array (
-                'id' => 4,
-                'products_id' => 4,
+                'id' => 637,
+                'products_id' => 637,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             4 => 
             array (
-                'id' => 5,
-                'products_id' => 5,
+                'id' => 638,
+                'products_id' => 638,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             5 => 
             array (
-                'id' => 6,
-                'products_id' => 6,
+                'id' => 639,
+                'products_id' => 639,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             6 => 
             array (
-                'id' => 7,
-                'products_id' => 7,
+                'id' => 640,
+                'products_id' => 640,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             7 => 
             array (
-                'id' => 8,
-                'products_id' => 8,
+                'id' => 641,
+                'products_id' => 641,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             8 => 
             array (
-                'id' => 9,
-                'products_id' => 9,
+                'id' => 642,
+                'products_id' => 642,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             9 => 
             array (
-                'id' => 10,
-                'products_id' => 10,
+                'id' => 643,
+                'products_id' => 643,
                 'sub_categories_id' => 9,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             10 => 
             array (
-                'id' => 11,
-                'products_id' => 11,
+                'id' => 644,
+                'products_id' => 644,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             11 => 
             array (
-                'id' => 12,
-                'products_id' => 12,
+                'id' => 645,
+                'products_id' => 645,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             12 => 
             array (
-                'id' => 13,
-                'products_id' => 13,
+                'id' => 646,
+                'products_id' => 646,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             13 => 
             array (
-                'id' => 14,
-                'products_id' => 14,
+                'id' => 647,
+                'products_id' => 647,
                 'sub_categories_id' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             14 => 
             array (
-                'id' => 15,
-                'products_id' => 15,
+                'id' => 648,
+                'products_id' => 648,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             15 => 
             array (
-                'id' => 16,
-                'products_id' => 16,
+                'id' => 649,
+                'products_id' => 649,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             16 => 
             array (
-                'id' => 17,
-                'products_id' => 17,
+                'id' => 650,
+                'products_id' => 650,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             17 => 
             array (
-                'id' => 18,
-                'products_id' => 18,
+                'id' => 651,
+                'products_id' => 651,
                 'sub_categories_id' => 16,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             18 => 
             array (
-                'id' => 19,
-                'products_id' => 19,
+                'id' => 652,
+                'products_id' => 652,
                 'sub_categories_id' => 17,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             19 => 
             array (
-                'id' => 20,
-                'products_id' => 20,
+                'id' => 653,
+                'products_id' => 653,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             20 => 
             array (
-                'id' => 21,
-                'products_id' => 21,
+                'id' => 654,
+                'products_id' => 654,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             21 => 
             array (
-                'id' => 22,
-                'products_id' => 22,
+                'id' => 655,
+                'products_id' => 655,
                 'sub_categories_id' => 19,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             22 => 
             array (
-                'id' => 23,
-                'products_id' => 23,
+                'id' => 656,
+                'products_id' => 656,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             23 => 
             array (
-                'id' => 24,
-                'products_id' => 24,
+                'id' => 657,
+                'products_id' => 657,
                 'sub_categories_id' => 20,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             24 => 
             array (
-                'id' => 25,
-                'products_id' => 25,
+                'id' => 658,
+                'products_id' => 658,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             25 => 
             array (
-                'id' => 26,
-                'products_id' => 26,
+                'id' => 659,
+                'products_id' => 659,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             26 => 
             array (
-                'id' => 27,
-                'products_id' => 27,
+                'id' => 660,
+                'products_id' => 660,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             27 => 
             array (
-                'id' => 28,
-                'products_id' => 28,
+                'id' => 661,
+                'products_id' => 661,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             28 => 
             array (
-                'id' => 29,
-                'products_id' => 29,
+                'id' => 662,
+                'products_id' => 662,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             29 => 
             array (
-                'id' => 30,
-                'products_id' => 30,
+                'id' => 663,
+                'products_id' => 663,
                 'sub_categories_id' => 25,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             30 => 
             array (
-                'id' => 31,
-                'products_id' => 31,
+                'id' => 664,
+                'products_id' => 664,
                 'sub_categories_id' => 26,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             31 => 
             array (
-                'id' => 32,
-                'products_id' => 32,
+                'id' => 665,
+                'products_id' => 665,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             32 => 
             array (
-                'id' => 33,
-                'products_id' => 33,
+                'id' => 666,
+                'products_id' => 666,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             33 => 
             array (
-                'id' => 34,
-                'products_id' => 34,
+                'id' => 667,
+                'products_id' => 667,
                 'sub_categories_id' => 28,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             34 => 
             array (
-                'id' => 35,
-                'products_id' => 35,
+                'id' => 668,
+                'products_id' => 668,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             35 => 
             array (
-                'id' => 36,
-                'products_id' => 36,
+                'id' => 669,
+                'products_id' => 669,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             36 => 
             array (
-                'id' => 37,
-                'products_id' => 37,
+                'id' => 670,
+                'products_id' => 670,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             37 => 
             array (
-                'id' => 38,
-                'products_id' => 38,
+                'id' => 671,
+                'products_id' => 671,
                 'sub_categories_id' => 31,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             38 => 
             array (
-                'id' => 39,
-                'products_id' => 39,
+                'id' => 672,
+                'products_id' => 672,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             39 => 
             array (
-                'id' => 40,
-                'products_id' => 40,
+                'id' => 673,
+                'products_id' => 673,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             40 => 
             array (
-                'id' => 41,
-                'products_id' => 41,
+                'id' => 674,
+                'products_id' => 674,
                 'sub_categories_id' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             41 => 
             array (
-                'id' => 42,
-                'products_id' => 42,
+                'id' => 675,
+                'products_id' => 675,
                 'sub_categories_id' => 32,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             42 => 
             array (
-                'id' => 43,
-                'products_id' => 43,
+                'id' => 676,
+                'products_id' => 676,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             43 => 
             array (
-                'id' => 44,
-                'products_id' => 44,
+                'id' => 677,
+                'products_id' => 677,
                 'sub_categories_id' => 20,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             44 => 
             array (
-                'id' => 45,
-                'products_id' => 45,
+                'id' => 678,
+                'products_id' => 678,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             45 => 
             array (
-                'id' => 46,
-                'products_id' => 46,
+                'id' => 679,
+                'products_id' => 679,
                 'sub_categories_id' => 33,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             46 => 
             array (
-                'id' => 47,
-                'products_id' => 47,
+                'id' => 680,
+                'products_id' => 680,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             47 => 
             array (
-                'id' => 48,
-                'products_id' => 48,
+                'id' => 681,
+                'products_id' => 681,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             48 => 
             array (
-                'id' => 49,
-                'products_id' => 49,
+                'id' => 682,
+                'products_id' => 682,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             49 => 
             array (
-                'id' => 50,
-                'products_id' => 50,
+                'id' => 683,
+                'products_id' => 683,
                 'sub_categories_id' => 35,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             50 => 
             array (
-                'id' => 51,
-                'products_id' => 51,
+                'id' => 684,
+                'products_id' => 684,
                 'sub_categories_id' => 36,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             51 => 
             array (
-                'id' => 52,
-                'products_id' => 52,
+                'id' => 685,
+                'products_id' => 685,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             52 => 
             array (
-                'id' => 53,
-                'products_id' => 53,
+                'id' => 686,
+                'products_id' => 686,
                 'sub_categories_id' => 37,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             53 => 
             array (
-                'id' => 54,
-                'products_id' => 54,
+                'id' => 687,
+                'products_id' => 687,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             54 => 
             array (
-                'id' => 55,
-                'products_id' => 55,
+                'id' => 688,
+                'products_id' => 688,
                 'sub_categories_id' => 38,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             55 => 
             array (
-                'id' => 56,
-                'products_id' => 56,
+                'id' => 689,
+                'products_id' => 689,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             56 => 
             array (
-                'id' => 57,
-                'products_id' => 57,
+                'id' => 690,
+                'products_id' => 690,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             57 => 
             array (
-                'id' => 58,
-                'products_id' => 58,
+                'id' => 691,
+                'products_id' => 691,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             58 => 
             array (
-                'id' => 59,
-                'products_id' => 59,
+                'id' => 692,
+                'products_id' => 692,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             59 => 
             array (
-                'id' => 60,
-                'products_id' => 60,
+                'id' => 693,
+                'products_id' => 693,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             60 => 
             array (
-                'id' => 61,
-                'products_id' => 61,
+                'id' => 694,
+                'products_id' => 694,
                 'sub_categories_id' => 40,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             61 => 
             array (
-                'id' => 62,
-                'products_id' => 62,
+                'id' => 695,
+                'products_id' => 695,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             62 => 
             array (
-                'id' => 63,
-                'products_id' => 63,
+                'id' => 696,
+                'products_id' => 696,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             63 => 
             array (
-                'id' => 64,
-                'products_id' => 64,
+                'id' => 697,
+                'products_id' => 697,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             64 => 
             array (
-                'id' => 65,
-                'products_id' => 65,
+                'id' => 698,
+                'products_id' => 698,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             65 => 
             array (
-                'id' => 66,
-                'products_id' => 66,
+                'id' => 699,
+                'products_id' => 699,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             66 => 
             array (
-                'id' => 67,
-                'products_id' => 67,
+                'id' => 700,
+                'products_id' => 700,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             67 => 
             array (
-                'id' => 68,
-                'products_id' => 68,
+                'id' => 701,
+                'products_id' => 701,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             68 => 
             array (
-                'id' => 69,
-                'products_id' => 69,
+                'id' => 702,
+                'products_id' => 702,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             69 => 
             array (
-                'id' => 70,
-                'products_id' => 70,
+                'id' => 703,
+                'products_id' => 703,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             70 => 
             array (
-                'id' => 71,
-                'products_id' => 71,
+                'id' => 704,
+                'products_id' => 704,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             71 => 
             array (
-                'id' => 72,
-                'products_id' => 72,
+                'id' => 705,
+                'products_id' => 705,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             72 => 
             array (
-                'id' => 73,
-                'products_id' => 73,
+                'id' => 706,
+                'products_id' => 706,
                 'sub_categories_id' => 41,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             73 => 
             array (
-                'id' => 74,
-                'products_id' => 74,
+                'id' => 707,
+                'products_id' => 707,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             74 => 
             array (
-                'id' => 75,
-                'products_id' => 75,
+                'id' => 708,
+                'products_id' => 708,
                 'sub_categories_id' => 42,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             75 => 
             array (
-                'id' => 76,
-                'products_id' => 76,
+                'id' => 709,
+                'products_id' => 709,
                 'sub_categories_id' => 43,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             76 => 
             array (
-                'id' => 77,
-                'products_id' => 77,
+                'id' => 710,
+                'products_id' => 710,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             77 => 
             array (
-                'id' => 78,
-                'products_id' => 78,
+                'id' => 711,
+                'products_id' => 711,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             78 => 
             array (
-                'id' => 79,
-                'products_id' => 79,
+                'id' => 712,
+                'products_id' => 712,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             79 => 
             array (
-                'id' => 80,
-                'products_id' => 80,
+                'id' => 713,
+                'products_id' => 713,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             80 => 
             array (
-                'id' => 81,
-                'products_id' => 81,
+                'id' => 714,
+                'products_id' => 714,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             81 => 
             array (
-                'id' => 82,
-                'products_id' => 82,
+                'id' => 715,
+                'products_id' => 715,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             82 => 
             array (
-                'id' => 83,
-                'products_id' => 83,
+                'id' => 716,
+                'products_id' => 716,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             83 => 
             array (
-                'id' => 84,
-                'products_id' => 84,
+                'id' => 717,
+                'products_id' => 717,
                 'sub_categories_id' => 19,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             84 => 
             array (
-                'id' => 85,
-                'products_id' => 85,
+                'id' => 718,
+                'products_id' => 718,
                 'sub_categories_id' => 28,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             85 => 
             array (
-                'id' => 86,
-                'products_id' => 86,
+                'id' => 719,
+                'products_id' => 719,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             86 => 
             array (
-                'id' => 87,
-                'products_id' => 87,
+                'id' => 720,
+                'products_id' => 720,
                 'sub_categories_id' => 46,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             87 => 
             array (
-                'id' => 88,
-                'products_id' => 88,
+                'id' => 721,
+                'products_id' => 721,
                 'sub_categories_id' => 47,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             88 => 
             array (
-                'id' => 89,
-                'products_id' => 89,
+                'id' => 722,
+                'products_id' => 722,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             89 => 
             array (
-                'id' => 90,
-                'products_id' => 90,
+                'id' => 723,
+                'products_id' => 723,
                 'sub_categories_id' => 48,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             90 => 
             array (
-                'id' => 91,
-                'products_id' => 91,
+                'id' => 724,
+                'products_id' => 724,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             91 => 
             array (
-                'id' => 92,
-                'products_id' => 92,
+                'id' => 725,
+                'products_id' => 725,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             92 => 
             array (
-                'id' => 93,
-                'products_id' => 93,
+                'id' => 726,
+                'products_id' => 726,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             93 => 
             array (
-                'id' => 94,
-                'products_id' => 94,
+                'id' => 727,
+                'products_id' => 727,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             94 => 
             array (
-                'id' => 95,
-                'products_id' => 95,
+                'id' => 728,
+                'products_id' => 728,
                 'sub_categories_id' => 32,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             95 => 
             array (
-                'id' => 96,
-                'products_id' => 96,
+                'id' => 729,
+                'products_id' => 729,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             96 => 
             array (
-                'id' => 97,
-                'products_id' => 97,
+                'id' => 730,
+                'products_id' => 730,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             97 => 
             array (
-                'id' => 98,
-                'products_id' => 98,
+                'id' => 731,
+                'products_id' => 731,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             98 => 
             array (
-                'id' => 99,
-                'products_id' => 99,
+                'id' => 732,
+                'products_id' => 732,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             99 => 
             array (
-                'id' => 100,
-                'products_id' => 100,
+                'id' => 733,
+                'products_id' => 733,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             100 => 
             array (
-                'id' => 101,
-                'products_id' => 101,
+                'id' => 734,
+                'products_id' => 734,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             101 => 
             array (
-                'id' => 102,
-                'products_id' => 102,
+                'id' => 735,
+                'products_id' => 735,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             102 => 
             array (
-                'id' => 103,
-                'products_id' => 103,
+                'id' => 736,
+                'products_id' => 736,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             103 => 
             array (
-                'id' => 104,
-                'products_id' => 104,
+                'id' => 737,
+                'products_id' => 737,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             104 => 
             array (
-                'id' => 105,
-                'products_id' => 105,
+                'id' => 738,
+                'products_id' => 738,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             105 => 
             array (
-                'id' => 106,
-                'products_id' => 106,
+                'id' => 739,
+                'products_id' => 739,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             106 => 
             array (
-                'id' => 107,
-                'products_id' => 107,
+                'id' => 740,
+                'products_id' => 740,
                 'sub_categories_id' => 26,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             107 => 
             array (
-                'id' => 108,
-                'products_id' => 108,
+                'id' => 741,
+                'products_id' => 741,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             108 => 
             array (
-                'id' => 109,
-                'products_id' => 109,
+                'id' => 742,
+                'products_id' => 742,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             109 => 
             array (
-                'id' => 110,
-                'products_id' => 110,
+                'id' => 743,
+                'products_id' => 743,
                 'sub_categories_id' => 35,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             110 => 
             array (
-                'id' => 111,
-                'products_id' => 111,
+                'id' => 744,
+                'products_id' => 744,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             111 => 
             array (
-                'id' => 112,
-                'products_id' => 112,
+                'id' => 745,
+                'products_id' => 745,
                 'sub_categories_id' => 51,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             112 => 
             array (
-                'id' => 113,
-                'products_id' => 113,
+                'id' => 746,
+                'products_id' => 746,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             113 => 
             array (
-                'id' => 114,
-                'products_id' => 114,
+                'id' => 747,
+                'products_id' => 747,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             114 => 
             array (
-                'id' => 115,
-                'products_id' => 115,
+                'id' => 748,
+                'products_id' => 748,
                 'sub_categories_id' => 52,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             115 => 
             array (
-                'id' => 116,
-                'products_id' => 116,
+                'id' => 749,
+                'products_id' => 749,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             116 => 
             array (
-                'id' => 117,
-                'products_id' => 117,
+                'id' => 750,
+                'products_id' => 750,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             117 => 
             array (
-                'id' => 118,
-                'products_id' => 118,
+                'id' => 751,
+                'products_id' => 751,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             118 => 
             array (
-                'id' => 119,
-                'products_id' => 119,
+                'id' => 752,
+                'products_id' => 752,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             119 => 
             array (
-                'id' => 120,
-                'products_id' => 120,
+                'id' => 753,
+                'products_id' => 753,
                 'sub_categories_id' => 52,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             120 => 
             array (
-                'id' => 121,
-                'products_id' => 121,
+                'id' => 754,
+                'products_id' => 754,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             121 => 
             array (
-                'id' => 122,
-                'products_id' => 122,
+                'id' => 755,
+                'products_id' => 755,
                 'sub_categories_id' => 38,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             122 => 
             array (
-                'id' => 123,
-                'products_id' => 123,
+                'id' => 756,
+                'products_id' => 756,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             123 => 
             array (
-                'id' => 124,
-                'products_id' => 124,
+                'id' => 757,
+                'products_id' => 757,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             124 => 
             array (
-                'id' => 125,
-                'products_id' => 125,
+                'id' => 758,
+                'products_id' => 758,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             125 => 
             array (
-                'id' => 126,
-                'products_id' => 126,
+                'id' => 759,
+                'products_id' => 759,
                 'sub_categories_id' => 55,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             126 => 
             array (
-                'id' => 127,
-                'products_id' => 127,
+                'id' => 760,
+                'products_id' => 760,
                 'sub_categories_id' => 56,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             127 => 
             array (
-                'id' => 128,
-                'products_id' => 128,
+                'id' => 761,
+                'products_id' => 761,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             128 => 
             array (
-                'id' => 129,
-                'products_id' => 129,
+                'id' => 762,
+                'products_id' => 762,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             129 => 
             array (
-                'id' => 130,
-                'products_id' => 130,
+                'id' => 763,
+                'products_id' => 763,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             130 => 
             array (
-                'id' => 131,
-                'products_id' => 131,
+                'id' => 764,
+                'products_id' => 764,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             131 => 
             array (
-                'id' => 132,
-                'products_id' => 132,
+                'id' => 765,
+                'products_id' => 765,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             132 => 
             array (
-                'id' => 133,
-                'products_id' => 133,
+                'id' => 766,
+                'products_id' => 766,
                 'sub_categories_id' => 58,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             133 => 
             array (
-                'id' => 134,
-                'products_id' => 134,
+                'id' => 767,
+                'products_id' => 767,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             134 => 
             array (
-                'id' => 135,
-                'products_id' => 135,
+                'id' => 768,
+                'products_id' => 768,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             135 => 
             array (
-                'id' => 136,
-                'products_id' => 136,
+                'id' => 769,
+                'products_id' => 769,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             136 => 
             array (
-                'id' => 137,
-                'products_id' => 137,
+                'id' => 770,
+                'products_id' => 770,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             137 => 
             array (
-                'id' => 138,
-                'products_id' => 138,
+                'id' => 771,
+                'products_id' => 771,
                 'sub_categories_id' => 59,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             138 => 
             array (
-                'id' => 139,
-                'products_id' => 139,
+                'id' => 772,
+                'products_id' => 772,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             139 => 
             array (
-                'id' => 140,
-                'products_id' => 140,
+                'id' => 773,
+                'products_id' => 773,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             140 => 
             array (
-                'id' => 141,
-                'products_id' => 141,
+                'id' => 774,
+                'products_id' => 774,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             141 => 
             array (
-                'id' => 142,
-                'products_id' => 142,
+                'id' => 775,
+                'products_id' => 775,
                 'sub_categories_id' => 32,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             142 => 
             array (
-                'id' => 143,
-                'products_id' => 143,
+                'id' => 776,
+                'products_id' => 776,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             143 => 
             array (
-                'id' => 144,
-                'products_id' => 144,
+                'id' => 777,
+                'products_id' => 777,
                 'sub_categories_id' => 17,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             144 => 
             array (
-                'id' => 145,
-                'products_id' => 145,
+                'id' => 778,
+                'products_id' => 778,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             145 => 
             array (
-                'id' => 146,
-                'products_id' => 146,
+                'id' => 779,
+                'products_id' => 779,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             146 => 
             array (
-                'id' => 147,
-                'products_id' => 147,
+                'id' => 780,
+                'products_id' => 780,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             147 => 
             array (
-                'id' => 148,
-                'products_id' => 148,
+                'id' => 781,
+                'products_id' => 781,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             148 => 
             array (
-                'id' => 149,
-                'products_id' => 149,
+                'id' => 782,
+                'products_id' => 782,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             149 => 
             array (
-                'id' => 150,
-                'products_id' => 150,
+                'id' => 783,
+                'products_id' => 783,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             150 => 
             array (
-                'id' => 151,
-                'products_id' => 151,
+                'id' => 784,
+                'products_id' => 784,
                 'sub_categories_id' => 60,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             151 => 
             array (
-                'id' => 152,
-                'products_id' => 152,
+                'id' => 785,
+                'products_id' => 785,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             152 => 
             array (
-                'id' => 153,
-                'products_id' => 153,
+                'id' => 786,
+                'products_id' => 786,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             153 => 
             array (
-                'id' => 154,
-                'products_id' => 154,
+                'id' => 787,
+                'products_id' => 787,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             154 => 
             array (
-                'id' => 155,
-                'products_id' => 155,
+                'id' => 788,
+                'products_id' => 788,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             155 => 
             array (
-                'id' => 156,
-                'products_id' => 156,
+                'id' => 789,
+                'products_id' => 789,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             156 => 
             array (
-                'id' => 157,
-                'products_id' => 157,
+                'id' => 790,
+                'products_id' => 790,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             157 => 
             array (
-                'id' => 158,
-                'products_id' => 158,
+                'id' => 791,
+                'products_id' => 791,
                 'sub_categories_id' => 62,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             158 => 
             array (
-                'id' => 159,
-                'products_id' => 159,
+                'id' => 792,
+                'products_id' => 792,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             159 => 
             array (
-                'id' => 160,
-                'products_id' => 160,
+                'id' => 793,
+                'products_id' => 793,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             160 => 
             array (
-                'id' => 161,
-                'products_id' => 161,
+                'id' => 794,
+                'products_id' => 794,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             161 => 
             array (
-                'id' => 162,
-                'products_id' => 162,
+                'id' => 795,
+                'products_id' => 795,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             162 => 
             array (
-                'id' => 163,
-                'products_id' => 163,
+                'id' => 796,
+                'products_id' => 796,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             163 => 
             array (
-                'id' => 164,
-                'products_id' => 164,
+                'id' => 797,
+                'products_id' => 797,
                 'sub_categories_id' => 16,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             164 => 
             array (
-                'id' => 165,
-                'products_id' => 165,
+                'id' => 798,
+                'products_id' => 798,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             165 => 
             array (
-                'id' => 166,
-                'products_id' => 166,
+                'id' => 799,
+                'products_id' => 799,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             166 => 
             array (
-                'id' => 167,
-                'products_id' => 167,
+                'id' => 800,
+                'products_id' => 800,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             167 => 
             array (
-                'id' => 168,
-                'products_id' => 168,
+                'id' => 801,
+                'products_id' => 801,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             168 => 
             array (
-                'id' => 169,
-                'products_id' => 169,
+                'id' => 802,
+                'products_id' => 802,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             169 => 
             array (
-                'id' => 170,
-                'products_id' => 170,
+                'id' => 803,
+                'products_id' => 803,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             170 => 
             array (
-                'id' => 171,
-                'products_id' => 171,
+                'id' => 804,
+                'products_id' => 804,
                 'sub_categories_id' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             171 => 
             array (
-                'id' => 172,
-                'products_id' => 172,
+                'id' => 805,
+                'products_id' => 805,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             172 => 
             array (
-                'id' => 173,
-                'products_id' => 173,
+                'id' => 806,
+                'products_id' => 806,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             173 => 
             array (
-                'id' => 174,
-                'products_id' => 174,
+                'id' => 807,
+                'products_id' => 807,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             174 => 
             array (
-                'id' => 175,
-                'products_id' => 175,
+                'id' => 808,
+                'products_id' => 808,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             175 => 
             array (
-                'id' => 176,
-                'products_id' => 176,
+                'id' => 809,
+                'products_id' => 809,
                 'sub_categories_id' => 31,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             176 => 
             array (
-                'id' => 177,
-                'products_id' => 177,
+                'id' => 810,
+                'products_id' => 810,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             177 => 
             array (
-                'id' => 178,
-                'products_id' => 178,
+                'id' => 811,
+                'products_id' => 811,
                 'sub_categories_id' => 65,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             178 => 
             array (
-                'id' => 179,
-                'products_id' => 179,
+                'id' => 812,
+                'products_id' => 812,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             179 => 
             array (
-                'id' => 180,
-                'products_id' => 180,
+                'id' => 813,
+                'products_id' => 813,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             180 => 
             array (
-                'id' => 181,
-                'products_id' => 181,
+                'id' => 814,
+                'products_id' => 814,
                 'sub_categories_id' => 66,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             181 => 
             array (
-                'id' => 182,
-                'products_id' => 182,
+                'id' => 815,
+                'products_id' => 815,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             182 => 
             array (
-                'id' => 183,
-                'products_id' => 183,
+                'id' => 816,
+                'products_id' => 816,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             183 => 
             array (
-                'id' => 184,
-                'products_id' => 184,
+                'id' => 817,
+                'products_id' => 817,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             184 => 
             array (
-                'id' => 185,
-                'products_id' => 185,
+                'id' => 818,
+                'products_id' => 818,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             185 => 
             array (
-                'id' => 186,
-                'products_id' => 186,
+                'id' => 819,
+                'products_id' => 819,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             186 => 
             array (
-                'id' => 187,
-                'products_id' => 187,
+                'id' => 820,
+                'products_id' => 820,
                 'sub_categories_id' => 67,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             187 => 
             array (
-                'id' => 188,
-                'products_id' => 188,
+                'id' => 821,
+                'products_id' => 821,
                 'sub_categories_id' => 51,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             188 => 
             array (
-                'id' => 189,
-                'products_id' => 189,
+                'id' => 822,
+                'products_id' => 822,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             189 => 
             array (
-                'id' => 190,
-                'products_id' => 190,
+                'id' => 823,
+                'products_id' => 823,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             190 => 
             array (
-                'id' => 191,
-                'products_id' => 191,
+                'id' => 824,
+                'products_id' => 824,
                 'sub_categories_id' => 69,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             191 => 
             array (
-                'id' => 192,
-                'products_id' => 192,
+                'id' => 825,
+                'products_id' => 825,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             192 => 
             array (
-                'id' => 193,
-                'products_id' => 193,
+                'id' => 826,
+                'products_id' => 826,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             193 => 
             array (
-                'id' => 194,
-                'products_id' => 194,
+                'id' => 827,
+                'products_id' => 827,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             194 => 
             array (
-                'id' => 195,
-                'products_id' => 195,
+                'id' => 828,
+                'products_id' => 828,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             195 => 
             array (
-                'id' => 196,
-                'products_id' => 196,
+                'id' => 829,
+                'products_id' => 829,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             196 => 
             array (
-                'id' => 197,
-                'products_id' => 197,
+                'id' => 830,
+                'products_id' => 830,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             197 => 
             array (
-                'id' => 198,
-                'products_id' => 198,
+                'id' => 831,
+                'products_id' => 831,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             198 => 
             array (
-                'id' => 199,
-                'products_id' => 199,
+                'id' => 832,
+                'products_id' => 832,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             199 => 
             array (
-                'id' => 200,
-                'products_id' => 200,
+                'id' => 833,
+                'products_id' => 833,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             200 => 
             array (
-                'id' => 201,
-                'products_id' => 201,
+                'id' => 834,
+                'products_id' => 834,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             201 => 
             array (
-                'id' => 202,
-                'products_id' => 202,
+                'id' => 835,
+                'products_id' => 835,
                 'sub_categories_id' => 19,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             202 => 
             array (
-                'id' => 203,
-                'products_id' => 203,
+                'id' => 836,
+                'products_id' => 836,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             203 => 
             array (
-                'id' => 204,
-                'products_id' => 204,
+                'id' => 837,
+                'products_id' => 837,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             204 => 
             array (
-                'id' => 205,
-                'products_id' => 205,
+                'id' => 838,
+                'products_id' => 838,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             205 => 
             array (
-                'id' => 206,
-                'products_id' => 206,
+                'id' => 839,
+                'products_id' => 839,
                 'sub_categories_id' => 6,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             206 => 
             array (
-                'id' => 207,
-                'products_id' => 207,
+                'id' => 840,
+                'products_id' => 840,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             207 => 
             array (
-                'id' => 208,
-                'products_id' => 208,
+                'id' => 841,
+                'products_id' => 841,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             208 => 
             array (
-                'id' => 209,
-                'products_id' => 209,
+                'id' => 842,
+                'products_id' => 842,
                 'sub_categories_id' => 70,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             209 => 
             array (
-                'id' => 210,
-                'products_id' => 210,
+                'id' => 843,
+                'products_id' => 843,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             210 => 
             array (
-                'id' => 211,
-                'products_id' => 211,
+                'id' => 844,
+                'products_id' => 844,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             211 => 
             array (
-                'id' => 212,
-                'products_id' => 212,
+                'id' => 845,
+                'products_id' => 845,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             212 => 
             array (
-                'id' => 213,
-                'products_id' => 213,
+                'id' => 846,
+                'products_id' => 846,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             213 => 
             array (
-                'id' => 214,
-                'products_id' => 214,
+                'id' => 847,
+                'products_id' => 847,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             214 => 
             array (
-                'id' => 215,
-                'products_id' => 215,
+                'id' => 848,
+                'products_id' => 848,
                 'sub_categories_id' => 71,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             215 => 
             array (
-                'id' => 216,
-                'products_id' => 216,
+                'id' => 849,
+                'products_id' => 849,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             216 => 
             array (
-                'id' => 217,
-                'products_id' => 217,
+                'id' => 850,
+                'products_id' => 850,
                 'sub_categories_id' => 72,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             217 => 
             array (
-                'id' => 218,
-                'products_id' => 218,
+                'id' => 851,
+                'products_id' => 851,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             218 => 
             array (
-                'id' => 219,
-                'products_id' => 219,
+                'id' => 852,
+                'products_id' => 852,
                 'sub_categories_id' => 43,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             219 => 
             array (
-                'id' => 220,
-                'products_id' => 220,
+                'id' => 853,
+                'products_id' => 853,
                 'sub_categories_id' => 25,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             220 => 
             array (
-                'id' => 221,
-                'products_id' => 221,
+                'id' => 854,
+                'products_id' => 854,
                 'sub_categories_id' => 73,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             221 => 
             array (
-                'id' => 222,
-                'products_id' => 222,
+                'id' => 855,
+                'products_id' => 855,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             222 => 
             array (
-                'id' => 223,
-                'products_id' => 223,
+                'id' => 856,
+                'products_id' => 856,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             223 => 
             array (
-                'id' => 224,
-                'products_id' => 224,
+                'id' => 857,
+                'products_id' => 857,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             224 => 
             array (
-                'id' => 225,
-                'products_id' => 225,
+                'id' => 858,
+                'products_id' => 858,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             225 => 
             array (
-                'id' => 226,
-                'products_id' => 226,
+                'id' => 859,
+                'products_id' => 859,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             226 => 
             array (
-                'id' => 227,
-                'products_id' => 227,
+                'id' => 860,
+                'products_id' => 860,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             227 => 
             array (
-                'id' => 228,
-                'products_id' => 228,
+                'id' => 861,
+                'products_id' => 861,
                 'sub_categories_id' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             228 => 
             array (
-                'id' => 229,
-                'products_id' => 229,
+                'id' => 862,
+                'products_id' => 862,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             229 => 
             array (
-                'id' => 230,
-                'products_id' => 230,
+                'id' => 863,
+                'products_id' => 863,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             230 => 
             array (
-                'id' => 231,
-                'products_id' => 231,
+                'id' => 864,
+                'products_id' => 864,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             231 => 
             array (
-                'id' => 232,
-                'products_id' => 232,
+                'id' => 865,
+                'products_id' => 865,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             232 => 
             array (
-                'id' => 233,
-                'products_id' => 233,
+                'id' => 866,
+                'products_id' => 866,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             233 => 
             array (
-                'id' => 234,
-                'products_id' => 234,
+                'id' => 867,
+                'products_id' => 867,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             234 => 
             array (
-                'id' => 235,
-                'products_id' => 235,
+                'id' => 868,
+                'products_id' => 868,
                 'sub_categories_id' => 9,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             235 => 
             array (
-                'id' => 236,
-                'products_id' => 236,
+                'id' => 869,
+                'products_id' => 869,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             236 => 
             array (
-                'id' => 237,
-                'products_id' => 237,
+                'id' => 870,
+                'products_id' => 870,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             237 => 
             array (
-                'id' => 238,
-                'products_id' => 238,
+                'id' => 871,
+                'products_id' => 871,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             238 => 
             array (
-                'id' => 239,
-                'products_id' => 239,
+                'id' => 872,
+                'products_id' => 872,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             239 => 
             array (
-                'id' => 240,
-                'products_id' => 240,
+                'id' => 873,
+                'products_id' => 873,
                 'sub_categories_id' => 71,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             240 => 
             array (
-                'id' => 241,
-                'products_id' => 241,
+                'id' => 874,
+                'products_id' => 874,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             241 => 
             array (
-                'id' => 242,
-                'products_id' => 242,
+                'id' => 875,
+                'products_id' => 875,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             242 => 
             array (
-                'id' => 243,
-                'products_id' => 243,
+                'id' => 876,
+                'products_id' => 876,
                 'sub_categories_id' => 75,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             243 => 
             array (
-                'id' => 244,
-                'products_id' => 244,
+                'id' => 877,
+                'products_id' => 877,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             244 => 
             array (
-                'id' => 245,
-                'products_id' => 245,
+                'id' => 878,
+                'products_id' => 878,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             245 => 
             array (
-                'id' => 246,
-                'products_id' => 246,
+                'id' => 879,
+                'products_id' => 879,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             246 => 
             array (
-                'id' => 247,
-                'products_id' => 247,
+                'id' => 880,
+                'products_id' => 880,
                 'sub_categories_id' => 76,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             247 => 
             array (
-                'id' => 248,
-                'products_id' => 248,
+                'id' => 881,
+                'products_id' => 881,
                 'sub_categories_id' => 77,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             248 => 
             array (
-                'id' => 249,
-                'products_id' => 249,
+                'id' => 882,
+                'products_id' => 882,
                 'sub_categories_id' => 78,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             249 => 
             array (
-                'id' => 250,
-                'products_id' => 250,
+                'id' => 883,
+                'products_id' => 883,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             250 => 
             array (
-                'id' => 251,
-                'products_id' => 251,
+                'id' => 884,
+                'products_id' => 884,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             251 => 
             array (
-                'id' => 252,
-                'products_id' => 252,
+                'id' => 885,
+                'products_id' => 885,
                 'sub_categories_id' => 79,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             252 => 
             array (
-                'id' => 253,
-                'products_id' => 253,
+                'id' => 886,
+                'products_id' => 886,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             253 => 
             array (
-                'id' => 254,
-                'products_id' => 254,
+                'id' => 887,
+                'products_id' => 887,
                 'sub_categories_id' => 75,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             254 => 
             array (
-                'id' => 255,
-                'products_id' => 255,
+                'id' => 888,
+                'products_id' => 888,
                 'sub_categories_id' => 80,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             255 => 
             array (
-                'id' => 256,
-                'products_id' => 256,
+                'id' => 889,
+                'products_id' => 889,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             256 => 
             array (
-                'id' => 257,
-                'products_id' => 257,
+                'id' => 890,
+                'products_id' => 890,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             257 => 
             array (
-                'id' => 258,
-                'products_id' => 258,
+                'id' => 891,
+                'products_id' => 891,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             258 => 
             array (
-                'id' => 259,
-                'products_id' => 259,
+                'id' => 892,
+                'products_id' => 892,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             259 => 
             array (
-                'id' => 260,
-                'products_id' => 260,
+                'id' => 893,
+                'products_id' => 893,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             260 => 
             array (
-                'id' => 261,
-                'products_id' => 261,
+                'id' => 894,
+                'products_id' => 894,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             261 => 
             array (
-                'id' => 262,
-                'products_id' => 262,
+                'id' => 895,
+                'products_id' => 895,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             262 => 
             array (
-                'id' => 263,
-                'products_id' => 263,
+                'id' => 896,
+                'products_id' => 896,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             263 => 
             array (
-                'id' => 264,
-                'products_id' => 264,
+                'id' => 897,
+                'products_id' => 897,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             264 => 
             array (
-                'id' => 265,
-                'products_id' => 265,
+                'id' => 898,
+                'products_id' => 898,
                 'sub_categories_id' => 38,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             265 => 
             array (
-                'id' => 266,
-                'products_id' => 266,
+                'id' => 899,
+                'products_id' => 899,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             266 => 
             array (
-                'id' => 267,
-                'products_id' => 267,
+                'id' => 900,
+                'products_id' => 900,
                 'sub_categories_id' => 60,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             267 => 
             array (
-                'id' => 268,
-                'products_id' => 268,
+                'id' => 901,
+                'products_id' => 901,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             268 => 
             array (
-                'id' => 269,
-                'products_id' => 269,
+                'id' => 902,
+                'products_id' => 902,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             269 => 
             array (
-                'id' => 270,
-                'products_id' => 270,
+                'id' => 903,
+                'products_id' => 903,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             270 => 
             array (
-                'id' => 271,
-                'products_id' => 271,
+                'id' => 904,
+                'products_id' => 904,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             271 => 
             array (
-                'id' => 272,
-                'products_id' => 272,
+                'id' => 905,
+                'products_id' => 905,
                 'sub_categories_id' => 58,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             272 => 
             array (
-                'id' => 273,
-                'products_id' => 273,
+                'id' => 906,
+                'products_id' => 906,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             273 => 
             array (
-                'id' => 274,
-                'products_id' => 274,
+                'id' => 907,
+                'products_id' => 907,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             274 => 
             array (
-                'id' => 275,
-                'products_id' => 275,
+                'id' => 908,
+                'products_id' => 908,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             275 => 
             array (
-                'id' => 276,
-                'products_id' => 276,
+                'id' => 909,
+                'products_id' => 909,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             276 => 
             array (
-                'id' => 277,
-                'products_id' => 277,
+                'id' => 910,
+                'products_id' => 910,
                 'sub_categories_id' => 81,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             277 => 
             array (
-                'id' => 278,
-                'products_id' => 278,
+                'id' => 911,
+                'products_id' => 911,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             278 => 
             array (
-                'id' => 279,
-                'products_id' => 279,
+                'id' => 912,
+                'products_id' => 912,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             279 => 
             array (
-                'id' => 280,
-                'products_id' => 280,
+                'id' => 913,
+                'products_id' => 913,
                 'sub_categories_id' => 26,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             280 => 
             array (
-                'id' => 281,
-                'products_id' => 281,
+                'id' => 914,
+                'products_id' => 914,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             281 => 
             array (
-                'id' => 282,
-                'products_id' => 282,
+                'id' => 915,
+                'products_id' => 915,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             282 => 
             array (
-                'id' => 283,
-                'products_id' => 283,
+                'id' => 916,
+                'products_id' => 916,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             283 => 
             array (
-                'id' => 284,
-                'products_id' => 284,
+                'id' => 917,
+                'products_id' => 917,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             284 => 
             array (
-                'id' => 285,
-                'products_id' => 285,
+                'id' => 918,
+                'products_id' => 918,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             285 => 
             array (
-                'id' => 286,
-                'products_id' => 286,
+                'id' => 919,
+                'products_id' => 919,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             286 => 
             array (
-                'id' => 287,
-                'products_id' => 287,
+                'id' => 920,
+                'products_id' => 920,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             287 => 
             array (
-                'id' => 288,
-                'products_id' => 288,
+                'id' => 921,
+                'products_id' => 921,
                 'sub_categories_id' => 9,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             288 => 
             array (
-                'id' => 289,
-                'products_id' => 289,
+                'id' => 922,
+                'products_id' => 922,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             289 => 
             array (
-                'id' => 290,
-                'products_id' => 290,
+                'id' => 923,
+                'products_id' => 923,
                 'sub_categories_id' => 20,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             290 => 
             array (
-                'id' => 291,
-                'products_id' => 291,
+                'id' => 924,
+                'products_id' => 924,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             291 => 
             array (
-                'id' => 292,
-                'products_id' => 292,
+                'id' => 925,
+                'products_id' => 925,
                 'sub_categories_id' => 82,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             292 => 
             array (
-                'id' => 293,
-                'products_id' => 293,
+                'id' => 926,
+                'products_id' => 926,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             293 => 
             array (
-                'id' => 294,
-                'products_id' => 294,
+                'id' => 927,
+                'products_id' => 927,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             294 => 
             array (
-                'id' => 295,
-                'products_id' => 295,
+                'id' => 928,
+                'products_id' => 928,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             295 => 
             array (
-                'id' => 296,
-                'products_id' => 296,
+                'id' => 929,
+                'products_id' => 929,
                 'sub_categories_id' => 48,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             296 => 
             array (
-                'id' => 297,
-                'products_id' => 297,
+                'id' => 930,
+                'products_id' => 930,
                 'sub_categories_id' => 38,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             297 => 
             array (
-                'id' => 298,
-                'products_id' => 298,
+                'id' => 931,
+                'products_id' => 931,
                 'sub_categories_id' => 9,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             298 => 
             array (
-                'id' => 299,
-                'products_id' => 299,
+                'id' => 932,
+                'products_id' => 932,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             299 => 
             array (
-                'id' => 300,
-                'products_id' => 300,
+                'id' => 933,
+                'products_id' => 933,
                 'sub_categories_id' => 46,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             300 => 
             array (
-                'id' => 301,
-                'products_id' => 301,
+                'id' => 934,
+                'products_id' => 934,
                 'sub_categories_id' => 83,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             301 => 
             array (
-                'id' => 302,
-                'products_id' => 302,
+                'id' => 935,
+                'products_id' => 935,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             302 => 
             array (
-                'id' => 303,
-                'products_id' => 303,
+                'id' => 936,
+                'products_id' => 936,
                 'sub_categories_id' => 83,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             303 => 
             array (
-                'id' => 304,
-                'products_id' => 304,
+                'id' => 937,
+                'products_id' => 937,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             304 => 
             array (
-                'id' => 305,
-                'products_id' => 305,
+                'id' => 938,
+                'products_id' => 938,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             305 => 
             array (
-                'id' => 306,
-                'products_id' => 306,
+                'id' => 939,
+                'products_id' => 939,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             306 => 
             array (
-                'id' => 307,
-                'products_id' => 307,
+                'id' => 940,
+                'products_id' => 940,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             307 => 
             array (
-                'id' => 308,
-                'products_id' => 308,
+                'id' => 941,
+                'products_id' => 941,
                 'sub_categories_id' => 41,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             308 => 
             array (
-                'id' => 309,
-                'products_id' => 309,
+                'id' => 942,
+                'products_id' => 942,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             309 => 
             array (
-                'id' => 310,
-                'products_id' => 310,
+                'id' => 943,
+                'products_id' => 943,
                 'sub_categories_id' => 65,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             310 => 
             array (
-                'id' => 311,
-                'products_id' => 311,
+                'id' => 944,
+                'products_id' => 944,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             311 => 
             array (
-                'id' => 312,
-                'products_id' => 312,
+                'id' => 945,
+                'products_id' => 945,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             312 => 
             array (
-                'id' => 313,
-                'products_id' => 313,
+                'id' => 946,
+                'products_id' => 946,
                 'sub_categories_id' => 19,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             313 => 
             array (
-                'id' => 314,
-                'products_id' => 314,
+                'id' => 947,
+                'products_id' => 947,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             314 => 
             array (
-                'id' => 315,
-                'products_id' => 315,
+                'id' => 948,
+                'products_id' => 948,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             315 => 
             array (
-                'id' => 316,
-                'products_id' => 316,
+                'id' => 949,
+                'products_id' => 949,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             316 => 
             array (
-                'id' => 317,
-                'products_id' => 317,
+                'id' => 950,
+                'products_id' => 950,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             317 => 
             array (
-                'id' => 318,
-                'products_id' => 318,
+                'id' => 951,
+                'products_id' => 951,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             318 => 
             array (
-                'id' => 319,
-                'products_id' => 319,
+                'id' => 952,
+                'products_id' => 952,
                 'sub_categories_id' => 76,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             319 => 
             array (
-                'id' => 320,
-                'products_id' => 320,
+                'id' => 953,
+                'products_id' => 953,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             320 => 
             array (
-                'id' => 321,
-                'products_id' => 321,
+                'id' => 954,
+                'products_id' => 954,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             321 => 
             array (
-                'id' => 322,
-                'products_id' => 322,
+                'id' => 955,
+                'products_id' => 955,
                 'sub_categories_id' => 67,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             322 => 
             array (
-                'id' => 323,
-                'products_id' => 323,
+                'id' => 956,
+                'products_id' => 956,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             323 => 
             array (
-                'id' => 324,
-                'products_id' => 324,
+                'id' => 957,
+                'products_id' => 957,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             324 => 
             array (
-                'id' => 325,
-                'products_id' => 325,
+                'id' => 958,
+                'products_id' => 958,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             325 => 
             array (
-                'id' => 326,
-                'products_id' => 326,
+                'id' => 959,
+                'products_id' => 959,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             326 => 
             array (
-                'id' => 327,
-                'products_id' => 327,
+                'id' => 960,
+                'products_id' => 960,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             327 => 
             array (
-                'id' => 328,
-                'products_id' => 328,
+                'id' => 961,
+                'products_id' => 961,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             328 => 
             array (
-                'id' => 329,
-                'products_id' => 329,
+                'id' => 962,
+                'products_id' => 962,
                 'sub_categories_id' => 37,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             329 => 
             array (
-                'id' => 330,
-                'products_id' => 330,
+                'id' => 963,
+                'products_id' => 963,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             330 => 
             array (
-                'id' => 331,
-                'products_id' => 331,
+                'id' => 964,
+                'products_id' => 964,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             331 => 
             array (
-                'id' => 332,
-                'products_id' => 332,
+                'id' => 965,
+                'products_id' => 965,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             332 => 
             array (
-                'id' => 333,
-                'products_id' => 333,
+                'id' => 966,
+                'products_id' => 966,
                 'sub_categories_id' => 84,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             333 => 
             array (
-                'id' => 334,
-                'products_id' => 334,
+                'id' => 967,
+                'products_id' => 967,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             334 => 
             array (
-                'id' => 335,
-                'products_id' => 335,
+                'id' => 968,
+                'products_id' => 968,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             335 => 
             array (
-                'id' => 336,
-                'products_id' => 336,
+                'id' => 969,
+                'products_id' => 969,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             336 => 
             array (
-                'id' => 337,
-                'products_id' => 337,
+                'id' => 970,
+                'products_id' => 970,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             337 => 
             array (
-                'id' => 338,
-                'products_id' => 338,
+                'id' => 971,
+                'products_id' => 971,
                 'sub_categories_id' => 85,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             338 => 
             array (
-                'id' => 339,
-                'products_id' => 339,
+                'id' => 972,
+                'products_id' => 972,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             339 => 
             array (
-                'id' => 340,
-                'products_id' => 340,
+                'id' => 973,
+                'products_id' => 973,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             340 => 
             array (
-                'id' => 341,
-                'products_id' => 341,
+                'id' => 974,
+                'products_id' => 974,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             341 => 
             array (
-                'id' => 342,
-                'products_id' => 342,
+                'id' => 975,
+                'products_id' => 975,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             342 => 
             array (
-                'id' => 343,
-                'products_id' => 343,
+                'id' => 976,
+                'products_id' => 976,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             343 => 
             array (
-                'id' => 344,
-                'products_id' => 344,
+                'id' => 977,
+                'products_id' => 977,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             344 => 
             array (
-                'id' => 345,
-                'products_id' => 345,
+                'id' => 978,
+                'products_id' => 978,
                 'sub_categories_id' => 86,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             345 => 
             array (
-                'id' => 346,
-                'products_id' => 346,
+                'id' => 979,
+                'products_id' => 979,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             346 => 
             array (
-                'id' => 347,
-                'products_id' => 347,
+                'id' => 980,
+                'products_id' => 980,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             347 => 
             array (
-                'id' => 348,
-                'products_id' => 348,
+                'id' => 981,
+                'products_id' => 981,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             348 => 
             array (
-                'id' => 349,
-                'products_id' => 349,
+                'id' => 982,
+                'products_id' => 982,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             349 => 
             array (
-                'id' => 350,
-                'products_id' => 350,
+                'id' => 983,
+                'products_id' => 983,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             350 => 
             array (
-                'id' => 351,
-                'products_id' => 351,
+                'id' => 984,
+                'products_id' => 984,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             351 => 
             array (
-                'id' => 352,
-                'products_id' => 352,
+                'id' => 985,
+                'products_id' => 985,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             352 => 
             array (
-                'id' => 353,
-                'products_id' => 353,
+                'id' => 986,
+                'products_id' => 986,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             353 => 
             array (
-                'id' => 354,
-                'products_id' => 354,
+                'id' => 987,
+                'products_id' => 987,
                 'sub_categories_id' => 87,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             354 => 
             array (
-                'id' => 355,
-                'products_id' => 355,
+                'id' => 988,
+                'products_id' => 988,
                 'sub_categories_id' => 30,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             355 => 
             array (
-                'id' => 356,
-                'products_id' => 356,
+                'id' => 989,
+                'products_id' => 989,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             356 => 
             array (
-                'id' => 357,
-                'products_id' => 357,
+                'id' => 990,
+                'products_id' => 990,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             357 => 
             array (
-                'id' => 358,
-                'products_id' => 358,
+                'id' => 991,
+                'products_id' => 991,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             358 => 
             array (
-                'id' => 359,
-                'products_id' => 359,
+                'id' => 992,
+                'products_id' => 992,
                 'sub_categories_id' => 84,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             359 => 
             array (
-                'id' => 360,
-                'products_id' => 360,
+                'id' => 993,
+                'products_id' => 993,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             360 => 
             array (
-                'id' => 361,
-                'products_id' => 361,
+                'id' => 994,
+                'products_id' => 994,
                 'sub_categories_id' => 88,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             361 => 
             array (
-                'id' => 362,
-                'products_id' => 362,
+                'id' => 995,
+                'products_id' => 995,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             362 => 
             array (
-                'id' => 363,
-                'products_id' => 363,
+                'id' => 996,
+                'products_id' => 996,
                 'sub_categories_id' => 58,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             363 => 
             array (
-                'id' => 364,
-                'products_id' => 364,
+                'id' => 997,
+                'products_id' => 997,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             364 => 
             array (
-                'id' => 365,
-                'products_id' => 365,
+                'id' => 998,
+                'products_id' => 998,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             365 => 
             array (
-                'id' => 366,
-                'products_id' => 366,
+                'id' => 999,
+                'products_id' => 999,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             366 => 
             array (
-                'id' => 367,
-                'products_id' => 367,
+                'id' => 1000,
+                'products_id' => 1000,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             367 => 
             array (
-                'id' => 368,
-                'products_id' => 368,
+                'id' => 1001,
+                'products_id' => 1001,
                 'sub_categories_id' => 58,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             368 => 
             array (
-                'id' => 369,
-                'products_id' => 369,
+                'id' => 1002,
+                'products_id' => 1002,
                 'sub_categories_id' => 63,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             369 => 
             array (
-                'id' => 370,
-                'products_id' => 370,
+                'id' => 1003,
+                'products_id' => 1003,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             370 => 
             array (
-                'id' => 371,
-                'products_id' => 371,
+                'id' => 1004,
+                'products_id' => 1004,
                 'sub_categories_id' => 45,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             371 => 
             array (
-                'id' => 372,
-                'products_id' => 372,
+                'id' => 1005,
+                'products_id' => 1005,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             372 => 
             array (
-                'id' => 373,
-                'products_id' => 373,
+                'id' => 1006,
+                'products_id' => 1006,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             373 => 
             array (
-                'id' => 374,
-                'products_id' => 374,
+                'id' => 1007,
+                'products_id' => 1007,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             374 => 
             array (
-                'id' => 375,
-                'products_id' => 375,
+                'id' => 1008,
+                'products_id' => 1008,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             375 => 
             array (
-                'id' => 376,
-                'products_id' => 376,
+                'id' => 1009,
+                'products_id' => 1009,
                 'sub_categories_id' => 43,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             376 => 
             array (
-                'id' => 377,
-                'products_id' => 377,
+                'id' => 1010,
+                'products_id' => 1010,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             377 => 
             array (
-                'id' => 378,
-                'products_id' => 378,
+                'id' => 1011,
+                'products_id' => 1011,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             378 => 
             array (
-                'id' => 379,
-                'products_id' => 379,
+                'id' => 1012,
+                'products_id' => 1012,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             379 => 
             array (
-                'id' => 380,
-                'products_id' => 380,
+                'id' => 1013,
+                'products_id' => 1013,
                 'sub_categories_id' => 69,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             380 => 
             array (
-                'id' => 381,
-                'products_id' => 381,
+                'id' => 1014,
+                'products_id' => 1014,
                 'sub_categories_id' => 81,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             381 => 
             array (
-                'id' => 382,
-                'products_id' => 382,
+                'id' => 1015,
+                'products_id' => 1015,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             382 => 
             array (
-                'id' => 383,
-                'products_id' => 383,
+                'id' => 1016,
+                'products_id' => 1016,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             383 => 
             array (
-                'id' => 384,
-                'products_id' => 384,
+                'id' => 1017,
+                'products_id' => 1017,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             384 => 
             array (
-                'id' => 385,
-                'products_id' => 385,
+                'id' => 1018,
+                'products_id' => 1018,
                 'sub_categories_id' => 48,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             385 => 
             array (
-                'id' => 386,
-                'products_id' => 386,
+                'id' => 1019,
+                'products_id' => 1019,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             386 => 
             array (
-                'id' => 387,
-                'products_id' => 387,
+                'id' => 1020,
+                'products_id' => 1020,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             387 => 
             array (
-                'id' => 388,
-                'products_id' => 388,
+                'id' => 1021,
+                'products_id' => 1021,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             388 => 
             array (
-                'id' => 389,
-                'products_id' => 389,
+                'id' => 1022,
+                'products_id' => 1022,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             389 => 
             array (
-                'id' => 390,
-                'products_id' => 390,
+                'id' => 1023,
+                'products_id' => 1023,
                 'sub_categories_id' => 25,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             390 => 
             array (
-                'id' => 391,
-                'products_id' => 391,
+                'id' => 1024,
+                'products_id' => 1024,
                 'sub_categories_id' => 26,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             391 => 
             array (
-                'id' => 392,
-                'products_id' => 392,
+                'id' => 1025,
+                'products_id' => 1025,
                 'sub_categories_id' => 87,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             392 => 
             array (
-                'id' => 393,
-                'products_id' => 393,
+                'id' => 1026,
+                'products_id' => 1026,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             393 => 
             array (
-                'id' => 394,
-                'products_id' => 394,
+                'id' => 1027,
+                'products_id' => 1027,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             394 => 
             array (
-                'id' => 395,
-                'products_id' => 395,
+                'id' => 1028,
+                'products_id' => 1028,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             395 => 
             array (
-                'id' => 396,
-                'products_id' => 396,
+                'id' => 1029,
+                'products_id' => 1029,
                 'sub_categories_id' => 71,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             396 => 
             array (
-                'id' => 397,
-                'products_id' => 397,
+                'id' => 1030,
+                'products_id' => 1030,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             397 => 
             array (
-                'id' => 398,
-                'products_id' => 398,
+                'id' => 1031,
+                'products_id' => 1031,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             398 => 
             array (
-                'id' => 399,
-                'products_id' => 399,
+                'id' => 1032,
+                'products_id' => 1032,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             399 => 
             array (
-                'id' => 400,
-                'products_id' => 400,
+                'id' => 1033,
+                'products_id' => 1033,
                 'sub_categories_id' => 52,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             400 => 
             array (
-                'id' => 401,
-                'products_id' => 401,
+                'id' => 1034,
+                'products_id' => 1034,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             401 => 
             array (
-                'id' => 402,
-                'products_id' => 402,
+                'id' => 1035,
+                'products_id' => 1035,
                 'sub_categories_id' => 16,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             402 => 
             array (
-                'id' => 403,
-                'products_id' => 403,
+                'id' => 1036,
+                'products_id' => 1036,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             403 => 
             array (
-                'id' => 404,
-                'products_id' => 404,
+                'id' => 1037,
+                'products_id' => 1037,
                 'sub_categories_id' => 89,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             404 => 
             array (
-                'id' => 405,
-                'products_id' => 405,
+                'id' => 1038,
+                'products_id' => 1038,
                 'sub_categories_id' => 43,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             405 => 
             array (
-                'id' => 406,
-                'products_id' => 406,
+                'id' => 1039,
+                'products_id' => 1039,
                 'sub_categories_id' => 46,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             406 => 
             array (
-                'id' => 407,
-                'products_id' => 407,
+                'id' => 1040,
+                'products_id' => 1040,
                 'sub_categories_id' => 34,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             407 => 
             array (
-                'id' => 408,
-                'products_id' => 408,
+                'id' => 1041,
+                'products_id' => 1041,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             408 => 
             array (
-                'id' => 409,
-                'products_id' => 409,
+                'id' => 1042,
+                'products_id' => 1042,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             409 => 
             array (
-                'id' => 410,
-                'products_id' => 410,
+                'id' => 1043,
+                'products_id' => 1043,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             410 => 
             array (
-                'id' => 411,
-                'products_id' => 411,
+                'id' => 1044,
+                'products_id' => 1044,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             411 => 
             array (
-                'id' => 412,
-                'products_id' => 412,
+                'id' => 1045,
+                'products_id' => 1045,
                 'sub_categories_id' => 40,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             412 => 
             array (
-                'id' => 413,
-                'products_id' => 413,
+                'id' => 1046,
+                'products_id' => 1046,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             413 => 
             array (
-                'id' => 414,
-                'products_id' => 414,
+                'id' => 1047,
+                'products_id' => 1047,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             414 => 
             array (
-                'id' => 415,
-                'products_id' => 415,
+                'id' => 1048,
+                'products_id' => 1048,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             415 => 
             array (
-                'id' => 416,
-                'products_id' => 416,
+                'id' => 1049,
+                'products_id' => 1049,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             416 => 
             array (
-                'id' => 417,
-                'products_id' => 417,
+                'id' => 1050,
+                'products_id' => 1050,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             417 => 
             array (
-                'id' => 418,
-                'products_id' => 418,
+                'id' => 1051,
+                'products_id' => 1051,
                 'sub_categories_id' => 84,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             418 => 
             array (
-                'id' => 419,
-                'products_id' => 419,
+                'id' => 1052,
+                'products_id' => 1052,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             419 => 
             array (
-                'id' => 420,
-                'products_id' => 420,
+                'id' => 1053,
+                'products_id' => 1053,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             420 => 
             array (
-                'id' => 421,
-                'products_id' => 421,
+                'id' => 1054,
+                'products_id' => 1054,
                 'sub_categories_id' => 47,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             421 => 
             array (
-                'id' => 422,
-                'products_id' => 422,
+                'id' => 1055,
+                'products_id' => 1055,
                 'sub_categories_id' => 56,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             422 => 
             array (
-                'id' => 423,
-                'products_id' => 423,
+                'id' => 1056,
+                'products_id' => 1056,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             423 => 
             array (
-                'id' => 424,
-                'products_id' => 424,
+                'id' => 1057,
+                'products_id' => 1057,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             424 => 
             array (
-                'id' => 425,
-                'products_id' => 425,
+                'id' => 1058,
+                'products_id' => 1058,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             425 => 
             array (
-                'id' => 426,
-                'products_id' => 426,
+                'id' => 1059,
+                'products_id' => 1059,
                 'sub_categories_id' => 40,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             426 => 
             array (
-                'id' => 427,
-                'products_id' => 427,
+                'id' => 1060,
+                'products_id' => 1060,
                 'sub_categories_id' => 87,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             427 => 
             array (
-                'id' => 428,
-                'products_id' => 428,
+                'id' => 1061,
+                'products_id' => 1061,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             428 => 
             array (
-                'id' => 429,
-                'products_id' => 429,
+                'id' => 1062,
+                'products_id' => 1062,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             429 => 
             array (
-                'id' => 430,
-                'products_id' => 430,
+                'id' => 1063,
+                'products_id' => 1063,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             430 => 
             array (
-                'id' => 431,
-                'products_id' => 431,
+                'id' => 1064,
+                'products_id' => 1064,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             431 => 
             array (
-                'id' => 432,
-                'products_id' => 432,
+                'id' => 1065,
+                'products_id' => 1065,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             432 => 
             array (
-                'id' => 433,
-                'products_id' => 433,
+                'id' => 1066,
+                'products_id' => 1066,
                 'sub_categories_id' => 90,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             433 => 
             array (
-                'id' => 434,
-                'products_id' => 434,
+                'id' => 1067,
+                'products_id' => 1067,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             434 => 
             array (
-                'id' => 435,
-                'products_id' => 435,
+                'id' => 1068,
+                'products_id' => 1068,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             435 => 
             array (
-                'id' => 436,
-                'products_id' => 436,
+                'id' => 1069,
+                'products_id' => 1069,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             436 => 
             array (
-                'id' => 437,
-                'products_id' => 437,
+                'id' => 1070,
+                'products_id' => 1070,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             437 => 
             array (
-                'id' => 438,
-                'products_id' => 438,
+                'id' => 1071,
+                'products_id' => 1071,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             438 => 
             array (
-                'id' => 439,
-                'products_id' => 439,
+                'id' => 1072,
+                'products_id' => 1072,
                 'sub_categories_id' => 77,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             439 => 
             array (
-                'id' => 440,
-                'products_id' => 440,
+                'id' => 1073,
+                'products_id' => 1073,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             440 => 
             array (
-                'id' => 441,
-                'products_id' => 441,
+                'id' => 1074,
+                'products_id' => 1074,
                 'sub_categories_id' => 32,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             441 => 
             array (
-                'id' => 442,
-                'products_id' => 442,
+                'id' => 1075,
+                'products_id' => 1075,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             442 => 
             array (
-                'id' => 443,
-                'products_id' => 443,
+                'id' => 1076,
+                'products_id' => 1076,
                 'sub_categories_id' => 84,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             443 => 
             array (
-                'id' => 444,
-                'products_id' => 444,
+                'id' => 1077,
+                'products_id' => 1077,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             444 => 
             array (
-                'id' => 445,
-                'products_id' => 445,
+                'id' => 1078,
+                'products_id' => 1078,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             445 => 
             array (
-                'id' => 446,
-                'products_id' => 446,
+                'id' => 1079,
+                'products_id' => 1079,
                 'sub_categories_id' => 82,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             446 => 
             array (
-                'id' => 447,
-                'products_id' => 447,
+                'id' => 1080,
+                'products_id' => 1080,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             447 => 
             array (
-                'id' => 448,
-                'products_id' => 448,
+                'id' => 1081,
+                'products_id' => 1081,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             448 => 
             array (
-                'id' => 449,
-                'products_id' => 449,
+                'id' => 1082,
+                'products_id' => 1082,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             449 => 
             array (
-                'id' => 450,
-                'products_id' => 450,
+                'id' => 1083,
+                'products_id' => 1083,
                 'sub_categories_id' => 42,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             450 => 
             array (
-                'id' => 451,
-                'products_id' => 451,
+                'id' => 1084,
+                'products_id' => 1084,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             451 => 
             array (
-                'id' => 452,
-                'products_id' => 452,
+                'id' => 1085,
+                'products_id' => 1085,
                 'sub_categories_id' => 48,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             452 => 
             array (
-                'id' => 453,
-                'products_id' => 453,
+                'id' => 1086,
+                'products_id' => 1086,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             453 => 
             array (
-                'id' => 454,
-                'products_id' => 454,
+                'id' => 1087,
+                'products_id' => 1087,
                 'sub_categories_id' => 79,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             454 => 
             array (
-                'id' => 455,
-                'products_id' => 455,
+                'id' => 1088,
+                'products_id' => 1088,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             455 => 
             array (
-                'id' => 456,
-                'products_id' => 456,
+                'id' => 1089,
+                'products_id' => 1089,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             456 => 
             array (
-                'id' => 457,
-                'products_id' => 457,
+                'id' => 1090,
+                'products_id' => 1090,
                 'sub_categories_id' => 13,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             457 => 
             array (
-                'id' => 458,
-                'products_id' => 458,
+                'id' => 1091,
+                'products_id' => 1091,
                 'sub_categories_id' => 92,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             458 => 
             array (
-                'id' => 459,
-                'products_id' => 459,
+                'id' => 1092,
+                'products_id' => 1092,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             459 => 
             array (
-                'id' => 460,
-                'products_id' => 460,
+                'id' => 1093,
+                'products_id' => 1093,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             460 => 
             array (
-                'id' => 461,
-                'products_id' => 461,
+                'id' => 1094,
+                'products_id' => 1094,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             461 => 
             array (
-                'id' => 462,
-                'products_id' => 462,
+                'id' => 1095,
+                'products_id' => 1095,
                 'sub_categories_id' => 33,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             462 => 
             array (
-                'id' => 463,
-                'products_id' => 463,
+                'id' => 1096,
+                'products_id' => 1096,
                 'sub_categories_id' => 52,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             463 => 
             array (
-                'id' => 464,
-                'products_id' => 464,
+                'id' => 1097,
+                'products_id' => 1097,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             464 => 
             array (
-                'id' => 465,
-                'products_id' => 465,
+                'id' => 1098,
+                'products_id' => 1098,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             465 => 
             array (
-                'id' => 466,
-                'products_id' => 466,
+                'id' => 1099,
+                'products_id' => 1099,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             466 => 
             array (
-                'id' => 467,
-                'products_id' => 467,
+                'id' => 1100,
+                'products_id' => 1100,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             467 => 
             array (
-                'id' => 468,
-                'products_id' => 468,
+                'id' => 1101,
+                'products_id' => 1101,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             468 => 
             array (
-                'id' => 469,
-                'products_id' => 469,
+                'id' => 1102,
+                'products_id' => 1102,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             469 => 
             array (
-                'id' => 470,
-                'products_id' => 470,
+                'id' => 1103,
+                'products_id' => 1103,
                 'sub_categories_id' => 26,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             470 => 
             array (
-                'id' => 471,
-                'products_id' => 471,
+                'id' => 1104,
+                'products_id' => 1104,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             471 => 
             array (
-                'id' => 472,
-                'products_id' => 472,
+                'id' => 1105,
+                'products_id' => 1105,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             472 => 
             array (
-                'id' => 473,
-                'products_id' => 473,
+                'id' => 1106,
+                'products_id' => 1106,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             473 => 
             array (
-                'id' => 474,
-                'products_id' => 474,
+                'id' => 1107,
+                'products_id' => 1107,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             474 => 
             array (
-                'id' => 475,
-                'products_id' => 475,
+                'id' => 1108,
+                'products_id' => 1108,
                 'sub_categories_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             475 => 
             array (
-                'id' => 476,
-                'products_id' => 476,
+                'id' => 1109,
+                'products_id' => 1109,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             476 => 
             array (
-                'id' => 477,
-                'products_id' => 477,
+                'id' => 1110,
+                'products_id' => 1110,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             477 => 
             array (
-                'id' => 478,
-                'products_id' => 478,
+                'id' => 1111,
+                'products_id' => 1111,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             478 => 
             array (
-                'id' => 479,
-                'products_id' => 479,
+                'id' => 1112,
+                'products_id' => 1112,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             479 => 
             array (
-                'id' => 480,
-                'products_id' => 480,
+                'id' => 1113,
+                'products_id' => 1113,
                 'sub_categories_id' => 51,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             480 => 
             array (
-                'id' => 481,
-                'products_id' => 481,
+                'id' => 1114,
+                'products_id' => 1114,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             481 => 
             array (
-                'id' => 482,
-                'products_id' => 482,
+                'id' => 1115,
+                'products_id' => 1115,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             482 => 
             array (
-                'id' => 483,
-                'products_id' => 483,
+                'id' => 1116,
+                'products_id' => 1116,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             483 => 
             array (
-                'id' => 484,
-                'products_id' => 484,
+                'id' => 1117,
+                'products_id' => 1117,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             484 => 
             array (
-                'id' => 485,
-                'products_id' => 485,
+                'id' => 1118,
+                'products_id' => 1118,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             485 => 
             array (
-                'id' => 486,
-                'products_id' => 486,
+                'id' => 1119,
+                'products_id' => 1119,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             486 => 
             array (
-                'id' => 487,
-                'products_id' => 487,
+                'id' => 1120,
+                'products_id' => 1120,
                 'sub_categories_id' => 93,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             487 => 
             array (
-                'id' => 488,
-                'products_id' => 488,
+                'id' => 1121,
+                'products_id' => 1121,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             488 => 
             array (
-                'id' => 489,
-                'products_id' => 489,
+                'id' => 1122,
+                'products_id' => 1122,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             489 => 
             array (
-                'id' => 490,
-                'products_id' => 490,
+                'id' => 1123,
+                'products_id' => 1123,
                 'sub_categories_id' => 43,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             490 => 
             array (
-                'id' => 491,
-                'products_id' => 491,
+                'id' => 1124,
+                'products_id' => 1124,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             491 => 
             array (
-                'id' => 492,
-                'products_id' => 492,
+                'id' => 1125,
+                'products_id' => 1125,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             492 => 
             array (
-                'id' => 493,
-                'products_id' => 493,
+                'id' => 1126,
+                'products_id' => 1126,
                 'sub_categories_id' => 51,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             493 => 
             array (
-                'id' => 494,
-                'products_id' => 494,
+                'id' => 1127,
+                'products_id' => 1127,
                 'sub_categories_id' => 51,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             494 => 
             array (
-                'id' => 495,
-                'products_id' => 495,
+                'id' => 1128,
+                'products_id' => 1128,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             495 => 
             array (
-                'id' => 496,
-                'products_id' => 496,
+                'id' => 1129,
+                'products_id' => 1129,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             496 => 
             array (
-                'id' => 497,
-                'products_id' => 497,
+                'id' => 1130,
+                'products_id' => 1130,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             497 => 
             array (
-                'id' => 498,
-                'products_id' => 498,
+                'id' => 1131,
+                'products_id' => 1131,
                 'sub_categories_id' => 71,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             498 => 
             array (
-                'id' => 499,
-                'products_id' => 499,
+                'id' => 1132,
+                'products_id' => 1132,
                 'sub_categories_id' => 38,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             499 => 
             array (
-                'id' => 500,
-                'products_id' => 500,
+                'id' => 1133,
+                'products_id' => 1133,
                 'sub_categories_id' => 92,
                 'created_at' => NULL,
                 'updated_at' => NULL,
@@ -4021,1064 +4021,1064 @@ class DetSubCategoriesTableSeeder extends Seeder
         \DB::table('det_sub_categories')->insert(array (
             0 => 
             array (
-                'id' => 501,
-                'products_id' => 501,
+                'id' => 1134,
+                'products_id' => 1134,
                 'sub_categories_id' => 33,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             1 => 
             array (
-                'id' => 502,
-                'products_id' => 502,
+                'id' => 1135,
+                'products_id' => 1135,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             2 => 
             array (
-                'id' => 503,
-                'products_id' => 503,
+                'id' => 1136,
+                'products_id' => 1136,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             3 => 
             array (
-                'id' => 504,
-                'products_id' => 504,
+                'id' => 1137,
+                'products_id' => 1137,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             4 => 
             array (
-                'id' => 505,
-                'products_id' => 505,
+                'id' => 1138,
+                'products_id' => 1138,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             5 => 
             array (
-                'id' => 506,
-                'products_id' => 506,
+                'id' => 1139,
+                'products_id' => 1139,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             6 => 
             array (
-                'id' => 507,
-                'products_id' => 507,
+                'id' => 1140,
+                'products_id' => 1140,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             7 => 
             array (
-                'id' => 508,
-                'products_id' => 508,
+                'id' => 1141,
+                'products_id' => 1141,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             8 => 
             array (
-                'id' => 509,
-                'products_id' => 509,
+                'id' => 1142,
+                'products_id' => 1142,
                 'sub_categories_id' => 44,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             9 => 
             array (
-                'id' => 510,
-                'products_id' => 510,
+                'id' => 1143,
+                'products_id' => 1143,
                 'sub_categories_id' => 59,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             10 => 
             array (
-                'id' => 511,
-                'products_id' => 511,
+                'id' => 1144,
+                'products_id' => 1144,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             11 => 
             array (
-                'id' => 512,
-                'products_id' => 512,
+                'id' => 1145,
+                'products_id' => 1145,
                 'sub_categories_id' => 94,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             12 => 
             array (
-                'id' => 513,
-                'products_id' => 513,
+                'id' => 1146,
+                'products_id' => 1146,
                 'sub_categories_id' => 95,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             13 => 
             array (
-                'id' => 514,
-                'products_id' => 514,
+                'id' => 1147,
+                'products_id' => 1147,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             14 => 
             array (
-                'id' => 515,
-                'products_id' => 515,
+                'id' => 1148,
+                'products_id' => 1148,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             15 => 
             array (
-                'id' => 516,
-                'products_id' => 516,
+                'id' => 1149,
+                'products_id' => 1149,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             16 => 
             array (
-                'id' => 517,
-                'products_id' => 517,
+                'id' => 1150,
+                'products_id' => 1150,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             17 => 
             array (
-                'id' => 518,
-                'products_id' => 518,
+                'id' => 1151,
+                'products_id' => 1151,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             18 => 
             array (
-                'id' => 519,
-                'products_id' => 519,
+                'id' => 1152,
+                'products_id' => 1152,
                 'sub_categories_id' => 3,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             19 => 
             array (
-                'id' => 520,
-                'products_id' => 520,
+                'id' => 1153,
+                'products_id' => 1153,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             20 => 
             array (
-                'id' => 521,
-                'products_id' => 521,
+                'id' => 1154,
+                'products_id' => 1154,
                 'sub_categories_id' => 40,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             21 => 
             array (
-                'id' => 522,
-                'products_id' => 522,
+                'id' => 1155,
+                'products_id' => 1155,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             22 => 
             array (
-                'id' => 523,
-                'products_id' => 523,
+                'id' => 1156,
+                'products_id' => 1156,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             23 => 
             array (
-                'id' => 524,
-                'products_id' => 524,
+                'id' => 1157,
+                'products_id' => 1157,
                 'sub_categories_id' => 49,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             24 => 
             array (
-                'id' => 525,
-                'products_id' => 525,
+                'id' => 1158,
+                'products_id' => 1158,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             25 => 
             array (
-                'id' => 526,
-                'products_id' => 526,
+                'id' => 1159,
+                'products_id' => 1159,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             26 => 
             array (
-                'id' => 527,
-                'products_id' => 527,
+                'id' => 1160,
+                'products_id' => 1160,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             27 => 
             array (
-                'id' => 528,
-                'products_id' => 528,
+                'id' => 1161,
+                'products_id' => 1161,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             28 => 
             array (
-                'id' => 529,
-                'products_id' => 529,
+                'id' => 1162,
+                'products_id' => 1162,
                 'sub_categories_id' => 15,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             29 => 
             array (
-                'id' => 530,
-                'products_id' => 530,
+                'id' => 1163,
+                'products_id' => 1163,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             30 => 
             array (
-                'id' => 531,
-                'products_id' => 531,
+                'id' => 1164,
+                'products_id' => 1164,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             31 => 
             array (
-                'id' => 532,
-                'products_id' => 532,
+                'id' => 1165,
+                'products_id' => 1165,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             32 => 
             array (
-                'id' => 533,
-                'products_id' => 533,
+                'id' => 1166,
+                'products_id' => 1166,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             33 => 
             array (
-                'id' => 534,
-                'products_id' => 534,
+                'id' => 1167,
+                'products_id' => 1167,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             34 => 
             array (
-                'id' => 535,
-                'products_id' => 535,
+                'id' => 1168,
+                'products_id' => 1168,
                 'sub_categories_id' => 5,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             35 => 
             array (
-                'id' => 536,
-                'products_id' => 536,
+                'id' => 1169,
+                'products_id' => 1169,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             36 => 
             array (
-                'id' => 537,
-                'products_id' => 537,
+                'id' => 1170,
+                'products_id' => 1170,
                 'sub_categories_id' => 70,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             37 => 
             array (
-                'id' => 538,
-                'products_id' => 538,
+                'id' => 1171,
+                'products_id' => 1171,
                 'sub_categories_id' => 40,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             38 => 
             array (
-                'id' => 539,
-                'products_id' => 539,
+                'id' => 1172,
+                'products_id' => 1172,
                 'sub_categories_id' => 61,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             39 => 
             array (
-                'id' => 540,
-                'products_id' => 540,
+                'id' => 1173,
+                'products_id' => 1173,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             40 => 
             array (
-                'id' => 541,
-                'products_id' => 541,
+                'id' => 1174,
+                'products_id' => 1174,
                 'sub_categories_id' => 31,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             41 => 
             array (
-                'id' => 542,
-                'products_id' => 542,
+                'id' => 1175,
+                'products_id' => 1175,
                 'sub_categories_id' => 78,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             42 => 
             array (
-                'id' => 543,
-                'products_id' => 543,
+                'id' => 1176,
+                'products_id' => 1176,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             43 => 
             array (
-                'id' => 544,
-                'products_id' => 544,
+                'id' => 1177,
+                'products_id' => 1177,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             44 => 
             array (
-                'id' => 545,
-                'products_id' => 545,
+                'id' => 1178,
+                'products_id' => 1178,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             45 => 
             array (
-                'id' => 546,
-                'products_id' => 546,
+                'id' => 1179,
+                'products_id' => 1179,
                 'sub_categories_id' => 67,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             46 => 
             array (
-                'id' => 547,
-                'products_id' => 547,
+                'id' => 1180,
+                'products_id' => 1180,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             47 => 
             array (
-                'id' => 548,
-                'products_id' => 548,
+                'id' => 1181,
+                'products_id' => 1181,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             48 => 
             array (
-                'id' => 549,
-                'products_id' => 549,
+                'id' => 1182,
+                'products_id' => 1182,
                 'sub_categories_id' => 57,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             49 => 
             array (
-                'id' => 550,
-                'products_id' => 550,
+                'id' => 1183,
+                'products_id' => 1183,
                 'sub_categories_id' => 71,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             50 => 
             array (
-                'id' => 551,
-                'products_id' => 551,
+                'id' => 1184,
+                'products_id' => 1184,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             51 => 
             array (
-                'id' => 552,
-                'products_id' => 552,
+                'id' => 1185,
+                'products_id' => 1185,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             52 => 
             array (
-                'id' => 553,
-                'products_id' => 553,
+                'id' => 1186,
+                'products_id' => 1186,
                 'sub_categories_id' => 95,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             53 => 
             array (
-                'id' => 554,
-                'products_id' => 554,
+                'id' => 1187,
+                'products_id' => 1187,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             54 => 
             array (
-                'id' => 555,
-                'products_id' => 555,
+                'id' => 1188,
+                'products_id' => 1188,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             55 => 
             array (
-                'id' => 556,
-                'products_id' => 556,
+                'id' => 1189,
+                'products_id' => 1189,
                 'sub_categories_id' => 32,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             56 => 
             array (
-                'id' => 557,
-                'products_id' => 557,
+                'id' => 1190,
+                'products_id' => 1190,
                 'sub_categories_id' => 20,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             57 => 
             array (
-                'id' => 558,
-                'products_id' => 558,
+                'id' => 1191,
+                'products_id' => 1191,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             58 => 
             array (
-                'id' => 559,
-                'products_id' => 559,
+                'id' => 1192,
+                'products_id' => 1192,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             59 => 
             array (
-                'id' => 560,
-                'products_id' => 560,
+                'id' => 1193,
+                'products_id' => 1193,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             60 => 
             array (
-                'id' => 561,
-                'products_id' => 561,
+                'id' => 1194,
+                'products_id' => 1194,
                 'sub_categories_id' => 96,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             61 => 
             array (
-                'id' => 562,
-                'products_id' => 562,
+                'id' => 1195,
+                'products_id' => 1195,
                 'sub_categories_id' => 53,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             62 => 
             array (
-                'id' => 563,
-                'products_id' => 563,
+                'id' => 1196,
+                'products_id' => 1196,
                 'sub_categories_id' => 91,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             63 => 
             array (
-                'id' => 564,
-                'products_id' => 564,
+                'id' => 1197,
+                'products_id' => 1197,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             64 => 
             array (
-                'id' => 565,
-                'products_id' => 565,
+                'id' => 1198,
+                'products_id' => 1198,
                 'sub_categories_id' => 82,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             65 => 
             array (
-                'id' => 566,
-                'products_id' => 566,
+                'id' => 1199,
+                'products_id' => 1199,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             66 => 
             array (
-                'id' => 567,
-                'products_id' => 567,
+                'id' => 1200,
+                'products_id' => 1200,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             67 => 
             array (
-                'id' => 568,
-                'products_id' => 568,
+                'id' => 1201,
+                'products_id' => 1201,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             68 => 
             array (
-                'id' => 569,
-                'products_id' => 569,
+                'id' => 1202,
+                'products_id' => 1202,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             69 => 
             array (
-                'id' => 570,
-                'products_id' => 570,
+                'id' => 1203,
+                'products_id' => 1203,
                 'sub_categories_id' => 97,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             70 => 
             array (
-                'id' => 571,
-                'products_id' => 571,
+                'id' => 1204,
+                'products_id' => 1204,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             71 => 
             array (
-                'id' => 572,
-                'products_id' => 572,
+                'id' => 1205,
+                'products_id' => 1205,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             72 => 
             array (
-                'id' => 573,
-                'products_id' => 573,
+                'id' => 1206,
+                'products_id' => 1206,
                 'sub_categories_id' => 82,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             73 => 
             array (
-                'id' => 574,
-                'products_id' => 574,
+                'id' => 1207,
+                'products_id' => 1207,
                 'sub_categories_id' => 33,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             74 => 
             array (
-                'id' => 575,
-                'products_id' => 575,
+                'id' => 1208,
+                'products_id' => 1208,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             75 => 
             array (
-                'id' => 576,
-                'products_id' => 576,
+                'id' => 1209,
+                'products_id' => 1209,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             76 => 
             array (
-                'id' => 577,
-                'products_id' => 577,
+                'id' => 1210,
+                'products_id' => 1210,
                 'sub_categories_id' => 4,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             77 => 
             array (
-                'id' => 578,
-                'products_id' => 578,
+                'id' => 1211,
+                'products_id' => 1211,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             78 => 
             array (
-                'id' => 579,
-                'products_id' => 579,
+                'id' => 1212,
+                'products_id' => 1212,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             79 => 
             array (
-                'id' => 580,
-                'products_id' => 580,
+                'id' => 1213,
+                'products_id' => 1213,
                 'sub_categories_id' => 39,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             80 => 
             array (
-                'id' => 581,
-                'products_id' => 581,
+                'id' => 1214,
+                'products_id' => 1214,
                 'sub_categories_id' => 98,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             81 => 
             array (
-                'id' => 582,
-                'products_id' => 582,
+                'id' => 1215,
+                'products_id' => 1215,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             82 => 
             array (
-                'id' => 583,
-                'products_id' => 583,
+                'id' => 1216,
+                'products_id' => 1216,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             83 => 
             array (
-                'id' => 584,
-                'products_id' => 584,
+                'id' => 1217,
+                'products_id' => 1217,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             84 => 
             array (
-                'id' => 585,
-                'products_id' => 585,
+                'id' => 1218,
+                'products_id' => 1218,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             85 => 
             array (
-                'id' => 586,
-                'products_id' => 586,
+                'id' => 1219,
+                'products_id' => 1219,
                 'sub_categories_id' => 11,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             86 => 
             array (
-                'id' => 587,
-                'products_id' => 587,
+                'id' => 1220,
+                'products_id' => 1220,
                 'sub_categories_id' => 24,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             87 => 
             array (
-                'id' => 588,
-                'products_id' => 588,
+                'id' => 1221,
+                'products_id' => 1221,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             88 => 
             array (
-                'id' => 589,
-                'products_id' => 589,
+                'id' => 1222,
+                'products_id' => 1222,
                 'sub_categories_id' => 21,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             89 => 
             array (
-                'id' => 590,
-                'products_id' => 590,
+                'id' => 1223,
+                'products_id' => 1223,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             90 => 
             array (
-                'id' => 591,
-                'products_id' => 591,
+                'id' => 1224,
+                'products_id' => 1224,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             91 => 
             array (
-                'id' => 592,
-                'products_id' => 592,
+                'id' => 1225,
+                'products_id' => 1225,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             92 => 
             array (
-                'id' => 593,
-                'products_id' => 593,
+                'id' => 1226,
+                'products_id' => 1226,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             93 => 
             array (
-                'id' => 594,
-                'products_id' => 594,
+                'id' => 1227,
+                'products_id' => 1227,
                 'sub_categories_id' => 7,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             94 => 
             array (
-                'id' => 595,
-                'products_id' => 595,
+                'id' => 1228,
+                'products_id' => 1228,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             95 => 
             array (
-                'id' => 596,
-                'products_id' => 596,
+                'id' => 1229,
+                'products_id' => 1229,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             96 => 
             array (
-                'id' => 597,
-                'products_id' => 597,
+                'id' => 1230,
+                'products_id' => 1230,
                 'sub_categories_id' => 22,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             97 => 
             array (
-                'id' => 598,
-                'products_id' => 598,
+                'id' => 1231,
+                'products_id' => 1231,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             98 => 
             array (
-                'id' => 599,
-                'products_id' => 599,
+                'id' => 1232,
+                'products_id' => 1232,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             99 => 
             array (
-                'id' => 600,
-                'products_id' => 600,
+                'id' => 1233,
+                'products_id' => 1233,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             100 => 
             array (
-                'id' => 601,
-                'products_id' => 601,
+                'id' => 1234,
+                'products_id' => 1234,
                 'sub_categories_id' => 12,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             101 => 
             array (
-                'id' => 602,
-                'products_id' => 602,
+                'id' => 1235,
+                'products_id' => 1235,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             102 => 
             array (
-                'id' => 603,
-                'products_id' => 603,
+                'id' => 1236,
+                'products_id' => 1236,
                 'sub_categories_id' => 99,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             103 => 
             array (
-                'id' => 604,
-                'products_id' => 604,
+                'id' => 1237,
+                'products_id' => 1237,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             104 => 
             array (
-                'id' => 605,
-                'products_id' => 605,
+                'id' => 1238,
+                'products_id' => 1238,
                 'sub_categories_id' => 90,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             105 => 
             array (
-                'id' => 606,
-                'products_id' => 606,
+                'id' => 1239,
+                'products_id' => 1239,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             106 => 
             array (
-                'id' => 607,
-                'products_id' => 607,
+                'id' => 1240,
+                'products_id' => 1240,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             107 => 
             array (
-                'id' => 608,
-                'products_id' => 608,
+                'id' => 1241,
+                'products_id' => 1241,
                 'sub_categories_id' => 10,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             108 => 
             array (
-                'id' => 609,
-                'products_id' => 609,
+                'id' => 1242,
+                'products_id' => 1242,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             109 => 
             array (
-                'id' => 610,
-                'products_id' => 610,
+                'id' => 1243,
+                'products_id' => 1243,
                 'sub_categories_id' => 74,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             110 => 
             array (
-                'id' => 611,
-                'products_id' => 611,
+                'id' => 1244,
+                'products_id' => 1244,
                 'sub_categories_id' => 23,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             111 => 
             array (
-                'id' => 612,
-                'products_id' => 612,
+                'id' => 1245,
+                'products_id' => 1245,
                 'sub_categories_id' => 54,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             112 => 
             array (
-                'id' => 613,
-                'products_id' => 613,
+                'id' => 1246,
+                'products_id' => 1246,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             113 => 
             array (
-                'id' => 614,
-                'products_id' => 614,
+                'id' => 1247,
+                'products_id' => 1247,
                 'sub_categories_id' => 72,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             114 => 
             array (
-                'id' => 615,
-                'products_id' => 615,
+                'id' => 1248,
+                'products_id' => 1248,
                 'sub_categories_id' => 59,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             115 => 
             array (
-                'id' => 616,
-                'products_id' => 616,
+                'id' => 1249,
+                'products_id' => 1249,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             116 => 
             array (
-                'id' => 617,
-                'products_id' => 617,
+                'id' => 1250,
+                'products_id' => 1250,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             117 => 
             array (
-                'id' => 618,
-                'products_id' => 618,
+                'id' => 1251,
+                'products_id' => 1251,
                 'sub_categories_id' => 77,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             118 => 
             array (
-                'id' => 619,
-                'products_id' => 619,
+                'id' => 1252,
+                'products_id' => 1252,
                 'sub_categories_id' => 2,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             119 => 
             array (
-                'id' => 620,
-                'products_id' => 620,
+                'id' => 1253,
+                'products_id' => 1253,
                 'sub_categories_id' => 68,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             120 => 
             array (
-                'id' => 621,
-                'products_id' => 621,
+                'id' => 1254,
+                'products_id' => 1254,
                 'sub_categories_id' => 81,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             121 => 
             array (
-                'id' => 622,
-                'products_id' => 622,
+                'id' => 1255,
+                'products_id' => 1255,
                 'sub_categories_id' => 33,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             122 => 
             array (
-                'id' => 623,
-                'products_id' => 623,
+                'id' => 1256,
+                'products_id' => 1256,
                 'sub_categories_id' => 27,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             123 => 
             array (
-                'id' => 624,
-                'products_id' => 624,
+                'id' => 1257,
+                'products_id' => 1257,
                 'sub_categories_id' => 81,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             124 => 
             array (
-                'id' => 625,
-                'products_id' => 625,
+                'id' => 1258,
+                'products_id' => 1258,
                 'sub_categories_id' => 8,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             125 => 
             array (
-                'id' => 626,
-                'products_id' => 626,
+                'id' => 1259,
+                'products_id' => 1259,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             126 => 
             array (
-                'id' => 627,
-                'products_id' => 627,
+                'id' => 1260,
+                'products_id' => 1260,
                 'sub_categories_id' => 64,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             127 => 
             array (
-                'id' => 628,
-                'products_id' => 628,
+                'id' => 1261,
+                'products_id' => 1261,
                 'sub_categories_id' => 14,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             128 => 
             array (
-                'id' => 629,
-                'products_id' => 629,
+                'id' => 1262,
+                'products_id' => 1262,
                 'sub_categories_id' => 18,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             129 => 
             array (
-                'id' => 630,
-                'products_id' => 630,
+                'id' => 1263,
+                'products_id' => 1263,
                 'sub_categories_id' => 50,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             130 => 
             array (
-                'id' => 631,
-                'products_id' => 631,
+                'id' => 1264,
+                'products_id' => 1264,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             131 => 
             array (
-                'id' => 632,
-                'products_id' => 632,
+                'id' => 1265,
+                'products_id' => 1265,
                 'sub_categories_id' => 29,
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
             132 => 
             array (
-                'id' => 633,
-                'products_id' => 633,
+                'id' => 1266,
+                'products_id' => 1266,
                 'sub_categories_id' => 100,
                 'created_at' => NULL,
                 'updated_at' => NULL,

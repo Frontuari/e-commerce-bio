@@ -20,26 +20,50 @@ class UserVisitProductsTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'products_id' => 22,
+                'products_id' => 833,
                 'users_id' => 16,
-                'created_at' => '2020-04-13 12:55:49',
-                'updated_at' => '2020-04-13 12:55:50',
+                'created_at' => '2020-04-13 16:13:24',
+                'updated_at' => '2020-04-13 16:13:28',
             ),
             1 => 
             array (
                 'id' => 2,
-                'products_id' => 228,
+                'products_id' => 1047,
                 'users_id' => 16,
-                'created_at' => '2020-04-13 12:55:53',
-                'updated_at' => '2020-04-13 12:55:55',
+                'created_at' => '2020-04-13 16:32:55',
+                'updated_at' => '2020-04-13 16:33:59',
             ),
             2 => 
             array (
                 'id' => 3,
-                'products_id' => 615,
+                'products_id' => 990,
                 'users_id' => 16,
-                'created_at' => '2020-04-13 12:56:00',
-                'updated_at' => '2020-04-13 12:56:02',
+                'created_at' => '2020-04-13 16:34:51',
+                'updated_at' => '2020-04-13 16:34:53',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'products_id' => 693,
+                'users_id' => 16,
+                'created_at' => '2020-04-13 16:34:58',
+                'updated_at' => '2020-04-13 16:35:01',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'products_id' => 672,
+                'users_id' => 16,
+                'created_at' => '2020-04-13 16:35:44',
+                'updated_at' => '2020-04-13 16:35:49',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'products_id' => 792,
+                'users_id' => 16,
+                'created_at' => '2020-04-13 16:36:31',
+                'updated_at' => '2020-04-13 16:36:31',
             ),
         ));
         

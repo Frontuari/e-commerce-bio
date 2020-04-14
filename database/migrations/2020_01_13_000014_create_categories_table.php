@@ -26,7 +26,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name', 45);
             $table->text('description')->nullable();
             
-            $table->string('image', 200)->nullable()->default('products/imagen_no_disponible_combo.png');
+            $table->string('image', 200)->nullable();
             $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->tinyInteger('order')->nullable()->default('1');
             $table->string('slug')->nullable();

@@ -39,11 +39,11 @@ class CreateProductsTable extends Migration
             $table->integer('sku')->nullable();
             $table->tinyInteger('promote')->nullable()->default('0');
             $table->decimal('discount', 20, 6)->nullable()->default('0');
-            $table->string('photo', 200)->nullable()->default(json_encode(['products/imagenNoDisponible.png']));
+            $table->string('photo', 200)->nullable();
             $table->unsignedInteger('stores_id');
             $table->unsignedInteger('brands_id')->nullable();
             $table->unsignedInteger('sub_categories_id');
-            $table->boolean('is_combo')->default('0');
+            $table->enum('is_combo', ['0', '1'])->nullable()->default('0');
             $table->index(["sub_categories_id"], 'fk_products_sub_categories1_idx');
 
             $table->index(["stores_id"], 'fk_products_stores1_idx');
