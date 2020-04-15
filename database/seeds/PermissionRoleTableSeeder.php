@@ -609,820 +609,810 @@ class PermissionRoleTableSeeder extends Seeder
             ),
             118 => 
             array (
-                'permission_id' => 130,
-                'role_id' => 1,
-            ),
-            119 => 
-            array (
-                'permission_id' => 131,
-                'role_id' => 1,
-            ),
-            120 => 
-            array (
                 'permission_id' => 27,
                 'role_id' => 3,
             ),
-            121 => 
+            119 => 
             array (
                 'permission_id' => 28,
                 'role_id' => 3,
             ),
-            122 => 
+            120 => 
             array (
                 'permission_id' => 29,
                 'role_id' => 3,
             ),
-            123 => 
+            121 => 
             array (
                 'permission_id' => 30,
                 'role_id' => 3,
             ),
-            124 => 
+            122 => 
             array (
                 'permission_id' => 31,
                 'role_id' => 3,
             ),
-            125 => 
+            123 => 
             array (
                 'permission_id' => 32,
                 'role_id' => 3,
             ),
-            126 => 
+            124 => 
             array (
                 'permission_id' => 33,
                 'role_id' => 3,
             ),
-            127 => 
+            125 => 
             array (
                 'permission_id' => 34,
                 'role_id' => 3,
             ),
-            128 => 
+            126 => 
             array (
                 'permission_id' => 35,
                 'role_id' => 3,
             ),
-            129 => 
+            127 => 
             array (
                 'permission_id' => 36,
                 'role_id' => 3,
             ),
-            130 => 
+            128 => 
             array (
                 'permission_id' => 37,
                 'role_id' => 3,
             ),
-            131 => 
+            129 => 
             array (
                 'permission_id' => 38,
                 'role_id' => 3,
             ),
-            132 => 
+            130 => 
             array (
                 'permission_id' => 39,
                 'role_id' => 3,
             ),
-            133 => 
+            131 => 
             array (
                 'permission_id' => 40,
                 'role_id' => 3,
             ),
-            134 => 
+            132 => 
             array (
                 'permission_id' => 41,
                 'role_id' => 3,
             ),
-            135 => 
+            133 => 
             array (
                 'permission_id' => 42,
+                'role_id' => 3,
+            ),
+            134 => 
+            array (
+                'permission_id' => 43,
+                'role_id' => 3,
+            ),
+            135 => 
+            array (
+                'permission_id' => 44,
                 'role_id' => 3,
             ),
             136 => 
             array (
-                'permission_id' => 43,
+                'permission_id' => 45,
                 'role_id' => 3,
             ),
             137 => 
             array (
-                'permission_id' => 44,
+                'permission_id' => 46,
                 'role_id' => 3,
             ),
             138 => 
             array (
-                'permission_id' => 45,
+                'permission_id' => 57,
                 'role_id' => 3,
             ),
             139 => 
             array (
-                'permission_id' => 46,
+                'permission_id' => 58,
                 'role_id' => 3,
             ),
             140 => 
             array (
-                'permission_id' => 57,
+                'permission_id' => 59,
                 'role_id' => 3,
             ),
             141 => 
             array (
-                'permission_id' => 58,
+                'permission_id' => 60,
                 'role_id' => 3,
             ),
             142 => 
             array (
-                'permission_id' => 59,
+                'permission_id' => 61,
                 'role_id' => 3,
             ),
             143 => 
             array (
-                'permission_id' => 60,
+                'permission_id' => 62,
                 'role_id' => 3,
             ),
             144 => 
             array (
-                'permission_id' => 61,
+                'permission_id' => 63,
                 'role_id' => 3,
             ),
             145 => 
             array (
-                'permission_id' => 62,
+                'permission_id' => 64,
                 'role_id' => 3,
             ),
             146 => 
             array (
-                'permission_id' => 63,
+                'permission_id' => 65,
                 'role_id' => 3,
             ),
             147 => 
             array (
-                'permission_id' => 64,
+                'permission_id' => 66,
                 'role_id' => 3,
             ),
             148 => 
             array (
-                'permission_id' => 65,
+                'permission_id' => 67,
                 'role_id' => 3,
             ),
             149 => 
             array (
-                'permission_id' => 66,
+                'permission_id' => 68,
                 'role_id' => 3,
             ),
             150 => 
             array (
-                'permission_id' => 67,
+                'permission_id' => 69,
                 'role_id' => 3,
             ),
             151 => 
             array (
-                'permission_id' => 68,
+                'permission_id' => 70,
                 'role_id' => 3,
             ),
             152 => 
             array (
-                'permission_id' => 69,
+                'permission_id' => 71,
                 'role_id' => 3,
             ),
             153 => 
             array (
-                'permission_id' => 70,
+                'permission_id' => 72,
                 'role_id' => 3,
             ),
             154 => 
             array (
-                'permission_id' => 71,
+                'permission_id' => 73,
                 'role_id' => 3,
             ),
             155 => 
             array (
-                'permission_id' => 72,
+                'permission_id' => 74,
                 'role_id' => 3,
             ),
             156 => 
             array (
-                'permission_id' => 73,
+                'permission_id' => 75,
                 'role_id' => 3,
             ),
             157 => 
             array (
-                'permission_id' => 74,
+                'permission_id' => 76,
                 'role_id' => 3,
             ),
             158 => 
             array (
-                'permission_id' => 75,
+                'permission_id' => 77,
                 'role_id' => 3,
             ),
             159 => 
             array (
-                'permission_id' => 76,
+                'permission_id' => 78,
                 'role_id' => 3,
             ),
             160 => 
             array (
-                'permission_id' => 77,
+                'permission_id' => 79,
                 'role_id' => 3,
             ),
             161 => 
             array (
-                'permission_id' => 78,
+                'permission_id' => 80,
                 'role_id' => 3,
             ),
             162 => 
             array (
-                'permission_id' => 79,
+                'permission_id' => 81,
                 'role_id' => 3,
             ),
             163 => 
             array (
-                'permission_id' => 80,
+                'permission_id' => 82,
                 'role_id' => 3,
             ),
             164 => 
             array (
-                'permission_id' => 81,
+                'permission_id' => 83,
                 'role_id' => 3,
             ),
             165 => 
             array (
-                'permission_id' => 82,
+                'permission_id' => 84,
                 'role_id' => 3,
             ),
             166 => 
             array (
-                'permission_id' => 83,
+                'permission_id' => 85,
                 'role_id' => 3,
             ),
             167 => 
             array (
-                'permission_id' => 84,
+                'permission_id' => 86,
                 'role_id' => 3,
             ),
             168 => 
             array (
-                'permission_id' => 85,
+                'permission_id' => 87,
                 'role_id' => 3,
             ),
             169 => 
             array (
-                'permission_id' => 86,
+                'permission_id' => 88,
                 'role_id' => 3,
             ),
             170 => 
             array (
-                'permission_id' => 87,
+                'permission_id' => 89,
                 'role_id' => 3,
             ),
             171 => 
             array (
-                'permission_id' => 88,
+                'permission_id' => 90,
                 'role_id' => 3,
             ),
             172 => 
             array (
-                'permission_id' => 89,
+                'permission_id' => 91,
                 'role_id' => 3,
             ),
             173 => 
             array (
-                'permission_id' => 90,
+                'permission_id' => 92,
                 'role_id' => 3,
             ),
             174 => 
             array (
-                'permission_id' => 91,
+                'permission_id' => 93,
                 'role_id' => 3,
             ),
             175 => 
             array (
-                'permission_id' => 92,
+                'permission_id' => 94,
                 'role_id' => 3,
             ),
             176 => 
             array (
-                'permission_id' => 93,
+                'permission_id' => 95,
                 'role_id' => 3,
             ),
             177 => 
             array (
-                'permission_id' => 94,
+                'permission_id' => 96,
                 'role_id' => 3,
             ),
             178 => 
             array (
-                'permission_id' => 95,
+                'permission_id' => 97,
                 'role_id' => 3,
             ),
             179 => 
             array (
-                'permission_id' => 96,
+                'permission_id' => 98,
                 'role_id' => 3,
             ),
             180 => 
             array (
-                'permission_id' => 97,
+                'permission_id' => 101,
                 'role_id' => 3,
             ),
             181 => 
             array (
-                'permission_id' => 98,
+                'permission_id' => 102,
                 'role_id' => 3,
             ),
             182 => 
             array (
-                'permission_id' => 101,
+                'permission_id' => 103,
                 'role_id' => 3,
             ),
             183 => 
             array (
-                'permission_id' => 102,
+                'permission_id' => 104,
                 'role_id' => 3,
             ),
             184 => 
             array (
-                'permission_id' => 103,
+                'permission_id' => 105,
                 'role_id' => 3,
             ),
             185 => 
             array (
-                'permission_id' => 104,
+                'permission_id' => 106,
                 'role_id' => 3,
             ),
             186 => 
             array (
-                'permission_id' => 105,
+                'permission_id' => 107,
                 'role_id' => 3,
             ),
             187 => 
             array (
-                'permission_id' => 106,
+                'permission_id' => 108,
                 'role_id' => 3,
             ),
             188 => 
             array (
-                'permission_id' => 107,
+                'permission_id' => 109,
                 'role_id' => 3,
             ),
             189 => 
             array (
-                'permission_id' => 108,
+                'permission_id' => 110,
                 'role_id' => 3,
             ),
             190 => 
             array (
-                'permission_id' => 109,
+                'permission_id' => 111,
                 'role_id' => 3,
             ),
             191 => 
             array (
-                'permission_id' => 110,
+                'permission_id' => 117,
                 'role_id' => 3,
             ),
             192 => 
             array (
-                'permission_id' => 111,
+                'permission_id' => 118,
                 'role_id' => 3,
             ),
             193 => 
             array (
-                'permission_id' => 117,
+                'permission_id' => 119,
                 'role_id' => 3,
             ),
             194 => 
             array (
-                'permission_id' => 118,
+                'permission_id' => 120,
                 'role_id' => 3,
             ),
             195 => 
             array (
-                'permission_id' => 119,
+                'permission_id' => 121,
                 'role_id' => 3,
             ),
             196 => 
             array (
-                'permission_id' => 120,
+                'permission_id' => 122,
                 'role_id' => 3,
             ),
             197 => 
             array (
-                'permission_id' => 121,
+                'permission_id' => 123,
                 'role_id' => 3,
             ),
             198 => 
             array (
-                'permission_id' => 122,
+                'permission_id' => 124,
                 'role_id' => 3,
             ),
             199 => 
             array (
-                'permission_id' => 123,
+                'permission_id' => 125,
                 'role_id' => 3,
             ),
             200 => 
             array (
-                'permission_id' => 124,
+                'permission_id' => 126,
                 'role_id' => 3,
             ),
             201 => 
             array (
-                'permission_id' => 125,
+                'permission_id' => 127,
                 'role_id' => 3,
             ),
             202 => 
             array (
-                'permission_id' => 126,
+                'permission_id' => 128,
                 'role_id' => 3,
             ),
             203 => 
             array (
-                'permission_id' => 127,
+                'permission_id' => 129,
                 'role_id' => 3,
             ),
             204 => 
             array (
-                'permission_id' => 128,
-                'role_id' => 3,
+                'permission_id' => 137,
+                'role_id' => 1,
             ),
             205 => 
             array (
-                'permission_id' => 129,
-                'role_id' => 3,
+                'permission_id' => 138,
+                'role_id' => 1,
             ),
             206 => 
             array (
-                'permission_id' => 137,
+                'permission_id' => 139,
                 'role_id' => 1,
             ),
             207 => 
             array (
-                'permission_id' => 138,
+                'permission_id' => 140,
                 'role_id' => 1,
             ),
             208 => 
             array (
-                'permission_id' => 139,
+                'permission_id' => 141,
                 'role_id' => 1,
             ),
             209 => 
             array (
-                'permission_id' => 140,
-                'role_id' => 1,
-            ),
-            210 => 
-            array (
-                'permission_id' => 141,
-                'role_id' => 1,
-            ),
-            211 => 
-            array (
                 'permission_id' => 137,
                 'role_id' => 3,
             ),
-            212 => 
+            210 => 
             array (
                 'permission_id' => 138,
                 'role_id' => 3,
             ),
-            213 => 
+            211 => 
             array (
                 'permission_id' => 139,
                 'role_id' => 3,
             ),
-            214 => 
+            212 => 
             array (
                 'permission_id' => 140,
                 'role_id' => 3,
             ),
-            215 => 
+            213 => 
             array (
                 'permission_id' => 141,
                 'role_id' => 3,
             ),
-            216 => 
+            214 => 
             array (
                 'permission_id' => 142,
+                'role_id' => 1,
+            ),
+            215 => 
+            array (
+                'permission_id' => 143,
+                'role_id' => 1,
+            ),
+            216 => 
+            array (
+                'permission_id' => 144,
                 'role_id' => 1,
             ),
             217 => 
             array (
-                'permission_id' => 143,
+                'permission_id' => 145,
                 'role_id' => 1,
             ),
             218 => 
             array (
-                'permission_id' => 144,
+                'permission_id' => 146,
                 'role_id' => 1,
             ),
             219 => 
             array (
-                'permission_id' => 145,
-                'role_id' => 1,
-            ),
-            220 => 
-            array (
-                'permission_id' => 146,
-                'role_id' => 1,
-            ),
-            221 => 
-            array (
                 'permission_id' => 142,
                 'role_id' => 3,
             ),
-            222 => 
+            220 => 
             array (
                 'permission_id' => 143,
                 'role_id' => 3,
             ),
-            223 => 
+            221 => 
             array (
                 'permission_id' => 144,
                 'role_id' => 3,
             ),
-            224 => 
+            222 => 
             array (
                 'permission_id' => 145,
                 'role_id' => 3,
             ),
-            225 => 
+            223 => 
             array (
                 'permission_id' => 146,
                 'role_id' => 3,
             ),
-            226 => 
+            224 => 
             array (
                 'permission_id' => 147,
                 'role_id' => 1,
             ),
-            227 => 
+            225 => 
             array (
                 'permission_id' => 148,
                 'role_id' => 1,
             ),
-            228 => 
+            226 => 
             array (
                 'permission_id' => 149,
                 'role_id' => 1,
             ),
-            229 => 
+            227 => 
             array (
                 'permission_id' => 150,
                 'role_id' => 1,
             ),
-            230 => 
+            228 => 
             array (
                 'permission_id' => 151,
                 'role_id' => 1,
             ),
-            231 => 
+            229 => 
             array (
                 'permission_id' => 152,
                 'role_id' => 1,
             ),
-            232 => 
+            230 => 
             array (
                 'permission_id' => 153,
                 'role_id' => 1,
             ),
-            233 => 
+            231 => 
             array (
                 'permission_id' => 154,
                 'role_id' => 1,
             ),
-            234 => 
+            232 => 
             array (
                 'permission_id' => 155,
                 'role_id' => 1,
             ),
-            235 => 
+            233 => 
             array (
                 'permission_id' => 156,
                 'role_id' => 1,
             ),
-            236 => 
+            234 => 
             array (
                 'permission_id' => 177,
+                'role_id' => 1,
+            ),
+            235 => 
+            array (
+                'permission_id' => 178,
+                'role_id' => 1,
+            ),
+            236 => 
+            array (
+                'permission_id' => 179,
                 'role_id' => 1,
             ),
             237 => 
             array (
-                'permission_id' => 178,
+                'permission_id' => 180,
                 'role_id' => 1,
             ),
             238 => 
             array (
-                'permission_id' => 179,
+                'permission_id' => 181,
                 'role_id' => 1,
             ),
             239 => 
             array (
-                'permission_id' => 180,
+                'permission_id' => 182,
                 'role_id' => 1,
             ),
             240 => 
             array (
-                'permission_id' => 181,
+                'permission_id' => 183,
                 'role_id' => 1,
             ),
             241 => 
             array (
-                'permission_id' => 182,
+                'permission_id' => 184,
                 'role_id' => 1,
             ),
             242 => 
             array (
-                'permission_id' => 183,
+                'permission_id' => 185,
                 'role_id' => 1,
             ),
             243 => 
             array (
-                'permission_id' => 184,
+                'permission_id' => 186,
                 'role_id' => 1,
             ),
             244 => 
             array (
-                'permission_id' => 185,
-                'role_id' => 1,
-            ),
-            245 => 
-            array (
-                'permission_id' => 186,
-                'role_id' => 1,
-            ),
-            246 => 
-            array (
                 'permission_id' => 177,
                 'role_id' => 3,
             ),
-            247 => 
+            245 => 
             array (
                 'permission_id' => 178,
                 'role_id' => 3,
             ),
-            248 => 
+            246 => 
             array (
                 'permission_id' => 179,
                 'role_id' => 3,
             ),
-            249 => 
+            247 => 
             array (
                 'permission_id' => 180,
                 'role_id' => 3,
             ),
-            250 => 
+            248 => 
             array (
                 'permission_id' => 181,
                 'role_id' => 3,
             ),
-            251 => 
+            249 => 
             array (
                 'permission_id' => 182,
                 'role_id' => 3,
             ),
-            252 => 
+            250 => 
             array (
                 'permission_id' => 183,
                 'role_id' => 3,
             ),
-            253 => 
+            251 => 
             array (
                 'permission_id' => 187,
+                'role_id' => 3,
+            ),
+            252 => 
+            array (
+                'permission_id' => 188,
+                'role_id' => 3,
+            ),
+            253 => 
+            array (
+                'permission_id' => 189,
                 'role_id' => 3,
             ),
             254 => 
             array (
-                'permission_id' => 188,
-                'role_id' => 3,
+                'permission_id' => 187,
+                'role_id' => 1,
             ),
             255 => 
             array (
-                'permission_id' => 189,
-                'role_id' => 3,
+                'permission_id' => 188,
+                'role_id' => 1,
             ),
             256 => 
             array (
-                'permission_id' => 187,
+                'permission_id' => 189,
                 'role_id' => 1,
             ),
             257 => 
             array (
-                'permission_id' => 188,
+                'permission_id' => 190,
                 'role_id' => 1,
             ),
             258 => 
             array (
-                'permission_id' => 189,
+                'permission_id' => 191,
                 'role_id' => 1,
             ),
             259 => 
             array (
-                'permission_id' => 190,
+                'permission_id' => 192,
                 'role_id' => 1,
             ),
             260 => 
             array (
-                'permission_id' => 191,
+                'permission_id' => 193,
                 'role_id' => 1,
             ),
             261 => 
             array (
-                'permission_id' => 192,
+                'permission_id' => 194,
                 'role_id' => 1,
             ),
             262 => 
             array (
-                'permission_id' => 193,
+                'permission_id' => 195,
                 'role_id' => 1,
             ),
             263 => 
             array (
-                'permission_id' => 194,
+                'permission_id' => 196,
                 'role_id' => 1,
             ),
             264 => 
             array (
-                'permission_id' => 195,
-                'role_id' => 1,
-            ),
-            265 => 
-            array (
-                'permission_id' => 196,
-                'role_id' => 1,
-            ),
-            266 => 
-            array (
                 'permission_id' => 192,
                 'role_id' => 3,
             ),
-            267 => 
+            265 => 
             array (
                 'permission_id' => 193,
                 'role_id' => 3,
             ),
-            268 => 
+            266 => 
             array (
                 'permission_id' => 194,
                 'role_id' => 3,
             ),
-            269 => 
+            267 => 
             array (
                 'permission_id' => 42,
                 'role_id' => 4,
             ),
-            270 => 
+            268 => 
             array (
                 'permission_id' => 43,
                 'role_id' => 4,
             ),
-            271 => 
+            269 => 
             array (
                 'permission_id' => 44,
                 'role_id' => 4,
             ),
-            272 => 
+            270 => 
             array (
                 'permission_id' => 67,
                 'role_id' => 4,
             ),
-            273 => 
+            271 => 
             array (
                 'permission_id' => 68,
                 'role_id' => 4,
             ),
-            274 => 
+            272 => 
             array (
                 'permission_id' => 69,
                 'role_id' => 4,
             ),
-            275 => 
+            273 => 
             array (
                 'permission_id' => 72,
                 'role_id' => 4,
             ),
-            276 => 
+            274 => 
             array (
                 'permission_id' => 73,
                 'role_id' => 4,
             ),
-            277 => 
+            275 => 
             array (
                 'permission_id' => 74,
                 'role_id' => 4,
             ),
-            278 => 
+            276 => 
             array (
                 'permission_id' => 102,
                 'role_id' => 4,
             ),
-            279 => 
+            277 => 
             array (
                 'permission_id' => 103,
                 'role_id' => 4,
             ),
-            280 => 
+            278 => 
             array (
                 'permission_id' => 104,
                 'role_id' => 4,
             ),
-            281 => 
+            279 => 
             array (
                 'permission_id' => 1,
                 'role_id' => 4,
