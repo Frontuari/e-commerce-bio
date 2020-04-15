@@ -20,7 +20,7 @@
 
 
     <!-- App CSS -->
-    <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
+
     <link rel="stylesheet" href="{{ url('/css/app_voyager_css.php') }}">
 
     @yield('css')
@@ -118,7 +118,7 @@ if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Ill
 <!-- Javascript Libs -->
 
 
-<script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script>
+
 <script type="text/javascript" src="{{ url('/js/app_voyager_js.php') }}"></script>
 
 <script>

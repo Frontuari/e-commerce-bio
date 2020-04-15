@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="admin login">
     <title>Admin - {{ Voyager::setting("admin.title") }}</title>
-    <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/app_voyager_css.php') }}">
     @if (__('voyager::generic.is_rtl') == 'true')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
         <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}">
@@ -229,4 +229,5 @@ box-shadow: 3px 3px 10px 0px rgba(119,119,119,0.54);
   transform: rotate(45deg);
 }
 </style>
+<script type="text/javascript" src="{{ url('/js/app_voyager_js.php') }}"></script>
 </html>
