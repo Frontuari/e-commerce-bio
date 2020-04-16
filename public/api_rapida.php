@@ -149,7 +149,15 @@ switch($_GET['evento']) {
         listarProductos($sql);
     break;
     case 'listarProductosPorCategoria':
+        //saber si es mayor de edad
         $categories_id=$_GET['categories_id'];
+        $users_id=$_SESSION['usuario']['id'];
+       
+        $arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
+        if(is_array($arr)){
+            salidaNueva(null,"Disculpe, debe ser mayor de edad para acceder a esta categoria.",false);
+        }
+
         $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
         $where="AND sc.categories_id='$categories_id'";
         $sql=getSqlListarProductos($join,$where);
@@ -284,7 +292,7 @@ switch($_GET['evento']) {
     break;
     case 'getPerfil':
         $users_id=$_SESSION['usuario']['id'];
-        $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
+        $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
         if(is_array($arr)){
             salidaNueva($arr,"Perfil");
        }else{
@@ -295,8 +303,9 @@ switch($_GET['evento']) {
         $rif=$_POST['rif'];
         $sex=$_POST['sex'];
         $name=$_POST['name'];
+        $birthdate=$_POST['birthdate'];
         $users_id=$_SESSION['usuario']['id'];
-        $sql="UPDATE peoples SET rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+        $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
       //  salidaNueva(null,$sql,false);
        $arr=q($sql);
        if(is_array($arr)){
@@ -888,10 +897,11 @@ function registrarUsuario(){
     $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
     $sex        =$_POST['sex'];
     $tlf        =$_POST['tlf'];
+    $birthdate  =$_POST['birthdate'];
     $cities     =1;
     
     $codigoCorreo=generarCodigoVerificacion($email);
-
+/*
 $res=q("SELECT validateemail FROM users WHERE email='$email' and email_verified_at IS NULL");
 if(is_array($res)){
     enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
@@ -899,25 +909,41 @@ if(is_array($res)){
     q("UPDATE users SET password='$password' WHERE email='$email' and email_verified_at IS NULL");
     salida(null,"Le hemos enviado nuevamente un email de confirmación.");
 }
+*/
 
-
-
-    $res=q("INSERT INTO peoples (name,rif,sex,cities_id,phone) VALUES ('$name','$rif','$sex','$cities','$tlf') RETURNING id");
+q("BEGIN");
+    $res=q("INSERT INTO peoples (name,rif,sex,cities_id,phone,birthdate) VALUES ('$name','$rif','$sex','$cities','$tlf','$birthdate') RETURNING id");
     if(is_array($res)){
         $peoples_id=$res[0]['id'];
-        $res=q("INSERT INTO users (password,email,peoples_id,name,validateemail) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo')");
+        $res=q("INSERT INTO users (password,email,peoples_id,name,validateemail,email_verified_at) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo',NOW())");
+        //$res=q("INSERT INTO users (password,email,peoples_id,name,validateemail) VALUES ('$password','$email','$peoples_id','$name','$codigoCorreo')");
         if($res){
-            enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
-            salida(null,"Le hemos enviado un email de confirmación.");
+            //enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
+            //salida(null,"Le hemos enviado un email de confirmación.");
+            enviarPaginaCorreo(3,$email);
+            q("COMMIT");
+            salida(null,"Bienvenido.");
         }else{
+            q("ROLLBACK");
             salida(null,"Intente de nuevo",false);
         }
     }else{
+        q("ROLLBACK");
         salida(null,"Intente de nuevo",false);
     }
     
 }
-function enviarCorreo($correo,$titulo,$body){
+function enviarPaginaCorreo($id,$email){
+    //3 bienvenido
+    //4 primera compra
+    $arr=q("SELECT * FROM pages WHERE id='$id'");
+    if(is_array($arr)){
+        $titulo=$arr[0]['titulo'];
+        $body=$arr[0]['body'];
+        enviarCorreo($email,$titulo,$body);
+    }
+}
+function enviarCorreo($email,$titulo,$body){
 
     require __DIR__.'/../vendor/autoload.php';
    // echo is_file(__DIR__.'/../vendor/autoload.php');
@@ -939,7 +965,7 @@ function enviarCorreo($correo,$titulo,$body){
 	    $mail->CharSet = 'UTF-8';
 	    //Recipients
 	    $mail->setFrom('bio_no-reply@gmail.com', 'Biomercados - Bio en línea');
-	    $mail->addAddress($correo);
+	    $mail->addAddress($email);
 	    
 	    $mail->isHTML(true);
 	    $mail->Subject = $titulo;

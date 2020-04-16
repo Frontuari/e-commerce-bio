@@ -37,7 +37,7 @@ class TransportsTableSeeder extends Seeder
                 'time_minutes' => 30,
                 'status' => 'A',
                 'created_at' => NULL,
-                'updated_at' => '2020-04-06 16:30:56',
+                'updated_at' => '2020-04-15 18:36:18',
             ),
         ));
         

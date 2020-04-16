@@ -34,7 +34,7 @@ class CreateProductsTable extends Migration
             $table->integer('qty_min')->nullable()->default('1')->comment('Cantidad minima de compra');
             $table->integer('qty_max')->nullable()->default('0')->comment('Cantidad maxima a vender si es 0 significa que es infinito');
             $table->string('keyword')->nullable();
-            $table->enum('status', ['A', 'I'])->nullable()->default('1');
+            $table->enum('status', ['A', 'I'])->nullable()->default('A');
             $table->integer('EAN')->nullable()->comment('codigo de barras');
             $table->integer('sku')->nullable();
             $table->tinyInteger('promote')->nullable()->default('0');

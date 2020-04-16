@@ -30,6 +30,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006452,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             1 => 
             array (
@@ -44,6 +45,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005956,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             2 => 
             array (
@@ -58,6 +60,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005394,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             3 => 
             array (
@@ -72,6 +75,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005609,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             4 => 
             array (
@@ -86,6 +90,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006078,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             5 => 
             array (
@@ -100,6 +105,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005264,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             6 => 
             array (
@@ -114,6 +120,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005257,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             7 => 
             array (
@@ -128,6 +135,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005879,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             8 => 
             array (
@@ -142,6 +150,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005549,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             9 => 
             array (
@@ -156,6 +165,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006031,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             10 => 
             array (
@@ -170,6 +180,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005568,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             11 => 
             array (
@@ -184,6 +195,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005750,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             12 => 
             array (
@@ -198,6 +210,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006311,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             13 => 
             array (
@@ -212,6 +225,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005923,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             14 => 
             array (
@@ -226,6 +240,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005517,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             15 => 
             array (
@@ -240,6 +255,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005847,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             16 => 
             array (
@@ -254,6 +270,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006129,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             17 => 
             array (
@@ -268,6 +285,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005428,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             18 => 
             array (
@@ -282,6 +300,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005483,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             19 => 
             array (
@@ -296,6 +315,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005335,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             20 => 
             array (
@@ -310,6 +330,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005456,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             21 => 
             array (
@@ -324,6 +345,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005315,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             22 => 
             array (
@@ -338,6 +360,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006169,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             23 => 
             array (
@@ -352,6 +375,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1006263,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             24 => 
             array (
@@ -366,6 +390,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005471,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
             25 => 
             array (
@@ -380,6 +405,7 @@ class CategoriesTableSeeder extends Seeder
                 'c_elementvalue_id_n3' => 1005419,
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
+                'adulto' => 'N',
             ),
         ));
         
