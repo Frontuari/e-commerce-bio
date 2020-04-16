@@ -3817,6 +3817,7 @@ return array(
     'PackagesTableSeeder' => $baseDir . '/database/seeds/PackagesTableSeeder.php',
     'PackagingsTableSeeder' => $baseDir . '/database/seeds/PackagingsTableSeeder.php',
     'PagesSeeder' => $baseDir . '/database/seeds/PagesSeeder.php',
+    'PagesTableSeeder' => $baseDir . '/database/seeds/PagesTableSeeder.php',
     'PaymentMethodsTableSeeder' => $baseDir . '/database/seeds/PaymentMethodsTableSeeder.php',
     'PeoplesTableSeeder' => $baseDir . '/database/seeds/PeoplesTableSeeder.php',
     'PermissionRoleTableSeeder' => $baseDir . '/database/seeds/PermissionRoleTableSeeder.php',

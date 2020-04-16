@@ -155,13 +155,40 @@ switch($_GET['evento']) {
        
         $arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
         if(is_array($arr)){
-            salidaNueva(null,"Disculpe, debe ser mayor de edad para acceder a esta categoria.",false);
+            salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
         }
 
         $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
         $where="AND sc.categories_id='$categories_id'";
         $sql=getSqlListarProductos($join,$where);
         listarProductos($sql);
+    break;
+    case 'mayorDeEdad':
+        $products_id    =$_GET['products_id'];
+        $users_id       =$_SESSION['usuario']['id'];
+        $sql="SELECT 1 FROM det_sub_categories dsc
+        INNER JOIN products p ON p.id=dsc.products_id
+        INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
+        INNER JOIN categories c ON c.id=sc.categories_id
+        WHERE p.id=$products_id AND
+        (c.adulto='N' OR (c.adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')>=18))";
+
+        $arr=q($sql);
+
+    if(is_array($arr)){
+        salidaNueva(null,"Acceso concedido.",true);
+    }else{
+        salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",false);
+    }
+    break;
+    case 'getPage':
+        $page_id=$_GET['page_id'];
+        $arr=q("SELECT titulo,body FROM pages WHERE status='A' and id='$page_id'");
+        if(is_array($arr)){
+           echo $arr[0]['body'];
+        }else{
+            echo 'Disculpe, intente mas tarde.';
+        }     
     break;
     case 'listarProductos':
         $sql=getSqlListarProductos();
@@ -619,7 +646,7 @@ function listarProductosPorBusqueda(){
 function buscarProducto(){
   
     $texto=strtolower($_GET['texto']);
-    $arr=q("SELECT name,price,sku FROM products WHERE LOWER(name) LIKE '%$texto%' or sku='$texto'");
+    $arr=q("SELECT name,price,sku FROM products WHERE (LOWER(name) LIKE '%$texto%')");
     if(is_array($arr)){
         salidaNueva($arr,"Coincidencia");
     }else{
@@ -713,7 +740,7 @@ function listarProductos($sql,$agregarCantidad=false){
         $row=recortar_imagen($row,$agregarCantidad);
         salidaNueva($row);
     }else{
-        salidaNueva(null,"No hay productos disponibles",false);
+        salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false);
     }
 }
 function consultarFavorito(){

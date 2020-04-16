@@ -30,6 +30,32 @@ class PeoplesTableSeeder extends Seeder
                 'updated_at' => '2020-02-23 21:45:40',
                 'phone_home' => NULL,
             ),
+            1 => 
+            array (
+                'id' => 4,
+                'rif' => 'V-18671986',
+                'name' => 'Leonardo melendez',
+                'sex' => 'm',
+                'birthdate' => '2010-07-20',
+                'phone' => '04145138790 ',
+                'cities_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'phone_home' => NULL,
+            ),
+            2 => 
+            array (
+                'id' => 6,
+                'rif' => 'V-18671985',
+                'name' => 'maria',
+                'sex' => 'm',
+                'birthdate' => '1982-06-10',
+                'phone' => '04145138790 ',
+                'cities_id' => 1,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+                'phone_home' => NULL,
+            ),
         ));
         
         

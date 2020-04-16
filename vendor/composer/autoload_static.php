@@ -4432,6 +4432,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'PackagesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PackagesTableSeeder.php',
         'PackagingsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PackagingsTableSeeder.php',
         'PagesSeeder' => __DIR__ . '/../..' . '/database/seeds/PagesSeeder.php',
+        'PagesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PagesTableSeeder.php',
         'PaymentMethodsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PaymentMethodsTableSeeder.php',
         'PeoplesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PeoplesTableSeeder.php',
         'PermissionRoleTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PermissionRoleTableSeeder.php',

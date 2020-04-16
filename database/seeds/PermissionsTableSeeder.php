@@ -427,53 +427,13 @@ class PermissionsTableSeeder extends Seeder
             ),
             51 => 
             array (
-                'id' => 52,
-                'key' => 'browse_pages',
-                'table_name' => 'pages',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-01-23 22:26:37',
-            ),
-            52 => 
-            array (
-                'id' => 53,
-                'key' => 'read_pages',
-                'table_name' => 'pages',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-01-23 22:26:37',
-            ),
-            53 => 
-            array (
-                'id' => 54,
-                'key' => 'edit_pages',
-                'table_name' => 'pages',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-01-23 22:26:37',
-            ),
-            54 => 
-            array (
-                'id' => 55,
-                'key' => 'add_pages',
-                'table_name' => 'pages',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-01-23 22:26:37',
-            ),
-            55 => 
-            array (
-                'id' => 56,
-                'key' => 'delete_pages',
-                'table_name' => 'pages',
-                'created_at' => '2020-01-23 22:26:37',
-                'updated_at' => '2020-01-23 22:26:37',
-            ),
-            56 => 
-            array (
                 'id' => 57,
                 'key' => 'browse_peoples',
                 'table_name' => 'peoples',
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-24 13:31:04',
             ),
-            57 => 
+            52 => 
             array (
                 'id' => 58,
                 'key' => 'read_peoples',
@@ -481,7 +441,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-24 13:31:04',
             ),
-            58 => 
+            53 => 
             array (
                 'id' => 59,
                 'key' => 'edit_peoples',
@@ -489,7 +449,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-24 13:31:04',
             ),
-            59 => 
+            54 => 
             array (
                 'id' => 60,
                 'key' => 'add_peoples',
@@ -497,7 +457,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-24 13:31:04',
             ),
-            60 => 
+            55 => 
             array (
                 'id' => 61,
                 'key' => 'delete_peoples',
@@ -505,7 +465,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 13:31:04',
                 'updated_at' => '2020-01-24 13:31:04',
             ),
-            61 => 
+            56 => 
             array (
                 'id' => 62,
                 'key' => 'browse_coins',
@@ -513,7 +473,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:26:46',
                 'updated_at' => '2020-01-24 14:26:46',
             ),
-            62 => 
+            57 => 
             array (
                 'id' => 63,
                 'key' => 'read_coins',
@@ -521,7 +481,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:26:46',
                 'updated_at' => '2020-01-24 14:26:46',
             ),
-            63 => 
+            58 => 
             array (
                 'id' => 64,
                 'key' => 'edit_coins',
@@ -529,7 +489,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:26:46',
                 'updated_at' => '2020-01-24 14:26:46',
             ),
-            64 => 
+            59 => 
             array (
                 'id' => 65,
                 'key' => 'add_coins',
@@ -537,7 +497,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:26:46',
                 'updated_at' => '2020-01-24 14:26:46',
             ),
-            65 => 
+            60 => 
             array (
                 'id' => 66,
                 'key' => 'delete_coins',
@@ -545,7 +505,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:26:46',
                 'updated_at' => '2020-01-24 14:26:46',
             ),
-            66 => 
+            61 => 
             array (
                 'id' => 67,
                 'key' => 'browse_stores',
@@ -553,7 +513,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:31:55',
                 'updated_at' => '2020-01-24 14:31:55',
             ),
-            67 => 
+            62 => 
             array (
                 'id' => 68,
                 'key' => 'read_stores',
@@ -561,7 +521,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:31:55',
                 'updated_at' => '2020-01-24 14:31:55',
             ),
-            68 => 
+            63 => 
             array (
                 'id' => 69,
                 'key' => 'edit_stores',
@@ -569,7 +529,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:31:55',
                 'updated_at' => '2020-01-24 14:31:55',
             ),
-            69 => 
+            64 => 
             array (
                 'id' => 70,
                 'key' => 'add_stores',
@@ -577,7 +537,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:31:55',
                 'updated_at' => '2020-01-24 14:31:55',
             ),
-            70 => 
+            65 => 
             array (
                 'id' => 71,
                 'key' => 'delete_stores',
@@ -585,7 +545,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:31:55',
                 'updated_at' => '2020-01-24 14:31:55',
             ),
-            71 => 
+            66 => 
             array (
                 'id' => 72,
                 'key' => 'browse_payment_methods',
@@ -593,7 +553,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:41:06',
                 'updated_at' => '2020-01-24 14:41:06',
             ),
-            72 => 
+            67 => 
             array (
                 'id' => 73,
                 'key' => 'read_payment_methods',
@@ -601,7 +561,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:41:06',
                 'updated_at' => '2020-01-24 14:41:06',
             ),
-            73 => 
+            68 => 
             array (
                 'id' => 74,
                 'key' => 'edit_payment_methods',
@@ -609,7 +569,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:41:06',
                 'updated_at' => '2020-01-24 14:41:06',
             ),
-            74 => 
+            69 => 
             array (
                 'id' => 75,
                 'key' => 'add_payment_methods',
@@ -617,7 +577,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:41:06',
                 'updated_at' => '2020-01-24 14:41:06',
             ),
-            75 => 
+            70 => 
             array (
                 'id' => 76,
                 'key' => 'delete_payment_methods',
@@ -625,7 +585,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:41:06',
                 'updated_at' => '2020-01-24 14:41:06',
             ),
-            76 => 
+            71 => 
             array (
                 'id' => 77,
                 'key' => 'browse_brands',
@@ -633,7 +593,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:44:40',
                 'updated_at' => '2020-01-24 14:44:40',
             ),
-            77 => 
+            72 => 
             array (
                 'id' => 78,
                 'key' => 'read_brands',
@@ -641,7 +601,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:44:40',
                 'updated_at' => '2020-01-24 14:44:40',
             ),
-            78 => 
+            73 => 
             array (
                 'id' => 79,
                 'key' => 'edit_brands',
@@ -649,7 +609,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:44:40',
                 'updated_at' => '2020-01-24 14:44:40',
             ),
-            79 => 
+            74 => 
             array (
                 'id' => 80,
                 'key' => 'add_brands',
@@ -657,7 +617,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:44:40',
                 'updated_at' => '2020-01-24 14:44:40',
             ),
-            80 => 
+            75 => 
             array (
                 'id' => 81,
                 'key' => 'delete_brands',
@@ -665,7 +625,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:44:40',
                 'updated_at' => '2020-01-24 14:44:40',
             ),
-            81 => 
+            76 => 
             array (
                 'id' => 82,
                 'key' => 'browse_transports',
@@ -673,7 +633,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:47:07',
                 'updated_at' => '2020-01-24 14:47:07',
             ),
-            82 => 
+            77 => 
             array (
                 'id' => 83,
                 'key' => 'read_transports',
@@ -681,7 +641,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:47:07',
                 'updated_at' => '2020-01-24 14:47:07',
             ),
-            83 => 
+            78 => 
             array (
                 'id' => 84,
                 'key' => 'edit_transports',
@@ -689,7 +649,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:47:07',
                 'updated_at' => '2020-01-24 14:47:07',
             ),
-            84 => 
+            79 => 
             array (
                 'id' => 85,
                 'key' => 'add_transports',
@@ -697,7 +657,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:47:07',
                 'updated_at' => '2020-01-24 14:47:07',
             ),
-            85 => 
+            80 => 
             array (
                 'id' => 86,
                 'key' => 'delete_transports',
@@ -705,7 +665,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:47:07',
                 'updated_at' => '2020-01-24 14:47:07',
             ),
-            86 => 
+            81 => 
             array (
                 'id' => 87,
                 'key' => 'browse_packagings',
@@ -713,7 +673,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:49:33',
                 'updated_at' => '2020-01-24 14:49:33',
             ),
-            87 => 
+            82 => 
             array (
                 'id' => 88,
                 'key' => 'read_packagings',
@@ -721,7 +681,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:49:33',
                 'updated_at' => '2020-01-24 14:49:33',
             ),
-            88 => 
+            83 => 
             array (
                 'id' => 89,
                 'key' => 'edit_packagings',
@@ -729,7 +689,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:49:33',
                 'updated_at' => '2020-01-24 14:49:33',
             ),
-            89 => 
+            84 => 
             array (
                 'id' => 90,
                 'key' => 'add_packagings',
@@ -737,7 +697,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:49:33',
                 'updated_at' => '2020-01-24 14:49:33',
             ),
-            90 => 
+            85 => 
             array (
                 'id' => 91,
                 'key' => 'delete_packagings',
@@ -745,7 +705,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:49:33',
                 'updated_at' => '2020-01-24 14:49:33',
             ),
-            91 => 
+            86 => 
             array (
                 'id' => 92,
                 'key' => 'browse_banks',
@@ -753,7 +713,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:50:21',
                 'updated_at' => '2020-01-24 14:50:21',
             ),
-            92 => 
+            87 => 
             array (
                 'id' => 93,
                 'key' => 'read_banks',
@@ -761,7 +721,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:50:21',
                 'updated_at' => '2020-01-24 14:50:21',
             ),
-            93 => 
+            88 => 
             array (
                 'id' => 94,
                 'key' => 'edit_banks',
@@ -769,7 +729,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:50:21',
                 'updated_at' => '2020-01-24 14:50:21',
             ),
-            94 => 
+            89 => 
             array (
                 'id' => 95,
                 'key' => 'add_banks',
@@ -777,7 +737,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:50:21',
                 'updated_at' => '2020-01-24 14:50:21',
             ),
-            95 => 
+            90 => 
             array (
                 'id' => 96,
                 'key' => 'delete_banks',
@@ -785,7 +745,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:50:21',
                 'updated_at' => '2020-01-24 14:50:21',
             ),
-            96 => 
+            91 => 
             array (
                 'id' => 97,
                 'key' => 'browse_rating_products',
@@ -793,7 +753,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:52:36',
                 'updated_at' => '2020-01-24 14:52:36',
             ),
-            97 => 
+            92 => 
             array (
                 'id' => 98,
                 'key' => 'read_rating_products',
@@ -801,7 +761,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:52:36',
                 'updated_at' => '2020-01-24 14:52:36',
             ),
-            98 => 
+            93 => 
             array (
                 'id' => 99,
                 'key' => 'edit_rating_products',
@@ -809,7 +769,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:52:36',
                 'updated_at' => '2020-01-24 14:52:36',
             ),
-            99 => 
+            94 => 
             array (
                 'id' => 100,
                 'key' => 'add_rating_products',
@@ -817,7 +777,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:52:36',
                 'updated_at' => '2020-01-24 14:52:36',
             ),
-            100 => 
+            95 => 
             array (
                 'id' => 101,
                 'key' => 'delete_rating_products',
@@ -825,7 +785,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 14:52:36',
                 'updated_at' => '2020-01-24 14:52:36',
             ),
-            101 => 
+            96 => 
             array (
                 'id' => 102,
                 'key' => 'browse_products',
@@ -833,7 +793,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 15:05:08',
                 'updated_at' => '2020-01-24 15:05:08',
             ),
-            102 => 
+            97 => 
             array (
                 'id' => 103,
                 'key' => 'read_products',
@@ -841,7 +801,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 15:05:08',
                 'updated_at' => '2020-01-24 15:05:08',
             ),
-            103 => 
+            98 => 
             array (
                 'id' => 104,
                 'key' => 'edit_products',
@@ -849,7 +809,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 15:05:08',
                 'updated_at' => '2020-01-24 15:05:08',
             ),
-            104 => 
+            99 => 
             array (
                 'id' => 105,
                 'key' => 'add_products',
@@ -857,7 +817,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 15:05:08',
                 'updated_at' => '2020-01-24 15:05:08',
             ),
-            105 => 
+            100 => 
             array (
                 'id' => 106,
                 'key' => 'delete_products',
@@ -865,7 +825,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 15:05:08',
                 'updated_at' => '2020-01-24 15:05:08',
             ),
-            106 => 
+            101 => 
             array (
                 'id' => 107,
                 'key' => 'browse_sub_categories',
@@ -873,7 +833,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:20:09',
                 'updated_at' => '2020-01-24 16:20:09',
             ),
-            107 => 
+            102 => 
             array (
                 'id' => 108,
                 'key' => 'read_sub_categories',
@@ -881,7 +841,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:20:09',
                 'updated_at' => '2020-01-24 16:20:09',
             ),
-            108 => 
+            103 => 
             array (
                 'id' => 109,
                 'key' => 'edit_sub_categories',
@@ -889,7 +849,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:20:09',
                 'updated_at' => '2020-01-24 16:20:09',
             ),
-            109 => 
+            104 => 
             array (
                 'id' => 110,
                 'key' => 'add_sub_categories',
@@ -897,7 +857,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:20:09',
                 'updated_at' => '2020-01-24 16:20:09',
             ),
-            110 => 
+            105 => 
             array (
                 'id' => 111,
                 'key' => 'delete_sub_categories',
@@ -905,7 +865,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:20:09',
                 'updated_at' => '2020-01-24 16:20:09',
             ),
-            111 => 
+            106 => 
             array (
                 'id' => 117,
                 'key' => 'browse_bank_datas',
@@ -913,7 +873,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 20:10:34',
                 'updated_at' => '2020-01-24 20:10:34',
             ),
-            112 => 
+            107 => 
             array (
                 'id' => 118,
                 'key' => 'read_bank_datas',
@@ -921,7 +881,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 20:10:34',
                 'updated_at' => '2020-01-24 20:10:34',
             ),
-            113 => 
+            108 => 
             array (
                 'id' => 119,
                 'key' => 'edit_bank_datas',
@@ -929,7 +889,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 20:10:34',
                 'updated_at' => '2020-01-24 20:10:34',
             ),
-            114 => 
+            109 => 
             array (
                 'id' => 120,
                 'key' => 'add_bank_datas',
@@ -937,7 +897,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 20:10:34',
                 'updated_at' => '2020-01-24 20:10:34',
             ),
-            115 => 
+            110 => 
             array (
                 'id' => 121,
                 'key' => 'delete_bank_datas',
@@ -945,7 +905,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 20:10:34',
                 'updated_at' => '2020-01-24 20:10:34',
             ),
-            116 => 
+            111 => 
             array (
                 'id' => 122,
                 'key' => 'browse_taxes',
@@ -953,7 +913,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:07:40',
                 'updated_at' => '2020-01-24 21:07:40',
             ),
-            117 => 
+            112 => 
             array (
                 'id' => 123,
                 'key' => 'read_taxes',
@@ -961,7 +921,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:07:40',
                 'updated_at' => '2020-01-24 21:07:40',
             ),
-            118 => 
+            113 => 
             array (
                 'id' => 124,
                 'key' => 'edit_taxes',
@@ -969,7 +929,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:07:40',
                 'updated_at' => '2020-01-24 21:07:40',
             ),
-            119 => 
+            114 => 
             array (
                 'id' => 125,
                 'key' => 'add_taxes',
@@ -977,7 +937,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:07:40',
                 'updated_at' => '2020-01-24 21:07:40',
             ),
-            120 => 
+            115 => 
             array (
                 'id' => 126,
                 'key' => 'delete_taxes',
@@ -985,7 +945,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:07:40',
                 'updated_at' => '2020-01-24 21:07:40',
             ),
-            121 => 
+            116 => 
             array (
                 'id' => 127,
                 'key' => 'browse_orders',
@@ -993,7 +953,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
-            122 => 
+            117 => 
             array (
                 'id' => 128,
                 'key' => 'read_orders',
@@ -1001,7 +961,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
-            123 => 
+            118 => 
             array (
                 'id' => 129,
                 'key' => 'edit_orders',
@@ -1009,7 +969,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
-            124 => 
+            119 => 
             array (
                 'id' => 130,
                 'key' => 'add_orders',
@@ -1017,7 +977,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
-            125 => 
+            120 => 
             array (
                 'id' => 131,
                 'key' => 'delete_orders',
@@ -1025,7 +985,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 21:22:54',
                 'updated_at' => '2020-01-24 21:22:54',
             ),
-            126 => 
+            121 => 
             array (
                 'id' => 137,
                 'key' => 'browse_advs',
@@ -1033,7 +993,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
-            127 => 
+            122 => 
             array (
                 'id' => 138,
                 'key' => 'read_advs',
@@ -1041,7 +1001,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
-            128 => 
+            123 => 
             array (
                 'id' => 139,
                 'key' => 'edit_advs',
@@ -1049,7 +1009,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
-            129 => 
+            124 => 
             array (
                 'id' => 140,
                 'key' => 'add_advs',
@@ -1057,7 +1017,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
-            130 => 
+            125 => 
             array (
                 'id' => 141,
                 'key' => 'delete_advs',
@@ -1065,7 +1025,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-29 02:11:23',
                 'updated_at' => '2020-01-29 02:11:23',
             ),
-            131 => 
+            126 => 
             array (
                 'id' => 142,
                 'key' => 'browse_packages',
@@ -1073,7 +1033,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
-            132 => 
+            127 => 
             array (
                 'id' => 143,
                 'key' => 'read_packages',
@@ -1081,7 +1041,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
-            133 => 
+            128 => 
             array (
                 'id' => 144,
                 'key' => 'edit_packages',
@@ -1089,7 +1049,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
-            134 => 
+            129 => 
             array (
                 'id' => 145,
                 'key' => 'add_packages',
@@ -1097,7 +1057,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
-            135 => 
+            130 => 
             array (
                 'id' => 146,
                 'key' => 'delete_packages',
@@ -1105,7 +1065,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-01-30 12:27:46',
                 'updated_at' => '2020-01-30 12:27:46',
             ),
-            136 => 
+            131 => 
             array (
                 'id' => 147,
                 'key' => 'browse_order_address',
@@ -1113,7 +1073,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
-            137 => 
+            132 => 
             array (
                 'id' => 148,
                 'key' => 'read_order_address',
@@ -1121,7 +1081,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
-            138 => 
+            133 => 
             array (
                 'id' => 149,
                 'key' => 'edit_order_address',
@@ -1129,7 +1089,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
-            139 => 
+            134 => 
             array (
                 'id' => 150,
                 'key' => 'add_order_address',
@@ -1137,7 +1097,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
-            140 => 
+            135 => 
             array (
                 'id' => 151,
                 'key' => 'delete_order_address',
@@ -1145,7 +1105,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-23 21:17:16',
                 'updated_at' => '2020-02-23 21:17:16',
             ),
-            141 => 
+            136 => 
             array (
                 'id' => 152,
                 'key' => 'browse_order_products',
@@ -1153,7 +1113,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
-            142 => 
+            137 => 
             array (
                 'id' => 153,
                 'key' => 'read_order_products',
@@ -1161,7 +1121,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
-            143 => 
+            138 => 
             array (
                 'id' => 154,
                 'key' => 'edit_order_products',
@@ -1169,7 +1129,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
-            144 => 
+            139 => 
             array (
                 'id' => 155,
                 'key' => 'add_order_products',
@@ -1177,7 +1137,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
-            145 => 
+            140 => 
             array (
                 'id' => 156,
                 'key' => 'delete_order_products',
@@ -1185,7 +1145,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 14:38:45',
                 'updated_at' => '2020-02-24 14:38:45',
             ),
-            146 => 
+            141 => 
             array (
                 'id' => 177,
                 'key' => 'browse_orders_status',
@@ -1193,7 +1153,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:28:11',
                 'updated_at' => '2020-02-24 18:28:11',
             ),
-            147 => 
+            142 => 
             array (
                 'id' => 178,
                 'key' => 'read_orders_status',
@@ -1201,7 +1161,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:28:11',
                 'updated_at' => '2020-02-24 18:28:11',
             ),
-            148 => 
+            143 => 
             array (
                 'id' => 179,
                 'key' => 'edit_orders_status',
@@ -1209,7 +1169,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:28:11',
                 'updated_at' => '2020-02-24 18:28:11',
             ),
-            149 => 
+            144 => 
             array (
                 'id' => 180,
                 'key' => 'add_orders_status',
@@ -1217,7 +1177,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:28:11',
                 'updated_at' => '2020-02-24 18:28:11',
             ),
-            150 => 
+            145 => 
             array (
                 'id' => 181,
                 'key' => 'delete_orders_status',
@@ -1225,7 +1185,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 18:28:11',
                 'updated_at' => '2020-02-24 18:28:11',
             ),
-            151 => 
+            146 => 
             array (
                 'id' => 182,
                 'key' => 'browse_trackings',
@@ -1233,7 +1193,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
-            152 => 
+            147 => 
             array (
                 'id' => 183,
                 'key' => 'read_trackings',
@@ -1241,7 +1201,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
-            153 => 
+            148 => 
             array (
                 'id' => 184,
                 'key' => 'edit_trackings',
@@ -1249,7 +1209,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
-            154 => 
+            149 => 
             array (
                 'id' => 185,
                 'key' => 'add_trackings',
@@ -1257,7 +1217,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
-            155 => 
+            150 => 
             array (
                 'id' => 186,
                 'key' => 'delete_trackings',
@@ -1265,7 +1225,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-02-24 19:02:15',
                 'updated_at' => '2020-02-24 19:02:15',
             ),
-            156 => 
+            151 => 
             array (
                 'id' => 187,
                 'key' => 'browse_det_bank_orders',
@@ -1273,7 +1233,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
-            157 => 
+            152 => 
             array (
                 'id' => 188,
                 'key' => 'read_det_bank_orders',
@@ -1281,7 +1241,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
-            158 => 
+            153 => 
             array (
                 'id' => 189,
                 'key' => 'edit_det_bank_orders',
@@ -1289,7 +1249,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
-            159 => 
+            154 => 
             array (
                 'id' => 190,
                 'key' => 'add_det_bank_orders',
@@ -1297,7 +1257,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
-            160 => 
+            155 => 
             array (
                 'id' => 191,
                 'key' => 'delete_det_bank_orders',
@@ -1305,7 +1265,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-26 01:01:30',
                 'updated_at' => '2020-03-26 01:01:30',
             ),
-            161 => 
+            156 => 
             array (
                 'id' => 192,
                 'key' => 'browse_calendars',
@@ -1313,7 +1273,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:41:13',
             ),
-            162 => 
+            157 => 
             array (
                 'id' => 193,
                 'key' => 'read_calendars',
@@ -1321,7 +1281,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:41:13',
             ),
-            163 => 
+            158 => 
             array (
                 'id' => 194,
                 'key' => 'edit_calendars',
@@ -1329,7 +1289,7 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:41:13',
             ),
-            164 => 
+            159 => 
             array (
                 'id' => 195,
                 'key' => 'add_calendars',
@@ -1337,13 +1297,53 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:41:13',
             ),
-            165 => 
+            160 => 
             array (
                 'id' => 196,
                 'key' => 'delete_calendars',
                 'table_name' => 'calendars',
                 'created_at' => '2020-03-31 14:41:13',
                 'updated_at' => '2020-03-31 14:41:13',
+            ),
+            161 => 
+            array (
+                'id' => 197,
+                'key' => 'browse_pages',
+                'table_name' => 'pages',
+                'created_at' => '2020-04-15 20:17:48',
+                'updated_at' => '2020-04-15 20:17:48',
+            ),
+            162 => 
+            array (
+                'id' => 198,
+                'key' => 'read_pages',
+                'table_name' => 'pages',
+                'created_at' => '2020-04-15 20:17:48',
+                'updated_at' => '2020-04-15 20:17:48',
+            ),
+            163 => 
+            array (
+                'id' => 199,
+                'key' => 'edit_pages',
+                'table_name' => 'pages',
+                'created_at' => '2020-04-15 20:17:48',
+                'updated_at' => '2020-04-15 20:17:48',
+            ),
+            164 => 
+            array (
+                'id' => 200,
+                'key' => 'add_pages',
+                'table_name' => 'pages',
+                'created_at' => '2020-04-15 20:17:48',
+                'updated_at' => '2020-04-15 20:17:48',
+            ),
+            165 => 
+            array (
+                'id' => 201,
+                'key' => 'delete_pages',
+                'table_name' => 'pages',
+                'created_at' => '2020-04-15 20:17:48',
+                'updated_at' => '2020-04-15 20:17:48',
             ),
         ));
         

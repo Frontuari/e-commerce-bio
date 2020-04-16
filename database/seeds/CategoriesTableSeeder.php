@@ -349,21 +349,6 @@ class CategoriesTableSeeder extends Seeder
             ),
             22 => 
             array (
-                'id' => 22,
-                'name' => 'LICORES',
-                'description' => NULL,
-                'image' => NULL,
-                'parent_id' => NULL,
-                'order' => 22,
-                'slug' => NULL,
-                'status' => 'A',
-                'c_elementvalue_id_n3' => 1006169,
-                'created_at' => NULL,
-                'updated_at' => '2020-04-14 13:39:47',
-                'adulto' => 'N',
-            ),
-            23 => 
-            array (
                 'id' => 23,
                 'name' => 'CAMPING Y DEPORTE',
                 'description' => NULL,
@@ -377,7 +362,7 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => '2020-04-14 13:39:47',
                 'adulto' => 'N',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 24,
                 'name' => 'AVES CONGELADAS PESABLES',
@@ -392,7 +377,7 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => '2020-04-14 13:39:47',
                 'adulto' => 'N',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 25,
                 'name' => 'VEGETALES NO PESABLES',
@@ -406,6 +391,21 @@ class CategoriesTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => '2020-04-14 13:39:47',
                 'adulto' => 'N',
+            ),
+            25 => 
+            array (
+                'id' => 22,
+                'name' => 'LICORES',
+                'description' => NULL,
+                'image' => 'categories\\April2020\\oU9wjlwIrYbcv2yrjE54.png',
+                'parent_id' => NULL,
+                'order' => 22,
+                'slug' => NULL,
+                'status' => 'A',
+                'c_elementvalue_id_n3' => 1006169,
+                'created_at' => NULL,
+                'updated_at' => '2020-04-16 00:55:14',
+                'adulto' => 'Y',
             ),
         ));
         

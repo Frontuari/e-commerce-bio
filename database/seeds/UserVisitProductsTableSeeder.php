@@ -65,6 +65,78 @@ class UserVisitProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:36:31',
                 'updated_at' => '2020-04-13 16:36:31',
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'products_id' => 905,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 09:39:19',
+                'updated_at' => '2020-04-16 10:07:14',
+            ),
+            7 => 
+            array (
+                'id' => 10,
+                'products_id' => 766,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:12:57',
+                'updated_at' => '2020-04-16 11:14:23',
+            ),
+            8 => 
+            array (
+                'id' => 12,
+                'products_id' => 1000,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:17:51',
+                'updated_at' => '2020-04-16 11:20:24',
+            ),
+            9 => 
+            array (
+                'id' => 13,
+                'products_id' => 998,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:23:44',
+                'updated_at' => '2020-04-16 11:27:22',
+            ),
+            10 => 
+            array (
+                'id' => 9,
+                'products_id' => 843,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:11:21',
+                'updated_at' => '2020-04-16 11:27:51',
+            ),
+            11 => 
+            array (
+                'id' => 14,
+                'products_id' => 666,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:27:52',
+                'updated_at' => '2020-04-16 11:27:54',
+            ),
+            12 => 
+            array (
+                'id' => 11,
+                'products_id' => 973,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:17:46',
+                'updated_at' => '2020-04-16 11:27:57',
+            ),
+            13 => 
+            array (
+                'id' => 15,
+                'products_id' => 696,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:28:00',
+                'updated_at' => '2020-04-16 11:28:02',
+            ),
+            14 => 
+            array (
+                'id' => 8,
+                'products_id' => 1002,
+                'users_id' => 20,
+                'created_at' => '2020-04-16 11:00:43',
+                'updated_at' => '2020-04-16 11:30:00',
+            ),
         ));
         
         

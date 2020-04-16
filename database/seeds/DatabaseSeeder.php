@@ -60,5 +60,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DetSubCategoriesTableSeeder::class);
         $this->call(CalendarsTableSeeder::class);
         $this->call(DetTaxTransportsTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
     }
 }
