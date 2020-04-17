@@ -369,7 +369,7 @@ function loginMovil(){
     $email=$_GET['email'];
     $clave=$_GET['password'];
     
-    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    $row=q("SELECT s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
     INNER JOIN cities c on c.id = p.cities_id
@@ -393,34 +393,57 @@ function guardarPago(){
     $amount=$_GET['amount'];
     $orders_id=$_GET['orders_id'];
     $bank_datas_id=$_GET['bank_datas_id'];
-    $ref=$_GET['ref'];
+    $ref=trim($_GET['ref']);
+    $coins_id=$_GET['coins_id'];
     $status='nuevo';
-    if($ref==''){
+
+    if($ref=='null'){
+       
         $ref="EFECTIVO";
         $status='efectivo';
     }
+    
+    //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
+    $diferencia_aceptable=0;
+    if($coins_id==1){ //dolares
+        $diferencia_aceptable=convertir_a_bs($coins_id,0.01);
+        $sumar_sql="+$diferencia_aceptable";
+       
+    }
+    //----------------------
     $users_id=$_SESSION['usuario']['id'];
    // $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay>=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
     //exit($sql);
     q("BEGIN");
-    $sql="INSERT INTO det_bank_orders (status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
+    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
    // exit($sql);
     $arr=q($sql);
     if(is_array($arr)) $pagoAbonado=true;
 
-    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
+    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
+    //exit($sql);
     $arr=q($sql);
 
     if(is_array($arr)){
         $order_status_id=4;
         $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+        //primera compra
+        if($_SESSION['usuario']['purchase_quantity']==0){
+            $_SESSION['usuario']['purchase_quantity']=1;
+            enviarPaginaCorreo(4,$_SESSION['usuario']['email']);
+        }
     }else{
-        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id))";
+        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))";
     
         $arr=q($sql);
         if(is_array($arr)){
             $order_status_id=2;
             $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+            //primera compra
+            if($_SESSION['usuario']['purchase_quantity']==0){
+                $_SESSION['usuario']['purchase_quantity']=1;
+                enviarPaginaCorreo(4,$_SESSION['usuario']['email']);
+            }
         }
     }
    // exit();
@@ -431,10 +454,18 @@ function guardarPago(){
          salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
 }
+function convertir_a_bs($coins_id,$value){
+    $arr=q("SELECT rate FROM coins WHERE id='$coins_id'");
+    if(is_array($arr)){
+        return $arr[0]['rate']*$value;
+    }else{
+        return 0;
+    }
+}
 function totalPagar(){
     $orders_id=$_GET['orders_id'];
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT total_pay,total_packaging,total_transport,rate_json, 
+    $sql="SELECT (SELECT orders_status_id FROM trackings WHERE id=(SELECT MAX(t.id) FROM trackings t WHERE t.orders_id='$orders_id')) as order_status, total_pay,total_packaging,total_transport,rate_json, 
     (SELECT json_agg(
                 json_build_object(
                 'id', dbo.id, 
@@ -460,7 +491,9 @@ function cancelarOrden(){
     $orders_id=$_GET['orders_id'];
     $orders_status_id=11;
    // salidaNueva(null,"SELECT 1 FROM orders WHERE orders_id=$orders_id AND users_id=$users_id",false);
-    $arr=q("SELECT 1 FROM orders WHERE id=$orders_id AND users_id=$users_id");//SEGURIDAD
+   $sql="SELECT 1 FROM orders WHERE id=$orders_id AND users_id=$users_id AND ((SELECT orders_status_id FROM trackings WHERE id=(SELECT MAX(t.id) FROM trackings t WHERE t.orders_id='$orders_id'))=1)";
+  
+    $arr=q($sql);//SEGURIDAD
     if(is_array($arr)){
       
         $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
@@ -469,6 +502,8 @@ function cancelarOrden(){
         }else{
                 salidaNueva(null,"Disculpe, no podemos cancelar su orden",false);
         }  
+    }else{
+        salidaNueva(null,"Disculpe, no podemos cancelar su orden",false);
     }
 }
 function comprobarDia($diaComprobar,$horaComprobar,$arrs){

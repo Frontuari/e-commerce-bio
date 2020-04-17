@@ -65,29 +65,6 @@ class UsersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 14,
-                'last_ip' => NULL,
-                'last_activity' => '2020-01-23 14:45:09',
-                'password' => '$2y$10$DnkYjEZbSX9hUlRYgQvlMOKhZNs0PRVmcn/t6RAj3dyxxSX48xnni',
-                'cant_orders' => 0,
-                'peoples_id' => NULL,
-                'coins_id' => NULL,
-                'groups_id' => NULL,
-                'name' => 'Administrador',
-                'email' => 'admin751@admin.com',
-                'validateemail' => NULL,
-                'email_verified_at' => NULL,
-                'failed_attempts' => 0,
-                'purchase_quantity' => 0,
-                'remember_token' => 'arB1fc5tW5pnQ0QhFUOnoUUC0c1sAOhJZ5jmDQrBlf6OiWTlQ6k8WFdT5pN7',
-                'created_at' => '2020-01-23 18:45:09',
-                'updated_at' => '2020-04-13 21:54:13',
-                'avatar' => 'users/default.png',
-                'role_id' => 3,
-                'settings' => '{"locale":"es"}',
-            ),
-            3 => 
-            array (
                 'id' => 13,
                 'last_ip' => NULL,
                 'last_activity' => '2020-01-22 23:04:38',
@@ -109,7 +86,7 @@ class UsersTableSeeder extends Seeder
                 'role_id' => 1,
                 'settings' => '{"locale":"es"}',
             ),
-            4 => 
+            3 => 
             array (
                 'id' => 18,
                 'last_ip' => NULL,
@@ -132,7 +109,7 @@ class UsersTableSeeder extends Seeder
                 'role_id' => NULL,
                 'settings' => NULL,
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 20,
                 'last_ip' => NULL,
@@ -154,6 +131,29 @@ class UsersTableSeeder extends Seeder
                 'avatar' => 'users/default.png',
                 'role_id' => NULL,
                 'settings' => NULL,
+            ),
+            5 => 
+            array (
+                'id' => 14,
+                'last_ip' => NULL,
+                'last_activity' => '2020-01-23 14:45:09',
+                'password' => '$2y$10$DnkYjEZbSX9hUlRYgQvlMOKhZNs0PRVmcn/t6RAj3dyxxSX48xnni',
+                'cant_orders' => 0,
+                'peoples_id' => NULL,
+                'coins_id' => NULL,
+                'groups_id' => NULL,
+                'name' => 'Administrador',
+                'email' => 'admin751@admin.com',
+                'validateemail' => NULL,
+                'email_verified_at' => NULL,
+                'failed_attempts' => 0,
+                'purchase_quantity' => 0,
+                'remember_token' => 'NGvCDEanDp9cCOIwQAo3il8AnkVSdES0es9q4XsK3KneLp8HMSqhwGnfwHnK',
+                'created_at' => '2020-01-23 18:45:09',
+                'updated_at' => '2020-04-13 21:54:13',
+                'avatar' => 'users/default.png',
+                'role_id' => 3,
+                'settings' => '{"locale":"es"}',
             ),
         ));
         

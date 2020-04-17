@@ -1371,32 +1371,6 @@ class ProductsTableSeeder extends Seeder
             ),
             52 => 
             array (
-                'id' => 1210,
-                'name' => 'SCHOCO BARRA CHOCOLATE CARAMELO SCHOCO 22GR 2683',
-                'description_short' => 'SCHOCO BARRA CHOCOLATE CARAMELO SCHOCO 22GR 2683',
-                'description' => NULL,
-                'price' => '18207.860000',
-                'qty_avaliable' => 22,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 35864,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            53 => 
-            array (
                 'id' => 1211,
                 'name' => 'VALE LIMPIADOR ANTIBACTERIAL LIMON 1LT',
                 'description_short' => 'VALE LIMPIADOR ANTIBACTERIAL LIMON 1LT',
@@ -1421,7 +1395,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 1212,
                 'name' => 'DEL REY MAYONESA  200 GR',
@@ -1447,7 +1421,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 1028,
                 'name' => 'KRAFT MAYONESA REG 275GR',
@@ -1473,7 +1447,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            56 => 
+            55 => 
             array (
                 'id' => 1029,
                 'name' => 'VATEL SOYA 500ML',
@@ -1499,7 +1473,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            57 => 
+            56 => 
             array (
                 'id' => 1030,
                 'name' => '100 PIPERS WHISKY 750ML',
@@ -1525,7 +1499,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            58 => 
+            57 => 
             array (
                 'id' => 1031,
                 'name' => 'ACE BLANCO DIAMANTES 400GR',
@@ -1551,7 +1525,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            59 => 
+            58 => 
             array (
                 'id' => 1215,
                 'name' => 'SET  DE MAQUILLAJE MODELO VIOLIN B-1906060',
@@ -1577,7 +1551,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            60 => 
+            59 => 
             array (
                 'id' => 1216,
                 'name' => 'SLIME LMUD BOTELLA CRISTAL B-1906195',
@@ -1603,7 +1577,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            61 => 
+            60 => 
             array (
                 'id' => 1217,
                 'name' => 'FIT ANTIBACTERIAL BIO NARANJA 1.5 L',
@@ -1629,7 +1603,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            62 => 
+            61 => 
             array (
                 'id' => 1218,
                 'name' => '..VALE MULTIUSO EN POLVO MANZANA 2.7GR',
@@ -1655,7 +1629,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            63 => 
+            62 => 
             array (
                 'id' => 1219,
                 'name' => 'DONA ALICIA ARROZ BLANCO TIPO I DE 1 KG',
@@ -1681,7 +1655,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 1222,
                 'name' => 'DEMASA EXTRASUAVE HARINA MAIZ 1 KG',
@@ -1707,7 +1681,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 1223,
                 'name' => 'SINDONI CORTADO DITALINI 1KG',
@@ -1733,7 +1707,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 1224,
                 'name' => 'YAYO TOYS NINJAGO SET 54/57/62/63 PZS SURTIDOS',
@@ -1759,7 +1733,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 1225,
                 'name' => 'YAYO TOYS NINJAGO SET 57/57/59/63 PZS SURTIDOS',
@@ -1785,7 +1759,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 1226,
                 'name' => 'SET MESA MECANICO DE LUJO B-1906280',
@@ -1811,7 +1785,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 1227,
                 'name' => 'BELL TOALLITAS HUMEDAS 40UND',
@@ -1837,7 +1811,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 1228,
                 'name' => 'HASBRO PISTOLA NERF LANZADOR DE DARDOS IONFIRE B4618',
@@ -1863,7 +1837,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 1229,
                 'name' => 'EL PRIMO SARDINA EN ACEITE VEG 270GR',
@@ -1889,7 +1863,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 1230,
                 'name' => 'VALE MULTIUSO EN POLVO MANZANA 4.5GR',
@@ -1915,7 +1889,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 1251,
                 'name' => 'POLLO ALAS XKG',
@@ -1941,7 +1915,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            74 => 
+            73 => 
             array (
                 'id' => 989,
                 'name' => 'HOLSUM PERRO CALIENTE JUMBO',
@@ -1967,7 +1941,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            75 => 
+            74 => 
             array (
                 'id' => 1068,
                 'name' => 'NIVEA CREMA ACLARADORA NOCHE 50ML',
@@ -1993,7 +1967,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 896,
                 'name' => 'MELON CRIOLLO XKG',
@@ -2019,7 +1993,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 977,
                 'name' => 'MI VAQUITA MOZZARELLA XKG',
@@ -2045,33 +2019,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            78 => 
-            array (
-                'id' => 979,
-                'name' => 'MIMO CHAMPIÑONES LAMINADOS 355GR',
-                'description_short' => 'MIMO CHAMPIÑONES LAMINADOS 355GR',
-                'description' => NULL,
-                'price' => '462816.350000',
-                'qty_avaliable' => 6,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 25179,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            79 => 
+            77 => 
             array (
                 'id' => 980,
                 'name' => 'SUPER-MAX 2 - MAQUINAS DE AFEITAR CONFORTGRIP AD110',
@@ -2097,7 +2045,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            80 => 
+            78 => 
             array (
                 'id' => 981,
                 'name' => 'VALE MULTIUSO EN POLVO FRAG LAVANDA SILVESTRE 900GR',
@@ -2123,7 +2071,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            81 => 
+            79 => 
             array (
                 'id' => 982,
                 'name' => 'FIT LAVATODO OCEANICO 375CC',
@@ -2149,7 +2097,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            82 => 
+            80 => 
             array (
                 'id' => 983,
                 'name' => 'HEINZ SALSA AJO 150 CC',
@@ -2175,7 +2123,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            83 => 
+            81 => 
+            array (
+                'id' => 979,
+                'name' => 'MIMO CHAMPIÑONES LAMINADOS 355GR',
+                'description_short' => 'MIMO CHAMPIÑONES LAMINADOS 355GR',
+                'description' => NULL,
+                'price' => '462816.350000',
+                'qty_avaliable' => 6,
+                'qty_sold' => 0,
+                'qty_view' => 2,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 25179,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            82 => 
             array (
                 'id' => 984,
                 'name' => 'YAYO TOYS JUEGO BRIGADA/INCENDIO 59PZS',
@@ -2201,7 +2175,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 985,
                 'name' => 'PUREX DETERGENTE POLVO FRAGANCIA ORIGINAL 2KG',
@@ -2227,7 +2201,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 986,
                 'name' => 'GRAN RESERVA RON SANTA TERESA 750ML',
@@ -2253,7 +2227,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 987,
                 'name' => 'EL SUINO JAMON AREPERO XKG',
@@ -2279,7 +2253,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 1231,
                 'name' => 'HEINZ SALSA BOLOGNESA 495GR',
@@ -2305,7 +2279,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 1232,
                 'name' => 'YAYO TOYS COLECCION CARS BOMBEROS VINIL REFTPT-083490',
@@ -2331,7 +2305,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 1233,
                 'name' => 'MUÑECA SIRENITA B-1906795',
@@ -2357,33 +2331,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            90 => 
-            array (
-                'id' => 1234,
-                'name' => '..VALE LAVATODO MULTIUSO LIMON 800CC',
-                'description_short' => '..VALE LAVATODO MULTIUSO LIMON 800CC',
-                'description' => NULL,
-                'price' => '141606.840000',
-                'qty_avaliable' => 1,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 19927,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            91 => 
+            89 => 
             array (
                 'id' => 1235,
                 'name' => 'AVENGER PERSONAJES VARIOS B-1906779',
@@ -2409,7 +2357,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            92 => 
+            90 => 
             array (
                 'id' => 1236,
                 'name' => 'GUARICO BOMBILLO 60 W INCANDENCENTE',
@@ -2435,7 +2383,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            93 => 
+            91 => 
             array (
                 'id' => 1237,
                 'name' => 'FIT ANTIBACTERIAL BIO OCEANICO 1.5 L',
@@ -2461,7 +2409,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            94 => 
+            92 => 
             array (
                 'id' => 1239,
                 'name' => 'LAGARTO LA REYNA GUISAR XKG',
@@ -2487,7 +2435,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            95 => 
+            93 => 
             array (
                 'id' => 1240,
                 'name' => 'YAYO TOYS NINJAGO SET 72/79/97/121 PZS SURTIDOS',
@@ -2513,7 +2461,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            96 => 
+            94 => 
             array (
                 'id' => 1241,
                 'name' => 'PRINCESA CLUB GALLETA REGULAR EXPORT 306GR',
@@ -2539,7 +2487,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            97 => 
+            95 => 
             array (
                 'id' => 1242,
                 'name' => 'YAYO TOYS JUEGO PATRULLA POLICIA 88PZS',
@@ -2565,7 +2513,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            98 => 
+            96 => 
             array (
                 'id' => 668,
                 'name' => ' FIT DESENGRASANTE MULTISUPERFICIE DEGREASER 650ML',
@@ -2591,7 +2539,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            99 => 
+            97 => 
             array (
                 'id' => 669,
                 'name' => '..VALE LAVATODO LIMON 500 CM3',
@@ -2617,7 +2565,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            100 => 
+            98 => 
             array (
                 'id' => 671,
                 'name' => 'FRESCALIDAD YUCA CONGELADA 1KG',
@@ -2643,7 +2591,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            101 => 
+            99 => 
             array (
                 'id' => 673,
                 'name' => 'AMALFI BABY CHAMPU CAMOMILA 415ML',
@@ -2669,7 +2617,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            102 => 
+            100 => 
             array (
                 'id' => 836,
                 'name' => 'SALT VIP ORIGINAL 156GR',
@@ -2695,7 +2643,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            103 => 
+            101 => 
             array (
                 'id' => 1115,
                 'name' => 'BAYGONGREEN CIK AEROSOL 235ML',
@@ -2721,7 +2669,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            104 => 
+            102 => 
             array (
                 'id' => 1116,
                 'name' => 'PLAGATOX INSECTICIDA EN POLVO MATA HORMIGAS 150GR',
@@ -2747,7 +2695,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            105 => 
+            103 => 
             array (
                 'id' => 1117,
                 'name' => 'GATORADE SABORES SURTIDOS 355ML 4859',
@@ -2773,7 +2721,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            106 => 
+            104 => 
             array (
                 'id' => 1118,
                 'name' => 'ALIDENT CREMA DENTAL CON BLANQUEADOR 100GR',
@@ -2799,7 +2747,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            107 => 
+            105 => 
             array (
                 'id' => 1119,
                 'name' => 'VALE MULTIUSO EN POLVO LAVANDA 4.5GR',
@@ -2825,7 +2773,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            108 => 
+            106 => 
             array (
                 'id' => 1121,
                 'name' => 'FRAPELLA CREMA DE PISTACHO ENVASE 55GR 5123',
@@ -2851,7 +2799,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            109 => 
+            107 => 
             array (
                 'id' => 1122,
                 'name' => 'ZERO GATORADE SABORES SURTIDOS SIN AZUCAR 355ML 3578',
@@ -2877,7 +2825,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            110 => 
+            108 => 
             array (
                 'id' => 1123,
                 'name' => 'MINALBA SPARKLING PET 500ML',
@@ -2903,7 +2851,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            111 => 
+            109 => 
             array (
                 'id' => 1124,
                 'name' => 'MARY PRIMIUM PASTA LARGA VERMICELLI 500GR',
@@ -2929,7 +2877,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            112 => 
+            110 => 
             array (
                 'id' => 1125,
                 'name' => 'EL GUAMITO QUESO BLANCO ESPECIAL BUF XKG',
@@ -2955,7 +2903,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            113 => 
+            111 => 
             array (
                 'id' => 1126,
                 'name' => 'EL GRANAL AZUCAR REFINADA 1KG',
@@ -2981,7 +2929,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            114 => 
+            112 => 
             array (
                 'id' => 1127,
                 'name' => 'DONA ANA AZUCAR REFINADA 1KG',
@@ -3007,7 +2955,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            115 => 
+            113 => 
             array (
                 'id' => 1128,
                 'name' => 'MUÑECA FASHION GIRL UNIQUE 1109',
@@ -3033,7 +2981,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            116 => 
+            114 => 
             array (
                 'id' => 1129,
                 'name' => 'CASA BLANCA QUESO MOZZARELLA XKG',
@@ -3059,7 +3007,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            117 => 
+            115 => 
             array (
                 'id' => 1130,
                 'name' => 'JUANA HARINA MAIZ EXT/SUAVE 1 KG',
@@ -3085,7 +3033,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            118 => 
+            116 => 
             array (
                 'id' => 1131,
                 'name' => 'EL PUERTO ACEITE OLEINA DE PALMA 1LT',
@@ -3111,7 +3059,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            119 => 
+            117 => 
             array (
                 'id' => 1132,
                 'name' => 'VENMENTAL QUESO BOLA XKG',
@@ -3137,7 +3085,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            120 => 
+            118 => 
             array (
                 'id' => 1243,
                 'name' => 'RENDIDORA MAYONESA 445GR',
@@ -3163,7 +3111,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            121 => 
+            119 => 
             array (
                 'id' => 1244,
                 'name' => 'KIERO GUISANTES AL NATURAL 220GR',
@@ -3189,7 +3137,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            122 => 
+            120 => 
             array (
                 'id' => 1245,
                 'name' => 'ALIDENT CREMA DENTAL SENSITIVE 100GR',
@@ -3215,23 +3163,23 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            123 => 
+            121 => 
             array (
-                'id' => 1246,
-                'name' => 'CARRO MULTI POSICION CON VIBRACION B-1906807',
-                'description_short' => 'CARRO MULTI POSICION CON VIBRACION B-1906807',
+                'id' => 1234,
+                'name' => '..VALE LAVATODO MULTIUSO LIMON 800CC',
+                'description_short' => '..VALE LAVATODO MULTIUSO LIMON 800CC',
                 'description' => NULL,
-                'price' => '1631990.000000',
-                'qty_avaliable' => 1,
+                'price' => '141606.840000',
+                'qty_avaliable' => 0,
                 'qty_sold' => 0,
-                'qty_view' => 0,
+                'qty_view' => 2,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
                 'keyword' => NULL,
                 'status' => 'A',
                 'EAN' => NULL,
-                'sku' => 34616,
+                'sku' => 19927,
                 'promote' => 0,
                 'discount' => '0.000000',
                 'photo' => NULL,
@@ -3241,7 +3189,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            124 => 
+            122 => 
             array (
                 'id' => 1247,
                 'name' => 'NESTLE ESPECIALIDADES 30X300GR',
@@ -3267,33 +3215,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            125 => 
-            array (
-                'id' => 1248,
-                'name' => 'JUVIOTE CAFE GOURMET MOLIDO 500GR',
-                'description_short' => 'JUVIOTE CAFE GOURMET MOLIDO 500GR',
-                'description' => NULL,
-                'price' => '118125.000000',
-                'qty_avaliable' => 2,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 24656,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            126 => 
+            123 => 
             array (
                 'id' => 1249,
                 'name' => 'NATURALYST SALSA PARA PIZZA 500GR',
@@ -3319,7 +3241,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            127 => 
+            124 => 
             array (
                 'id' => 1250,
                 'name' => 'YAYO TOYS JUEGO SUPER HERO BATMAN 185PZS',
@@ -3345,7 +3267,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            128 => 
+            125 => 
             array (
                 'id' => 1108,
                 'name' => 'VILLAGE PANETTONE FRUTAS 400G',
@@ -3371,7 +3293,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            129 => 
+            126 => 
             array (
                 'id' => 934,
                 'name' => 'LIPTON TE DURAZNO 500ML',
@@ -3397,33 +3319,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            130 => 
-            array (
-                'id' => 1032,
-                'name' => 'KIERO SALSA TOMATE KETCHUP C/PEPINILLO 397 GR',
-                'description_short' => 'KIERO SALSA TOMATE KETCHUP C/PEPINILLO 397 GR',
-                'description' => NULL,
-                'price' => '112470.120000',
-                'qty_avaliable' => 160,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 27181,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            131 => 
+            127 => 
             array (
                 'id' => 1033,
                 'name' => 'LINDA MORA MERLOT MALBEC 750ML VT',
@@ -3449,7 +3345,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            132 => 
+            128 => 
             array (
                 'id' => 1034,
                 'name' => 'FIT LAVATODO NARANJA CITRICA 800CC',
@@ -3475,7 +3371,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            133 => 
+            129 => 
             array (
                 'id' => 1035,
                 'name' => 'CUADRITOS TOCINETA XKG',
@@ -3501,7 +3397,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            134 => 
+            130 => 
             array (
                 'id' => 1036,
                 'name' => 'PANADERIA EL MANA PAN HAMBURGUESA AJONJOLI 500GR',
@@ -3527,33 +3423,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            135 => 
-            array (
-                'id' => 1037,
-                'name' => 'INFUSION NATURALGRIPDEL ANTIGRIPAL 20GR',
-                'description_short' => 'INFUSION NATURALGRIPDEL ANTIGRIPAL 20GR',
-                'description' => NULL,
-                'price' => '175657.140000',
-                'qty_avaliable' => 1,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 21679,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            136 => 
+            131 => 
             array (
                 'id' => 1038,
                 'name' => 'MINALBA AGUA 355ML',
@@ -3579,7 +3449,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            137 => 
+            132 => 
             array (
                 'id' => 1039,
                 'name' => 'PAMPERS JUEGOS Y SUENOS MED 24 UND',
@@ -3605,7 +3475,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            138 => 
+            133 => 
             array (
                 'id' => 1040,
                 'name' => 'CILANTRO XKG',
@@ -3631,7 +3501,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            139 => 
+            134 => 
             array (
                 'id' => 1041,
                 'name' => 'KLARIS DETERGENTE LIQUIDO 1 LT ',
@@ -3657,7 +3527,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            140 => 
+            135 => 
             array (
                 'id' => 1042,
                 'name' => '..VALE MULTIUSO EN POLVO FRAG PODER LIMON 900GR',
@@ -3683,7 +3553,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            141 => 
+            136 => 
             array (
                 'id' => 1043,
                 'name' => 'SAVOY CHOCOLATE OSCURO 75 ANIVERSARIO 100 GR',
@@ -3709,7 +3579,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            142 => 
+            137 => 
             array (
                 'id' => 1044,
                 'name' => 'MONOPATIN COLORES B-1906488',
@@ -3735,7 +3605,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            143 => 
+            138 => 
             array (
                 'id' => 1045,
                 'name' => 'EDMAG SAL MARINA RANCHERA 220GR',
@@ -3761,7 +3631,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            144 => 
+            139 => 
             array (
                 'id' => 1046,
                 'name' => 'YAYO TOYS JUEGO ARMABLE SUPER HEROES SET 60/63/84/93 PZS TPT-826648',
@@ -3787,7 +3657,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            145 => 
+            140 => 
             array (
                 'id' => 803,
                 'name' => 'CHOCORESCO GALLETA 60GR',
@@ -3813,7 +3683,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            146 => 
+            141 => 
             array (
                 'id' => 877,
                 'name' => 'BROCOLI XKG',
@@ -3839,7 +3709,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            147 => 
+            142 => 
             array (
                 'id' => 727,
                 'name' => 'QIIN GALLETA WAFER FRESA EXPORT 259GR',
@@ -3865,7 +3735,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            148 => 
+            143 => 
             array (
                 'id' => 728,
                 'name' => 'HACIENDA GUASACACA PICANTE 500GR',
@@ -3891,7 +3761,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            149 => 
+            144 => 
             array (
                 'id' => 729,
                 'name' => 'DORITOS MEGA QUESO 150GR',
@@ -3917,7 +3787,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            150 => 
+            145 => 
             array (
                 'id' => 1133,
                 'name' => 'SAGRADA CENA VINO BLANCO 070L',
@@ -3943,7 +3813,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            151 => 
+            146 => 
             array (
                 'id' => 1134,
                 'name' => 'AMALFI PRE TRATAMIENTO CAPILAR HIDRATANTE 1250ML',
@@ -3969,7 +3839,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            152 => 
+            147 => 
             array (
                 'id' => 1135,
                 'name' => 'NATURALYS CARAOTAS NEGRAS ALIÑADAS 220 GR',
@@ -3995,7 +3865,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            153 => 
+            148 => 
             array (
                 'id' => 1136,
                 'name' => 'FRITZ PAPAS 200GR',
@@ -4021,7 +3891,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            154 => 
+            149 => 
             array (
                 'id' => 773,
                 'name' => 'PLATANO XKG',
@@ -4047,7 +3917,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            155 => 
+            150 => 
             array (
                 'id' => 991,
                 'name' => 'PEPSI COLA REFRESCO LIGHT 2LT',
@@ -4073,7 +3943,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            156 => 
+            151 => 
             array (
                 'id' => 992,
                 'name' => 'NESTEA LIMON BOLSA 450GR',
@@ -4099,7 +3969,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            157 => 
+            152 => 
             array (
                 'id' => 993,
                 'name' => 'GOLDEN REFRESCO KOLA 1500ML',
@@ -4125,7 +3995,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            158 => 
+            153 => 
             array (
                 'id' => 995,
                 'name' => 'TEN ANTIBACTERIAL JABON DE TOCADOR 100 GR',
@@ -4151,7 +4021,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            159 => 
+            154 => 
             array (
                 'id' => 996,
                 'name' => 'MAVESA  MARGARINA  500GR',
@@ -4177,7 +4047,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            160 => 
+            155 => 
             array (
                 'id' => 997,
                 'name' => 'KULWAP MAYONESA 225GR',
@@ -4203,7 +4073,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            161 => 
+            156 => 
             array (
                 'id' => 634,
                 'name' => 'PARISINA PAN BASE PIZZA FAMILIAR 2UND ',
@@ -4229,7 +4099,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            162 => 
+            157 => 
             array (
                 'id' => 635,
                 'name' => 'NATURALYST SALSA NAPOLITANA 200GR',
@@ -4255,7 +4125,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            163 => 
+            158 => 
             array (
                 'id' => 670,
                 'name' => 'NARANJA JUGO XKG',
@@ -4281,7 +4151,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            164 => 
+            159 => 
             array (
                 'id' => 999,
                 'name' => 'ARIEL DETERGENTE PERLAS LIMPIADORAS 500GR ',
@@ -4307,7 +4177,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            165 => 
+            160 => 
             array (
                 'id' => 862,
                 'name' => 'OLD PARR SINGLE PACK 750ML',
@@ -4333,7 +4203,59 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            166 => 
+            161 => 
+            array (
+                'id' => 1032,
+                'name' => 'KIERO SALSA TOMATE KETCHUP C/PEPINILLO 397 GR',
+                'description_short' => 'KIERO SALSA TOMATE KETCHUP C/PEPINILLO 397 GR',
+                'description' => NULL,
+                'price' => '112470.120000',
+                'qty_avaliable' => 158,
+                'qty_sold' => 0,
+                'qty_view' => 2,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 27181,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            162 => 
+            array (
+                'id' => 1248,
+                'name' => 'JUVIOTE CAFE GOURMET MOLIDO 500GR',
+                'description_short' => 'JUVIOTE CAFE GOURMET MOLIDO 500GR',
+                'description' => NULL,
+                'price' => '118125.000000',
+                'qty_avaliable' => 0,
+                'qty_sold' => 0,
+                'qty_view' => 1,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 24656,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            163 => 
             array (
                 'id' => 1079,
                 'name' => 'LISMA 6 ROLLOS DOBLE HOJA',
@@ -4359,7 +4281,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            167 => 
+            164 => 
             array (
                 'id' => 1137,
                 'name' => 'JOLLYBAR BARRA CHOCOLATE RELLENO FRESA 22GR 2702',
@@ -4385,7 +4307,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            168 => 
+            165 => 
             array (
                 'id' => 1138,
                 'name' => 'FIT ANTIBACTERIAL TERNURA DE BEBE 1.5 L',
@@ -4411,7 +4333,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            169 => 
+            166 => 
             array (
                 'id' => 1139,
                 'name' => 'SOLOMO ABIERTO MOLIDO XKG',
@@ -4437,7 +4359,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            170 => 
+            167 => 
             array (
                 'id' => 1141,
                 'name' => 'LESMI ENCURTIDOS EN VINAGRE 300GR',
@@ -4463,7 +4385,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            171 => 
+            168 => 
             array (
                 'id' => 1142,
                 'name' => 'LISMA SERVILLETAS PAQ X 100UND',
@@ -4489,7 +4411,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            172 => 
+            169 => 
             array (
                 'id' => 1143,
                 'name' => 'BRANGER 1783 CAFE GOURMET 500 GR',
@@ -4515,7 +4437,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            173 => 
+            170 => 
             array (
                 'id' => 1144,
                 'name' => 'GABY MAIZ COTUFA 400GR',
@@ -4541,7 +4463,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            174 => 
+            171 => 
             array (
                 'id' => 1145,
                 'name' => 'CASA BLANCA QUESO AMARILLO XKG',
@@ -4567,7 +4489,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            175 => 
+            172 => 
             array (
                 'id' => 1146,
                 'name' => 'GERBER PASO 2 COLADO MANZANA 113GR',
@@ -4593,7 +4515,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            176 => 
+            173 => 
             array (
                 'id' => 1147,
                 'name' => 'LESMI ENCURTIDOS EN VINAGRE 500 GR',
@@ -4619,7 +4541,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            177 => 
+            174 => 
             array (
                 'id' => 1148,
                 'name' => 'ALIDENT CREMA DENTAL KIDS NINO 100 GR',
@@ -4645,7 +4567,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            178 => 
+            175 => 
             array (
                 'id' => 1149,
                 'name' => 'PAPA JACKS SAL 100GR',
@@ -4671,7 +4593,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            179 => 
+            176 => 
             array (
                 'id' => 1150,
                 'name' => 'EVERVESS SODA PSH 250ML',
@@ -4697,7 +4619,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            180 => 
+            177 => 
             array (
                 'id' => 1151,
                 'name' => 'NIVEA GEL LIMP EQUILIBRANTE P/MIXTA A GRASA 150ML',
@@ -4723,7 +4645,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            181 => 
+            178 => 
             array (
                 'id' => 1153,
                 'name' => 'YAYO TOYS JUEGO BRIGADA FORESTAL 113PZS',
@@ -4749,7 +4671,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            182 => 
+            179 => 
             array (
                 'id' => 1154,
                 'name' => 'MERU SAL FINA X 1KG',
@@ -4775,7 +4697,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            183 => 
+            180 => 
             array (
                 'id' => 1155,
                 'name' => 'PEQUEÑO PONY B-1906229',
@@ -4801,7 +4723,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            184 => 
+            181 => 
             array (
                 'id' => 911,
                 'name' => 'PEREJIL LISO XKG',
@@ -4827,7 +4749,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            185 => 
+            182 => 
             array (
                 'id' => 1048,
                 'name' => 'CHAMBE SARDINA ACEITE 260GR',
@@ -4853,7 +4775,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            186 => 
+            183 => 
             array (
                 'id' => 1049,
                 'name' => 'VILLAGE PANETTONE TRUFADO CHOCOLATE 500G',
@@ -4879,7 +4801,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            187 => 
+            184 => 
             array (
                 'id' => 1050,
                 'name' => 'MAVESA MAYONESA  175 GR',
@@ -4905,7 +4827,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            188 => 
+            185 => 
             array (
                 'id' => 1051,
                 'name' => 'LIPTON TE LIMON 270GR',
@@ -4931,7 +4853,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            189 => 
+            186 => 
             array (
                 'id' => 1052,
                 'name' => 'QUIDY MAYONESA 445GR',
@@ -4957,7 +4879,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            190 => 
+            187 => 
             array (
                 'id' => 1053,
                 'name' => 'POWERADE FRUTAS TROPICALES 500ML',
@@ -4983,7 +4905,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            191 => 
+            188 => 
             array (
                 'id' => 1055,
                 'name' => 'MUM DESODORANTE ROLL ON LAVANDA 90GR',
@@ -5009,7 +4931,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            192 => 
+            189 => 
             array (
                 'id' => 1056,
                 'name' => 'MUÑECO BAILA COLORES VARIOS B-1906487',
@@ -5035,7 +4957,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            193 => 
+            190 => 
             array (
                 'id' => 1057,
                 'name' => 'PLAGATOX INSECTICIDA LIQUIDO ESPACIAL REPUESTO 500CC',
@@ -5061,7 +4983,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            194 => 
+            191 => 
             array (
                 'id' => 1058,
                 'name' => 'CROWN PRINCE FILET D/ANCHOA ACEITE DE OLIVA 56GR',
@@ -5087,7 +5009,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            195 => 
+            192 => 
             array (
                 'id' => 1060,
                 'name' => 'MAGROS PECHUGA POLLO XKG',
@@ -5113,7 +5035,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            196 => 
+            193 => 
             array (
                 'id' => 1061,
                 'name' => 'VILLAGE PANETTONE CHOCOLATE 400G',
@@ -5139,7 +5061,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            197 => 
+            194 => 
             array (
                 'id' => 1062,
                 'name' => 'MONICA ARROZ BLANCO TIPO I DE 1 KG',
@@ -5165,7 +5087,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            198 => 
+            195 => 
             array (
                 'id' => 1063,
                 'name' => 'ALIDENT CREMA DENTAL KIDS NINA 100 GR',
@@ -5191,7 +5113,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            199 => 
+            196 => 
             array (
                 'id' => 1064,
                 'name' => 'FIT LIMPIADOR BIO LIMON 940ML',
@@ -5217,7 +5139,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            200 => 
+            197 => 
             array (
                 'id' => 1065,
                 'name' => 'ROSA BRANCA HARINA TRIGO LEUDANTE 1KG',
@@ -5243,7 +5165,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            201 => 
+            198 => 
             array (
                 'id' => 1066,
                 'name' => 'TORTUGA MAGICA C/LUCES/SONIDO B-1906053',
@@ -5269,7 +5191,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            202 => 
+            199 => 
             array (
                 'id' => 1067,
                 'name' => 'FRUTY CAKE CON CREMA DE AVELLANA 36GR 3023',
@@ -5295,7 +5217,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            203 => 
+            200 => 
             array (
                 'id' => 838,
                 'name' => 'JUANA MEZCLAS LISTAS CACHAPAS 500 GR',
@@ -5321,7 +5243,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            204 => 
+            201 => 
             array (
                 'id' => 839,
                 'name' => 'YUCA XKG',
@@ -5347,7 +5269,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            205 => 
+            202 => 
             array (
                 'id' => 840,
                 'name' => 'EVERVESS SODA LATA 355ML',
@@ -5373,7 +5295,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            206 => 
+            203 => 
             array (
                 'id' => 841,
                 'name' => 'SCHWEPPES AGUAKINA LATA 355CC',
@@ -5399,7 +5321,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            207 => 
+            204 => 
             array (
                 'id' => 842,
                 'name' => 'ALWAYS PROTECCION PLUS SUAVE PAQ X 8UND',
@@ -5425,7 +5347,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            208 => 
+            205 => 
             array (
                 'id' => 844,
                 'name' => 'COLGATE CREMA DENTAL MENTA 100ML',
@@ -5451,7 +5373,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            209 => 
+            206 => 
             array (
                 'id' => 845,
                 'name' => 'TRELOSO GALLETA VAINILLA FRESA  130GR',
@@ -5477,7 +5399,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            210 => 
+            207 => 
             array (
                 'id' => 846,
                 'name' => 'MEDIO ORIENTE PAN ARABE 6UND',
@@ -5503,7 +5425,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            211 => 
+            208 => 
             array (
                 'id' => 847,
                 'name' => '7 UP REFRESCO 1500ML',
@@ -5529,7 +5451,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            212 => 
+            209 => 
             array (
                 'id' => 848,
                 'name' => 'GIRASOIL ACEITE GIRASOL PET 900 ML',
@@ -5555,7 +5477,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            213 => 
+            210 => 
             array (
                 'id' => 849,
                 'name' => 'YAYO TOYS NINJAGO SET ARMABLE 152/162 PZS SURTIDOS',
@@ -5581,7 +5503,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            214 => 
+            211 => 
             array (
                 'id' => 851,
                 'name' => 'VENELA LENTEJAS 500 GR',
@@ -5607,7 +5529,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            215 => 
+            212 => 
             array (
                 'id' => 852,
                 'name' => 'MINALBA AGUA 1500ML',
@@ -5633,7 +5555,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            216 => 
+            213 => 
             array (
                 'id' => 853,
                 'name' => '..VALE CESTA SANITARIOS AZUL 40GR',
@@ -5659,7 +5581,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            217 => 
+            214 => 
             array (
                 'id' => 854,
                 'name' => 'NATURAL KING MILANESA DE POLLO XKG',
@@ -5685,7 +5607,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            218 => 
+            215 => 
             array (
                 'id' => 855,
                 'name' => 'LAS LLAVES SUAVIZANTE BEBE 950ML',
@@ -5711,7 +5633,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            219 => 
+            216 => 
             array (
                 'id' => 856,
                 'name' => 'DONA TITA SALSA INGLESA 150ML',
@@ -5737,7 +5659,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            220 => 
+            217 => 
             array (
                 'id' => 837,
                 'name' => 'TEN ENERGIA RADIANTE JABON DE TOCADOR 100 GR',
@@ -5763,7 +5685,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            221 => 
+            218 => 
             array (
                 'id' => 1171,
                 'name' => 'EDMAG SAL MARINA SELECTA 220GR',
@@ -5789,7 +5711,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            222 => 
+            219 => 
             array (
                 'id' => 881,
                 'name' => 'POLLO XKG',
@@ -5815,7 +5737,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            223 => 
+            220 => 
             array (
                 'id' => 1120,
                 'name' => 'NIVEA BODY SOFT MILK PIEL SECA 400ML',
@@ -5841,7 +5763,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            224 => 
+            221 => 
             array (
                 'id' => 677,
                 'name' => 'K-NINA CARNE CON CEREAL ARROZ 4KG VE',
@@ -5867,7 +5789,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            225 => 
+            222 => 
             array (
                 'id' => 679,
                 'name' => 'AMALFI POST TRATAMIENTO CAPILAR TRIPLE ACCION 1000ML',
@@ -5893,7 +5815,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            226 => 
+            223 => 
             array (
                 'id' => 680,
                 'name' => 'NATURALYST SALSA PARA PIZZA 200GR',
@@ -5919,7 +5841,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            227 => 
+            224 => 
             array (
                 'id' => 681,
                 'name' => 'VALE MULTIUSO EN POLVO FRAG MANZANA CHISPEANTE 900GR',
@@ -5945,7 +5867,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            228 => 
+            225 => 
             array (
                 'id' => 682,
                 'name' => 'TOMATE PERITA XKG',
@@ -5971,7 +5893,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            229 => 
+            226 => 
             array (
                 'id' => 683,
                 'name' => 'SUINO MORCILLA C.CEBOLLA /VACIOXKG',
@@ -5997,7 +5919,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            230 => 
+            227 => 
             array (
                 'id' => 684,
                 'name' => '...VALE LIMPIA VIDRIOS PISTOLA 500 ML',
@@ -6023,7 +5945,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            231 => 
+            228 => 
             array (
                 'id' => 685,
                 'name' => 'PANINO PAN P/PERRO 10UNDD 350GR',
@@ -6049,7 +5971,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            232 => 
+            229 => 
             array (
                 'id' => 686,
                 'name' => 'QUINTBARR HAMBURGUESA RES 10UN X 50GR',
@@ -6075,7 +5997,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            233 => 
+            230 => 
             array (
                 'id' => 687,
                 'name' => 'CANUELAS HARINA TRIGO TIPO I 1KG TRADICIONAL',
@@ -6101,7 +6023,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            234 => 
+            231 => 
             array (
                 'id' => 688,
                 'name' => 'TORONDOY PECORINO XKG',
@@ -6127,7 +6049,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            235 => 
+            232 => 
             array (
                 'id' => 689,
                 'name' => 'EL MAIZAL LENTEJAS 500 GR',
@@ -6153,7 +6075,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            236 => 
+            233 => 
             array (
                 'id' => 1001,
                 'name' => 'CAMPESTRE MANTEQUILLA CON SAL LATA 360GR',
@@ -6179,7 +6101,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            237 => 
+            234 => 
             array (
                 'id' => 674,
                 'name' => 'AVELINA AVENA HOJ/INSTANT SABOR VAINILLA 250GR',
@@ -6205,7 +6127,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            238 => 
+            235 => 
             array (
                 'id' => 675,
                 'name' => 'LAS PIBAS CHIMI CHURRI PICANTE 250GR',
@@ -6231,7 +6153,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            239 => 
+            236 => 
             array (
                 'id' => 676,
                 'name' => 'CHINOTTO BOTELLA 2 LT SIN CALORIAS',
@@ -6257,7 +6179,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            240 => 
+            237 => 
             array (
                 'id' => 1012,
                 'name' => 'COLIFLOR XKG',
@@ -6283,7 +6205,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            241 => 
+            238 => 
             array (
                 'id' => 1156,
                 'name' => 'MARY TOMATE PELADO 800GR',
@@ -6309,7 +6231,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            242 => 
+            239 => 
             array (
                 'id' => 1157,
                 'name' => 'KELVIN BRIDGE WHISKY SCOTCH BLENDE 750ML 12A',
@@ -6335,7 +6257,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            243 => 
+            240 => 
             array (
                 'id' => 1158,
                 'name' => 'VALE MULTIUSO EN POLVO PERLA FLORAL 4.5GR',
@@ -6361,7 +6283,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            244 => 
+            241 => 
             array (
                 'id' => 1159,
                 'name' => '..VALE LIMPIADOR ANTIBACTERIAL MANZANA 1LT',
@@ -6387,7 +6309,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            245 => 
+            242 => 
             array (
                 'id' => 1160,
                 'name' => '..VALE CLORO JABONOSO NATURAL 1 L',
@@ -6413,7 +6335,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            246 => 
+            243 => 
             array (
                 'id' => 1193,
                 'name' => 'YAYO TOYS  BOLSO PARA COLOREAR REF TPT-824279',
@@ -6439,7 +6361,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            247 => 
+            244 => 
             array (
                 'id' => 730,
                 'name' => 'YAYO TOYS JUEGO NINJA 109PZS',
@@ -6465,7 +6387,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            248 => 
+            245 => 
             array (
                 'id' => 731,
                 'name' => 'CHOCORESCO GALLETA 130GR',
@@ -6491,7 +6413,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            249 => 
+            246 => 
             array (
                 'id' => 732,
                 'name' => 'FIT LIMPIADOR PROFUNDO MULTIUSOS MULTI ACTION 650ML ',
@@ -6517,7 +6439,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            250 => 
+            247 => 
             array (
                 'id' => 733,
                 'name' => 'CHOCOZUELA BISTECK XKG',
@@ -6543,7 +6465,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            251 => 
+            248 => 
             array (
                 'id' => 734,
                 'name' => 'COCA-COLA MENOS CALORIAS PET 2LT ',
@@ -6569,7 +6491,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            252 => 
+            249 => 
             array (
                 'id' => 735,
                 'name' => 'SAMBA CHOCOLATE 32G',
@@ -6595,7 +6517,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            253 => 
+            250 => 
             array (
                 'id' => 736,
                 'name' => 'KIERO SALSA P/PIZZA 200 GR',
@@ -6621,7 +6543,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            254 => 
+            251 => 
             array (
                 'id' => 737,
                 'name' => 'MI VAQUITA MOZZARELLA APUREÑA XKG',
@@ -6647,7 +6569,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            255 => 
+            252 => 
             array (
                 'id' => 738,
                 'name' => '..VALE DETERGENTE LIQUIDO SPORT 1 L',
@@ -6673,7 +6595,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            256 => 
+            253 => 
             array (
                 'id' => 739,
                 'name' => 'MARY PALMITO ENTERO LATA 400GR',
@@ -6699,7 +6621,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            257 => 
+            254 => 
             array (
                 'id' => 740,
                 'name' => 'MONTSERRATINA CHORIZO TIPO VELA XKG',
@@ -6725,7 +6647,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            258 => 
+            255 => 
             array (
                 'id' => 741,
                 'name' => 'AMALFI BABY JABON LIQUIDO ALOE VERA 415ML',
@@ -6751,7 +6673,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            259 => 
+            256 => 
             array (
                 'id' => 742,
                 'name' => 'PANTERA FRIJOL BLANCO 500GR',
@@ -6777,7 +6699,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            260 => 
+            257 => 
             array (
                 'id' => 743,
                 'name' => 'SUINO MORCILLA C. ARROZ /VACIO XKG',
@@ -6803,7 +6725,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            261 => 
+            258 => 
             array (
                 'id' => 744,
                 'name' => 'FIT LAVATODO LIMON FRESCO 375CC',
@@ -6829,7 +6751,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            262 => 
+            259 => 
             array (
                 'id' => 745,
                 'name' => 'GLOBO AZUCAR CRISTAL 1KG',
@@ -6855,7 +6777,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            263 => 
+            260 => 
             array (
                 'id' => 746,
                 'name' => '..VALE MULTIUSO EN POLVO LAVANDA 2.7GR',
@@ -6881,7 +6803,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            264 => 
+            261 => 
             array (
                 'id' => 747,
                 'name' => '..VALE CLORO JABONOSO LIMON 1 L',
@@ -6907,7 +6829,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            265 => 
+            262 => 
             array (
                 'id' => 748,
                 'name' => 'LAS MORAS SAUVIGNON BLANC 750ML',
@@ -6933,7 +6855,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            266 => 
+            263 => 
             array (
                 'id' => 1093,
                 'name' => 'GRAN ORIENTE PAN ARABE 380GR',
@@ -6959,7 +6881,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            267 => 
+            264 => 
             array (
                 'id' => 1166,
                 'name' => 'JUANA MEZCLAS LISTAS CACHAPAS 1 KG',
@@ -6985,7 +6907,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            268 => 
+            265 => 
             array (
                 'id' => 1167,
                 'name' => 'NESTLE NESQUIK CHOCOLATE 1180GR 6368',
@@ -7011,7 +6933,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            269 => 
+            266 => 
             array (
                 'id' => 1168,
                 'name' => 'CASA BLANCA QUESO BLANCO BUFALA PARDITO XKG',
@@ -7037,7 +6959,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            270 => 
+            267 => 
             array (
                 'id' => 754,
                 'name' => 'CEBOLLIN XKG',
@@ -7063,7 +6985,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            271 => 
+            268 => 
             array (
                 'id' => 1070,
                 'name' => 'PLAGATOX INSECTICIDA LIQUIDO ESPACIAL 500CC',
@@ -7089,7 +7011,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            272 => 
+            269 => 
             array (
                 'id' => 1071,
                 'name' => 'NIVEA GEL LIMPIADOR REFRESCANTE PIEL NORMAL 150ML',
@@ -7115,7 +7037,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            273 => 
+            270 => 
             array (
                 'id' => 1072,
                 'name' => 'POLLO PIERNA BATE XKG',
@@ -7141,7 +7063,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            274 => 
+            271 => 
             array (
                 'id' => 1073,
                 'name' => 'ARIAS MUÑECA CON PIJAMA Y SACO DE DORMIR  45CM',
@@ -7167,7 +7089,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            275 => 
+            272 => 
             array (
                 'id' => 1161,
                 'name' => 'FRUTY CAKE CAKE CON FRUTILLA 36GR 870',
@@ -7193,7 +7115,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            276 => 
+            273 => 
             array (
                 'id' => 1162,
                 'name' => 'LA VIÑA SALSA TOMATE KETCHUP 397GRS',
@@ -7219,7 +7141,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            277 => 
+            274 => 
             array (
                 'id' => 1163,
                 'name' => '..VALE LIMPIADOR ANTIBACTERIAL LAVANDA 1LT',
@@ -7245,7 +7167,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            278 => 
+            275 => 
             array (
                 'id' => 1164,
                 'name' => 'MUÑECAS PRINCESAS ANGEL GIRL B-1906798 ',
@@ -7271,7 +7193,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            279 => 
+            276 => 
             array (
                 'id' => 1165,
                 'name' => 'HASBRO PISTOLA NERF LANZADOR DE DARDOS MEDIATOR E0016',
@@ -7297,7 +7219,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            280 => 
+            277 => 
             array (
                 'id' => 804,
                 'name' => 'QUAKER HARINA DE AVENA BOLS  400GR',
@@ -7323,7 +7245,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            281 => 
+            278 => 
             array (
                 'id' => 1109,
                 'name' => 'EL ZEDEÑO QUESO BLANCO DURO XKG',
@@ -7349,7 +7271,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            282 => 
+            279 => 
             array (
                 'id' => 1172,
                 'name' => 'ENSURE CHOCOLATE LATA 400GR',
@@ -7375,7 +7297,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            283 => 
+            280 => 
             array (
                 'id' => 850,
                 'name' => 'TORONTO BOLSA X 125G',
@@ -7401,7 +7323,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            284 => 
+            281 => 
             array (
                 'id' => 1221,
                 'name' => 'RONCO LINGUINI 500GR',
@@ -7427,7 +7349,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            285 => 
+            282 => 
             array (
                 'id' => 1252,
                 'name' => 'NATURALYST  PASTA  DE  TOMATE  200GR',
@@ -7453,7 +7375,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            286 => 
+            283 => 
             array (
                 'id' => 1253,
                 'name' => 'MIYA ATUN TROCITOS AGUA 140GR',
@@ -7479,33 +7401,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            287 => 
-            array (
-                'id' => 1254,
-                'name' => 'PROMO VINAGRE BLANCO 473.1LT',
-                'description_short' => 'PROMO VINAGRE BLANCO 473.1LT',
-                'description' => NULL,
-                'price' => '159415.440000',
-                'qty_avaliable' => 41,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 34270,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            288 => 
+            284 => 
             array (
                 'id' => 1255,
                 'name' => 'ROLDA GEL BLANCO 500GR',
@@ -7531,7 +7427,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            289 => 
+            285 => 
             array (
                 'id' => 1256,
                 'name' => 'GABY CARAOTAS NEGRAS 400GR',
@@ -7557,7 +7453,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            290 => 
+            286 => 
+            array (
+                'id' => 1254,
+                'name' => 'PROMO VINAGRE BLANCO 473.1LT',
+                'description_short' => 'PROMO VINAGRE BLANCO 473.1LT',
+                'description' => NULL,
+                'price' => '159415.440000',
+                'qty_avaliable' => 34,
+                'qty_sold' => 0,
+                'qty_view' => 15,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 34270,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            287 => 
             array (
                 'id' => 1257,
                 'name' => 'IBERIA VINAGRE 500CC',
@@ -7583,7 +7505,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            291 => 
+            288 => 
             array (
                 'id' => 1258,
                 'name' => 'PANTANELLA PASTA LINGUINE 500 GR',
@@ -7609,7 +7531,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            292 => 
+            289 => 
             array (
                 'id' => 1259,
                 'name' => ' FIT DESENGRASANTE MULTISUPERFICIE DEGREASER 1LT',
@@ -7635,7 +7557,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            293 => 
+            290 => 
             array (
                 'id' => 1260,
                 'name' => 'BAYGON INSECTOS VOLADORES AEROSOL 235ML',
@@ -7661,7 +7583,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            294 => 
+            291 => 
             array (
                 'id' => 636,
                 'name' => 'SUPER-MAX PLATINUM HOJILLAS DE AFEITAR AA01',
@@ -7687,7 +7609,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            295 => 
+            292 => 
             array (
                 'id' => 637,
                 'name' => 'ZORRIK HOJILLAS DE AFEITAR  AA47',
@@ -7713,7 +7635,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            296 => 
+            293 => 
             array (
                 'id' => 638,
                 'name' => 'GALAK UNIDAD 30 GR',
@@ -7739,7 +7661,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            297 => 
+            294 => 
             array (
                 'id' => 639,
                 'name' => 'NAPOLITANA MOZZARELLA XKG',
@@ -7765,7 +7687,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            298 => 
+            295 => 
             array (
                 'id' => 640,
                 'name' => 'AJO CRIOLLO XKG',
@@ -7791,7 +7713,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            299 => 
+            296 => 
             array (
                 'id' => 641,
                 'name' => '..OKI TOALLITAS HUMEDAS MANZANILLA 72UND',
@@ -7817,7 +7739,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            300 => 
+            297 => 
             array (
                 'id' => 642,
                 'name' => 'MARY PREMIUM PASTA LINGUINI 500GR',
@@ -7843,7 +7765,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            301 => 
+            298 => 
             array (
                 'id' => 643,
                 'name' => 'FIESTA SALCHICHA VIENA CORTA 12UN',
@@ -7869,7 +7791,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            302 => 
+            299 => 
             array (
                 'id' => 857,
                 'name' => 'PRIMOR PASTA CORTA DEDALES 500GR',
@@ -7895,7 +7817,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            303 => 
+            300 => 
             array (
                 'id' => 858,
                 'name' => 'PULPA NEGRA BISTECK XKG',
@@ -7921,7 +7843,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            304 => 
+            301 => 
             array (
                 'id' => 859,
                 'name' => 'SOLOMO DE CUERITO BISTECK XKG',
@@ -7947,7 +7869,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            305 => 
+            302 => 
             array (
                 'id' => 860,
                 'name' => 'PACO SALSA PIZZA 500GR',
@@ -7973,7 +7895,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            306 => 
+            303 => 
             array (
                 'id' => 861,
                 'name' => 'AVELINA AVENA/HOJ INSTANT 400GR',
@@ -7999,7 +7921,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            307 => 
+            304 => 
             array (
                 'id' => 864,
                 'name' => '..VALE CLORO JABONOSO BEBE 1 L',
@@ -8025,7 +7947,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            308 => 
+            305 => 
             array (
                 'id' => 865,
                 'name' => 'DONA TITA SALSA AJO 150ML',
@@ -8051,7 +7973,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            309 => 
+            306 => 
             array (
                 'id' => 866,
                 'name' => 'KRAFT MAYONESA REG 445GR',
@@ -8077,7 +7999,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            310 => 
+            307 => 
             array (
                 'id' => 867,
                 'name' => 'CHOCOCAO BEB/ACHOCOLATADA BOLSA 400GR',
@@ -8103,7 +8025,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            311 => 
+            308 => 
             array (
                 'id' => 868,
                 'name' => 'FIESTA SALCHICHA VIENA LARGA 12UN',
@@ -8129,7 +8051,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            312 => 
+            309 => 
             array (
                 'id' => 869,
                 'name' => 'Z PEQUENA SERVILLETAS POLY 160UND',
@@ -8155,7 +8077,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            313 => 
+            310 => 
             array (
                 'id' => 870,
                 'name' => 'FALDA PARA MECHAR XKG',
@@ -8181,7 +8103,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            314 => 
+            311 => 
             array (
                 'id' => 871,
                 'name' => 'PISTA DE CARRERA EJECTION DOBLE CARRIL B-1906046',
@@ -8207,7 +8129,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            315 => 
+            312 => 
             array (
                 'id' => 1076,
                 'name' => 'FRUCTUS BEBIDA EN POLVO UVA 15GR',
@@ -8233,7 +8155,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            316 => 
+            313 => 
             array (
                 'id' => 1077,
                 'name' => 'HUEVOS PEQUEÑO PONY B-1906219',
@@ -8259,7 +8181,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            317 => 
+            314 => 
             array (
                 'id' => 1078,
                 'name' => 'PLAGATOX ESPIRALES ANTIZANCUDOS 12UNID',
@@ -8285,7 +8207,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            318 => 
+            315 => 
             array (
                 'id' => 1081,
                 'name' => 'PLAGATOX INSECTICIDA POLVO MATA CUCARACHAS/CHIRIPAS 150GR',
@@ -8311,7 +8233,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            319 => 
+            316 => 
             array (
                 'id' => 1082,
                 'name' => 'CHAMBE SARDINA PICANTE 260GR',
@@ -8337,7 +8259,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            320 => 
+            317 => 
             array (
                 'id' => 1083,
                 'name' => 'CHEEZ WHIZ REFORMULADO 300GR',
@@ -8363,7 +8285,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            321 => 
+            318 => 
             array (
                 'id' => 1084,
                 'name' => 'YAYO TOYS SET RAQUETAS PING PONG REF TPT-17011 3 PELOTAS Y MALLA',
@@ -8389,7 +8311,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            322 => 
+            319 => 
             array (
                 'id' => 1086,
                 'name' => 'PLAGATOX INSECTICIDA LIQUIDO RESIDUAL 500CC',
@@ -8415,7 +8337,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            323 => 
+            320 => 
             array (
                 'id' => 1087,
                 'name' => 'CITY OF LONDON GINEBRA 07LT',
@@ -8441,7 +8363,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            324 => 
+            321 => 
             array (
                 'id' => 1088,
                 'name' => 'NIVEA VISAGE CREMA DÍA HIDRATANTE P/S 50ML',
@@ -8467,7 +8389,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            325 => 
+            322 => 
             array (
                 'id' => 1089,
                 'name' => 'YAYO TOYS JUEGO SUPER HERO CAPITAN 203PZS',
@@ -8493,7 +8415,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            326 => 
+            323 => 
             array (
                 'id' => 1090,
                 'name' => 'AVELINA AVENA HOJ/INSTANT SABOR BANANA 200GR',
@@ -8519,7 +8441,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            327 => 
+            324 => 
             array (
                 'id' => 1091,
                 'name' => 'SAGRADA FAMILIA VINO TINTO 070L',
@@ -8545,7 +8467,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            328 => 
+            325 => 
             array (
                 'id' => 1238,
                 'name' => 'MUSIC DOG B-1906253',
@@ -8571,7 +8493,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            329 => 
+            326 => 
             array (
                 'id' => 1074,
                 'name' => 'HACIENDA GUASACACA CRIOLLA 500GR',
@@ -8597,7 +8519,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            330 => 
+            327 => 
             array (
                 'id' => 1075,
                 'name' => 'CARRITO MODELO DEPORTIVO B-1906118',
@@ -8623,7 +8545,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            331 => 
+            328 => 
             array (
                 'id' => 814,
                 'name' => 'BRASA LEÑA PARRILLERA 5 KG',
@@ -8649,7 +8571,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            332 => 
+            329 => 
             array (
                 'id' => 690,
                 'name' => 'MANI JACKS 175GR',
@@ -8675,7 +8597,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            333 => 
+            330 => 
             array (
                 'id' => 1092,
                 'name' => 'YAYO TOYS SUPER HEROES SET ARMABLE 91/79/92/89 PZS SURTIDOS',
@@ -8701,7 +8623,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            334 => 
+            331 => 
             array (
                 'id' => 1094,
             'name' => 'JUEGO DE ENTRETENIMIENTO AJEDREZ (18601)',
@@ -8727,7 +8649,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            335 => 
+            332 => 
             array (
                 'id' => 1095,
                 'name' => 'AMALFI PRE TRATAMIENTO CAPILAR REPARADOR 1250ML',
@@ -8753,7 +8675,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            336 => 
+            333 => 
             array (
                 'id' => 1096,
                 'name' => 'LAS MORAS CABERNET SAUVIGNON 750ML',
@@ -8779,7 +8701,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            337 => 
+            334 => 
             array (
                 'id' => 1097,
                 'name' => 'GIRALDA ACEITUNA RELLENA 500GR',
@@ -8805,7 +8727,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            338 => 
+            335 => 
             array (
                 'id' => 1098,
                 'name' => 'FIT ANTIBACTERIAL BIO LAVANDA 1.5L',
@@ -8831,7 +8753,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            339 => 
+            336 => 
             array (
                 'id' => 692,
                 'name' => 'AJI DULCE XKG',
@@ -8857,7 +8779,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            340 => 
+            337 => 
             array (
                 'id' => 1003,
                 'name' => 'COCA-COLA MENOS CALORIAS PET 1500ML',
@@ -8883,7 +8805,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            341 => 
+            338 => 
             array (
                 'id' => 1004,
                 'name' => 'LA YAYA SALSA AJO 300ML',
@@ -8909,7 +8831,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            342 => 
+            339 => 
             array (
                 'id' => 753,
                 'name' => 'LINDA MORA CHARDONNAY CHENIN 750ML',
@@ -8935,7 +8857,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            343 => 
+            340 => 
             array (
                 'id' => 755,
                 'name' => 'FLOR DE ARAGUA PECORINO XKG',
@@ -8961,7 +8883,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            344 => 
+            341 => 
             array (
                 'id' => 756,
                 'name' => '..VALE MULTIUSO EN POLVO FRAG PERLAS FLORALES 900GR',
@@ -8987,7 +8909,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            345 => 
+            342 => 
             array (
                 'id' => 757,
                 'name' => 'INAICA GALLETA NARANJA 150GR',
@@ -9013,7 +8935,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            346 => 
+            343 => 
             array (
                 'id' => 758,
                 'name' => 'AUYAMA XKG',
@@ -9039,7 +8961,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            347 => 
+            344 => 
             array (
                 'id' => 759,
                 'name' => 'LOS POZOS PAPAS BASTONES 1KG',
@@ -9065,7 +8987,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            348 => 
+            345 => 
             array (
                 'id' => 760,
                 'name' => 'SECRET DESODORANTE ROLL ON POWDER 60GR',
@@ -9091,7 +9013,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            349 => 
+            346 => 
             array (
                 'id' => 761,
                 'name' => 'YAYO TOYS JUEGO SUPER HERO SUPERMAN 177PZS',
@@ -9117,7 +9039,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            350 => 
+            347 => 
             array (
                 'id' => 762,
                 'name' => 'SUPER-MAX 2 - MAQUINAS DE AFEITAR LONG HANDLE AD83',
@@ -9143,7 +9065,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            351 => 
+            348 => 
             array (
                 'id' => 763,
                 'name' => 'TEN  DERMO FRESH JABON DE TOCADOR 100 GR',
@@ -9169,7 +9091,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            352 => 
+            349 => 
             array (
                 'id' => 765,
                 'name' => 'YAYO TOYS JUEGO POLICIA PATRULLA/NIEVE 99PZS',
@@ -9195,7 +9117,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            353 => 
+            350 => 
             array (
                 'id' => 767,
                 'name' => '..OKI TOALLITAS HUMEDAS BABY LOTION 24UND',
@@ -9221,7 +9143,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            354 => 
+            351 => 
             array (
                 'id' => 749,
                 'name' => 'GATORADE MANDARINA 500ML',
@@ -9247,7 +9169,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            355 => 
+            352 => 
             array (
                 'id' => 750,
                 'name' => 'ZANAHORIA XKG',
@@ -9273,7 +9195,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            356 => 
+            353 => 
             array (
                 'id' => 751,
                 'name' => 'COLGATE CREMA DENTAL TRIPLE ACCION 75ML',
@@ -9299,7 +9221,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            357 => 
+            354 => 
             array (
                 'id' => 752,
                 'name' => '..OKI TOALLITAS HUMEDAS ALOE 72UND',
@@ -9325,7 +9247,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            358 => 
+            355 => 
             array (
                 'id' => 779,
                 'name' => 'FABRIPAN PERRO CALIENTE PQÑO 10UND 300GR',
@@ -9351,7 +9273,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            359 => 
+            356 => 
             array (
                 'id' => 872,
                 'name' => 'CARRITO MODELO DEPORTIVO B-19061215',
@@ -9377,7 +9299,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            360 => 
+            357 => 
             array (
                 'id' => 873,
                 'name' => 'MAZEITE ACEITE PET 1LT',
@@ -9403,7 +9325,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            361 => 
+            358 => 
             array (
                 'id' => 874,
                 'name' => 'GIRALDA MAIZ DULCE GRANOS 440GR',
@@ -9429,7 +9351,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            362 => 
+            359 => 
             array (
                 'id' => 875,
                 'name' => 'GRAN ROQUE LOMO ATUN EN AGUA 140GR',
@@ -9455,7 +9377,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            363 => 
+            360 => 
             array (
                 'id' => 876,
                 'name' => 'FRESH ENSALADA CAMPESTRE 335GR',
@@ -9481,7 +9403,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            364 => 
+            361 => 
             array (
                 'id' => 878,
                 'name' => '..VALE MULTIUSO EN POLVO VALE MANZANA  400G',
@@ -9507,7 +9429,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            365 => 
+            362 => 
             array (
                 'id' => 879,
                 'name' => 'ENVAPRIMOLCA  ACEITUNAS SIN SEMILLAS 500GR',
@@ -9533,7 +9455,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            366 => 
+            363 => 
             array (
                 'id' => 880,
                 'name' => 'MIGURT YOGURT DULCE 750GR',
@@ -9559,33 +9481,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            367 => 
-            array (
-                'id' => 883,
-                'name' => 'CACIQUE 500 RON AÑEJO 750ML',
-                'description_short' => 'CACIQUE 500 RON AÑEJO 750ML',
-                'description' => NULL,
-                'price' => '1179759.010000',
-                'qty_avaliable' => 3,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 7117,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            368 => 
+            364 => 
             array (
                 'id' => 785,
                 'name' => 'OCUMO BLANCO XKG',
@@ -9611,7 +9507,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            369 => 
+            365 => 
             array (
                 'id' => 1099,
                 'name' => 'EL PRIMO SARDINA EN TOMATE 270GR',
@@ -9637,7 +9533,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            370 => 
+            366 => 
             array (
                 'id' => 1100,
                 'name' => 'PAMPA ATUN LIGHT EN AGUA  142 GRMS',
@@ -9663,7 +9559,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            371 => 
+            367 => 
             array (
                 'id' => 1101,
                 'name' => 'CARRO MULTI POSICION FUSELAJE FLEXIBLE CV8818-82A',
@@ -9689,7 +9585,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            372 => 
+            368 => 
             array (
                 'id' => 978,
                 'name' => 'MAGGI CALDO/POLLO 8CUB 92GR',
@@ -9715,7 +9611,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            373 => 
+            369 => 
+            array (
+                'id' => 883,
+                'name' => 'CACIQUE 500 RON AÑEJO 750ML',
+                'description_short' => 'CACIQUE 500 RON AÑEJO 750ML',
+                'description' => NULL,
+                'price' => '1179759.010000',
+                'qty_avaliable' => 1,
+                'qty_sold' => 0,
+                'qty_view' => 2,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 7117,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            370 => 
             array (
                 'id' => 988,
                 'name' => 'CAMBUR GUINEO XKG',
@@ -9741,7 +9663,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            374 => 
+            371 => 
             array (
                 'id' => 1140,
                 'name' => 'GOOD WAY CAKE DE CACAO RELLENO 100GR 2061',
@@ -9767,33 +9689,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            375 => 
-            array (
-                'id' => 1020,
-                'name' => 'PANTERA FRIJOL PICO NEGRO 500GR',
-                'description_short' => 'PANTERA FRIJOL PICO NEGRO 500GR',
-                'description' => NULL,
-                'price' => '102400.000000',
-                'qty_avaliable' => 8,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 1300,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            376 => 
+            372 => 
             array (
                 'id' => 1179,
                 'name' => 'OLE SANGRIA 1750ML',
@@ -9819,7 +9715,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            377 => 
+            373 => 
             array (
                 'id' => 644,
                 'name' => 'AVIVA GALLETA SODA NORMAL EXPORT 234GR',
@@ -9845,7 +9741,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            378 => 
+            374 => 
             array (
                 'id' => 645,
                 'name' => 'SANTONI ARROZ EXCELENTE TIPO 1 1KG',
@@ -9871,7 +9767,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            379 => 
+            375 => 
             array (
                 'id' => 646,
                 'name' => 'LAS LLAVES MULTIUSO CREMA 250GR',
@@ -9897,7 +9793,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            380 => 
+            376 => 
             array (
                 'id' => 647,
                 'name' => 'AVELINA AVENA/HOJUELAS 400GR',
@@ -9923,7 +9819,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            381 => 
+            377 => 
             array (
                 'id' => 648,
                 'name' => 'YAYO TOYS JUEGO NINJA COMBATE 94PZS',
@@ -9949,33 +9845,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            382 => 
-            array (
-                'id' => 649,
-                'name' => 'NATURALYS SALSA TOMATE KETCHUP 397GR',
-                'description_short' => 'NATURALYS SALSA TOMATE KETCHUP 397GR',
-                'description' => NULL,
-                'price' => '116635.680000',
-                'qty_avaliable' => 115,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 22132,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            383 => 
+            378 => 
             array (
                 'id' => 650,
                 'name' => 'CRUSTISSIMO PAN PERRO CALIENTE JUMBO 630GR',
@@ -10001,7 +9871,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            384 => 
+            379 => 
             array (
                 'id' => 651,
                 'name' => 'ELSUINO TOCINETA AHUMADA XKG',
@@ -10027,7 +9897,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            385 => 
+            380 => 
             array (
                 'id' => 652,
                 'name' => 'MAGGI SOPA POLLO CON FIDEOS 65GR',
@@ -10053,7 +9923,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            386 => 
+            381 => 
             array (
                 'id' => 653,
                 'name' => '..VALE MULTIUSO EN POLVO VALE PERLA FLORAL 400G',
@@ -10079,7 +9949,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            387 => 
+            382 => 
             array (
                 'id' => 941,
                 'name' => 'PURISIMA LECHE UHT ENTERA 1LT',
@@ -10105,7 +9975,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            388 => 
+            383 => 
             array (
                 'id' => 1005,
                 'name' => 'PARISINA PAN BASE PIZZA PRE-COCIDA 2UND ',
@@ -10131,7 +10001,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            389 => 
+            384 => 
             array (
                 'id' => 1006,
                 'name' => 'DERILAC MOZZARELLA X KG',
@@ -10157,7 +10027,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            390 => 
+            385 => 
             array (
                 'id' => 1007,
                 'name' => 'LAS LLAVES SUAVIZANTE BEBE 500ML',
@@ -10183,7 +10053,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            391 => 
+            386 => 
             array (
                 'id' => 1008,
                 'name' => 'EVEBA SARDINA EN SALSA DE TOMATE 140GR',
@@ -10209,7 +10079,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            392 => 
+            387 => 
             array (
                 'id' => 1009,
                 'name' => 'NEVADA AGUA MINERAL 5LT',
@@ -10235,7 +10105,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            393 => 
+            388 => 
             array (
                 'id' => 1010,
                 'name' => 'VALE LAVATODO MULTIUSO CITRUS 800CC',
@@ -10261,7 +10131,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            394 => 
+            389 => 
             array (
                 'id' => 1011,
                 'name' => 'MAVESA ADEREZO MAYONESA 3600GR',
@@ -10287,7 +10157,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            395 => 
+            390 => 
             array (
                 'id' => 1013,
                 'name' => 'KELLOGG S CHOCOZUCARITAS 250GR',
@@ -10313,7 +10183,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            396 => 
+            391 => 
             array (
                 'id' => 1014,
                 'name' => 'LA YAYA VINAGRE BLANCO 500ML',
@@ -10339,7 +10209,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            397 => 
+            392 => 
             array (
                 'id' => 768,
                 'name' => 'CEBOLLA BLANCA XKG',
@@ -10365,33 +10235,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            398 => 
-            array (
-                'id' => 769,
-                'name' => 'VICONE CARAOTAS NEGRAS 500 GRS.',
-                'description_short' => 'VICONE CARAOTAS NEGRAS 500 GRS.',
-                'description' => NULL,
-                'price' => '128562.500000',
-                'qty_avaliable' => 4,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 5695,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            399 => 
+            393 => 
             array (
                 'id' => 1102,
                 'name' => 'YAYO TOYS JUEGO ARMABLE SUPER HEROES SET 74/75/84/85 PZS TPT-823111',
@@ -10417,7 +10261,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            400 => 
+            394 => 
             array (
                 'id' => 770,
                 'name' => 'EMMANUEL QUESO MOZZARELLA BUF XKG',
@@ -10443,7 +10287,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            401 => 
+            395 => 
             array (
                 'id' => 774,
                 'name' => 'GANSO BISTECK XKG',
@@ -10469,7 +10313,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            402 => 
+            396 => 
             array (
                 'id' => 781,
                 'name' => 'PEPINO XKG',
@@ -10495,7 +10339,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            403 => 
+            397 => 
             array (
                 'id' => 882,
                 'name' => 'PLUMROSE MORTADELA ESPECIAL POLLO 1KG',
@@ -10521,7 +10365,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            404 => 
+            398 => 
             array (
                 'id' => 884,
                 'name' => 'SAVOY POSTRES CHOCOLATE OSCURO 55% 200G',
@@ -10547,7 +10391,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            405 => 
+            399 => 
             array (
                 'id' => 885,
                 'name' => 'GORDON´S GIN 0.750LT',
@@ -10573,7 +10417,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            406 => 
+            400 => 
             array (
                 'id' => 886,
                 'name' => 'NESTLE MILO ACTIV-GO BEBIDA CHOCOLATE 250GR',
@@ -10599,7 +10443,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            407 => 
+            401 => 
             array (
                 'id' => 887,
                 'name' => 'FRESH ENSALADA CESAR 220GR',
@@ -10625,7 +10469,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            408 => 
+            402 => 
             array (
                 'id' => 888,
                 'name' => 'DEJAVU CHAMPIÑON FRESCO 300GRS',
@@ -10651,7 +10495,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            409 => 
+            403 => 
             array (
                 'id' => 889,
                 'name' => 'AGUACATE XKG',
@@ -10677,7 +10521,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            410 => 
+            404 => 
             array (
                 'id' => 890,
                 'name' => 'INAICA GALLETA SAFARI 150GR',
@@ -10703,7 +10547,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            411 => 
+            405 => 
             array (
                 'id' => 891,
                 'name' => 'PRIMOR PASTA LARGA AL HUEVO LINGUINI 1KG',
@@ -10729,7 +10573,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            412 => 
+            406 => 
             array (
                 'id' => 820,
                 'name' => 'CAROREÑA SANGRIA 1750ML',
@@ -10755,7 +10599,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            413 => 
+            407 => 
             array (
                 'id' => 994,
                 'name' => 'BOLSA DE HIELO',
@@ -10781,7 +10625,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            414 => 
+            408 => 
             array (
                 'id' => 1015,
                 'name' => 'PAPA JACKS SAL 80GR',
@@ -10807,7 +10651,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            415 => 
+            409 => 
             array (
                 'id' => 1016,
                 'name' => 'PATINETA B-1906491',
@@ -10833,7 +10677,59 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            416 => 
+            410 => 
+            array (
+                'id' => 1020,
+                'name' => 'PANTERA FRIJOL PICO NEGRO 500GR',
+                'description_short' => 'PANTERA FRIJOL PICO NEGRO 500GR',
+                'description' => NULL,
+                'price' => '102400.000000',
+                'qty_avaliable' => 6,
+                'qty_sold' => 0,
+                'qty_view' => 24,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 1300,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            411 => 
+            array (
+                'id' => 649,
+                'name' => 'NATURALYS SALSA TOMATE KETCHUP 397GR',
+                'description_short' => 'NATURALYS SALSA TOMATE KETCHUP 397GR',
+                'description' => NULL,
+                'price' => '116635.680000',
+                'qty_avaliable' => 113,
+                'qty_sold' => 0,
+                'qty_view' => 21,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 22132,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            412 => 
             array (
                 'id' => 1017,
                 'name' => 'TEN NEUTROJABON DE TOCADOR 100 GR',
@@ -10859,7 +10755,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            417 => 
+            413 => 
             array (
                 'id' => 1018,
                 'name' => 'EL TORO CARBON  4.5KG',
@@ -10885,7 +10781,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            418 => 
+            414 => 
             array (
                 'id' => 1019,
                 'name' => 'CALABACIN XKG',
@@ -10911,33 +10807,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            419 => 
-            array (
-                'id' => 1021,
-                'name' => 'NATURALYST SALSA PEPPERONI GOURMET 500GRS',
-                'description_short' => 'NATURALYST SALSA PEPPERONI GOURMET 500GRS',
-                'description' => NULL,
-                'price' => '169926.650000',
-                'qty_avaliable' => 1,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 35934,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            420 => 
+            415 => 
             array (
                 'id' => 1022,
                 'name' => 'TRELOSO GALLETA FRESA 60GR',
@@ -10963,7 +10833,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            421 => 
+            416 => 
             array (
                 'id' => 1023,
                 'name' => '..VALE CESTA SANITARIOS CLORO 40GR',
@@ -10989,7 +10859,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            422 => 
+            417 => 
             array (
                 'id' => 1024,
                 'name' => 'ALIMEX MORTADELA TAPARA XKG',
@@ -11015,7 +10885,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            423 => 
+            418 => 
             array (
                 'id' => 1025,
                 'name' => 'EL SUINO JAMON COCIDO ESTANDAR TACO X KG',
@@ -11041,7 +10911,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            424 => 
+            419 => 
             array (
                 'id' => 1026,
                 'name' => 'NOAM SERVILLETAS PLUS PAQ 250UNID',
@@ -11067,7 +10937,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            425 => 
+            420 => 
             array (
                 'id' => 1027,
                 'name' => 'MARIA CALEDONIA GALLETA 250GR',
@@ -11093,7 +10963,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            426 => 
+            421 => 
             array (
                 'id' => 912,
                 'name' => 'B52 ENERGY DRINK 250ML',
@@ -11119,7 +10989,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            427 => 
+            422 => 
             array (
                 'id' => 919,
                 'name' => 'CELERY XKG',
@@ -11145,7 +11015,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            428 => 
+            423 => 
             array (
                 'id' => 1085,
                 'name' => 'EL TORO  CARBON 1.5KG',
@@ -11171,7 +11041,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            429 => 
+            424 => 
             array (
                 'id' => 1111,
                 'name' => 'SPRINT ULTRA LAVATODO LIMON 400ML',
@@ -11197,7 +11067,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            430 => 
+            425 => 
             array (
                 'id' => 893,
                 'name' => 'PRIMOR ARROZ CLÁSICO 1 KG',
@@ -11223,7 +11093,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            431 => 
+            426 => 
             array (
                 'id' => 894,
                 'name' => '..OKI TOALLITAS HUMEDAS BABY LOTION 50UND',
@@ -11249,7 +11119,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            432 => 
+            427 => 
             array (
                 'id' => 895,
                 'name' => 'FIT LAVATODO LIMON FRESCO 800CC',
@@ -11275,7 +11145,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            433 => 
+            428 => 
             array (
                 'id' => 897,
                 'name' => 'TRELOSO GALLETA CHOCOLATE  60GR',
@@ -11301,7 +11171,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            434 => 
+            429 => 
             array (
                 'id' => 898,
                 'name' => 'MI VAQUITA QUESO AMARILLO XKG',
@@ -11327,7 +11197,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            435 => 
+            430 => 
             array (
                 'id' => 899,
                 'name' => 'UNDER WOOD  KETCHUP 397GR',
@@ -11353,7 +11223,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            436 => 
+            431 => 
             array (
                 'id' => 900,
                 'name' => 'CERDO COSTILLAS  XKG',
@@ -11379,7 +11249,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            437 => 
+            432 => 
             array (
                 'id' => 901,
                 'name' => '..OKI TOALLITAS HUMEDAS ALOE 50UND',
@@ -11405,7 +11275,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            438 => 
+            433 => 
             array (
                 'id' => 902,
                 'name' => 'RICA CHICHA FORTIFICADO SOBRE 400GR',
@@ -11431,7 +11301,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            439 => 
+            434 => 
             array (
                 'id' => 903,
                 'name' => 'PAMPERO KETCHUP 397GR',
@@ -11457,7 +11327,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            440 => 
+            435 => 
             array (
                 'id' => 904,
                 'name' => 'FIT LAVATODO MANZANA VERDE 375CC ',
@@ -11483,7 +11353,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            441 => 
+            436 => 
             array (
                 'id' => 906,
                 'name' => 'GIRALDA SALSA TOMATE KETCHUP198GR',
@@ -11509,7 +11379,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            442 => 
+            437 => 
             array (
                 'id' => 908,
                 'name' => 'BIMBO PAN ARTESANO 500GR',
@@ -11535,7 +11405,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            443 => 
+            438 => 
             array (
                 'id' => 909,
                 'name' => 'GOLDEN REFRESCO DE UVA 1500ML',
@@ -11561,7 +11431,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            444 => 
+            439 => 
             array (
                 'id' => 910,
                 'name' => 'MAVESA VINAGRE DE ALCOHOL 1LT',
@@ -11587,7 +11457,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            445 => 
+            440 => 
             array (
                 'id' => 913,
                 'name' => 'ITALGUARICO SALCHICHON NAPOLI XKG',
@@ -11613,7 +11483,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            446 => 
+            441 => 
             array (
                 'id' => 914,
                 'name' => 'BAYGON ESPIRALES 12UND',
@@ -11639,7 +11509,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            447 => 
+            442 => 
             array (
                 'id' => 892,
                 'name' => 'OCURNICIELLO TOMATES PELADOS 400GR',
@@ -11665,7 +11535,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            448 => 
+            443 => 
             array (
                 'id' => 921,
                 'name' => 'PLUMROSE SALCHICHA WINNERS LARGA 12UND',
@@ -11691,7 +11561,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            449 => 
+            444 => 
             array (
                 'id' => 664,
                 'name' => 'MONTSERRATINA SALCHICHON VICH XKG',
@@ -11717,7 +11587,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            450 => 
+            445 => 
             array (
                 'id' => 665,
                 'name' => 'FIT LAVATODO MANZANA VERDE 800CC',
@@ -11743,7 +11613,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            451 => 
+            446 => 
             array (
                 'id' => 667,
                 'name' => 'PLUMROSE JAMÓN ENDIABLADO 55GR LATA',
@@ -11769,7 +11639,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            452 => 
+            447 => 
             array (
                 'id' => 654,
                 'name' => 'YAYO TOYS JUEGO DE BLOQUES PARA ARMAR POKEMON',
@@ -11795,7 +11665,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            453 => 
+            448 => 
             array (
                 'id' => 655,
                 'name' => 'TORONDOY LECHE SEMI DESCREMADA SOBRE 900GR',
@@ -11821,7 +11691,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            454 => 
+            449 => 
             array (
                 'id' => 656,
                 'name' => 'INAICA GALLETA CACAO 150GR',
@@ -11847,7 +11717,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            455 => 
+            450 => 
             array (
                 'id' => 657,
                 'name' => 'DOGOURMET CARNE A LA PARRILLA 4KG',
@@ -11873,7 +11743,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            456 => 
+            451 => 
             array (
                 'id' => 658,
                 'name' => 'JUANA HARINA MAIZ BLCA 1 KG',
@@ -11899,16 +11769,16 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            457 => 
+            452 => 
             array (
                 'id' => 666,
                 'name' => 'PANTERA LENTEJA 500GR',
                 'description_short' => 'PANTERA LENTEJA 500GR',
                 'description' => NULL,
                 'price' => '115200.000000',
-                'qty_avaliable' => 72,
+                'qty_avaliable' => 69,
                 'qty_sold' => 0,
-                'qty_view' => 2,
+                'qty_view' => 37,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
@@ -11925,7 +11795,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            458 => 
+            453 => 
+            array (
+                'id' => 1021,
+                'name' => 'NATURALYST SALSA PEPPERONI GOURMET 500GRS',
+                'description_short' => 'NATURALYST SALSA PEPPERONI GOURMET 500GRS',
+                'description' => NULL,
+                'price' => '169926.650000',
+                'qty_avaliable' => 0,
+                'qty_sold' => 0,
+                'qty_view' => 12,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 35934,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            454 => 
             array (
                 'id' => 659,
                 'name' => '..VALE MULTIUSO EN POLVO BEBE 2.7GR',
@@ -11951,7 +11847,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            459 => 
+            455 => 
             array (
                 'id' => 660,
                 'name' => 'PEARLS ACEITUNAS NEGRAS GRANDE S/SEMILLA 170GR',
@@ -11977,7 +11873,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            460 => 
+            456 => 
             array (
                 'id' => 661,
                 'name' => 'GOLDEN REFRESCO NARANJA 2 LT',
@@ -12003,7 +11899,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            461 => 
+            457 => 
             array (
                 'id' => 662,
                 'name' => 'TODDY CHIPS GALLETAS 6UND',
@@ -12029,7 +11925,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            462 => 
+            458 => 
             array (
                 'id' => 663,
                 'name' => '..VALE PASTILLA LIMP SANITARIOS 40GR',
@@ -12055,7 +11951,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            463 => 
+            459 => 
             array (
                 'id' => 775,
                 'name' => 'LAS PIBAS CHIMI CHURRI NATURAL 250GR',
@@ -12081,7 +11977,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            464 => 
+            460 => 
             array (
                 'id' => 776,
                 'name' => '..DALAN JABON MULTICARE NOURISHING ALMENDRA C/LECHE 125GR',
@@ -12107,7 +12003,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            465 => 
+            461 => 
             array (
                 'id' => 777,
                 'name' => 'MAGGI SOPA POLLO CON FIDEOS 62GR',
@@ -12133,7 +12029,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            466 => 
+            462 => 
             array (
                 'id' => 778,
                 'name' => 'MARY PRIMIUM PASTA CORTA TORNILLOS 500GR',
@@ -12159,7 +12055,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            467 => 
+            463 => 
             array (
                 'id' => 780,
                 'name' => '..VALE MULTIUSO EN POLVO PERLA FLORAL 2.7GR',
@@ -12185,7 +12081,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            468 => 
+            464 => 
             array (
                 'id' => 782,
                 'name' => 'PANTANELLA VERMICELLI 500 GR',
@@ -12211,7 +12107,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            469 => 
+            465 => 
             array (
                 'id' => 783,
                 'name' => 'NATUCHIPS PLATAN/ONDUL 245GR',
@@ -12237,7 +12133,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            470 => 
+            466 => 
             array (
                 'id' => 784,
                 'name' => 'CERDO PERNIL XKG',
@@ -12263,33 +12159,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            471 => 
-            array (
-                'id' => 786,
-                'name' => 'EL MAIZAL CARAOTAS NEGRAS 500 GR',
-                'description_short' => 'EL MAIZAL CARAOTAS NEGRAS 500 GR',
-                'description' => NULL,
-                'price' => '60937.500000',
-                'qty_avaliable' => 49,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 29698,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            472 => 
+            467 => 
             array (
                 'id' => 787,
                 'name' => 'MARY ARROZ ESMERALDA 1 KG',
@@ -12315,7 +12185,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            473 => 
+            468 => 
             array (
                 'id' => 788,
                 'name' => 'COLGATE CREMA DEN TOTAL CLN MNT 100ML',
@@ -12341,7 +12211,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            474 => 
+            469 => 
             array (
                 'id' => 789,
                 'name' => 'TODDY ENVASE 200GR',
@@ -12367,7 +12237,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            475 => 
+            470 => 
             array (
                 'id' => 805,
                 'name' => 'PAPAYA MARADOL XKG',
@@ -12393,7 +12263,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            476 => 
+            471 => 
             array (
                 'id' => 813,
                 'name' => 'ÑAME XKG',
@@ -12419,7 +12289,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            477 => 
+            472 => 
             array (
                 'id' => 907,
                 'name' => 'PIMENTON XKG',
@@ -12445,7 +12315,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            478 => 
+            473 => 
             array (
                 'id' => 952,
                 'name' => 'MIGURT YOGURT FRUTA FRESA 750GR',
@@ -12471,7 +12341,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            479 => 
+            474 => 
             array (
                 'id' => 953,
                 'name' => 'COCA-COLA LIGHT BOTELLA 2LT',
@@ -12497,7 +12367,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            480 => 
+            475 => 
             array (
                 'id' => 954,
                 'name' => 'KALDINI CARAOTAS NEGRAS AL NATURAL 400GR',
@@ -12523,7 +12393,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            481 => 
+            476 => 
             array (
                 'id' => 955,
                 'name' => 'CAROREÑA SANGRIA BLANCA 1750ML',
@@ -12549,7 +12419,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            482 => 
+            477 => 
             array (
                 'id' => 956,
                 'name' => 'GRANTS WHISKY 12 AÑOS 750ML',
@@ -12575,7 +12445,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            483 => 
+            478 => 
             array (
                 'id' => 957,
                 'name' => 'GATORADE TROPICAL FRUIT 500ML',
@@ -12601,7 +12471,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            484 => 
+            479 => 
             array (
                 'id' => 958,
                 'name' => 'LA INTEGRAL FORORO SABOR A CANELA 500GR',
@@ -12627,7 +12497,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            485 => 
+            480 => 
             array (
                 'id' => 959,
                 'name' => 'SCHWEPPES  SODA 355CC',
@@ -12653,7 +12523,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            486 => 
+            481 => 
             array (
                 'id' => 960,
                 'name' => 'NATURALYST SALSA PARA GUISO 200GR',
@@ -12679,7 +12549,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            487 => 
+            482 => 
             array (
                 'id' => 961,
                 'name' => 'FRESCOLITA 2LT SIN CALORIA',
@@ -12705,7 +12575,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            488 => 
+            483 => 
             array (
                 'id' => 962,
                 'name' => 'QUINTBARR HAMBURGUESA RES 10UN X 100GR',
@@ -12731,7 +12601,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            489 => 
+            484 => 
             array (
                 'id' => 963,
                 'name' => 'DOÑA BLANCA ARROZ 1KG',
@@ -12757,7 +12627,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            490 => 
+            485 => 
             array (
                 'id' => 964,
                 'name' => 'PARISINA PAN BASE PIZZA GRANDE 2UND ',
@@ -12783,7 +12653,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            491 => 
+            486 => 
             array (
                 'id' => 965,
                 'name' => 'MAVESA MAYONESA  445GR',
@@ -12809,7 +12679,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            492 => 
+            487 => 
             array (
                 'id' => 966,
                 'name' => 'NESTEA DURAZNO BOLSA 450GR',
@@ -12835,7 +12705,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            493 => 
+            488 => 
             array (
                 'id' => 968,
                 'name' => 'SOLOMO DE CUERITO ENTERO XKG',
@@ -12861,7 +12731,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            494 => 
+            489 => 
             array (
                 'id' => 969,
                 'name' => 'PULPA NEGRA GUISAR XKG',
@@ -12887,7 +12757,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            495 => 
+            490 => 
             array (
                 'id' => 970,
                 'name' => 'GOLDEN REFRESCO PIÑA 1500ML',
@@ -12913,7 +12783,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            496 => 
+            491 => 
             array (
                 'id' => 971,
                 'name' => 'HUEVOS CARTON 30UN',
@@ -12939,7 +12809,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            497 => 
+            492 => 
             array (
                 'id' => 972,
                 'name' => 'DON PEPE PANETTONE FRUTAS 500GR',
@@ -12965,7 +12835,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            498 => 
+            493 => 
             array (
                 'id' => 798,
                 'name' => 'ACE BLANCO DIAMANTES 1000GR',
@@ -12991,7 +12861,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            499 => 
+            494 => 
             array (
                 'id' => 915,
                 'name' => '..VALE DETERGENTE LIQUIDO BLANCURA INTENSA 1 LTS',
@@ -13017,9 +12887,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-        ));
-        \DB::table('products')->insert(array (
-            0 => 
+            495 => 
             array (
                 'id' => 917,
                 'name' => 'MARY ARROZ DORADO 800GR',
@@ -13045,7 +12913,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            1 => 
+            496 => 
             array (
                 'id' => 918,
                 'name' => 'DUETTO GALLETA VAINILLA 2X2 EXPORT 336GR',
@@ -13071,7 +12939,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            2 => 
+            497 => 
             array (
                 'id' => 920,
                 'name' => '..VALE ACONDICIONADOR DE TEJIDOS NUBES DE ALGODON 1LT',
@@ -13097,7 +12965,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            3 => 
+            498 => 
             array (
                 'id' => 922,
                 'name' => 'CERELAC SACHET 400 GR',
@@ -13123,7 +12991,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            4 => 
+            499 => 
             array (
                 'id' => 923,
                 'name' => 'K-NINA CARNE CEREAL Y ARROZ 2KG VE',
@@ -13149,7 +13017,9 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            5 => 
+        ));
+        \DB::table('products')->insert(array (
+            0 => 
             array (
                 'id' => 924,
                 'name' => 'GOLDEN REFRESCO KOLA 2LT',
@@ -13175,7 +13045,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            6 => 
+            1 => 
             array (
                 'id' => 925,
                 'name' => 'FLOR DE LOTUS PAPEL HIGIENICO 4 ROLLOS',
@@ -13201,7 +13071,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            7 => 
+            2 => 
             array (
                 'id' => 926,
                 'name' => 'MARGARITA SARDINA SALSA D TOMATE 170GR',
@@ -13227,7 +13097,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            8 => 
+            3 => 
             array (
                 'id' => 927,
                 'name' => 'SUPER-MAX 3 - MAQUINAS DE AFEITAR PARA DAMAS  AT318',
@@ -13253,7 +13123,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            9 => 
+            4 => 
             array (
                 'id' => 928,
                 'name' => 'CACIQUE RON AÑEJO 750ML',
@@ -13279,7 +13149,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            10 => 
+            5 => 
             array (
                 'id' => 929,
                 'name' => 'LA CAIMANA CARBON VEGETAL 1.5KG+500GR EDICION ANIVERSARIA',
@@ -13305,7 +13175,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            11 => 
+            6 => 
             array (
                 'id' => 930,
                 'name' => 'LIBERTAD/PELAYO PECORINO  XKG',
@@ -13331,7 +13201,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            12 => 
+            7 => 
             array (
                 'id' => 931,
                 'name' => 'FIESTA SALCHICHA POLLO ECONOMICA 12UN',
@@ -13357,7 +13227,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            13 => 
+            8 => 
             array (
                 'id' => 932,
                 'name' => '..VALE MULTIUSO EN POLVO  LIMON 4.5GR',
@@ -13383,7 +13253,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            14 => 
+            9 => 
             array (
                 'id' => 933,
                 'name' => 'PAMPERS JUEGOS Y SUENOS X-XGDE 32UND',
@@ -13409,7 +13279,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            15 => 
+            10 => 
             array (
                 'id' => 935,
                 'name' => 'SUPREMA QUESO GUAYANES XKG',
@@ -13435,7 +13305,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            16 => 
+            11 => 
             array (
                 'id' => 936,
                 'name' => 'LIPTON ICE TE LIMON PET. 1500 ML',
@@ -13461,33 +13331,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            17 => 
-            array (
-                'id' => 937,
-                'name' => 'FRUTOS DEL MAR TROZOS DE ATUN EN ACEITE 160GR',
-                'description_short' => 'FRUTOS DEL MAR TROZOS DE ATUN EN ACEITE 160GR',
-                'description' => NULL,
-                'price' => '241714.290000',
-                'qty_avaliable' => 129,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 33765,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            18 => 
+            12 => 
             array (
                 'id' => 698,
                 'name' => 'MARY ARROZ SUPERIOR TIPO 1 1KG',
@@ -13513,7 +13357,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            19 => 
+            13 => 
             array (
                 'id' => 699,
                 'name' => 'NATURALYST SALSA PRIMAVERA GOURMET 500GRS',
@@ -13539,7 +13383,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            20 => 
+            14 => 
             array (
                 'id' => 700,
                 'name' => '..VALE MULTIUSO EN POLVO VALE BEBE  400G',
@@ -13565,7 +13409,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            21 => 
+            15 => 
             array (
                 'id' => 701,
                 'name' => 'BERENJENA XKG',
@@ -13591,7 +13435,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            22 => 
+            16 => 
             array (
                 'id' => 702,
                 'name' => 'RAQUETA TENIS 2 EN 1 B-1906062',
@@ -13617,7 +13461,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            23 => 
+            17 => 
             array (
                 'id' => 703,
                 'name' => 'COCOSETTE MAXI 50G',
@@ -13643,7 +13487,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            24 => 
+            18 => 
             array (
                 'id' => 704,
                 'name' => 'CHICHEN ITZA TOSTADA MEXICANA 130GR',
@@ -13669,7 +13513,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            25 => 
+            19 => 
             array (
                 'id' => 705,
                 'name' => '..VALE DETERGENTE LIQUIDO LIMON 1LTS',
@@ -13695,7 +13539,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            26 => 
+            20 => 
             array (
                 'id' => 706,
                 'name' => 'PURISIMA LECHE DESCREMADA UHT 1LT',
@@ -13721,7 +13565,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            27 => 
+            21 => 
             array (
                 'id' => 707,
                 'name' => 'QUESO BLANCO DURO DE  BUFALA  XKG',
@@ -13747,7 +13591,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            28 => 
+            22 => 
             array (
                 'id' => 691,
                 'name' => 'MESA DE CONSTRUCCION DE 54 PCS B-1906051',
@@ -13773,7 +13617,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            29 => 
+            23 => 
             array (
                 'id' => 694,
                 'name' => 'SALMAR SAL REFINADA 1KG',
@@ -13799,7 +13643,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            30 => 
+            24 => 
             array (
                 'id' => 695,
                 'name' => 'MIMO CHAMPIÑONES LAMINADOS 185GR',
@@ -13825,7 +13669,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            31 => 
+            25 => 
             array (
                 'id' => 697,
                 'name' => '..OKI TOALLAS HUMEDAS BABY LOCION 72UND',
@@ -13851,7 +13695,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            32 => 
+            26 => 
             array (
                 'id' => 790,
                 'name' => 'COLGATE CREMA DENTAL TRIPLE ACCION 100ML',
@@ -13877,7 +13721,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            33 => 
+            27 => 
             array (
                 'id' => 791,
                 'name' => 'YAYO TOYS PELOTAS PERFUMADAS 10',
@@ -13903,7 +13747,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            34 => 
+            28 => 
             array (
                 'id' => 793,
                 'name' => 'BLACK &WHITE WHISKY 750ML',
@@ -13929,7 +13773,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            35 => 
+            29 => 
             array (
                 'id' => 794,
                 'name' => 'ROLANDO ALCAPARRAS 500GR',
@@ -13955,7 +13799,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            36 => 
+            30 => 
             array (
                 'id' => 795,
                 'name' => 'CARUPANO EXTRA RON 070LT',
@@ -13981,7 +13825,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            37 => 
+            31 => 
             array (
                 'id' => 797,
                 'name' => 'PLUMROSE TOCINETA AHUMADA S/C XKG',
@@ -14007,7 +13851,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            38 => 
+            32 => 
             array (
                 'id' => 799,
                 'name' => 'PLAGATOX INSECTICIDA AERO MATA HORMIGA 400CM3',
@@ -14033,7 +13877,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            39 => 
+            33 => 
             array (
                 'id' => 800,
                 'name' => 'COCA-COLA MENOS CALORIAS PET 1LT',
@@ -14059,7 +13903,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            40 => 
+            34 => 
             array (
                 'id' => 801,
                 'name' => '..VALE MULTIUSO EN POLVO VALE LIMON   400G',
@@ -14085,7 +13929,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            41 => 
+            35 => 
+            array (
+                'id' => 937,
+                'name' => 'FRUTOS DEL MAR TROZOS DE ATUN EN ACEITE 160GR',
+                'description_short' => 'FRUTOS DEL MAR TROZOS DE ATUN EN ACEITE 160GR',
+                'description' => NULL,
+                'price' => '241714.290000',
+                'qty_avaliable' => 126,
+                'qty_sold' => 0,
+                'qty_view' => 14,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 33765,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            36 => 
             array (
                 'id' => 802,
                 'name' => '..VALE MULTIUSO EN POLVO LIMON 2.7GR',
@@ -14111,7 +13981,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            42 => 
+            37 => 
             array (
                 'id' => 806,
                 'name' => 'PANTERA FRIJOL VERDE 500GR',
@@ -14137,7 +14007,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            43 => 
+            38 => 
             array (
                 'id' => 807,
                 'name' => 'PAN MEZCLA P/CACHAPAS 500GR',
@@ -14163,7 +14033,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            44 => 
+            39 => 
             array (
                 'id' => 808,
                 'name' => 'TEN VITAMINA E JABON DE TOCADOR 100 GR',
@@ -14189,7 +14059,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            45 => 
+            40 => 
             array (
                 'id' => 809,
                 'name' => 'TU VERDURA YUCA 1KG',
@@ -14215,7 +14085,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            46 => 
+            41 => 
             array (
                 'id' => 810,
                 'name' => 'DONA TITA SALSA SOYA 150ML',
@@ -14241,7 +14111,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            47 => 
+            42 => 
             array (
                 'id' => 811,
                 'name' => 'YUKI/PAK JUGO UHT MANZANA 250ML',
@@ -14267,7 +14137,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            48 => 
+            43 => 
             array (
                 'id' => 764,
                 'name' => 'LIMON INJERTO XKG',
@@ -14293,7 +14163,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            49 => 
+            44 => 
             array (
                 'id' => 796,
                 'name' => 'PATILLA XKG',
@@ -14319,7 +14189,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            50 => 
+            45 => 
             array (
                 'id' => 834,
                 'name' => 'PEPSI COLA  1500ML',
@@ -14345,7 +14215,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            51 => 
+            46 => 
             array (
                 'id' => 863,
                 'name' => 'EL ZEDEÑO QUESO MOZZARELLA XKG',
@@ -14371,7 +14241,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            52 => 
+            47 => 
             array (
                 'id' => 944,
                 'name' => 'VALE MULTIUSO EN POLVO FRAG BEBE 900GR',
@@ -14397,7 +14267,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            53 => 
+            48 => 
             array (
                 'id' => 945,
                 'name' => 'REPOLLO BLANCO XKG',
@@ -14423,7 +14293,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            54 => 
+            49 => 
             array (
                 'id' => 946,
                 'name' => 'SVELTY LECHE SEMI DESCREMADA 400GR',
@@ -14449,7 +14319,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            55 => 
+            50 => 
             array (
                 'id' => 947,
                 'name' => 'EL FAMOSO PAN ARABE 380GR',
@@ -14475,7 +14345,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            56 => 
+            51 => 
             array (
                 'id' => 948,
                 'name' => 'YAYO TOYS NINJAGO SET 96/97/76/82 PZS SURTIDOS TPT1229',
@@ -14501,7 +14371,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            57 => 
+            52 => 
             array (
                 'id' => 949,
                 'name' => 'BAYGON DA FIK AEROSOL 235ML',
@@ -14527,7 +14397,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            58 => 
+            53 => 
             array (
                 'id' => 950,
                 'name' => 'EL TURKITO PREPIZZA X 2UND',
@@ -14553,7 +14423,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            59 => 
+            54 => 
             array (
                 'id' => 951,
                 'name' => 'KELVIN BRIDGE WHISKY SCOTCH BLENDE 750ML 8A',
@@ -14579,7 +14449,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            60 => 
+            55 => 
             array (
                 'id' => 974,
                 'name' => 'MAESTRO LIMPIO MULTIUSO 1.2 KG',
@@ -14605,7 +14475,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            61 => 
+            56 => 
             array (
                 'id' => 975,
                 'name' => 'LAGARTO C/HUESO RUEDAS XKG',
@@ -14631,7 +14501,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            62 => 
+            57 => 
             array (
                 'id' => 976,
                 'name' => 'VENELA CARAOTAS NEGRAS 500GR',
@@ -14657,33 +14527,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            63 => 
-            array (
-                'id' => 938,
-                'name' => 'KIERO SALSA TOMATE KETCHUP 397 GR',
-                'description_short' => 'KIERO SALSA TOMATE KETCHUP 397 GR',
-                'description' => NULL,
-                'price' => '117293.400000',
-                'qty_avaliable' => 137,
-                'qty_sold' => 0,
-                'qty_view' => 0,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 27435,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            64 => 
+            58 => 
             array (
                 'id' => 939,
                 'name' => 'YAYO TOYS JUEGO SUPER HERO SUPERMAN COMANDO AEREO 101PZS',
@@ -14709,7 +14553,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            65 => 
+            59 => 
             array (
                 'id' => 940,
                 'name' => 'COLGATE CREMA DENTAL MENTA 50ML',
@@ -14735,7 +14579,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            66 => 
+            60 => 
             array (
                 'id' => 942,
                 'name' => 'AMALFI BABY LOCION HIDRATANTE ALOE VERA 400ML',
@@ -14761,7 +14605,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            67 => 
+            61 => 
             array (
                 'id' => 943,
                 'name' => 'YUKERY JUGO NARANJA 1500ML',
@@ -14787,7 +14631,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            68 => 
+            62 => 
             array (
                 'id' => 1080,
                 'name' => 'ALCASAFOIL FAMILIAR 21MTS',
@@ -14813,7 +14657,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            69 => 
+            63 => 
             array (
                 'id' => 1152,
                 'name' => 'SUPER-MAX SMX 3 - MAQUINA DE AFEITAR AT457',
@@ -14839,7 +14683,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            70 => 
+            64 => 
             array (
                 'id' => 708,
                 'name' => 'DALVITO QUESO FUNDIDO PARA UNTAR 300GR',
@@ -14865,7 +14709,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            71 => 
+            65 => 
             array (
                 'id' => 709,
                 'name' => 'MINALBA  AGUA 5LT',
@@ -14891,7 +14735,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            72 => 
+            66 => 
             array (
                 'id' => 710,
                 'name' => 'PACO MAIZ DULCE GRANOS 500GR',
@@ -14917,7 +14761,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            73 => 
+            67 => 
             array (
                 'id' => 1194,
                 'name' => 'POLAR PILSEN LAT 295ML',
@@ -14943,7 +14787,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            74 => 
+            68 => 
             array (
                 'id' => 812,
                 'name' => 'ARIEL DETERGENTE 1000GR',
@@ -14969,7 +14813,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            75 => 
+            69 => 
             array (
                 'id' => 815,
                 'name' => '7 UP REFRESCO 2LT',
@@ -14995,7 +14839,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            76 => 
+            70 => 
             array (
                 'id' => 816,
                 'name' => 'BAYGON INSECTOS VOLADORES AEROSOL 360ML',
@@ -15021,7 +14865,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            77 => 
+            71 => 
             array (
                 'id' => 817,
                 'name' => 'LECHUGA AMERICANA XKG',
@@ -15047,7 +14891,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            78 => 
+            72 => 
             array (
                 'id' => 818,
                 'name' => 'DONA MARIA HARINA TRIGO LEUDANTE 1KG',
@@ -15073,7 +14917,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            79 => 
+            73 => 
             array (
                 'id' => 819,
                 'name' => 'FIT ELIMINADOR DE MALOS OLORES  650 ML',
@@ -15099,7 +14943,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            80 => 
+            74 => 
             array (
                 'id' => 821,
                 'name' => 'DOCE DIA AZUCAR CRISTAL 1KG',
@@ -15125,7 +14969,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            81 => 
+            75 => 
             array (
                 'id' => 822,
                 'name' => 'DE LA CASA LOMOS DE ATUN EN ACEITE 160GR',
@@ -15151,7 +14995,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            82 => 
+            76 => 
             array (
                 'id' => 823,
                 'name' => 'BUFALINDA QUESO MOZZARELLA XKG',
@@ -15177,7 +15021,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            83 => 
+            77 => 
             array (
                 'id' => 824,
                 'name' => 'MANA CEREAL SABOR VAINILLA 135GR',
@@ -15203,7 +15047,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            84 => 
+            78 => 
             array (
                 'id' => 825,
                 'name' => 'FIT LAVATODO NARANJA CITRICA 375CC',
@@ -15229,7 +15073,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            85 => 
+            79 => 
             array (
                 'id' => 1054,
                 'name' => 'EL MONTANES CREMA DE LECHE 400GR',
@@ -15255,7 +15099,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            86 => 
+            80 => 
             array (
                 'id' => 826,
                 'name' => 'EL MAIZAL MAIZ COTUFA 500GR',
@@ -15281,7 +15125,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            87 => 
+            81 => 
             array (
                 'id' => 827,
                 'name' => 'OKI TOALLITAS HUMEDAS ALOE 24UND',
@@ -15307,7 +15151,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            88 => 
+            82 => 
             array (
                 'id' => 828,
                 'name' => '..VALE MULTIUSO EN POLVO VALE LAVANDA  400G',
@@ -15333,7 +15177,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            89 => 
+            83 => 
             array (
                 'id' => 829,
                 'name' => 'PANADERIA EL MANA PAN PERRO PEQUEÑO X 10 UDS',
@@ -15359,7 +15203,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            90 => 
+            84 => 
             array (
                 'id' => 830,
                 'name' => '..VALE DETERGENTE LIQUIDO BEBE 1 LTS',
@@ -15385,7 +15229,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            91 => 
+            85 => 
             array (
                 'id' => 831,
                 'name' => 'LA LUCHA ARROZ CANILLA TIPO 1 1KG',
@@ -15411,7 +15255,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            92 => 
+            86 => 
             array (
                 'id' => 832,
                 'name' => 'CHEETOS BOLIQUESO 110GR',
@@ -15437,7 +15281,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            93 => 
+            87 => 
             array (
                 'id' => 835,
                 'name' => 'KLIM LECHE SOYA BOLSA 500GR',
@@ -15463,7 +15307,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            94 => 
+            88 => 
             array (
                 'id' => 711,
                 'name' => 'DIGA WRAPTIPO ENVOPLAST  23MTS',
@@ -15489,7 +15333,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            95 => 
+            89 => 
             array (
                 'id' => 712,
                 'name' => 'LAS LLAVES PASTILLA PODER ARRANCA GRASA 130 GR ',
@@ -15515,7 +15359,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            96 => 
+            90 => 
             array (
                 'id' => 713,
                 'name' => '..OKI TOALLITAS HUMEDAS MANZANILLA 50UND',
@@ -15541,7 +15385,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            97 => 
+            91 => 
             array (
                 'id' => 1059,
                 'name' => 'CELESTIAL SAL 1 KG',
@@ -15567,7 +15411,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            98 => 
+            92 => 
             array (
                 'id' => 1220,
                 'name' => 'COCA-COLA PET 1500ML',
@@ -15593,7 +15437,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            99 => 
+            93 => 
             array (
                 'id' => 714,
                 'name' => 'PEPSI COLA REFRESCO 2LT',
@@ -15619,7 +15463,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            100 => 
+            94 => 
             array (
                 'id' => 715,
                 'name' => 'NOAM SERVILLETAS PAQ X 150UNDD',
@@ -15645,7 +15489,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            101 => 
+            95 => 
             array (
                 'id' => 716,
                 'name' => 'LA YAYA SALSA AJO 150ML',
@@ -15671,7 +15515,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            102 => 
+            96 => 
             array (
                 'id' => 717,
                 'name' => 'LA CAMPIÑA LECHE COMPLETA  BOLSA 900GR',
@@ -15697,7 +15541,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            103 => 
+            97 => 
             array (
                 'id' => 718,
                 'name' => 'PLUMROSE JAMÓN ENDIABLADO 115GR LATA',
@@ -15723,7 +15567,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            104 => 
+            98 => 
             array (
                 'id' => 719,
                 'name' => 'PANADERIA EL MANA PAN PERRO CALIENTE AJONJOLI 500GR',
@@ -15749,7 +15593,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            105 => 
+            99 => 
             array (
                 'id' => 720,
                 'name' => 'PAMPERS JUEGOS Y SUENOS GDE 20 UND',
@@ -15775,7 +15619,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            106 => 
+            100 => 
             array (
                 'id' => 721,
                 'name' => 'MI CAMPESINA CREMA DE LECHE 350GR',
@@ -15801,7 +15645,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            107 => 
+            101 => 
             array (
                 'id' => 722,
                 'name' => 'LAS LLAVES MULTIUSO CREMA 500GR',
@@ -15827,7 +15671,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            108 => 
+            102 => 
             array (
                 'id' => 723,
                 'name' => 'EL TORO CARBON 3KG',
@@ -15853,7 +15697,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            109 => 
+            103 => 
             array (
                 'id' => 724,
                 'name' => 'BUCHANAN´S DE LUXE 12 AÑOS 750ML',
@@ -15879,7 +15723,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            110 => 
+            104 => 
             array (
                 'id' => 725,
                 'name' => 'CLUB SOCIAL 6S 156GR',
@@ -15905,7 +15749,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            111 => 
+            105 => 
             array (
                 'id' => 726,
                 'name' => 'GIRALDA SALSA TOMATE KETCHUP 397GR',
@@ -15931,7 +15775,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            112 => 
+            106 => 
             array (
                 'id' => 1261,
                 'name' => 'SLIME LMUD SURTIDOS B-1906199/B-1906204-1906197',
@@ -15957,7 +15801,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            113 => 
+            107 => 
             array (
                 'id' => 1262,
                 'name' => 'FIT DETERGENTE EN POLVO FRAGANCIA FRESH 1KG',
@@ -15983,7 +15827,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            114 => 
+            108 => 
             array (
                 'id' => 1263,
                 'name' => 'PECHO PARA ESMECHAR XKG',
@@ -16009,7 +15853,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            115 => 
+            109 => 
             array (
                 'id' => 1264,
                 'name' => 'FIT ANTIBACTERIAL BIO BOSQUE DE PINO 1.5 L',
@@ -16035,7 +15879,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            116 => 
+            110 => 
             array (
                 'id' => 1265,
                 'name' => 'FIT LIMPIADOR BIO TERNURA DE BEBE 940ML',
@@ -16061,7 +15905,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            117 => 
+            111 => 
             array (
                 'id' => 1266,
                 'name' => 'HEINZ MOSTAZA 113GR',
@@ -16087,16 +15931,16 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            118 => 
+            112 => 
             array (
                 'id' => 833,
                 'name' => 'CRUSTISSIMO PAN PERRO CALIENTE GIGANTE 780GR',
                 'description_short' => 'CRUSTISSIMO PAN PERRO CALIENTE GIGANTE 780GR',
                 'description' => NULL,
                 'price' => '249840.000000',
-                'qty_avaliable' => 1,
+                'qty_avaliable' => 0,
                 'qty_sold' => 0,
-                'qty_view' => 4,
+                'qty_view' => 16,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
@@ -16113,16 +15957,16 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            119 => 
+            113 => 
             array (
                 'id' => 990,
                 'name' => 'SAVOY CHOCOLATE DE LECHE UND 130',
                 'description_short' => 'SAVOY CHOCOLATE DE LECHE UND 130',
                 'description' => NULL,
                 'price' => '200466.200000',
-                'qty_avaliable' => 70,
+                'qty_avaliable' => 68,
                 'qty_sold' => 0,
-                'qty_view' => 4,
+                'qty_view' => 6,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
@@ -16139,7 +15983,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            120 => 
+            114 => 
             array (
                 'id' => 1047,
                 'name' => 'CIMBOO CHOCOLATE GALLETA CHOCOLATE MALVAVISCO 50GR 632',
@@ -16165,7 +16009,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            121 => 
+            115 => 
             array (
                 'id' => 693,
                 'name' => 'TRELOSO GALLETA CHOCOLATE  130GR',
@@ -16191,59 +16035,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            122 => 
-            array (
-                'id' => 672,
-                'name' => 'HEINZ SALSA TOMATE KETCHUP BBQ 397 GR',
-                'description_short' => 'HEINZ SALSA TOMATE KETCHUP BBQ 397 GR',
-                'description' => NULL,
-                'price' => '153944.990000',
-                'qty_avaliable' => 19,
-                'qty_sold' => 0,
-                'qty_view' => 4,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 30083,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            123 => 
-            array (
-                'id' => 792,
-                'name' => 'HEINZ SALSA DE TOMATE KETCHUP 397GR',
-                'description_short' => 'HEINZ SALSA DE TOMATE KETCHUP 397GR',
-                'description' => NULL,
-                'price' => '177204.550000',
-                'qty_avaliable' => 69,
-                'qty_sold' => 0,
-                'qty_view' => 3,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 12445,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '1',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 21:02:54',
-            ),
-            124 => 
+            116 => 
             array (
                 'id' => 1175,
                 'name' => 'CAMPOFRIO CHORIZO SARTA DULCE ESPANOL 225GR',
@@ -16269,23 +16061,23 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-14 19:40:28',
             ),
-            125 => 
+            117 => 
             array (
-                'id' => 905,
-                'name' => 'LA ESTANCIA  MARGARINA  500GR',
-                'description_short' => 'LA ESTANCIA  MARGARINA  500GR',
+                'id' => 696,
+                'name' => 'BERGI CARAOTAS NEGRAS 500 GR',
+                'description_short' => 'BERGI CARAOTAS NEGRAS 500 GR',
                 'description' => NULL,
-                'price' => '212500.000000',
-                'qty_avaliable' => 30,
+                'price' => '56666.670000',
+                'qty_avaliable' => 41,
                 'qty_sold' => 0,
-                'qty_view' => 2,
+                'qty_view' => 3,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
                 'keyword' => NULL,
                 'status' => 'A',
                 'EAN' => NULL,
-                'sku' => 34519,
+                'sku' => 35206,
                 'promote' => 0,
                 'discount' => '0.000000',
                 'photo' => NULL,
@@ -16295,7 +16087,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            126 => 
+            118 => 
+            array (
+                'id' => 1246,
+                'name' => 'CARRO MULTI POSICION CON VIBRACION B-1906807',
+                'description_short' => 'CARRO MULTI POSICION CON VIBRACION B-1906807',
+                'description' => NULL,
+                'price' => '1631990.000000',
+                'qty_avaliable' => 0,
+                'qty_sold' => 0,
+                'qty_view' => 1,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 34616,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            119 => 
             array (
                 'id' => 973,
                 'name' => 'PANTERA CARAOTA NEGRA 500GR',
@@ -16321,23 +16139,23 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            127 => 
+            120 => 
             array (
-                'id' => 696,
-                'name' => 'BERGI CARAOTAS NEGRAS 500 GR',
-                'description_short' => 'BERGI CARAOTAS NEGRAS 500 GR',
+                'id' => 938,
+                'name' => 'KIERO SALSA TOMATE KETCHUP 397 GR',
+                'description_short' => 'KIERO SALSA TOMATE KETCHUP 397 GR',
                 'description' => NULL,
-                'price' => '56666.670000',
-                'qty_avaliable' => 43,
+                'price' => '117293.400000',
+                'qty_avaliable' => 131,
                 'qty_sold' => 0,
-                'qty_view' => 2,
+                'qty_view' => 6,
                 'user_rating' => '0',
                 'qty_min' => 1,
                 'qty_max' => 0,
                 'keyword' => NULL,
                 'status' => 'A',
                 'EAN' => NULL,
-                'sku' => 35206,
+                'sku' => 27435,
                 'promote' => 0,
                 'discount' => '0.000000',
                 'photo' => NULL,
@@ -16347,33 +16165,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            128 => 
-            array (
-                'id' => 766,
-                'name' => 'MAVESA LIGERA MARGARINA 500GR',
-                'description_short' => 'MAVESA LIGERA MARGARINA 500GR',
-                'description' => NULL,
-                'price' => '209100.000000',
-                'qty_avaliable' => 39,
-                'qty_sold' => 0,
-                'qty_view' => 2,
-                'user_rating' => '0',
-                'qty_min' => 1,
-                'qty_max' => 0,
-                'keyword' => NULL,
-                'status' => 'A',
-                'EAN' => NULL,
-                'sku' => 2519,
-                'promote' => 0,
-                'discount' => '0.000000',
-                'photo' => NULL,
-                'stores_id' => 1,
-                'brands_id' => NULL,
-                'is_combo' => '0',
-                'created_at' => '2020-04-13 16:13:05',
-                'updated_at' => '2020-04-13 16:13:05',
-            ),
-            129 => 
+            121 => 
             array (
                 'id' => 1002,
                 'name' => 'SANTA TERESA RON ANTIGUO D/SOLERA 1796 700ML',
@@ -16399,7 +16191,59 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            130 => 
+            122 => 
+            array (
+                'id' => 766,
+                'name' => 'MAVESA LIGERA MARGARINA 500GR',
+                'description_short' => 'MAVESA LIGERA MARGARINA 500GR',
+                'description' => NULL,
+                'price' => '209100.000000',
+                'qty_avaliable' => 39,
+                'qty_sold' => 0,
+                'qty_view' => 5,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 2519,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            123 => 
+            array (
+                'id' => 792,
+                'name' => 'HEINZ SALSA DE TOMATE KETCHUP 397GR',
+                'description_short' => 'HEINZ SALSA DE TOMATE KETCHUP 397GR',
+                'description' => NULL,
+                'price' => '177204.550000',
+                'qty_avaliable' => 66,
+                'qty_sold' => 0,
+                'qty_view' => 5,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 12445,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '1',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 21:02:54',
+            ),
+            124 => 
             array (
                 'id' => 1000,
                 'name' => 'VENELA FRIJOLES VERDE 500GR',
@@ -16425,7 +16269,7 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            131 => 
+            125 => 
             array (
                 'id' => 998,
                 'name' => 'SANTA TERESA RON LINAJE 750ML',
@@ -16451,7 +16295,33 @@ class ProductsTableSeeder extends Seeder
                 'created_at' => '2020-04-13 16:13:05',
                 'updated_at' => '2020-04-13 16:13:05',
             ),
-            132 => 
+            126 => 
+            array (
+                'id' => 769,
+                'name' => 'VICONE CARAOTAS NEGRAS 500 GRS.',
+                'description_short' => 'VICONE CARAOTAS NEGRAS 500 GRS.',
+                'description' => NULL,
+                'price' => '128562.500000',
+                'qty_avaliable' => 2,
+                'qty_sold' => 0,
+                'qty_view' => 2,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 5695,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            127 => 
             array (
                 'id' => 843,
                 'name' => 'PANTERA FRIJOL BAYO 500GR',
@@ -16468,6 +16338,136 @@ class ProductsTableSeeder extends Seeder
                 'status' => 'A',
                 'EAN' => NULL,
                 'sku' => 1297,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            128 => 
+            array (
+                'id' => 905,
+                'name' => 'LA ESTANCIA  MARGARINA  500GR',
+                'description_short' => 'LA ESTANCIA  MARGARINA  500GR',
+                'description' => NULL,
+                'price' => '212500.000000',
+                'qty_avaliable' => 29,
+                'qty_sold' => 0,
+                'qty_view' => 4,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 34519,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            129 => 
+            array (
+                'id' => 786,
+                'name' => 'EL MAIZAL CARAOTAS NEGRAS 500 GR',
+                'description_short' => 'EL MAIZAL CARAOTAS NEGRAS 500 GR',
+                'description' => NULL,
+                'price' => '60937.500000',
+                'qty_avaliable' => 47,
+                'qty_sold' => 0,
+                'qty_view' => 8,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 29698,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => '["products\\\\April2020\\\\nHL9JqZS0ctfuCb5JW92.png"]',
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => NULL,
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-16 21:25:39',
+            ),
+            130 => 
+            array (
+                'id' => 1037,
+                'name' => 'INFUSION NATURALGRIPDEL ANTIGRIPAL 20GR',
+                'description_short' => 'INFUSION NATURALGRIPDEL ANTIGRIPAL 20GR',
+                'description' => NULL,
+                'price' => '175657.140000',
+                'qty_avaliable' => 0,
+                'qty_sold' => 0,
+                'qty_view' => 6,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 21679,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            131 => 
+            array (
+                'id' => 672,
+                'name' => 'HEINZ SALSA TOMATE KETCHUP BBQ 397 GR',
+                'description_short' => 'HEINZ SALSA TOMATE KETCHUP BBQ 397 GR',
+                'description' => NULL,
+                'price' => '153944.990000',
+                'qty_avaliable' => 15,
+                'qty_sold' => 0,
+                'qty_view' => 8,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 30083,
+                'promote' => 0,
+                'discount' => '0.000000',
+                'photo' => NULL,
+                'stores_id' => 1,
+                'brands_id' => NULL,
+                'is_combo' => '0',
+                'created_at' => '2020-04-13 16:13:05',
+                'updated_at' => '2020-04-13 16:13:05',
+            ),
+            132 => 
+            array (
+                'id' => 1210,
+                'name' => 'SCHOCO BARRA CHOCOLATE CARAMELO SCHOCO 22GR 2683',
+                'description_short' => 'SCHOCO BARRA CHOCOLATE CARAMELO SCHOCO 22GR 2683',
+                'description' => NULL,
+                'price' => '18207.860000',
+                'qty_avaliable' => 17,
+                'qty_sold' => 0,
+                'qty_view' => 30,
+                'user_rating' => '0',
+                'qty_min' => 1,
+                'qty_max' => 0,
+                'keyword' => NULL,
+                'status' => 'A',
+                'EAN' => NULL,
+                'sku' => 35864,
                 'promote' => 0,
                 'discount' => '0.000000',
                 'photo' => NULL,

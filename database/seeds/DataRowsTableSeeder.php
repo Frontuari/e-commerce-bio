@@ -4819,22 +4819,6 @@ class DataRowsTableSeeder extends Seeder
             ),
             300 => 
             array (
-                'id' => 252,
-                'data_type_id' => 34,
-                'field' => 'status',
-                'type' => 'radio_btn',
-                'display_name' => 'Estatus',
-                'required' => false,
-                'browse' => true,
-                'read' => true,
-                'edit' => true,
-                'add' => false,
-                'delete' => false,
-                'details' => '{"default":"NU","options":{"NU":"Nuevo","PR":"Preparando","ED":"En despacho","EN":"Entregado","DE":"Devuelto","RT":"Retirar en tienda","PN":"Pago no procesado"}}',
-                'order' => 2,
-            ),
-            301 => 
-            array (
                 'id' => 265,
                 'data_type_id' => 34,
                 'field' => 'order_belongsto_packaging_relationship',
@@ -4849,7 +4833,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"model":"App\\\\Packagings","table":"packagings","type":"belongsTo","column":"packagings_id","key":"id","label":"name","pivot_table":"migrations","pivot":"0","taggable":"0"}',
                 'order' => 18,
             ),
-            302 => 
+            301 => 
             array (
                 'id' => 350,
                 'data_type_id' => 54,
@@ -4865,7 +4849,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 6,
             ),
-            303 => 
+            302 => 
             array (
                 'id' => 351,
                 'data_type_id' => 54,
@@ -4881,7 +4865,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 7,
             ),
-            304 => 
+            303 => 
             array (
                 'id' => 352,
                 'data_type_id' => 54,
@@ -4897,7 +4881,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 8,
             ),
-            305 => 
+            304 => 
             array (
                 'id' => 355,
                 'data_type_id' => 54,
@@ -4913,7 +4897,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"model":"App\\\\User","table":"users","type":"belongsTo","column":"users_id","key":"id","label":"email","pivot_table":"migrations","pivot":"0","taggable":"0"}',
                 'order' => 5,
             ),
-            306 => 
+            305 => 
             array (
                 'id' => 386,
                 'data_type_id' => 28,
@@ -4929,7 +4913,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 7,
             ),
-            307 => 
+            306 => 
             array (
                 'id' => 381,
                 'data_type_id' => 55,
@@ -4945,7 +4929,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 7,
             ),
-            308 => 
+            307 => 
             array (
                 'id' => 387,
                 'data_type_id' => 9,
@@ -4961,7 +4945,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"display":{"width":"3"},"default":"N","options":{"N":"NO","Y":"SI"}}',
                 'order' => 12,
             ),
-            309 => 
+            308 => 
             array (
                 'id' => 388,
                 'data_type_id' => 1,
@@ -4977,7 +4961,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 12,
             ),
-            310 => 
+            309 => 
             array (
                 'id' => 392,
                 'data_type_id' => 57,
@@ -4993,7 +4977,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"display":{"width":"3"},"default":"A","options":{"A":"Activo","I":"Inactivo"}}',
                 'order' => 6,
             ),
-            311 => 
+            310 => 
             array (
                 'id' => 394,
                 'data_type_id' => 57,
@@ -5009,7 +4993,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 7,
             ),
-            312 => 
+            311 => 
             array (
                 'id' => 395,
                 'data_type_id' => 57,
@@ -5025,7 +5009,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 8,
             ),
-            313 => 
+            312 => 
             array (
                 'id' => 396,
                 'data_type_id' => 57,
@@ -5041,7 +5025,39 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 5,
             ),
+            313 => 
+            array (
+                'id' => 397,
+                'data_type_id' => 55,
+                'field' => 'other_amount',
+                'type' => 'text',
+                'display_name' => 'Other Amount',
+                'required' => false,
+                'browse' => false,
+                'read' => false,
+                'edit' => false,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 10,
+            ),
             314 => 
+            array (
+                'id' => 398,
+                'data_type_id' => 55,
+                'field' => 'coins_id',
+                'type' => 'text',
+                'display_name' => 'Moneda',
+                'required' => false,
+                'browse' => false,
+                'read' => false,
+                'edit' => false,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 11,
+            ),
+            315 => 
             array (
                 'id' => 389,
                 'data_type_id' => 57,
@@ -5057,7 +5073,39 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{}',
                 'order' => 1,
             ),
-            315 => 
+            316 => 
+            array (
+                'id' => 399,
+                'data_type_id' => 55,
+                'field' => 'description',
+                'type' => 'text_area',
+                'display_name' => 'Observación',
+                'required' => false,
+                'browse' => false,
+                'read' => true,
+                'edit' => true,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 12,
+            ),
+            317 => 
+            array (
+                'id' => 252,
+                'data_type_id' => 34,
+                'field' => 'status',
+                'type' => 'radio_btn',
+                'display_name' => 'Estatus',
+                'required' => false,
+                'browse' => true,
+                'read' => true,
+                'edit' => true,
+                'add' => false,
+                'delete' => false,
+                'details' => '{"default":"NU","options":{"NU":"Nuevo","SD":"Esperando por delivery","ED":"Entregado al delivery","EC":"Entregado al cliente","RT":"Retirar en tienda BIO","CO":"Cancelar orden"}}',
+                'order' => 2,
+            ),
+            318 => 
             array (
                 'id' => 393,
                 'data_type_id' => 57,
@@ -5073,7 +5121,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"description":"Medida recomendada: ancho 1400px, alto 360px. No exceder 120KB"}',
                 'order' => 3,
             ),
-            316 => 
+            319 => 
             array (
                 'id' => 391,
                 'data_type_id' => 57,
@@ -5089,7 +5137,7 @@ class DataRowsTableSeeder extends Seeder
                 'details' => '{"display":{"width":"9"},"validation":{"rule":["required"]}}',
                 'order' => 4,
             ),
-            317 => 
+            320 => 
             array (
                 'id' => 390,
                 'data_type_id' => 57,
@@ -5104,6 +5152,22 @@ class DataRowsTableSeeder extends Seeder
                 'delete' => false,
                 'details' => '{"display":{"width":"9"}}',
                 'order' => 2,
+            ),
+            321 => 
+            array (
+                'id' => 400,
+                'data_type_id' => 34,
+                'field' => 'observacion',
+                'type' => 'text_area',
+                'display_name' => 'Observación',
+                'required' => false,
+                'browse' => false,
+                'read' => true,
+                'edit' => true,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 23,
             ),
         ));
         

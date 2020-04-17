@@ -96,17 +96,6 @@ class PaymentMethodsTableSeeder extends Seeder
             ),
             7 => 
             array (
-                'id' => 3,
-                'name' => 'Efectivo',
-                'description' => 'Paga en casa o en nuestra tienda Bio',
-                'time_minutes' => 0,
-                'status' => 'I',
-                'created_at' => '2020-04-05 03:13:54',
-                'updated_at' => '2020-04-08 16:27:39',
-                'image' => NULL,
-            ),
-            8 => 
-            array (
                 'id' => 4,
                 'name' => 'Transferencia Zelle',
                 'description' => 'Entre 1 hora a 2 horas para verificar su pago',
@@ -115,6 +104,17 @@ class PaymentMethodsTableSeeder extends Seeder
                 'created_at' => '2020-01-24 16:08:02',
                 'updated_at' => '2020-04-08 16:32:11',
                 'image' => 'payment-methods\\February2020\\AgSYpWc1AF4zCkLevQCx.png',
+            ),
+            8 => 
+            array (
+                'id' => 3,
+                'name' => 'Efectivo',
+                'description' => 'Paga en casa o en nuestra tienda Bio',
+                'time_minutes' => 0,
+                'status' => 'A',
+                'created_at' => '2020-04-05 03:13:54',
+                'updated_at' => '2020-04-17 13:45:31',
+                'image' => NULL,
             ),
         ));
         

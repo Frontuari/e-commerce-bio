@@ -407,7 +407,7 @@ class DataTypesTableSeeder extends Seeder
                 'description' => NULL,
                 'generate_permissions' => true,
                 'created_at' => '2020-01-24 21:22:54',
-                'updated_at' => '2020-04-15 00:41:48',
+                'updated_at' => '2020-04-17 19:14:12',
                 'server_side' => 1,
                 'controller' => NULL,
                 'policy_name' => NULL,
@@ -415,21 +415,21 @@ class DataTypesTableSeeder extends Seeder
             ),
             22 => 
             array (
-                'id' => 54,
-                'name' => 'trackings',
-                'slug' => 'trackings',
-                'display_name_singular' => 'Tracking',
-                'display_name_plural' => 'Trackings',
-                'icon' => NULL,
-                'model_name' => 'App\\Trackings',
+                'id' => 55,
+                'name' => 'det_bank_orders',
+                'slug' => 'det-bank-orders',
+                'display_name_singular' => 'Verificar pago',
+                'display_name_plural' => 'Verificar pagos',
+                'icon' => 'voyager-paypal',
+                'model_name' => 'App\\DetBankOrders',
                 'description' => NULL,
                 'generate_permissions' => true,
-                'created_at' => '2020-02-24 19:02:15',
-                'updated_at' => '2020-04-15 00:57:47',
-                'server_side' => 0,
+                'created_at' => '2020-03-26 01:01:30',
+                'updated_at' => '2020-04-17 18:28:24',
+                'server_side' => 1,
                 'controller' => NULL,
                 'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":"status","scope":null}',
             ),
             23 => 
             array (
@@ -469,24 +469,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             25 => 
             array (
-                'id' => 55,
-                'name' => 'det_bank_orders',
-                'slug' => 'det-bank-orders',
-                'display_name_singular' => 'Verificar pago',
-                'display_name_plural' => 'Verificar pagos',
-                'icon' => 'voyager-paypal',
-                'model_name' => 'App\\DetBankOrders',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-03-26 01:01:30',
-                'updated_at' => '2020-04-15 01:08:50',
-                'server_side' => 1,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":"status","scope":null}',
-            ),
-            26 => 
-            array (
                 'id' => 28,
                 'name' => 'sub_categories',
                 'slug' => 'sub-categories',
@@ -503,7 +485,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":"position","order_display_column":"name","order_direction":"desc","default_search_key":null,"scope":null}',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 1,
                 'name' => 'users',
@@ -521,7 +503,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 53,
                 'name' => 'orders_status',
@@ -539,7 +521,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 43,
                 'name' => 'advs',
@@ -556,6 +538,24 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => NULL,
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            29 => 
+            array (
+                'id' => 54,
+                'name' => 'trackings',
+                'slug' => 'trackings',
+                'display_name_singular' => 'Tracking',
+                'display_name_plural' => 'Trackings',
+                'icon' => NULL,
+                'model_name' => 'App\\Trackings',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-02-24 19:02:15',
+                'updated_at' => '2020-04-17 00:35:53',
+                'server_side' => 1,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"orders_id","scope":null}',
             ),
             30 => 
             array (
