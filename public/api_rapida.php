@@ -209,6 +209,9 @@ switch($_GET['evento']) {
     case 'guardarOpinion':
         guardarOpinion();
     break;
+    case 'guardarOpinionOrden':
+        guardarOpinionOrden();
+    break;
     case 'guardarVisitaProducto':
         guardarVisitaProducto();
     break;
@@ -707,6 +710,20 @@ if(is_array($arr)){
     salidaNueva(null,"Gracias por su comentario.");
 }
 salidaNueva(null,"Disculpe, intente nuevamente.",false);
+}
+function guardarOpinionOrden(){
+    $users_id       =$_SESSION['usuario']['id'];
+    $orders_id      =$_GET['orders_id'];
+    $opinion        =$_GET['opinion'];
+    $user_rating    =intval($_GET['user_rating']);
+    $sql="UPDATE orders SET opinion='$opinion',user_rating='$user_rating' WHERE users_id='$users_id' AND id='$orders_id' RETURNING id";
+ 
+    $arr=q($sql);
+   
+    if(is_array($arr)){
+        salidaNueva(null,"Gracias por su opinión.");
+    }
+    salidaNueva(null,"Disculpe, intente nuevamente.",false);
 }
 function guardarCalificacion(){
     $users_id   =$_SESSION['usuario']['id'];
