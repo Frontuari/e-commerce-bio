@@ -149,6 +149,7 @@
     export default {
         data() {
             return {
+				cat: 0,
 				products: {},
 				filterP: [],
 				limitP: 5,
@@ -190,10 +191,11 @@
 				console.log("Not logout");
 				this.datauser.id = 'undefined';
 			}
+			this.cat = window.location.href.split("cat=")[1] || 0;
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page;
+				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page;
 			}
 		},
 		created: function() {

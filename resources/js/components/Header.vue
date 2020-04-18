@@ -79,8 +79,12 @@
 							</li>
 							<!-- no loggeado -->
 							<!-- loggeado -->
-							<li id="nav-logged" v-if="!!userlogged"><a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text"> {{userlogged.name}}</span></a> <a href="javascript:void(0)" @click="logout()" class="logout">
-							<img src="assets/img/cerrar-sesion-bio.svg"></a></li>
+							<li id="nav-logged" v-if="!!userlogged">
+								<a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="javascript:void(0)" @click="logout()" class="logout">
+									<img src="assets/img/cerrar-sesion-bio.svg">
+								</a>
+							</li>
 							<!-- loggeado -->
 							
 							<li id="nav-cart" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver el carrito">
@@ -249,12 +253,18 @@ export default {
 					  icon: 'error',
 					  title: 'Error',
 					  text: response.data.msj_general,
-					  //footer: '<a href>Why do I have this issue?</a>'
-					})
-
-
+					});
 				}else{
 					location.href = window.location.href;
+				}
+			}).catch(err => {
+				if(err.response.data.success == false)
+				{
+					Swal.fire({
+					  icon: 'error',
+					  title: 'Error',
+					  text: "Usuario y/o clave incorrecta",
+					});
 				}
 			});
 			
@@ -281,11 +291,8 @@ export default {
 		if( window.localStorage.getItem("cartNew") ){
 			const _this = this;
 			JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {
-				console.log("a::> ",a);
 				_this.cant_cart += parseInt(a.cant);
-			})
-
-			
+			});
 		}else{
 			this.cant_cart = 0;
 		}

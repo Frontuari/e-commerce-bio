@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Coin;
 use App\Advs;
+use App\ProductCategory;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -30,9 +31,10 @@ class HomeController extends Controller
         $Coin = Coin::where("id",1)->first();
         
         $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
-        $Medio = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio")).'%'])->orderBy('order','ASC')->get();
         $Medio_Bajo = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
         $footer = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
+
+        $Categories = ProductCategory::where('status','A')->orderBy("order","asc")->take(4)->get();
 
         $MostRecent = Product::where('products.status','A')
         ->where('is_combo',false)
@@ -40,7 +42,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('created_at','desc')
-        ->take(10)
+        ->take(12)
         ->get();
 
         $MostView = Product::where('products.status','A')
@@ -49,7 +51,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_view','desc')
-        ->take(10)
+        ->take(12)
         ->get();
 
         $MostSold = Product::where('products.status','A')
@@ -58,7 +60,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_sold','desc')
-        ->take(10)
+        ->take(12)
         ->get();
 
         $BestPrice = Product::where('products.status','A')
@@ -67,7 +69,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('price','asc')
-        ->take(10)
+        ->take(12)
         ->get();
 
         $Combos = Product::where('products.status','A')
@@ -81,7 +83,7 @@ class HomeController extends Controller
         return view("home",[
             "tasa_dolar"=>$Coin->rate,
             "sliders"=>$Slider,
-            "medio"=>$Medio,
+            "categories"=>$Categories,
             "medio_bajo"=>$Medio_Bajo,
             "recent"=>$MostRecent,
             "viewed"=>$MostView,

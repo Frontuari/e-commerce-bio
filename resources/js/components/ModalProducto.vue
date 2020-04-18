@@ -8,11 +8,11 @@
                             <div class=" col-lg-4">
                                 <div :id="'modalslider'+product.id" class="carousel slide" data-ride="carousel">
                                     <!-- Indicators -->
-                                    <ul class="carousel-indicators" >
+                                    <ul class="carousel-indicators" v-if="product.photo != null">
                                         <li v-for="(foto,index) in JSON.parse(product.photo)" v-bind:key="index" :data-target="'#modalslider'+product.id" :data-slide-to="index" :class="(index==0)?'active':''"></li>
                                     </ul>
                                     <!-- The slideshow -->
-                                    <div class="carousel-inner">
+                                    <div class="carousel-inner" v-if="product.photo != null">
                                         <div :class="(index==0)?'carousel-item active':'carousel-item'" v-for="(photo,index) in JSON.parse(product.photo)" v-bind:key="index">
                                             <img :src="'storage/'+ photo | MediumImage">
                                         </div>

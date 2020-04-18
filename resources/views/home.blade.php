@@ -14,7 +14,7 @@
 
 	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
 
-	<ads :ads="{{ $medio }}"></ads>
+	<ads :categories="{{ $categories }}"></ads>
 
 	<offers :medio_bajo="{{ $medio_bajo }}"></offers>
 
