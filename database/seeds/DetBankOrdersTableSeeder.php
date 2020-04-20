@@ -49,36 +49,6 @@ class DetBankOrdersTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 4,
-                'amount' => '229900.00',
-                'orders_id' => 3,
-                'bank_datas_id' => 1,
-                'status' => 'nuevo',
-                'ref' => 'ghj',
-                'image' => NULL,
-                'created_at' => '2020-04-16 18:33:16',
-                'updated_at' => '2020-04-16 18:33:16',
-                'other_amount' => NULL,
-                'coins_id' => NULL,
-                'description' => NULL,
-            ),
-            3 => 
-            array (
-                'id' => 5,
-                'amount' => '0.00',
-                'orders_id' => 3,
-                'bank_datas_id' => 1,
-                'status' => 'nuevo',
-                'ref' => 'sdfg',
-                'image' => NULL,
-                'created_at' => '2020-04-16 19:31:32',
-                'updated_at' => '2020-04-16 19:31:32',
-                'other_amount' => NULL,
-                'coins_id' => NULL,
-                'description' => NULL,
-            ),
-            4 => 
-            array (
                 'id' => 6,
                 'amount' => '0.00',
                 'orders_id' => 3,
@@ -92,7 +62,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            5 => 
+            3 => 
             array (
                 'id' => 8,
                 'amount' => '0.00',
@@ -107,7 +77,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            6 => 
+            4 => 
             array (
                 'id' => 9,
                 'amount' => '0.00',
@@ -122,7 +92,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            7 => 
+            5 => 
             array (
                 'id' => 11,
                 'amount' => '203500.00',
@@ -137,7 +107,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            8 => 
+            6 => 
             array (
                 'id' => 12,
                 'amount' => '1100.00',
@@ -152,7 +122,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            9 => 
+            7 => 
             array (
                 'id' => 13,
                 'amount' => '113300.00',
@@ -167,7 +137,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            10 => 
+            8 => 
             array (
                 'id' => 14,
                 'amount' => '236500.00',
@@ -182,7 +152,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            11 => 
+            9 => 
             array (
                 'id' => 15,
                 'amount' => '1632400.00',
@@ -197,7 +167,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            12 => 
+            10 => 
             array (
                 'id' => 16,
                 'amount' => '460437.71',
@@ -212,7 +182,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            13 => 
+            11 => 
             array (
                 'id' => 17,
                 'amount' => '0.01',
@@ -227,7 +197,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            14 => 
+            12 => 
             array (
                 'id' => 1,
                 'amount' => '2829200.00',
@@ -242,7 +212,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            15 => 
+            13 => 
             array (
                 'id' => 18,
                 'amount' => '220000.00',
@@ -257,7 +227,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            16 => 
+            14 => 
             array (
                 'id' => 19,
                 'amount' => '12100.00',
@@ -272,7 +242,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            17 => 
+            15 => 
             array (
                 'id' => 20,
                 'amount' => '1100.00',
@@ -287,7 +257,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => NULL,
                 'description' => NULL,
             ),
-            18 => 
+            16 => 
             array (
                 'id' => 21,
                 'amount' => '248600.00',
@@ -302,7 +272,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            19 => 
+            17 => 
             array (
                 'id' => 22,
                 'amount' => '1100.00',
@@ -317,7 +287,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            20 => 
+            18 => 
             array (
                 'id' => 23,
                 'amount' => '17600.00',
@@ -332,7 +302,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            21 => 
+            19 => 
             array (
                 'id' => 24,
                 'amount' => '35200.00',
@@ -347,7 +317,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            22 => 
+            20 => 
             array (
                 'id' => 25,
                 'amount' => '1100.00',
@@ -362,7 +332,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            23 => 
+            21 => 
             array (
                 'id' => 26,
                 'amount' => '319000.00',
@@ -377,7 +347,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            24 => 
+            22 => 
             array (
                 'id' => 27,
                 'amount' => '300000.00',
@@ -392,7 +362,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            25 => 
+            23 => 
             array (
                 'id' => 28,
                 'amount' => '33000.00',
@@ -407,7 +377,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            26 => 
+            24 => 
             array (
                 'id' => 29,
                 'amount' => '11000.00',
@@ -422,7 +392,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            27 => 
+            25 => 
             array (
                 'id' => 30,
                 'amount' => '483420.00',
@@ -437,7 +407,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            28 => 
+            26 => 
             array (
                 'id' => 31,
                 'amount' => '8.58',
@@ -452,52 +422,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            29 => 
-            array (
-                'id' => 32,
-                'amount' => '175600.00',
-                'orders_id' => 17,
-                'bank_datas_id' => 1,
-                'status' => 'nuevo',
-                'ref' => 'hjk',
-                'image' => NULL,
-                'created_at' => '2020-04-17 10:52:25',
-                'updated_at' => '2020-04-17 10:52:25',
-                'other_amount' => '0.00',
-                'coins_id' => 2,
-                'description' => NULL,
-            ),
-            30 => 
-            array (
-                'id' => 33,
-                'amount' => '57.00',
-                'orders_id' => 17,
-                'bank_datas_id' => 1,
-                'status' => 'nuevo',
-                'ref' => 'fdgh',
-                'image' => NULL,
-                'created_at' => '2020-04-17 10:55:18',
-                'updated_at' => '2020-04-17 10:55:18',
-                'other_amount' => '0.00',
-                'coins_id' => 2,
-                'description' => NULL,
-            ),
-            31 => 
-            array (
-                'id' => 34,
-                'amount' => '0.14',
-                'orders_id' => 17,
-                'bank_datas_id' => 1,
-                'status' => 'nuevo',
-                'ref' => 'gfhfg',
-                'image' => NULL,
-                'created_at' => '2020-04-17 10:55:26',
-                'updated_at' => '2020-04-17 10:55:26',
-                'other_amount' => '0.00',
-                'coins_id' => 2,
-                'description' => NULL,
-            ),
-            32 => 
+            27 => 
             array (
                 'id' => 47,
                 'amount' => '766200.45',
@@ -512,7 +437,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            33 => 
+            28 => 
             array (
                 'id' => 48,
                 'amount' => '766200.45',
@@ -527,7 +452,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            34 => 
+            29 => 
             array (
                 'id' => 49,
                 'amount' => '165000.00',
@@ -542,7 +467,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            35 => 
+            30 => 
             array (
                 'id' => 35,
                 'amount' => '478246.32',
@@ -557,7 +482,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            36 => 
+            31 => 
             array (
                 'id' => 36,
                 'amount' => '234586.80',
@@ -572,7 +497,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            37 => 
+            32 => 
             array (
                 'id' => 37,
                 'amount' => '200000.00',
@@ -587,7 +512,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            38 => 
+            33 => 
             array (
                 'id' => 38,
                 'amount' => '215714.29',
@@ -602,7 +527,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            39 => 
+            34 => 
             array (
                 'id' => 39,
                 'amount' => '307889.98',
@@ -617,7 +542,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            40 => 
+            35 => 
             array (
                 'id' => 40,
                 'amount' => '400400.00',
@@ -632,7 +557,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            41 => 
+            36 => 
             array (
                 'id' => 42,
                 'amount' => '34100.00',
@@ -647,7 +572,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 1,
                 'description' => NULL,
             ),
-            42 => 
+            37 => 
             array (
                 'id' => 41,
                 'amount' => '200000.00',
@@ -662,7 +587,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            43 => 
+            38 => 
             array (
                 'id' => 43,
                 'amount' => '30000.00',
@@ -677,7 +602,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            44 => 
+            39 => 
             array (
                 'id' => 44,
                 'amount' => '6415.72',
@@ -692,7 +617,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            45 => 
+            40 => 
             array (
                 'id' => 45,
                 'amount' => '307889.98',
@@ -707,7 +632,7 @@ class DetBankOrdersTableSeeder extends Seeder
                 'coins_id' => 2,
                 'description' => NULL,
             ),
-            46 => 
+            41 => 
             array (
                 'id' => 46,
                 'amount' => '766200.45',
@@ -718,6 +643,81 @@ class DetBankOrdersTableSeeder extends Seeder
                 'image' => NULL,
                 'created_at' => '2020-04-17 14:12:35',
                 'updated_at' => '2020-04-17 18:12:47',
+                'other_amount' => '0.00',
+                'coins_id' => 2,
+                'description' => NULL,
+            ),
+            42 => 
+            array (
+                'id' => 4,
+                'amount' => '229900.00',
+                'orders_id' => 3,
+                'bank_datas_id' => 1,
+                'status' => 'aprobado',
+                'ref' => 'ghj',
+                'image' => NULL,
+                'created_at' => '2020-04-16 18:33:16',
+                'updated_at' => '2020-04-20 13:36:46',
+                'other_amount' => NULL,
+                'coins_id' => NULL,
+                'description' => NULL,
+            ),
+            43 => 
+            array (
+                'id' => 5,
+                'amount' => '0.00',
+                'orders_id' => 3,
+                'bank_datas_id' => 1,
+                'status' => 'aprobado',
+                'ref' => 'sdfg',
+                'image' => NULL,
+                'created_at' => '2020-04-16 19:31:32',
+                'updated_at' => '2020-04-20 13:36:59',
+                'other_amount' => NULL,
+                'coins_id' => NULL,
+                'description' => NULL,
+            ),
+            44 => 
+            array (
+                'id' => 34,
+                'amount' => '0.14',
+                'orders_id' => 17,
+                'bank_datas_id' => 1,
+                'status' => 'aprobado',
+                'ref' => 'gfhfg',
+                'image' => NULL,
+                'created_at' => '2020-04-17 10:55:26',
+                'updated_at' => '2020-04-20 13:38:25',
+                'other_amount' => '0.00',
+                'coins_id' => 2,
+                'description' => NULL,
+            ),
+            45 => 
+            array (
+                'id' => 33,
+                'amount' => '57.00',
+                'orders_id' => 17,
+                'bank_datas_id' => 1,
+                'status' => 'aprobado',
+                'ref' => 'fdgh',
+                'image' => NULL,
+                'created_at' => '2020-04-17 10:55:18',
+                'updated_at' => '2020-04-20 13:38:48',
+                'other_amount' => '0.00',
+                'coins_id' => 2,
+                'description' => NULL,
+            ),
+            46 => 
+            array (
+                'id' => 32,
+                'amount' => '175600.00',
+                'orders_id' => 17,
+                'bank_datas_id' => 1,
+                'status' => 'aprobado',
+                'ref' => 'hjk',
+                'image' => NULL,
+                'created_at' => '2020-04-17 10:52:25',
+                'updated_at' => '2020-04-20 13:38:58',
                 'other_amount' => '0.00',
                 'coins_id' => 2,
                 'description' => NULL,

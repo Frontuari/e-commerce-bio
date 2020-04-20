@@ -5102,7 +5102,7 @@ class DataRowsTableSeeder extends Seeder
                 'edit' => true,
                 'add' => false,
                 'delete' => false,
-                'details' => '{"default":"NU","options":{"NU":"Nuevo","SD":"Esperando por delivery","ED":"Entregado al delivery","EC":"Entregado al cliente","RT":"Retirar en tienda BIO","CO":"Cancelar orden"}}',
+                'details' => '{"default":"NU","options":{"NU":"Nuevo","PR":"Preparar orden","SD":"Esperando por delivery","ED":"Entregado al delivery","EC":"Entregado al cliente","RT":"Retirar en tienda BIO","CO":"Cancelar orden"}}',
                 'order' => 2,
             ),
             318 => 
@@ -5168,6 +5168,38 @@ class DataRowsTableSeeder extends Seeder
                 'delete' => false,
                 'details' => '{}',
                 'order' => 23,
+            ),
+            322 => 
+            array (
+                'id' => 401,
+                'data_type_id' => 34,
+                'field' => 'enviado_bio',
+                'type' => 'text',
+                'display_name' => 'Enviado Bio',
+                'required' => true,
+                'browse' => false,
+                'read' => false,
+                'edit' => false,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 24,
+            ),
+            323 => 
+            array (
+                'id' => 402,
+                'data_type_id' => 34,
+                'field' => 'fecha_enviado_bio',
+                'type' => 'timestamp',
+                'display_name' => 'Fecha Enviado Bio',
+                'required' => false,
+                'browse' => false,
+                'read' => false,
+                'edit' => false,
+                'add' => false,
+                'delete' => false,
+                'details' => '{}',
+                'order' => 25,
             ),
         ));
         

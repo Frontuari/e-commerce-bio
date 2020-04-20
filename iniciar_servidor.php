@@ -12,11 +12,13 @@ $retraso_general=7;
 $ip="http://192.168.0.105";
 
 
-$activar_productos=true;
+$activar_productos=false;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+5 minutes";
 
-
+$activar_envio_orden=true;
+$tiempo_acumulado_envio_orden=0;
+$retraso_envio_orden="+1 minutes";
 
 
 /* Ejemplo si quieren crear otro :)
@@ -36,7 +38,14 @@ do{
 		$tiempo_acumulado_productos=strtotime($retraso_productos);		
 	}	
 
-
+	if(time()>=$time_envio_orden and $activar_envio_orden==true){
+		syslog(LOG_INFO,"Actualizando envio_orden");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		actualizarEnvioOrden($ip);
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_envio_orden=strtotime($retraso_envio_orden);		
+	}	
 
 
 	
@@ -46,6 +55,74 @@ sleep($retraso_general);
 
 }while(true);
 closelog();
+
+
+function actualizarEnvioOrden(){
+	$arr=q("SELECT 
+	'T01' as localidad,
+	o.id as norder,
+	o.total_transport as envio,
+	o.sub_total,
+	o.exento,
+	o.bi as base_imponible,
+	o.total_tax as iva,
+	o.total_pay as total,
+	p.rif as rif,
+	oa.address as direccion_de_entrega,
+	p.name as descripcion,
+	p.phone as telefono,
+	TO_CHAR(o.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha_de_orden,
+	TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_para_entrega,
+	(SELECT json_agg(
+				json_build_object(
+				'sku', p.sku, 
+				'cant', op.cant,
+				'nombre',p.name,
+				'precio',op.price,
+				'total',(p.price*op.cant)
+			)
+			
+	) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) orderlines,
+	(SELECT json_agg(
+				json_build_object(
+				'method', pm.name, 
+				'mount', dbo.amount,
+				'id_trans',dbo.id,
+				'referencia',dbo.ref,
+				'payment_status',dbo.status
+			)
+			
+	) FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id INNER JOIN payment_methods pm ON pm.id=bd.payment_methods_id WHERE dbo.orders_id=o.id) detallepago 
+	
+	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0");
+	if(is_array($arr)){
+		$data['data']=json_encode($arr);
+
+	$res=send_url($data,"http://200.74.230.206:9009/api/v1/setOrder");
+	//$res=true;
+	if($res!=true){
+		echo "Error al enviar la orden al servidor de bio";
+	}elseif($res==true){
+		q("BEGIN");
+		$malo=false;
+		foreach($arr as $orden){
+			$id=$orden['norder'];
+			$sql="UPDATE orders SET fecha_enviado_bio=NOW(),enviado_bio=1 WHERE id='$id' RETURNING id";
+			$r=q($sql);
+
+			if(!is_array($r)){
+				$malo=true;
+			}
+		}
+		if($malo==true){
+			q("ROLLBACK");
+		}else{
+			q("COMMIT");
+		}
+	}
+}
+
+}
 
 
 function actualizarProductos($ip){
@@ -215,6 +292,21 @@ function get_url($url){
 		}
 		
 		return true;
+}
+function send_url($arr,$url){
+	
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL,$url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+curl_setopt($ch, CURLOPT_POSTFIELDS, 
+http_build_query($arr));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$server_output = curl_exec($ch);
+curl_close ($ch);
+
+if ($server_output == "OK") {return true;} else {return false;}
 }
 
 function leer($nombre,$url){

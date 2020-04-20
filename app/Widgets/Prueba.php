@@ -32,9 +32,13 @@ class Prueba extends BaseDimmer
         $this->usuarios().
         $this->ventas().
         $this->opiniones().
-        '</div>'.
+        $this->nuevo_pago('Nuevos pagos','consutar_nuevo_pago','/admin/det-bank-orders','ion-cash').
+        $this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes','/admin/orders','ion-pricetag').
+        '
+        <span id="noti" style="margin-right:20px;float:right; font-size:60px; color:#E1251B" onclick="chao()"><i class="ion-android-notifications-off"></i></span>
+        </div>'.
         $this->grafico_pedidos();
-        //$h.=$this->footer();
+       $h.=$this->footer();
         //$h.=$this->footer();
         return $h;
     }
@@ -124,10 +128,10 @@ var APP_URL = "'.url("/").'";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">
         <div class="info-box">
-          <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+          <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Pedidos</span>
+            <span class="info-box-text">Total Ordenes</span>
             <span class="info-box-number">'.$count.'</span>
           </div>
           <!-- /.info-box-content -->
@@ -142,7 +146,7 @@ var APP_URL = "'.url("/").'";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">
         <div class="info-box">
-          <span class="info-box-icon bg-red"><i class="ion-heart"></i></span>
+          <span class="info-box-icon bg-yellow"><i class="ion-heart"></i></span>
 
           <div class="info-box-content">
             <span class="info-box-text">Opiniones</span>
@@ -153,6 +157,88 @@ var APP_URL = "'.url("/").'";
         <!-- /.info-box -->
       </div>';
     }
+
+
+    
+    public function nuevo_pago($name,$evento,$url,$icono){
+     $js='' ;
+$js=$this->send_data($evento);
+
+$count=1;
+      //$url="/admin/det-bank-orders";
+      return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+      <a href="'.$url.'">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="'.$icono.'"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">'.$name.'</span>
+          <span class="info-box-number" id="'.$evento.'"></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div></a>
+      <!-- /.info-box -->
+    </div>
+    
+    <script>
+    var cant_'.$evento.'=0;
+    data_'.$evento.'();
+    async function data_'.$evento.'(){
+      while(true){
+        '.$js.'
+        await sleep(2000);
+       // beep(999, 220, 300);
+      }
+      
+      
+    }
+
+ function datab_'.$evento.'(json){
+   
+   cant_nueva_'.$evento.'=json.data[0].cant;
+   if(cant_'.$evento.'!=cant_nueva_'.$evento.'){
+    notify().success().message("Successfull Hello World");    
+    cant_'.$evento.'=cant_nueva_'.$evento.';
+   }
+  document.getElementById("'.$evento.'").innerHTML =json.data[0].cant;
+
+ }
+
+    </script>
+
+    
+    
+    ';
+  }
+
+
+
+
+private function send_data($evento){
+  $url=url('/api_rapida_admin.php?token=leonardomelendez&evento='.$evento);
+  $js='
+  var xmlhttp = new XMLHttpRequest();
+  var url = "'.$url.'";
+  
+  xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var myArr = JSON.parse(this.responseText);
+          datab_'.$evento.'(myArr);
+      }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+  ';
+  return $js;
+}
+
+
+
+
+
+
+
+
     public function top(){
         $html="";
         $html.='<link rel="stylesheet" href="css/AdminLTE.min.css">';
@@ -170,13 +256,46 @@ var APP_URL = "'.url("/").'";
         }
         
         </style>
+        <script>
+      
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+function chao(){
+  document.getElementById("noti").style.display="none";
+}
+        </script>
+       
         ';
        // $html.='<link rel="stylesheet" href="fontawesome-free-5.12.0-web/css/all.min.css">';
         return $html;
     }
 
     public function footer(){
-        $html="";
+        $html='
+        
+
+  
+        <script src="js/notify.min.js"></script>
+        <script>
+    var n = notify({
+        duration: 3000
+    });
+    n.wait(function() {
+        n.message("Hi! I am a Notification!")
+    }, 2000);
+
+</script>
+
+
+
+
+     
+
+
+
+
+        ';
         
         return $html;
     }

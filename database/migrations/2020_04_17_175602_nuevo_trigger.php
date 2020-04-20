@@ -27,7 +27,8 @@ class NuevoTrigger extends Migration
      
             IF NEW.status='aprobado' AND (v_total_monto_aprobado_o_efectivo>=v_total_a_pagar) THEN
           		INSERT INTO trackings (description,orders_id,orders_status_id,users_id,created_at) VALUES (NEW.description,NEW.orders_id,4,v_users_id,NOW());
-			END IF;
+              UPDATE orders SET status='PR' WHERE orders.id=NEW.orders_id;
+		  END IF;
 			IF NEW.status='rechazado' THEN
 				INSERT INTO trackings (description,orders_id,orders_status_id,users_id,created_at) VALUES (NEW.description,NEW.orders_id,1,v_users_id,NOW());
 			END IF;

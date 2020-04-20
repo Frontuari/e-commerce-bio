@@ -977,6 +977,26 @@ class TrackingsTableSeeder extends Seeder
                 'created_at' => '2020-04-17 18:36:06',
                 'updated_at' => NULL,
             ),
+            96 => 
+            array (
+                'id' => 101,
+                'description' => NULL,
+                'orders_id' => 17,
+                'orders_status_id' => 4,
+                'users_id' => 16,
+                'created_at' => '2020-04-20 09:38:59',
+                'updated_at' => NULL,
+            ),
+            97 => 
+            array (
+                'id' => 102,
+                'description' => NULL,
+                'orders_id' => 27,
+                'orders_status_id' => 8,
+                'users_id' => 16,
+                'created_at' => '2020-04-20 09:39:19',
+                'updated_at' => NULL,
+            ),
         ));
         
         

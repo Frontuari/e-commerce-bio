@@ -42,6 +42,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 17:01:36',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             1 => 
             array (
@@ -68,6 +70,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 17:41:32',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             2 => 
             array (
@@ -94,6 +98,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 18:33:05',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             3 => 
             array (
@@ -120,6 +126,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 19:40:32',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             4 => 
             array (
@@ -146,6 +154,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 20:12:17',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             5 => 
             array (
@@ -172,6 +182,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 20:16:44',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             6 => 
             array (
@@ -198,6 +210,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 20:16:57',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             7 => 
             array (
@@ -224,6 +238,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 20:17:21',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             8 => 
             array (
@@ -250,6 +266,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-16 20:18:19',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             9 => 
             array (
@@ -276,6 +294,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 09:45:07',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             10 => 
             array (
@@ -302,6 +322,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 10:11:45',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             11 => 
             array (
@@ -328,6 +350,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 10:16:49',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             12 => 
             array (
@@ -354,6 +378,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 10:23:09',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             13 => 
             array (
@@ -380,6 +406,8 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 10:42:20',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             14 => 
             array (
@@ -406,34 +434,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 10:44:50',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
             15 => 
-            array (
-                'id' => 17,
-                'sub_total' => '175657.14',
-                'total_pay' => '175657.14',
-                'total_tax' => '0.00',
-                'total_packaging' => '0.00',
-                'total_transport' => '0.00',
-                'order_address_id' => NULL,
-                'transports_id' => 1,
-                'user_rating' => 0,
-                'delivery_time_date' => '2020-04-17 04:52:03',
-                'discount' => '0.00',
-                'exento' => '175657.14',
-                'bi' => '0.00',
-                'packagings_id' => 1,
-                'currency_rate' => '1.00',
-                'opinion' => NULL,
-                'coins_id' => 1,
-                'users_id' => 16,
-                'rate_json' => '[{"id":"2","name":"Bol\\u00edvares","symbol":"Bs","rate":"1.000000000"},{"id":"4","name":"Bitcoin","symbol":"BTC","rate":"700000000.000000000"},{"id":"1","name":"D\\u00f3lares","symbol":"$","rate":"110000.000000000"}]',
-                'created_at' => '2020-04-17 10:52:05',
-                'updated_at' => '2020-04-17 10:52:05',
-                'status' => 'NU',
-                'observacion' => NULL,
-            ),
-            16 => 
             array (
                 'id' => 18,
                 'sub_total' => '478246.32',
@@ -458,8 +462,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 11:42:57',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 19,
                 'sub_total' => '234586.80',
@@ -484,8 +490,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 11:54:58',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 20,
                 'sub_total' => '241714.29',
@@ -510,8 +518,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 12:04:15',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 21,
                 'sub_total' => '307889.98',
@@ -536,8 +546,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 12:24:29',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 22,
                 'sub_total' => '400932.40',
@@ -562,8 +574,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 12:25:29',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 23,
                 'sub_total' => '234586.80',
@@ -588,8 +602,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 12:26:42',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 24,
                 'sub_total' => '36415.72',
@@ -614,8 +630,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 12:27:07',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 25,
                 'sub_total' => '307889.98',
@@ -640,8 +658,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 14:05:55',
                 'status' => 'NU',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 26,
                 'sub_total' => '766200.45',
@@ -666,34 +686,10 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 19:33:41',
                 'status' => 'CO',
                 'observacion' => 'No lo encontramos en su casa debe venir a nuestra locasd fds fasd fas df asdfasdf',
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
-            25 => 
-            array (
-                'id' => 27,
-                'sub_total' => '224940.24',
-                'total_pay' => '224940.24',
-                'total_tax' => '0.00',
-                'total_packaging' => '0.00',
-                'total_transport' => '0.00',
-                'order_address_id' => NULL,
-                'transports_id' => 1,
-                'user_rating' => 0,
-                'delivery_time_date' => '2020-04-20 08:51:03',
-                'discount' => '0.00',
-                'exento' => '224940.24',
-                'bi' => '0.00',
-                'packagings_id' => 1,
-                'currency_rate' => '1.00',
-                'opinion' => NULL,
-                'coins_id' => 1,
-                'users_id' => 16,
-                'rate_json' => '[{"id":"2","name":"Bol\\u00edvares","symbol":"Bs","rate":"1.000000000"},{"id":"4","name":"Bitcoin","symbol":"BTC","rate":"700000000.000000000"},{"id":"1","name":"D\\u00f3lares","symbol":"$","rate":"110000.000000000"}]',
-                'created_at' => '2020-04-17 14:51:05',
-                'updated_at' => '2020-04-17 19:52:43',
-                'status' => 'RT',
-                'observacion' => NULL,
-            ),
-            26 => 
+            24 => 
             array (
                 'id' => 14,
                 'sub_total' => '318830.88',
@@ -719,6 +715,64 @@ class OrdersTableSeeder extends Seeder
                 'updated_at' => '2020-04-17 20:20:17',
                 'status' => 'EC',
                 'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
+            ),
+            25 => 
+            array (
+                'id' => 27,
+                'sub_total' => '224940.24',
+                'total_pay' => '224940.24',
+                'total_tax' => '0.00',
+                'total_packaging' => '0.00',
+                'total_transport' => '0.00',
+                'order_address_id' => NULL,
+                'transports_id' => 1,
+                'user_rating' => 0,
+                'delivery_time_date' => '2020-04-20 08:51:03',
+                'discount' => '0.00',
+                'exento' => '224940.24',
+                'bi' => '0.00',
+                'packagings_id' => 1,
+                'currency_rate' => '1.00',
+                'opinion' => NULL,
+                'coins_id' => 1,
+                'users_id' => 16,
+                'rate_json' => '[{"id":"2","name":"Bol\\u00edvares","symbol":"Bs","rate":"1.000000000"},{"id":"4","name":"Bitcoin","symbol":"BTC","rate":"700000000.000000000"},{"id":"1","name":"D\\u00f3lares","symbol":"$","rate":"110000.000000000"}]',
+                'created_at' => '2020-04-17 14:51:05',
+                'updated_at' => '2020-04-20 13:39:19',
+                'status' => 'EC',
+                'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
+            ),
+            26 => 
+            array (
+                'id' => 17,
+                'sub_total' => '175657.14',
+                'total_pay' => '175657.14',
+                'total_tax' => '0.00',
+                'total_packaging' => '0.00',
+                'total_transport' => '0.00',
+                'order_address_id' => NULL,
+                'transports_id' => 1,
+                'user_rating' => 0,
+                'delivery_time_date' => '2020-04-17 04:52:03',
+                'discount' => '0.00',
+                'exento' => '175657.14',
+                'bi' => '0.00',
+                'packagings_id' => 1,
+                'currency_rate' => '1.00',
+                'opinion' => NULL,
+                'coins_id' => 1,
+                'users_id' => 16,
+                'rate_json' => '[{"id":"2","name":"Bol\\u00edvares","symbol":"Bs","rate":"1.000000000"},{"id":"4","name":"Bitcoin","symbol":"BTC","rate":"700000000.000000000"},{"id":"1","name":"D\\u00f3lares","symbol":"$","rate":"110000.000000000"}]',
+                'created_at' => '2020-04-17 10:52:05',
+                'updated_at' => '2020-04-20 15:35:32',
+                'status' => 'NU',
+                'observacion' => NULL,
+                'enviado_bio' => 0,
+                'fecha_enviado_bio' => NULL,
             ),
         ));
         
