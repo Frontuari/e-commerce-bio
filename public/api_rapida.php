@@ -138,6 +138,14 @@ switch($_GET['evento']) {
                 $order='ORDER BY p.price ASC';
                 $sql=getSqlListarProductos('','',$order);
             break;
+            case 'Orden alfabético A-Z';
+                $order='ORDER BY p.name ASC';
+                $sql=getSqlListarProductos('','',$order);
+            break;
+            case 'Orden alfabético Z-A';
+                $order='ORDER BY p.name DESC';
+                $sql=getSqlListarProductos('','',$order);
+            break;
             default:
             
             $sql=getSqlListarProductos();

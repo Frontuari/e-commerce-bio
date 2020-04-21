@@ -15,10 +15,10 @@ class AddColumndOrderAddres extends Migration
     public function up()
     {
         Schema::table($this->tableName, function (Blueprint $table) {
-            $table->string('zip_code', 20)->nullable();
-            $table->string('urb', 150)->nullable();
-            $table->string('sector', 100)->nullable();
-            $table->string('nro_home', 10)->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('urb')->nullable();
+            $table->string('sector')->nullable();
+            $table->string('nro_home')->nullable();
             $table->text('reference_point')->nullable();
         });
     }
