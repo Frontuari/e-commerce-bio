@@ -47,8 +47,9 @@ export default {
 		getcategories: function() {
 
 			this.categories.forEach( (a,b) => {
-				const img = a.image.replace("\\","/");
-				this.backgrounds.push('url(storage/'+img+')');
+				// const img = a.image.replace("\\","/");
+				console.log("a.image::> ",a.image);
+				this.backgrounds.push('url(storage/'+a.image+')');
 			});
 			
 			// this.backgrounds.push('url(storage/'+this.categories[0].image+')');

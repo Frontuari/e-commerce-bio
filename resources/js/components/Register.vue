@@ -14,12 +14,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="username">Nombre de usuario:</label>
+                <label for="rif">Cédula:</label>
+                <input type="text" class="form-control" id="rif" name="rif" v-model="User.rif">
+            </div>
+            <div class="form-group">
+                <label for="username">Nombre y Apellido:</label>
                 <input type="text" class="form-control" id="username" name="username" v-model="User.username">
             </div>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <input type="text" class="form-control" id="email" name="email" v-model="User.email">
+            </div>
+            <div class="form-group">
+                <label for="date">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" id="date" name="date" v-model="User.date">
+            </div>
+            <div class="form-group">
+                <label for="phone">Nro de Teléfono:</label>
+                <input type="text" class="form-control" id="phone" name="phone" v-model="User.phone">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
@@ -48,10 +60,13 @@
         data() {
             return {
                 User: {
+                    rif: '',
                     username: '',
                     password: '',
                     c_password: '',
                     email: '',
+                    date:'',
+                    phone:'',
                     sex: '',
                 }
             }
@@ -60,17 +75,51 @@
             userlogged: Object
         },
         methods: {
-            saveData() {
-                axios.post(URLHOME+'api/register', {
-                    name: this.User.username,
-                    password: this.User.password,
-                    c_password: this.User.c_password,
-                    email: this.User.email,
-                    sex: this.User.sex,
-                }).then( (data) => {
-                    Swal.fire("Usuario Registrado Exitosamente");
-                    location.href=window.location.href;
-                })
+            saveData() { 
+
+                if( this.User.rif.trim() != '' && this.User.username.trim() != '' && this.User.password.trim() != '' && this.User.c_password.trim() != '' && this.User.email.trim() != '' && this.User.sex.trim() != '') {
+
+
+                    if(this.User.password == this.User.c_password){
+
+                        axios.post(URLHOME+'api/register', {
+                            rif: this.User.rif,
+                            name: this.User.username,
+                            date: this.User.date,
+                            phone: this.User.phone,
+                            password: this.User.password,
+                            c_password: this.User.c_password,
+                            email: this.User.email,
+                            sex: this.User.sex,
+                        }).then( (data) => {
+                            Swal.fire("Usuario Registrado Exitosamente, revise su bandeja de entrada para confirmar su correo").then( result => {
+                                location.href="/";    
+                            });
+                            
+                        }).catch(err => {
+                            if(!!err)
+                            {
+                                Swal.fire({
+                                  icon: 'error',
+                                  title: 'Error',
+                                  text: "El correo ya está en uso, intente con otro correo",
+                                });
+                            }
+                        });
+                    }else {
+                        Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: 'Las claves no son iguales, por favor intente nuevamente',
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                          icon: 'error',
+                          title: 'Error',
+                          text: 'Todos los campos son obligatorios',
+                        });
+                }
             }
         }
     }

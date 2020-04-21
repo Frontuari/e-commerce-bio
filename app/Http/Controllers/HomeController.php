@@ -21,6 +21,10 @@ class HomeController extends Controller
         // $this->middleware('auth');
     }
 
+    function cambiarBarra($data) {
+        return str_replace("\\", "/", $data);
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -31,10 +35,31 @@ class HomeController extends Controller
         $Coin = Coin::where("id",1)->first();
         
         $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
-        $Medio_Bajo = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
-        $footer = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
 
-        $Categories = ProductCategory::where('status','A')->orderBy("order","asc")->take(4)->get();
+
+        $Medio_Bajo = [];
+        $Med = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
+        foreach ($Med as $i => $m) {
+            $m["image"] = $this->cambiarBarra($m["image"]);
+            array_push($Medio_Bajo, $m);
+        }
+        $Medio_Bajo = json_encode($Medio_Bajo);
+
+        $footer = [];
+        $foot = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
+        foreach ($foot as $i => $f) {
+            $f["image"] = $this->cambiarBarra($f["image"]);
+            array_push($footer, $f);
+        }
+        $footer = json_encode($footer);
+
+        $Categories = [];
+        $Cat = ProductCategory::where('status','A')->orderBy("order","asc")->take(4)->get();
+        foreach ($Cat as $i => $c) {
+            $c["image"] = $this->cambiarBarra($c["image"]);
+            array_push($Categories, $c);
+        }
+        $Categories = json_encode($Categories);
 
         $MostRecent = Product::where('products.status','A')
         ->where('is_combo',false)

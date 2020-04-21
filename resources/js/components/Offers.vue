@@ -1,11 +1,11 @@
 <template>
     <section id="offers" class="hero" :style="{backgroundImage: backgrounds[0]}">
 		<div class="container hero-container">
-			<div class="hero-content">
+			<!-- <div class="hero-content">
 				<h2>GRANDES <span>Ofertas</span></h2>
 				<h3>en nuestros productos de</h3>
 				<a href="#">VERDURAS, FRUTAS Y HORTALIZAS <img src="assets/img/boton-circular-bio.svg"></a>
-			</div>
+			</div> -->
 		</div>
 	</section>
 </template>

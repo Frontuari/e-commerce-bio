@@ -150,13 +150,15 @@
         data() {
             return {
 				cat: 0,
+				search: '',
+				sParam: '',
 				products: {},
 				filterP: [],
-				limitP: 5,
+				limitP: 50,
 				orderP: 'AZasc',
 				rangeP: '',
-				min_price: 100000,
-				max_price: 800000,
+				min_price: 0,
+				max_price: 100,
 				page: 1,
             	datauser:[],
 
@@ -175,7 +177,6 @@
 				this.products = response.data.data;
 			},
 			pageclick(value) {
-				console.log("value emit::> ",value);
 				this.page = value;
 			},
 			isObject: function(o) 
@@ -185,17 +186,27 @@
 		
         },
         mounted() {
+
 			if(this.isObject(this.userlogged)){
 				this.datauser = this.userlogged;
 			}else{
 				console.log("Not logout");
 				this.datauser.id = 'undefined';
 			}
-			this.cat = window.location.href.split("cat=")[1] || 0;
+
+			if(!!window.location.href.split("cat=")[1]){
+				this.cat = window.location.href.split("cat=")[1].split("&search=")[0] || 0;
+			}
+			
+			if(!!window.location.href.split("search=")[1]) {
+				this.search = window.location.href.split("search=")[1] || '';	
+				this.sParam = "&search="+this.search;
+			}
+
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page;
+				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam;
 			}
 		},
 		created: function() {

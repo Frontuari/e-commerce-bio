@@ -23,16 +23,19 @@ class RegisterController extends BaseController
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             //'c_password' => 'required|same:password', VALIDAR LA CONFIRMACIÓN SOLO DEL LADO DEL CLIENTE!!
         ]);
-   
-        if($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());       
-        }
+
+        // var_dump($validator->errors);
+        // var_dump($validator["errors"]);
+    
+        // if($validator->fails()) {
+        //     return $this->sendError('Validation Error.', $validator->errors());       
+        // }
         
         $data = $request->all();
         if($data['rif']) $rif=$data['rif']; else $rif=rand(1111,999999);
@@ -40,9 +43,9 @@ class RegisterController extends BaseController
             'rif' => $rif,
             'name' => $data['name'],
             'sex' => $data["sex"],
-            'birthdate' => '01/01/1990',
+            'birthdate' => $data["date"],
             'cities_id' => '1',
-            'phone' => '',
+            'phone' => $data["phone"],
             'phone_home' => '',
         ]);
 

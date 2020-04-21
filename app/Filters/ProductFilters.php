@@ -19,7 +19,8 @@ class ProductFilters extends QueryFilters
     }
 
     public function search($term) {
-        return $this->builder->whereRaw('LOWER(products.name) LIKE ?', ['%'.trim(strtolower($term)).'%']);
+        if(isset($term) && !empty($term))
+            return $this->builder->whereRaw('LOWER(products.name) LIKE ?', ['%'.trim(strtolower($term)).'%']);
     }
 
     public function precio($precio) {
