@@ -15,188 +15,98 @@ $_POST=seguro($_POST);
 
 
 switch($_GET['evento']) {
+    case 'theBest':
+        $row['data']['usuario']=loginMovil(true);
+        if($row['data']['usuario']['success']==true){
+            $row['data']['perfil']=getPerfil(true);
+            $row['data']['categories']=listar_categorias_movil(true);
+            $row['data']['cities']=getCitiesAll(true);
+            $row['data']['regions']=getRegionsAll(true);
+            $row['data']['states']=getStates(true);
+            $row['data']['address']=getAdreess(true);   
+            $row['data']['payment_methods']=listarMetodoDePago(true);
+            $row['data']['envio']=recargoEnvio(true);
+            $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+            $row['data']['favoritos']=best_sql_listarFavoritos(true);
+            $row['data']['productos']=best_sql_ListarProductos(true);
+            $row['success']=true;
+            $row['msj_general']=true;
+           
+           // echo json_encode($row);
+            //echo base64_encode(gzcompress(json_encode($row), 9));
+            echo gzcompress(json_encode($row), 9);
+        }else{
+            echo json_encode($row['data']['usuario']);
+        }
+    break;
     case 'obtenerTodo':
-
-        $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
-        FROM users s
-        INNER JOIN peoples p on p.id = s.peoples_id
-        INNER JOIN cities c on c.id = p.cities_id
-        WHERE s.email='".$_SESSION['usuario']['email']."'")[0];
-
-        $row_direccions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
-        INNER JOIN cities c on c.id = o.cities_id
-        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
-        ");
-        $_SESSION["usuario"]=$row_usuario;
-        $_SESSION["usuario"]["directions"] = $row_direccions;
-
-        salida($row_usuario,"Datos actualizados",true);
+        obtenerTodo();
     break;
     case 'obtenerDireccion':
-        $row = q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
-        INNER JOIN cities c on c.id = o.cities_id
-        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
-        ");
-        $_SESSION["usuario"]["directions"] = $row;
-        salida($row,"Direcciones actualizadas",true);
+        obtenerDireccion();
     break;
     case 'login':
-        $email=$_GET['email'];
-        $clave=$_GET['password'];
-        
-        $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
-        FROM users s
-        INNER JOIN peoples p on p.id = s.peoples_id
-        INNER JOIN cities c on c.id = p.cities_id
-        WHERE s.email='$email'")[0];
-
-        $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
-            INNER JOIN cities c on c.id = o.cities_id
-            WHERE o.users_id = ".$row['id']." and o.status = 'A'
-        ");
-
-       if($row['email']){
-            if(password_verify($clave,$row['password'])){
-                unset($row["password"]);
-                $_SESSION["usuario"]=$row;
-                $_SESSION["usuario"]["directions"]=$directions;
-                $row['id_sesion']=session_id();
-                salida($row,"Bienvenido",true);
-            }else{
-                $row=null;
-                salida($row,"Contraseña no válida",false);
-            }
-       }else{
-        salida($row,"Correo electrónico no valido",false);
-    }
+        login();
     break;
     case 'loginMovil':
-        loginMovil();
-
+        loginMovil(false);
     break;
     case 'listar_categorias_movil':
         listar_categorias_movil();
     break;
     case 'registrarUsuario':
-        echo registrarUsuario();
+        registrarUsuario();
     break;
     case 'confirmarCorreo':
-        echo confirmarCorreo();
+        confirmarCorreo();
     break;
     case 'enviarCodRecuperacion':
-        echo enviarCodRecuperacion();
+        enviarCodRecuperacion();
     break;
     case 'confirmarCodRecuperacion':
-        echo confirmarCodRecuperacion();
+        confirmarCodRecuperacion();
     break;
     case 'cambiarClavePublico':
-        echo cambiarClavePublico();
+        cambiarClavePublico();
     break;
     case 'logout':
-        session_destroy();
-        salida($row,"Hasta pronto",true);
+        logout();
     break;
     case 'cambiarClave':
         echo cambiarClave();
     break;
     case 'getCities':
-        echo getCities();
+        echo getCities(false);
     break;
     case 'getRegions':
-        echo getRegions();
+        echo getRegions(false);
     break;
     case 'getStates':
-        echo getStates();
+        echo getStates(false);
     break;
     case 'guardarDireccion':
         echo guardarDireccion();
     break;
     case 'getAdreess':
-        echo getAdreess();
+        echo getAdreess(false);
     break;
     case 'eliminarDireccion':
         echo eliminarDireccion();
     break;
     case 'listarFavoritos':
-        $users_id=$_SESSION['usuario']['id'];
-        $join="INNER JOIN  favorites f ON f.products_id=p.id";
-        $where="AND f.users_id='$users_id'";
-        $sql=getSqlListarProductos($join,$where);
-        listarProductos($sql);
+       listarFavoritos();
     break;
     case 'listarProductosFiltrados':
-        $precioInicial=$_GET['precioInicial'];
-        $precioFinal=$_GET['precioFinal'];
-        $tipo=$_GET['tipo'];
-       
-        switch($tipo){
-            case 'Mas vendidos':
-                $order='ORDER BY qty_sold DESC';
-                $sql=getSqlListarProductos('','',$order);
-            break;
-            case 'Mejores precios':
-                $order='ORDER BY p.price ASC';
-                $sql=getSqlListarProductos('','',$order);
-            break;
-            case 'Orden alfabético A-Z';
-                $order='ORDER BY p.name ASC';
-                $sql=getSqlListarProductos('','',$order);
-            break;
-            case 'Orden alfabético Z-A';
-                $order='ORDER BY p.name DESC';
-                $sql=getSqlListarProductos('','',$order);
-            break;
-            default:
-            
-            $sql=getSqlListarProductos();
-        }
-        
-        
-        $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
-        //exit($sql);
-        listarProductos($sql);
+        listarProductosFiltrados();
     break;
     case 'listarProductosPorCategoria':
-        //saber si es mayor de edad
-        $categories_id=$_GET['categories_id'];
-        $users_id=$_SESSION['usuario']['id'];
-       
-        $arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
-        if(is_array($arr)){
-            salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
-        }
-
-        $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
-        $where="AND sc.categories_id='$categories_id'";
-        $sql=getSqlListarProductos($join,$where);
-        listarProductos($sql);
+        listarProductosPorCategoria();
     break;
     case 'mayorDeEdad':
-        $products_id    =$_GET['products_id'];
-        $users_id       =$_SESSION['usuario']['id'];
-        $sql="SELECT 1 FROM det_sub_categories dsc
-        INNER JOIN products p ON p.id=dsc.products_id
-        INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
-        INNER JOIN categories c ON c.id=sc.categories_id
-        WHERE p.id=$products_id AND
-        (c.adulto='N' OR (c.adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')>=18))";
-
-        $arr=q($sql);
-
-    if(is_array($arr)){
-        salidaNueva(null,"Acceso concedido.",true);
-    }else{
-        salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",false);
-    }
+        mayorDeEdad();
     break;
     case 'getPage':
-        $page_id=$_GET['page_id'];
-        $arr=q("SELECT titulo,body FROM pages WHERE status='A' and id='$page_id'");
-        if(is_array($arr)){
-           echo $arr[0]['body'];
-        }else{
-            echo 'Disculpe, intente mas tarde.';
-        }     
+        getPage();
     break;
     case 'listarProductos':
         $sql=getSqlListarProductos();
@@ -233,15 +143,312 @@ switch($_GET['evento']) {
         listarProductosCarrito($json);
     break;
     case 'listarMetodosDePago':
-        $arr=q("SELECT id,name,description,image FROM payment_methods WHERE status='A'");
-        if(is_array($arr)){
-            salidaNueva($arr,"Listando metodos de pago");
-        }else{
-            salidaNueva(null,"Disculpe, intente de nuevo",false);
-        }
+        listarMetodoDePago();
     break;
     case 'listarOrdenes':
-        $users_id=$_SESSION['usuario']['id'];
+        listarOrdenes();
+    break;
+    case 'crearOrden':
+        crearOrden($json);
+    break;
+    case 'consultarOrden':
+        consultarOrden();
+    break;
+    case 'recargoEnvio':
+        recargoEnvio(false);
+    break;
+    case 'horasDisponiblesEntrega':
+        horasDisponiblesEntrega();
+    break;
+    case 'listarTracking':
+        listarTracking();
+    break;
+    case 'getPerfil':
+        getPerfil(false);
+    break;
+    case 'actualizarPerfil':
+        actualizarPerfil();
+        
+    break;
+    case 'totalPagar':
+        totalPagar();
+    break;
+    case 'cancelarOrden':
+        cancelarOrden();
+    break;
+    case 'guardarPago':
+        guardarPago();
+    break;
+    case 'listarBancosdelMetododePago':
+        listarBancosdelMetododePago();
+    break;
+    default:
+    
+    salida($row,"Disculpe debe enviar un evento",false);
+}
+function best_sql_listarFavoritos($tipo_salida){
+    $users_id=$_SESSION['usuario']['id'];
+   $arr=q("SELECT products_id FROM favorites f WHERE f.users_id='$users_id'");
+   if(is_array($arr)){
+    return salidaNueva($arr,'Favoritos',true,$tipo_salida);
+   }else{
+    return salidaNueva(null,'No tiene favoritos',false,$tipo_salida);
+   }
+
+}
+function best_sql_perfil(){
+    $users_id=$_SESSION['usuario']['id'];
+    return "SELECT date_part('year',age(p.birthdate)) as edad,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id
+    WHERE users.id='$users_id'";
+}
+function best_sql_ListarProductos($tipo_salida){
+    $users_id=$_SESSION['usuario']['id'];
+    $sql="SELECT json_agg(
+        json_build_object(
+    's', sc.id,
+    'c',c.id,
+    'm',c.adulto
+) 
+) json_subcategories,
+json_agg(
+json_build_object('f',f.id)) as json_favorite,p.description_short,p.qty_avaliable,p.qty_max,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN favorites f ON (p.id=f.products_id AND f.users_id='$users_id') INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id INNER JOIN categories c ON c.id=sc.categories_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE (p.status='A' AND p.qty_avaliable>0) GROUP BY p.id";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,'Productos',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,'No encontramos productos',false,$tipo_salida);
+    }
+}
+function obtenerTodo(){
+    $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    FROM users s
+    INNER JOIN peoples p on p.id = s.peoples_id
+    INNER JOIN cities c on c.id = p.cities_id
+    WHERE s.email='".$_SESSION['usuario']['email']."'")[0];
+
+    $row_direccions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+    INNER JOIN cities c on c.id = o.cities_id
+    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
+    ");
+    $_SESSION["usuario"]=$row_usuario;
+    $_SESSION["usuario"]["directions"] = $row_direccions;
+
+    salida($row_usuario,"Datos actualizados",true);
+}
+function obtenerDireccion(){
+    $row = q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+    INNER JOIN cities c on c.id = o.cities_id
+    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
+    ");
+    $_SESSION["usuario"]["directions"] = $row;
+    salida($row,"Direcciones actualizadas",true);
+}
+
+function login(){
+    $email=$_GET['email'];
+    $clave=$_GET['password'];
+    
+    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    FROM users s
+    INNER JOIN peoples p on p.id = s.peoples_id
+    INNER JOIN cities c on c.id = p.cities_id
+    WHERE s.email='$email'")[0];
+
+    $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+        INNER JOIN cities c on c.id = o.cities_id
+        WHERE o.users_id = ".$row['id']." and o.status = 'A'
+    ");
+
+   if($row['email']){
+        if(password_verify($clave,$row['password'])){
+            unset($row["password"]);
+            $_SESSION["usuario"]=$row;
+            $_SESSION["usuario"]["directions"]=$directions;
+            $row['id_sesion']=session_id();
+            salida($row,"Bienvenido",true);
+        }else{
+            $row=null;
+            salida($row,"Contraseña no válida",false);
+        }
+   }else{
+    salida($row,"Correo electrónico no valido",false);
+}
+}
+
+function logout(){
+    session_destroy();
+    salida(null,"Hasta pronto",true);
+}
+
+function listarFavoritos(){
+    $users_id=$_SESSION['usuario']['id'];
+    $join="INNER JOIN  favorites f ON f.products_id=p.id";
+    $where="AND f.users_id='$users_id'";
+    $sql=getSqlListarProductos($join,$where);
+    listarProductos($sql);
+}
+
+function listarProductosFiltrados(){
+    $precioInicial=$_GET['precioInicial'];
+    $precioFinal=$_GET['precioFinal'];
+    $tipo=$_GET['tipo'];
+   
+    switch($tipo){
+        case 'Mas vendidos':
+            $order='ORDER BY qty_sold DESC';
+            $sql=getSqlListarProductos('','',$order);
+        break;
+        case 'Mejores precios':
+            $order='ORDER BY p.price ASC';
+            $sql=getSqlListarProductos('','',$order);
+        break;
+        case 'Orden alfabético A-Z';
+            $order='ORDER BY p.name ASC';
+            $sql=getSqlListarProductos('','',$order);
+        break;
+        case 'Orden alfabético Z-A';
+            $order='ORDER BY p.name DESC';
+            $sql=getSqlListarProductos('','',$order);
+        break;
+        default:
+        
+        $sql=getSqlListarProductos();
+    }
+    
+    
+    $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    //exit($sql);
+    listarProductos($sql);
+}
+
+function listarProductosPorCategoria(){
+            //saber si es mayor de edad
+            $categories_id=$_GET['categories_id'];
+            $users_id=$_SESSION['usuario']['id'];
+           
+            $arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
+            if(is_array($arr)){
+                salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
+            }
+    
+            $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
+            $where="AND sc.categories_id='$categories_id'";
+            $sql=getSqlListarProductos($join,$where);
+            listarProductos($sql);
+}
+
+function mayorDeEdad(){
+    $products_id    =$_GET['products_id'];
+    $users_id       =$_SESSION['usuario']['id'];
+    $sql="SELECT 1 FROM det_sub_categories dsc
+    INNER JOIN products p ON p.id=dsc.products_id
+    INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
+    INNER JOIN categories c ON c.id=sc.categories_id
+    WHERE p.id=$products_id AND
+    (c.adulto='N' OR (c.adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')>=18))";
+
+    $arr=q($sql);
+
+if(is_array($arr)){
+    salidaNueva(null,"Acceso concedido.",true);
+}else{
+    salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",false);
+}
+}
+
+function getPage(){
+    $page_id=$_GET['page_id'];
+    $arr=q("SELECT titulo,body FROM pages WHERE status='A' and id='$page_id'");
+    if(is_array($arr)){
+       echo $arr[0]['body'];
+    }else{
+        echo 'Disculpe, intente mas tarde.';
+    }     
+}
+
+function consultarOrden(){
+    $id=$_GET['id'];
+    $arr=q("SELECT (SELECT json_agg(
+        json_build_object(
+        'id', op.products_id, 
+        'cant', op.cant,
+        'image',p.photo,
+        'name',p.name,
+        'price',op.price
+    )
+    
+) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) productos,oa.address, p.name as nombre_usuario, o.*,TO_CHAR(o.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha,TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE o.id='$id'");
+    if(is_array($arr)){
+        salidaNueva($arr,"Orden consultada");
+    }else{
+        salidaNueva(null,"Disculpe, intente de nuevo",false);
+    }
+}
+function recargoEnvio($tipo_salida){
+    $transports_id=2;
+        $coins_id=1;
+        //$sql="SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p";
+        $sql="
+        SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=1)) as precio_d FROM (SELECT (price*
+																							 (with sum_null as (SELECT SUM(value) as sum_n
+FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=2 GROUP BY
+dtt.transports_id) select case
+    when not exists (select 1 from sum_null) then 0
+    else (select sum_n from sum_null) end) /100+price) as precio_b FROM transports WHERE id=2) p
+        ";
+  //exit($sql);
+        $arr=q($sql);
+       // exit($arr);
+        return salidaNueva($arr,"Recargo envio",true,$tipo_salida);
+}
+
+function getPerfil($tipo_salida){
+    $users_id=$_SESSION['usuario']['id'];
+    $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
+    if(is_array($arr)){
+        return salidaNueva($arr,"Perfil",true,$tipo_salida);
+   }else{
+    return salidaNueva(null,"Disculpe, intente de nuevo",false,$tipo_salida);
+   }
+}
+
+function listarBancosdelMetododePago($tipo_salida){
+    $payment_methods_id=$_GET['payment_methods_id'];
+    $sql="SELECT c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE payment_methods_id=$payment_methods_id";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,"Listando datos bancarios",true,$tipo_salida);
+   }else{
+    return salidaNueva(null,"Disculpe, intente de nuevo",false,$tipo_salida);
+   }
+}
+function listarBancosdelMetododePagoAll($tipo_salida){
+    $sql="SELECT bd.id,payment_methods_id,c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,"Listando datos bancarios",true,$tipo_salida);
+   }else{
+    return salidaNueva(null,"Disculpe, intente de nuevo",false,$tipo_salida);
+   }
+}
+function actualizarPerfil(){
+    $rif=$_POST['rif'];
+    $sex=$_POST['sex'];
+    $name=$_POST['name'];
+    $birthdate=$_POST['birthdate'];
+    $users_id=$_SESSION['usuario']['id'];
+    $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+  //  salidaNueva(null,$sql,false);
+   $arr=q($sql);
+   if(is_array($arr)){
+        $data=getPerfil(true);
+        salidaNueva($data['data'],"Perfil actualizado correctamente");
+   }else{
+    salidaNueva(null,"Disculpe, intente de nuevo",false);
+   }
+}
+function listarOrdenes(){
+    $users_id=$_SESSION['usuario']['id'];
         $sql="SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id WHERE o.users_id='$users_id' ORDER BY o.id DESC";
    // exit($sql);
         $arr=q($sql);
@@ -251,75 +458,17 @@ switch($_GET['evento']) {
         }else{
             salidaNueva(null,"Disculpe, intente de nuevo",false);
         }
-    break;
-    case 'crearOrden':
-        crearOrden($json);
-    break;
-    case 'consultarOrden':
-        $id=$_GET['id'];
-        $arr=q("SELECT (SELECT json_agg(
-            json_build_object(
-            'id', op.products_id, 
-            'cant', op.cant,
-            'image',p.photo,
-            'name',p.name,
-            'price',op.price
-        )
-        
-) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) productos,oa.address, p.name as nombre_usuario, o.*,TO_CHAR(o.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha,TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_entrega,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE o.id='$id'");
+}
+function listarMetodoDePago($tipo_salida){
+    $arr=q("SELECT id,name,description,image FROM payment_methods WHERE status='A'");
         if(is_array($arr)){
-            salidaNueva($arr,"Orden consultada");
+            return salidaNueva($arr,"Listando metodos de pago",true,$tipo_salida);
         }else{
-            salidaNueva(null,"Disculpe, intente de nuevo",false);
+            return salidaNueva(null,"Disculpe, intente de nuevo",false,$tipo_salida);
         }
-    break;
-    case 'recargoEnvio':
-        $transports_id=2;
-        $coins_id=1;
-        $arr=q("SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p");
-        salidaNueva($arr,"Recargo envio");
-    break;
-    case 'horasDisponiblesEntrega':
-        $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
-        $arr=q("SELECT * FROM calendars WHERE status='A'");
-        $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
-        $iniciarDespuesDe=2; //Horas
-        $timenow = time();
-        $index=0;
-        $maxApartado=24;
-        $o=0;//hora apartada
-        $i=2;//hora inicial
-        while($o<$maxApartado){          
-
-            $fechaComprobar = strtotime("+ $i hours",$timenow);
-            $horaComprobar=date('H:i',$fechaComprobar);
-            $diaComprobar=date('N',$fechaComprobar);
-            $diaActual=strftime('%d',$timenow);
-            if(comprobarDia($diaComprobar,$horaComprobar,$arr)){
-                $o++;
-                $diaDisponible=strftime('%d',$fechaComprobar);
-                //$horas[]['id']='A';
-                $horas[$index]['id']=$index;
-                $horas[$index]['time']=$fechaComprobar;
-                $msjHora=date('h:iA',$fechaComprobar);
-                if($diaActual==$diaDisponible){
-                    $msj="Hoy";
-                }else{
-                    $msj=$diassemana[$diaComprobar-1];
-                }
-                $horas[$index]['name']=$msj." - ".$msjHora;
-                $index++;
-            }
-            $i++;
-            if($i==168){ //Para que no quede en un ciclo en caso de que esten cerrados los despachos
-                break;
-            }
-        }
-
-        salidaNueva($horas,"Listando horas disponible para entrega");
-    break;
-    case 'listarTracking':
-        $users_id=$_SESSION['usuario']['id'];
+}
+function listarTracking(){
+    $users_id=$_SESSION['usuario']['id'];
         $orders_id=$_GET['orders_id'];
         $arr=q("SELECT t.description,os.name,TO_CHAR(t.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha FROM trackings t INNER JOIN orders_status os ON os.id=t.orders_status_id INNER JOIN orders o ON o.id=t.orders_id WHERE o.users_id='$users_id' AND o.id='$orders_id' ORDER BY t.id DESC");
         if(is_array($arr)){
@@ -327,63 +476,53 @@ switch($_GET['evento']) {
        }else{
         salidaNueva(null,"No hay datos disponibles",false);
        }
-    break;
-    case 'getPerfil':
-        $users_id=$_SESSION['usuario']['id'];
-        $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
-        if(is_array($arr)){
-            salidaNueva($arr,"Perfil");
-       }else{
-        salidaNueva(null,"Disculpe, intente de nuevo",false);
-       }
-    break;
-    case 'actualizarPerfil':
-        $rif=$_POST['rif'];
-        $sex=$_POST['sex'];
-        $name=$_POST['name'];
-        $birthdate=$_POST['birthdate'];
-        $users_id=$_SESSION['usuario']['id'];
-        $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
-      //  salidaNueva(null,$sql,false);
-       $arr=q($sql);
-       if(is_array($arr)){
-            salidaNueva($arr,"Perfil actualizado correctamente");
-       }else{
-        salidaNueva(null,"Disculpe, intente de nuevo",false);
-       }
-        
-    break;
-    case 'totalPagar':
-        totalPagar();
-    break;
-    case 'cancelarOrden':{
-        cancelarOrden();
-    }
-    case 'guardarPago':
-        guardarPago();
-    break;
-    case 'listarBancosdelMetododePago':{
-        $payment_methods_id=$_GET['payment_methods_id'];
-        $sql="SELECT c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE payment_methods_id=$payment_methods_id";
-        $arr=q($sql);
-        if(is_array($arr)){
-            salidaNueva($arr,"Listando datos bancarios");
-       }else{
-             salidaNueva(null,"Disculpe, intente de nuevo",false);
-       }
-    }
-    break;
-    default:
-        salida($row,"Disculpe debe enviar un evento",false);
 }
-function loginMovil(){
+function horasDisponiblesEntrega(){
+    $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
+    $arr=q("SELECT * FROM calendars WHERE status='A'");
+    $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
+    $iniciarDespuesDe=2; //Horas
+    $timenow = time();
+    $index=0;
+    $maxApartado=24;
+    $o=0;//hora apartada
+    $i=2;//hora inicial
+    while($o<$maxApartado){          
+
+        $fechaComprobar = strtotime("+ $i hours",$timenow);
+        $horaComprobar=date('H:i',$fechaComprobar);
+        $diaComprobar=date('N',$fechaComprobar);
+        $diaActual=strftime('%d',$timenow);
+        if(comprobarDia($diaComprobar,$horaComprobar,$arr)){
+            $o++;
+            $diaDisponible=strftime('%d',$fechaComprobar);
+            //$horas[]['id']='A';
+            $horas[$index]['id']=$index;
+            $horas[$index]['time']=$fechaComprobar;
+            $msjHora=date('h:iA',$fechaComprobar);
+            if($diaActual==$diaDisponible){
+                $msj="Hoy";
+            }else{
+                $msj=$diassemana[$diaComprobar-1];
+            }
+            $horas[$index]['name']=$msj." - ".$msjHora;
+            $index++;
+        }
+        $i++;
+        if($i==168){ //Para que no quede en un ciclo en caso de que esten cerrados los despachos
+            break;
+        }
+    }
+
+    salidaNueva($horas,"Listando horas disponible para entrega");
+}
+function loginMovil($tipo_salida){
     $email=$_GET['email'];
     $clave=$_GET['password'];
     
-    $row=q("SELECT s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    $row=q("SELECT date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
-    INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='$email'")[0];
 
    if($row['email']){
@@ -391,14 +530,15 @@ function loginMovil(){
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
             $row['id_sesion']=session_id();
-            salida($row,"Bienvenido",true);
+            return salidaNueva($row,"Bienvenido",true,$tipo_salida);
         }else{
             $row=null;
-            salida($row,"Contraseña incorrecta",false);
+            return salidaNueva($row,"Contraseña incorrecta",false,$tipo_salida);
         }
    }else{
-    salida($row,"Correo electrónico no valido",false);
-}
+   
+    return salidaNueva($row,"Correo electrónico no valido",false,$tipo_salida);
+    }
 }
 function guardarPago(){
     $amount=$_GET['amount'];
@@ -839,10 +979,10 @@ function listarProductos(){
     salida_movil($row);
 }
 */
-function listar_categorias_movil(){
+function listar_categorias_movil($tipo_salida){
     $row=q("SELECT name,image,id FROM categories WHERE status='A'");
     $row=recortar_imagen($row);
-    salida_movil($row,"Listado de categorias",true);
+    return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
 }
 function eliminarDireccion(){
     $users_id=$_SESSION['usuario']['id'];
@@ -850,13 +990,13 @@ function eliminarDireccion(){
     $arr=q("UPDATE order_address SET status='I' WHERE users_id='$users_id' AND id='$id'");
     salida(null,"Eliminado correctamente");
 }
-function getAdreess(){
+function getAdreess($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
     $arr=q("SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE oa.users_id='$users_id' AND oa.status='A'");
     if(is_array($arr)){
-        salida_list($arr);
+        return salidaNueva($arr,'Listando direcciones',true,$tipo_salida);
     }else{
-        salida(null,"Disculpe no hay direcciones.",false);
+        return salidaNueva(null,"Disculpe no hay direcciones.",false,$tipo_salida);
     }
 }
 function guardarDireccion(){
@@ -873,42 +1013,59 @@ function guardarDireccion(){
         $arr=q("UPDATE order_address SET cities_id='$cities_id',address='$address',zip_code='$zip_code',urb='$urb',sector='$sector',nro_home='$nro_home',reference_point='$reference_point' WHERE users_id='$users_id' AND id='$id' RETURNING id");
     }else{//Registra
         $sql="INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point' ) RETURNING id";
-   // exit();
-        //salida(null,$sql,false);
         $arr=q($sql);
     }
+
     if(is_array($arr)){
-        salida(null,"Guardado exitosamente");
+        $data=getAdreess(true);
+        salidaNueva($data['data'],"Guardado exitosamente");
     }else{
-        salida(null,"Disculpe, intente mas tarde",false);
+        salidaNueva(null,"Disculpe, intente mas tarde",false);
     }
 
 }
-function getStates(){
+function getStates($tipo_salida){
     $arr=q("SELECT id,name FROM states WHERE status='A' ORDER BY name");
     if(is_array($arr)){
-        salida_list($arr);
+        return salidaNueva($arr,'Listando estados',true,$tipo_salida);
     }else{
-        salida(null,"No se cargaron los estados",false);
+        return salidaNueva(null,"No se cargaron los estados",false,$tipo_salida);
     }
 }
-function getCities(){
+function getCitiesAll($tipo_salida){
+    $arr=q("SELECT id,name,regions_id FROM cities WHERE status='A' ORDER BY name");
+    if(is_array($arr)){
+        return salidaNueva($arr,'parroquias',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,"No se cargaron las parroquias",false,$tipo_salida);
+    }
+}
+function getCities($tipo_salida){
     
     $regions_id=$_GET['regions_id'];
     $arr=q("SELECT id,name,regions_id FROM cities WHERE status='A' AND regions_id='$regions_id' ORDER BY name");
     if(is_array($arr)){
-        salida_list($arr);
+        return salidaNueva($arr,'Ciudades',true,$tipo_salida);
     }else{
-        salida(null,"No se cargaron las parroquias",false);
+        return salidaNueva(null,"No se cargaron las parroquias",false,$tipo_salida);
     }
 }
-function getRegions(){
+function getRegions($tipo_salida){
     $states_id=$_GET['states_id'];
     $arr=q("SELECT id,name,states_id FROM regions WHERE status='A' AND states_id='$states_id' ORDER BY name");
     if(is_array($arr)){
-        salida_list($arr);
+        return salidaNueva($arr,'Listando regiones',true,$tipo_salida);
     }else{
-        salida(null,"No se cargaron los municipios",false);
+        return salidaNueva(null,"No se cargaron los municipios",false,$tipo_salida);
+    }
+}
+function getRegionsAll($tipo_salida){
+    $states_id=$_GET['states_id'];
+    $arr=q("SELECT id,name,states_id FROM regions WHERE status='A' ORDER BY name");
+    if(is_array($arr)){
+        return salidaNueva($arr,'Listando municipios',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,"No se cargaron los municipios",false,$tipo_salida);
     }
 }
 function cambiarClave(){
@@ -1109,12 +1266,17 @@ function salida($row,$msj_general="",$bueno=true){
     echo json_encode($row);
     exit();
 }
-function salidaNueva($row,$msj_general="",$bueno=true){
+function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false){
     $rowa['success']=$bueno;
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $rowa['msj_general']=$msj_general;
     $rowa['data']=$row;
-    echo json_encode($rowa);
+    if($tipo_salida==true){
+        
+        return $rowa;
+    }else{
+        echo json_encode($rowa);
+    }
     exit();
 }
 function salida_movil($row,$msj_general="",$bueno=true){
