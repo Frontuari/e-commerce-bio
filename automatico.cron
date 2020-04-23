@@ -1,12 +1,4 @@
 #!/bin/bash
-# Sleep for 5 seconds. If you are starting more than one tmux session
-#   "at the same time", then make sure they all sleep for different periods
-#   or you can experience problems
-/bin/sleep 10
-# Ensure the environment is available
-source /home/USERNAME/.bashrc
-# Create a new tmux session named helloworld...
-/usr/bin/tmux new-session -d -s biomercados
-/usr/bin/tmux send-keys -t atmopen "cd /var/www/html/e-commerce-bio" C-m
-/usr/bin/tmux send-keys -t atmopen "php iniciar_servidor.php" C-m
-
+tmux new-session -d -s biomercados
+tmux send-keys -t biomercados "cd /var/www/html/e-commerce-bio" C-m
+tmux send-keys -t biomercados "php iniciar_servidor.php" C-m
