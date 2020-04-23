@@ -156,10 +156,11 @@ function actualizarProductos($ip){
 					
 					if(!is_array($arr_ca)) {
 						$name_ca=explode("-",$obj->Nivel3)[1];
-						$arr_insert_ca=q("INSERT INTO categories (name,c_elementvalue_id_n3) VALUES ('$name_ca',$obj->c_elementvalue_id_N3) RETURNING id");
+						$sql="INSERT INTO categories (name,c_elementvalue_id_n3) VALUES ('$name_ca',$obj->c_elementvalue_id_N3) RETURNING id";
+						$arr_insert_ca=q($sql);
 						if(!is_array($arr_insert_ca)){
 							$malo=true;
-							msj("MALO insertar categoria");
+							msj("MALO insertar categoria ".$sql);
 							break;
 						}else{
 						
