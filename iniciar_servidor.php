@@ -9,14 +9,14 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=7;
-$ip="http://192.168.0.105";
+$ip="http://192.168.0.106";
 
 
-$activar_productos=false;
+$activar_productos=true;
 $tiempo_acumulado_productos=0;
-$retraso_productos="+5 minutes";
+$retraso_productos="+10 minutes";
 
-$activar_envio_orden=true;
+$activar_envio_orden=false;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
@@ -128,23 +128,27 @@ function actualizarEnvioOrden(){
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	$url_productos="$ip/example_api_bio/getProducts.json";
-	
-	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
+	//$url_productos="$ip/example_api_bio/getProducts.json";
+	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
+	$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
 	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
+	
 	$data=leer("Productos",$url_productos);
 	
 	if($data!=false){
-		
+	
 		$arr=q("SELECT id,nro_tienda FROM stores");
 		$tienda=crearArreglo($arr);
+		
 		if(is_array($arr)){
+			
 			q("BEGIN");
 			foreach($data->item as $obj){
 				if($obj->ad_org_id==1000004){
-			
+				//aqui entra
 				
-				if(is_numeric($obj->sku) and isset($obj->item_name) and is_numeric($obj->sugerido) and $obj->sugerido>=0 and $obj->price>0 and is_numeric($obj->ad_org_id)){
+				if(is_numeric($obj->sku) and isset($obj->item_name) and is_numeric($obj->sugerido) and $obj->sugerido>=0 and $obj->pricelist>0 and is_numeric($obj->ad_org_id)){
+
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
@@ -187,25 +191,52 @@ function actualizarProductos($ip){
 					}
 					
 
+//------------IMPUESTOS--------------------
+if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
+	$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
 
+	$sql="SELECT id FROM taxes WHERE value='$obj->IMPUESTO'";
+	
+	$arr=q($sql);
+	if(!is_array($arr)){
+		$sql="INSERT INTO taxes (short_name,name,value,type,created_at) VALUES ('$nombre_impuesto','$nombre_impuesto','$obj->IMPUESTO','porc',NOW()) RETURNING id";
+		$arr=q($sql);
+		if(!is_array($arr)){
+			echo "ERROR: ".$sql;
+		}
+		$taxes_id=$arr[0]['id'];
+	}else{
+		$taxes_id=$arr[0]['id'];
+	}
+	$memo[$obj->IMPUESTO]=true;
+}
+
+
+
+
+//-----------------------------------------
 
 					//echo $obj->ad_org_id." $obj->organizacion $obj->sku $obj->sugerido\n";
 					$tienda_id=$tienda[$obj->ad_org_id];
 					$sql="SELECT id FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
 					//echo " Consultando: ".$sql."\n";
 					$arr=q($sql);
-					//print_r($tienda);
-					//exit();
+
+					if($obj->bsca_netweight>0){
+						$peso=$obj->bsca_netweight/1000;
+					}else{
+						$peso=0;
+					}
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
-						$sql="UPDATE products SET price='$obj->price',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						//exit($sql);
 						$valido=q($sql);
 						$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
 						
 
 					}else{
-						$sql="INSERT INTO products (sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ($obj->sku,'$obj->item_name','$obj->item_description','$obj->price','$obj->sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$obj->sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
@@ -218,6 +249,19 @@ function actualizarProductos($ip){
 						break;
 						$malo=true;
 					}
+//--------------IMPUESTOS-----------
+$sql="SELECT t.id,t.value FROM det_product_taxes dpt INNER JOIN taxes t ON t.id=dpt.id WHERE products_id='$products_id'";
+$arr=q($sql);
+if(!is_array($arr) AND $obj->IMPUESTO>0){
+	$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
+}else{
+	
+		if($obj->IMPUESTO==0 and $arr[0]['value']>0){
+			q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
+		}
+	
+}
+//---------------------------------
 
 
 
@@ -281,7 +325,7 @@ function msj($value){
 }
 function get_url($url){
 	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 180);
 
 		if(curl_errno($ch)>0 and !$ch){
 			return false;
