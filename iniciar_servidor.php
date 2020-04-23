@@ -16,6 +16,7 @@ $activar_productos=true;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
+
 $activar_envio_orden=false;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
@@ -29,7 +30,7 @@ $retraso_productosb="+5 minutes";
 
 do{
 	
-	if(time()>=$time_productos and $activar_productos==true){
+	if(time()>=$tiempo_acumulado_productos and $activar_productos==true){
 		syslog(LOG_INFO,"Actualizando Productos");
 		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
 		actualizarProductos($ip);
@@ -38,7 +39,7 @@ do{
 		$tiempo_acumulado_productos=strtotime($retraso_productos);		
 	}	
 
-	if(time()>=$time_envio_orden and $activar_envio_orden==true){
+	if(time()>=$tiempo_acumulado_envio_orden and $activar_envio_orden==true){
 		syslog(LOG_INFO,"Actualizando envio_orden");
 		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
 		actualizarEnvioOrden($ip);
