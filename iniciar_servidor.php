@@ -8,7 +8,7 @@ syslog(LOG_INFO,"Servidor iniciado");
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
-$retraso_general=7;
+$retraso_general=30;
 $ip="http://192.168.0.106";
 
 
