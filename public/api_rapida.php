@@ -27,14 +27,11 @@ switch($_GET['evento']) {
             $row['data']['payment_methods']=listarMetodoDePago(true);
             $row['data']['envio']=recargoEnvio(true);
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-            $row['data']['favoritos']=best_sql_listarFavoritos(true);
-            $row['data']['productos']=best_sql_ListarProductos(true);
+            //$row['data']['favoritos']=best_sql_listarFavoritos(true);
+            //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
             $row['msj_general']=true;
-           
-           // echo json_encode($row);
-            //echo base64_encode(gzcompress(json_encode($row), 9));
-            echo gzcompress(json_encode($row), 9);
+            echo d($row);
         }else{
             echo json_encode($row['data']['usuario']);
         }
@@ -52,7 +49,7 @@ switch($_GET['evento']) {
         loginMovil(false);
     break;
     case 'listar_categorias_movil':
-        listar_categorias_movil();
+        listar_categorias_movil(false);
     break;
     case 'registrarUsuario':
         registrarUsuario();
@@ -143,7 +140,7 @@ switch($_GET['evento']) {
         listarProductosCarrito($json);
     break;
     case 'listarMetodosDePago':
-        listarMetodoDePago();
+        listarMetodoDePago(false);
     break;
     case 'listarOrdenes':
         listarOrdenes();
@@ -180,7 +177,7 @@ switch($_GET['evento']) {
         guardarPago();
     break;
     case 'listarBancosdelMetododePago':
-        listarBancosdelMetododePago();
+        listarBancosdelMetododePago(false);
     break;
     default:
     
@@ -218,6 +215,9 @@ json_build_object('f',f.id)) as json_favorite,p.description_short,p.qty_avaliabl
     }else{
         return salidaNueva(null,'No encontramos productos',false,$tipo_salida);
     }
+}
+function d($row){
+    return gzcompress(json_encode($row), 9);
 }
 function obtenerTodo(){
     $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
@@ -514,7 +514,7 @@ function horasDisponiblesEntrega(){
         }
     }
 
-    salidaNueva($horas,"Listando horas disponible para entrega");
+    salidaNueva($horas,"Listando horas disponible para entrega",true,false,true);
 }
 function loginMovil($tipo_salida){
     $email=$_GET['email'];
@@ -938,7 +938,7 @@ function listarProductos($sql,$agregarCantidad=false){
     $row=q($sql);
     if(is_array($row)){
         $row=recortar_imagen($row,$agregarCantidad);
-        salidaNueva($row);
+        salidaNueva($row,"Listando productos",true,false,true);
     }else{
         salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false);
     }
@@ -1266,7 +1266,7 @@ function salida($row,$msj_general="",$bueno=true){
     echo json_encode($row);
     exit();
 }
-function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false){
+function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false,$comprimido=false){
     $rowa['success']=$bueno;
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $rowa['msj_general']=$msj_general;
@@ -1275,10 +1275,15 @@ function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false){
         
         return $rowa;
     }else{
-        echo json_encode($rowa);
+        if($comprimido==true){
+            echo d($rowa);
+        }else{
+            echo json_encode($rowa);
+        }
     }
     exit();
 }
+
 function salida_movil($row,$msj_general="",$bueno=true){
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     echo json_encode($row);
