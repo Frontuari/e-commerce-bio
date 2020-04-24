@@ -13,7 +13,7 @@ $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
 
-
+//best_sql_listarFavoritos(true);
 switch($_GET['evento']) {
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
@@ -27,7 +27,9 @@ switch($_GET['evento']) {
             $row['data']['payment_methods']=listarMetodoDePago(true);
             $row['data']['envio']=recargoEnvio(true);
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-            //$row['data']['favoritos']=best_sql_listarFavoritos(true);
+            $row['data']['favoritos']=best_sql_listarFavoritos(true);
+            $row['data']['productos_mayor']=productosMayorEdad(true);
+
             //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
             $row['msj_general']=true;
@@ -100,7 +102,7 @@ switch($_GET['evento']) {
         listarProductosPorCategoria();
     break;
     case 'mayorDeEdad':
-        mayorDeEdad();
+        mayorDeEdad(false);
     break;
     case 'getPage':
         getPage();
@@ -187,11 +189,18 @@ function best_sql_listarFavoritos($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
    $arr=q("SELECT products_id FROM favorites f WHERE f.users_id='$users_id'");
    if(is_array($arr)){
-    return salidaNueva($arr,'Favoritos',true,$tipo_salida);
+    $arrb=reformularId($arr);
+    return salidaNueva($arrb,'Favoritos',true,$tipo_salida);
    }else{
     return salidaNueva(null,'No tiene favoritos',false,$tipo_salida);
    }
 
+}
+function reformularId($arr){
+    foreach($arr as $obj){
+        $row[$obj['products_id']]=true;
+    }
+    return $row;
 }
 function best_sql_perfil(){
     $users_id=$_SESSION['usuario']['id'];
@@ -336,21 +345,42 @@ function listarProductosPorCategoria(){
             $sql=getSqlListarProductos($join,$where);
             listarProductos($sql);
 }
+function productosMayorEdad($tipo_salida){
+    $users_id       =$_SESSION['usuario']['id'];
+    $sql="SELECT p.id as products_id FROM det_sub_categories dsc
+    INNER JOIN products p ON p.id=dsc.products_id
+    INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
+    INNER JOIN categories c ON c.id=sc.categories_id WHERE 
+    ((c.adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18))";
+      $arr=q($sql);
 
-function mayorDeEdad(){
+      if(is_array($arr)){
+        $arrb=reformularId($arr);
+          salidaNueva($arrb,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",true,$tipo_salida);
+      }else{
+          salidaNueva(null,"El usuario es mayor de edad.",false,$tipo_salida);
+      }  
+}
+function mayorDeEdad($tipo_salida){
+
     $products_id    =$_GET['products_id'];
     $users_id       =$_SESSION['usuario']['id'];
+
+
+    $add="p.id=$products_id AND";
+   
+
     $sql="SELECT 1 FROM det_sub_categories dsc
     INNER JOIN products p ON p.id=dsc.products_id
     INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
-    INNER JOIN categories c ON c.id=sc.categories_id
-    WHERE p.id=$products_id AND
+    INNER JOIN categories c ON c.id=sc.categories_id WHERE 
+    $add
     (c.adulto='N' OR (c.adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')>=18))";
 
     $arr=q($sql);
 
 if(is_array($arr)){
-    salidaNueva(null,"Acceso concedido.",true);
+    salidaNueva(null,"Acceso concedido.",true,$tipo_salida);
 }else{
     salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",false);
 }
@@ -389,12 +419,12 @@ function recargoEnvio($tipo_salida){
         $coins_id=1;
         //$sql="SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p";
         $sql="
-        SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=1)) as precio_d FROM (SELECT (price*
+        SELECT p.peso_max,p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=1)) as precio_d FROM (SELECT (price*
 																							 (with sum_null as (SELECT SUM(value) as sum_n
 FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=2 GROUP BY
 dtt.transports_id) select case
     when not exists (select 1 from sum_null) then 0
-    else (select sum_n from sum_null) end) /100+price) as precio_b FROM transports WHERE id=2) p
+    else (select sum_n from sum_null) end) /100+price) as precio_b,t.peso_max FROM transports t WHERE id=2) p
         ";
   //exit($sql);
         $arr=q($sql);
@@ -529,6 +559,7 @@ function loginMovil($tipo_salida){
         if(password_verify($clave,$row['password'])){
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
+            $_SESSION['sesion_iniciada']=true;
             $row['id_sesion']=session_id();
             return salidaNueva($row,"Bienvenido",true,$tipo_salida);
         }else{
@@ -823,10 +854,11 @@ function listarProductosCarrito($json){
 }
 function listarProductosPorBusqueda(){
     $texto=strtolower($_GET['texto']);
+    
     $where="AND LOWER(p.name) LIKE '%$texto%'";
 
     $sql=getSqlListarProductos('',$where,'');
-    //exit($sql);
+
     listarProductos($sql);    
 }
 function buscarProducto(){
@@ -929,7 +961,7 @@ function listarProductosIA(){
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
     $limit='LIMIT 100';
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+    $sql="SELECT p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
@@ -964,10 +996,14 @@ function guardarFavorito(){
         $arr=q("INSERT INTO favorites (users_id,products_id) VALUES ('$users_id','$products_id') RETURNING id");
 
     }
+
+    
+
     if(is_array($arr)){
-        salida(null,"Modificado exitosamente");
+        $data=best_sql_listarFavoritos(true);
+        salidaNueva($data['data'],"Modificado exitosamente");
     }else{
-        salida(null,"Disculpe, intente mas tarde",false);
+        salidaNueva(null,"Disculpe, intente mas tarde",false);
     }   
 }
 /*
@@ -1271,6 +1307,9 @@ function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false,$compri
     if(!$bueno) header('HTTP/1.1 409 Conflict');
     $rowa['msj_general']=$msj_general;
     $rowa['data']=$row;
+    if($_SESSION['sesion_iniciada']==true){
+        $rowa['login']=true;
+    }
     if($tipo_salida==true){
         
         return $rowa;
@@ -1340,6 +1379,7 @@ function q($sql){
    // $result = pg_query($sql) or die(false);
    $con=$GLOBALS["con"];
     if (pg_send_query($con,$sql)) {
+
         $res=pg_get_result($con);
         if ($res) {
           $state = pg_result_error_field($res, PGSQL_DIAG_SQLSTATE);
@@ -1354,16 +1394,17 @@ function q($sql){
             }
           }
           else {
+
               switch($state){
-                  case 23505:
-                    salida(null,"El registro ya existe, intente de nuevo.",false);
+                  case 23505://El registro ya existe, intente de nuevo
+                    salidaNueva(null,"Disculpe intente mas tarde.",false);
                   break;
-                  case '22P02':
-                    salida(null,"Ingrese todos los campos obligatorios.",false);
+                  case '22P02'://faltan campos
+                    salidaNueva(null,"Disculpe intente mas tarde..",false);
                     
                   break;
                   default:
-                    salida(null,"Error en la consulta.",false);
+                    salidaNueva(null,"Disculpe, intente mas tarde...",false);
               }
           }
         }  

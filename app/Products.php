@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\FuncionesGenerales;
+
 class Products extends Model
 {
+
     public function setPriceAttribute($value)
     {
         $fg= new FuncionesGenerales;
