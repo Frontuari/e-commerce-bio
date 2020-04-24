@@ -8,6 +8,12 @@ use App\OrderAddress;
 
 class OrderAddressController extends BaseController
 {
+
+    public function index() {
+        $Address = OrderAddress::where("users_id",$_SESSION["usuario"]["id"]);
+        return $this->sendResponse($Address);
+    }
+
     public function update($id,Request $request) {
         if(isset($_SESSION["usuario"])) {
             $user_id = $_SESSION["usuario"]["id"];

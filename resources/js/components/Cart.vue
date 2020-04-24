@@ -44,7 +44,7 @@
 												<div class="col-6 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
 													<div class="product-block">
 														<div class="product-img">
-															<img  :src="'storage/'+JSON.parse(product_cart.product.photo)[0]">
+															<img v-if="product_cart.product.photo != null" :src="'storage/'+JSON.parse(product_cart.product.photo)[0]">
 														</div>
 														<div class="product-content">
 															<a href="#" class="product-title">{{product_cart.product.name}}</a>

@@ -64,22 +64,30 @@
 											<form action="">
 												<div class="col-12">
 													<div class="row">
-														<div class="col-lg-6">
+														<!-- <div class="col-lg-6">
 															<div class="form-group">
-																<label for="user-name">Nombre (s):</label>
+																<label for="user-name">Cédula / Rif</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="" v-model="userData.rif">
+															</div>
+														</div> -->
+														<div class="col-lg-12">
+															<div class="form-group">
+																<label for="user-name">Nombre y Apellido (s):</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
 																<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" value="" v-model="userData.name">
 															</div>
 														</div>
-														<div class="col-lg-6">
+														<!-- <div class="col-lg-6">
 															<div class="form-group">
 																<label for="user-lastname">Apellido (s):</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
 																<input type="text" class="form-control" id="user-lastname" name="user-lastname" disabled="disabled" value="">
 															</div>
-														</div>
+														</div> -->
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="user-email">Correo Electrónico:</label>
@@ -148,15 +156,15 @@
 												<div class="col-lg-6">
 													<div class="form-group">
 														<label for="currently-password">Confirma tu contraseña actual:</label>
-														<input type="text" class="form-control" id="currently-password" name="currently-password" value="">
+														<input type="password" class="form-control" id="currently-password" name="currently-password" value="">
 													</div>
 													<div class="form-group">
 														<label for="new-password">Escribe la nueva contraseña:</label>
-														<input type="text" class="form-control" id="new-password" name="new-password" value="">
+														<input type="password" class="form-control" id="new-password" name="new-password" value="">
 													</div>
 													<div class="form-group">
 														<label for="new-password-confirm">Repite la nueva contraseña:</label>
-														<input type="text" class="form-control" id="new-password-confirm" name="new-password-confirm" value="">
+														<input type="password" class="form-control" id="new-password-confirm" name="new-password-confirm" value="">
 													</div>
 													<div class="mt-5"></div>
 													<div class="form-group">
@@ -422,7 +430,7 @@
 											        <div class="row">
 											            <div class="col-6 col-lg-12" v-for="(favorite,index) in favorites" :key="favorite.id">
 											                <div class="product-block">
-											                    <div class="product-img"><img   :src="'storage/'+JSON.parse(favorite.photo)[0] | MediumImage" >
+											                    <div class="product-img"><img v-if="favorite.photo != null" :src="'storage/'+JSON.parse(favorite.photo)[0] | MediumImage" >
 											                        <div class="product-actions">
 											                            <button type="button" data-toggle="modal" data-target="#ModalProd" class="btn">
 											                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
@@ -734,6 +742,11 @@
                 	console.log(response.data);
 					that.userData = response.data;
 					fetch(URLHOME+"api_rapida.php?evento=obtenerTodo");
+					Swal.fire(
+						'Perfil',
+						'Tus datos han sido guardado exitosamente',
+						'success'
+					);
                 })
                 .catch(function (error) {
                 	console.log(error);

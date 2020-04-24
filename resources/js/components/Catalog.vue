@@ -158,7 +158,7 @@
 				orderP: 'AZasc',
 				rangeP: '',
 				min_price: 0,
-				max_price: 100,
+				max_price: 50,
 				page: 1,
             	datauser:[],
 
@@ -206,7 +206,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam;
+				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam;
 			}
 		},
 		created: function() {
