@@ -33,6 +33,8 @@ switch($_GET['evento']) {
             //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
             $row['msj_general']=true;
+           // print_r($row);
+           // exit();
             echo d($row);
         }else{
             echo json_encode($row['data']['usuario']);
@@ -358,9 +360,9 @@ function productosMayorEdad($tipo_salida){
 
       if(is_array($arr)){
         $arrb=reformularId($arr);
-          salidaNueva($arrb,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",true,$tipo_salida);
+          return salidaNueva($arrb,"Disculpe, debe ser mayor de edad (18+) para comprar este producto.",true,$tipo_salida);
       }else{
-          salidaNueva(null,"El usuario es mayor de edad.",false,$tipo_salida);
+          return salidaNueva(null,"El usuario es mayor de edad.",false,$tipo_salida);
       }  
 }
 function mayorDeEdad($tipo_salida){
@@ -737,15 +739,17 @@ function crearOrden($json){
     }
     
     $where=armarWhereProductos($arrProductos);
-    $sql="SELECT p.qty_min, p.qty_max,p.qty_avaliable,p.name, ((coalesce(SUM(t.value),0.000000)*p.price)/100) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
+    $sql="SELECT p.peso,p.qty_min, p.qty_max,p.qty_avaliable,p.name, ((coalesce(SUM(t.value),0.000000)*p.price)/100) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
    
     $arrs=q($sql);
     //Validaciones
     if(!is_array($arrs)){
         salidaNueva(null,"Disculpe intente mas tarde",false);
     }
+    $pesoTotal=0.00;
     foreach($arrs as $pro){
         $cant=$arrProductos[$pro['id']];
+        $pesoTotal+=($pro['peso']*$cant);
         $impuesto=$pro['total_impuesto']*$cant;
         $total_tax+=$impuesto;
         $precio=$pro['price']*$cant;
@@ -769,11 +773,24 @@ function crearOrden($json){
         }    
     }
    //TRANSPORTS
-   $sql="SELECT price,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
+   $sql="SELECT peso_maxprice,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
 
     $arr=q($sql);
     if(is_array($arr)){
-        $total_transport=$arr[0]['price'];
+        //--------PESO-----
+        $peso_max=$arr[0]['peso_max'];
+        $peso_cargado=$peso_max;
+        $multiplo_peso=1;
+
+        while($pesoTotal>$peso_cargado) {
+            $multiplo_peso++;
+         
+              $peso_cargado+=($peso_max+$peso_cargado);
+         
+          }
+//--------------FIN PESO-------------------
+
+        $total_transport=($arr[0]['price']*$multiplo_peso);
         $impuesto=$arr[0]['impuesto'];
         if($impuesto>0){
             $base_imponible+=$total_transport;
