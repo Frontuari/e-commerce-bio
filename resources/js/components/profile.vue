@@ -891,7 +891,7 @@
 			},
 			showAddDirection()
 			{
-				if(!this.userlogged.directions){
+				if(this.userlogged.directions == true){
 					this.userlogged.directions = [];
 				}
 				this.userlogged.directions.push({

@@ -249,6 +249,8 @@ function obtenerDireccion(){
     INNER JOIN cities c on c.id = o.cities_id
     WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
     ");
+    var_dump($row);
+    die();
     $_SESSION["usuario"]["directions"] = $row;
     salida($row,"Direcciones actualizadas",true);
 }
