@@ -773,7 +773,7 @@ function crearOrden($json){
         }    
     }
    //TRANSPORTS
-   $sql="SELECT peso_maxprice,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
+   $sql="SELECT peso_max,price,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
 
     $arr=q($sql);
     if(is_array($arr)){
@@ -1423,6 +1423,7 @@ function q($sql){
                     
                   break;
                   default:
+                //  exit($sql);
                     salidaNueva(null,"Disculpe, intente mas tarde...",false);
               }
           }
