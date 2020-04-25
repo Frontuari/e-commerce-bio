@@ -800,6 +800,8 @@
 			saveDirection(direction,index)
 			{	
 				const that = this;		
+				console.log("direction::> ",direction);
+				console.log("direction.action::> ",direction.action);
 				if(typeof direction.action === 'undefined'){
 
 					axios.put(URLHOME+'api/user_address/'+direction.id, {
@@ -827,7 +829,8 @@
 	                });
 
 	            }else{
-	            	axios.post(URLHOME+'api/user_address/'+direction.id, {
+	            	console.log("esta entrando por el POST");
+	            	axios.post(URLHOME+'api/user_address', {
 						id: direction.id,
 						cities_id: direction.cities_id,
 						address: direction.address,
@@ -844,7 +847,7 @@
 	                })
 	                .then(function (response) {
 	                	console.log(response);
-	                	Swal.fire("Direccion Actualizada exitosamente");
+	                	Swal.fire("Direccion Guardada exitosamente");
 	                	fetch(URLHOME+"api_rapida.php?evento=obtenerDireccion");
 	                })
 	                .catch(function (error) {
@@ -909,7 +912,7 @@
 					reference_point: '',
 					city_id: '',
 					ciudad: '',
-					action:'update',
+					action:'save',
 				});
 				this.userData = this.userlogged;
 			},

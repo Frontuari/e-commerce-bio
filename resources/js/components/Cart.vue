@@ -149,12 +149,12 @@
 															<input type="text" class="form-control" id="user-name" name="user-name" disabled="disabled" v-model="this.datauser.name">
 														</div>
 													</div>
-													<div class="col-lg-6">
+													<!-- <div class="col-lg-6">
 														<div class="form-group">
 															<label for="user-lastname">Apellido (s):</label>
 															<input type="text" class="form-control" id="user-lastname" name="user-lastname" disabled="disabled" value="Mendoza">
 														</div>
-													</div>
+													</div> -->
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="user-email">Correo Electrónico:</label>
