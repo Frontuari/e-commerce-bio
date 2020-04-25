@@ -40,6 +40,11 @@ switch($_GET['evento']) {
             echo json_encode($row['data']['usuario']);
         }
     break;
+    case 'verificarSesion':
+        if($_SESSION['sesion_iniciada']==false or !isset($_SESSION['sesion_iniciada'])){
+            salidaNueva(null,'',true);
+        }
+    break;
     case 'obtenerTodo':
         obtenerTodo();
     break;
@@ -187,6 +192,7 @@ switch($_GET['evento']) {
     
     salida($row,"Disculpe debe enviar un evento",false);
 }
+
 function best_sql_listarFavoritos($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
    $arr=q("SELECT products_id FROM favorites f WHERE f.users_id='$users_id'");
@@ -763,7 +769,7 @@ function crearOrden($json){
        
         //exit("PRODUCTO cant ".$cant);
         if($pro['qty_avaliable']<$cant){
-            salidaNueva(null,"No hay cantidad suficiente para el producto".$pro['name'],false);
+            salidaNueva(null,"No hay cantidad suficiente para ".$pro['name'].", por favor chequee el Stock en su carrito de compras.",false);
         }    
         if($pro['qty_min']>$cant){
             salidaNueva(null,"El pedido min. de "+$pro['name']+" debe ser: ".$pro['qty_min'],false);
@@ -872,17 +878,26 @@ function listarProductosCarrito($json){
     listarProductos($sql,$arr);
 }
 function listarProductosPorBusqueda(){
-    $texto=strtolower($_GET['texto']);
+    $texto=mb_strtolower($_GET['texto']);
+    $arr=explode(' ',$texto);
+    $otro='';
+    if(count($arr)>1){
+        foreach($arr as $s){
+            $otro.="$s&";
+        }
+        $otro=rtrim($otro,'&');
+    }else{
+        $otro=$texto;
+    }
     
-    $where="AND LOWER(p.name) LIKE '%$texto%'";
+    $where="AND to_tsvector(p.name) @@ to_tsquery('$otro')";
 
     $sql=getSqlListarProductos('',$where,'');
-
     listarProductos($sql);    
 }
-function buscarProducto(){
+function buscarProducto(){//el autocompletado
   
-    $texto=strtolower($_GET['texto']);
+    $texto=mb_strtolower($_GET['texto']);
     $arr=q("SELECT name,price,sku FROM products WHERE (LOWER(name) LIKE '%$texto%')");
     if(is_array($arr)){
         salidaNueva($arr,"Coincidencia");
@@ -943,17 +958,28 @@ function listarProductosIA(){
     $users_id=$_SESSION['usuario']['id'];
     //$users_id=1;
     $cant_mostrar=20;
-
+    //para no repetir las palabras
+$nameUnico=array();
+$description_short=array();
+$keyword=array();
+//
     try{
-        $arr=q('SELECT p.name, p.description_short, p.keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 50');
+        $arr=q('SELECT p.name, p.description_short, p.keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
         $string="";
         if(is_array($arr)){
             foreach ($arr as $obj){
-                $string.=$obj['name']." ".$obj['description_short']." ".$obj['keyword']." ";
+               
+                    $nameUnico=_filtro($obj['name'],$nameUnico);
+                    $nameUnico=_filtro($obj['description_short'],$nameUnico);
+                    $nameUnico=_filtro($obj['keyword'],$nameUnico);
+            }
+            foreach($nameUnico as $key => $valor){
+                $string.=$key." ";
             }
         }else{
             $order='ORDER BY RANDOM()';
             $sql=getSqlListarProductos('','',$order);
+           
             listarProductos($sql);
         }
     }
@@ -976,6 +1002,21 @@ function listarProductosIA(){
     catch(\Exception $e){
         salidaNueva(null,"disculpe, intente nuevamente 2");
     }
+}
+function _filtro($obj,$nameUnico){
+    if($obj){
+        $u=explode(' ',$obj);
+        
+        if(count($u)>0){
+            foreach($u as $a){
+                //$a=trim($a);
+                if(preg_match('/^[a-zA-ZñáéíóúÑÁÉÍÓÚ]/',$a) and strlen($a)>3){
+                    $nameUnico[$a]=true;
+                }
+            }
+        }
+    }
+    return $nameUnico;
 }
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
     $limit='LIMIT 100';
