@@ -25,6 +25,11 @@ Route::get('/cart','CartController@index')->name("cart");
 
 Route::get('/validateUser/{hash}','API\RegisterController@validateUser');
 
+// For SinglePages
+Route::get('/culture',"SinglePageController@culture")->name("culture");
+Route::get('/sucursal/{id?}',"SinglePageController@sucursal")->name("sucursal");
+Route::get('/contact',"SinglePageController@contact")->name("contact");
+
 // Auth::routes();
 
 Route::group(['prefix' => 'admin'], function () {

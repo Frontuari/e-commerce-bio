@@ -33,6 +33,7 @@ Vue.component('catalog', require('./components/Catalog.vue').default);
 Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
+Vue.component('contact', require('./components/Contact.vue').default);
 
 // Vue.component('modal-producto',require('./components/ModalProducto.vue').default,{ props:{product: Object} });
 Vue.component('modal-combo', require('./components/ModalCombo.vue').default);

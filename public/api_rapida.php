@@ -15,6 +15,10 @@ $_POST=seguro($_POST);
 
 //best_sql_listarFavoritos(true);
 switch($_GET['evento']) {
+    case 'contactweb':
+        $message = array("name"=>$_POST['name'],"email"=>$_POST['email'],"message"=>$_POST['message']);
+        enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
+        break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -1497,6 +1501,26 @@ function seguro($varb){
         $_GET[$id]= pg_escape_string(htmlspecialchars(filter_var($var,FILTER_SANITIZE_STRING)));
     }
     return $_GET;
+}
+
+function plantillaContacto($message){
+    return '
+    <div style="text-align:center; background-color: #7FBC01;">
+    <img width="200" src="https://i.imgur.com/bqhoBSp.png" titñe="Bio en Línea">
+    
+    </div>
+    <br>
+    <div style="text-align:center">
+    Ha sido contactado mediante el portal de <a href="http://www.biomercados.com.ve/contacto">contacto</a> por:
+    <br>
+    <p><strong>Nombre y Apellido:</strong>&nbsp;'.$message['name'].'<br>
+    <strong>Email:</strong>&nbsp;'.$message['email'].'<br>
+    <strong>Mensaje:</strong>&nbsp;'.$message['message'].'<br>
+    <br><hr><a href="http://www.biomercados.com.ve">www.biomercados.com.ve</a>
+    </div> 
+    
+ ';
+
 }
 
 ?>
