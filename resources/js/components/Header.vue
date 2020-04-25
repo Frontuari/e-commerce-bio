@@ -29,12 +29,12 @@
 						</button>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
+						<a  href="/" class="navbar-brand"><img src="assets/img/logo.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" v-on:submit="search()">
-							<input class="form-control" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
-							<button class="btn btn-search" type="button" @click="search()"><img src="assets/img/busqueda-bio.svg"></button>
+							<input class="form-control" id="bio-search" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
+							<button class="btn btn-search" type="button" @click="search()"><img src="assets/img/visualizar-producto-bio.svg"></button>
 							<div class="keyup_search" :style="{ display: dSearch }">
 								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
@@ -53,7 +53,7 @@
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
+									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.png" alt="Login">
 								</a>
 				
 								<!-- el login-->
@@ -80,7 +80,7 @@
 							<!-- no loggeado -->
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged">
-								<a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="/profile"><img src="assets/img/perfil-bio.png" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
 									<img src="assets/img/cerrar-sesion-bio.svg">
 								</a>
@@ -88,14 +88,12 @@
 							<!-- loggeado -->
 							
 							<li id="nav-cart" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver el carrito">
-								<a href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
+								<a href="cart"><img src="assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
 							</li>
 
 							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
-								<a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
+								<a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</li>
-
-							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
 
 							<!-- loggeado -->
 							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
