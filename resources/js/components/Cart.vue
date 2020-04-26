@@ -428,7 +428,7 @@
 															<div class="order-footer-buttons">
 																<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
 																<p  v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
-																<a href="/catalago.php" type="button" class="btn btn-link">Seguir comprando</a>
+																<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 															</div>
 														</div>
 													</div>
@@ -451,27 +451,33 @@
 												<div class="col-lg-12" v-for="pay in payments" :key="pay.id">
 													<div class="payment-option">
 														<div class="form-check form-check-radio">
-															<input type="radio" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id" v-model="selectedPayment">
+															<input type="checkbox" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id">
 															<label :for="'credit-card'+pay.id" class="custom-check"><span></span>{{pay.name}}
 															</label>
 														</div>
 													</div>
-                                                    <template v-if="selectedPayment==2">
-                                                        <div class="col-lg-12">
-                                                            <div class="row" v-if="pay.id===2">
-                                                                <div class="form-group col-lg-3" >
-                                                                    <label for="referencia-pago">Número de Referencia:</label>
-                                                                    <input type="text" name="referencia-pago" class="form-control" v-model="payment_ref">
-                                                                </div>
-                                                                <div class="form-group col-lg-7">
-                                                                    <label for="img-referencia">Imagen:</label>
-                                                                    <input type="file" class="form-control" id="img-referencia" name="img-referencia" accept=".Jpeg,.jpg,.png,.gif" @change="LoadImageFile($event)">
-                                                                </div>
-                                                                <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Nuestras Cuentas" @click="showBanksInfo()"></div>
-                                                            </div>
-                                                        </div>
-                                                    </template>
-                                                    <template v-if="selectedPayment==1" >
+													<div class="col-lg-12">
+														<div class="row">
+															<div class="form-group col-lg-3" >
+																<label for="referencia-pago">Cuenta</label>
+																<select class="form-control" @change="showBanksInfo($event,pay.id)">
+																	<option>Seleccione</option>
+																	<option v-for="bank in pay.bank_datas" :key="bank.id" :value='bank'>{{bank.name}}</option>
+																</select>
+															</div>
+															<!-- <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Ver Datos" @click="showBanksInfo()"></div> -->
+															<div class="form-group col-lg-3" >
+																<label for="referencia-pago">Monto</label>
+																<input type="text" name="referencia-pago" class="form-control">
+															</div>
+															<div class="form-group col-lg-3" >
+																<label for="referencia-pago">Referencia</label>
+																<input type="text" name="referencia-pago" class="form-control">
+															</div>
+															
+														</div>
+													</div>
+                                                    <!-- <template v-if="selectedPayment==1" >
                                                         <div class="col-lg-12">
                                                             <div class="row" v-if="pay.id===1">
                                                                 <div class="form-group col-lg-3" >
@@ -485,7 +491,7 @@
                                                                 <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Nuestras Cuentas" @click="showBanksInfo()"></div>
                                                             </div>
                                                         </div>
-                                                    </template>
+                                                    </template> -->
 												</div>
 											</div>
 											<div class="row">
@@ -595,7 +601,7 @@
 				datauser:[],
 				payments: [],
 				selectedDirection: '',
-				selectedPayment: '',
+				selectedPayment: [],
 				order: {},
 				payment_img:'',
 				payment_ref: '',
@@ -620,6 +626,7 @@
 			async getPayments() {
 				const response = await axios.get(URLSERVER+"api/payment_methods");
 				this.payments = response.data.data;
+				console.log("this.payments::> ",this.payments);
 			},
 			saveOrder() {
 				this.order = {
@@ -698,32 +705,37 @@
 					}
 				}
 			},
-			showBanksInfo: async function()
+			showBanksInfo: async function(bank,position)
 			{
-				const response  =   await axios.get(URLSERVER+'api/banks');
-				var banks       =   response.data.data;
-				var DatosCuentas=   Array;
-				var DatosCuentasArr=   Array;
-				var Mensaje     =   "";
-				var i           =   0;
+				
+				// const payment_id = event.target.value;
+				// const response  =   await axios.get(URLSERVER+'api/banks/byPayment/'+payment_id);
+				// var banks       =   response.data.data;
 
-				for(i=0; i<banks.length;i++)
-				{
-					var a = 0;
-					DatosCuentas=banks[i].cuentas.split("||");
-					for(a=0; a<DatosCuentas.length ; a++)
-					{
-						DatosCuentasArr=DatosCuentas[a].split("/n");
-						if (a==0)
-							Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
-						Mensaje+=DatosCuentasArr[0]+"<br><br>";
-					}
-					Mensaje+="</p></div>";
-				}
 				window.Swal.fire({
-					title:"Nuestras Cuentas Bancarias",
-					html:Mensaje,
+					title:banks.name,
+					html:banks.cuentas,
 				});
+
+				// var DatosCuentas=   Array;
+				// var DatosCuentasArr=   Array;
+				// var Mensaje     =   "";
+				// var i           =   0;
+
+				// for(i=0; i<banks.length;i++)
+				// {
+				// 	var a = 0;
+				// 	DatosCuentas=banks[i].cuentas.split("||");
+				// 	for(a=0; a<DatosCuentas.length ; a++)
+				// 	{
+				// 		DatosCuentasArr=DatosCuentas[a].split("/n");
+				// 		if (a==0)
+				// 			Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
+				// 		Mensaje+=DatosCuentasArr[0]+"<br><br>";
+				// 	}
+				// 	Mensaje+="</p></div>";
+				// }
+				
 			},
 		},
 		created() {

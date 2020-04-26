@@ -24,6 +24,7 @@ Route::get('advs/type/{type}','API\AdvsController@ByType')->name("adv_type");
 
 //bank
 Route::resource('banks', 'API\BanksController');
+Route::get('banks/byPayment/{payment_id}', 'API\BanksController@getByPaymentMethod');
 
 
 //CATEGORIES
