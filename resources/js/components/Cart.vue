@@ -134,6 +134,7 @@
 									</div>
 								</div>
 							</fieldset>
+							
 							<fieldset>
 								<div class="user-profile">
 									<div class="row">
@@ -448,31 +449,31 @@
 												<div class="col-12">
 													<h5>Elige el Método de Pago</h5>
 												</div>
-												<div class="col-lg-12" v-for="pay in payments" :key="pay.id">
+												<div class="col-lg-12" v-for="(pay,index) in payments" :key="pay.id">
 													<div class="payment-option">
 														<div class="form-check form-check-radio">
-															<input type="checkbox" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id">
+															<input type="checkbox" class="form-check-input" :id="'credit-card'+pay.id" name="payment-method" :value="pay.id" v-model="selectedPayment">
 															<label :for="'credit-card'+pay.id" class="custom-check"><span></span>{{pay.name}}
 															</label>
 														</div>
 													</div>
-													<div class="col-lg-12">
+													<div class="col-lg-12" :style="{display: (selectedPayment.indexOf(pay.id) >= 0)?'block':'none'}">
 														<div class="row">
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Cuenta</label>
-																<select class="form-control" @change="showBanksInfo($event,pay.id)">
-																	<option>Seleccione</option>
-																	<option v-for="bank in pay.bank_datas" :key="bank.id" :value='bank'>{{bank.name}}</option>
+																<select class="form-control" @change="showBanksInfo($event,pay.id)" v-model="paymentData[index].account">
+																	<option value='0'>Seleccione</option>
+																	<option v-for="bank in pay.bank_datas" :key="bank.id" :value='bank.id'>{{bank.name}}</option>
 																</select>
 															</div>
 															<!-- <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Ver Datos" @click="showBanksInfo()"></div> -->
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Monto</label>
-																<input type="text" name="referencia-pago" class="form-control">
+																<input type="text" name="referencia-pago" class="form-control" v-model="paymentData[index].amount">
 															</div>
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Referencia</label>
-																<input type="text" name="referencia-pago" class="form-control">
+																<input type="text" name="referencia-pago" class="form-control" v-model="paymentData[index].ref">
 															</div>
 															
 														</div>
@@ -602,6 +603,7 @@
 				payments: [],
 				selectedDirection: '',
 				selectedPayment: [],
+				paymentData: [],
 				order: {},
 				payment_img:'',
 				payment_ref: '',
@@ -626,7 +628,14 @@
 			async getPayments() {
 				const response = await axios.get(URLSERVER+"api/payment_methods");
 				this.payments = response.data.data;
-				console.log("this.payments::> ",this.payments);
+				this.payments.forEach( (a,b) => {
+					this.paymentData[b] = {
+						account: 0,
+						amount: 0,
+						ref: '',
+						type: a.bank[0].coins_id
+					};
+				});
 			},
 			saveOrder() {
 				this.order = {
@@ -705,17 +714,14 @@
 					}
 				}
 			},
-			showBanksInfo: async function(bank,position)
+			showBanksInfo: async function(event,position)
 			{
 				
-				// const payment_id = event.target.value;
-				// const response  =   await axios.get(URLSERVER+'api/banks/byPayment/'+payment_id);
-				// var banks       =   response.data.data;
-
-				window.Swal.fire({
-					title:banks.name,
-					html:banks.cuentas,
-				});
+				const payment_id = event.target.value;
+				const response  =   await axios.get(URLSERVER+'api/banks/byPayment/'+payment_id);
+				const bank       =   response.data.data;
+				
+				await Swal.fire(bank[0].name,bank[0].cuentas);
 
 				// var DatosCuentas=   Array;
 				// var DatosCuentasArr=   Array;
