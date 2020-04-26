@@ -11,10 +11,10 @@
 					</div>
 					<div class="col-md-6">
 						<ul class="social-nav">
-							<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
-							<li><a href="#"><img src="assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
-							<li><a href="#"><img src="assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-							<li><a href="#"><img src="assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
+							<li><a href="#"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
+							<li><a href="#"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
+							<li><a href="#"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
+							<li><a href="#"><img src="/assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 						</ul>
 					</div>
 				</div>
@@ -25,16 +25,16 @@
 				<div class="row align-items-center-md">
 					<div id="toggler-header" class="col-4">
 						<button class="navbar-toggler toggle-menu" type="button">
-							<img src="assets/img/menu-movil-bio.svg" alt="Menu Bars">
+							<img src="/assets/img/menu-movil-bio.svg" alt="Menu Bars">
 						</button>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						<a  href="/" class="navbar-brand"><img src="assets/img/logo-bio-en-linea.png" alt="Bio Mercados"></a>
+						<a  href="/" class="navbar-brand"><img src="/assets/img/logo.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" v-on:submit="search()">
-							<input class="form-control" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
-							<button class="btn btn-search" type="button" @click="search()"><img src="assets/img/busqueda-bio.svg"></button>
+							<input class="form-control" id="bio-search" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
+							<button class="btn btn-search" type="button" @click="search()"><img src="/assets/img/visualizar-producto-bio.svg"></button>
 							<div class="keyup_search" :style="{ display: dSearch }">
 								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
@@ -53,7 +53,7 @@
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="link-text">Entrar / Registrarse</span> <img src="assets/img/login-bio.svg" alt="Login">
+									<span class="link-text">Entrar / Registrarse</span> <img src="/assets/img/login-bio.png" alt="Login">
 								</a>
 				
 								<!-- el login-->
@@ -80,25 +80,23 @@
 							<!-- no loggeado -->
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged">
-								<a href="/profile"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="/profile"><img src="/assets/img/perfil-bio.png" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
-									<img src="assets/img/cerrar-sesion-bio.svg">
+									<img src="/assets/img/cerrar-sesion-bio.svg">
 								</a>
 							</li>
 							<!-- loggeado -->
 							
 							<li id="nav-cart" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver el carrito">
-								<a href="cart"><img src="assets/img/carrito-de-compras-bio.svg" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
+								<a href="cart"><img src="/assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
 							</li>
 
 							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
-								<a href="profile?tab=my-favorites"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
+								<a href="profile?tab=my-favorites"><img src="/assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</li>
 
-							<li id="bio-wallet"><a href="#" class="bio-points"><span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span>bio Wallet</a></li>
-
 							<!-- loggeado -->
-							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="assets/img/cerrar-sesion-bio.svg"></a></li>-->
+							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="/assets/img/cerrar-sesion-bio.svg"></a></li>-->
 							<!-- loggeado -->
 						</ul>
 
@@ -112,34 +110,34 @@
 					<div id="top-info" class="w-100 align-items-center">
 						<div class="col-md-12 text-right">
 							<button class="navbar-toggler toggle-menu" type="button">
-								<img src="assets/img/x.svg" alt="Menu Bars">
+								<img src="/assets/img/x.svg" alt="Menu Bars">
 							</button>
 						</div>
 						<!---->
 						<div class="col-md-12">
 							<ul class="social-nav">
-								<li><a href="#"><img src="assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
-								<li><a href="#"><img src="assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
-								<li><a href="#"><img src="assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-								<li><a href="#"><img src="assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
+								<li><a href="#"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
+								<li><a href="#"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
+								<li><a href="#"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
+								<li><a href="#"><img src="/assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 							</ul>
 						</div>
 						<div class="col-md-12">
 							<!-- loggeado -->
 							<!--<div class="top-info-nav">
 								<div class="top-info-log">
-									<a href="#"><img src="assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
-									<a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
-									<a href="#" class="logout"><img src="assets/img/cerrar-sesion-bio.svg"></a>
+									<a href="#"><img src="/assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
+									<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
+									<a href="#" class="logout"><img src="/assets/img/cerrar-sesion-bio.svg"></a>
 								</div>
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">253<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">253<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 							</div>-->
 							<!-- loggeado -->
 
 							<!-- no loggeado -->
 							<div class="top-info-nav">
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
-								<a href="#"><img src="assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
+								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 							</div>
 							<!-- no loggeado -->
 						</div>
@@ -159,7 +157,7 @@
 						<li id="nav-all-categories" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="dropdown-uppercase">Categorías</span>
-								<img src="assets/img/flecha-izquierda-bio.svg">
+								<img src="/assets/img/flecha-izquierda-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarCategories">
 								<a v-for="cat in categories" :key="cat.id" class="dropdown-item" :href="'/catalog?cat='+cat.id" >{{cat.name}}</a>
@@ -168,15 +166,13 @@
 						<li id="nav-bios" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarBios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Conoce a bio mercados
-								<img src="assets/img/abajo-blanco-bio.svg">
+								<img src="/assets/img/abajo-blanco-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarBios">
-								<a class="dropdown-item" href="#">Cultura bio</a>
-								<a class="dropdown-item" href="#">Zona bio</a>
-								<a class="dropdown-item" href="#">Categorías</a>
-								<a class="dropdown-item" href="#">Surcursales</a>
-								<a class="dropdown-item" href="#">Proveedores</a>
-								<a class="dropdown-item" href="#">Contacto</a>
+								<a class="dropdown-item" href="/culture">Cultura bio</a>
+								<a class="dropdown-item" href="/sucursal">Surcursales</a>
+								<a class="dropdown-item" target="_blank" href="http://portalproveedores.biomercados.com.ve:18880/webui/">Proveedores</a>
+								<a class="dropdown-item" href="/contact">Contacto</a>
 							</div>
 						</li>
 					</ul>

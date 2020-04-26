@@ -4,12 +4,17 @@
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="Shortcut Icon" href="assets/img/favicon.png" type="image/x-icon" />	
+	<link rel="Shortcut Icon" href="/assets/img/favicon.png" type="image/x-icon" />	
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
+<<<<<<< HEAD
 	<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+=======
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}">
+	
+>>>>>>> 311de69b272437f0ac2123bdb43465322262279a
 	<style>.cls-1{fill:#ccc;}</style>
 	<script>
 		var min_range, max_range;

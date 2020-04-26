@@ -3,7 +3,7 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="footer-block">
-						<img src="assets/img/logo-bio-mercados.svg" alt="Bio Mercados">
+						<img src="/assets/img/logo-bio-mercados.svg" alt="Bio Mercados">
 						
 						<p><span>Teléfono:</span> +58 414 123 4567</p>
 						<p><span>Correo:</span> Contacto@Biomercados.com</p>
@@ -19,7 +19,7 @@
 								<a href="#">Preguntas Frecuentes</a>
 								<a href="#">Términos legales</a>
 								<a href="#">Soporte</a>
-								<a href="#">Contacto</a>
+								<a href="/contact">Contacto</a>
 							</div>
 						</div>
 					</div>
@@ -31,8 +31,8 @@
 						</a>
 						<div class="collapse" id="apps">
 							<div class="card card-body">
-								<a href="#"><img src="assets/img/descarga-app-android-bio.svg"></a>
-								<a href="#"><img src="assets/img/descarga-app-ios-bio.svg"></a>
+								<a href="#"><img src="/assets/img/descarga-app-android-bio.svg"></a>
+								<a href="#"><img src="/assets/img/descarga-app-ios-bio.svg"></a>
 							</div>
 						</div>
 					</div>
