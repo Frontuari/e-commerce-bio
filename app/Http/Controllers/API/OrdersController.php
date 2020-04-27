@@ -99,8 +99,7 @@ class OrdersController extends BaseController
     public function store(Request $r)
     {
         $orden = new Orders;
-        $ordenProduct = new OrderProducts;
-        $bankOrder = new BankOrder;
+        
         $datum = $r->all();
         $order = json_decode($datum["order"]);
         // $image = $r->file('payment_img');
@@ -133,6 +132,7 @@ class OrdersController extends BaseController
 
         $pagosReturn = [];
         foreach ($order->payment as $key => $pay) {
+            $bankOrder = new BankOrder;
             if($pay->account != '0') {
                 $bankOrder->amount = floatval($pay->amount);
                 $bankOrder->orders_id = $orden->id;
@@ -145,6 +145,7 @@ class OrdersController extends BaseController
         }
         $productsReturn = [];
         foreach ($order->products as $key => $product) {
+            $ordenProduct = new OrderProducts;
             $cantidad = $product->cant;
             $producto = $product->product;
             

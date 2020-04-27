@@ -2820,11 +2820,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context2.sent;
                 bank = response.data.data;
+                this.paymentData[index].account = bank[0].bank_data_id;
                 this.paymentData[index].coin = bank[0].coins_id;
-                _context2.next = 8;
+                _context2.next = 9;
                 return Swal.fire(bank[0].name, bank[0].cuentas);
 
-              case 8:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -4640,12 +4641,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       User: {
         rif: '',
-        username: '',
+        name: '',
         password: '',
         c_password: '',
         email: '',
-        date: '',
-        phone: '',
+        birthdate: '',
+        tlf: '',
         sex: ''
       }
     };
@@ -4655,19 +4656,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     saveData: function saveData() {
-      if (this.User.rif.trim() != '' && this.User.username.trim() != '' && this.User.password.trim() != '' && this.User.c_password.trim() != '' && this.User.email.trim() != '' && this.User.sex.trim() != '') {
+      if (this.User.rif.trim() != '' && this.User.name.trim() != '' && this.User.password.trim() != '' && this.User.c_password.trim() != '' && this.User.email.trim() != '' && this.User.sex.trim() != '') {
         if (this.User.password == this.User.c_password) {
-          axios.post(URLHOME + 'api/register', {
-            rif: this.User.rif,
-            name: this.User.username,
-            date: this.User.date,
-            phone: this.User.phone,
-            password: this.User.password,
-            c_password: this.User.c_password,
-            email: this.User.email,
-            sex: this.User.sex
-          }).then(function (data) {
-            Swal.fire("Usuario Registrado Exitosamente, revise su bandeja de entrada para confirmar su correo").then(function (result) {
+          var formData = new FormData();
+          formData.append("rif", this.User.rif);
+          formData.append("name", this.User.name);
+          formData.append("password", this.User.password);
+          formData.append("email", this.User.email);
+          formData.append("birthdate", this.User.birthdate);
+          formData.append("tlf", this.User.tlf);
+          formData.append("sex", this.User.sex);
+          formData.append("from", "web");
+          axios.post(URLHOME + 'api_rapida.php?evento=registrarUsuario', formData).then(function (data) {
+            Swal.fire("Bio en línea", "Usuario Registrado Exitosamente", success).then(function (result) {
               location.href = "/";
             });
           })["catch"](function (err) {
@@ -75742,54 +75743,14 @@ var render = function() {
                                                 _c(
                                                   "select",
                                                   {
-                                                    directives: [
-                                                      {
-                                                        name: "model",
-                                                        rawName: "v-model",
-                                                        value:
-                                                          _vm.paymentData[index]
-                                                            .account,
-                                                        expression:
-                                                          "paymentData[index].account"
-                                                      }
-                                                    ],
                                                     staticClass: "form-control",
                                                     on: {
-                                                      change: [
-                                                        function($event) {
-                                                          var $$selectedVal = Array.prototype.filter
-                                                            .call(
-                                                              $event.target
-                                                                .options,
-                                                              function(o) {
-                                                                return o.selected
-                                                              }
-                                                            )
-                                                            .map(function(o) {
-                                                              var val =
-                                                                "_value" in o
-                                                                  ? o._value
-                                                                  : o.value
-                                                              return val
-                                                            })
-                                                          _vm.$set(
-                                                            _vm.paymentData[
-                                                              index
-                                                            ],
-                                                            "account",
-                                                            $event.target
-                                                              .multiple
-                                                              ? $$selectedVal
-                                                              : $$selectedVal[0]
-                                                          )
-                                                        },
-                                                        function($event) {
-                                                          return _vm.showBanksInfo(
-                                                            $event,
-                                                            index
-                                                          )
-                                                        }
-                                                      ]
+                                                      change: function($event) {
+                                                        return _vm.showBanksInfo(
+                                                          $event,
+                                                          index
+                                                        )
+                                                      }
                                                     }
                                                   },
                                                   [
@@ -83033,19 +82994,19 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.User.username,
-              expression: "User.username"
+              value: _vm.User.name,
+              expression: "User.name"
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", id: "username", name: "username" },
-          domProps: { value: _vm.User.username },
+          attrs: { type: "text", id: "name", name: "name" },
+          domProps: { value: _vm.User.name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.User, "username", $event.target.value)
+              _vm.$set(_vm.User, "name", $event.target.value)
             }
           }
         })
@@ -83080,7 +83041,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "date" } }, [
+        _c("label", { attrs: { for: "birthdate" } }, [
           _vm._v("Fecha de Nacimiento:")
         ]),
         _vm._v(" "),
@@ -83089,45 +83050,45 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.User.date,
-              expression: "User.date"
+              value: _vm.User.birthdate,
+              expression: "User.birthdate"
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "date", id: "date", name: "date" },
-          domProps: { value: _vm.User.date },
+          attrs: { type: "date", id: "birthdate", name: "birthdate" },
+          domProps: { value: _vm.User.birthdate },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.User, "date", $event.target.value)
+              _vm.$set(_vm.User, "birthdate", $event.target.value)
             }
           }
         })
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "phone" } }, [_vm._v("Nro de Teléfono:")]),
+        _c("label", { attrs: { for: "tlf" } }, [_vm._v("Nro de Teléfono:")]),
         _vm._v(" "),
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.User.phone,
-              expression: "User.phone"
+              value: _vm.User.tlf,
+              expression: "User.tlf"
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "text", id: "phone", name: "phone" },
-          domProps: { value: _vm.User.phone },
+          attrs: { type: "text", id: "tlf", name: "tlf" },
+          domProps: { value: _vm.User.tlf },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.User, "phone", $event.target.value)
+              _vm.$set(_vm.User, "tlf", $event.target.value)
             }
           }
         })
