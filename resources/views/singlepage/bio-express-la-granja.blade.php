@@ -81,8 +81,9 @@
 @stop
 
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}">
 <style>
+
 .parallax {
   /* The image used */
   background-image: url("http://biomercados.com.ve/wp-content/uploads/2019/12/express-granja.jpg");

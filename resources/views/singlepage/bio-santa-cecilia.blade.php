@@ -81,7 +81,7 @@
 @stop
 
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}">
 <style>
 .parallax {
   /* The image used */

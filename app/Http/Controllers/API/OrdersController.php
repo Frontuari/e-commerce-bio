@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Orders;
 use App\OrderProducts;
+use App\BankOrder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\DB;
@@ -98,11 +99,11 @@ class OrdersController extends BaseController
     public function store(Request $r)
     {
         $orden = new Orders;
-        $ordenProduct = new OrderProducts;
+        
         $datum = $r->all();
         $order = json_decode($datum["order"]);
-        $image = $r->file('payment_img');
-        $destinationPath = 'storage';
+        // $image = $r->file('payment_img');
+        // $destinationPath = 'storage';
         
         $orden->users_id = $order->user_id;
         $orden->sub_total = $order->total;
@@ -125,11 +126,26 @@ class OrdersController extends BaseController
         $orden->opinion = '';
         $orden->coins_id = 1;
         $orden->rate_json = NULL;
-        $orden->image = "/".$destinationPath."/".$image->getClientOriginalName();
+        // $orden->image = "/".$destinationPath."/".$image->getClientOriginalName();
 
         $orden->save();
+
+        $pagosReturn = [];
+        foreach ($order->payment as $key => $pay) {
+            $bankOrder = new BankOrder;
+            if($pay->account != '0') {
+                $bankOrder->amount = floatval($pay->amount);
+                $bankOrder->orders_id = $orden->id;
+                $bankOrder->bank_datas_id = $pay->account;
+                $bankOrder->ref = $pay->ref;
+                $bankOrder->image = '';
+                $bankOrder->save();
+                array_push($pagosReturn,$bankOrder);
+            }
+        }
         $productsReturn = [];
         foreach ($order->products as $key => $product) {
+            $ordenProduct = new OrderProducts;
             $cantidad = $product->cant;
             $producto = $product->product;
             
@@ -143,9 +159,10 @@ class OrdersController extends BaseController
             array_push($productsReturn,$ordenProduct);
         }
 
-        $image->move($destinationPath,$image->getClientOriginalName());
+        // $image->move($destinationPath,$image->getClientOriginalName());
         $response = [];
         $response["order"] = $orden;
+        $response["pagos"] = $pagosReturn;
         $response["productos"] = $productsReturn;
         return $this->sendResponse($response);
     }

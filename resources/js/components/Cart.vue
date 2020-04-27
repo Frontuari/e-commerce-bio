@@ -461,7 +461,7 @@
 														<div class="row">
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Cuenta</label>
-																<select class="form-control" @change="showBanksInfo($event,index)" v-model="paymentData[index].account">
+																<select class="form-control" @change="showBanksInfo($event,index)">
 																	<option value='0'>Seleccione</option>
 																	<option v-for="bank in pay.bank_datas" :key="bank.id" :value='bank.id'>{{bank.name}}</option>
 																</select>
@@ -677,13 +677,13 @@
 					direction   : this.selectedDirection,
 					datetime    : this.datetime,
 					products    : this.products_cart,
-					payment     : this.selectedPayment,
-					payment_ref : this.payment_ref,
+					payment     : this.paymentData,
+					// payment_ref : this.payment_ref,
 					total       : this.total_cart
 				};
 				let formData    = new FormData();
 				formData.append("order",JSON.stringify(this.order));
-				formData.append("payment_img",this.payment_img);
+				// formData.append("payment_img",this.payment_img);
 				axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
 					this.num_order = datos.data.data.order.id;
 
@@ -772,6 +772,7 @@
 				const payment_id = event.target.value;
 				const response  =   await axios.get(URLSERVER+'api/banks/byPayment/'+payment_id);
 				const bank       =   response.data.data;
+				this.paymentData[index].account = bank[0].bank_data_id;
 				this.paymentData[index].coin = bank[0].coins_id;
 				await Swal.fire(bank[0].name,bank[0].cuentas);
 
