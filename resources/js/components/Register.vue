@@ -19,19 +19,19 @@
             </div>
             <div class="form-group">
                 <label for="username">Nombre y Apellido:</label>
-                <input type="text" class="form-control" id="username" name="username" v-model="User.username">
+                <input type="text" class="form-control" id="name" name="name" v-model="User.name">
             </div>
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <input type="text" class="form-control" id="email" name="email" v-model="User.email">
             </div>
             <div class="form-group">
-                <label for="date">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="date" name="date" v-model="User.date">
+                <label for="birthdate">Fecha de Nacimiento:</label>
+                <input type="date" class="form-control" id="birthdate" name="birthdate" v-model="User.birthdate">
             </div>
             <div class="form-group">
-                <label for="phone">Nro de Teléfono:</label>
-                <input type="text" class="form-control" id="phone" name="phone" v-model="User.phone">
+                <label for="tlf">Nro de Teléfono:</label>
+                <input type="text" class="form-control" id="tlf" name="tlf" v-model="User.tlf">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
@@ -61,12 +61,12 @@
             return {
                 User: {
                     rif: '',
-                    username: '',
+                    name: '',
                     password: '',
                     c_password: '',
                     email: '',
-                    date:'',
-                    phone:'',
+                    birthdate:'',
+                    tlf:'',
                     sex: '',
                 }
             }
@@ -75,37 +75,34 @@
             userlogged: Object
         },
         methods: {
-            saveData() { 
-
-                if( this.User.rif.trim() != '' && this.User.username.trim() != '' && this.User.password.trim() != '' && this.User.c_password.trim() != '' && this.User.email.trim() != '' && this.User.sex.trim() != '') {
-
+            saveData() {
+                if( this.User.rif.trim() != '' && this.User.name.trim() != '' && this.User.password.trim() != '' && this.User.c_password.trim() != '' && this.User.email.trim() != '' && this.User.sex.trim() != '') {
 
                     if(this.User.password == this.User.c_password){
+                        const formData = new FormData();
+                        formData.append("rif",this.User.rif);
+                        formData.append("name",this.User.name);
+                        formData.append("password",this.User.password);
+                        formData.append("email",this.User.email);
+                        formData.append("birthdate",this.User.birthdate);
+                        formData.append("tlf",this.User.tlf);
+                        formData.append("sex",this.User.sex);
+                        formData.append("from","web");
 
-                        axios.post(URLHOME+'api/register', {
-                            rif: this.User.rif,
-                            name: this.User.username,
-                            date: this.User.date,
-                            phone: this.User.phone,
-                            password: this.User.password,
-                            c_password: this.User.c_password,
-                            email: this.User.email,
-                            sex: this.User.sex,
-                        }).then( (data) => {
-                            Swal.fire("Usuario Registrado Exitosamente, revise su bandeja de entrada para confirmar su correo").then( result => {
-                                location.href="/";    
-                            });
-                            
-                        }).catch(err => {
-                            if(!!err)
-                            {
-                                Swal.fire({
-                                  icon: 'error',
-                                  title: 'Error',
-                                  text: "El correo ya está en uso, intente con otro correo",
+                            axios.post(URLHOME+'api_rapida.php?evento=registrarUsuario', formData).then( (data) => {
+                                Swal.fire("Bio en línea","Usuario Registrado Exitosamente",success).then( result => {
+                                    location.href="/";    
                                 });
-                            }
-                        });
+                            }).catch(err => {
+                                if(!!err)
+                                {
+                                    Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: "El correo ya está en uso, intente con otro correo",
+                                    });
+                                }
+                            });
                     }else {
                         Swal.fire({
                           icon: 'error',
