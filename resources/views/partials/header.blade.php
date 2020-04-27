@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/new-styles.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}">
 	
 	<style>.cls-1{fill:#ccc;}</style>
 	<script>

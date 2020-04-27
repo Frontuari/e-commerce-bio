@@ -129,7 +129,7 @@ class OrdersController extends BaseController
         $orden->rate_json = NULL;
         // $orden->image = "/".$destinationPath."/".$image->getClientOriginalName();
 
-        // $orden->save();
+        $orden->save();
 
         $pagosReturn = [];
         foreach ($order->payment as $key => $pay) {
@@ -137,7 +137,7 @@ class OrdersController extends BaseController
                 $bankOrder->amount = floatval($pay->amount);
                 $bankOrder->orders_id = $orden->id;
                 $bankOrder->bank_datas_id = $pay->account;
-                $bankOrder->ref = $pay->red;
+                $bankOrder->ref = $pay->ref;
                 $bankOrder->image = '';
                 $bankOrder->save();
                 array_push($pagosReturn,$bankOrder);
