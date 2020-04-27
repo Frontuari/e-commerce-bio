@@ -131,10 +131,10 @@ function actualizarEnvioOrden(){
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	$url_productos="$ip/example_api_bio/getProducts.json";
+	//$url_productos="$ip/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
 	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
-	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
+	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
 	
