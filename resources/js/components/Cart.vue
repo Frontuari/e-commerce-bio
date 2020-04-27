@@ -677,13 +677,13 @@
 					direction   : this.selectedDirection,
 					datetime    : this.datetime,
 					products    : this.products_cart,
-					payment     : this.selectedPayment,
-					payment_ref : this.payment_ref,
+					payment     : this.paymentData,
+					// payment_ref : this.payment_ref,
 					total       : this.total_cart
 				};
 				let formData    = new FormData();
 				formData.append("order",JSON.stringify(this.order));
-				formData.append("payment_img",this.payment_img);
+				// formData.append("payment_img",this.payment_img);
 				axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
 					this.num_order = datos.data.data.order.id;
 

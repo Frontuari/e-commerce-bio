@@ -1,4 +1,4 @@
-div.middle-header{
+div.middle-header {
 	background:white !important; 
 	border-color:white !important;
 	padding:30px 0px 10px 0px !important;
@@ -16,9 +16,9 @@ div#brand-header img{
 }
 
 button.btn-search{
-	margin-right:15px !important;"
+	margin-right:15px !important;
 }
 
-section#main-slider, div#carouselExampleIndicators, div.carousel-inner{
+section#main-slider, div#carouselExampleIndicators{
 	height: 400px !important;
 }

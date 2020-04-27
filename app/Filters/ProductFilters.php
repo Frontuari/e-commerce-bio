@@ -15,7 +15,8 @@ class ProductFilters extends QueryFilters
     }
 
     public function cat($id) {
-        return $this->builder->join("det_sub_categories","det_sub_categories.products_id","=","products.id")->where('det_sub_categories.sub_categories_id','=',$id);
+        if(isset($id) && !empty($id) && $id > 0)
+            return $this->builder->join("det_sub_categories","det_sub_categories.products_id","=","products.id")->join("sub_categories","sub_categories.id","=","det_sub_categories.sub_categories_id")->where('sub_categories.categories_id','=',$id)->groupBy("products.id");
     }
 
     public function search($term) {
