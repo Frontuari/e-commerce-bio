@@ -2531,6 +2531,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2542,7 +2567,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       payments: [],
       selectedDirection: '',
       selectedPayment: [],
-      paymentData: [],
+      paymentData: [{
+        account: 0,
+        amount: 0,
+        ref: '',
+        coin: 0
+      }, {
+        account: 0,
+        amount: 0,
+        ref: '',
+        coin: 0
+      }, {
+        account: 0,
+        amount: 0,
+        ref: '',
+        coin: 0
+      }, {
+        account: 0,
+        amount: 0,
+        ref: '',
+        coin: 0
+      }],
+      totalAbonoBs: 0,
+      totalAbonoUsd: 0,
+      totalAbono: 0,
+      Resta: 0,
       order: {},
       payment_img: '',
       payment_ref: '',
@@ -2585,7 +2634,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     account: 0,
                     amount: 0,
                     ref: '',
-                    type: a.bank[0].coins_id
+                    coin: 0
                   };
                 });
 
@@ -2674,10 +2723,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }
     },
+    getTotalAbono: function getTotalAbono() {
+      var _this3 = this;
+
+      this.totalAbonoBs = 0;
+      this.totalAbonoUsd = 0;
+      var totalBs = 0;
+      this.paymentData.forEach(function (a, b) {
+        switch (a.coin) {
+          case 1:
+            _this3.totalAbonoUsd += parseFloat(a.amount);
+            break;
+
+          case 2:
+            _this3.totalAbonoBs += parseFloat(a.amount);
+            break;
+        }
+      });
+      this.totalAbono = parseFloat(this.totalAbonoUsd * this.tasadolar) + parseFloat(this.totalAbonoBs);
+      this.Resta = parseFloat(this.total_cart) - parseFloat(this.totalAbono);
+    },
     showBanksInfo: function () {
       var _showBanksInfo = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(event, position) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(event, index) {
         var payment_id, response, bank;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2690,15 +2759,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context2.sent;
                 bank = response.data.data;
-                _context2.next = 7;
+                this.paymentData[index].coin = bank[0].coins_id;
+                _context2.next = 8;
                 return Swal.fire(bank[0].name, bank[0].cuentas);
 
-              case 7:
+              case 8:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
+        }, _callee2, this);
       }));
 
       function showBanksInfo(_x, _x2) {
@@ -2709,10 +2779,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }()
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     EventBus.$on('update_cantCart', function (data) {
-      _this3.cant_cart = data;
+      _this4.cant_cart = data;
     });
     this.getPayments();
   },
@@ -75395,7 +75465,7 @@ var render = function() {
                                                         function($event) {
                                                           return _vm.showBanksInfo(
                                                             $event,
-                                                            pay.id
+                                                            index
                                                           )
                                                         }
                                                       ]
@@ -75473,6 +75543,9 @@ var render = function() {
                                                         .amount
                                                   },
                                                   on: {
+                                                    blur: function($event) {
+                                                      return _vm.getTotalAbono()
+                                                    },
                                                     input: function($event) {
                                                       if (
                                                         $event.target.composing
@@ -75764,6 +75837,92 @@ var render = function() {
                                                       ) +
                                                       " "
                                                   )
+                                                ]
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "order-description order-total"
+                                          },
+                                          [
+                                            _c("div", { staticClass: "row" }, [
+                                              _c(
+                                                "label",
+                                                { staticClass: "order-text" },
+                                                [_vm._v("Abono")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "table",
+                                                {
+                                                  staticClass:
+                                                    "table table-sm table-borderless"
+                                                },
+                                                [
+                                                  _c("tr", [
+                                                    _vm._m(16),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        "$ " +
+                                                          _vm._s(
+                                                            this.totalAbonoUsd
+                                                          ) +
+                                                          " "
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _vm._m(17),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(this.totalAbonoBs)
+                                                        ) + " Bs"
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("Resta:  ")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(this.Resta)
+                                                        ) + " Bs"
+                                                      )
+                                                    ])
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("tr", [
+                                                    _c("td", [
+                                                      _vm._v("Total:  ")
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm._f(
+                                                            "FormatNumber"
+                                                          )(this.totalAbono)
+                                                        ) + " Bs"
+                                                      )
+                                                    ])
+                                                  ])
                                                 ]
                                               )
                                             ])
@@ -76766,6 +76925,18 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-12" }, [
       _c("h5", [_vm._v("Elige el Método de Pago")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("b", [_vm._v("USD:")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("b", [_vm._v("Bs:")])])
   }
 ]
 render._withStripped = true

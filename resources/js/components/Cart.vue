@@ -461,7 +461,7 @@
 														<div class="row">
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Cuenta</label>
-																<select class="form-control" @change="showBanksInfo($event,pay.id)" v-model="paymentData[index].account">
+																<select class="form-control" @change="showBanksInfo($event,index)" v-model="paymentData[index].account">
 																	<option value='0'>Seleccione</option>
 																	<option v-for="bank in pay.bank_datas" :key="bank.id" :value='bank.id'>{{bank.name}}</option>
 																</select>
@@ -469,7 +469,7 @@
 															<!-- <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Ver Datos" @click="showBanksInfo()"></div> -->
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Monto</label>
-																<input type="text" name="referencia-pago" class="form-control" v-model="paymentData[index].amount">
+																<input type="text" name="referencia-pago" @blur="getTotalAbono()" class="form-control" v-model="paymentData[index].amount">
 															</div>
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Referencia</label>
@@ -526,6 +526,31 @@
 																	<div class="row">
 																		<p>Total</p>
 																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																	</div>
+																</div>
+
+																<div class="order-description order-total">
+																	<div class="row">
+																		<label class="order-text">Abono</label>
+																		<table class="table table-sm table-borderless">
+																			<tr>
+																				<td><b>USD:</b> </td>
+																				<td>$ {{this.totalAbonoUsd}} </td>
+																			</tr>
+																			<tr>
+																				<td><b>Bs:</b> </td>
+																				<td>{{this.totalAbonoBs | FormatNumber}} Bs</td>
+																			</tr>
+																			<tr>
+																				<td>Resta:  </td>
+																				<td>{{this.Resta | FormatNumber}} Bs</td>
+																			</tr>
+																			<tr>
+																				<td>Total:  </td>
+																				<td>{{this.totalAbono | FormatNumber}} Bs</td>
+																			</tr>
+																		</table>
+																		
 																	</div>
 																</div>
 
@@ -603,7 +628,16 @@
 				payments: [],
 				selectedDirection: '',
 				selectedPayment: [],
-				paymentData: [],
+				paymentData: [
+					{account: 0,amount: 0,ref: '',coin:0},
+					{account: 0,amount: 0,ref: '',coin:0},
+					{account: 0,amount: 0,ref: '',coin:0},
+					{account: 0,amount: 0,ref: '',coin:0},
+				],
+				totalAbonoBs: 0,
+				totalAbonoUsd: 0,
+				totalAbono: 0,
+				Resta: 0,
 				order: {},
 				payment_img:'',
 				payment_ref: '',
@@ -633,7 +667,7 @@
 						account: 0,
 						amount: 0,
 						ref: '',
-						type: a.bank[0].coins_id
+						coin:0,
 					};
 				});
 			},
@@ -714,13 +748,31 @@
 					}
 				}
 			},
-			showBanksInfo: async function(event,position)
+			getTotalAbono() {
+				this.totalAbonoBs = 0;
+				this.totalAbonoUsd = 0;
+				let totalBs = 0;
+				this.paymentData.forEach( (a,b) => {
+					switch(a.coin){
+						case 1:
+							this.totalAbonoUsd += parseFloat(a.amount);
+						break;
+						case 2:
+							this.totalAbonoBs += parseFloat(a.amount);
+						break;
+					}
+				});
+				
+				this.totalAbono = (parseFloat(this.totalAbonoUsd * this.tasadolar) + parseFloat(this.totalAbonoBs));
+				this.Resta = parseFloat(this.total_cart) - parseFloat(this.totalAbono);
+			},
+			showBanksInfo: async function(event,index)
 			{
 				
 				const payment_id = event.target.value;
 				const response  =   await axios.get(URLSERVER+'api/banks/byPayment/'+payment_id);
 				const bank       =   response.data.data;
-				
+				this.paymentData[index].coin = bank[0].coins_id;
 				await Swal.fire(bank[0].name,bank[0].cuentas);
 
 				// var DatosCuentas=   Array;
