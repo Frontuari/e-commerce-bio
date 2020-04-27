@@ -1941,23 +1941,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1971,6 +1954,7 @@ __webpack_require__.r(__webpack_exports__);
       this.categories.forEach(function (a, b) {
         // const img = a.image.replace("\\","/");
         console.log("a.image::> ", a.image);
+        console.log(a);
 
         _this.backgrounds.push('url(storage/' + a.image + ')');
       }); // this.backgrounds.push('url(storage/'+this.categories[0].image+')');
@@ -73017,105 +73001,30 @@ var render = function() {
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12 category-box" }, [
-          _c(
-            "div",
-            {
+          _c("a", { attrs: { href: "catalog?cat=" + _vm.categories[0].id } }, [
+            _c("div", {
               staticClass: "category-img",
               style: { backgroundImage: _vm.backgrounds[0] }
-            },
-            [
-              _c("div", { staticClass: "category-content" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.categories[0].name))]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { attrs: { href: "catalog?cat=" + _vm.categories[0].id } },
-                  [
-                    _vm._v("Ver todos los productos "),
-                    _c("img", {
-                      attrs: { src: "assets/img/boton-circular-bio.svg" }
-                    })
-                  ]
-                )
-              ])
-            ]
-          )
+            })
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 category-box category-box-middle" }, [
-          _c(
-            "div",
-            {
+        _c("div", { staticClass: "col-12 category-box" }, [
+          _c("a", { attrs: { href: "catalog?cat=" + _vm.categories[1].id } }, [
+            _c("div", {
               staticClass: "category-img",
               style: { backgroundImage: _vm.backgrounds[1] }
-            },
-            [
-              _c("div", { staticClass: "category-content" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.categories[1].name))]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { attrs: { href: "catalog?cat=" + _vm.categories[1].id } },
-                  [
-                    _vm._v("Ver todos los productos "),
-                    _c("img", {
-                      attrs: { src: "assets/img/boton-circular-bio.svg" }
-                    })
-                  ]
-                )
-              ])
-            ]
-          )
+            })
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 category-box category-box-double" }, [
-          _c(
-            "div",
-            {
-              staticClass: "category-img category-img-first",
+        _c("div", { staticClass: "col-12 category-box" }, [
+          _c("a", { attrs: { href: "catalog?cat=" + _vm.categories[2].id } }, [
+            _c("div", {
+              staticClass: "category-img",
               style: { backgroundImage: _vm.backgrounds[2] }
-            },
-            [
-              _c("div", { staticClass: "category-content" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.categories[2].name))]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { attrs: { href: "catalog?cat=" + _vm.categories[2].id } },
-                  [
-                    _vm._v("Ver todos los productos "),
-                    _c("img", {
-                      attrs: { src: "assets/img/boton-circular-bio.svg" }
-                    })
-                  ]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "category-img category-img-last",
-              style: { backgroundImage: _vm.backgrounds[3] }
-            },
-            [
-              _c("div", { staticClass: "category-content" }, [
-                _c("h3", [_vm._v(_vm._s(_vm.categories[3].name))]),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { attrs: { href: "catalog?cat=" + _vm.categories[3].id } },
-                  [
-                    _vm._v("Ver todos los productos "),
-                    _c("img", {
-                      attrs: { src: "assets/img/boton-circular-bio.svg" }
-                    })
-                  ]
-                )
-              ])
-            ]
-          )
+            })
+          ])
         ])
       ])
     ])
@@ -100896,8 +100805,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

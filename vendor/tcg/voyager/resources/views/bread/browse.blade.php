@@ -45,7 +45,7 @@
                     <div class="panel-body">
                         @if ($isServerSide)
                             <form method="get" class="form-search">
-                                <div id="search-input" >
+                                <div id="search-input">
                                     <div class="col-2">
                                         <select id="search_key" name="key">
                                             @foreach($searchNames as $key => $name)
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-2">
                                         <select id="filter" name="filter">
-                                            <option value="contains" @if($search->filter == "contains") selected @endif>Contiene</option>
+                                            <option value="contains" @if($search->filter == "contains") selected @endif>contains</option>
                                             <option value="equals" @if($search->filter == "equals") selected @endif>=</option>
                                         </select>
                                     </div>
@@ -250,7 +250,7 @@
                                                 @endif
                                             </td>
                                         @endforeach
-                                        <td class="no-sort no-click bread-actions">
+                                        <td class="no-sort no-click" id="bread-actions">
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
                                                     @include('voyager::bread.partials.actions', ['action' => $action])

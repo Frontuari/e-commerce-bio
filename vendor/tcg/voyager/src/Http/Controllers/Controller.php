@@ -22,7 +22,7 @@ use TCG\Voyager\Http\Controllers\ContentTypes\Text;
 use TCG\Voyager\Http\Controllers\ContentTypes\Timestamp;
 use TCG\Voyager\Traits\AlertsMessages;
 use Validator;
-use Illuminate\Support\Facades\DB;
+
 abstract class Controller extends BaseController
 {
     use DispatchesJobs,
@@ -149,52 +149,16 @@ abstract class Controller extends BaseController
                 $data->{$row->field} = str_replace($uuid, $data->getKey(), $data->{$row->field});
             });
             $data->save();
-           
             if ($old_path != $new_path && !Storage::disk(config('voyager.storage.disk'))->exists($new_path)) {
                 $request->session()->forget([$slug.'_path', $slug.'_uuid']);
                 Storage::disk(config('voyager.storage.disk'))->move($old_path, $new_path);
                 Storage::disk(config('voyager.storage.disk'))->deleteDirectory($folder_path);
             }
         }
-        $this->guardar_cantidades($data);
+
         return $data;
     }
-    public function mostrar_cantidades(){
 
-        exit();
-    }
-    public function guardar_cantidades($data){
-
-        if(isset($_POST['id_leo'])){
-            $id= $_POST['id_leo'];
-        }else{
-            $id=$data['id'];
-        }
-if(isset($_POST['cantidad'])){
-        $cant=$_POST['cantidad'];
-
-        
-       /* if($_POST['_method']=='PUT'){
-            foreach($_POST['package_belongstomany_product_relationship'] as $valor){
-                echo $cant[$valor]."<br>";
-                DB::Update("UPDATE det_product_packages SET cant=");
-            }
-        }
-*/
-//print_r($_POST);
-//exit();
-//if($_POST['_method']=='PUT' or !isset($_POST['_method'])){
-
-    foreach($cant as $cod=>$valor){
-        echo $cod." ".$valor.", ";
-        //echo $cant[$valor]."<br>";
-       DB::Update("UPDATE det_product_packages SET cant=$valor WHERE packages_id=$id AND products_id=$cod");
-    }
-}
-//}
-
-//exit();
-    }
     /**
      * Validates bread POST request.
      *

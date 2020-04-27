@@ -1064,6 +1064,19 @@ header .dropdown-menu a:focus {
     }
 }
 
+-------- Mensaje Original --------
+Asunto: Fwd: Manual para crear cuenta desarrollador en Play Store(Android) y App Store (iOs)
+Fecha: 2020-04-20 09:42
+De: cvargas@frontuari.net
+Destinatario: wcolmenarez@frontuari.net
+
+-------- Mensaje Original --------
+Asunto: Manual para crear cuenta desarrollador en Play Store(Android) y App Store (iOs)
+Fecha: 2020-04-20 09:19
+De: cvargas@frontuari.net
+Destinatario: jcolmenarez@frontuari.net, jlct.master@gmail.com
+
+
 
 /*
 	======================================================
@@ -1274,9 +1287,7 @@ div[class*="col-"]:not(:last-child) .product-block {
 #recents .row div div.product-block,
 #sellers .row div div.product-block,
 #searched .row div div.product-block,
-#cost .row div div.product-block {
-    border: 1px solid #ccc6;
-}
+
 
 #recents .row div div.product-block .product-title,
 #sellers .row div div.product-block .product-title,
@@ -1627,7 +1638,7 @@ div[class*="col-"]:not(:last-child) .product-block {
 
 .combo-group .product-block {
     margin: .5rem 0 !important;
-    border: 1px solid #ccc6;
+    /*border: 1px solid #ccc6;*/
 }
 
 .combos-on-mobile {

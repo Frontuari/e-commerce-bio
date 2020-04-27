@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'loggingin'    => 'Iniciando',
-    'signin_below' => 'Iniciar Sesión:',
-    'welcome'      => 'Bienvenido al panel de administrador de bio en línea.',
+    'loggingin'    => 'Logging in',
+    'signin_below' => 'Sign In Below:',
+    'welcome'      => 'Welcome to Voyager. The Missing Admin for Laravel',
 ];
