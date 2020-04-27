@@ -65,7 +65,16 @@
 		</div>
 		<div class="bottom-footer">
 			<div class="container">
-				<p>Todos los derechos reservados. Bio Mercados 2020</p>
+				<div class="row">
+					<div class="col-md-10">
+						<p>Alimentos FM, C.A. © 2020 Todos los Derechos Reservados <br />J-31721968-6</p>
+					</div>
+					<div class="col-md-2">
+						<ul class="social-icons">
+						</ul>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</footer>
