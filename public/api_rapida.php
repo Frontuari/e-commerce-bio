@@ -591,8 +591,8 @@ function horasDisponiblesEntrega(){
     salidaNueva($horas,"Listando horas disponible para entrega",true,false,true);
 }
 function loginMovil($tipo_salida){
-    $email=$_GET['email'];
-    $clave=$_GET['password'];
+    $email=mb_strtolower(trim($_GET['email']));
+    $clave=trim($_GET['password']);
     
     $row=q("SELECT date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
     FROM users s
@@ -1269,8 +1269,8 @@ function registrarUsuario(){
    
     $name       =$_POST['name'];
     $rif        =$_POST['rif'];
-    $email      =$_POST['email'];
-    $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $email      =mb_strtolower(trim($_POST['email']));
+    $password   =password_hash(trim($_POST['password']),PASSWORD_BCRYPT);
     $sex        =$_POST['sex'];
     $tlf        =$_POST['tlf'];
     $birthdate  =$_POST['birthdate'];
@@ -1493,7 +1493,7 @@ function q($sql){
 
               switch($state){
                   case 23505://El registro ya existe, intente de nuevo
-                    salidaNueva(null,"Disculpe intente mas tarde.",false);
+                    salidaNueva(null,"El registro ya existe.",false);
                   break;
                   case '22P02'://faltan campos
                     salidaNueva(null,"Disculpe intente mas tarde..",false);
