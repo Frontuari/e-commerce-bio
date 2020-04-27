@@ -9,7 +9,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.0.106";
+$ip="http://192.168.1.102";
 
 
 $activar_productos=true;
@@ -96,6 +96,7 @@ function actualizarEnvioOrden(){
 	) FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id INNER JOIN payment_methods pm ON pm.id=bd.payment_methods_id WHERE dbo.orders_id=o.id) detallepago 
 	
 	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0");
+	
 	if(is_array($arr)){
 		$data['data']=json_encode($arr);
 
@@ -104,6 +105,7 @@ function actualizarEnvioOrden(){
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
 	}elseif($res==true){
+		
 		q("BEGIN");
 		$malo=false;
 		foreach($arr as $orden){
@@ -129,10 +131,10 @@ function actualizarEnvioOrden(){
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	//$url_productos="$ip/example_api_bio/getProducts.json";
+	$url_productos="$ip/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
 	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
-	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
+	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
 	
@@ -145,11 +147,15 @@ function actualizarProductos($ip){
 			
 			q("BEGIN");
 			foreach($data->item as $obj){
-				if($obj->ad_org_id==1000004){
-				//aqui entra
-				
-				if(is_numeric($obj->sku) and isset($obj->item_name) and is_numeric($obj->sugerido) and $obj->sugerido>=0 and $obj->pricelist>0 and is_numeric($obj->ad_org_id)){
 
+				if($obj->ad_org_id==1000004){
+				
+					if($obj->sugerido<0){
+						$obj->sugerido=0;
+					}
+
+				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
+				
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
@@ -219,6 +225,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 //-----------------------------------------
 
 					//echo $obj->ad_org_id." $obj->organizacion $obj->sku $obj->sugerido\n";
+					//echo $obj->sku."\n";
 					$tienda_id=$tienda[$obj->ad_org_id];
 					$sql="SELECT id FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
 					//echo " Consultando: ".$sql."\n";
@@ -229,6 +236,8 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					}else{
 						$peso=0;
 					}
+					
+					
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
 						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
@@ -244,6 +253,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						$products_id=$valido[0]['id'];
 						$msj="error al insertar! ID: $obj->m_product_id SQL: ".$sql;
 					}
+					
 					if(!is_array($valido)){
 						
 						msj($msj);
@@ -252,9 +262,11 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						$malo=true;
 					}
 //--------------IMPUESTOS-----------
-$sql="SELECT t.id,t.value FROM det_product_taxes dpt INNER JOIN taxes t ON t.id=dpt.id WHERE products_id='$products_id'";
+$sql="SELECT t.id,t.value FROM det_product_taxes dpt INNER JOIN taxes t ON t.id=dpt.taxes_id WHERE products_id='$products_id'";
+
 $arr=q($sql);
 if(!is_array($arr) AND $obj->IMPUESTO>0){
+	
 	$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
 }else{
 	
@@ -263,8 +275,8 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 		}
 	
 }
-//---------------------------------
 
+//---------------------------------
 
 
 					

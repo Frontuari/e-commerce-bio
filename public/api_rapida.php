@@ -120,6 +120,7 @@ switch($_GET['evento']) {
     break;
     case 'listarProductos':
         $sql=getSqlListarProductos();
+        $sql=filtroProductos($sql);
         listarProductos($sql);
     break;
     case 'guardarFavorito':
@@ -195,6 +196,33 @@ switch($_GET['evento']) {
     default:
     
     salida($row,"Disculpe debe enviar un evento",false);
+}
+function filtroProductos($sql){
+    $precioInicial=$_GET['precioInicial'];
+    $precioFinal=$_GET['precioFinal'];
+    $tipo=$_GET['tipo'];
+    switch($tipo){
+        case 'Mas vendidos':
+            $order='ORDER BY qty_sold DESC';
+        break;
+        case 'Mejores precios':
+            $order='ORDER BY price ASC';
+        break;
+        case 'Orden alfabético A-Z';
+            $order='ORDER BY name ASC';
+        break;
+        case 'Orden alfabético Z-A';
+            $order='ORDER BY name DESC';
+        break;
+        default://mas recientes
+            $order='ORDER BY id DESC';
+        break;
+    }
+    if($precioInicial>-1 and $precioFinal>0){
+        $where="WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    }
+    $sql="SELECT * FROM ($sql) as consulta $where $order";
+    return $sql;
 }
 
 function best_sql_listarFavoritos($tipo_salida){
@@ -308,6 +336,7 @@ function listarFavoritos(){
     $join="INNER JOIN  favorites f ON f.products_id=p.id";
     $where="AND f.users_id='$users_id'";
     $sql=getSqlListarProductos($join,$where);
+    $sql=filtroProductos($sql);
     listarProductos($sql);
 }
 
@@ -357,6 +386,7 @@ function listarProductosPorCategoria(){
             $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
             $where="AND sc.categories_id='$categories_id'";
             $sql=getSqlListarProductos($join,$where);
+            $sql=filtroProductos($sql);
             listarProductos($sql);
 }
 function productosMayorEdad($tipo_salida){
@@ -463,7 +493,7 @@ function listarBancosdelMetododePago($tipo_salida){
     if(is_array($arr)){
         return salidaNueva($arr,"Listando datos bancarios",true,$tipo_salida);
    }else{
-    return salidaNueva(null,"Disculpe, intente de nuevo",false,$tipo_salida);
+    return salidaNueva(null,"Disculpe, intente mas tarde",false,$tipo_salida);
    }
 }
 function listarBancosdelMetododePagoAll($tipo_salida){
@@ -897,12 +927,13 @@ function listarProductosPorBusqueda(){
     $where="AND to_tsvector(p.name) @@ to_tsquery('$otro')";
 
     $sql=getSqlListarProductos('',$where,'');
+    $sql=filtroProductos($sql);
     listarProductos($sql);    
 }
 function buscarProducto(){//el autocompletado
   
     $texto=mb_strtolower($_GET['texto']);
-    $arr=q("SELECT name,price,sku FROM products WHERE (LOWER(name) LIKE '%$texto%')");
+    $arr=q("SELECT name,price,sku FROM products WHERE (LOWER(name) LIKE '%$texto%') AND status='A' AND qty_avaliable>0");
     if(is_array($arr)){
         salidaNueva($arr,"Coincidencia");
     }else{
@@ -1001,6 +1032,7 @@ $keyword=array();
        $order='ORDER BY RANDOM()';
       $join="INNER JOIN ($sql) as r ON r.id=p.id";
       $sql=getSqlListarProductos($join,'',$order);
+    
       listarProductos($sql);
     }
     catch(\Exception $e){
@@ -1025,7 +1057,7 @@ function _filtro($obj,$nameUnico){
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
     $limit='LIMIT 100';
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+    $sql="SELECT p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
