@@ -28,18 +28,9 @@ export default {
     },
     methods: {
 		getcategories: function() {
-
 			this.categories.forEach( (a,b) => {
-				// const img = a.image.replace("\\","/");
-				console.log("a.image::> ",a.image);
-				console.log(a);
 				this.backgrounds.push('url(storage/'+a.image+')');
 			});
-			
-			// this.backgrounds.push('url(storage/'+this.categories[0].image+')');
-			// this.backgrounds.push('url(storage/'+this.categories[1].image+')');
-			// this.backgrounds.push('url(storage/'+this.categories[2].image+')');
-			// this.backgrounds.push('url(storage/'+this.categories[3].image+')');
         }
     },
     mounted() {

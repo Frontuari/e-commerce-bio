@@ -1,6 +1,6 @@
 @extends('partials.base')
 
-@section('title','Registro')
+@section('title','Perfil')
 
 @section('body')
 
