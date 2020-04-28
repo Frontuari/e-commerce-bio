@@ -44,8 +44,29 @@
                 <div class="panel panel-bordered">
                     <div class="panel-body">
                         @if ($isServerSide)
-                            <form method="get" class="form-search">
+                            <form method="get" class="form-search"  id="formulario">
                                 <div id="search-input">
+                                <div class="col-md-3">
+                                    <?php
+                                    $ar=Array(100,200,300,500,1000,10000);
+                                    $listaOptions='<option>50</option>';
+                                    $selected='';
+                                    foreach($ar as $valor){
+                                        if(isset($_GET['show'])){
+                                            if($_GET['show']==$valor)
+                                                $selected='selected';
+                                            else
+                                                $selected='';
+                                        }
+                                        $listaOptions.='<option '.$selected.'>'.$valor.'</option>';
+                                    }
+                                    ?>
+                                    <span >Mostrar:</span>
+                                        <select  id="show-input" style="width:90px;" onchange="formulario.submit()" name="show">
+                                            <?php echo $listaOptions;?>
+                                        </select>
+                                    
+                                </div>
                                     <div class="col-2">
                                         <select id="search_key" name="key">
                                             @foreach($searchNames as $key => $name)
