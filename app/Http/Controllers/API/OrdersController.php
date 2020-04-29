@@ -26,8 +26,8 @@ class OrdersController extends BaseController
             FROM trackings 
             WHERE trackings.orders_id = orders.id
             order by created_at DESC Limit 1) AS namestatus"))
-            ->join("order_address","orders.order_address_id","=","order_address.id")
-            ->join("users","users.id","=","order_address.users_id")
+            ->leftJoin("order_address","orders.order_address_id","=","order_address.id")
+            ->join("users","users.id","=","orders.users_id")
             ->where("orders.users_id",$_SESSION["usuario"]["id"])
             ->get();
         }
@@ -100,7 +100,7 @@ class OrdersController extends BaseController
      */
     public function store(Request $r)
     {
-        $coin = Coins::where('status','A');
+        $coin = Coins::all();
         $tmp_rate = [];
         foreach($coin as $i => $c) {
             $tmp=[];
@@ -183,6 +183,7 @@ class OrdersController extends BaseController
         $Track->orders_id = $orden->id;
         $Track->orders_status_id = 1;
         $Track->users_id = $order->user_id;
+        $Track->save();
 
         $response = [];
         $response["order"] = $orden;

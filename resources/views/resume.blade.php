@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</section>
-	<resume :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></resume>
+	<resume :order="{{$order}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></resume>
 </main>
 <!-- CIERRE DEL MAIN-->
 @stop

@@ -21,6 +21,8 @@ Route::get('/profile','ProfileController@index')->name("profile");
 
 Route::get('/cart','CartController@index')->name("cart");
 
+Route::get('/resume/{id}','OrdersController@show')->name("cart");
+
 Route::get('/validateUser/{hash}','API\RegisterController@validateUser');
 
 // For SinglePages

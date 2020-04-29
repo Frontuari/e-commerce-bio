@@ -2,12 +2,12 @@
 	<section id="cart" class="cart">
 		<div class="container">
 			<div class="row">
-				<div  class="col-md-12 mx-0" v-if="cant_cart <= 0">
+				<div  class="col-md-12 mx-0" v-if="length_car <= 0">
 					<p class="cart-empty bio-info">Tu carrito está vacío.</p>
 					<a class="button" href="catalog">Volver a la tienda</a>
 				</div>
 
-				<div class="col-md-12 mx-0" v-if="cant_cart > 0">
+				<div class="col-md-12 mx-0" v-if="length_car > 0">
 					<div class="wizard">
 						<form class="wizard-form">
 							<ul class="progressbar">
@@ -54,10 +54,10 @@
 																<div class="product-quantity-group">
 																	<input id="quantity2" class="form-control" type="text" name="quantity" v-model="product_cart.cant">
 																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" @click="increaseValue(product_cart.cant,product_cart.product.id)">
+																		<button type="button" class="btn" @click="increaseValue(product_cart.cant,product_cart.product.id,index)">
 																			<img src="assets/img/increase.png" alt="Increase">
 																		</button>
-																		<button type="button" class="btn" @click="decreaseValue(product_cart.cant,product_cart.product.id)">
+																		<button type="button" class="btn" @click="decreaseValue(product_cart.cant,product_cart.product.id,index)">
 																			<img   src="assets/img/decrease.png" alt="decrease">
 																		</button>
 																	</div>
@@ -501,8 +501,7 @@
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
-															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit next action-button">CONFIRMAR PAGO</button>
-															<!-- <button type="button" @click="saveOrder()" name="next" class="btn btn-submit">CONFIRMAR PAGO</button> -->
+															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit">CONFIRMAR PAGO</button>
 														</div>
 													</div>
 												</div>
@@ -622,6 +621,7 @@
 		data() {
 			return {
 				cant_cart: 0,
+				length_car: 0,
 				products_cart:0,
 				total_cart:0,
 				datauser:[],
@@ -686,15 +686,7 @@
 				// formData.append("payment_img",this.payment_img);
 				axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
 					this.num_order = datos.data.data.order.id;
-
-					this.tmpOrder = {
-						num_order: this.num_order,
-						products:this.products_cart,
-						total:this.total_cart,
-						direction: this.selectedDirection,
-						direction_text: this.objDirection.urb+" "+this.objDirection.sector+" "+this.objDirection.nro_home+" "+this.objDirection.zip_code+" "+this.objDirection.reference_point,
-						status: "En Proceso"
-					};
+					window.location.href="/resume/"+this.num_order;
 				});
 
 			},
@@ -702,43 +694,54 @@
 			{
 				return typeof o == "object"
 			},
-			increaseValue(value,product_id)
+			increaseValue(value,product_id,index)
 			{
-				for(let i = 0; i<this.cant_cart; i++)
-				{
-					if(this.products_cart[i].product.id == product_id)
-					{
-						if(parseInt(value) < parseInt(this.products_cart[i].product.qty_avaliable))
+				// for(let i = 0; i<this.cant_cart; i++)
+				// {
+				// 	if(this.products_cart[i].product.id == product_id)
+				// 	{
+						if(parseInt(value) < parseInt(this.products_cart[index].product.qty_avaliable))
 						{
-							this.products_cart[i].cant = parseInt(this.products_cart[i].cant)+1;
+							this.products_cart[index].cant = parseInt(this.products_cart[index].cant)+1;
 						}
-					}
-				}
+				// 	}
+				// }
 				//actualizar el carro
 				window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
 				this.updateCartTotal();
-
+				this.getCartCant();
+            	
 			},
-			decreaseValue(value,product_id)
+			decreaseValue(value,product_id,index)
 			{
 				if(value>1)
 				{
-					for(let i = 0; i<this.cant_cart; i++)
-					{
-						if(this.products_cart[i].product.id == product_id)
-						{
-							this.products_cart[i].cant = parseInt(this.products_cart[i].cant)-1;
-						}
-					}
+					// for(let i = 0; i<this.cant_cart; i++)
+					// {
+					// 	if(this.products_cart[i].product.id == product_id)
+					// 	{
+							this.products_cart[index].cant = parseInt(this.products_cart[index].cant)-1;
+					// 	}
+					// }
 					//actualizar el carro
 					window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
 					this.updateCartTotal();
+					this.getCartCant();
 				}
 			},
+			getCartCant: function() {
+				let cart = JSON.parse(window.localStorage.getItem('cartNew'));
+		        let cant = 0;
+		        cart.forEach( (a) => {
+		            cant += a.cant
+		        });
+		        console.log("cant::> ",cant);
+		        EventBus.$emit("update_cantCart",cant);
+		    },
 			updateCartTotal()
 			{
 				this.total_cart = 0;
-				for(let i = 0; i<this.cant_cart; i++)
+				for(let i = 0; i<this.length_car; i++)
 				{
 					if(this.products_cart[i].product.discount>0)
 					{
@@ -775,26 +778,6 @@
 				this.paymentData[index].account = bank[0].bank_data_id;
 				this.paymentData[index].coin = bank[0].coins_id;
 				await Swal.fire(bank[0].name,bank[0].cuentas);
-
-				// var DatosCuentas=   Array;
-				// var DatosCuentasArr=   Array;
-				// var Mensaje     =   "";
-				// var i           =   0;
-
-				// for(i=0; i<banks.length;i++)
-				// {
-				// 	var a = 0;
-				// 	DatosCuentas=banks[i].cuentas.split("||");
-				// 	for(a=0; a<DatosCuentas.length ; a++)
-				// 	{
-				// 		DatosCuentasArr=DatosCuentas[a].split("/n");
-				// 		if (a==0)
-				// 			Mensaje+="<div><p><h4 class='order-number order-text'>"+banks[i].name+"</h4><br>";
-				// 		Mensaje+=DatosCuentasArr[0]+"<br><br>";
-				// 	}
-				// 	Mensaje+="</p></div>";
-				// }
-				
 			},
 		},
 		created() {
@@ -805,15 +788,18 @@
 		},
 		mounted()
 		{
+			const _this = this;
 			if( window.localStorage.getItem("cartNew") ){
-				this.cant_cart = JSON.parse(window.localStorage.getItem("cartNew")).length;
+				this.length_car = JSON.parse(window.localStorage.getItem("cartNew")).length;
 				this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
-				// console.log(this.products_cart);
+				JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {
+					_this.cant_cart += parseInt(a.cant);
+				});	
 			}else{
-				this.cant_cart = 0;
+				this.length_car = 0;
 			}
-			//For para sacar el total del carro de compras
-			for(let i = 0; i<this.cant_cart; i++)
+			
+			for(let i = 0; i<this.length_car; i++)
 			{
 				if(this.products_cart[i].product.discount>0)
 				{
