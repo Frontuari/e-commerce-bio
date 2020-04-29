@@ -118,4 +118,8 @@ class HomeController extends Controller
             "footer"=>$footer
         ]);
     }
+
+    public function join() {
+        return view("register");
+    }
 }
