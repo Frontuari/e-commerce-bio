@@ -43,22 +43,6 @@ class RolesTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 6,
-                'name' => 'logistico',
-                'display_name' => 'Logistico',
-                'created_at' => '2020-04-29 18:27:06',
-                'updated_at' => '2020-04-29 18:27:06',
-            ),
-            4 => 
-            array (
-                'id' => 7,
-                'name' => 'financiero',
-                'display_name' => 'Fiananciero',
-                'created_at' => '2020-04-29 18:29:15',
-                'updated_at' => '2020-04-29 18:29:15',
-            ),
-            5 => 
-            array (
                 'id' => 1,
                 'name' => 'super',
                 'display_name' => 'Sistemas',
