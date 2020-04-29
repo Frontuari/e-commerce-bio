@@ -688,8 +688,13 @@
 						direction_text: order.address+" "+order.sector+" "+order.nro_home+" "+order.zip_code+" "+order.reference_point,
 						status: order.namestatus
 					};
-					console.log("tmpOrder::> ",this.tmpOrder)
-					this.currency_rate = Number(order.currency_rate);
+					const rate_json = JSON.parse(order.rate_json);
+					rate_json.forEach( a => {
+						if(a.id == 1) {
+							this.currency_rate = Number(a.rate);
+						}
+					});
+					
 				})
 			},
             getFavorites: async function () {

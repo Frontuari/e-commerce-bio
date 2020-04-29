@@ -5469,8 +5469,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     direction_text: order.address + " " + order.sector + " " + order.nro_home + " " + order.zip_code + " " + order.reference_point,
                     status: order.namestatus
                   };
-                  console.log("tmpOrder::> ", _this2.tmpOrder);
-                  _this2.currency_rate = Number(order.currency_rate);
+                  var rate_json = JSON.parse(order.rate_json);
+                  rate_json.forEach(function (a) {
+                    if (a.id == 1) {
+                      _this2.currency_rate = Number(a.rate);
+                    }
+                  });
                 });
 
               case 1:
@@ -79810,7 +79814,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-12" }, [
                   _c("h3", { staticClass: "order-number order-text" }, [
-                    _vm._v("Orden #" + _vm._s(_vm.order.num_order))
+                    _vm._v("Orden #" + _vm._s(_vm.order.id))
                   ]),
                   _vm._v(" "),
                   _c(
@@ -79842,17 +79846,18 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _vm._m(1),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-12 col-md-6" }, [
+                      _c("div", { staticClass: "col-12 col-md-8" }, [
                         _c("h3", { staticClass: "order-text" }, [
                           _vm._v(
-                            "Bs " +
-                              _vm._s(_vm._f("FormatNumber")(_vm.order.total)) +
-                              "  / $ " +
+                            "$ " +
                               _vm._s(
                                 _vm._f("FormatDolar")(
                                   _vm.order.total / _vm.tasadolar
                                 )
-                              )
+                              ) +
+                              " / " +
+                              _vm._s(_vm._f("FormatNumber")(_vm.order.total)) +
+                              " Bs "
                           )
                         ])
                       ])
@@ -79922,7 +79927,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-6" }, [
+    return _c("div", { staticClass: "col-12 col-md-4" }, [
       _c("h3", { staticClass: "order-text" }, [_vm._v("Costo Total")])
     ])
   }
