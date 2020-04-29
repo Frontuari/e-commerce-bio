@@ -379,24 +379,6 @@ class DataTypesTableSeeder extends Seeder
             ),
             20 => 
             array (
-                'id' => 12,
-                'name' => 'peoples',
-                'slug' => 'peoples',
-                'display_name_singular' => 'Dato personal',
-                'display_name_plural' => 'Datos personales',
-                'icon' => NULL,
-                'model_name' => 'App\\People',
-                'description' => NULL,
-                'generate_permissions' => true,
-                'created_at' => '2020-01-24 13:31:04',
-                'updated_at' => '2020-04-15 01:04:39',
-                'server_side' => 1,
-                'controller' => NULL,
-                'policy_name' => NULL,
-                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"rif","scope":null}',
-            ),
-            21 => 
-            array (
                 'id' => 28,
                 'name' => 'sub_categories',
                 'slug' => 'sub-categories',
@@ -413,7 +395,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":"position","order_display_column":"name","order_direction":"desc","default_search_key":null,"scope":null}',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 1,
                 'name' => 'users',
@@ -431,7 +413,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"desc","default_search_key":null,"scope":null}',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 53,
                 'name' => 'orders_status',
@@ -449,7 +431,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 43,
                 'name' => 'advs',
@@ -467,7 +449,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 54,
                 'name' => 'trackings',
@@ -485,7 +467,7 @@ class DataTypesTableSeeder extends Seeder
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"orders_id","scope":null}',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 57,
                 'name' => 'pages',
@@ -502,6 +484,24 @@ class DataTypesTableSeeder extends Seeder
                 'controller' => NULL,
                 'policy_name' => NULL,
                 'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+            ),
+            26 => 
+            array (
+                'id' => 12,
+                'name' => 'peoples',
+                'slug' => 'peoples',
+                'display_name_singular' => 'Dato personal',
+                'display_name_plural' => 'Datos personales',
+                'icon' => NULL,
+                'model_name' => 'App\\People',
+                'description' => NULL,
+                'generate_permissions' => true,
+                'created_at' => '2020-01-24 13:31:04',
+                'updated_at' => '2020-04-29 19:14:42',
+                'server_side' => 1,
+                'controller' => NULL,
+                'policy_name' => NULL,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":"rif","scope":null}',
             ),
             27 => 
             array (
