@@ -71,6 +71,9 @@
 					</div>
 					<div class="col-md-2">
 						<ul class="social-icons">
+							<li><a href="#">
+								<img src="{{ asset('assets/img/social_icons.png') }}">
+							</a></li>
 						</ul>
 					</div>
 				</div>

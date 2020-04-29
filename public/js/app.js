@@ -79420,7 +79420,7 @@ var render = function() {
                       _c("a", { attrs: { href: "/profile" } }, [
                         _c("img", {
                           attrs: {
-                            src: "/assets/img/perfil-bio.png",
+                            src: "/assets/img/icono-perfil-bio.png",
                             alt: "User"
                           }
                         }),
@@ -79444,7 +79444,7 @@ var render = function() {
                         },
                         [
                           _c("img", {
-                            attrs: { src: "/assets/img/cerrar-sesion-bio.svg" }
+                            attrs: { src: "/assets/img/icono-salir-bio.png" }
                           })
                         ]
                       )
@@ -102016,8 +102016,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

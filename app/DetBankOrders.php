@@ -11,6 +11,7 @@ class DetBankOrders extends Model
     {
         parent::__construct($attributes);
         $this->perPage = request()->input('show') ?? 50;
+       // exit(request()->input('s')."dd");
     }
     public function getAmountAttribute($value){
         $fg= new FuncionesGenerales;
