@@ -1360,7 +1360,7 @@ return hexdec( substr(sha1($data), 0, 5) );
 }
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
-        $no_image[0]='products/imagenNoDisponible.png';
+        $no_image[0]='imagenNoDisponible.png';
         if($value['image']==null) $value['image']=json_encode($no_image);
         $img=json_decode($value['image']);
         if(is_array($img)){
