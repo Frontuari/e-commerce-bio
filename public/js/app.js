@@ -3091,7 +3091,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _ModalCombo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalCombo.vue */ "./resources/js/components/ModalCombo.vue");
+/* harmony import */ var _ModalProducto_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalProducto.vue */ "./resources/js/components/ModalProducto.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3227,7 +3227,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     tasadolar: Number
   },
   components: {
-    ModalCombo: _ModalCombo_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ModalProducto: _ModalProducto_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   methods: {
     getProduct: function () {
@@ -3618,6 +3618,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     search: function search() {
+      var route = "/catalog?search=" + this.searchText;
+      window.location.href = route;
+      event.preventDefault();
+    },
+    goToCatalog: function goToCatalog(text) {
       var route = "/catalog?search=" + this.searchText;
       window.location.href = route;
       event.preventDefault();
@@ -5614,6 +5619,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context4.sent;
                 this.orders = response.data.data;
+                console.log("orders::> ", this.orders);
                 this.completos = this.orders.filter(function (lista) {
                   return lista.namestatus == "Entregado";
                 });
@@ -5621,7 +5627,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return lista.namestatus != "Entregado";
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context4.stop();
             }
@@ -78421,7 +78427,7 @@ var render = function() {
                                     attrs: {
                                       type: "button",
                                       "data-toggle": "modal",
-                                      "data-target": "#ModalProdCombo"
+                                      "data-target": "#ModalProd"
                                     },
                                     on: {
                                       click: function($event) {
@@ -78555,7 +78561,9 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("ModalCombo", { attrs: { combo: _vm.combo } })
+      _c("ModalProducto", {
+        attrs: { tasadolar: _vm.tasadolar, product: _vm.combo }
+      })
     ],
     1
   )
@@ -78870,21 +78878,32 @@ var render = function() {
                       _c(
                         "ol",
                         _vm._l(_vm.searched, function(ser) {
-                          return _c("li", { key: ser.id }, [
-                            _c("img", {
-                              style: { width: "6%" },
-                              attrs: {
-                                src: _vm._f("MediumImage")(
-                                  "storage/" + ser.photo
-                                )
+                          return _c(
+                            "li",
+                            {
+                              key: ser.id,
+                              on: {
+                                click: function($event) {
+                                  return _vm.goToCatalog(ser.name)
+                                }
                               }
-                            }),
-                            _vm._v(
-                              "\n\t\t\t\t\t\t\t\t\t\t" +
-                                _vm._s(ser.name) +
-                                "\n\t\t\t\t\t\t\t\t\t"
-                            )
-                          ])
+                            },
+                            [
+                              _c("img", {
+                                style: { width: "6%" },
+                                attrs: {
+                                  src: _vm._f("MediumImage")(
+                                    "storage/" + ser.photo
+                                  )
+                                }
+                              }),
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\t\t" +
+                                  _vm._s(ser.name) +
+                                  "\n\t\t\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
                         }),
                         0
                       )
@@ -84877,7 +84896,42 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._m(36, true),
+                                          _c(
+                                            "div",
+                                            { staticClass: "col-6 col-lg-16" },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass: "btn",
+                                                  attrs: {
+                                                    type: "button",
+                                                    "data-toggle": "tooltip",
+                                                    "data-placement": "bottom",
+                                                    title:
+                                                      "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass: "order-span"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "Dirección de entrega"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(
+                                                    _vm._s(order.address) +
+                                                      "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
                                           _vm._v(" "),
                                           _c(
                                             "div",
@@ -84981,7 +85035,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "order-table" },
                                   [
-                                    _vm._m(37),
+                                    _vm._m(36),
                                     _vm._v(" "),
                                     _vm._l(_vm.en_proceso, function(order) {
                                       return _c(
@@ -85040,7 +85094,7 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._m(38, true),
+                                          _vm._m(37, true),
                                           _vm._v(" "),
                                           _c(
                                             "div",
@@ -85113,7 +85167,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "order-table" },
                                   [
-                                    _vm._m(39),
+                                    _vm._m(38),
                                     _vm._v(" "),
                                     _vm._l(_vm.completos, function(order) {
                                       return _c(
@@ -85172,7 +85226,7 @@ var render = function() {
                                             ]
                                           ),
                                           _vm._v(" "),
-                                          _vm._m(40, true),
+                                          _vm._m(39, true),
                                           _vm._v(" "),
                                           _c(
                                             "div",
@@ -85245,7 +85299,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(41),
+                        _vm._m(40),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -86946,32 +87000,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-6 col-lg-16" }, [_vm._v("Repetir")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 col-lg-16" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: {
-            type: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "bottom",
-            title:
-              "Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)"
-          }
-        },
-        [
-          _c("span", { staticClass: "order-span" }, [
-            _vm._v("Dirección de entrega")
-          ]),
-          _vm._v("Mi casa\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t")
-        ]
-      )
     ])
   },
   function() {

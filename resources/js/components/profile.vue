@@ -316,7 +316,7 @@
 													<div class="col-6 col-lg-16"><span class="order-span">Fecha</span>{{order.created_at}}</div>
 													<div class="col-6 col-lg-16">
 														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
-															<span class="order-span">Dirección de entrega</span>Mi casa
+															<span class="order-span">Dirección de entrega</span>{{order.address}}
 														</button>
 													</div>
 													<div class="col-6 col-lg-16"><span class="order-span">Fecha de entrega</span>{{order.delivery_time_date}}</div>
@@ -770,6 +770,7 @@
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
 				this.orders = response.data.data;
+				console.log("orders::> ",this.orders);
 
 				this.completos = this.orders.filter( lista => {
 					return lista.namestatus == "Entregado"
