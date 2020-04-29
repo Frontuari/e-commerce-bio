@@ -176,10 +176,12 @@ class Collection implements ArrayAccess, Enumerable
 
                 return $this->first($key, $placeholder) !== $placeholder;
             }
-
+//exit();
             return in_array($key, $this->items);
         }
+       // print_r($this->contains($this->operatorForWhere(...func_get_args())));
 
+      // exit("dd");
         return $this->contains($this->operatorForWhere(...func_get_args()));
     }
 
