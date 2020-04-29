@@ -79300,7 +79300,7 @@ var render = function() {
                       _c("a", { attrs: { href: "/profile" } }, [
                         _c("img", {
                           attrs: {
-                            src: "/assets/img/perfil-bio.png",
+                            src: "/assets/img/icono-perfil-bio.png",
                             alt: "User"
                           }
                         }),
@@ -79324,7 +79324,7 @@ var render = function() {
                         },
                         [
                           _c("img", {
-                            attrs: { src: "/assets/img/cerrar-sesion-bio.svg" }
+                            attrs: { src: "/assets/img/icono-salir-bio.png" }
                           })
                         ]
                       )

@@ -80,9 +80,9 @@
 							<!-- no loggeado -->
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged">
-								<a href="/profile"><img src="/assets/img/perfil-bio.png" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="/profile"><img src="/assets/img/icono-perfil-bio.png" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
-									<img src="/assets/img/cerrar-sesion-bio.svg">
+									<img src="/assets/img/icono-salir-bio.png">
 								</a>
 							</li>
 							<!-- loggeado -->
@@ -96,7 +96,7 @@
 							</li>
 
 							<!-- loggeado -->
-							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="/assets/img/cerrar-sesion-bio.svg"></a></li>-->
+							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="/assets/img/icono-salir-bio.png"></a></li>-->
 							<!-- loggeado -->
 						</ul>
 
@@ -126,7 +126,7 @@
 							<!-- loggeado -->
 							<!--<div class="top-info-nav">
 								<div class="top-info-log">
-									<a href="#"><img src="/assets/img/perfil-bio.svg" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
+									<a href="#"><img src="/assets/img/icono-perfil-bio.png" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
 									<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 									<a href="#" class="logout"><img src="/assets/img/cerrar-sesion-bio.svg"></a>
 								</div>
