@@ -44,6 +44,9 @@
                             <div class="product-prices" v-if="product.impuesto > 0">
                                 <p>IVA INCLUIDO</p>
                             </div>
+                            <div class="product-prices" v-if="!product.impuesto">
+                                <p>EXCENTO DE IVA</p>
+                            </div>
                             <div class="product-prices" v-if="product.impuesto > 0">
                                 <p> ${{ (product.calculado / tasadolar) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
                             </div>
@@ -115,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <ModalProducto :product="oneproduct"></ModalProducto>
+        <ModalProducto :tasadolar="tasadolar" :product="oneproduct"></ModalProducto>
     </div>
 </template>
 <script>

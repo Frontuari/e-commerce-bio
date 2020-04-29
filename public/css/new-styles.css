@@ -30,3 +30,17 @@ section#offers{
 div#mainNavbar{
 	margin-bottom: 20px !important;
 }
+
+section#combos{
+	height: 500px !important;
+}
+
+ul.social-icons{
+	list-style: none !important;
+}
+
+ul.social-icons li a.social-icons-link{
+	background: url("/assets/img/Iconos-04.png") no-repeat;
+	padding: 20px !important;
+	background-position: 30px 30px !important;
+}

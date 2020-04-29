@@ -7,7 +7,11 @@ use App\FuncionesGenerales;
 
 class Products extends Model
 {
-
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = request()->input('show') ?? 50;
+    }
     public function setPriceAttribute($value)
     {
         $fg= new FuncionesGenerales;

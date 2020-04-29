@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetBankOrders extends Model
 {
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = request()->input('show') ?? 50;
+    }
     public function getAmountAttribute($value){
         $fg= new FuncionesGenerales;
         return $fg->get_formato_moneda($value);
