@@ -42,6 +42,9 @@
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
+								<div class="product-prices" v-if="!product_recent.impuesto">
+									<p>EXCENTO DE IVA</p>
+								</div>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p> ${{ (product_recent.calculado / tasadolar) | FormatDolar}} / Bs {{ product_recent.calculado | FormatNumber }}</p>
 								</div>
@@ -74,6 +77,9 @@
 								<!-- <span class="product-info">500 g</span> -->
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="!product_sold.impuesto">
+									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p> ${{ (product_sold.calculado / tasadolar) | FormatDolar}} / Bs {{ product_sold.calculado | FormatNumber }}</p>
@@ -108,6 +114,9 @@
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
+								<div class="product-prices" v-if="!product_view.impuesto">
+									<p>EXCENTO DE IVA</p>
+								</div>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p> ${{ (product_view.calculado / tasadolar) | FormatDolar}} / Bs {{ product_view.calculado | FormatNumber }}</p>
 								</div>
@@ -140,6 +149,9 @@
 								<!-- <span class="product-info">500 g</span> -->
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>IVA INCLUIDO</p>
+								</div>
+								<div class="product-prices" v-if="!product_best.impuesto">
+									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p> ${{ (product_best.calculado / tasadolar) | FormatDolar}} / Bs {{ product_best.calculado | FormatNumber }}</p>

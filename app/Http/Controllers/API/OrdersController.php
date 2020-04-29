@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Orders;
 use App\OrderProducts;
 use App\BankOrder;
+use App\Trackings;
+use App\Coins;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +22,7 @@ class OrdersController extends BaseController
         $a=Orders::get();
         if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])) {
             $a = DB::table('orders')
-            ->select("orders.*",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
+            ->select("orders.*","order_address.address",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
             FROM trackings 
             WHERE trackings.orders_id = orders.id
             order by created_at DESC Limit 1) AS namestatus"))
@@ -98,6 +100,18 @@ class OrdersController extends BaseController
      */
     public function store(Request $r)
     {
+        $coin = Coins::where('status','A');
+        $tmp_rate = [];
+        foreach($coin as $i => $c) {
+            $tmp=[];
+            $tmp["id"] = $c->id;
+            $tmp["name"] = $c->name;
+            $tmp["symbol"] = $c->symbol;
+            $tmp["rate"] = $c->rate;
+            array_push($tmp_rate,$tmp);
+        }
+        $rate_json = json_encode($tmp_rate);
+
         $orden = new Orders;
         
         $datum = $r->all();
@@ -111,11 +125,16 @@ class OrdersController extends BaseController
         $orden->total_tax = 0;
         $orden->total_packaging = 0;
         $orden->total_transport = 0;
-        if($order->direction == 0 )
+        $orden->rate_json = $rate_json;
+        if($order->direction == 0 ) {
+            $orden->transports_id = 1;
             $orden->order_address_id = NULL;
-        else
+        }
+        else{
+            $orden->transports_id = 2;
             $orden->order_address_id = $order->direction;
-        $orden->transports_id = 1;
+        }
+        
         $orden->user_rating = 0;
         $orden->delivery_time_date = date("Y-m-d H:i:s",strtotime("+2 hours"));
         $orden->discount = 0;
@@ -125,7 +144,6 @@ class OrdersController extends BaseController
         $orden->currency_rate = 0;
         $orden->opinion = '';
         $orden->coins_id = 1;
-        $orden->rate_json = NULL;
         // $orden->image = "/".$destinationPath."/".$image->getClientOriginalName();
 
         $orden->save();
@@ -160,6 +178,12 @@ class OrdersController extends BaseController
         }
 
         // $image->move($destinationPath,$image->getClientOriginalName());
+        $Track = new Trackings;
+        $Track->description="";
+        $Track->orders_id = $orden->id;
+        $Track->orders_status_id = 1;
+        $Track->users_id = $order->user_id;
+
         $response = [];
         $response["order"] = $orden;
         $response["pagos"] = $pagosReturn;
@@ -177,7 +201,7 @@ class OrdersController extends BaseController
     {
         $response = [];
         $a = DB::table('orders')
-        ->select("orders.*","order_address.*",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
+        ->select("orders.*","order_address.address","order_address.zip_code","order_address.urb","order_address.sector","order_address.nro_home","order_address.reference_point",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
         FROM trackings 
         WHERE trackings.orders_id = orders.id
         order by created_at DESC Limit 1) AS namestatus"))

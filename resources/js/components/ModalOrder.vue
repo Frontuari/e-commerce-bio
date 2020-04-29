@@ -6,7 +6,7 @@
 					<div class="order-block">
 						<div class="row">
 							<div class="col-lg-12">
-								<h3 class="order-number order-text">Orden #{{order.num_order}}</h3>
+								<h3 class="order-number order-text">Orden #{{order.id}}</h3>
 								<div class="order-description">
 									<div class="row">
 										<div class="col-6"><label class="order-text">Detalles de la orden</label></div>
@@ -19,8 +19,8 @@
 								</div>
 								<div class="order-total">
 									<div class="row">
-										<div class="col-12 col-md-6"><h3 class="order-text">Costo Total</h3></div>
-										<div class="col-12 col-md-6"><h3 class="order-text">Bs {{order.total | FormatNumber}}  / $ {{ (order.total / tasadolar) | FormatDolar}}</h3></div>
+										<div class="col-12 col-md-4"><h3 class="order-text">Costo Total</h3></div>
+										<div class="col-12 col-md-8"><h3 class="order-text">$ {{ (order.total / tasadolar) | FormatDolar}} / {{order.total | FormatNumber}} Bs </h3></div>
 									</div>
 								</div>
 								<label class="order-text">Dirección de envio</label>

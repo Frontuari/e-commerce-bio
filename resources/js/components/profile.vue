@@ -14,7 +14,7 @@
 						</div>
 						<div class="profile-info">
 							<h2 class="profile-title">{{userData.name}}</h2>
-							<p class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
+							<!-- <p class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p> -->
 						</div>
 					</div>
 				</div>
@@ -316,7 +316,7 @@
 													<div class="col-6 col-lg-16"><span class="order-span">Fecha</span>{{order.created_at}}</div>
 													<div class="col-6 col-lg-16">
 														<button class="btn" type="button" data-toggle="tooltip" data-placement="bottom" title="Urb Zaragoza, Avenida 1 entre calles 10 y 11, casa 57, Araure, Estado Portugesa 3303 (al lado del bodegón Girasol)">
-															<span class="order-span">Dirección de entrega</span>Mi casa
+															<span class="order-span">Dirección de entrega</span>{{order.address}}
 														</button>
 													</div>
 													<div class="col-6 col-lg-16"><span class="order-span">Fecha de entrega</span>{{order.delivery_time_date}}</div>
@@ -469,16 +469,27 @@
 											                            </button>
 											                        </div>
 											                    </div>
-											                    <div class="product-content">
-																	<a href="#" class="product-title">{{favorite.product_name}}</a> 
+											                   <div class="product-content" >
+																	<a href="#" class="product-title">{{ favorite.name }}</a>
 																	<!-- <span class="product-info">500 g</span> -->
-											                        <div class="product-prices">
-											                            <p>{{favorite.price / tasadolar | FormatDolar}} / Bs {{favorite.price | FormatNumber }}</p>
-											                        </div>
-											                    </div>
-											                    <div class="product-add"><span class="product-info">Disponibles: <b>{{favorite.qty_avaliable}} en Stock</b></span>
+
+																	<div class="product-prices" v-if="favorite.impuesto > 0">
+																		<p>IVA INCLUIDO</p>
+																	</div>
+																	<div class="product-prices" v-if="favorite.impuesto > 0">
+																		<p> ${{ (favorite.calculado / tasadolar) | FormatDolar}} / Bs {{ favorite.calculado | FormatNumber }}</p>
+																	</div>
+																	<div class="product-prices" v-if="!favorite.impuesto">
+																		<p> ${{ (favorite.price / tasadolar) | FormatDolar}} / Bs {{ favorite.price | FormatNumber }}</p>
+																	</div>
+																</div>
+											                    <div class="product-add">
+																	
+																	<span class="product-info" v-if="favorite.qty_avaliable > 0">Disponibles: <b>{{favorite.qty_avaliable}} en Stock</b></span>
+                            										<span class="product-info" v-else>Producto<b> Agotado!</b></span>
+
 											                        <form action="">
-											                            <div class="product-quantity">
+											                            <div class="product-quantity" v-if="favorite.qty_avaliable > 0">
 											                                <label>Cantidad</label>
 											                                <div class="product-quantity-group">
 											                                    <input :class="'cantidad_'+favorite.id" type="text" name="quantity" value="1" class="form-control" v-model="cant_product[favorite.id]">
@@ -489,7 +500,7 @@
 											                                </div>
 											                            </div>
 											                            <div class="product-buttons">
-											                                <button type="button" class="btn btn-addcart-outline" @click="addToCart(favorite,cant_product[favorite.id])">
+											                                <button type="button" class="btn btn-addcart-outline" @click="addToCart(favorite,cant_product[favorite.id])" v-if="favorite.qty_avaliable > 0">
 											                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15">
 											                                        <title>añadir-carrito-bio</title>
 											                                        <g id="Capa_2" data-name="Capa 2">
@@ -677,8 +688,13 @@
 						direction_text: order.address+" "+order.sector+" "+order.nro_home+" "+order.zip_code+" "+order.reference_point,
 						status: order.namestatus
 					};
-					console.log("tmpOrder::> ",this.tmpOrder)
-					this.currency_rate = Number(order.currency_rate);
+					const rate_json = JSON.parse(order.rate_json);
+					rate_json.forEach( a => {
+						if(a.id == 1) {
+							this.currency_rate = Number(a.rate);
+						}
+					});
+					
 				})
 			},
             getFavorites: async function () {
@@ -759,6 +775,7 @@
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
 				this.orders = response.data.data;
+				console.log("orders::> ",this.orders);
 
 				this.completos = this.orders.filter( lista => {
 					return lista.namestatus == "Entregado"
@@ -946,7 +963,7 @@
 		},
 		created() {
 			this.userData = this.userlogged;
-			for(let i = 0;i<100;i++) {
+			for(let i = 0;i<2000;i++) {
                 this.cant_product[i] = 1;
             }
 		}

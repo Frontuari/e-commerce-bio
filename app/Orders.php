@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\FuncionesGenerales;
 class Orders extends Model
 {
-
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->perPage = request()->input('show') ?? 50;
+    }
     public function getTotaltaxAttribute($value)
     {
         $fg= new FuncionesGenerales;
