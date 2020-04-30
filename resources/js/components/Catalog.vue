@@ -69,12 +69,12 @@
 							</div>
 							<div class="filter filter-tags">
 								<h4>Por Etiquetas</h4>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Enlatados</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Pastas</span>
+								<span v-for="(t,index) in tags" :key="t" class="hashtag" @click="putToggle($event,index)">#{{t}}</span>
+								<!-- <span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Pastas</span>
 								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Harinas</span>
 								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Arroz</span>
 								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Salsas</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Aceites</span>
+								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Aceites</span> -->
 							</div>
 						</div>
 					</div>
@@ -152,6 +152,7 @@
 				cat: 0,
 				search: '',
 				sParam: '',
+				selectedTags:'',
 				products: {},
 				filterP: [],
 				limitP: 50,
@@ -169,12 +170,16 @@
         },
 		props: {
 			userlogged: Object,
-			tasadolar: Number
+			tasadolar: Number,
+			tags: Object
 		},
         methods: {
 			filterProducts: async function() {
 				const response = await axios.get(URLSERVER+'api/products?'+this.filtros);
 				this.products = response.data.data;
+			},
+			putToggle(event) {
+				event.target.classList.toggle('hashtag_active')
 			},
 			pageclick(value) {
 				this.page = value;
@@ -206,7 +211,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam;
+				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+"&tags="+this.selectedTags;
 			}
 		},
 		created: function() {

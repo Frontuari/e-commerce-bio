@@ -686,6 +686,8 @@
 				// formData.append("payment_img",this.payment_img);
 				axios.post( "/api/orders", formData, { headers: {'Content-Type': 'multipart/form-data'}}).then( datos => {
 					this.num_order = datos.data.data.order.id;
+					window.localStorage.setItem("cartNew",[]);
+					EventBus.$emit("update_cantCart",0);
 					window.location.href="/resume/"+this.num_order;
 				});
 
@@ -735,7 +737,6 @@
 		        cart.forEach( (a) => {
 		            cant += a.cant
 		        });
-		        console.log("cant::> ",cant);
 		        EventBus.$emit("update_cantCart",cant);
 		    },
 			updateCartTotal()

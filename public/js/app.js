@@ -2713,6 +2713,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }).then(function (datos) {
         _this3.num_order = datos.data.data.order.id;
+        window.localStorage.setItem("cartNew", []);
+        EventBus.$emit("update_cantCart", 0);
         window.location.href = "/resume/" + _this3.num_order;
       });
     },
@@ -2756,7 +2758,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cart.forEach(function (a) {
         cant += a.cant;
       });
-      console.log("cant::> ", cant);
       EventBus.$emit("update_cantCart", cant);
     },
     updateCartTotal: function updateCartTotal() {
@@ -3063,6 +3064,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cat: 0,
       search: '',
       sParam: '',
+      selectedTags: '',
       products: {},
       filterP: [],
       limitP: 50,
@@ -3079,7 +3081,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   props: {
     userlogged: Object,
-    tasadolar: Number
+    tasadolar: Number,
+    tags: Object
   },
   methods: {
     filterProducts: function () {
@@ -3110,6 +3113,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return filterProducts;
     }(),
+    putToggle: function putToggle(event) {
+      event.target.classList.toggle('hashtag_active');
+    },
     pageclick: function pageclick(value) {
       this.page = value;
     },
@@ -3136,7 +3142,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     filtros: function filtros() {
-      return this.filterP.join("&") + "&cat=" + this.cat + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price + "&page=" + this.page + this.sParam;
+      return this.filterP.join("&") + "&cat=" + this.cat + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price + "&page=" + this.page + this.sParam + "&tags=" + this.selectedTags;
     }
   },
   created: function created() {// this.getDebounceProducts = _.debounce(this.filterProducts,100);
@@ -77642,99 +77648,30 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "filter filter-tags" }, [
-                    _c("h4", [_vm._v("Por Etiquetas")]),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Enlatados")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Pastas")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Harinas")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Arroz")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Salsas")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "hashtag",
-                        on: {
-                          click: function($event) {
-                            return $event.target.classList.toggle(
-                              "hashtag_active"
-                            )
-                          }
-                        }
-                      },
-                      [_vm._v("#Aceites")]
-                    )
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "filter filter-tags" },
+                    [
+                      _c("h4", [_vm._v("Por Etiquetas")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.tags, function(t, index) {
+                        return _c(
+                          "span",
+                          {
+                            key: t,
+                            staticClass: "hashtag",
+                            on: {
+                              click: function($event) {
+                                return _vm.putToggle($event, index)
+                              }
+                            }
+                          },
+                          [_vm._v("#" + _vm._s(t))]
+                        )
+                      })
+                    ],
+                    2
+                  )
                 ]
               )
             ]),
@@ -79462,7 +79399,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("a", { attrs: { href: "cart" } }, [
+                    _c("a", { attrs: { href: "/cart" } }, [
                       _c("img", {
                         attrs: {
                           src: "/assets/img/carrito-de-compras-bio.png",
@@ -79487,7 +79424,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("a", { attrs: { href: "profile?tab=my-favorites" } }, [
+                    _c("a", { attrs: { href: "/profile?tab=my-favorites" } }, [
                       _c("img", {
                         attrs: {
                           src: "/assets/img/favoritos-bio.png",

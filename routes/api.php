@@ -33,6 +33,7 @@ Route::resource('categories', 'API\CategoryController');
 //PRODUCTS
 // Route::resource('products', 'API\ProductController');
 Route::resource('products', 'API\ProductController');
+Route::get('products/get/tags', 'API\ProductController@getTags');
 Route::get('products/search/{name}','API\ProductController@search')->name("search_like");
 Route::get('products/most/viewed','API\ProductController@most_viewed')->name("most_viewed");
 Route::get('products/most/recent','API\ProductController@most_recent')->name("most_recent");

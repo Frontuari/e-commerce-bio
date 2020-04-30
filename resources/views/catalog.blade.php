@@ -8,5 +8,5 @@
 			</div>
 		</div>
 	</div>
-	<catalog :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></catalog>
+	<catalog :tags="{{ $tags }}" :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></catalog>
 @stop

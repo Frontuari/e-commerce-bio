@@ -88,11 +88,11 @@
 							<!-- loggeado -->
 							
 							<li id="nav-cart" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver el carrito">
-								<a href="cart"><img src="/assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
+								<a href="/cart"><img src="/assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
 							</li>
 
 							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
-								<a href="profile?tab=my-favorites"><img src="/assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
+								<a href="/profile?tab=my-favorites"><img src="/assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</li>
 
 							<!-- loggeado -->
