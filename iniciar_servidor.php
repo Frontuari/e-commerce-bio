@@ -9,7 +9,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.1.102";
+$ip="http://192.168.42.75";
 
 
 $activar_productos=true;
@@ -144,11 +144,12 @@ function actualizarProductos($ip){
 		$tienda=crearArreglo($arr);
 		
 		if(is_array($arr)){
-			
+			$todoProducto=array(); //para inactivar o activar lo que exista o no exista
 			q("BEGIN");
 			foreach($data->item as $obj){
 
 				if($obj->ad_org_id==1000004){
+					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
 				
 					if($obj->sugerido<0){
 						$obj->sugerido=0;
@@ -159,7 +160,7 @@ function actualizarProductos($ip){
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
-					
+				
 					
 					if(!is_array($arr_ca)) {
 						$name_ca=explode("-",$obj->Nivel3)[1];
@@ -221,8 +222,6 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 
 
 
-
-//-----------------------------------------
 
 					//echo $obj->ad_org_id." $obj->organizacion $obj->sku $obj->sugerido\n";
 					//echo $obj->sku."\n";
@@ -301,6 +300,35 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 
 
 			}
+
+//ACTIVAR O DESACTIVAR PRODUCTOS-----
+
+
+	$arr=q("SELECT sku,status FROM products");
+	if(is_array($arr)){
+		foreach($arr as $ob){
+			
+			$sku=$ob['sku'];
+			$status=$ob['status'];
+			//print_r($todoProducto); exit();
+			//echo $todoProducto['sku_idempiere'][$sku]."\n";
+			//echo "existe: ".$todoProducto['sku_idempiere'][$sku]." status: ".$status."\n";
+			if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
+				q("UPDATE products SET status='A' WHERE sku='$sku'");
+			}elseif(!$todoProducto['sku_idempiere'][$sku]){
+				q("UPDATE products SET status='I' WHERE sku='$sku'");
+			}
+		}
+	}
+
+//-----------------
+
+
+
+
+
+
+
 			if($malo){
 				q("ROLLBACK");
 			}else{
