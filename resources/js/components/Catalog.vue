@@ -173,6 +173,8 @@
 				this.selectedTags = tmp.join(" ");
 				if(!!this.selectedTags) {
 					this.fTags = "&tags="+this.selectedTags;
+				}else {
+					this.fTags = '';
 				}
 			},
 			pageclick(value) {

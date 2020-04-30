@@ -3109,6 +3109,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (!!this.selectedTags) {
         this.fTags = "&tags=" + this.selectedTags;
+      } else {
+        this.fTags = '';
       }
     },
     pageclick: function pageclick(value) {
