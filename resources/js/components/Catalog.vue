@@ -69,24 +69,13 @@
 							</div>
 							<div class="filter filter-tags">
 								<h4>Por Etiquetas</h4>
-								<span v-for="(t,index) in tags" :key="t" class="hashtag" @click="putToggle($event,index)">#{{t}}</span>
-								<!-- <span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Pastas</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Harinas</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Arroz</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Salsas</span>
-								<span class="hashtag" @click="$event.target.classList.toggle('hashtag_active')">#Aceites</span> -->
+								<span v-for="(t,index) in tags" :key="t" class="hashtag" @click="putToggle($event,index)">{{t}}</span>
 							</div>
 						</div>
 					</div>
 					<div class="bio-ads">
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/puntos-bio-mercados.jpg"></a>
-						</div>
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>
-						</div>
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/puntos-bio-mercados.jpg"></a>
+						<div class="ad-box" v-for="a in ads">
+							<a :href="a.url"><img :src="'storage/'+a.image"></a>
 						</div>
 					</div>
 				</div>
@@ -127,15 +116,10 @@
 					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
 
 					<div class="bio-ads">
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/puntos-bio-mercados.jpg"></a>
+						<div class="ad-box" v-for="a in ads">
+							<a :href="a.url"><img :src="'storage/'+a.image"></a>
 						</div>
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>
-						</div>
-						<div class="ad-box">
-							<a href="#"><img src="assets/img/oferta-bebidas-bio-mercados.jpg"></a>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -171,7 +155,8 @@
 		props: {
 			userlogged: Object,
 			tasadolar: Number,
-			tags: Object
+			tags: Array,
+			ads: Array
 		},
         methods: {
 			filterProducts: async function() {
@@ -191,7 +176,7 @@
 		
         },
         mounted() {
-
+        	console.log("ads::> ",this.ads);
 			if(this.isObject(this.userlogged)){
 				this.datauser = this.userlogged;
 			}else{
@@ -215,6 +200,7 @@
 			}
 		},
 		created: function() {
+			console.log("ads::> ",this.ads);
 			// this.getDebounceProducts = _.debounce(this.filterProducts,100);
 		},
 		watch: {
