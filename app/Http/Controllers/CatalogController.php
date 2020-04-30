@@ -36,7 +36,9 @@
 			}
 			
 			$Coin = Coin::where("id",1)->first();
-			$k = json_encode($this->getTags());
+			// die($_GET["cat"]);
+			$cat = ($_GET["cat"] ?? 0);
+			$k = json_encode($this->getTags($cat));
 
 			return view("catalog",[
 				"title"=>$title,
@@ -46,8 +48,19 @@
 			]);
 		}
 
-		private function getTags() {
-	        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(20)->get();
+		private function getTags($cat = '') {
+			if(isset($cat) && !empty($cat)) {
+				$data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))
+				->join("det_sub_categories","det_sub_categories.products_id","=","products.id")
+				->join("sub_categories","sub_categories.id","=","det_sub_categories.sub_categories_id")
+				->where('sub_categories.categories_id','=',$cat)
+				->where('products.status','A')
+				->whereNotNull('keyword')
+				->groupBy("products.id")
+				->get();
+			}else {
+	        	$data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(20)->get();
+	        }
 	        $keywords = [];
 	        foreach($data as $i => $d) {
 	            $tmp = explode(" ", $d->key);
