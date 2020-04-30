@@ -6,9 +6,11 @@
             </ol>
             <div class="carousel-inner">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
-                    <a v-bind:href="slider.url">
+                    <a :href="slider.url" v-if="!!slider.url">
                         <img class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
                     </a>
+                    <img v-else="!slider.url" class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
+
                     <div class="container">
                         <!--<div class="carousel-caption caption-left" >
                             <h5>¡Aprovecha nuestros combos!</h5>
@@ -44,6 +46,9 @@
     export default {
         props: {
             sliders: Array
+        },
+        mounted() {
+            console.log("this.sliders::> ",this.sliders);
         }
     }
 </script>
