@@ -1973,6 +1973,7 @@ div[class*="col-"]:not(:last-child) .product-block {
     border: 1px solid #d9d9d9;
     margin: 5px 0;
     cursor: pointer;
+    line-height: 1em !important;
 }
 
 .hashtag_active {

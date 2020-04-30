@@ -44,3 +44,7 @@ ul.social-icons li a{
 	background-position: 30px 30px !important;
 
 }
+
+div.carousel img{
+	border:1px solid red !important;
+}
