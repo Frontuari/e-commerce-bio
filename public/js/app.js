@@ -3041,22 +3041,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3082,7 +3066,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: {
     userlogged: Object,
     tasadolar: Number,
-    tags: Object
+    tags: Array,
+    ads: Array
   },
   methods: {
     filterProducts: function () {
@@ -3124,6 +3109,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
+    console.log("ads::> ", this.ads);
+
     if (this.isObject(this.userlogged)) {
       this.datauser = this.userlogged;
     } else {
@@ -3145,7 +3132,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.filterP.join("&") + "&cat=" + this.cat + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price + "&page=" + this.page + this.sParam + "&tags=" + this.selectedTags;
     }
   },
-  created: function created() {// this.getDebounceProducts = _.debounce(this.filterProducts,100);
+  created: function created() {
+    console.log("ads::> ", this.ads); // this.getDebounceProducts = _.debounce(this.filterProducts,100);
   },
   watch: {
     filtros: function filtros() {
@@ -77666,7 +77654,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("#" + _vm._s(t))]
+                          [_vm._v(_vm._s(t))]
                         )
                       })
                     ],
@@ -77676,7 +77664,18 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _c(
+              "div",
+              { staticClass: "bio-ads" },
+              _vm._l(_vm.ads, function(a) {
+                return _c("div", { staticClass: "ad-box" }, [
+                  _c("a", { attrs: { href: a.url } }, [
+                    _c("img", { attrs: { src: "storage/" + a.image } })
+                  ])
+                ])
+              }),
+              0
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -77802,7 +77801,18 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _vm._m(3)
+              _c(
+                "div",
+                { staticClass: "bio-ads" },
+                _vm._l(_vm.ads, function(a) {
+                  return _c("div", { staticClass: "ad-box" }, [
+                    _c("a", { attrs: { href: a.url } }, [
+                      _c("img", { attrs: { src: "storage/" + a.image } })
+                    ])
+                  ])
+                }),
+                0
+              )
             ],
             1
           )
@@ -77847,60 +77857,6 @@ var staticRenderFns = [
         staticClass: "js-range-slider",
         attrs: { type: "text", value: "" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bio-ads" }, [
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", { attrs: { src: "assets/img/puntos-bio-mercados.jpg" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", {
-            attrs: { src: "assets/img/oferta-bebidas-bio-mercados.jpg" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", { attrs: { src: "assets/img/puntos-bio-mercados.jpg" } })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bio-ads" }, [
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", { attrs: { src: "assets/img/puntos-bio-mercados.jpg" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", {
-            attrs: { src: "assets/img/oferta-bebidas-bio-mercados.jpg" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ad-box" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("img", {
-            attrs: { src: "assets/img/oferta-bebidas-bio-mercados.jpg" }
-          })
-        ])
-      ])
     ])
   }
 ]
@@ -101952,8 +101908,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
