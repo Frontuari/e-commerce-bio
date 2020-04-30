@@ -15,22 +15,22 @@
             <div v-if="!!second">
                 <div class="form-group">
                     <label for="email">Código de recuperación:</label>
-                    <input type="text" class="form-control" id="email" name="email" v-model="codigo">
+                    <input type="text" class="form-control" id="codigo" name="codigo" v-model="codigo">
                 </div>
                 
                 <div class="form-group">
                     <button class="btn" :disabled="sending" type="button" @click="CheckCode()">Validar código</button>
                 </div>
             </div>
-            <div v-if="!!second">
+            <div v-if="!!third">
                 <div class="form-group">
                     <label for="email">Nueva clave:</label>
-                    <input type="text" class="form-control" id="email" name="email" v-model="password">
+                    <input type="text" class="form-control" id="password" name="password" v-model="password">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Repita su clave:</label>
-                    <input type="text" class="form-control" id="email" name="email" v-model="samepassword">
+                    <input type="text" class="form-control" id="samepassword" name="samepassword" v-model="samepassword">
                 </div>
                 
                 <div class="form-group">
@@ -58,17 +58,59 @@
             userlogged: Object
         },
         methods: {
-            CheckCode(){
+            CheckCode() {
                 const formData = new FormData();
                 formData.append("email",this.email);
                 formData.append("codigoCorreo",this.codigo);
-
+                this.sending = true;
+                axios.post(URLHOME+'api_rapida.php?evento=confirmarCodRecuperacion',formData).then( (data) => {
+                    Swal.fire("Bio en línea","Código correcto, puede cambiar su clave","success").then( result => {
+                        this.first = false;
+                        this.second = false;
+                        this.second = true;
+                        this.sending = false;
+                    });
+                }).catch(err => {
+                    if(!!err) {
+                        this.sending = false;
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: "Código invalido, intente nuevamente",
+                        });
+                    }
+                });
             },
             changePassword() {
                 const formData = new FormData();
                 formData.append("email",this.email);
                 formData.append("codigoCorreo",this.codigo);
                 formData.append("password",this.password);
+                if(this.password === this.samepassword){
+                    axios.post(URLHOME+'api_rapida.php?evento=cambiarClavePublico',formData).then( (data) => {
+                        Swal.fire("Bio en línea","Código correcto, puede cambiar su clave","success").then( result => {
+                            this.first = false;
+                            this.second = false;
+                            this.second = true;
+                            this.sending = false;
+                        });
+                    }).catch(err => {
+                        if(!!err) {
+                            this.sending = false;
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: "Código invalido, intente nuevamente",
+                            });
+                        }
+                    });
+                }else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Sus claves no concuerdan, intente nuevamente',
+                    });
+                }
             },
             sendEmail() {
                 if(this.email.trim() != '') {
@@ -84,7 +126,6 @@
                             this.sending = false;
                         });
                     }).catch(err => {
-                        console.log("err::> ",err);
                         if(!!err) {
                             this.sending = false;
                             Swal.fire({
@@ -99,7 +140,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Todos los campos son obligatorios',
+                        text: 'Debe escribir el email',
                     });
                 }
             }

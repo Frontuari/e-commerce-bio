@@ -1,6 +1,6 @@
 @extends('partials.base')
 
-@section('title','Registro')
+@section('title','Recuperar cuenta')
 
 @section('body')
 <section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
