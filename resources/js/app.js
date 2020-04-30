@@ -34,6 +34,7 @@ Vue.component('profile', require('./components/profile.vue').default);
 Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('resume', require('./components/Resume.vue').default);
 Vue.component('register', require('./components/Register.vue').default);
+Vue.component('recover', require('./components/Recover.vue').default);
 Vue.component('contact', require('./components/Contact.vue').default);
 
 Vue.filter('FormatNumber',function(num) {
@@ -46,7 +47,6 @@ Vue.filter('FormatNumber',function(num) {
 Vue.filter('FormatDolar',function(num) {
     return parseFloat(num).toFixed(2);
 });
-
 
 Vue.filter('MediumImage',function(imageText) {
     imageText = imageText.split('.');
@@ -67,7 +67,6 @@ Vue.directive('select2', {
         })
     },
 });
-
 
 var globalFunc = {
     addToFavorite: function(product,user_id) {
@@ -184,8 +183,6 @@ Vue.prototype.addToFavorite = globalFunc.addToFavorite;
 Vue.prototype.addToCart = globalFunc.addToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 Vue.prototype.dropCart = globalFunc.dropCart;
-
-
 
 
 /**

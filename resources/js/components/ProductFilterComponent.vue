@@ -165,7 +165,7 @@
 				</div>
 			</div>
 		</div>
-		<ModalProducto :tasadolar="tasadolar" :product="product"></ModalProducto>
+		<ModalProducto :tasadolar="tasadolar" :product="oneproduct"></ModalProducto>
 	</section>
 </template>
 
@@ -175,7 +175,7 @@
     export default {
         data() {
             return {
-				product: {},
+				oneproduct: {},
 				cantModal: 1,
 				tasa: 0
             }
@@ -192,9 +192,10 @@
 			best_price: Array
 		},
 		methods: {
-			getProduct: async function(objP) {
-				this.product = objP;
-			}
+			getProduct: function(objP) {
+                console.log(objP);
+				this.oneproduct = objP;
+            }
 		}
     }
 </script>

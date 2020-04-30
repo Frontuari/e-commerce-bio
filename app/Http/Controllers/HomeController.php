@@ -122,4 +122,7 @@ class HomeController extends Controller
     public function join() {
         return view("register");
     }
+    public function recover() {
+        return view("recover");
+    }
 }

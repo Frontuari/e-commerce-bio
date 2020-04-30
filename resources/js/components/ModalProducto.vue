@@ -30,7 +30,7 @@
                             <div class="col-lg-8">
                                 <div class="product-description">
                                     <a href="#" class="product-title">{{product.name}}</a>
-                                    <span class="product-info">{{product.description}}</span>
+                                    <span class="product-info" v-html="product.description"></span>
                                     <div class="product-prices" v-if="product.impuesto > 0">
                                         <p>IVA INCLUIDO</p>
                                     </div>
@@ -112,6 +112,12 @@
                     this.cantModal--;
                 }
             }
+        },
+        mounted() {
+            console.log("mounted::> ",this.product);
+        },
+        created() {
+            console.log("created::> ",this.product);
         },
         computed: {
 			totalModal: function() {

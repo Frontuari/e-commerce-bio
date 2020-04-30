@@ -73,6 +73,7 @@
 										</div>
 										<div class="form-group form-group-register">
 											<small>¿No tienes cuenta? <a  href="/join">Registrate aquí</a></small>
+											<small><a href="/recover">Olvido de clave</a></small>
 										</div>
 									</form>
 								</div>

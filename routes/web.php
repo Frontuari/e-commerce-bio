@@ -16,6 +16,7 @@ Route::get('/',"HomeController@index")->name("home");
 Route::get('/catalog','CatalogController@index')->name("Catalog");
 
 Route::get('/join',"HomeController@join")->name("join");
+Route::get('/recover',"HomeController@recover")->name("join");
 
 Route::get('/profile','ProfileController@index')->name("profile");
 

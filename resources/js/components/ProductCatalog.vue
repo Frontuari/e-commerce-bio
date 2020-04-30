@@ -136,8 +136,8 @@
         },
         methods: {
             getProduct: function(objP) {
+                console.log(objP);
 				this.oneproduct = objP;
-
             },
             getpage(index) {
                 this.page = index;
@@ -153,8 +153,7 @@
                 $('.cantidad_'+productID).val(this.cant_product[productID]);
                 $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
             },
-            decreaseValue(product)
-            {
+            decreaseValue(product) {
                 const productID = product.id;
                 const qty_avaliable = product.qty_avaliable;
                 if(this.cant_product[productID] > 1 ) {
