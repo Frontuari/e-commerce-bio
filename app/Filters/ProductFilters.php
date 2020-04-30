@@ -20,8 +20,41 @@ class ProductFilters extends QueryFilters
     }
 
     public function search($term) {
-        if(isset($term) && !empty($term))
-            return $this->builder->whereRaw('LOWER(products.name) LIKE ?', ['%'.trim(strtolower($term)).'%']);
+        if(isset($term) && !empty($term)){
+
+            $texto=mb_strtolower($term);
+            $arr=explode(' ',$texto);
+            $otro='';
+            if(count($arr)>1){
+                foreach($arr as $s){
+                    $otro.="$s&";
+                }
+                $otro=rtrim($otro,'&');
+            }else{
+                $otro=$texto;
+            }
+
+            return $this->builder->whereRaw("to_tsvector(products.name) @@ to_tsquery('$otro')");
+        }
+    }
+
+    public function tags($term) {
+        if(isset($term) && !empty($term)){
+
+            $texto=mb_strtolower($term);
+            $arr=explode(' ',$texto);
+            $otro='';
+            if(count($arr)>1){
+                foreach($arr as $s){
+                    $otro.="#$s|";
+                }
+                $otro=rtrim($otro,'|');
+            }else{
+                $otro="#".$texto;
+            }
+
+            return $this->builder->whereRaw("to_tsvector(products.keyword) @@ to_tsquery('$otro')");
+        }
     }
 
     public function precio($precio) {
@@ -54,6 +87,5 @@ class ProductFilters extends QueryFilters
     public function mj($term = null) {
         return $this->builder->orderBy('products.price','asc');
     }
-
 
 }

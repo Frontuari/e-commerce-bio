@@ -3048,6 +3048,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cat: 0,
       search: '',
       sParam: '',
+      fTags: '',
       selectedTags: '',
       products: {},
       filterP: [],
@@ -3099,7 +3100,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return filterProducts;
     }(),
     putToggle: function putToggle(event) {
+      var tmp = [];
       event.target.classList.toggle('hashtag_active');
+      document.querySelectorAll(".hashtag_active").forEach(function (a) {
+        tmp.push(a.innerHTML.replace("#", ""));
+      });
+      this.selectedTags = tmp.join(" ");
+
+      if (!!this.selectedTags) {
+        this.fTags = "&tags=" + this.selectedTags;
+      }
     },
     pageclick: function pageclick(value) {
       this.page = value;
@@ -3129,7 +3139,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     filtros: function filtros() {
-      return this.filterP.join("&") + "&cat=" + this.cat + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price + "&page=" + this.page + this.sParam + "&tags=" + this.selectedTags;
+      return this.filterP.join("&") + "&cat=" + this.cat + "&limit=" + this.limitP + "&order=" + this.orderP + "&precio=" + this.min_price + "," + this.max_price + "&page=" + this.page + this.sParam + this.fTags;
     }
   },
   created: function created() {
@@ -101908,8 +101918,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/e-commerce-bio/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/e-commerce-bio/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp7\htdocs\e-commerce-bio\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -40,7 +40,20 @@ class ProductController extends BaseController
 
     public function search($name)
     {
-        $Product =  DB::table('products')->whereRaw('LOWER(name) LIKE ?', ['%'.trim(strtolower($name)).'%'])->take(10)->get();
+        $texto=mb_strtolower($name);
+        $arr=explode(' ',$texto);
+        $otro='';
+        if(count($arr)>1){
+            foreach($arr as $s){
+                $otro.="$s&";
+            }
+            $otro=rtrim($otro,'&');
+        }else{
+            $otro=$texto;
+        }
+
+        // $Product =  DB::table('products')->whereRaw('LOWER(name) LIKE ?', ['%'.trim(strtolower($name)).'%'])->take(10)->get();
+        $Product =  DB::table('products')->whereRaw("to_tsvector(name) @@ to_tsquery('$otro')")->take(10)->get();
         if (is_null($Product)) {
             return $this->sendError('Product not found.');
         }

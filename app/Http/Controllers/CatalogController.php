@@ -47,7 +47,7 @@
 		}
 
 		private function getTags() {
-	        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(40)->get();
+	        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(20)->get();
 	        $keywords = [];
 	        foreach($data as $i => $d) {
 	            $tmp = explode(" ", $d->key);

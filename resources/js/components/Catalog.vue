@@ -136,6 +136,7 @@
 				cat: 0,
 				search: '',
 				sParam: '',
+				fTags: '',
 				selectedTags:'',
 				products: {},
 				filterP: [],
@@ -164,7 +165,15 @@
 				this.products = response.data.data;
 			},
 			putToggle(event) {
-				event.target.classList.toggle('hashtag_active')
+				let tmp = [];
+				event.target.classList.toggle('hashtag_active');
+				document.querySelectorAll(".hashtag_active").forEach( a => {
+				 	tmp.push(a.innerHTML.replace("#",""));
+				});
+				this.selectedTags = tmp.join(" ");
+				if(!!this.selectedTags) {
+					this.fTags = "&tags="+this.selectedTags;
+				}
 			},
 			pageclick(value) {
 				this.page = value;
@@ -196,7 +205,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+"&tags="+this.selectedTags;
+				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags;
 			}
 		},
 		created: function() {
