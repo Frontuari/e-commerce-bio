@@ -138,6 +138,9 @@ switch($_GET['evento']) {
     case 'guardarOpinion':
         guardarOpinion();
     break;
+    case 'listarCombos':
+        listarCombos();
+    break;
     case 'guardarOpinionOrden':
         guardarOpinionOrden();
     break;
@@ -193,9 +196,36 @@ switch($_GET['evento']) {
     case 'listarBancosdelMetododePago':
         listarBancosdelMetododePago(false);
     break;
+    case 'listarPublicidad':
+        listarPublicidad();
+    break;
     default:
     
     salida($row,"Disculpe debe enviar un evento",false);
+}
+function listarPublicidad(){
+    $arr=q("select image from advs where type='top'");
+    if(is_array($arr)){
+     return salidaNueva($arr,'Listar publicidad',true);
+    }else{
+     return salidaNueva(null,'No tiene publicidad',false);
+    }
+}
+function listarCombos(){
+    $sql="SELECT todo.*,todo.total_precio/rate.rate as total_precio_dolar FROM (SELECT json_agg(
+        json_build_object(
+			'products_id',p.id,
+    'name', initcap(p.name),
+    'price',(p.price*coalesce(t.value,0.00)*0.01)+p.price,
+    'cant',dpp.cant
+) 
+) json,initcap(pa.name) as name,pa.id,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.status='A' AND p.qty_avaliable>0 GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,'Listado combos',true);
+    }else{
+        return salidaNueva(null,'No encontramos Compras fáciles',false);
+    }
 }
 function filtroProductos($sql){
     $precioInicial=$_GET['precioInicial'];
