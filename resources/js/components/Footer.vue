@@ -1,6 +1,6 @@
 <template>
 
-    <section id="combos" class="hero" :style="{backgroundImage: background}">
+    <section id="combos" class="hero" :style="{backgroundImage: background, backgroundSize: 'contain'}">
 		<div class="container hero-container">
 			<!-- <div class="hero-content">
 				<h2>LLÉVATE</h2>
