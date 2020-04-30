@@ -2,19 +2,18 @@
     <section id="categories">
 		<div class="container-fluid">
 			<div class="row">
-
-				<div class="col-12 category-box">
+				<div class="col-md-3">
 					<a :href="'catalog?cat='+categories[0].id"><div class="category-img" :style="{backgroundImage: backgrounds[0]}"></div></a>
 				</div>
-
-				<div class="col-12 category-box">
+				<div class="col-md-3">
 					<a :href="'catalog?cat='+categories[1].id"><div class="category-img" :style="{backgroundImage: backgrounds[1]}"></div></a>
 				</div>
-
-				<div class="col-12 category-box">
+				<div class="col-md-3">
 					<a :href="'catalog?cat='+categories[2].id"><div class="category-img" :style="{backgroundImage: backgrounds[2]}"></div></a>
 				</div>
-
+				<div class="col-md-3">
+					<a :href="'catalog?cat='+categories[3].id"><div class="category-img" :style="{backgroundImage: backgrounds[3]}"></div></a>
+				</div>
 			</div>
 		</div>
 	</section>

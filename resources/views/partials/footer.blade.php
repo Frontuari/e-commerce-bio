@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<div class="bottom-footer">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-10">
 						<p>Alimentos FM, C.A. © 2020 Todos los Derechos Reservados <br />J-31721968-6</p>
