@@ -30,7 +30,7 @@
 	        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(40)->get();
 	        $keywords = [];
 	        foreach($data as $i => $d) {
-	            $tmp = explode(",", $d->key);
+	            $tmp = explode(" ", $d->key);
 	            foreach($tmp as $j => $t) {
 	                array_push($keywords, trim($t));
 	            }
