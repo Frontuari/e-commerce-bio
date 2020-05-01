@@ -1065,20 +1065,6 @@ header .dropdown-menu a:focus {
     }
 }
 
--------- Mensaje Original --------
-Asunto: Fwd: Manual para crear cuenta desarrollador en Play Store(Android) y App Store (iOs)
-Fecha: 2020-04-20 09:42
-De: cvargas@frontuari.net
-Destinatario: wcolmenarez@frontuari.net
-
--------- Mensaje Original --------
-Asunto: Manual para crear cuenta desarrollador en Play Store(Android) y App Store (iOs)
-Fecha: 2020-04-20 09:19
-De: cvargas@frontuari.net
-Destinatario: jcolmenarez@frontuari.net, jlct.master@gmail.com
-
-
-
 /*
 	======================================================
 	Categories
@@ -3691,4 +3677,8 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.white{
+    color: white!important;
 }

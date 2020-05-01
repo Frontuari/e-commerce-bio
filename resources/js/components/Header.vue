@@ -69,11 +69,14 @@
 											<input type="password" class="form-control" name="password" v-model="user.pass">
 										</div>
 										<div class="form-group">
+											<input type="checkbox"> Recordar Usuario
+										</div>
+										<div class="form-group">
 											<button type="button" @click="login()" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
 											<small>¿No tienes cuenta? <a  href="/join">Registrate aquí</a></small>
-											<small><a href="/recover">Olvido de clave</a></small>
+											<small><a href="/recover" class="white">¿Olvidaste la contraseña?</a></small>
 										</div>
 									</form>
 								</div>

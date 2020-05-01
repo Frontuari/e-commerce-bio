@@ -114,7 +114,7 @@ var globalFunc = {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                tmp[b] = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
                 exist = true;
             }
         });
@@ -153,6 +153,7 @@ var globalFunc = {
                 this.updateCartTotal();
                 let cart = JSON.parse(window.localStorage.getItem('cartNew'));
                 const cantUpdate = globalFunc.getCartCant(cart);
+                console.log("cantUpdate::> ",cantUpdate);
                 EventBus.$emit("update_cantCart",cantUpdate);
             }
         })

@@ -85,7 +85,6 @@
 			this.num_order = order.id;
 
 			let dir = '';
-			console.log("order.order_address_id::> ",!!order.order_address_id);
 			if(!!order.order_address_id) {
 				dir = order.order_address_id;
 			}else {

@@ -6,7 +6,7 @@ use App\Orders;
 use App\OrderProducts;
 use App\BankOrder;
 use App\Trackings;
-use App\Coins;
+use App\Coin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController;
 use Illuminate\Support\Facades\DB;
@@ -100,7 +100,7 @@ class OrdersController extends BaseController
      */
     public function store(Request $r)
     {
-        $coin = Coins::all();
+        $coin = Coin::all();
         $tmp_rate = [];
         foreach($coin as $i => $c) {
             $tmp=[];

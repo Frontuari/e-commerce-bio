@@ -741,6 +741,7 @@
 		    },
 			updateCartTotal()
 			{
+				this.length_car = JSON.parse(window.localStorage.getItem("cartNew")).length;
 				this.total_cart = 0;
 				for(let i = 0; i<this.length_car; i++)
 				{
