@@ -90,7 +90,7 @@
                         formData.append("from","web");
 
                             axios.post(URLHOME+'api_rapida.php?evento=registrarUsuario', formData).then( (data) => {
-                                Swal.fire("Bio en línea","Usuario Registrado Exitosamente",success).then( result => {
+                                Swal.fire("Bio en línea","Usuario Registrado Exitosamente","success").then( result => {
                                     location.href="/";    
                                 });
                             }).catch(err => {
