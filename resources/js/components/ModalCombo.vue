@@ -7,7 +7,7 @@
 						<div class="row">
 							<div class="col-lg-5">
 								<div class="product-img">
-									<img :src="'storage'+combo.image">
+									<img :src="'storage/'+combo.image">
 								</div>
 							</div>
 							<div class="col-lg-7">
