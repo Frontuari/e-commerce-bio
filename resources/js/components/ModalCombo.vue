@@ -13,20 +13,8 @@
 							<div class="col-lg-7">
 								<div class="product-description">
 									<a href="#" class="product-title">Cesta bio</a>
-									<span class="product-info">2 Harinas de maíz blanco - 1 kg</span>
-									<span class="product-info">1 Arroz blanco tipo 1 - 1 kg</span>
-									<span class="product-info">1 Pasta larga o corto - 1 kg</span>
-									<span class="product-info">1 Margarina - 500 g</span>
-									<span class="product-info">1 Aceite de maíz o soya - 1 L</span>
-									<span class="product-info">1 Harina de trigo - 1 kg</span>
-									<span class="product-info">1 Azúcar refinada - 1 kg</span>
-									<span class="product-info">1 Sal de mar - 1 kg</span>
-									<span class="product-info">1 Café - 500 g</span>
-									<span class="product-info">1 Vinagre - 500 ml</span>
-									<span class="product-info">1 Fororo - 900 g</span>
-									<span class="product-info">1 Leche en polvo - 400 g</span>
-									<span class="product-info">2 Sardinas de lata - 260 g</span>
-									<span class="product-info">1 Granos - 500 g</span>
+									<span class="product-info" v-for="p in combo.products" :key="p">{{ p.name }}</span>
+									
 									<div class="product-prices">
 										<span class="product-descount">$ 3 / Bs 135.000</span>
 										<p>$ 2 / Bs 90.000</p>
@@ -75,7 +63,8 @@
             }
         },
         props: {
-            combo: Object
+            combo: Object,
+			tasadolar: Number
         }
     }
 </script>

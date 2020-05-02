@@ -7,6 +7,7 @@ use App\Coin;
 use App\Advs;
 use App\ProductCategory;
 use App\Product;
+use App\Packages;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -97,13 +98,28 @@ class HomeController extends Controller
         ->take(12)
         ->get();
 
-        $Combos = Product::where('products.status','A')
-        ->where('is_combo',true)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
-        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
-        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
-        ->take(8)
-        ->get();
+        $comboData = Packages::where('status','A')->take(8)->get();
+        $Combos = [];
+        $total = 0;
+        foreach($comboData as $i => $c){ 
+            $c["products"] = DB::table("det_product_packages")
+            ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+            ->join("products","products.id","=","det_product_packages.products_id")
+            ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+            ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+            ->where("det_product_packages.packages_id",$c["id"])
+            ->get();
+            foreach($c["products"] as $j => $p) {
+                if($p->calculado > 0){
+                    $total += $p->calculado;
+                }else {
+                    $total += $p->price;
+                }
+            }
+            $c["combo_price"] = $total;
+            array_push($Combos,$c);
+        }
+        $Combos = json_encode($Combos);
 
         return view("home",[
             "tasa_dolar"=>$Coin->rate,
