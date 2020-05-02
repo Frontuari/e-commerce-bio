@@ -113,12 +113,6 @@
                 }
             }
         },
-        mounted() {
-            console.log("mounted::> ",this.product);
-        },
-        created() {
-            console.log("created::> ",this.product);
-        },
         computed: {
 			totalModal: function() {
                 let price = 0;

@@ -115,6 +115,7 @@
 		},
 		methods: {
 			getProduct: async function(objP) {
+				console.log("objP::> ",objP);
 				this.combo = objP;
 			}
 		},

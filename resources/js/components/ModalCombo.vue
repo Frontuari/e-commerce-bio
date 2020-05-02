@@ -7,37 +7,37 @@
 						<div class="row">
 							<div class="col-lg-5">
 								<div class="product-img">
-									<img src="assets/img/combo-bio-001.jpg">
+									<img :src="'storage'+combo.image">
 								</div>
 							</div>
 							<div class="col-lg-7">
 								<div class="product-description">
-									<a href="#" class="product-title">Cesta bio</a>
+									<a href="#" class="product-title">{{combo.name}}</a>
 									<span class="product-info" v-for="p in combo.products" :key="p">{{ p.name }}</span>
 									
 									<div class="product-prices">
-										<span class="product-descount">$ 3 / Bs 135.000</span>
-										<p>$ 2 / Bs 90.000</p>
+										<!-- <span class="product-descount">$ 3 / Bs 135.000</span> -->
+										<p> ${{ (combo.combo_price / tasadolar) | FormatDolar}} / Bs {{ combo.combo_price | FormatNumber }}</p>
 									</div>
 								</div>
 								<div class="product-options">
 									<form action="">
 										<div class="product-quantity">
-											<label>Cantidad</label>
-											<div class="product-quantity-group">
-												<input id="quantity2" class="form-control" type="text" name="quantity" value="1">
-												<div class="product-quantity-buttons">
-													<button type="button" class="btn increaseValue">
-														<img src="assets/img/increase.png" alt="Increase">
-													</button>
-													<button type="button" class="btn decreaseValue">
-														<img src="assets/img/decrease.png" alt="decrease">
-													</button>
-												</div>
-											</div>
-										</div>
+                                            <label>Cantidad</label>
+                                            <div class="product-quantity-group">
+                                                <input id="quantity" class="form-control" type="number" name="quantity" v-model="cantModal" value="1">
+                                                <div class="product-quantity-buttons">
+                                                    <button type="button" class="btn" @click="increaseValue()">
+                                                        <img src="assets/img/increase.png" alt="Increase">
+                                                    </button>
+                                                    <button type="button" class="btn" @click="decreaseValue()">
+                                                        <img src="assets/img/decrease.png" alt="decrease">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
 										<div class="product-prices">
-											<p><b>Total:</b> $ 2 / Bs 90.000</p>
+											<p><b>Total:</b> $ {{ (totalModal / tasadolar) | FormatDolar}} / Bs {{totalModal | FormatNumber}} </p>
 										</div>
 										<div class="product-buttons">
 											<button type="submit" class="btn btn-addcart">Añadir al carrito</button>
@@ -59,12 +59,41 @@
     export default{
         data(){
             return{
-                data: []
+                cantModal: 1
             }
         },
         props: {
             combo: Object,
 			tasadolar: Number
-        }
+		},
+		methods: {
+            increaseValue()
+            {
+                // const productID = this.combo.id;
+                // const qty_avaliable = this.product.qty_avaliable;
+                // if(this.cantModal < qty_avaliable ) {
+                    this.cantModal++;
+                // }
+            },
+            decreaseValue()
+            {
+                // const productID = this.combo.id;
+                // const qty_avaliable = this.product.qty_avaliable;
+                if(this.cantModal > 1 ) {
+                    this.cantModal--;
+                }
+            }
+        },
+		computed: {
+			totalModal: function() {
+                let price = 0;
+                
+                price = this.combo.combo_price * this.cantModal;
+                
+
+				return price;
+			}
+
+		}
     }
 </script>
