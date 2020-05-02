@@ -13,7 +13,7 @@
 							<div class="col-lg-7">
 								<div class="product-description">
 									<a href="#" class="product-title">{{combo.name}}</a>
-									<span class="product-info" v-for="p in combo.products" :key="p">{{ p.name }}</span>
+									<span class="product-info" v-for="p in combo.products" :key="p">{{ p.name }} X {{p.cant_combo}}</span>
 									
 									<div class="product-prices">
 										<!-- <span class="product-descount">$ 3 / Bs 135.000</span> -->

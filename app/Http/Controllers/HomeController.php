@@ -100,10 +100,11 @@ class HomeController extends Controller
 
         $comboData = Packages::where('status','A')->take(8)->get();
         $Combos = [];
-        $total = 0;
-        foreach($comboData as $i => $c){ 
+        
+        foreach($comboData as $i => $c) {
+            $total = 0;
             $c["products"] = DB::table("det_product_packages")
-            ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+            ->select("products.*","det_product_packages.cant as cant_combo",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
             ->join("products","products.id","=","det_product_packages.products_id")
             ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
             ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
@@ -111,9 +112,9 @@ class HomeController extends Controller
             ->get();
             foreach($c["products"] as $j => $p) {
                 if($p->calculado > 0){
-                    $total += $p->calculado;
+                    $total += ($p->calculado * $p->cant_combo);
                 }else {
-                    $total += $p->price;
+                    $total += ($p->price * $p->cant_combo);
                 }
             }
             $c["combo_price"] = $total;
