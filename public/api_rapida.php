@@ -223,6 +223,7 @@ function listarCombos(){
 ) json,initcap(pa.name) as name,pa.id,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.status='A' AND p.qty_avaliable>0 GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate";
     $arr=q($sql);
     if(is_array($arr)){
+        $arr=recortar_imagen_combo($arr);
         return salidaNueva($arr,'Listado combos',true);
     }else{
         return salidaNueva(null,'No encontramos Compras fáciles',false);
@@ -1389,6 +1390,16 @@ function enviarCorreo($email,$titulo,$body){
 function generarCodigoVerificacion($data){
 //return "90000";
 return hexdec( substr(sha1($data), 0, 5) );
+}
+function recortar_imagen_combo($row){
+    foreach($row as $id=>$value){
+        $arr=explode(".",$value['image']);
+        $row[$id]['image']=cambiarBarra($arr[0].'-cropped.'.$arr[1]);
+        $row[$id]['image_grande']=cambiarBarra($value['image']);
+        
+    }
+     return $row;
+    
 }
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
