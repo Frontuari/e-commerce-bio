@@ -1395,6 +1395,7 @@ function recortar_imagen_combo($row){
     foreach($row as $id=>$value){
         $arr=explode(".",$value['image']);
         $row[$id]['image']=cambiarBarra($arr[0].'-cropped.'.$arr[1]);
+        $row[$id]['image_web']=cambiarBarra($arr[0].'-web.'.$arr[1]);
         $row[$id]['image_grande']=cambiarBarra($value['image']);
         
     }
