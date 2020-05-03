@@ -14,7 +14,7 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos=false;
+$activar_productos=true;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
