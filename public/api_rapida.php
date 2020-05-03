@@ -723,7 +723,7 @@ function convertir_a_bs($coins_id,$value){
 function totalPagar(){
     $orders_id=$_GET['orders_id'];
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT (SELECT orders_status_id FROM trackings WHERE id=(SELECT MAX(t.id) FROM trackings t WHERE t.orders_id='$orders_id')) as order_status, total_pay,total_packaging,total_transport,rate_json, 
+    $sql="SELECT (SELECT COUNT(1) FROM det_bank_orders WHERE det_bank_orders.orders_id=54) as cant_pagos,(SELECT orders_status_id FROM trackings WHERE id=(SELECT MAX(t.id) FROM trackings t WHERE t.orders_id='$orders_id')) as order_status, total_pay,total_packaging,total_transport,rate_json, 
     (SELECT json_agg(
                 json_build_object(
                 'id', dbo.id, 
