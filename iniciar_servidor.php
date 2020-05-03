@@ -1,7 +1,9 @@
 <?php
 //ini_set('max_execution_time', '600');
 error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
-		
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;		
 openlog("Biomercados",LOG_PERROR, LOG_DAEMON);
 syslog(LOG_INFO,"Servidor iniciado");
 
@@ -12,7 +14,7 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos=true;
+$activar_productos=false;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
@@ -21,6 +23,9 @@ $activar_envio_orden=false;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
+$activar_email_tracking=true;
+$tiempo_acumulado_email_tracking=0;
+$retraso_email_tracking="+1 minutes";
 
 /* Ejemplo si quieren crear otro :)
 $activar_productosb=true;
@@ -29,7 +34,15 @@ $retraso_productosb="+5 minutes";
 */
 
 do{
-	
+	if(time()>=$tiempo_acumulado_email_tracking and $activar_email_tracking==true){
+		syslog(LOG_INFO,"Actualizando email_tracking");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		email_tracking();
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_email_tracking=strtotime($retraso_email_tracking);		
+	}	
+
 	if(time()>=$tiempo_acumulado_productos and $activar_productos==true){
 		syslog(LOG_INFO,"Actualizando Productos");
 		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
@@ -57,6 +70,25 @@ sleep($retraso_general);
 }while(true);
 closelog();
 
+function email_tracking(){
+	$arr=q("SELECT t.id, t.description, oe.name,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
+	if(is_array($arr)){
+		foreach($arr as $obj){
+			$id=$obj['id'];
+			$titulo="Estatus de su orden # ".$obj['orders_id'];
+			$body="Su nuevo estatus de la orden es:<br>".$obj['name']."<br>".$obj['description'];
+			if(enviarCorreo($obj['email'],$titulo,$body)){
+				q("UPDATE trackings SET envio_email=1 WHERE id='$id'");
+			}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+				q("UPDATE trackings SET envio_email=1 WHERE id='$id'");
+			}else{
+				sleep(5);
+				enviarCorreo($obj['email'],$titulo,$body);
+				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+			}
+		}
+	}
+}
 
 function actualizarEnvioOrden(){
 	$arr=q("SELECT 
@@ -500,4 +532,40 @@ list($useg, $seg) = explode(" ", microtime());
 return ((float)$useg + (float)$seg);
 }
 
+function enviarCorreo($email,$titulo,$body){
+
+    require __DIR__.'/vendor/autoload.php';
+   // echo is_file(__DIR__.'/../vendor/autoload.php');
+
+
+	$mail = new PHPMailer(true);
+
+	try {
+	    //Server settings
+	    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+	    $mail->isSMTP();                                            // Send using SMTP
+	    $mail->Host       = 'mail.biomercados.com.ve';                    // Set the SMTP server to send through
+	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+	    $mail->Username   = 'noreply@biomercados.com.ve';                     // SMTP username
+	    $mail->Password   = 'Bio2020';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        
+	    $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+	    $mail->SMTPDebug = 0;
+        $mail->CharSet = 'UTF-8';
+	    //Recipients
+	    $mail->setFrom('noreply@biomercados.com.ve', 'Biomercados - Bio en línea');
+	    $mail->addAddress($email);
+	    
+	    $mail->isHTML(true);
+	    $mail->Subject = $titulo;
+	    $mail->Body    = $body;
+	    
+	    $mail->send();
+	    return true;
+	} catch (Exception $e) {
+	    return false;
+	}
+
+}
 ?>

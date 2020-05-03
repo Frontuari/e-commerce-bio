@@ -90,6 +90,7 @@ return array(
     'App\\Http\\Controllers\\LogsController' => $baseDir . '/app/Http/Controllers/LogsController.php',
     'App\\Http\\Controllers\\OrderAddressController' => $baseDir . '/app/Http/Controllers/OrderAddressController.php',
     'App\\Http\\Controllers\\OrderProductsController' => $baseDir . '/app/Http/Controllers/OrderProductsController.php',
+    'App\\Http\\Controllers\\OrdersController' => $baseDir . '/app/Http/Controllers/OrdersController.php',
     'App\\Http\\Controllers\\OrdersStatusController' => $baseDir . '/app/Http/Controllers/OrdersStatusController.php',
     'App\\Http\\Controllers\\PackagesController' => $baseDir . '/app/Http/Controllers/PackagesController.php',
     'App\\Http\\Controllers\\PackagingsController' => $baseDir . '/app/Http/Controllers/PackagingsController.php',

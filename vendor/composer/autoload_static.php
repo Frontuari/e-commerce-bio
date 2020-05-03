@@ -705,6 +705,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\LogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogsController.php',
         'App\\Http\\Controllers\\OrderAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderAddressController.php',
         'App\\Http\\Controllers\\OrderProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderProductsController.php',
+        'App\\Http\\Controllers\\OrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrdersController.php',
         'App\\Http\\Controllers\\OrdersStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrdersStatusController.php',
         'App\\Http\\Controllers\\PackagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PackagesController.php',
         'App\\Http\\Controllers\\PackagingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/PackagingsController.php',

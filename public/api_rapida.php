@@ -199,9 +199,20 @@ switch($_GET['evento']) {
     case 'listarPublicidad':
         listarPublicidad();
     break;
+    case 'listarPublicidadMedio':
+        listarPublicidadMedio();
+    break;
     default:
     
     salida($row,"Disculpe debe enviar un evento",false);
+}
+function listarPublicidadMedio(){
+    $arr=q("select image from advs where type='medio'");
+    if(is_array($arr)){
+     return salidaNueva($arr,'Listar publicidad',true);
+    }else{
+     return salidaNueva(null,'No tiene publicidad',false);
+    }
 }
 function listarPublicidad(){
     $arr=q("select image from advs where type='top'");
