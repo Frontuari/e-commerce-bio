@@ -14,7 +14,7 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos=false;
+$activar_productos=true;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
@@ -71,12 +71,15 @@ sleep($retraso_general);
 closelog();
 
 function email_tracking(){
-	$arr=q("SELECT t.id, t.description, oe.name,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
-	if(is_array($arr)){
+	$arra=q("SELECT titulo,body FROM pages WHERE id='5' AND status='A'");
+
+	$arr=q("SELECT t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
+	if(is_array($arr) and is_array($arra)){
+
 		foreach($arr as $obj){
 			$id=$obj['id'];
-			$titulo="Estatus de su orden # ".$obj['orders_id'];
-			$body="Su nuevo estatus de la orden es:<br>".$obj['name']."<br>".$obj['description'];
+			$titulo=agregarVariables($arra[0]['titulo'],$obj);
+			$body=agregarVariables($arra[0]['body'],$obj);
 			if(enviarCorreo($obj['email'],$titulo,$body)){
 				q("UPDATE trackings SET envio_email=1 WHERE id='$id'");
 			}elseif(enviarCorreo($obj['email'],$titulo,$body)){
@@ -88,6 +91,16 @@ function email_tracking(){
 			}
 		}
 	}
+}
+
+function agregarVariables($texto,$variables){
+
+	foreach($variables as $name=>$var){
+	
+		$texto = str_replace("{{$name}}", $var, $texto);
+		
+	}
+	return $texto;
 }
 
 function actualizarEnvioOrden(){
