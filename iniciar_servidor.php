@@ -126,7 +126,7 @@ function actualizarEnvioOrden(){
 	TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_para_entrega,
 	(SELECT json_agg(
 				json_build_object(
-				'sku', p.sku, 
+				'sku', TO_CHAR(p.sku,'fm000000'), 
 				'cant', op.cant,
 				'nombre',p.name,
 				'precio',op.price,
@@ -153,7 +153,7 @@ function actualizarEnvioOrden(){
 		foreach($arr as $index=>$obj){
 			
 			$data['data'][$index]['orderlines']=json_decode($obj['orderlines']);
-			$data['data'][$index]['detallepago']=json_decode($obj['orderlines']);
+			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
 
