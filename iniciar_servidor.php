@@ -19,7 +19,7 @@ $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
 
-$activar_envio_orden=false;
+$activar_envio_orden=true;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
@@ -150,7 +150,7 @@ function actualizarEnvioOrden(){
 	if(is_array($arr)){
 		$data['data']=json_encode($arr);
 
-	$res=send_url($data,"http://200.74.230.206:9009/api/v1/setOrder");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/setOrders");
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
