@@ -148,7 +148,14 @@ function actualizarEnvioOrden(){
 	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0");
 	
 	if(is_array($arr)){
-		$data['data']=json_encode($arr);
+		$data['data']=$arr;
+		//print_r($arr); exit();
+		foreach($arr as $index=>$obj){
+			
+			$data['data'][$index]['orderlines']=json_decode($obj['orderlines']);
+			$data['data'][$index]['detallepago']=json_decode($obj['orderlines']);
+		}
+		$data['data']=json_encode($data['data']);
 
 	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/setOrders");
 	//$res=true;
