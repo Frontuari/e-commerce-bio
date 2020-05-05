@@ -1,0 +1,302 @@
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: 00002279-44937 
+RedireccionFormulario: Redireccionando
+Control: 00002279-44937 
+PaginaWeb: Llegando a nuestro servidor
+Control: -42658
+URL de petición de XML: https://200.71.151.226:8443/payment/action/paymentgatewayuniveral-querystatus?control=-42658
+Obteniendo Login
+Datos a enviar:
+URL:https://200.71.151.226:8443/payment/action/paymentgatewayuniveral-querystatus?control=-42658 USERNAME: sanitas01 PASSWORD: Mega123-+
+Resultado HTTP ERROR -> 500 
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://200.71.151.226:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+Obteniendo Login
+Datos a enviar:
+URL:https://200.71.151.226:8443/payment/action/paymentgatewayuniveral-querystatus?control= USERNAME: sanitas01 PASSWORD: Mega123-+
+Resultado ERROR -> 60: SSL: no alternative certificate subject name matches target host name '200.71.151.226' 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: ERROR -> 60: SSL: no alternative certificate subject name matches target host name '200.71.151.226' 
+RedireccionFormulario: Redireccionando
+Control: ERROR -> 60: SSL: no alternative certificate subject name matches target host name '200.71.151.226' 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 10000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: ERROR -> 60: SSL: no alternative certificate subject name matches target host name '200.71.151.226' 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 10001 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67,sanitas01,Mega123-+
+Control: ERROR -> 28: Connection timed out after 20001 milliseconds 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67,sanitas01,Mega123-+
+Control: 1588690548810134008 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67,sanitas01,Mega123-+
+Control: 1588690655966134011 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1266&monto=124.67,sanitas01,Mega123-+
+Control: 1588690661660134027 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=12667&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=12667&monto=124.67,sanitas01,Mega123-+
+Control: 1588690697260134033 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: 1588690710161134046 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=1265&monto=124.67,sanitas01,Mega123-+
+Control: 1588690782311134059 
+RedireccionFormulario: Redireccionando
+Control: 1588690782311134059 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000,sanitas01,Mega123-+
+Control: 1588694352050134077 
+RedireccionFormulario: Redireccionando
+Control: 1588694352050134077 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33,sanitas01,Mega123-+
+Control: 1588699830701134141 
+RedireccionFormulario: Redireccionando
+Control: 1588699830701134141 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=60000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=60000.33,sanitas01,Mega123-+
+Control: 1588699952990134157 
+RedireccionFormulario: Redireccionando
+Control: 1588699952990134157 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000.33,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667000.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667000.33,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 20001 milliseconds with 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383.33,sanitas01,Mega123-+
+Control: 1588701271645134186 
+RedireccionFormulario: Redireccionando
+Control: 1588701271645134186 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383.33
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383.33,sanitas01,Mega123-+
+Control: 1588701625874134194 
+RedireccionFormulario: Redireccionando
+Control: 1588701625874134194 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383,sanitas01,Mega123-+
+Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667383,sanitas01,Mega123-+
+Control: 1588701861809134205 
+RedireccionFormulario: Redireccionando
+Control: 1588701861809134205 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600,sanitas01,Mega123-+
+Control: ERROR -> 28: Connection timed out after 20000 milliseconds 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600,sanitas01,Mega123-+
+Control: 1588703672567134255 
+RedireccionFormulario: Redireccionando
+Control: 1588703672567134255 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000
+Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000,sanitas01,Mega123-+
+Control: 1588703828645134261 
+RedireccionFormulario: Redireccionando
+Control: 1588703828645134261 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000
+05 06:49:12 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000,sanitas01,Mega123-+
+05 06:49:32 Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000
+05 06:50:40 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000,sanitas01,Mega123-+
+05 06:50:47 Control: 1588704579240134271 
+RedireccionFormulario: Redireccionando
+Control: 1588704579240134271 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000
+05 06:54:15 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=600000,sanitas01,Mega123-+
+05 06:54:15 Control: 1588704789685134289 
+RedireccionFormulario: Redireccionando
+Control: 1588704789685134289 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=50000
+05 06:56:16 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=50000,sanitas01,Mega123-+
+05 06:56:19 Control: 1588704913549134291 
+RedireccionFormulario: Redireccionando
+Control: 1588704913549134291 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=400000
+05 06:58:03 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=400000,sanitas01,Mega123-+
+05 06:58:03 Control: 1588705017508134301 
+RedireccionFormulario: Redireccionando
+Control: 1588705017508134301 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=400000
+05 07:06:51 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=400000,sanitas01,Mega123-+
+05 07:06:56 Control: 1588705549765134319 
+RedireccionFormulario: Redireccionando
+Control: 1588705549765134319 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=20000
+05 07:14:05 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=20000,sanitas01,Mega123-+
+05 07:14:25 Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=2000
+05 07:14:37 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=2000,sanitas01,Mega123-+
+05 07:14:44 Control: 1588706014630134322 
+RedireccionFormulario: Redireccionando
+Control: 1588706014630134322 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=90000
+05 07:18:56 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=90000,sanitas01,Mega123-+
+05 07:19:06 Control: 1588706280501134334 
+RedireccionFormulario: Redireccionando
+Control: 1588706280501134334 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=100000
+05 07:20:18 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=100000,sanitas01,Mega123-+
+05 07:20:38 Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=100000
+05 07:20:54 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=100000,sanitas01,Mega123-+
+05 07:21:14 Control: ERROR -> 28: Operation timed out after 20000 milliseconds with 0 out of 0 bytes received 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=50000
+05 07:21:36 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=50000,sanitas01,Mega123-+
+05 07:21:46 Control: 1588706440511134351 
+RedireccionFormulario: Redireccionando
+Control: 1588706440511134351 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=200000
+05 07:26:33 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=200000,sanitas01,Mega123-+
+05 07:26:34 Control: 1588706727801134364 
+RedireccionFormulario: Redireccionando
+Control: 1588706727801134364 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667000.00
+05 07:32:05 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=667000.00,sanitas01,Mega123-+
+05 07:32:26 Control: ERROR -> 28: Failed to connect to 200.71.151.226 port 8443: Timed out 
+PreRegistro
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=200000.00
+05 07:32:59 Obteniendo Login
+Datos a enviar:
+https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=60&monto=200000.00,sanitas01,Mega123-+
+05 07:33:10 Control: 1588707123870134378 
+RedireccionFormulario: Redireccionando
+Control: 1588707123870134378 
