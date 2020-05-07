@@ -226,6 +226,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
 //print_r($row->details->options);
 //echo "<br>";
 //echo "<br>";
+exit("MANTENIMIENTO");
 if($row->field=='status'){
     $rol=Auth::user()->role_id;
     if($rol==5){
@@ -237,7 +238,7 @@ if($row->field=='status'){
             unset($v->CO);
             }
         }
-            
+
       //  $dataType->editRows[$key]['details'] = json_decode('{"default":"NU","options":{"NU":"Nuevo","PR":"Preparar orden","SD":"Esperando por delivery","ED":"Entregado al delivery","EC":"Entregado al cliente","RT":"Retirar en tienda BIO","CO":"Cancelar orden"}}');
         $dataType->editRows[$key]['details'] = $t;
     }
