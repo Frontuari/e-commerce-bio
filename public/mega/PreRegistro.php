@@ -8,8 +8,8 @@ $nro_orden=$_GET['nro_orden'];
 $monto=$_GET['total'];
 $archivo=fopen("log.txt",'a+');
 fwrite($archivo,"PreRegistro\n");
-
-$url = "https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-".
+ 
+$url = URL_MEGA."/payment/action/paymentgatewayuniversal-".
     "prereg?cod_afiliacion=".CODAFILIACION."&factura=$nro_orden&monto=$monto";
 
 fwrite($archivo,"$url\n");
@@ -23,7 +23,7 @@ fwrite($archivo,"".$url.",".USERNAME.",".PASSWORD."\n");
 $numeroControl=$control->loginHTTPS($url,USERNAME,PASSWORD);
 fwrite($archivo,date("d h:i:s ")."Control: $numeroControl \n");
 if(is_numeric($numeroControl)){
-	RedireccionFormulario::redireccionar($numeroControl);
+	RedireccionFormulario::redireccionar($numeroControl,URL_MEGA);
 }else{
 	echo "<div style='text-align:center'>Disculpe, en este momento no podemos procesar su pago, intente mas tarde.</div>";
 }
