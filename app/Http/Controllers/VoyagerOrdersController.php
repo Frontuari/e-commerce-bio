@@ -221,12 +221,12 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         
         }
-
+        exit("MANTENIMIENTO");
         foreach ($dataType->editRows as $key => $row) {
 //print_r($row->details->options);
 //echo "<br>";
 //echo "<br>";
-exit("MANTENIMIENTO");
+
 if($row->field=='status'){
     $rol=Auth::user()->role_id;
     if($rol==5){
