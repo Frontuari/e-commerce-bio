@@ -4,7 +4,7 @@
 	<div class="jumbotron" style="background-image: url('{{ $portada }}');">
 		<div class="container">
 			<div class="text-center">
-				<!-- <h1>{{ $title }}</h1> -->
+				<h1 style="visibility: hidden">{{ $title }}</h1>
 			</div>
 		</div>
 	</div>
