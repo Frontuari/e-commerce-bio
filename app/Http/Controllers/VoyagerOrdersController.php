@@ -221,7 +221,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         
         }
-        exit("MANTENIMIENTO");
+     
         foreach ($dataType->editRows as $key => $row) {
 //print_r($row->details->options);
 //echo "<br>";
