@@ -19,7 +19,7 @@ $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
 
-$activar_envio_orden=false;
+$activar_envio_orden=true;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
@@ -126,7 +126,7 @@ function actualizarEnvioOrden(){
 	TO_CHAR(o.delivery_time_date, 'dd/mm/yyyy HH12:MI AM') AS fecha_para_entrega,
 	(SELECT json_agg(
 				json_build_object(
-				'sku', p.sku, 
+				'sku', TO_CHAR(p.sku,'fm000000'), 
 				'cant', op.cant,
 				'nombre',p.name,
 				'precio',op.price,
@@ -148,9 +148,15 @@ function actualizarEnvioOrden(){
 	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0");
 	
 	if(is_array($arr)){
-		$data['data']=json_encode($arr);
-
-	$res=send_url($data,"http://200.74.230.206:9009/api/v1/setOrder");
+		$data['data']=$arr;
+		//print_r($arr); exit();
+		foreach($arr as $index=>$obj){
+			
+			$data['data'][$index]['orderlines']=json_decode($obj['orderlines']);
+			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
+		}
+		$data['data']=json_encode($data['data']);
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/setOrders");
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
@@ -200,9 +206,11 @@ function actualizarProductos($ip){
 
 				if($obj->ad_org_id==1000004){
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
-				
-					if($obj->sugerido<0){
-						$obj->sugerido=0;
+					$sugerido=$obj->sugerido;
+					if($sugerido<0){
+						$sugerido=0;
+					}else{
+						$sugerido=round($sugerido*0.80);
 					}
 
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
@@ -289,14 +297,14 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
-						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						//exit($sql);
 						$valido=q($sql);
 						$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
 						
 
 					}else{
-						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$obj->sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
