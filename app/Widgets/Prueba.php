@@ -27,14 +27,26 @@ class Prueba extends BaseDimmer
     public function run()
     {
         $h="";
-        $h.= "<div class='row'>".$this->top().
-        $this->productos().
-        $this->usuarios().
-        $this->ventas().
-        $this->opiniones().
-        $this->nuevo_pago('Nuevos pagos','consutar_nuevo_pago','/admin/det-bank-orders','ion-cash').
-        $this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes','/admin/orders','ion-pricetag').
-        '
+        $h.= "<div class='row'>".$this->top();
+        $rol=Auth::user()->role_id;
+        if($rol!=7){
+          $h.=$this->productos();
+          $h.=$this->usuarios();
+          $h.=$this->ventas();
+          $h.=$this->opiniones();
+        }
+
+
+        if($rol==6 || $rol==1){
+          $h.=$this->nuevo_pago('Nuevos pagos','consutar_nuevo_pago','/admin/det-bank-orders','ion-cash');
+        }
+        if($rol==5 || $rol==1){
+          $h.=$this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes','/admin/orders','ion-pricetag');
+        }
+        if($rol==7 || $rol==1){
+          $h.=$this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes_delivery','/admin/orders','ion-pricetag');
+        }
+        $h.='
         <span id="noti" style="margin-right:20px;float:right; font-size:60px; color:#E1251B" onclick="chao()"><i class="ion-android-notifications-off"></i></span>
         </div>'.
         $this->grafico_pedidos();

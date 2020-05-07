@@ -30,6 +30,14 @@ if($_GET['token']=='leonardomelendez'){
                 salida(null,"Disculpe sin conexión al servidor",false);
             }
         break;
+        case 'consutar_nuevas_ordenes_delivery':
+            $arr=q("SELECT count(o.id) as cant FROM orders o WHERE o.status='SD'");
+            if(is_array($arr)){
+                salida($arr,"Consulta realizada",true);
+            }else{
+                salida(null,"Disculpe sin conexión al servidor",false);
+            }
+        break;
         default:
         salida($row,"Disculpe debe enviar un evento",false);
     break;

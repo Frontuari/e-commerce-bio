@@ -6,13 +6,13 @@
  */
 class RedireccionFormulario {
     
-    public function redireccionar($control){
+    public function redireccionar($control,$url){
         
         $archivo=fopen("log.txt",'a+');
         fwrite($archivo,"RedireccionFormulario: Redireccionando\n");
         fwrite($archivo,"Control: $control \n");
         
-        $url="https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-data?control=$control";
+        $url=$url."/payment/action/paymentgatewayuniversal-data?control=$control";
         
         header("Location: $url");
         
