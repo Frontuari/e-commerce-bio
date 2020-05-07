@@ -206,9 +206,11 @@ function actualizarProductos($ip){
 
 				if($obj->ad_org_id==1000004){
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
-				
-					if($obj->sugerido<0){
-						$obj->sugerido=0;
+					$sugerido=$obj->sugerido;
+					if($sugerido<0){
+						$sugerido=0;
+					}else{
+						$sugerido=round($sugerido*0.80);
 					}
 
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
@@ -295,14 +297,14 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
-						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$obj->sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						//exit($sql);
 						$valido=q($sql);
 						$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
 						
 
 					}else{
-						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$obj->sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
