@@ -501,7 +501,7 @@
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
-															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit">CONFIRMAR PAGO</button>
+															<button type="button" @click="saveOrder()" name="next" class="btn btn-submit" :disabled="payButton">CONFIRMAR PAGO</button>
 														</div>
 													</div>
 												</div>
@@ -525,6 +525,11 @@
 																	<div class="row">
 																		<p>Total</p>
 																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		<span v-if="payButton">
+																			<font color="red">
+																				Su abono de pago debe ser exacto
+																			</font>
+																		</span>
 																	</div>
 																</div>
 
@@ -534,19 +539,19 @@
 																		<table class="table table-sm table-borderless">
 																			<tr>
 																				<td><b>USD:</b> </td>
-																				<td>$ {{this.totalAbonoUsd}} </td>
+																				<td>$ {{totalAbonoUsd}} </td>
 																			</tr>
 																			<tr>
 																				<td><b>Bs:</b> </td>
-																				<td>{{this.totalAbonoBs | FormatNumber}} Bs</td>
+																				<td>{{totalAbonoBs | FormatNumber}} Bs</td>
 																			</tr>
 																			<tr>
 																				<td>Resta:  </td>
-																				<td>{{this.Resta | FormatNumber}} Bs</td>
+																				<td>{{Resta | FormatNumber}} Bs</td>
 																			</tr>
 																			<tr>
 																				<td>Total:  </td>
-																				<td>{{this.totalAbono | FormatNumber}} Bs</td>
+																				<td>{{totalAbono | FormatNumber}} Bs</td>
 																			</tr>
 																		</table>
 																		
@@ -574,7 +579,7 @@
 																</div>
 															</div>
 															<div class="order-footer-buttons">
-																<button type="button" @click="saveOrder()" class="btn btn-submit">CONFIRMAR PAGO</button>
+																<button type="button" @click="saveOrder()" class="btn btn-submit" :disabled="payButton">CONFIRMAR PAGO</button>
 																<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
 															</div>
 														</div>
@@ -644,7 +649,8 @@
 				datetime: '',
 				num_order: 0,
 				tmpOrder: {},
-				banks:[]
+				banks:[],
+				payButton: true
 			}
 		},
 		components:{
@@ -655,7 +661,6 @@
 			tasadolar: Number
 		},
 		methods:{
-
 			LoadImageFile(event) {
 				this.payment_img = event.target.files[0];
 			},
@@ -770,6 +775,13 @@
 				
 				this.totalAbono = (parseFloat(this.totalAbonoUsd * this.tasadolar) + parseFloat(this.totalAbonoBs));
 				this.Resta = parseFloat(this.total_cart) - parseFloat(this.totalAbono);
+
+				if(this.totalAbono == this.total_cart) {
+					this.payButton = false;
+				}else {
+					this.payButton = true;
+				}
+
 			},
 			showBanksInfo: async function(event,index)
 			{
@@ -841,7 +853,7 @@
 				}else{
 					return this.userlogged.directions[id];
 				}
-			},
+			}
 		}
 	}
 </script>

@@ -22,6 +22,7 @@
 	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
+	            $m["image_b"] = $this->cambiarBarra($m["image_b"]);
 	            array_push($Ads, $m);
 	        }
 	        $Ads = json_encode($Ads);
@@ -30,8 +31,10 @@
 				$category_id = filter_input(INPUT_GET, "cat",FILTER_VALIDATE_INT);
 				$category = ProductCategory::where('id',$category_id)->get();
 				$category = json_decode($category);
+				$portada = "storage/".$category[0]->image_b;
 				$title = $category[0]->name;
 			}else{
+				$portada = '/assets/img/banner-titulos.jpg';
 				$title = 'Catalogo';
 			}
 			
@@ -41,6 +44,7 @@
 			$k = json_encode($this->getTags($cat));
 
 			return view("catalog",[
+				"portada"=>$portada,
 				"title"=>$title,
 				"tasa_dolar"=>$Coin->rate,
 				"ads"=>$Ads,
