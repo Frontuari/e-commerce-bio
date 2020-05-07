@@ -65,8 +65,10 @@ $direccion_entrega=($o->dir_entrega=='' ? $o->address : $o->dir_entrega);
 if($direccion_entrega==''){
     $direccion_entrega='Retirar en tienda Biomercados';
 }
-$fecha_factura=date('d/m/Y',strtotime($o->fecha_enviado_bio));
-$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
+//$fecha_factura=date('d/m/Y',strtotime($o->fecha_enviado_bio));
+//$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
+$fecha_factura=date('d/m/Y',strtotime($o->created_at));
+$hora_factura=date('h:i:s A',strtotime($o->created_at));
 $fecha_entrega=$o->fecha_entrega;
 
 $fac= "
@@ -180,7 +182,7 @@ $fac.="
     <td>".formato_numero($o->total_transport+$o->sub_total)."</td>
 </tr>
 <tr>
-    <td>exento</td>
+    <td>Exento</td>
     <td>".formato_numero($o->exento)."</td>
 </tr>
 <tr>
