@@ -110,6 +110,12 @@ var globalFunc = {
         }
         
     },
+    addComboToCart: function(products) {
+        products.forEach( a => {
+            console.log("a::> ",a);
+            globalFunc.addToCart(a,a.cant_combo);
+        });
+    },
     validateCart: function(product,tmp,cantidad) {
         let exist = false;
         tmp.forEach( (a,b) => {
@@ -182,6 +188,7 @@ var globalFunc = {
 
 Vue.prototype.addToFavorite = globalFunc.addToFavorite; 
 Vue.prototype.addToCart = globalFunc.addToCart;
+Vue.prototype.addComboToCart = globalFunc.addComboToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 Vue.prototype.dropCart = globalFunc.dropCart;
 
