@@ -300,3 +300,65 @@ https://200.71.151.226:8443/payment/action/paymentgatewayuniversal-prereg?cod_af
 05 07:33:10 Control: 1588707123870134378 
 RedireccionFormulario: Redireccionando
 Control: 1588707123870134378 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:41:34 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,Biomer01,Biopg01*
+08 12:41:41 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:41:52 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,Biomer01,Biopg01*
+08 12:42:00 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:42:05 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,Biomer01,Biopg01*
+08 12:42:19 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=80&monto=300000.00
+08 12:42:48 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=2013061801&factura=80&monto=300000.00,sanitas01,Mega123-+
+08 12:42:49 Control: 1588941691950134421 
+RedireccionFormulario: Redireccionando
+Control: 1588941691950134421 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:49:15 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg01*
+08 12:49:17 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:49:22 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg01*
+08 12:49:23 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:49:31 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg01*
+08 12:49:32 Control: HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:49:49 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg01*
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 12:52:19 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg01*
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 01:10:00 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg02*
+08 01:10:01 Control: 1588943323604134504 
+RedireccionFormulario: Redireccionando
+Control: 1588943323604134504 
