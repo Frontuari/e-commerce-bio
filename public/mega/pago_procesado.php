@@ -8,6 +8,7 @@
     
    $numeroControl=$_GET['control'];
     //$numeroControl='1588963980911134684';
+    //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
     fwrite($archivo,"Control: $numeroControl\n");
     
@@ -23,7 +24,7 @@
     fwrite($archivo,"URL:".$url." USERNAME: ".USERNAME." PASSWORD: ".PASSWORD."\n");
     
     $xml=$control->loginHTTPS($url,USERNAME,PASSWORD);
-   
+   print_r($xml);
     fwrite($archivo,"Resultado $xml \n");
     
     fclose($archivo);

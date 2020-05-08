@@ -612,3 +612,240 @@ https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prer
 08 08:43:36 Control: 1588970534903134743 
 RedireccionFormulario: Redireccionando
 Control: 1588970534903134743 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=80000.00
+08 08:47:37 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=80000.00,biomer01,Biopg02*
+08 08:47:38 Control: 1588970779075134758 
+RedireccionFormulario: Redireccionando
+Control: 1588970779075134758 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=80000.00
+08 08:48:43 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=80000.00,biomer01,Biopg02*
+08 08:48:53 Control: 1588970854595134761 
+RedireccionFormulario: Redireccionando
+Control: 1588970854595134761 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado <?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+	<control>1588963980911134684</control>
+	<cod_afiliacion>25032020</cod_afiliacion>
+	<factura>80</factura>
+	<monto>2000000</monto>
+	<estado>A</estado>
+	<codigo>00</codigo>
+	<descripcion><![CDATA[APROBADA]]></descripcion>
+	<vtid>biopg01</vtid>
+	<seqnum>10</seqnum>
+	<authid>4713</authid>
+	<authname>P-Banesco</authname>
+	<tarjeta>542007******9279</tarjeta>
+	<referencia>23</referencia>
+	<terminal>9898016</terminal>
+	<lote>4</lote>
+	<rifbanco>J-07013380-5</rifbanco>
+	<afiliacion>860084789</afiliacion>
+	<voucher><![CDATA[
+<UT>         DUPLICADO</UT>
+     B A N E S C O J-07013380-5
+               COMPRA
+PAYMENT GATEWAY
+CHAGUARAMOS
+RIF:J00408552965 AFIL:860084789 
+TER:9898016 LOTE:4 REF:23
+NRO.CTA:542007******9279 'M'
+FECHA:08/05/2020 14:53:46 APROB:4713
+SECUENCIA:10 CAJA:BIOPG01
+MONTO BS.  :20.000,00
+
+FIRMA  :__________________
+C.I.   :__________________
+
+]]></voucher>
+</response> 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado <?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+	<control>1588963980911134684</control>
+	<cod_afiliacion>25032020</cod_afiliacion>
+	<factura>80</factura>
+	<monto>2000000</monto>
+	<estado>A</estado>
+	<codigo>00</codigo>
+	<descripcion><![CDATA[APROBADA]]></descripcion>
+	<vtid>biopg01</vtid>
+	<seqnum>10</seqnum>
+	<authid>4713</authid>
+	<authname>P-Banesco</authname>
+	<tarjeta>542007******9279</tarjeta>
+	<referencia>23</referencia>
+	<terminal>9898016</terminal>
+	<lote>4</lote>
+	<rifbanco>J-07013380-5</rifbanco>
+	<afiliacion>860084789</afiliacion>
+	<voucher><![CDATA[
+<UT>         DUPLICADO</UT>
+     B A N E S C O J-07013380-5
+               COMPRA
+PAYMENT GATEWAY
+CHAGUARAMOS
+RIF:J00408552965 AFIL:860084789 
+TER:9898016 LOTE:4 REF:23
+NRO.CTA:542007******9279 'M'
+FECHA:08/05/2020 14:53:46 APROB:4713
+SECUENCIA:10 CAJA:BIOPG01
+MONTO BS.  :20.000,00
+
+FIRMA  :__________________
+C.I.   :__________________
+
+]]></voucher>
+</response> 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado <?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+	<control>1588963980911134684</control>
+	<cod_afiliacion>25032020</cod_afiliacion>
+	<factura>80</factura>
+	<monto>2000000</monto>
+	<estado>A</estado>
+	<codigo>00</codigo>
+	<descripcion><![CDATA[APROBADA]]></descripcion>
+	<vtid>biopg01</vtid>
+	<seqnum>10</seqnum>
+	<authid>4713</authid>
+	<authname>P-Banesco</authname>
+	<tarjeta>542007******9279</tarjeta>
+	<referencia>23</referencia>
+	<terminal>9898016</terminal>
+	<lote>4</lote>
+	<rifbanco>J-07013380-5</rifbanco>
+	<afiliacion>860084789</afiliacion>
+	<voucher><![CDATA[
+<UT>         DUPLICADO</UT>
+     B A N E S C O J-07013380-5
+               COMPRA
+PAYMENT GATEWAY
+CHAGUARAMOS
+RIF:J00408552965 AFIL:860084789 
+TER:9898016 LOTE:4 REF:23
+NRO.CTA:542007******9279 'M'
+FECHA:08/05/2020 14:53:46 APROB:4713
+SECUENCIA:10 CAJA:BIOPG01
+MONTO BS.  :20.000,00
+
+FIRMA  :__________________
+C.I.   :__________________
+
+]]></voucher>
+</response> 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588970854595134761
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588970854595134761
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588970854595134761 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado <?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+	<control>1588970854595134761</control>
+	<cod_afiliacion>25032020</cod_afiliacion>
+	<factura>80</factura>
+	<monto>8000000</monto>
+	<estado>A</estado>
+	<codigo>00</codigo>
+	<descripcion><![CDATA[APROBADA]]></descripcion>
+	<vtid>biopg01</vtid>
+	<seqnum>11</seqnum>
+	<authid>6016</authid>
+	<authname>P-Banesco</authname>
+	<tarjeta>522037******2279</tarjeta>
+	<referencia>24</referencia>
+	<terminal>9898016</terminal>
+	<lote>4</lote>
+	<rifbanco>J-07013380-5</rifbanco>
+	<afiliacion>860084789</afiliacion>
+	<voucher><![CDATA[
+<UT>         DUPLICADO</UT>
+     B A N E S C O J-07013380-5
+               COMPRA
+PAYMENT GATEWAY
+CHAGUARAMOS
+RIF:J00408552965 AFIL:860084789 
+TER:9898016 LOTE:4 REF:24
+NRO.CTA:522037******2279 'M'
+FECHA:08/05/2020 16:49:20 APROB:6016
+SECUENCIA:11 CAJA:BIOPG01
+MONTO BS.  :80.000,00
+
+FIRMA  :__________________
+C.I.   :__________________
+
+]]></voucher>
+</response> 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado <?xml version="1.0" encoding="ISO-8859-1"?>
+<response>
+	<control>1588963980911134684</control>
+	<cod_afiliacion>25032020</cod_afiliacion>
+	<factura>80</factura>
+	<monto>2000000</monto>
+	<estado>A</estado>
+	<codigo>00</codigo>
+	<descripcion><![CDATA[APROBADA]]></descripcion>
+	<vtid>biopg01</vtid>
+	<seqnum>10</seqnum>
+	<authid>4713</authid>
+	<authname>P-Banesco</authname>
+	<tarjeta>542007******9279</tarjeta>
+	<referencia>23</referencia>
+	<terminal>9898016</terminal>
+	<lote>4</lote>
+	<rifbanco>J-07013380-5</rifbanco>
+	<afiliacion>860084789</afiliacion>
+	<voucher><![CDATA[
+<UT>         DUPLICADO</UT>
+     B A N E S C O J-07013380-5
+               COMPRA
+PAYMENT GATEWAY
+CHAGUARAMOS
+RIF:J00408552965 AFIL:860084789 
+TER:9898016 LOTE:4 REF:23
+NRO.CTA:542007******9279 'M'
+FECHA:08/05/2020 14:53:46 APROB:4713
+SECUENCIA:10 CAJA:BIOPG01
+MONTO BS.  :20.000,00
+
+FIRMA  :__________________
+C.I.   :__________________
+
+]]></voucher>
+</response> 

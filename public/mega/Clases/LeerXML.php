@@ -27,8 +27,10 @@ class LeerXML{
         $xml->setAfiliacion($dato->afiliacion);
         $xml->setVoucher($dato->voucher);
         
-        echo "Transacción exitosa. Control: ".$xml->getControl();
-
+        echo "Transacción exitosa. Control: ".$xml->getControl()."<br>";
+        echo "Estado: ".$xml->getEstado()."<br>";
+        echo "Orden Nro. ".$xml->getFactura()."<br>";
+        echo "Referencia. ".$xml->getReferencia()."<br>";
     }
 }
 ?>
