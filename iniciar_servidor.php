@@ -19,11 +19,11 @@ $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
 
-$activar_envio_orden=false;
+$activar_envio_orden=true;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
-$activar_email_tracking=false;
+$activar_email_tracking=true;
 $tiempo_acumulado_email_tracking=0;
 $retraso_email_tracking="+1 minutes";
 
