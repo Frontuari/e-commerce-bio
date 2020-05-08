@@ -5,6 +5,9 @@ ECHO "POST------------<BR>";
 print_r($_POST);
 ECHO "SESSION------------<BR>";
 print_r($_SESSION);
+ECHO "CABECERAS-----------<BR>";
+print_r(headers_list());
+
 /*
 include_once 'Objetos/XML.php';
 class LeerXML{
