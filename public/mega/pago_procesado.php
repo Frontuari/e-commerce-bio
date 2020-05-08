@@ -1,4 +1,8 @@
 <?php
+print_r($_GET);
+ECHO "POST------------<BR>";
+print_r($_POST);
+/*
 include_once 'Objetos/XML.php';
 class LeerXML{
     
@@ -32,4 +36,5 @@ class LeerXML{
     }
 }
 $a= new LeerXML();
+*/
 ?>
