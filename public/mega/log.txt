@@ -450,3 +450,11 @@ https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prer
 08 03:12:11 Control: 1588950652247134623 
 RedireccionFormulario: Redireccionando
 Control: 1588950652247134623 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=3000.00
+08 03:28:03 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=3000.00,biomer01,Biopg02*
+08 03:28:11 Control: 1588951613802134631 
+RedireccionFormulario: Redireccionando
+Control: 1588951613802134631 

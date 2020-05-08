@@ -1,6 +1,13 @@
 <?php
 session_start();
+ECHO "REQUEST------------<BR>";
+print_r($_REQUEST);
+ECHO "GET------------<BR>";
 print_r($_GET);
+ECHO "COOKIE------------<BR>";
+print_r($_COOKIE);
+ECHO "FILE------------<BR>";
+print_r($_FILES);
 ECHO "POST------------<BR>";
 print_r($_POST);
 ECHO "SESSION------------<BR>";
