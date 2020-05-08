@@ -2,6 +2,8 @@
 print_r($_GET);
 ECHO "POST------------<BR>";
 print_r($_POST);
+ECHO "SESSION------------<BR>";
+print_r($_SESSION);
 /*
 include_once 'Objetos/XML.php';
 class LeerXML{

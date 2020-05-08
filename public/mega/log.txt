@@ -370,3 +370,35 @@ https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prer
 08 02:01:26 Control: 1588946408494134523 
 RedireccionFormulario: Redireccionando
 Control: 1588946408494134523 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 02:08:18 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg02*
+08 02:08:19 Control: 1588946821614134531 
+RedireccionFormulario: Redireccionando
+Control: 1588946821614134531 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 02:28:11 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg02*
+08 02:28:15 Control: 1588948017216134546 
+RedireccionFormulario: Redireccionando
+Control: 1588948017216134546 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 02:36:03 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg02*
+08 02:36:05 Control: 1588948487276134554 
+RedireccionFormulario: Redireccionando
+Control: 1588948487276134554 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00
+08 02:44:17 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=300000.00,biomer01,Biopg02*
+08 02:44:18 Control: 1588948980720134565 
+RedireccionFormulario: Redireccionando
+Control: 1588948980720134565 
