@@ -1,4 +1,5 @@
 <?php
+session_start();
 print_r($_GET);
 ECHO "POST------------<BR>";
 print_r($_POST);
