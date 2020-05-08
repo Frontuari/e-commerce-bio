@@ -14,26 +14,26 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos=true;
+$activar_productos=false;
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
 
-$activar_envio_orden=true;
+$activar_envio_orden=false;
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
-$activar_email_tracking=true;
+$activar_email_tracking=false;
 $tiempo_acumulado_email_tracking=0;
 $retraso_email_tracking="+1 minutes";
 
 $activar_tasa=true;
 $tiempo_acumulado_tasa=0;
-$retraso_tasa="+29 minutes";
+$retraso_tasa="+7 minutes";
 
 $activar_delivery=true;
 $tiempo_acumulado_delivery=0;
-$retraso_delivery="+30 minutes";
+$retraso_delivery="+7 minutes";
 
 /* Ejemplo si quieren crear otro :)
 $activar_productosb=true;
@@ -95,31 +95,33 @@ closelog();
 
 
 function actualizarDelivery($ip){
+	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
 	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getDelivery";
 	
 	$data=leer("Delivery",$url);
 	
 	if($data!=false){
-		foreach($data as $obj){
-			if($obj->price>0){
-				$price=$obj->price;
+		
+			if($data->price>0){
+				$price=$data->price;
 				q("UPDATE transports SET price='$price' WHERE id=2");
 			}
-		}
+		
 	}
 }
 function actualizarTasa($ip){
+	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
 	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getTax";
 	
 	$data=leer("Tasa dolar",$url);
-	
+
 	if($data!=false){
-		foreach($data as $obj){
-			if($obj->Tax>0){
-				$rate=$obj->Tax;
+			if($data->Tax>0){
+				
+				$rate=$data->Tax;
 				q("UPDATE coins SET rate='$rate' WHERE id=1");
 			}
-		}
+		
 	}
 }
 
