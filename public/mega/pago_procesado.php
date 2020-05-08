@@ -1,53 +1,31 @@
 <?php
-session_start();
-ECHO "REQUEST------------<BR>";
-print_r($_REQUEST);
-ECHO "GET------------<BR>";
-print_r($_GET);
-ECHO "COOKIE------------<BR>";
-print_r($_COOKIE);
-ECHO "FILE------------<BR>";
-print_r($_FILES);
-ECHO "POST------------<BR>";
-print_r($_POST);
-ECHO "SESSION------------<BR>";
-print_r($_SESSION);
-ECHO "CABECERAS-----------<BR>";
-print_r(headers_list());
-
-/*
-include_once 'Objetos/XML.php';
-class LeerXML{
+    include_once './Clases/Login.php';
+    include_once './Clases/LeerXML.php';
+    include './constantes.php';
     
-    function leerXML($resultado){
-        //echo $resultado;
-        $xml = new XML();
-
-        $dato= new SimpleXMLElement($resultado);
-        
-        $xml->setControl($dato->control);
-        $xml->setCodAfiliacion($dato->cod_afiliacion);
-        $xml->setFactura($dato->factura);
-        $xml->setMonto($dato->monto);
-        $xml->setEstado($dato->estado);
-        $xml->setCodigo($dato->codigo);
-        $xml->setDescripcion($dato->descripcion);
-        $xml->setVtid($dato->vtid);
-        $xml->setSeqnum($dato->seqnum);
-        $xml->setAuthid($dato->authid);
-        $xml->setAuthname($dato->authname);
-        $xml->setTarjeta($dato->tarjeta);
-        $xml->setReferencia($dato->referencia);
-        $xml->setTerminal($dato->terminal);
-        $xml->setLote($dato->lote);
-        $xml->setRifBanco($dato->rifbanco);
-        $xml->setAfiliacion($dato->afiliacion);
-        $xml->setVoucher($dato->voucher);
-        
-        echo "Transacción exitosa. Control: ".$xml->getControl();
-
-    }
-}
-$a= new LeerXML();
-*/
+    $archivo=fopen("log.txt",'a+');
+    fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
+    
+    $numeroControl=$_GET['control'];
+    
+    fwrite($archivo,"Control: $numeroControl\n");
+    
+    $url=URL_MEGA."/payment/action/paymentgatewayuniveral-querystatus?control=$numeroControl";
+    
+    fwrite($archivo,"URL de petición de XML: $url\n");
+    
+    $control = new Login();
+    $leerXML = new LeerXML();
+    
+    fwrite($archivo,"Obteniendo Login\n");
+    fwrite($archivo,"Datos a enviar:\n");
+    fwrite($archivo,"URL:".$url." USERNAME: ".USERNAME." PASSWORD: ".PASSWORD."\n");
+    
+    $xml=$control->loginHTTPS($url,USERNAME,PASSWORD);
+    
+    fwrite($archivo,"Resultado $xml \n");
+    
+    fclose($archivo);
+    $leerXML->leerXML($xml);
+    
 ?>
