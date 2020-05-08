@@ -65,8 +65,10 @@ $direccion_entrega=($o->dir_entrega=='' ? $o->address : $o->dir_entrega);
 if($direccion_entrega==''){
     $direccion_entrega='Retirar en tienda Biomercados';
 }
-$fecha_factura=date('d/m/Y',strtotime($o->fecha_enviado_bio));
-$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
+//$fecha_factura=date('d/m/Y',strtotime($o->fecha_enviado_bio));
+//$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
+$fecha_factura=date('d/m/Y',strtotime($o->created_at));
+$hora_factura=date('h:i:s A',strtotime($o->created_at));
 $fecha_entrega=$o->fecha_entrega;
 
 $fac= "
@@ -78,6 +80,7 @@ $fac= "
 .titu{
     text-align:center
 }
+#t td { padding: 1px; }
 </style>
 <table id='t'>
 <tr>
@@ -145,7 +148,10 @@ $fac= "
     <td>Hora: $hora_factura</td>
    
 </tr>
-
+<tr>
+    <td colspan='2'>&nbsp;</td>
+  
+</tr>
 ";
 
 $pro=json_decode($o->productos);
@@ -153,15 +159,39 @@ $pro=json_decode($o->productos);
 foreach($pro as $k=>$v){
     $fac.="<tr>
     <td>$v->cant x $v->name</td>
-    <td>".formato_numero($v->price)."</td>
+    <td>".formato_numero($v->price*$v->cant)."</td>
     </tr>";
 }
 
 
 $fac.="
 <tr>
-    <td>EXENTO</td>
+    <td colspan='2'>&nbsp;</td>
+  
+</tr>
+<tr>
+    <td>Productos</td>
+    <td>".formato_numero($o->sub_total)."</td>
+</tr>
+<tr>
+    <td>Envío</td>
+    <td>".formato_numero($o->total_transport)."</td>
+</tr>
+<tr>
+    <td>Sub total</td>
+    <td>".formato_numero($o->total_transport+$o->sub_total)."</td>
+</tr>
+<tr>
+    <td>Exento</td>
     <td>".formato_numero($o->exento)."</td>
+</tr>
+<tr>
+    <td>Base imponible</td>
+    <td>".formato_numero($o->bi)."</td>
+</tr>
+<tr>
+    <td>Impuestos</td>
+    <td>".formato_numero($o->total_tax)."</td>
 </tr>
 <tr>
     <td>TOTAL</td>

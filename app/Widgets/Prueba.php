@@ -44,7 +44,7 @@ class Prueba extends BaseDimmer
           $h.=$this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes','/admin/orders','ion-pricetag');
         }
         if($rol==7 || $rol==1){
-          $h.=$this->nuevo_pago('Nueva orden','consutar_nuevas_ordenes_delivery','/admin/orders','ion-pricetag');
+          $h.=$this->nuevo_pago('Delivery','consutar_nuevas_ordenes_delivery','/admin/orders','ion-pricetag');
         }
         $h.='
         <span id="noti" style="margin-right:20px;float:right; font-size:60px; color:#E1251B" onclick="chao()"><i class="ion-android-notifications-off"></i></span>
