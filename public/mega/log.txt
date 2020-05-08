@@ -482,3 +482,54 @@ https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prer
 08 06:25:47 Control: 1588962265610134664 
 RedireccionFormulario: Redireccionando
 Control: 1588962265610134664 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=2000.00
+08 06:37:08 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=2000.00,biomer01,Biopg02*
+08 06:37:16 Control: 1588962957596134677 
+RedireccionFormulario: Redireccionando
+Control: 1588962957596134677 
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control= USERNAME: biomer01 PASSWORD: Biopg02*
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control= USERNAME: biomer01 PASSWORD: Biopg02*
+PaginaWeb: Llegando a nuestro servidor
+Control: 
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control= USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado HTTP ERROR -> 500 
