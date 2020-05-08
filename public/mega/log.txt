@@ -533,3 +533,18 @@ Obteniendo Login
 Datos a enviar:
 URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control= USERNAME: biomer01 PASSWORD: Biopg02*
 Resultado HTTP ERROR -> 500 
+PreRegistro
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=20000.00
+08 06:54:09 Obteniendo Login
+Datos a enviar:
+https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniversal-prereg?cod_afiliacion=25032020&factura=80&monto=20000.00,biomer01,Biopg02*
+08 06:54:20 Control: 1588963980911134684 
+RedireccionFormulario: Redireccionando
+Control: 1588963980911134684 
+PaginaWeb: Llegando a nuestro servidor
+Control: 1588963980911134684
+URL de petición de XML: https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=1588963980911134684
+Obteniendo Login
+Datos a enviar:
+URL:https://paytest.megasoft.com.ve:8443/payment/action/paymentgatewayuniveral-querystatus?control=1588963980911134684 USERNAME: biomer01 PASSWORD: Biopg02*
+Resultado HTTP ERROR -> 500 

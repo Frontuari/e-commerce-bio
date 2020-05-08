@@ -27,6 +27,14 @@ $activar_email_tracking=true;
 $tiempo_acumulado_email_tracking=0;
 $retraso_email_tracking="+1 minutes";
 
+$activar_tasa=true;
+$tiempo_acumulado_tasa=0;
+$retraso_tasa="+29 minutes";
+
+$activar_delivery=true;
+$tiempo_acumulado_delivery=0;
+$retraso_delivery="+30 minutes";
+
 /* Ejemplo si quieren crear otro :)
 $activar_productosb=true;
 $tiempo_acumulado_productosb=0;
@@ -60,8 +68,22 @@ do{
 		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
 		$tiempo_acumulado_envio_orden=strtotime($retraso_envio_orden);		
 	}	
-
-
+	if(time()>=$tiempo_acumulado_tasa and $activar_tasa==true){
+		syslog(LOG_INFO,"Actualizando tasa");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		actualizarTasa($ip);
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_tasa=strtotime($retraso_tasa);		
+	}	
+	if(time()>=$tiempo_acumulado_delivery and $activar_delivery==true){
+		syslog(LOG_INFO,"Actualizando delivery");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		actualizarDelivery($ip);
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_delivery=strtotime($retraso_delivery);		
+	}	
 	
 
 
@@ -69,6 +91,37 @@ sleep($retraso_general);
 
 }while(true);
 closelog();
+
+
+
+function actualizarDelivery($ip){
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getDelivery";
+	
+	$data=leer("Delivery",$url);
+	
+	if($data!=false){
+		foreach($data as $obj){
+			if($obj->price>0){
+				$price=$obj->price;
+				q("UPDATE transports SET price='$price' WHERE id=2");
+			}
+		}
+	}
+}
+function actualizarTasa($ip){
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getTax";
+	
+	$data=leer("Tasa dolar",$url);
+	
+	if($data!=false){
+		foreach($data as $obj){
+			if($obj->Tax>0){
+				$rate=$obj->Tax;
+				q("UPDATE coins SET rate='$rate' WHERE id=1");
+			}
+		}
+	}
+}
 
 function email_tracking(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='5' AND status='A'");
@@ -455,7 +508,7 @@ if ($server_output == "OK") {return true;} else {return false;}
 
 function leer($nombre,$url){
 		syslog(LOG_INFO,"Leyendo... ".$nombre);
-		if($res=get_url($url,$nombre)){
+		if($res=get_url($url)){
 			syslog(LOG_INFO,"Leido!");
 			if(isJson($res)){
 				return json_decode($res);
