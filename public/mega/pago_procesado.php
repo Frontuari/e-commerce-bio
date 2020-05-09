@@ -18,8 +18,8 @@ $_POST=seguro($_POST);
    // $archivo=fopen("log.txt",'a+');
     //fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
     
-   $numeroControl=$_GET['control'];
-    //$numeroControl='1588963980911134684';
+   //$numeroControl=$_GET['control'];
+    $numeroControl='1588963980911134684';
     //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
     if(!$numeroControl) salidaMala();
@@ -67,6 +67,7 @@ Referencia. '.$xml->getReferencia().'<br>
     ';
 
     $amount=set_formato_moneda($xml->getMonto());
+    exit("monto: ".$amount." origen: ".$xml->getMonto());
     $orders_id=$xml->getFactura();
     $bank_datas_id=3;
     $ref="MEGA ".$xml->getReferencia()." ".$xml->getControl();
