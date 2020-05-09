@@ -1,36 +1,28 @@
 <?php include_once './Objetos/XML.php';
 
-class LeerXML{
+class LeerXML extends XML{
     
     function leerXML($resultado){
-        //echo $resultado;
-        $xml = new XML();
-
         $dato= new SimpleXMLElement($resultado);
         
-        $xml->setControl($dato->control);
-        $xml->setCodAfiliacion($dato->cod_afiliacion);
-        $xml->setFactura($dato->factura);
-        $xml->setMonto($dato->monto);
-        $xml->setEstado($dato->estado);
-        $xml->setCodigo($dato->codigo);
-        $xml->setDescripcion($dato->descripcion);
-        $xml->setVtid($dato->vtid);
-        $xml->setSeqnum($dato->seqnum);
-        $xml->setAuthid($dato->authid);
-        $xml->setAuthname($dato->authname);
-        $xml->setTarjeta($dato->tarjeta);
-        $xml->setReferencia($dato->referencia);
-        $xml->setTerminal($dato->terminal);
-        $xml->setLote($dato->lote);
-        $xml->setRifBanco($dato->rifbanco);
-        $xml->setAfiliacion($dato->afiliacion);
-        $xml->setVoucher($dato->voucher);
-        
-        echo "Transacción exitosa. Control: ".$xml->getControl()."<br>";
-        echo "Estado: ".$xml->getEstado()."<br>";
-        echo "Orden Nro. ".$xml->getFactura()."<br>";
-        echo "Referencia. ".$xml->getReferencia()."<br>";
+        $this->setControl($dato->control);
+        $this->setCodAfiliacion($dato->cod_afiliacion);
+        $this->setFactura($dato->factura);
+        $this->setMonto($dato->monto);
+        $this->setEstado($dato->estado);
+        $this->setCodigo($dato->codigo);
+        $this->setDescripcion($dato->descripcion);
+        $this->setVtid($dato->vtid);
+        $this->setSeqnum($dato->seqnum);
+        $this->setAuthid($dato->authid);
+        $this->setAuthname($dato->authname);
+        $this->setTarjeta($dato->tarjeta);
+        $this->setReferencia($dato->referencia);
+        $this->setTerminal($dato->terminal);
+        $this->setLote($dato->lote);
+        $this->setRifBanco($dato->rifbanco);
+        $this->setAfiliacion($dato->afiliacion);
+        $this->setVoucher($dato->voucher);
     }
 }
 ?>
