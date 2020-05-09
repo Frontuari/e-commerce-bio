@@ -15,31 +15,31 @@ $_POST=seguro($_POST);
     include_once './Clases/LeerXML.php';
     include './constantes.php';
    
-    $archivo=fopen("log.txt",'a+');
-    fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
+   // $archivo=fopen("log.txt",'a+');
+    //fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
     
    $numeroControl=$_GET['control'];
     //$numeroControl='1588963980911134684';
     //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
     if(!$numeroControl) salidaMala();
-    fwrite($archivo,"Control: $numeroControl\n");
+   // fwrite($archivo,"Control: $numeroControl\n");
     
     $url=URL_MEGA."/payment/action/paymentgatewayuniversal-querystatus?control=$numeroControl";
     
-    fwrite($archivo,"URL de petición de XML: $url\n");
+    //fwrite($archivo,"URL de petición de XML: $url\n");
     
     $control = new Login();
     
 
-    fwrite($archivo,"Obteniendo Login\n");
-    fwrite($archivo,"Datos a enviar:\n");
-    fwrite($archivo,"URL:".$url." USERNAME: ".USERNAME." PASSWORD: ".PASSWORD."\n");
+   // fwrite($archivo,"Obteniendo Login\n");
+   // fwrite($archivo,"Datos a enviar:\n");
+   // fwrite($archivo,"URL:".$url." USERNAME: ".USERNAME." PASSWORD: ".PASSWORD."\n");
     
     $xml=$control->loginHTTPS($url,USERNAME,PASSWORD);
-    fwrite($archivo,"Resultado $xml \n");
+   // fwrite($archivo,"Resultado $xml \n");
     
-    fclose($archivo);
+   // fclose($archivo);
     $xml= new leerXML($xml);
     if($xml->getEstado()=='A'){
         salidaBuena($xml);
@@ -137,7 +137,52 @@ Referencia. '.$xml->getReferencia().'<br>
     exit();
 }
 
+function enviarPaginaCorreo($id,$email){
+    //3 bienvenido
+    //4 primera compra
+    $arr=q("SELECT * FROM pages WHERE id='$id'");
+    if(is_array($arr)){
+        $titulo=$arr[0]['titulo'];
+        $body=$arr[0]['body'];
+        enviarCorreo($email,$titulo,$body);
+    }
+}
+function enviarCorreo($email,$titulo,$body){
 
+    require __DIR__.'/../../vendor/autoload.php';
+   // echo is_file(__DIR__.'/../vendor/autoload.php');
+
+
+	$mail = new PHPMailer(true);
+
+	try {
+	    //Server settings
+	    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+	    $mail->isSMTP();                                            // Send using SMTP
+	    $mail->Host       = 'mail.biomercados.com.ve';                    // Set the SMTP server to send through
+	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+	    $mail->Username   = 'noreply@biomercados.com.ve';                     // SMTP username
+	    $mail->Password   = 'Bio2020';                               // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        
+	    $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+	    $mail->SMTPDebug = 0;
+        $mail->CharSet = 'UTF-8';
+	    //Recipients
+	    $mail->setFrom('noreply@biomercados.com.ve', 'Biomercados - Bio en línea');
+	    $mail->addAddress($email);
+	    
+	    $mail->isHTML(true);
+	    $mail->Subject = $titulo;
+	    $mail->Body    = $body;
+	    
+	    $mail->send();
+	    return true;
+	} catch (Exception $e) {
+	    return false;
+	}
+
+}
 
 function set_formato_moneda($value){
     $listo=null;
