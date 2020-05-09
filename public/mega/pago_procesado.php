@@ -19,7 +19,7 @@ $_POST=seguro($_POST);
     //fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
     
    $numeroControl=$_GET['control'];
-    //$numeroControl='1588963980911134684';
+    $numeroControl='1588992434924134839';
     //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
     if(!$numeroControl) salidaMala();
@@ -104,18 +104,25 @@ Referencia. '.$xml->getReferencia().'<br>
 
     if(is_array($arr)){
         $order_status_id=4;
+        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+        //primera compra
+        if($users_purchase_quantity==0){
+            $users_purchase_quantity=1;
+            enviarPaginaCorreo(4,$users_email);
+        }
     }else{
         $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))";
+    
         $arr=q($sql);
         if(is_array($arr)){
             $order_status_id=2;
+            $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+            //primera compra
+            if($users_purchase_quantity==0){
+                $users_purchase_quantity=1;
+                enviarPaginaCorreo(4,$users_email);
+            }
         }
-    }
-    $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
-    //primera compra
-    if($users_purchase_quantity==0){
-        $users_purchase_quantity=1;
-        enviarPaginaCorreo(4,$users_email);
     }
     q("COMMIT");
     if($pagoAbonado){
@@ -260,7 +267,7 @@ function set_formato_moneda($value){
                         
                       break;
                       default:
-                        salida(null,"Error en la consulta.",false);
+                        exit($sql);
                   }
               }
             }  
