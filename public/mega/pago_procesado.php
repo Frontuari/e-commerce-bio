@@ -19,7 +19,7 @@ $_POST=seguro($_POST);
     //fwrite($archivo,"PaginaWeb: Llegando a nuestro servidor\n");
     
    $numeroControl=$_GET['control'];
-    $numeroControl='1588992434924134839';
+    //$numeroControl='1588992434924134839';
     //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
     if(!$numeroControl) salidaMala();
