@@ -14,11 +14,11 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos		=false;
-$activar_envio_orden	=false;
-$activar_email_tracking	=false;
-$activar_tasa			=false;
-$activar_delivery		=false;
+$activar_productos		=true;
+$activar_envio_orden	=true;
+$activar_email_tracking	=true;
+$activar_tasa			=true;
+$activar_delivery		=true;
 $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
 
 
