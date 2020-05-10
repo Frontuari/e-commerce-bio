@@ -762,6 +762,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\VoyagerDatabaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerDatabaseController.php',
         'App\\Http\\Controllers\\VoyagerMediaController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerMediaController.php',
         'App\\Http\\Controllers\\VoyagerMenuController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerMenuController.php',
+        'App\\Http\\Controllers\\VoyagerOrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerOrdersController.php',
         'App\\Http\\Controllers\\VoyagerRoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerRoleController.php',
         'App\\Http\\Controllers\\VoyagerSettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerSettingsController.php',
         'App\\Http\\Controllers\\VoyagerUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/VoyagerUserController.php',

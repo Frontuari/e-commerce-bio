@@ -111,7 +111,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach($dataTypeContent as $data)
-                                    <tr>
+                                    <tr style="<?php
+                                    date_default_timezone_set('America/Manaus');
+                                    //echo strtotime($data['created_at'])." - ".date('d-m-y h-i-s');
+                                    if(strtotime($data['created_at'])<=strtotime("-60 minutes") and $data['status']=='NU'){
+                                    echo "background:#FFB7B7";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+                                    ?>">
                                         @if($showCheckboxColumn)
                                             <td>
                                                 <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">

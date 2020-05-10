@@ -117,6 +117,7 @@ return array(
     'App\\Http\\Controllers\\VoyagerDatabaseController' => $baseDir . '/app/Http/Controllers/VoyagerDatabaseController.php',
     'App\\Http\\Controllers\\VoyagerMediaController' => $baseDir . '/app/Http/Controllers/VoyagerMediaController.php',
     'App\\Http\\Controllers\\VoyagerMenuController' => $baseDir . '/app/Http/Controllers/VoyagerMenuController.php',
+    'App\\Http\\Controllers\\VoyagerOrdersController' => $baseDir . '/app/Http/Controllers/VoyagerOrdersController.php',
     'App\\Http\\Controllers\\VoyagerRoleController' => $baseDir . '/app/Http/Controllers/VoyagerRoleController.php',
     'App\\Http\\Controllers\\VoyagerSettingsController' => $baseDir . '/app/Http/Controllers/VoyagerSettingsController.php',
     'App\\Http\\Controllers\\VoyagerUserController' => $baseDir . '/app/Http/Controllers/VoyagerUserController.php',

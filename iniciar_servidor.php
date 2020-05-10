@@ -14,27 +14,37 @@ $retraso_general=30;
 $ip="http://192.168.42.75";
 
 
-$activar_productos=false;
+$activar_productos		=false;
+$activar_envio_orden	=false;
+$activar_email_tracking	=false;
+$activar_tasa			=false;
+$activar_delivery		=false;
+$activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
+
+
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
 
 
-$activar_envio_orden=true;
+
 $tiempo_acumulado_envio_orden=0;
 $retraso_envio_orden="+1 minutes";
 
-$activar_email_tracking=true;
+
 $tiempo_acumulado_email_tracking=0;
 $retraso_email_tracking="+1 minutes";
 
-$activar_tasa=true;
+
 $tiempo_acumulado_tasa=0;
 $retraso_tasa="+7 minutes";
 
-$activar_delivery=true;
+
 $tiempo_acumulado_delivery=0;
 $retraso_delivery="+7 minutes";
 
+
+$tiempo_acumulado_paga_rapido=0;
+$retraso_paga_rapido="+5 minutes";
 /* Ejemplo si quieren crear otro :)
 $activar_productosb=true;
 $tiempo_acumulado_productosb=0;
@@ -42,6 +52,14 @@ $retraso_productosb="+5 minutes";
 */
 
 do{
+	if(time()>=$tiempo_acumulado_paga_rapido and $activar_paga_rapido==true){
+		syslog(LOG_INFO,"Actualizando paga_rapido");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		paga_rapido();
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_paga_rapido=strtotime($retraso_paga_rapido);		
+	}	
 	if(time()>=$tiempo_acumulado_email_tracking and $activar_email_tracking==true){
 		syslog(LOG_INFO,"Actualizando email_tracking");
 		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
@@ -92,7 +110,29 @@ sleep($retraso_general);
 }while(true);
 closelog();
 
+function paga_rapido(){
+	$arra=q("SELECT titulo,body FROM pages WHERE id='6' AND status='A'");
+	$arr=q("SELECT u.email, o.created_at,o.id FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE status='NU' AND email_pay_speed ISNULL");
+	
+	if(is_array($arr)){
+		
+		date_default_timezone_set('America/Manaus');
+		
+		foreach($arr as $v){
+		
+			if(strtotime($v['created_at'])<=strtotime("-60 minutes")){
+				$titulo=agregarVariables($arra[0]['titulo'],$v);
+				$body=agregarVariables($arra[0]['body'],$v);
+				if(enviarCorreo($v['email'],$titulo,$body)){			
+					$id=$v['id'];
+					q("UPDATE orders SET email_pay_speed=1 WHERE id=$id");
+				}
+			}
+		}
 
+	}
+
+}
 
 function actualizarDelivery($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
@@ -352,10 +392,16 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
-						$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
-						//exit($sql);
-						$valido=q($sql);
-						$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
+						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
+						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'"))){
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						}else{
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						}
+							//exit($sql);
+							$valido=q($sql);
+							$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
+					
 						
 
 					}else{
