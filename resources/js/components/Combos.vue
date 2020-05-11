@@ -2,7 +2,7 @@
     <section id="combos-bio">
 		<div class="container">
 			<div class="section-title">
-				<h2>Compra Fácil <img src="assets/img/boton-circular-bio.svg"></h2>
+				<h2>Mi Compra Fácil <img src="assets/img/boton-circular-bio.svg"></h2>
 			</div>
 		</div>
 		<div class="combo-group-big">
