@@ -19,6 +19,14 @@ switch($_GET['evento']) {
         $message = array("name"=>$_POST['name'],"email"=>$_POST['email'],"message"=>$_POST['message']);
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
         break;
+    case 'web_no_login':
+        $_GET['tipo']='top';
+        $row['data']['publicidad_top']=listarPublicidad(true);
+        
+        $row['success']=true;
+        $row['msj_general']=true;
+        echo d($row);
+    break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -33,7 +41,7 @@ switch($_GET['evento']) {
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
             $row['data']['productos_mayor']=productosMayorEdad(true);
-
+            
             //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
             $row['msj_general']=true;
@@ -197,19 +205,19 @@ switch($_GET['evento']) {
         listarBancosdelMetododePago(false);
     break;
     case 'listarPublicidad':
-        listarPublicidad();
+        listarPublicidad(false);
     break;
     default:
     
     salida($row,"Disculpe debe enviar un evento",false);
 }
-function listarPublicidad(){
+function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
     $arr=q("select image from advs where type='$tipo'");
     if(is_array($arr)){
-     return salidaNueva($arr,'Listar publicidad',true);
+     return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
     }else{
-     return salidaNueva(null,'No tiene publicidad',false);
+     return salidaNueva(null,'No tiene publicidad',false,$tipo_salida);
     }
 }
 function listarCombos(){

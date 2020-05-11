@@ -51,7 +51,7 @@ function salidaMala(){
     echo '
     <div style="text-align: center; "><img src="../logo.png" width="200" /></div>
 <p>&nbsp;</p>
-<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, intente mas tarde.<br /><br /><hr />www.biomercados.com.ve</div>     
+<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, intente de nuevo.<br /><br /><hr />www.biomercados.com.ve</div>     
     ';
     exit();
 }
