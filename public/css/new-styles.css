@@ -68,3 +68,7 @@ a.sltwitter{
 a.slyoutube{
 	background: url('/assets/img/social_icons.png') -150px 0;
 }
+
+ul.carousel-indicators{
+	display: none;
+}
