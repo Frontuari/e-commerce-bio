@@ -93,7 +93,7 @@ Referencia. '.$xml->getReferencia().'<br>
     $users_email=$arr[0]['email'];
    }
     q("BEGIN");
-    $sql="INSERT INTO det_bank_orders (description,coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$description','$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
+    $sql="INSERT INTO det_bank_orders (description,coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$description','$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
    // exit($sql);
     $arr=q($sql);
     if(is_array($arr)) $pagoAbonado=true;
