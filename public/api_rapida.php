@@ -662,7 +662,7 @@ function guardarPago(){
     $ref=trim($_GET['ref']);
     $coins_id=$_GET['coins_id'];
     $status='nuevo';
-
+    $users_id=$_SESSION['usuario']['id'];
     if($ref=='null'){
        
         $ref="EFECTIVO";
@@ -681,7 +681,7 @@ function guardarPago(){
    // $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay>=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
     //exit($sql);
     q("BEGIN");
-    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
+    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
    // exit($sql);
     $arr=q($sql);
     if(is_array($arr)) $pagoAbonado=true;
