@@ -14,7 +14,6 @@ class EditTriggerDetBankOrders2 extends Migration
     public function up()
     {
         DB::unprepared("
-        DROP FUNCTION det_bank_orders();
         CREATE OR REPLACE FUNCTION det_bank_orders()
         RETURNS trigger AS
       $$
