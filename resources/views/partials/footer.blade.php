@@ -71,9 +71,10 @@
 					</div>
 					<div class="col-md-2">
 						<ul class="social-icons">
-							<li><a href="#">
-								<img src="{{ asset('assets/img/social_icons.png') }}">
-							</a></li>
+							<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank" class="slfacebook"></a></li>
+							<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank" class="slinstagram"></a></li>
+							<li><a href="https://twitter.com/BioMercadosVe/" target="_blank" class="sltwitter"></a></li>
+							<li><a href="https://www.youtube.com/channel/UCV4s57Vi8rw_0aPXNfDJEcw" target="_blank" class="slyoutube"></a></li>
 						</ul>
 					</div>
 				</div>

@@ -37,14 +37,34 @@ section#combos{
 
 ul.social-icons{
 	list-style: none !important;
+	height: auto;
+	overflow: hidden;
 }
 
 ul.social-icons li a{
-	/* padding: 20px !important; */
-	background-position: 30px 30px !important;
+	float: left;
+	display:block;
+	padding: 25px !important;
+	margin:0px 2px !important;
 
 }
 
 div.carousel img{
 	width: 100%;	
+}
+
+a.slfacebook{
+	background: url('/assets/img/social_icons.png') 0 0;
+}
+
+a.slinstagram{
+	background: url('/assets/img/social_icons.png') -50px 0;
+}
+
+a.sltwitter{
+	background: url('/assets/img/social_icons.png') -100px 0;
+}
+
+a.slyoutube{
+	background: url('/assets/img/social_icons.png') -150px 0;
 }
