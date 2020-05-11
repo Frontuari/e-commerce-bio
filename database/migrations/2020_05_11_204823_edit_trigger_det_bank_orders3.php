@@ -14,6 +14,8 @@ class EditTriggerDetBankOrders2 extends Migration
     public function up()
     {
         DB::unprepared("
+        DROP TRIGGER det_bank_orders;
+        DROP FUNCTION det_bank_orders();
         CREATE OR REPLACE FUNCTION det_bank_orders()
         RETURNS trigger AS
       $$
@@ -39,7 +41,14 @@ class EditTriggerDetBankOrders2 extends Migration
           RETURN NEW;
       END;
       $$
-      LANGUAGE 'plpgsql';");
+      LANGUAGE 'plpgsql';
+      
+      CREATE TRIGGER det_bank_orders
+      AFTER INSERT OR UPDATE
+      ON det_bank_orders
+      FOR EACH ROW
+      EXECUTE PROCEDURE det_bank_orders();                 
+      ");
     }
 
     /**
