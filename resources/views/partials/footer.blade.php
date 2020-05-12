@@ -66,15 +66,15 @@
 		<div class="bottom-footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-md-8">
 						<p>Alimentos FM, C.A. © 2020 Todos los Derechos Reservados <br />J-31721968-6</p>
 					</div>
-					<div class="col-md-3">
-						<ul class="social-icons">
-							<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank" class="slfacebook"></a></li>
-							<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank" class="slinstagram"></a></li>
-							<li><a href="https://twitter.com/BioMercadosVe/" target="_blank" class="sltwitter"></a></li>
+					<div class="col-md-4">
+						<ul class="social-icons">							
 							<li><a href="https://www.youtube.com/channel/UCV4s57Vi8rw_0aPXNfDJEcw" target="_blank" class="slyoutube"></a></li>
+							<li><a href="https://twitter.com/BioMercadosVe/" target="_blank" class="sltwitter"></a></li>
+							<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank" class="slinstagram"></a></li>
+							<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank" class="slfacebook"></a></li>
 						</ul>
 					</div>
 				</div>

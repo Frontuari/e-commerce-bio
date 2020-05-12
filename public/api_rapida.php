@@ -19,6 +19,14 @@ switch($_GET['evento']) {
         $message = array("name"=>$_POST['name'],"email"=>$_POST['email'],"message"=>$_POST['message']);
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
         break;
+    case 'web_no_login':
+        $_GET['tipo']='top';
+        $row['data']['publicidad_top']=listarPublicidad(true);
+        $row['data']['productos']=listarProductosWeb();
+        $row['success']=true;
+        $row['msj_general']=true;
+        echo json_encode($row);
+    break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -33,7 +41,7 @@ switch($_GET['evento']) {
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
             $row['data']['productos_mayor']=productosMayorEdad(true);
-
+            
             //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
             $row['msj_general']=true;
@@ -197,19 +205,24 @@ switch($_GET['evento']) {
         listarBancosdelMetododePago(false);
     break;
     case 'listarPublicidad':
-        listarPublicidad();
+        listarPublicidad(false);
     break;
     default:
     
     salida($row,"Disculpe debe enviar un evento",false);
 }
-function listarPublicidad(){
+function listarProductosWeb(){
+    $sql=getSqlListarProductos();
+    $sql=filtroProductos($sql);
+    return listarProductos($sql,false,true,false);
+}
+function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
     $arr=q("select image from advs where type='$tipo'");
     if(is_array($arr)){
-     return salidaNueva($arr,'Listar publicidad',true);
+     return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
     }else{
-     return salidaNueva(null,'No tiene publicidad',false);
+     return salidaNueva(null,'No tiene publicidad',false,$tipo_salida);
     }
 }
 function listarCombos(){
@@ -299,6 +312,9 @@ json_build_object('f',f.id)) as json_favorite,p.description_short,p.qty_avaliabl
 }
 function d($row){
     return gzcompress(json_encode($row), 9);
+}
+function e($row){
+    return base64_encode(gzcompress(rawurlencode(json_encode($row)),9));
 }
 function obtenerTodo(){
     $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
@@ -654,7 +670,7 @@ function guardarPago(){
     $ref=trim($_GET['ref']);
     $coins_id=$_GET['coins_id'];
     $status='nuevo';
-
+    $users_id=$_SESSION['usuario']['id'];
     if($ref=='null'){
        
         $ref="EFECTIVO";
@@ -673,7 +689,7 @@ function guardarPago(){
    // $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay>=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
     //exit($sql);
     q("BEGIN");
-    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW()) RETURNING id";
+    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
    // exit($sql);
     $arr=q($sql);
     if(is_array($arr)) $pagoAbonado=true;
@@ -891,7 +907,7 @@ q("BEGIN");
     }
     //if($order_address_id=="NULL") $orders_status_id=5; else 
     $orders_status_id=1;
-    $sql="INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders,$orders_status_id,$users_id,NOW())";
+    $sql="INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,tiempo_min) VALUES ($orders,$orders_status_id,$users_id,NOW(),0)";
     q($sql);
     q("COMMIT");
   salidaNueva($res,"Su orden ha sido procesada!");
@@ -1089,20 +1105,26 @@ function _filtro($obj,$nameUnico){
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
     $limit='LIMIT 100';
     $users_id=$_SESSION['usuario']['id'];
-    $sql="SELECT p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi, ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+    if($users_id){
+        
+        $whereUsuario="(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi,";
+    }
+  
+    $sql="SELECT p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
-function listarProductos($sql,$agregarCantidad=false){
+function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true){
     
     $row=q($sql);
     if(is_array($row)){
         $row=recortar_imagen($row,$agregarCantidad);
-        salidaNueva($row,"Listando productos",true,false,true);
+        return salidaNueva($row,"Listando productos",true,$tipo_salida,$comprimido);
     }else{
-        salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false);
+        return salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false,$tipo_salida,$comprimido);
     }
 }
+
 function consultarFavorito(){
     $users_id=$_SESSION['usuario']['id'];
     $products_id=$_GET['products_id'];
