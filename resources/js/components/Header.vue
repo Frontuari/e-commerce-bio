@@ -39,7 +39,7 @@
 								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
 									<li v-for="ser in searched" :key="ser.id" @click="goToCatalog(ser.id)">
-										<img :style="{width: '6%'}" :src="'storage/'+ser.photo | MediumImage">
+										<img :style="{width: '6%'}" :src="'storage/'+JSON.parse(ser.photo)[0] | MediumImage">
 										{{ser.name}}
 									</li>
 								</ol>

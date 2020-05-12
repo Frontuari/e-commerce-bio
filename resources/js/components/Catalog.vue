@@ -133,9 +133,11 @@
     export default {
         data() {
             return {
+				id: 0,
 				cat: 0,
 				search: '',
 				sParam: '',
+				idParam: '',
 				fTags: '',
 				selectedTags:'',
 				products: {},
@@ -204,10 +206,15 @@
 				this.sParam = "&search="+this.search;
 			}
 
+			if(!!window.location.href.split("id=")[1]) {
+				this.id = window.location.href.split("id=")[1] || 0;	
+				this.idParam = "&id="+this.id;
+			}
+
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags;
+				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
 			}
 		},
 		created: function() {
