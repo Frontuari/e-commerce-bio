@@ -645,7 +645,7 @@ function horasDisponiblesEntrega(){
         }
     }
 
-    salidaNueva($horas,"Listando horas disponible para entrega",true,false,true);
+    salidaNueva($horas,"Listando horas disponible para entrega",true,false,false);
 }
 function loginMovil($tipo_salida){
     $email=mb_strtolower(trim($_GET['email']));

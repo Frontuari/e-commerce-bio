@@ -204,7 +204,7 @@ function agregarVariables($texto,$variables){
 }
 
 function actualizarEnvioOrden(){
-	$arr=q("SELECT 
+	$arr=q("SELECT *, CASE WHEN direccion_a_no_usar_esta='' THEN 'Valencia' else direccion_a_no_usar_esta END as direccion_a FROM (SELECT 
 	'T01' as localidad,
 	o.id as norder,
 	o.total_transport as envio,
@@ -214,7 +214,9 @@ function actualizarEnvioOrden(){
 	o.total_tax as iva,
 	o.total_pay as total,
 	p.rif as rif,
-	oa.address as direccion_de_entrega,
+	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_de_entrega,
+	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_a_no_usar_esta,
+	'Carabobo' AS direccion_B,
 	p.name as descripcion,
 	p.phone as telefono,
 	TO_CHAR(o.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha_de_orden,
@@ -242,7 +244,7 @@ function actualizarEnvioOrden(){
 			
 	) FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id INNER JOIN payment_methods pm ON pm.id=bd.payment_methods_id WHERE dbo.orders_id=o.id) detallepago 
 	
-	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0");
+	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y");
 	
 	if(is_array($arr)){
 		$data['data']=$arr;
