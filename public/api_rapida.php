@@ -7,7 +7,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
 session_start();
-
+date_default_timezone_set('America/Manaus');
 $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
@@ -608,6 +608,7 @@ function listarTracking(){
        }
 }
 function horasDisponiblesEntrega(){
+    
     $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
     $arr=q("SELECT * FROM calendars WHERE status='A'");
     $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
@@ -619,7 +620,7 @@ function horasDisponiblesEntrega(){
     $i=2;//hora inicial
     while($o<$maxApartado){          
 
-        $fechaComprobar = strtotime("+ $i hours",$timenow);
+        $fechaComprobar = strtotime("+ $i hours",time());
         $horaComprobar=date('H:i',$fechaComprobar);
         $diaComprobar=date('N',$fechaComprobar);
         $diaActual=strftime('%d',$timenow);

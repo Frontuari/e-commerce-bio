@@ -33,26 +33,14 @@ function procesar(data,evento){
     case 'web_no_login':
     console.log(data);
     var data = JSON.parse(JXG.decompress(data));
-
         if(data.success==true){
-        var datos=data.data;
-
-        // datos.forEach( function(valor, indice, array) {
-        //  console.log("En el índice " + indice + " hay este valor: " + valor);
-        //});
-        //datos.forEach(element => console.log(element));
-        //localStorage.setItem('miGato', 'Juan');
-
-        for (var [key, value] of Object.entries(datos)) {
-            //console.log(key + ' ' + value);
-            localStorage.setItem(key, JSON.stringify(value));
-
-        }
-        var cat = JSON.parse(localStorage.getItem('publicidad_top'));
+            var datos=data.data;
+            for (var [key, value] of Object.entries(datos)) {
+                //console.log(key + ' ' + value);
+                localStorage.setItem(key, JSON.stringify(value));
+            }
+            var cat = JSON.parse(localStorage.getItem('publicidad_top'));
             console.log(cat.data);
-        //  console.log(cat.data);
-
-        // console.log(datos);
         }
 
         break;

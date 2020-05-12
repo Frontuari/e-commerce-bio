@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;		
 openlog("Biomercados",LOG_PERROR, LOG_DAEMON);
 syslog(LOG_INFO,"Servidor iniciado");
-
+date_default_timezone_set('America/Manaus');
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
@@ -116,7 +116,7 @@ function paga_rapido(){
 	
 	if(is_array($arr)){
 		
-		date_default_timezone_set('America/Manaus');
+		
 		
 		foreach($arr as $v){
 		
