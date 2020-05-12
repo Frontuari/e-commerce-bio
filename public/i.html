@@ -54,6 +54,7 @@ table {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <script src="js/jsxcompressor.min.js" type="text/javascript"></script>
+    <script src="js/todo_web.js" type="text/javascript"></script>
     <title>Biomercados</title>
 
 
@@ -143,64 +144,6 @@ label:focus,
           <span class="sr-only">Siguiente</span>
         </a>
       </div>
-
-<script>
-               function get(evento,variables="") {
-                   //alert(variables);
-                    //alert(url);
-                    var host=window.location.host;
-                    var protocol=window.location.protocol;
-                    var xmlhttp = new XMLHttpRequest();
-                    let data=new Map();
-                    data['success']=false;
-                    data['msj_general']="Intente mas tarde";
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                           if (xmlhttp.status == 200 || xmlhttp.status == 409) {
-                              
-                              procesar(xmlhttp.responseText,evento);
-                           
-                           }else {
-                            procesar(data,evento);
-                           }
-                        }
-                    };
-                   
-                    xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?evento="+evento+variables, true);
-                     xmlhttp.send();
-                }
-
-get("web_no_login");
-function procesar(data,evento){
-    switch(evento){
-        case 'listarPublicidad':
-        listarPublicidad();
-        break;
-        case 'web_no_login':
-
-      var data = JXG.decompress(data);
-      console.log(data);
-      
-        break;
-    }
-}
-
-function listarPublicidad(data){
-    ht='';
-        var carrousel=document.getElementById("imagenesCarrousel");
-        var tipo='active';
-        data['data'].forEach(element => {
-            ht+='<div class="carousel-item '+tipo+'"><img height="360px" class="d-block w-100" src="storage/'+element.image+'" alt="First slide"></div>';
-            tipo=''
-        });
-        carrousel.innerHTML=ht;
-}
-</script>
-
-
-
-
-
 
 
     <!-- Optional JavaScript -->

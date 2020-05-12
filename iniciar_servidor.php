@@ -225,6 +225,8 @@ function actualizarEnvioOrden(){
 				'cant', op.cant,
 				'nombre',p.name,
 				'precio',op.price,
+				'peso',p.peso,
+				'peso_total',(p.peso*op.cant),
 				'total',(p.price*op.cant)
 			)
 			
