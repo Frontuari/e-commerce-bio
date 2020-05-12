@@ -16,7 +16,9 @@
 
 	<ads :categories="{{ $categories }}"></ads>
 
-	<offers :medio_bajo="{{ $medio_bajo }}"></offers>
+	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
+
+	<slider :sliders="{{ $medio_bajo }}"></slider>
 
 	<nuestros-productos 
 		:recent="{{ $recent }}"
@@ -27,7 +29,9 @@
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
 	</nuestros-productos>
 
-	<footer-ad :ads="{{ $footer }}"></footer-ad>
+	<!-- <footer-ad :ads="{{ $footer }}"></footer-ad> -->
+
+	<slider :sliders="{{ $footer }}"></slider>
 
 @stop
 

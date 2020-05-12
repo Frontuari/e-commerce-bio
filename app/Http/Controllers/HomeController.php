@@ -8,6 +8,7 @@ use App\Advs;
 use App\ProductCategory;
 use App\Product;
 use App\Packages;
+use App\Pages;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -36,7 +37,6 @@ class HomeController extends Controller
         $Coin = Coin::where("id",1)->first();
         
         $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
-
 
         $Medio_Bajo = [];
         $Med = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
@@ -103,6 +103,7 @@ class HomeController extends Controller
         
         foreach($comboData as $i => $c) {
             $total = 0;
+            $cantTotal = 0;
             $c["products"] = DB::table("det_product_packages")
             ->select("products.*","det_product_packages.cant as cant_combo",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
             ->join("products","products.id","=","det_product_packages.products_id")
@@ -111,6 +112,7 @@ class HomeController extends Controller
             ->where("det_product_packages.packages_id",$c["id"])
             ->get();
             foreach($c["products"] as $j => $p) {
+                $cantTotal += $p->cant_combo;
                 if($p->calculado > 0){
                     $total += ($p->calculado * $p->cant_combo);
                 }else {
@@ -118,6 +120,7 @@ class HomeController extends Controller
                 }
             }
             $c["combo_price"] = $total;
+            $c["cantTotal"] = $cantTotal;
             array_push($Combos,$c);
         }
         $Combos = json_encode($Combos);
@@ -141,5 +144,19 @@ class HomeController extends Controller
     }
     public function recover() {
         return view("recover");
+    }
+
+    public function terminos() {
+        $data = Pages::where("id",1)->get();
+        return view("terminos",[
+            "terms" => $data
+        ]);
+    }
+
+    public function faq() {
+        $data = Pages::where("id",2)->get();
+        return view("faq",[
+            "faqs" => $data
+        ]);
     }
 }

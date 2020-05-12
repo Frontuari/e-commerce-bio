@@ -111,6 +111,7 @@ var globalFunc = {
         
     },
     addComboToCart: function(products) {
+        console.log("products::> ",products);
         products.forEach( a => {
             console.log("a::> ",a);
             globalFunc.addToCart(a,a.cant_combo);

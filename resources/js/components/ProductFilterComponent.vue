@@ -38,7 +38,7 @@
 									</div>
 								</div>
 								<a href="#" class="product-title">{{ product_recent.name }}</a>
-								<!-- <span class="product-info">500 g</span> -->
+								<span class="product-info">({{product_recent.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
@@ -46,10 +46,12 @@
 									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
-									<p> ${{ (product_recent.calculado / tasadolar) | FormatDolar}} / Bs {{ product_recent.calculado | FormatNumber }}</p>
+									<p>{{ product_recent.calculado | FormatNumber }} Bs</p>
+									<p>{{ (product_recent.calculado / tasadolar) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_recent.impuesto">
-									<p> ${{ (product_recent.price / tasadolar) | FormatDolar}} / Bs {{ product_recent.price | FormatNumber }}</p>
+									<p>{{ product_recent.price | FormatNumber }} Bs</p>
+									<p>{{ (product_recent.price / tasadolar) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -74,7 +76,7 @@
 									</div>
 								</div>
 								<a href="#" class="product-title">{{ product_sold.name }}</a>
-								<!-- <span class="product-info">500 g</span> -->
+								<span class="product-info">({{product_sold.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
@@ -82,10 +84,12 @@
 									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
-									<p> ${{ (product_sold.calculado / tasadolar) | FormatDolar}} / Bs {{ product_sold.calculado | FormatNumber }}</p>
+									<p>{{ product_sold.calculado | FormatNumber }} Bs</p>
+									<p>{{ (product_sold.calculado / tasadolar) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_sold.impuesto">
-									<p> ${{ (product_sold.price / tasadolar) | FormatDolar}} / Bs {{ product_sold.price | FormatNumber }}</p>
+									<p>{{ product_sold.price | FormatNumber }} Bs</p>
+									<p>{{ (product_sold.price / tasadolar) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -110,7 +114,7 @@
 									</div>
 								</div>
 								<a href="#" class="product-title">{{ product_view.name }}</a>
-								<!-- <span class="product-info">500 g</span> -->
+								<span class="product-info">({{product_view.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
@@ -118,10 +122,12 @@
 									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
-									<p> ${{ (product_view.calculado / tasadolar) | FormatDolar}} / Bs {{ product_view.calculado | FormatNumber }}</p>
+									<p>{{ product_view.calculado | FormatNumber }} Bs</p>
+									<p>{{ (product_view.calculado / tasadolar) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_view.impuesto">
-									<p> ${{ (product_view.price / tasadolar) | FormatDolar}} / Bs {{ product_view.price | FormatNumber }}</p>
+									<p>{{ product_view.price | FormatNumber }} Bs</p>
+									<p>{{ (product_view.price / tasadolar) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -146,7 +152,7 @@
 									</div>
 								</div>
 								<a href="#" class="product-title">{{ product_best.name }}</a>
-								<!-- <span class="product-info">500 g</span> -->
+								<span class="product-info">({{product_best.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>IVA INCLUIDO</p>
 								</div>
@@ -154,10 +160,12 @@
 									<p>EXCENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
-									<p> ${{ (product_best.calculado / tasadolar) | FormatDolar}} / Bs {{ product_best.calculado | FormatNumber }}</p>
+									<p>{{ product_best.calculado | FormatNumber }} Bs</p>
+									<p>{{ (product_best.calculado / tasadolar) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_best.impuesto">
-									<p> ${{ (product_best.price / tasadolar) | FormatDolar}} / Bs {{ product_best.price | FormatNumber }}</p>
+									<p>{{ product_best.price | FormatNumber }} Bs</p>
+									<p>{{ (product_best.price / tasadolar) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>

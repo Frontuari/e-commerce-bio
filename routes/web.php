@@ -12,6 +12,8 @@
 */
 
 Route::get('/',"HomeController@index")->name("home");
+Route::get('/terminos-condiciones',"HomeController@terminos")->name("home");
+Route::get('/faq',"HomeController@faq")->name("home");
 
 Route::get('/catalog','CatalogController@index')->name("Catalog");
 

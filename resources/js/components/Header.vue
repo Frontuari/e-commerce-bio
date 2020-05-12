@@ -38,7 +38,7 @@
 							<div class="keyup_search" :style="{ display: dSearch }">
 								<span  :style="{display: gifSearch}">Cargando.....</span>
 								<ol>
-									<li v-for="ser in searched" :key="ser.id" @click="goToCatalog(ser.name)">
+									<li v-for="ser in searched" :key="ser.id" @click="goToCatalog(ser.id)">
 										<img :style="{width: '6%'}" :src="'storage/'+ser.photo | MediumImage">
 										{{ser.name}}
 									</li>
@@ -215,8 +215,8 @@ export default {
 			window.location.href = route;
 			event.preventDefault();
 		},
-		goToCatalog(text) {
-			const route = "/catalog?search="+this.searchText;
+		goToCatalog(id) {
+			const route = "/catalog?id="+id;
 			window.location.href = route;
 			event.preventDefault();
 		},

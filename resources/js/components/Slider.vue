@@ -9,7 +9,7 @@
                     <a :href="slider.url" v-if="!!slider.url">
                         <img class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
                     </a>
-                    <img v-else="!slider.url" class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
+                    <img v-else-if="!slider.url" class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
 
                     <div class="container">
                         <!--<div class="carousel-caption caption-left" >

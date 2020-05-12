@@ -34,12 +34,12 @@ class BaseController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function sendError($error='Disculpe, intente nuevamente.', $errorMessages = [], $code = 404)
+    public function sendError($error='Disculpe, intente nuevamente.', $errorMessages = [], $code = 200)
     {
 
     	$response = [
             'success' => false,
-            'code'    => 500,
+            'code'    => 409,
             'message' => $error,
         ];
 

@@ -14,6 +14,11 @@ class ProductFilters extends QueryFilters
         parent::__construct($request);
     }
 
+    public function id($id) {
+        if(isset($id) && !empty($id) && $id > 0)
+            return $this->builder->where("products.id",$id);
+    }
+
     public function cat($id) {
         if(isset($id) && !empty($id) && $id > 0)
             return $this->builder->join("det_sub_categories","det_sub_categories.products_id","=","products.id")->join("sub_categories","sub_categories.id","=","det_sub_categories.sub_categories_id")->where('sub_categories.categories_id','=',$id)->groupBy("products.id");

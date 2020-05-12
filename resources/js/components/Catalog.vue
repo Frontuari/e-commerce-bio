@@ -74,7 +74,7 @@
 						</div>
 					</div>
 					<div class="bio-ads">
-						<div class="ad-box" v-for="a in ads" :key="a">
+						<div class="ad-box" v-for="a in ads" :key="a.url">
 							<a :href="a.url"><img :src="'storage/'+a.image"></a>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
 					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
 
 					<div class="bio-ads">
-						<div class="ad-box" v-for="a in ads" :key="a">
+						<div class="ad-box" v-for="a in ads" :key="a.url">
 							<a :href="a.url"><img :src="'storage/'+a.image"></a>
 						</div>
 						

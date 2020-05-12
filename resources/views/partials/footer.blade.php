@@ -5,8 +5,8 @@
 					<div class="footer-block">
 						<img src="/assets/img/logo-bio-mercados.svg" alt="Bio Mercados">
 						
-						<p><span>Teléfono:</span> +58 414 123 4567</p>
-						<p><span>Correo:</span> Contacto@Biomercados.com</p>
+						<p><span>Teléfono:</span> (0241) 714.16.00</p>
+						<p><span>Correo:</span> contacto@biomercados.com.ve</p>
 					</div>
 				</div>
 				<div class="col-lg-2">
@@ -16,9 +16,9 @@
 						</a>
 						<div class="collapse" id="enlaces">
 							<div class="card card-body">
-								<a href="#">Preguntas Frecuentes</a>
-								<a href="#">Términos legales</a>
-								<a href="#">Soporte</a>
+								<a href="/faq">Preguntas Frecuentes</a>
+								<a href="/terminos-condiciones">Términos legales</a>
+								<!-- <a href="#">Soporte</a> -->
 								<a href="/contact">Contacto</a>
 							</div>
 						</div>
@@ -49,7 +49,7 @@
 									<form action="">
 										<div class="form-group">
 											<div class="input-group">
-												<input type="text" class="form-control" placeholder="Escribe tu correo aquí..." aria-label="Escribe tu correo aquí...">
+												<input id="email_subscription" type="text" class="form-control" placeholder="Escribe tu correo aquí..." aria-label="Escribe tu correo aquí...">
 												<div class="input-group-append">
 													<button class="btn" type="button" id="button-addon2">Suscribirse</button>
 												</div>
@@ -66,10 +66,10 @@
 		<div class="bottom-footer">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-9">
 						<p>Alimentos FM, C.A. © 2020 Todos los Derechos Reservados <br />J-31721968-6</p>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<ul class="social-icons">
 							<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank" class="slfacebook"></a></li>
 							<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank" class="slinstagram"></a></li>
@@ -362,6 +362,20 @@
 			$(window).scrollTop(parseInt($(".jumbotron").offset().top));
 		});
 
+		$("#button-addon2").on("click",function() {
+			const email = $("#email_subscription").val();
+			const formdata = new FormData;
+			formdata.append("email",email)
+			axios.post(URLSERVER+"api/subscribe",formdata).then( (resp) => {
+				console.log("resp::> ",resp.data);
+				if(resp.data.code == "409"){
+					Swal.fire("Bio en línea","Su correo ya existe en nuestros registros","warning");
+				}else {
+					Swal.fire("Bio en línea","Suscripción realizada con éxito","success");
+				}
+				
+			});
+		});
 	</script>
 </body>
 </html>

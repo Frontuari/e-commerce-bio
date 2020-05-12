@@ -117,7 +117,11 @@
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">{{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		<br>
+																		<p>Peso</p>
+																		<h3 class="order-text">{{ total_weight.toFixed(2) }} Kg </h3>
+																		
 																	</div>
 																</div>
 															</div>
@@ -629,6 +633,7 @@
 				length_car: 0,
 				products_cart:0,
 				total_cart:0,
+				total_weight: 0,
 				datauser:[],
 				payments: [],
 				selectedDirection: '',
@@ -748,6 +753,7 @@
 			{
 				this.length_car = JSON.parse(window.localStorage.getItem("cartNew")).length;
 				this.total_cart = 0;
+				this.total_weight = 0;
 				for(let i = 0; i<this.length_car; i++)
 				{
 					if(this.products_cart[i].product.discount>0)
@@ -756,6 +762,7 @@
 					}else{
 						this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 					}
+					this.total_weight = parseFloat(this.products_cart[i].product.peso) * parseInt(this.products_cart[i].cant);
 				}
 			},
 			getTotalAbono() {

@@ -83,3 +83,6 @@ Route::get('tasa','API\CoinController@index');
 Route::get('cities','API\LocationController@getCities');
 Route::get('states','API\LocationController@getStates');
 Route::get('regions','API\LocationController@getRegions');
+
+//SUSCRIPCION
+Route::post('subscribe','API\SubscriptionController@subscribe');
