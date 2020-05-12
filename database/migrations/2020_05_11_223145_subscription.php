@@ -13,7 +13,7 @@ class Subscription extends Migration
      */
     public function up()
     {
-        Schema::create('advs', function (Blueprint $table) {
+        Schema::create('subscription', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email')->nullable();
             $table->timestamps();
