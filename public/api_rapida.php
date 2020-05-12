@@ -23,9 +23,17 @@ switch($_GET['evento']) {
         $_GET['tipo']='top';
         $row['data']['publicidad_top']=listarPublicidad(true);
         $row['data']['productos']=listarProductosWeb();
+        $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
+        $row['data']['cities']=getCitiesAll(true);
+        $row['data']['regions']=getRegionsAll(true);
+        $row['data']['states']=getStates(true);
+        $row['data']['payment_methods']=listarMetodoDePago(true);
+        $row['data']['envio']=recargoEnvio(true);
+        $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+        $row['data']['combos']=listarCombos(true);
         $row['success']=true;
         $row['msj_general']=true;
-        echo json_encode($row);
+        echo e($row);
     break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
@@ -147,7 +155,7 @@ switch($_GET['evento']) {
         guardarOpinion();
     break;
     case 'listarCombos':
-        listarCombos();
+        listarCombos(false);
     break;
     case 'guardarOpinionOrden':
         guardarOpinionOrden();
@@ -225,7 +233,7 @@ function listarPublicidad($tipo_salida){
      return salidaNueva(null,'No tiene publicidad',false,$tipo_salida);
     }
 }
-function listarCombos(){
+function listarCombos($tipo_salida=false){
     $sql="SELECT todo.*,todo.total_precio/rate.rate as total_precio_dolar FROM (SELECT json_agg(
         json_build_object(
 			'products_id',p.id,
@@ -237,9 +245,9 @@ function listarCombos(){
     $arr=q($sql);
     if(is_array($arr)){
         $arr=recortar_imagen_combo($arr);
-        return salidaNueva($arr,'Listado combos',true);
+        return salidaNueva($arr,'Listado combos',true,$tipo_salida);
     }else{
-        return salidaNueva(null,'No encontramos Compras fáciles',false);
+        return salidaNueva(null,'No encontramos Compras fáciles',false,$tipo_salida);
     }
 }
 function filtroProductos($sql){
