@@ -9,9 +9,11 @@
 		</div>
 	</div>
 	<catalog
-
 		:tags="{{ $tags }}"
-		:ads="{{ $ads }}"
+		:ads_a="{{ $ads_a }}"
+		:ads_b="{{ $ads_b }}"
+		:ads_c="{{ $ads_c }}"
+		:ads_d="{{ $ads_d }}"
 		:tasadolar="{{$tasa_dolar}}"
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
 	</catalog>

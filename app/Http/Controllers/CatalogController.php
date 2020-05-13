@@ -18,14 +18,37 @@
 
 		function index() {
 
-			$Ads = [];
-	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto")).'%'])->orderBy('order','ASC')->get();
+			$Ads_a = [];
+	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_a")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
-	            $m["image_b"] = $this->cambiarBarra($m["image_b"]);
-	            array_push($Ads, $m);
+	            array_push($Ads_a, $m);
 	        }
-	        $Ads = json_encode($Ads);
+			$Ads_a = json_encode($Ads_a);
+			
+			$Ads_b = [];
+	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_b")).'%'])->orderBy('order','ASC')->get();
+	        foreach ($a as $i => $m) {
+	            $m["image"] = $this->cambiarBarra($m["image"]);
+	            array_push($Ads_b, $m);
+	        }
+			$Ads_b = json_encode($Ads_b);
+			
+			$Ads_c = [];
+	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_c")).'%'])->orderBy('order','ASC')->get();
+	        foreach ($a as $i => $m) {
+	            $m["image"] = $this->cambiarBarra($m["image"]);
+	            array_push($Ads_c, $m);
+	        }
+			$Ads_c = json_encode($Ads_c);
+			
+			$Ads_d = [];
+	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_d")).'%'])->orderBy('order','ASC')->get();
+	        foreach ($a as $i => $m) {
+	            $m["image"] = $this->cambiarBarra($m["image"]);
+	            array_push($Ads_d, $m);
+	        }
+	        $Ads_d = json_encode($Ads_d);
 
 			if(isset($_GET['cat'])){
 				$category_id = filter_input(INPUT_GET, "cat",FILTER_VALIDATE_INT);
@@ -47,7 +70,10 @@
 				"portada"=>$portada,
 				"title"=>$title,
 				"tasa_dolar"=>$Coin->rate,
-				"ads"=>$Ads,
+				"ads_a"=>$Ads_a,
+				"ads_b"=>$Ads_b,
+				"ads_c"=>$Ads_c,
+				"ads_d"=>$Ads_d,
 				"tags"=>$k
 			]);
 		}

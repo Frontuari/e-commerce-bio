@@ -74,9 +74,15 @@
 						</div>
 					</div>
 					<div class="bio-ads">
-						<div class="ad-box" v-for="a in ads" :key="a.url">
-							<a :href="a.url"><img :src="'storage/'+a.image"></a>
+						<div class="ad-box">
+							<Slider :sliders="ads_a"></Slider>
+							<Slider :sliders="ads_b"></Slider>
+							<Slider :sliders="ads_c"></Slider>
+							<Slider :sliders="ads_d"></Slider>
 						</div>
+						<!-- <div class="ad-box" v-for="a in ads" :key="a.url">
+							<a :href="a.url"><img :src="'storage/'+a.image"></a>
+						</div> -->
 					</div>
 				</div>
 				<div id="content">
@@ -116,9 +122,10 @@
 					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products" :user_id="datauser.id"></ProductList>
 
 					<div class="bio-ads">
-						<div class="ad-box" v-for="a in ads" :key="a.url">
+						<Slider :sliders="ads_a"></Slider>
+						<!-- <div class="ad-box" v-for="a in ads" :key="a.url">
 							<a :href="a.url"><img :src="'storage/'+a.image"></a>
-						</div>
+						</div> -->
 						
 					</div>
 				</div>
@@ -129,6 +136,7 @@
 </template>
 <script>
 	import ProductList from './ProductCatalog.vue';
+	import Slider from './SliderVertical.vue';
 
     export default {
         data() {
@@ -153,13 +161,17 @@
             }
 		},
 		components: {
-			ProductList
+			ProductList,
+			Slider
         },
 		props: {
 			userlogged: Object,
 			tasadolar: Number,
 			tags: Array,
-			ads: Array
+			ads_a: Array,
+			ads_b: Array,
+			ads_c: Array,
+			ads_d: Array
 		},
         methods: {
 			filterProducts: async function() {
