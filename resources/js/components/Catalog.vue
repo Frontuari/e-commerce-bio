@@ -113,7 +113,7 @@
 						</div>
 					</div>
 
-					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products"></ProductList>
+					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products" :user_id="datauser.id"></ProductList>
 
 					<div class="bio-ads">
 						<div class="ad-box" v-for="a in ads" :key="a.url">

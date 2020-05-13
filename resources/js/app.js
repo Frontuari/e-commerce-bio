@@ -121,14 +121,27 @@ var globalFunc = {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                if(product.qty_avaliable > parseInt(parseInt(tmp[b].cant) + parseInt(cantidad)) ){
+                    console.log("si hay inventario disponible, lo agrega");
+                    tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                }else {
+                    console.log("el inventario no es suficiente para agregar al carrito");
+                }
                 exist = true;
             }
         });
         if(!exist) {
-            tmp.push({product: product,cant: parseInt(cantidad)});
+            if(product.qty_avaliable >= 1 ){
+                console.log("entro por el !exist, si hay inventario disponible, lo agrega");
+                tmp.push({product: product,cant: parseInt(cantidad)});
+            }else {
+                console.log("entro por el !exist y el inventario no es suficiente para agregar al carrito");
+            }
         }
         return tmp;
+    },
+    checkStock: function(product,tmp,cantidad) {
+
     },
     dropCart: function() {
         window.localStorage.removeItem('cartNew');
