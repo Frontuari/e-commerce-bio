@@ -20,8 +20,7 @@ switch($_GET['evento']) {
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
         break;
     case 'web_no_login':
-        $_GET['tipo']='top';
-        $row['data']['publicidad_top']=listarPublicidad(true);
+        $row['data']['listarPublicidadToda']=listarPublicidadToda(true);
         $row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
@@ -30,7 +29,7 @@ switch($_GET['evento']) {
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-        $row['data']['combos']=listarCombos(true);
+        $row['data']['listarCombos']=listarCombos(true);
         $row['success']=true;
         $row['msj_general']=true;
         echo e($row);
@@ -223,6 +222,14 @@ function listarProductosWeb(){
     $sql=getSqlListarProductos();
     $sql=filtroProductos($sql);
     return listarProductos($sql,false,true,false);
+}
+function listarPublicidadToda($tipo_salida){
+    $arr=q("select image,type from advs");
+    if(is_array($arr)){
+     return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
+    }else{
+     return salidaNueva(null,'No tiene publicidad',false,$tipo_salida);
+    }
 }
 function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
