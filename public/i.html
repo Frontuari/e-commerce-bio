@@ -132,7 +132,7 @@ body{
   color: #ABABBE;
 }
 .name_combo,.monto{
-  font-size: 20px;
+  font-size: 17px;
 }
 .cajaImagenProducto{
   min-height: 215px;
@@ -169,6 +169,25 @@ a.slfacebook {
   background-color: #69BE7B;
   color: white;
 }
+#menuCategorias{
+  padding: 0;
+  margin: 0;
+  color:#69BE7B;
+
+}
+.marLados{
+  padding: 0px 40px 0px 40px;
+}
+.navbar-nav>li {
+  padding: 0 13px 0 13px;
+}
+.nav-item>a{
+  color: #69BE7B !important;
+}
+.dropdown-item{
+  color: #69BE7B !important;
+  
+}
 </style>
 
   </head>
@@ -198,6 +217,23 @@ a.slfacebook {
                 
              
         </div>
+      </div>
+      <div class="row marLados">
+        <nav class="navbar navbar-expand-lg navbar-light" id="menuCategorias">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" id="ulmenuCategorias">
+              <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
       </div>
 
     </div>

@@ -44,6 +44,7 @@ function procesar(data,evento){
             listar_publicidad_final();
             listar_publicidad_medio();
             productos_home();
+            listar_categorias_movil_menu();
         }
 
         break;
@@ -103,9 +104,10 @@ function productos_home(){
     data['data'].forEach(element => {
         var preD=formatD(element.total_precio_dolar);
         var preB=formatB(element.total_precio);
+        disponible='<div class="monto">('+element.qty_avaliable+' Disponibles)</div>';
         divPrecioBolivar='<div class="monto">'+preB+'</div>';
         divPrecioDolar='<div class="monto">'+preD+'</div>';
-        ht+='<div class="col-md-2 caja_producto"><div class="cajaImagenProducto"><img width="200px" src="'+urlBaseImagen+element.image+'"></div><div class="name_combo">'+element.name+'</div>'+divPrecioBolivar+divPrecioDolar+'</div>';
+        ht+='<div class="col-md-2 caja_producto"><div class="cajaImagenProducto"><img width="200px" src="'+urlBaseImagen+element.image+'"></div><div class="name_combo">'+element.name+'</div>'+disponible+divPrecioBolivar+divPrecioDolar+'</div>';
     }); 
     div_listarCombos.innerHTML=ht;
     console.log(data);
@@ -126,6 +128,43 @@ function listar_categorias_movil_4(){
     div_listar_categorias_movil_4.innerHTML=ht;
     console.log(data);
     
+}
+function listar_categorias_movil_menu(){
+    var i=0;
+    hy='';
+    ht='';
+    conoce='';
+ cierraD='</div></li>';
+ conoce+='<a class="dropdown-item" href="#">Cultura bio</a>';
+ conoce+='<a class="dropdown-item" href="#">Sucursales</a>';
+ conoce+='<a class="dropdown-item" href="#">Proveedores</a>';
+ conoce+='<a class="dropdown-item" href="#">Contacto</a>';
+    datab=getLocal('listar_categorias_movil'); 
+    var ULmenuCategorias=document.getElementById("ulmenuCategorias");
+    ht+='<li class="nav-item active"><a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a></li>';
+   datab['data'].forEach(element => {
+        if(i<6){
+            //alert(element.name);
+        ht+='<li class="nav-item"><a class="nav-link" href="#">'+element.name+' <span class="sr-only">(current)</span></a></li>';
+     
+        }
+        hy+='<a class="dropdown-item" href="#">'+element.name+'</a>';
+        
+        i++;
+    }); 
+    ht+=abreD('Mas categorias',"navbarDropdownA")+hy+cierraD;
+    ht+=abreD('Conoce a bio mercados',"navbarDropdownB")+conoce+cierraD;
+    ULmenuCategorias.innerHTML=ht;
+    console.log(data);
+    
+}
+function abreD(titulo,id){
+    aabreD='<li class="nav-item dropdown">'+
+    '<a class="nav-link dropdown-toggle" href="#" id="'+id+'" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+      titulo+
+    '</a>'+
+   '<div class="dropdown-menu" aria-labelledby="'+id+'">';
+   return aabreD;
 }
 function listar_publicidad_medio(){
     data=getLocal('listarPublicidadToda');

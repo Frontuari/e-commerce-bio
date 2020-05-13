@@ -30,6 +30,15 @@ switch($_GET['evento']) {
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
         $row['data']['listarCombos']=listarCombos(true);
+        $_GET['tipo']='Mas vendidos';
+        $row['data']['pro_mas_vendido']=listarProductosFiltrados(true,true);
+        $_GET['tipo']='Mejores precios';
+        $row['data']['pro_mejor_precio']=listarProductosFiltrados(true,true);
+        $_GET['tipo']='Orden alfabético A-Z';
+        $row['data']['pro_a_z']=listarProductosFiltrados(true,true);
+        $_GET['tipo']='Orden alfabético Z-A';
+        $row['data']['pro_z_a']=listarProductosFiltrados(true,true);
+        //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
         echo e($row);
@@ -403,7 +412,7 @@ function listarFavoritos(){
     listarProductos($sql);
 }
 
-function listarProductosFiltrados(){
+function listarProductosFiltrados($tipo_salida=false,$simple=false){
     $precioInicial=$_GET['precioInicial'];
     $precioFinal=$_GET['precioFinal'];
     $tipo=$_GET['tipo'];
@@ -430,10 +439,11 @@ function listarProductosFiltrados(){
         $sql=getSqlListarProductos();
     }
     
-    
-    $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    if($precioInicial and $precioFinal){
+        $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    }
     //exit($sql);
-    listarProductos($sql);
+    return listarProductos($sql,false,$tipo_salida,true,true);
 }
 
 function listarProductosPorCategoria(){
@@ -1053,7 +1063,7 @@ function guardarCalificacion(){
         salidaNueva(null,"Ha fallado la calificación",false);
     }
 }
-function listarProductosIA(){
+function listarProductosIA($tipo_salida=false,$simple=false){
     $users_id=$_SESSION['usuario']['id'];
     //$users_id=1;
     $cant_mostrar=20;
@@ -1079,7 +1089,7 @@ $keyword=array();
             $order='ORDER BY RANDOM()';
             $sql=getSqlListarProductos('','',$order);
            
-            listarProductos($sql);
+            listarProductos($sql,false,$tipo_salida,true,$simple);
         }
     }
     catch(\Exception $e){
@@ -1097,7 +1107,7 @@ $keyword=array();
       $join="INNER JOIN ($sql) as r ON r.id=p.id";
       $sql=getSqlListarProductos($join,'',$order);
     
-      listarProductos($sql);
+      listarProductos($sql,false,$tipo_salida,true,$simple);
     }
     catch(\Exception $e){
         salidaNueva(null,"disculpe, intente nuevamente 2");
@@ -1130,11 +1140,19 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
  
     return $sql;
 }
-function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true){
-    
+function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true,$simple=false){
+    if($simple){
+        $sql="SELECT id FROM ($sql) as todo";
+    }
     $row=q($sql);
     if(is_array($row)){
+        if($simple==false){
         $row=recortar_imagen($row,$agregarCantidad);
+        }
+
+                
+            
+        
         return salidaNueva($row,"Listando productos",true,$tipo_salida,$comprimido);
     }else{
         return salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false,$tipo_salida,$comprimido);
