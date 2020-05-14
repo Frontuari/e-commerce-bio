@@ -16,7 +16,7 @@
 
 									<span class="product-info" v-for="p in combo.products" :key="p.id">
 										{{ p.name }} X {{p.cant_combo}}
-										<span v-if="p.qty_avaliable == 0"><font color="red">Agotado</font></span>
+										<span v-if="p.qty_avaliable <= 0"><font color="red">Agotado</font></span>
 										<span v-else-if="p.cant_combo > p.qty_avaliable"><font color="red"> ({{p.qty_avaliable}} Disponible) </font></span>
 									</span>
 									
