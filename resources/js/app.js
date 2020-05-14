@@ -71,28 +71,34 @@ Vue.directive('select2', {
 var globalFunc = {
     addToFavorite: function(product,user_id) {
         let products_id = product.id;
-        // console.log("product::> ",products_id);
-        // console.log("user_id::> ",user_id);
-        axios.post(URLHOME+'api/favorites', {
-            products_id: products_id,
-            user_id: user_id
-        })
-        .then(function (response) {
-            // console.log(response.data);
-            if(response.data == 'error') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Debes estar logueado para agregar a favoritos',
-                });
-            }else {
-                EventBus.$emit("update_cantFavorite",response.data);
-            }
-            
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        if(!!user_id) {
+            axios.post(URLHOME+'api/favorites', {
+                products_id: products_id,
+                user_id: user_id
+            })
+            .then(function (response) {
+                // console.log(response.data);
+                if(response.data == 'error') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Debes estar logueado para agregar a favoritos',
+                    });
+                }else {
+                    EventBus.$emit("update_cantFavorite",response.data);
+                }
+                
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Debes estar logueado para agregar a favoritos',
+            });
+        }
     },
 
     addToCart: function(product,cantidad) {

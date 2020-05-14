@@ -1331,7 +1331,7 @@ div[class*="col-"]:not(:last-child) .product-block {
     border-radius: 30px;
     box-shadow: 1px 2px #b9b7b7;
     padding: .35rem 1.25rem;
-    width: 100%;
+    width: fit-content;
     max-width: 140px;
     margin: auto;
     position: absolute;

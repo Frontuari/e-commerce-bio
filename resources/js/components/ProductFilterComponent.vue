@@ -43,7 +43,7 @@
 									<p>IVA INCLUIDO</p>
 								</div>
 								<div class="product-prices" v-if="!product_recent.impuesto">
-									<p>EXCENTO DE IVA</p>
+									<p>EXENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p>{{ product_recent.calculado | FormatNumber }} Bs</p>
@@ -81,7 +81,7 @@
 									<p>IVA INCLUIDO</p>
 								</div>
 								<div class="product-prices" v-if="!product_sold.impuesto">
-									<p>EXCENTO DE IVA</p>
+									<p>EXENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>{{ product_sold.calculado | FormatNumber }} Bs</p>
@@ -119,7 +119,7 @@
 									<p>IVA INCLUIDO</p>
 								</div>
 								<div class="product-prices" v-if="!product_view.impuesto">
-									<p>EXCENTO DE IVA</p>
+									<p>EXENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>{{ product_view.calculado | FormatNumber }} Bs</p>
@@ -157,7 +157,7 @@
 									<p>IVA INCLUIDO</p>
 								</div>
 								<div class="product-prices" v-if="!product_best.impuesto">
-									<p>EXCENTO DE IVA</p>
+									<p>EXENTO DE IVA</p>
 								</div>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>{{ product_best.calculado | FormatNumber }} Bs</p>

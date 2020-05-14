@@ -48,7 +48,7 @@
 														</div>
 														<div class="product-content">
 															<a href="#" class="product-title">{{product_cart.product.name}}</a>
-															<span class="product-info">Descripción: {{product_cart.description_short}}</span>
+															<!-- <span class="product-info">Descripción: {{product_cart.description_short}}</span> -->
 															<div class="product-quantity">
 																<label>Cantidad</label>
 																<div class="product-quantity-group">
