@@ -333,7 +333,6 @@ function actualizarProductos($ip){
 						
 						}
 					}else{
-						
 						$id_ca=$arr_ca[0]['id'];
 					}					
 					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";

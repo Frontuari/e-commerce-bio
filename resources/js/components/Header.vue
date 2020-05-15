@@ -75,7 +75,7 @@
 											<button type="button" @click="login()" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
-											<small>¿No tienes cuenta? <a  href="/join">Registrate aquí</a></small>
+											<small>¿No tienes cuenta? <a  href="/join" class="white">Registrate aquí</a></small>
 											<small><a href="/recover" class="white">¿Olvidaste la contraseña?</a></small>
 										</div>
 									</form>
