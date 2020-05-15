@@ -127,11 +127,8 @@ var globalFunc = {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                if(product.qty_avaliable > parseInt(parseInt(tmp[b].cant) + parseInt(cantidad)) ){
-                    console.log("si hay inventario disponible, lo agrega");
+                if(product.qty_avaliable >= parseInt(parseInt(tmp[b].cant) + parseInt(cantidad)) ){
                     tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
-                }else {
-                    console.log("el inventario no es suficiente para agregar al carrito");
                 }
                 exist = true;
             }
