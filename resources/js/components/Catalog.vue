@@ -75,10 +75,10 @@
 					</div>
 					<div class="bio-ads">
 						<div class="ad-box">
-							<Slider :sliders="ads_a"></Slider>
-							<Slider :sliders="ads_b"></Slider>
-							<Slider :sliders="ads_c"></Slider>
-							<Slider :sliders="ads_d"></Slider>
+							<Slider :id="'slider_catalog1'" :sliders="ads_a"></Slider>
+							<Slider :id="'slider_catalog2'" :sliders="ads_b"></Slider>
+							<Slider :id="'slider_catalog3'" :sliders="ads_c"></Slider>
+							<Slider :id="'slider_catalog4'" :sliders="ads_d"></Slider>
 						</div>
 						<!-- <div class="ad-box" v-for="a in ads" :key="a.url">
 							<a :href="a.url"><img :src="'storage/'+a.image"></a>
