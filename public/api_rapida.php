@@ -680,7 +680,7 @@ function loginMovil($tipo_salida){
     $row=q("SELECT date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
-    WHERE s.email='$email'")[0];
+    WHERE lower(s.email)='$email'")[0];
 
    if($row['email']){
         if(password_verify($clave,$row['password'])){
