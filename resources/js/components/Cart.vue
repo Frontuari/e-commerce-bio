@@ -483,7 +483,7 @@
 															<!-- <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Ver Datos" @click="showBanksInfo()"></div> -->
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Monto</label>
-																<input type="text" name="referencia-pago" @blur="getTotalAbono()" class="form-control" v-model="paymentData[index].amount">
+																<input type="text" @keyup="index == 0 ? maskBs() : null" name="referencia-pago" @blur="getTotalAbono()" class="form-control" v-model="paymentData[index].amount">
 															</div>
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Referencia</label>
@@ -781,6 +781,19 @@
 					this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery);
 				}
 			},
+			maskBs() {
+				this.paymentData[0].amount = (this.paymentData[0].amount.replace(/(.*){1}/, '0$1').replace(/[^\d]/g, '').replace(/(\d\d?)$/, ',$1').replace(/\B(?=(\d{3})+(?!\d))/g, ".")).replace("0.","");
+				console.log("this.paymentData[0].amount::>",this.paymentData[0].amount);
+			},
+			returnNumber(num) {
+				const arrNum = num.split(".").join("").split(",");
+				let value = arrNum[0];
+				let decimal = arrNum[1];
+				console.log("value::> ",value);
+				console.log("decimal::> ",decimal);
+				console.log("parseFloat(value+'.'+decimal)::>> ",parseFloat(value+"."+decimal));
+				return parseFloat(value+"."+decimal);
+			},
 			getTotalAbono() {
 				this.totalAbonoBs = 0;
 				this.totalAbonoUsd = 0;
@@ -791,7 +804,12 @@
 							this.totalAbonoUsd += parseFloat(a.amount);
 						break;
 						case 2:
-							this.totalAbonoBs += parseFloat(a.amount);
+							console.log("b::> ",b);
+							if(b == 0) {
+								this.totalAbonoBs += this.returnNumber(a.amount);
+							}else {
+								this.totalAbonoBs += this.parseFloat(a.amount);
+							}
 						break;
 					}
 				});
