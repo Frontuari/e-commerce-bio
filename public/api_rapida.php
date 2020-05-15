@@ -464,10 +464,10 @@ function listarProductosPorCategoria(){
             if(is_array($arr)){
                 salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
             }
-    
-            $join="INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
+    //se borro INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id
+            //$join="INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
             $where="AND sc.categories_id='$categories_id'";
-            $sql=getSqlListarProductos($join,$where);
+            $sql=getSqlListarProductos("",$where);
             $sql=filtroProductos($sql);
             listarProductos($sql);
 }
@@ -1622,7 +1622,8 @@ function q($sql){
                     
                   break;
                   default:
-                //  exit($sql);
+
+                  wh_log($sql);
                     salidaNueva(null,"Disculpe, intente mas tarde...",false);
               }
           }
@@ -1632,6 +1633,18 @@ function q($sql){
 
 
 }
+function wh_log($log_msg)
+{
+    $log_filename = "log";
+    if (!file_exists($log_filename)) 
+    {
+        // create directory/folder uploads.
+        mkdir($log_filename, 0777, true);
+    }
+    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
+    // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
+    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
+} 
 function cabecera($error="Off"){
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Credentials: true");
