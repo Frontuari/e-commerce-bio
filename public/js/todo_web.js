@@ -3,6 +3,9 @@ var urlBaseImagen="storage/";
 var categoriaActual=null;
 var filtroPreIni=0;
 var filtroPreFin=50;
+var precioMin=0;
+var precioMax=50;
+var palabrasClaves="";
 cambiarPagina('inicio');
 function get(evento,variables="") {
     //alert(variables);
@@ -98,6 +101,7 @@ function cambiarPagina(nombre,tipo,imagen){
         case 'categorias':
             categoriaActual=tipo;
             contenido.innerHTML="<div class='container-fluid'><div class='row'><img width='100%' src='"+urlBaseImagen+imagen+"'></div><div class='row mar'><div class='col-md-3'>"+divIzq()+"</div><div class='col-md-9'>"+divDer()+"</div></div></div>";
+            multiRangoData();
         break;
         default:
 
@@ -142,31 +146,50 @@ function cambiarDataFiltroHorizontal(tipo){
      }); 
      DerHorizontalPro.innerHTML=ht;
 }
+function divPalabrasClaves(){
+    g='';//div_palabras_claves en div
+    for( let a in palabrasClaves ){
+        g+=' <span>'+palabrasClaves[a]+'</span>';
+     
+          
+      };
+      return  g;
+    
+}
 function fitrarRango(){
-    if(minRango.value<0){
-        minRango.value=0;
-    }
-    if(maxRango.value>50){
-        maxRango.value=0;
-    }
-    if(minRango.value>=maxRango.value){
-        minRango.value=maxRango.value-1;
-    }
+var tipo="";
+    precioMin=minRango.value;
+    precioMax=maxRango.value;
+    tipo=selectOrganizar.value;
+    cambiarDataFiltroHorizontal(tipo);
+
     //alert(value);
+}
+function multiRango(){
+    var html='<div class="row rowMultiRangoInputs">'+
+  
+      '<div class="col-6"><input id="minRango" onchange="fitrarRango()"  type="number" class="js-input-from form-control" v-model="min_price" /></div>'+
+      '<div class="col-6"><input id="maxRango" onchange="fitrarRango()"  type="number" class="js-input-to form-control" v-model="max_price" /></div>'+
+  
+'</div>';
+return html;
+}
+function inputRango(){
+    return '<input type="text" class="js-range-slider" name="my_range" value="" />';
 }
 function divFiltro(){
 
    // var checkOfertas='<div class="titulo_filtro_izq_span"><input type="radio" id="check_reciente"> <span>Más recientes</span></div>';
 
-
+//<div class="col-6"><input id="minRango" onchange="fitrarRango()" max="49" min="0" type="number" class="form-control" value="'+filtroPreIni+'"></div><div class="col-6"><input id="maxRango" onchange="fitrarRango()" max="50" min="1" type="number" value="'+filtroPreFin+'" class="form-control"></div>
 
 
 
     var html='<div class="row row_filtro_izq"><div class="col-12 tituloFiltroIzqPrincipal"><img src="img/ico_filtro.png"> Filtrado por:</div></div>'+
     '<div class="row"><div class="col-12 tituloFiltroIzq">Precio $:</div></div>'+
-    '<div class="row"><div class="col-6"><input id="minRango" onchange="fitrarRango()" max="49" min="0" type="number" class="form-control" value="'+filtroPreIni+'"></div><div class="col-6"><input id="maxRango" onchange="fitrarRango()" max="50" min="1" type="number" value="'+filtroPreFin+'" class="form-control"></div></div>'+
+    inputRango()+''+multiRango()+''+
     //'<div class="row"><div class="col-12 tituloFiltroIzq">Ofertas:'+checkOfertas+'</div></div>'+
-    '<div class="row mt-3"><div class="col-12 tituloFiltroIzq">Por etiquetas:</div></div>'
+    '<div class="row mt-3"><div class="col-12 tituloFiltroIzq">Por etiquetas:</div><div class="row" ><div class="col-12" id="div_palabras_claves">'+divPalabrasClaves()+'</div></div></div>'
     ;
     return html;
 }
@@ -224,13 +247,14 @@ function cambiar_listado_productos_home(tipo,a){
     a_z_a.classList.remove("btnactive");
     a.classList.add("btnactive");
 }
-function productos_home(){ //ELIMINAR
+function productos_home(){
     listarProductos('recientes',"div_productos_home");
 }
 
-function listarProductos(tipo,div){//eliminar
+function listarProductos(tipo,div){
 
     data=procesarProductos(tipo);
+   
     data.forEach(element => { //decia datos noc porque
       ht+=cajaProductos(element);
    }); 
@@ -243,7 +267,29 @@ function procesarProductos(tipo){
     ht='';
     data=getLocal('productos'); 
     datos=data['data'];
+    if(categoriaActual!=null){
+        datos = datos.filter(element => JSON.parse(element.json_subcategories)[0].c ==categoriaActual);
+        cargarPalabrasClaves(datos);
+    }
+    datos = datos.filter(function(element) {
+        //alert(element.price+" > min: "+precioMin+" "+element.price+" and < max: "+precioMax);
+        return (element.total_precio_dolar>precioMin && element.total_precio_dolar<precioMax);
+
+      });
     switch(tipo){
+        
+        case 'rango':
+            
+            datos = datos.filter(function(element) {
+                //alert(element.price+" > min: "+precioMin+" "+element.price+" and < max: "+precioMax);
+                return (element.total_precio_dolar>precioMin && element.total_precio_dolar<precioMax);
+
+              });
+            
+            
+            
+           
+        break;
         case 'precio':
             datos.sort((a, b) => a.price - b.price);
         break;
@@ -260,12 +306,28 @@ function procesarProductos(tipo){
             datos.sort((a, b) => b.qty_sold - a.qty_sold);
         break;
     }
-    if(categoriaActual!=null){
-        datos = datos.filter(element => JSON.parse(element.json_subcategories)[0].c ==categoriaActual);
-    }
+    
     return datos;
 }
+function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
 
+function cargarPalabrasClaves(datos){
+    var todo='';
+    datos.forEach(element => {
+        if(element.keyword!=null){
+            
+            todo+=element.keyword+" ";
+        }
+
+    }); 
+    todo=todo.replace(/\s+/g,' ');
+    var t=todo.trim().split(" ").filter( onlyUnique );
+    console.log(t);
+    palabrasClaves = t;
+    
+}
 function cajaProductos(element,tamano='2'){
     var htm='';
     var preD=formatD(element.total_precio_dolar);
@@ -493,3 +555,85 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
       console.log(e)
     }
   };
+
+  function multiRangoData(){
+    var $range = $(".js-range-slider");
+    var $inputFrom = $(".js-input-from");
+    var $inputTo = $(".js-input-to");
+    var instance;
+    var min = 0;
+    var max = 50;
+    var from = 0;
+    var to = 50;
+
+    $range.ionRangeSlider({
+        skin: "round",
+        type: "double",
+        min: min,
+        max: max,
+        from: from,
+        to: to,
+        prefix: "$",
+        onStart: updateInputs,
+        onChange: updateInputs,
+        onFinish: updateInputsB
+    });
+    instance = $range.data("ionRangeSlider");
+
+    function updateInputsB (data) {
+        fitrarRango();
+        updateInputs (data);
+    }
+
+    function updateInputs (data) {
+       
+        from = data.from;
+        to = data.to;
+        min_range = data.from;
+        max_range = data.to;
+
+
+        $inputFrom.val(from);
+        $inputTo.val(to);
+
+        $('.js-input-from')[0].dispatchEvent(new CustomEvent('input'));
+        $('.js-input-to')[0].dispatchEvent(new CustomEvent('input'));
+    }
+
+    $inputFrom.on("change", function () {
+        var val = $(this).val();
+
+        // validate
+        if (val < min) {
+            val = min;
+        } else if (val > to) {
+            val = to;
+        }
+
+        instance.update({
+            from: val
+        });
+
+        $(this).val(val);
+    });
+
+    $inputTo.on("change", function () {
+        var val = $(this).val();
+
+        // validate
+        if (val < from) {
+            val = from;
+        } else if (val > max) {
+            val = max;
+        }
+
+        instance.update({
+            to: val
+        });
+
+        $(this).val(val);
+
+    });
+    
+  
+  }
