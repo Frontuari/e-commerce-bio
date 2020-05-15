@@ -13,7 +13,12 @@
 			</div>
 		</div>
 	</section>
-	<cart :tasadolar="{{$tasa_dolar}}" :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></cart>
+	<cart 
+		:peso_max="{{$peso}}"
+		:delivery="{{$delivery}}" 
+		:tasadolar="{{$tasa_dolar}}" 
+		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
+	</cart>
 </main>
 <!-- CIERRE DEL MAIN-->
 @stop

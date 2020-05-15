@@ -21,6 +21,7 @@ switch($_GET['evento']) {
         break;
     case 'web_no_login':
         $row['data']['listarPublicidadToda']=listarPublicidadToda(true);
+        $row['data']['productosb']=reformularIdProductosCompleto(listarProductosWeb());
         $row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
@@ -30,6 +31,7 @@ switch($_GET['evento']) {
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
         $row['data']['listarCombos']=listarCombos(true);
+        //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
         echo e($row);
@@ -257,33 +259,7 @@ function listarCombos($tipo_salida=false){
         return salidaNueva(null,'No encontramos Compras fáciles',false,$tipo_salida);
     }
 }
-function filtroProductos($sql){
-    $precioInicial=$_GET['precioInicial'];
-    $precioFinal=$_GET['precioFinal'];
-    $tipo=$_GET['tipo'];
-    switch($tipo){
-        case 'Mas vendidos':
-            $order='ORDER BY qty_sold DESC';
-        break;
-        case 'Mejores precios':
-            $order='ORDER BY price ASC';
-        break;
-        case 'Orden alfabético A-Z';
-            $order='ORDER BY name ASC';
-        break;
-        case 'Orden alfabético Z-A';
-            $order='ORDER BY name DESC';
-        break;
-        default://mas recientes
-            $order='ORDER BY id DESC';
-        break;
-    }
-    if($precioInicial>-1 and $precioFinal>0){
-        $where="WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
-    }
-    $sql="SELECT * FROM ($sql) as consulta $where $order";
-    return $sql;
-}
+
 
 function best_sql_listarFavoritos($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
@@ -299,6 +275,18 @@ function best_sql_listarFavoritos($tipo_salida){
 function reformularId($arr){
     foreach($arr as $obj){
         $row[$obj['products_id']]=true;
+    }
+    return $row;
+}
+function reformularIdProductos($arr){
+    foreach($arr['data'] as $obj){
+        $row[$obj['id']]=1;
+    }
+    return $row;
+}
+function reformularIdProductosCompleto($arr){
+    foreach($arr['data'] as $obj){
+        $row[$obj['id']]=$obj;
     }
     return $row;
 }
@@ -403,7 +391,7 @@ function listarFavoritos(){
     listarProductos($sql);
 }
 
-function listarProductosFiltrados(){
+function listarProductosFiltrados($tipo_salida=false,$simple=false){
     $precioInicial=$_GET['precioInicial'];
     $precioFinal=$_GET['precioFinal'];
     $tipo=$_GET['tipo'];
@@ -425,17 +413,48 @@ function listarProductosFiltrados(){
             $order='ORDER BY p.name DESC';
             $sql=getSqlListarProductos('','',$order);
         break;
+        case 'Mas recientes':
+            $order='ORDER BY id DESC';
+            $sql=getSqlListarProductos('','',$order);
+        break;
         default:
         
         $sql=getSqlListarProductos();
     }
     
-    
-    $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    if($precioInicial and $precioFinal){
+        $sql="SELECT * FROM ($sql) as consulta WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    }
     //exit($sql);
-    listarProductos($sql);
+    return listarProductos($sql,false,$tipo_salida,true,true);
 }
-
+function filtroProductos($sql){
+    $precioInicial=$_GET['precioInicial'];
+    $precioFinal=$_GET['precioFinal'];
+    $tipo=$_GET['tipo'];
+    switch($tipo){
+        case 'Mas vendidos':
+            $order='ORDER BY qty_sold DESC';
+        break;
+        case 'Mejores precios':
+            $order='ORDER BY price ASC';
+        break;
+        case 'Orden alfabético A-Z';
+            $order='ORDER BY name ASC';
+        break;
+        case 'Orden alfabético Z-A';
+            $order='ORDER BY name DESC';
+        break;
+        default://mas recientes
+            $order='ORDER BY id DESC';
+        break;
+    }
+    if($precioInicial>-1 and $precioFinal>0){
+        $where="WHERE total_precio_dolar>'$precioInicial' AND total_precio_dolar<'$precioFinal'";
+    }
+    $sql="SELECT * FROM ($sql) as consulta $where $order";
+    return $sql;
+}
 function listarProductosPorCategoria(){
             //saber si es mayor de edad
             $categories_id=$_GET['categories_id'];
@@ -1053,7 +1072,7 @@ function guardarCalificacion(){
         salidaNueva(null,"Ha fallado la calificación",false);
     }
 }
-function listarProductosIA(){
+function listarProductosIA($tipo_salida=false,$simple=false){
     $users_id=$_SESSION['usuario']['id'];
     //$users_id=1;
     $cant_mostrar=20;
@@ -1079,7 +1098,7 @@ $keyword=array();
             $order='ORDER BY RANDOM()';
             $sql=getSqlListarProductos('','',$order);
            
-            listarProductos($sql);
+            listarProductos($sql,false,$tipo_salida,true,$simple);
         }
     }
     catch(\Exception $e){
@@ -1097,7 +1116,7 @@ $keyword=array();
       $join="INNER JOIN ($sql) as r ON r.id=p.id";
       $sql=getSqlListarProductos($join,'',$order);
     
-      listarProductos($sql);
+      listarProductos($sql,false,$tipo_salida,true,$simple);
     }
     catch(\Exception $e){
         salidaNueva(null,"disculpe, intente nuevamente 2");
@@ -1126,15 +1145,30 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
         $whereUsuario="(SELECT rating FROM rating_products WHERE users_id='$users_id' AND products_id=p.id) as calificado_por_mi,";
     }
   
-    $sql="SELECT p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+  //  $sql="SELECT p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+    $sql="SELECT json_agg(
+        json_build_object(
+    's', sc.id,
+    'c',c.id,
+    'm',c.adulto
+) 
+) json_subcategories, p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id INNER JOIN categories c ON c.id=sc.categories_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
-function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true){
-    
+function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true,$simple=false){
+    if($simple){
+        $sql="SELECT id FROM ($sql) as todo";
+    }
     $row=q($sql);
     if(is_array($row)){
+        if($simple==false){
         $row=recortar_imagen($row,$agregarCantidad);
+        }
+
+                
+            
+        
         return salidaNueva($row,"Listando productos",true,$tipo_salida,$comprimido);
     }else{
         return salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false,$tipo_salida,$comprimido);
@@ -1182,7 +1216,7 @@ function listarProductos(){
 }
 */
 function listar_categorias_movil($tipo_salida){
-    $row=q("SELECT name,image,id FROM categories WHERE status='A'");
+    $row=q("SELECT name,image,image_b,id FROM categories WHERE status='A'");
     $row=recortar_imagen($row);
     return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
 }
@@ -1443,7 +1477,13 @@ function recortar_imagen_combo($row){
 function recortar_imagen($row,$cant=null){
     foreach($row as $id=>$value){
         $no_image[0]='imagenNoDisponible.png';
-        if($value['image']==null) $value['image']=json_encode($no_image);
+      
+        if($value['image']==null or !file_exists('storage/'.json_decode($value['image'])[0])) $value['image']=json_encode($no_image);
+
+        if(isset($value['image_b'])){
+            $row[$id]['image_b']=cambiarBarra($value['image_b']);
+        }
+
         $img=json_decode($value['image']);
         if(is_array($img)){
             $imgLista=$img[0];
