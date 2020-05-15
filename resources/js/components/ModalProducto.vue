@@ -35,7 +35,7 @@
                                         <p>IVA INCLUIDO</p>
                                     </div>
                                     <div class="product-prices" v-if="!product.impuesto">
-                                        <p>EXCENTO DE IVA</p>
+                                        <p>EXENTO DE IVA</p>
                                     </div>
                                     <div class="product-prices" v-if="product.impuesto > 0">
                                         <p> ${{ (product.calculado / tasadolar) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
