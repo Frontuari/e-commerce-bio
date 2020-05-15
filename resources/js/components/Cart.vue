@@ -126,7 +126,7 @@
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total Delivery:</p>
-																			<h3 class="order-text">$ {{ total_delivery | FormatDolar }} </h3>
+																			<h3 class="order-text">$ {{ total_delivery / tasadolar | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total a Pagar:</p>
@@ -675,7 +675,9 @@
 		},
 		props: {
 			userlogged: Object,
-			tasadolar: Number
+			tasadolar: Number,
+			peso_max: Number,
+			delivery: Number
 		},
 		methods:{
 			LoadImageFile(event) {
@@ -775,8 +777,8 @@
 						this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 					}
 					this.total_weight += parseFloat(this.products_cart[i].product.peso) * parseFloat(this.products_cart[i].cant);
-					this.total_delivery = (Math.round(this.total_weight / 15) * 2);
-					this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery * this.tasadolar);
+					this.total_delivery = (Math.round(this.total_weight / this.peso_max) * this.delivery);
+					this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery);
 				}
 			},
 			getTotalAbono() {
@@ -843,8 +845,8 @@
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
 				this.total_weight += parseFloat(this.products_cart[i].product.peso) * parseFloat(this.products_cart[i].cant);
-				this.total_delivery = (Math.round(this.total_weight / 15) * 2);
-				this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery * this.tasadolar);
+				this.total_delivery = (Math.round(this.total_weight / this.peso_max) * this.delivery);
+				this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery);
 			}
 
 			if(this.isObject(this.userlogged)){
