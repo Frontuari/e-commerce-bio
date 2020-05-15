@@ -354,7 +354,12 @@ function actualizarProductos($ip){
 					}else{
 						$id_sub_ca=$arr_sub_ca[0]['id'];
 					}
-					
+					//NUEVA MODIFICACION CATEGORIAS
+					$sql="SELECT sc.id FROM sub_categories sc INNER JOIN categories c ON c.id=sc.categories_id WHERE sc.c_elementvalue_id_n4=$obj->c_elementvalue_id_N4 AND c.c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
+					$arr=q($sql);
+					if(!is_array($sql)){
+						q("UPDATE sub_categories SET categories_id=$id_ca WHERE id='$id_sub_ca'");
+					}
 
 //------------IMPUESTOS--------------------
 if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
