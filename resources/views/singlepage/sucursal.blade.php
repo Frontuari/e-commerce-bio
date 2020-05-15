@@ -7,8 +7,8 @@
 	<div class="section-subtitle"><h1>"Nuestras Sucursales"</h1></div>
 </section>
 
-<div class="container" style="margin: 0;">
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.1891615294135!2d-68.00340518474638!3d10.24632269268262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e805c55e7723c99%3A0xac834d2d302ce0e7!2sBioMercados!5e0!3m2!1ses!2sus!4v1575580546689!5m2!1ses!2sus" width="1920" height="800" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+<div class="container-fluid" style="margin: 0;">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3926.1891615294135!2d-68.00340518474638!3d10.24632269268262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e805c55e7723c99%3A0xac834d2d302ce0e7!2sBioMercados!5e0!3m2!1ses!2sus!4v1575580546689!5m2!1ses!2sus" width="100%" height="800" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 </div>
 
 <div id="shapely_home_portfolio-8" class="widget shapely_home_portfolio">		<section class="projects pb0" style="background-color:#dddddd">
