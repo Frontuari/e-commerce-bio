@@ -1,5 +1,5 @@
 <template>    
-    <section style="height:455px !important;">
+    <section style="height:455px !important; margin-bottom: 10px !important;">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <!-- <ol class="carousel-indicators">
                 <li v-for="(slider, index) in sliders" v-bind:key="slider.id" data-target="#carouselExampleIndicators" :data-slide-to="index" v-bind:class="{'active': index == 0}"></li>
