@@ -116,12 +116,22 @@
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
-																		<p>Total</p>
-																		<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
-																		<br>
-																		<p>Peso</p>
-																		<h3 class="order-text">{{ total_weight.toFixed(2) }} Kg </h3>
-																		
+																		<div class="col-md-12">
+																			<p>Subtotal</p>
+																			<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Peso</p>
+																			<h3 class="order-text">{{ total_weight.toFixed(2) }} Kg </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Total Delivery:</p>
+																			<h3 class="order-text">$ {{ total_delivery | FormatDolar }} </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Total a Pagar:</p>
+																			<h3 class="order-text">$ {{ total_pagar / tasadolar | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
+																		</div>
 																	</div>
 																</div>
 															</div>
@@ -634,6 +644,8 @@
 				products_cart:0,
 				total_cart:0,
 				total_weight: 0,
+				total_delivery: 0,
+				total_pagar: 0,
 				datauser:[],
 				payments: [],
 				selectedDirection: '',
@@ -762,7 +774,9 @@
 					}else{
 						this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 					}
-					this.total_weight = parseFloat(this.products_cart[i].product.peso) * parseInt(this.products_cart[i].cant);
+					this.total_weight += parseFloat(this.products_cart[i].product.peso) * parseFloat(this.products_cart[i].cant);
+					this.total_delivery = (Math.round(this.total_weight / 15) * 2);
+					this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery * this.tasadolar);
 				}
 			},
 			getTotalAbono() {
@@ -828,6 +842,9 @@
 				}else{
 					this.total_cart += parseFloat(this.products_cart[i].product.price) * parseInt(this.products_cart[i].cant);
 				}
+				this.total_weight += parseFloat(this.products_cart[i].product.peso) * parseFloat(this.products_cart[i].cant);
+				this.total_delivery = (Math.round(this.total_weight / 15) * 2);
+				this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery * this.tasadolar);
 			}
 
 			if(this.isObject(this.userlogged)){
