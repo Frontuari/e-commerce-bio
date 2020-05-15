@@ -72,3 +72,7 @@ a.slyoutube{
 ul.carousel-indicators{
 	display: none;
 }
+
+.product-block .product-img .carousel-inner{
+	height: 200px;
+}
