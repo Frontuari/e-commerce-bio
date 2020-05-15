@@ -4,7 +4,7 @@
             <!-- <ol class="carousel-indicators">
                 <li v-for="(slider, index) in sliders" v-bind:key="slider.id" data-target="#carouselExampleIndicators" :data-slide-to="index" v-bind:class="{'active': index == 0}"></li>
             </ol> -->
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="height:500px !important;">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
                     <a :href="slider.url" v-if="!!slider.url">
                         <img class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
