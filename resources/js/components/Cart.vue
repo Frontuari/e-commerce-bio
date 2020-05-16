@@ -483,7 +483,7 @@
 															<!-- <div class="col-lg-2 float-right mx-auto"><br><input type="button" class="btn btn-submit" value="Ver Datos" @click="showBanksInfo()"></div> -->
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Monto</label>
-																<input type="text" @input="index == 0 ? maskBs($event) : null" name="referencia-pago" @blur="getTotalAbono()" class="form-control amountPay" v-model="paymentData[index].amount">
+																<input type="text" @input="mask($event,index)" name="referencia-pago" @blur="getTotalAbono()" class="form-control amountPay" v-model="paymentData[index].amount">
 															</div>
 															<div class="form-group col-lg-3" >
 																<label for="referencia-pago">Referencia</label>
@@ -528,13 +528,7 @@
 														<div class="col-lg-12">
 															<h3 class="order-number order-text">Resumen de la compra</h3>
 															<div class="order-content">
-																<div class="order-description">
-																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
-																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{product_cart.product.price / tasadolar | FormatDolar }} / Bs {{product_cart.product.price | FormatNumber}}</h3>
-																	</div>
-																</div>
+
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
@@ -557,20 +551,29 @@
 																			</tr>
 																			<tr>
 																				<td><b>Bs:</b> </td>
-																				<td>{{totalAbonoBs | FormatNumber}} Bs</td>
+																				<td>Bs {{totalAbonoBs | FormatNumber}}</td>
 																			</tr>
 																			<tr>
 																				<td>Resta:  </td>
-																				<td>{{Resta | FormatNumber}} Bs</td>
+																				<td>$ {{Resta / tasadolar | FormatDolar}} / Bs {{Resta | FormatNumber}}</td>
 																			</tr>
 																			<tr>
 																				<td>Total:  </td>
-																				<td>{{totalAbono | FormatNumber}} Bs</td>
+																				<td>$ {{totalAbono / tasadolar | FormatDolar}} / Bs {{totalAbono | FormatNumber}}</td>
 																			</tr>
 																		</table>
 																		
 																	</div>
 																</div>
+
+																<div class="order-description">
+																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
+																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{product_cart.product.price / tasadolar | FormatDolar }} / Bs {{product_cart.product.price | FormatNumber}}</h3>
+																	</div>
+																</div>
+																
 
 																<div class="order-description">
 																	<div class="row">
@@ -781,11 +784,11 @@
 					this.total_pagar = parseFloat(this.total_cart) + parseFloat(this.total_delivery);
 				}
 			},
-			maskBs(event) {
-				this.paymentData[0].amount = (this.paymentData[0].amount.replace(/(.*){1}/, '$1').replace(/[^\d]/g, '').replace(/(\d\d?)$/, ',$1').replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+			mask(event,index) {
+				this.paymentData[index].amount = (this.paymentData[index].amount.replace(/(.*){1}/, '$1').replace(/[^\d]/g, '').replace(/(\d\d?)$/, ',$1').replace(/\B(?=(\d{3})+(?!\d))/g, "."));
 				// $('.amountPay').value = this.paymentData[0].amount;
 				// $('.amountPay')[0].dispatchEvent(new CustomEvent('input'));
-				event.target.value = this.paymentData[0].amount;
+				event.target.value = this.paymentData[index].amount;
 			},
 			returnNumber(num) {
 				const arrNum = num.split(".").join("").split(",");
@@ -801,15 +804,10 @@
 				this.paymentData.forEach( (a,b) => {
 					switch(a.coin){
 						case 1:
-							this.totalAbonoUsd += parseFloat(a.amount);
+							this.totalAbonoUsd += this.returnNumber(a.amount);
 						break;
 						case 2:
-							console.log("b::> ",b);
-							if(b == 0) {
-								this.totalAbonoBs += this.returnNumber(a.amount);
-							}else {
-								this.totalAbonoBs += this.parseFloat(a.amount);
-							}
+							this.totalAbonoBs += this.returnNumber(a.amount);
 						break;
 					}
 				});
