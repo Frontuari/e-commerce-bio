@@ -10,7 +10,7 @@
 	
 	</div>
 
-	<slider :id="sliderHome1" :sliders="{{ $sliders }}"></slider>
+	<slider :id="'sliderHome1'" :sliders="{{ $sliders }}"></slider>
 
 	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
 
@@ -18,7 +18,7 @@
 
 	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
 
-	<slider :id="sliderHome2" :sliders="{{ $medio_bajo }}"></slider>
+	<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
 
 	<nuestros-productos 
 		:recent="{{ $recent }}"
@@ -31,7 +31,7 @@
 
 	<!-- <footer-ad :ads="{{ $footer }}"></footer-ad> -->
 
-	<slider :id="sliderHome3" :sliders="{{ $footer }}"></slider>
+	<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>
 
 @stop
 
