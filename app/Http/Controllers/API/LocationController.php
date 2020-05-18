@@ -11,17 +11,22 @@ use App\Cities;
 class LocationController extends BaseController
 {
     public function getStates() {
-        $States = States::all();
+        $States = States::where("status","A")->get();
         return $this->sendResponse($States);
     }
 
+    public function getRegionsByState($state_id) {
+        $Regions = Regions::where("status","A")->where("states_id",$state_id)->get();
+        return $this->sendResponse($Regions);
+    }
+
     public function getRegions() {
-        $Regions = Regions::all();
+        $Regions = Regions::where("status","A")->get();
         return $this->sendResponse($Regions);
     }
 
     public function getCities() {
-        $Cities = Cities::all();
+        $Cities = Cities::where("status","A")->get();
         return $this->sendResponse($Cities);
     }
 }

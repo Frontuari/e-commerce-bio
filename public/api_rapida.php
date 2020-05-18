@@ -356,7 +356,8 @@ function login(){
     INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='$email'")[0];
 
-    $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+    $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad 
+    FROM order_address as o
         INNER JOIN cities c on c.id = o.cities_id
         WHERE o.users_id = ".$row['id']." and o.status = 'A'
     ");

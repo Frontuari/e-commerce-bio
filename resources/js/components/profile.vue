@@ -219,28 +219,37 @@
 																	<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" v-model="direction.nro_home">
 																</div>
 															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-prov">Municipio/Provincia:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad">
-																</div>
-															</div>
+															
 															<div class="col-lg-6">
 																<div class="form-group">
 																	<label for="address-1-state">Estado:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control dropdown-toggle"  data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled"  autocomplete="off">
-																	<div class="dropdown-menu dropdown-menu-state">
+																	<select class="form-control" @change="loadMunicipio($event)" v-model="direction.state_id">
+																		<option value="">Seleccione</option>
+																		<option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
+																	</select>
+																	<!-- <input type="text" class="form-control dropdown-toggle"  data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled"  autocomplete="off"> -->
+																	<!-- <div class="dropdown-menu dropdown-menu-state">
 																	    <div class="dropdown-item" v-for="state in states" :key="state.id">
 																			<div class="form-check form-check-radio">
 																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" v-model="state.name">
 																				<label :for="state.name+'-address-1'" class="custom-check">{{state.name}}</label>
 																			</div>
 																	    </div>
-																	</div>
+																	</div> -->
+																</div>
+															</div>
+															<div class="col-lg-6">
+																<div class="form-group">
+																	<label for="address-prov">Municipio:</label>
+																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																	<!-- <input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad"> -->
+																	<select class="form-control" v-model="direction.region_id">
+																		<option value="">Seleccione</option>
+																		<option v-for="region in regions" :key="region.id" :value="region.id">{{region.name}}</option>
+																	</select>
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -661,6 +670,7 @@
             	get_tab:'',
 				userData: [],
 				states: [],
+				regions: [],
 				orders: [],
 				data_products: [],
 				en_proceso: [],
@@ -779,10 +789,18 @@
 				const response = await axios.get(URLSERVER+"api/states");
 				this.states = response.data.data;
 			},
+			async getRegions() {
+				const response = await axios.get(URLSERVER+"api/regions");
+				this.regions = response.data.data;
+			},
+			async loadMunicipio(event) {
+				const state_id = event.target.value;
+				const response = await axios.get(URLSERVER+"api/regions/state/"+state_id);
+				this.regions = response.data.data;
+			},
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
 				this.orders = response.data.data;
-				console.log("orders::> ",this.orders);
 
 				this.completos = this.orders.filter( lista => {
 					return lista.namestatus == "Entregado"
@@ -966,7 +984,9 @@
 			this.getFavorites();
 			this.getTabUrl();
 			this.getStates();
+			this.getRegions();
 			this.getPedidos();
+			console.log("direcciones::> ",this.userlogged.directions);
 		},
 		created() {
 			this.userData = this.userlogged;
