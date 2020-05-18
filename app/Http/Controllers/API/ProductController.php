@@ -52,8 +52,16 @@ class ProductController extends BaseController
             $otro=$texto;
         }
 
-        // $Product =  DB::table('products')->whereRaw('LOWER(name) LIKE ?', ['%'.trim(strtolower($name)).'%'])->take(10)->get();
-        $Product =  DB::table('products')->whereRaw("to_tsvector(name) @@ to_tsquery('$otro')")->take(10)->get();
+        $Product =  DB::table('products')
+        ->select("products.*")
+        ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
+        ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
+        ->where("products.status","A")
+        ->where("products.qty_avaliable",">",0)
+        ->whereRaw("to_tsvector(products.name) @@ to_tsquery('$otro') OR to_tsvector(products.keyword) @@ to_tsquery('$otro')")
+        ->groupBy("products.id")
+        ->orderBy("products.name")
+        ->take(10)->get();
         if (is_null($Product)) {
             return $this->sendError('Product not found.');
         }

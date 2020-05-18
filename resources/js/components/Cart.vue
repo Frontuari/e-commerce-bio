@@ -94,7 +94,11 @@
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
-															<p v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
+															<p v-if="this.datauser.id=='undefined'" >
+																<a href="#" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																	Inicie sesion para confirmar
+																</a>
+															</p>
 														</div>
 													</div>
 												</div>

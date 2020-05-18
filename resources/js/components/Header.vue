@@ -52,7 +52,7 @@
 						<ul>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
-								<a href="#" v-if="!userlogged" id="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="/assets/img/login-bio.png" alt="Login">
 								</a>
 				

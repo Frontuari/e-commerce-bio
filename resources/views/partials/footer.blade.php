@@ -348,7 +348,7 @@
 			document.location.href="{{ url('/profile') }}";
 		});
 
-		$("#navbarLogin").click(function(){
+		$(".navbarLogin").click(function(){
 			if($(".login_navbar").hasClass('show')===true)
 			{
 				$(".login_navbar").removeClass('show');
