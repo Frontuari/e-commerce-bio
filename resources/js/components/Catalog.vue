@@ -51,19 +51,19 @@
 							<div class="filter filter-offers">
 								<h4>Ofertas</h4>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-reciente" title="Mas Recientes" name="mas-reciente" value="mr" v-model="filterP">
+									<input type="radio" class="check-box" id="mas-reciente" title="Mas Recientes" name="radioOferta" value="mr" v-model="filterP">
 									<label for="mas-reciente">Más Recientes</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-buscados" title="Mas Buscados" name="mas-buscados" value="mb" v-model="filterP">
+									<input type="radio" class="check-box" id="mas-buscados" title="Mas Buscados" name="radioOferta" value="mb" v-model="filterP">
 									<label for="mas-buscados">Más Buscados</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="mas-vendidos" value="mv" v-model="filterP">
+									<input type="radio" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="radioOferta" value="mv" v-model="filterP">
 									<label for="mas-vendidos">Más Vendidos</label>
 								</div>
 								<div class="form-group">
-									<input type="checkbox" class="check-box" id="mejor-precio" title="Mejor Precio" name="mejor-precio" value="mj" v-model="filterP"> 
+									<input type="radio" class="check-box" id="mejor-precio" title="Mejor Precio" name="radioOferta" value="mj" v-model="filterP"> 
 									<label for="mejor-precio">Mejor Precio</label>
 								</div>
 							</div>
@@ -149,7 +149,7 @@
 				fTags: '',
 				selectedTags:'',
 				products: {},
-				filterP: [],
+				filterP: '',
 				limitP: 50,
 				orderP: 'AZasc',
 				rangeP: '',
@@ -226,17 +226,17 @@
 		},
 		computed: {
 			filtros: function() {
-				return this.filterP.join("&")+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
+				return "&"+this.filterP+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
 			}
 		},
 		created: function() {
-			console.log("ads::> ",this.ads);
-			// this.getDebounceProducts = _.debounce(this.filterProducts,100);
+			// console.log("ads::> ",this.ads);
+			this.getDebounceProducts = _.debounce(this.filterProducts,100);
 		},
 		watch: {
 			filtros: function() {
-				this.filterProducts();
-				// this.getDebounceProducts();
+				// this.filterProducts();
+				this.getDebounceProducts();
 			}
 		}
     }

@@ -57,7 +57,7 @@ class FavoritesController extends BaseController
             try {
                 $favorite->save();
             } catch (\Exception $e) {
-                return 'error';
+                return 'exist';
             }
             //Traernos todos los favoritos
              $a=Favorites::where('users_id',$id_usuario)->get();

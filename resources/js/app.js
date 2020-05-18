@@ -78,11 +78,11 @@ var globalFunc = {
             })
             .then(function (response) {
                 // console.log(response.data);
-                if(response.data == 'error') {
+                if(response.data == 'exist') {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Debes estar logueado para agregar a favoritos',
+                        text: 'Ya este producto está añadido en Favoritos',
                     });
                 }else {
                     EventBus.$emit("update_cantFavorite",response.data);
@@ -110,6 +110,7 @@ var globalFunc = {
             const cantUpdate = globalFunc.getCartCant(cart);
             EventBus.$emit("update_cantCart",cantUpdate);
         }else {
+            cart = globalFunc.validateCart(product,cart,cantidad);
             cart.push({product: product,cant: parseInt(cantidad)});
             window.localStorage.setItem('cartNew', JSON.stringify(cart));
             EventBus.$emit("update_cantCart",cantidad);
@@ -129,16 +130,25 @@ var globalFunc = {
             if (a.product.id == product.id) {
                 if(product.qty_avaliable >= parseInt(parseInt(tmp[b].cant) + parseInt(cantidad)) ){
                     tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'El inventario del producto no es suficiente para agregar al carrito',
+                    });
                 }
                 exist = true;
             }
         });
         if(!exist) {
-            if(product.qty_avaliable >= 1 ){
-                console.log("entro por el !exist, si hay inventario disponible, lo agrega");
+            if(product.qty_avaliable >= 1 && (product.qty_avaliable >= cantidad) ) {
                 tmp.push({product: product,cant: parseInt(cantidad)});
             }else {
-                console.log("entro por el !exist y el inventario no es suficiente para agregar al carrito");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El inventario del producto no es suficiente para agregar al carrito',
+                });
             }
         }
         return tmp;
@@ -149,6 +159,23 @@ var globalFunc = {
     dropCart: function() {
         window.localStorage.removeItem('cartNew');
         EventBus.$emit("update_cantCart",0);
+    },
+    droppingCart: function() {
+        Swal.fire({
+            title: 'Carrito',
+            text: "¿Desea eliminar su carrito de compras?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                this.dropCart();
+                location.href = "/";
+            }
+        })
     },
     getCartCant: function(cart) {
         let cant = 0;
@@ -208,6 +235,8 @@ Vue.prototype.addToCart = globalFunc.addToCart;
 Vue.prototype.addComboToCart = globalFunc.addComboToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 Vue.prototype.dropCart = globalFunc.dropCart;
+Vue.prototype.droppingCart = globalFunc.droppingCart;
+
 
 
 /**

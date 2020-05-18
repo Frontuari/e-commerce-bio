@@ -526,7 +526,7 @@
 											                                    </svg>
 											                                    Quitar de Favoritos
 											                                </button>
-											                                <button type="button" class="btn btn-view">
+											                                <button type="button" class="btn btn-view" @click="getProduct(favorite)" data-toggle="modal" data-target="#ModalProd">
 											                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.03 15">
 											                                        <title>visualizar-producto-bio</title>
 											                                        <g id="Capa_2" data-name="Capa 2">
@@ -646,13 +646,16 @@
 			</div>
 		</div>
 		<ModalOrder :tasadolar="currency_rate" :order="tmpOrder"></ModalOrder>
+		<ModalProducto :tasadolar="tasadolar" :product="oneproduct" :user_id="userlogged.id"></ModalProducto>
 	</section>
 </template>
 <script>
 	import ModalOrder from './ModalOrder.vue';
+	import ModalProducto from './ModalProducto.vue';
     export default {
         data() {
             return {
+				oneproduct: {},
 				favorites: [],
 				cant_favorites : 0,
             	get_tab:'',
@@ -669,13 +672,17 @@
             }
 		},
 		components: {
-			ModalOrder
+			ModalOrder,
+			ModalProducto
 		},
 		props: {
 			userlogged: Object,
 			tasadolar: Number
 		},
         methods: {
+			getProduct: function(objP) {
+				this.oneproduct = objP;
+            },
 			getOrder: async function(id) {
 				axios.get(URLHOME+'api/orders/'+id).then( datos => {
 					const order = datos.data.data.order;

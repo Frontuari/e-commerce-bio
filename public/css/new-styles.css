@@ -76,3 +76,7 @@ ul.carousel-indicators{
 .product-block .product-img .carousel-inner{
 	height: 200px;
 }
+
+.carrito .wizard-title h3{
+	display: inline-flex;
+}

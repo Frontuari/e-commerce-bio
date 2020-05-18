@@ -173,7 +173,7 @@
 				</div>
 			</div>
 		</div>
-		<ModalProducto :tasadolar="tasadolar" :product="oneproduct"></ModalProducto>
+		<ModalProducto :tasadolar="tasadolar" :product="oneproduct" :user_id="userlogged.id"></ModalProducto>
 	</section>
 </template>
 
@@ -201,7 +201,6 @@
 		},
 		methods: {
 			getProduct: function(objP) {
-                console.log(objP);
 				this.oneproduct = objP;
             }
 		}

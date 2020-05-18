@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <ModalProducto :tasadolar="tasadolar" :product="oneproduct"></ModalProducto>
+        <ModalProducto :tasadolar="tasadolar" :product="oneproduct" :user_id="user_id"></ModalProducto>
     </div>
 </template>
 <script>

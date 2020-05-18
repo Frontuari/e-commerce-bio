@@ -66,7 +66,7 @@
 										</div>
 										<div class="form-group">
 											<label>Contraseña</label>
-											<input type="password" class="form-control" name="password" v-model="user.pass">
+											<input type="password" class="form-control" name="password" v-model="user.pass" @keypress="enterLogin($event)">
 										</div>
 										<div class="form-group">
 											<input type="checkbox"> Recordar Usuario
@@ -248,6 +248,12 @@ export default {
 				this.cant_favorite = response.data.data.length;
 			}else {
 				this.cant_favorite = 0;
+			}
+		},
+		enterLogin(event) {
+			//13 es igual a enter
+			if(event.keyCode == 13 || event.key=="Enter") {
+				this.login();
 			}
 		},
 		login() {

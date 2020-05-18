@@ -31,7 +31,7 @@
 									Compra Completada
 								</li>
 							</ul>
-							<fieldset>
+							<fieldset class="carrito">
 								<div class="product-list">
 									<div class="row">
 										<div class="col-12 col-lg-8">
@@ -39,6 +39,7 @@
 												<div class="col-12">
 													<div class="wizard-title">
 														<h3>Mi carrito de compras <span class="quantity-span">{{cant_cart}}</span></h3>
+														<button type="button" @click="droppingCart()" class="btn btn-submit" style="display: inline-flex!important; float:right">Vaciar Carrito</button>
 													</div>
 												</div>
 												<div class="col-6 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
