@@ -253,8 +253,8 @@ switch($evento) {
 }
 function actualizarFotoPerfil(){
     $users_id=$_SESSION['usuario']['id'];
-    wh_log("CARGANDO IMAGEN");
-    wh_log(print_r($_POST,true));
+    //wh_log("CARGANDO IMAGEN");
+    //wh_log(print_r($_POST,true));
     $image = $_POST['image'];
     $name = md5($users_id.rand(0,9999999)).".png";
     $avatar='users/'.$name;
@@ -1669,7 +1669,7 @@ function q($sql){
                   break;
                   default:
 
-                  wh_log($sql);
+                 // wh_log($sql);
                     salidaNueva(null,"Disculpe, intente mas tarde...",false);
               }
           }
