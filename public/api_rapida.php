@@ -1,5 +1,7 @@
 <?php
 cabecera('On');
+
+use App\Http\Resources\Favorite;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -14,7 +16,12 @@ $_POST=seguro($_POST);
 
 
 //best_sql_listarFavoritos(true);
-switch($_GET['evento']) {
+if($_GET['evento']=='' && $_POST['evento']!=''){
+    $evento=$_POST['evento'];
+}else{
+    $evento=$_GET['evento'];
+}
+switch($evento) {
     case 'contactweb':
         $message = array("name"=>$_POST['name'],"email"=>$_POST['email'],"message"=>$_POST['message']);
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
@@ -36,6 +43,21 @@ switch($_GET['evento']) {
         $row['msj_general']=true;
         echo e($row);
     break;
+    case 'loginNuevo':
+        $row['data']['usuario']=loginMovil(true);
+        if($row['data']['usuario']['success']==true){
+            $row['data']['perfil']=getPerfil(true);
+            $row['data']['address']=getAdreess(true);   
+            $row['data']['favoritos']=best_sql_listarFavoritos(true);
+            $row['data']['productos_mayor']=productosMayorEdad(true);
+            $row['success']=true;
+            $row['msj_general']="Bienvenido";
+            echo e($row);
+        }else{
+                echo e($row['data']['usuario']);
+        }
+
+    break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -50,15 +72,21 @@ switch($_GET['evento']) {
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
             $row['data']['productos_mayor']=productosMayorEdad(true);
-            
-            //$row['data']['productos']=best_sql_ListarProductos(true);
             $row['success']=true;
-            $row['msj_general']=true;
-           // print_r($row);
-           // exit();
+            $row['msj_general']="Bienvenido";
+
+           if($_GET['web']==1){
+            echo e($row);
+           }else{
             echo d($row);
+           }
         }else{
-            echo json_encode($row['data']['usuario']);
+            if($_GET['web']==1){
+                echo e($row['data']['usuario']);
+               }else{
+                echo json_encode($row['data']['usuario']);
+               }
+            
         }
     break;
     case 'verificarSesion':
@@ -218,7 +246,7 @@ switch($_GET['evento']) {
     break;
     default:
     
-    salida($row,"Disculpe debe enviar un evento",false);
+    salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
 }
 function listarProductosWeb(){
     $sql=getSqlListarProductos();
@@ -1083,7 +1111,7 @@ $description_short=array();
 $keyword=array();
 //
     try{
-        $arr=q('SELECT p.name, p.description_short, p.keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
+        $arr=q('SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
         $string="";
         if(is_array($arr)){
             foreach ($arr as $obj){
@@ -1153,7 +1181,7 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
     'c',c.id,
     'm',c.adulto
 ) 
-) json_subcategories, p.keyword,p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id INNER JOIN categories c ON c.id=sc.categories_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+) json_subcategories, initcap(p.keyword) keyword,p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id INNER JOIN categories c ON c.id=sc.categories_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }

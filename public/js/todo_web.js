@@ -6,10 +6,64 @@ var filtroPreFin=50;
 var precioMin=0;
 var precioMax=50;
 var palabrasClaves="";
-cambiarPagina('inicio');
+var arrPalabrasClaves=[];
+var islogin=false;
+get("web_no_login");
+verificarSesion();
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+function verificarSesion(){
+    var usuario=getLocal('usuario');
+    if(usuario!=null){
+        islogin=true;
+        divTopMenuUser.innerHTML=divMenuLogin();
+        console.log(usuario);
+        return true;
+        
+      
+    }else{
+        islogin=false;
+        console.log("no esta logueado");
+        return false;
+        
+    }
+}
+function logout(){
+    get('logout');
+}
+
 function get(evento,variables="") {
     //alert(variables);
      //alert(url);
+     var host=window.location.host;
+     var protocol=window.location.protocol;
+     var xmlhttp = new XMLHttpRequest();
+     let data=new Map();
+     data['success']=false;
+     data['msj_general']="Intente mas tarde";
+     xmlhttp.onreadystatechange = function() {
+         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+            if (xmlhttp.status == 200 || xmlhttp.status == 409) {
+               
+               procesar(xmlhttp.responseText,evento);
+                
+            }else {
+             procesar(data,evento);
+            }
+         }
+     };
+    
+     xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?evento="+evento+variables, true);
+      xmlhttp.send();
+ }
+
+ function post(evento,datai) {
+    //var datai = new FormData(document.getElementById(idFormulario));
+    
+    datai.append("evento", evento);
+
+
      var host=window.location.host;
      var protocol=window.location.protocol;
      var xmlhttp = new XMLHttpRequest();
@@ -27,9 +81,10 @@ function get(evento,variables="") {
             }
          }
      };
-    
-     xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?evento="+evento+variables, true);
-      xmlhttp.send();
+     
+     xmlhttp.open("POST", protocol+"//"+host+"/api_rapida.php", true);
+
+      xmlhttp.send(datai);
  }
 
 
@@ -37,9 +92,8 @@ function get(evento,variables="") {
 
 
 
-
-get("web_no_login");
 function procesar(data,evento){
+    
     switch(evento){
     case 'web_no_login':
    // console.log(data);
@@ -51,17 +105,56 @@ function procesar(data,evento){
                 setLocal(key, value);
             }
             console.log(data);
-            listarPublicidad();
-            listarCombos();
-            listar_categorias_movil_4();
-            listar_publicidad_final();
-            listar_publicidad_medio();
-            productos_home();
-            listar_categorias_movil_menu();
+            cambiarPagina('inicio');
+
         }
 
         break;
-        }
+        case 'registrarUsuario':
+            var data = JSON.parse(data);
+            if(data.success){
+                alert("Registrado exitosamente!");
+            }else{
+                alert(data.msj_general);
+                return false;
+            }
+        break;
+        case 'loginNuevo':
+            var data = JSON.parse(JXG.decompress(data));
+            if(data.success){
+                var datos=data.data;
+                for (var [key, value] of Object.entries(datos)) {
+                    setLocal(key, value);
+                }
+                console.log(data);
+                alert(data.msj_general);
+                location.reload();
+                return true;
+            }else{
+                alert(data.msj_general);
+                return false;
+            }
+        break;
+        case 'logout':
+            alert("Vuelve pronto");
+            delLocal('usuario');
+            location.reload();
+
+
+        break;
+        case 'actualizarPerfil':
+            var data = JSON.parse(data);
+            if(data.success){
+                alert("Su perfil ha sido actualizado");
+                return false;
+            }else{
+                alert(data.msj_general);
+                return false;
+            }
+        break;
+        
+    }
+
 }
 
 function setLocal(key,value){
@@ -69,6 +162,9 @@ function setLocal(key,value){
 }
 function getLocal(key){
     return JSON.parse(localStorage.getItem(key));
+}
+function delLocal(key){
+    localStorage.removeItem(key);
 }
 
 function listarPublicidad(){
@@ -96,29 +192,315 @@ function listarPublicidad(){
 
 function cambiarPagina(nombre,tipo,imagen){
     //alert(window.location.hash);
-   
+    arrPalabrasClaves=[];
+    cerrarFormLogin();
     switch(nombre){
         case 'categorias':
+            //arrPalabrasClaves=[];
+        
             categoriaActual=tipo;
             contenido.innerHTML="<div class='container-fluid'><div class='row'><img width='100%' src='"+urlBaseImagen+imagen+"'></div><div class='row mar'><div class='col-md-3'>"+divIzq()+"</div><div class='col-md-9'>"+divDer()+"</div></div></div>";
+            divPalabrasClaves();
+            //publicidad('pubA','izq_producto_a');
+            //publicidad('pubB','izq_producto_b');
+            //publicidad('pubC','izq_producto_c');
+            //publicidad('pubD','izq_producto_d');
             multiRangoData();
+            
+        break;
+        case 'favoritos':
+            
+
+        break;
+        case 'registro':
+            imagenTop='img/topRegistroUsuario.jpg';
+            contenido.innerHTML="<div class='container-fluid'><div class='row'><img width='100%' src='"+imagenTop+"'></div><div class='row mar2'><div class='col-md-6'>"+divRegistroIzq()+"</div><div class='col-md-6' id='cuadroRegistro'>"+divRegistroDer()+"</div></div></div>";
+            nroCedulaRegistro.focus();
+        break;
+        case 'panel_usuario':
+           
+            contenido.innerHTML="<div class='topGeneral align-middle' ><span class=''>Mi cuenta</span></div><div class='container-fluid'><div class='row justify-content-md-center'><div class='col-2'>"+divPanelUsuarioIzq()+"</div><div class='col-6'>"+divPanelUsuarioDer()+"<br><br></div></div></div>"; 
+
         break;
         default:
 
             contenido.innerHTML=paginaPrincipal();
-            listarPublicidad();
             listarCombos();
             listar_categorias_movil_4();
-            listar_publicidad_final();
-            listar_publicidad_medio();
             productos_home();
             listar_categorias_movil_menu();
+
+            
         break;
     }
     
 }
+function divPanelUsuarioIzq(){
+    var d=getLocal('usuario')['data'];
+    var h='';
+    h+='<div class="row"><div class="col center"><img src="img/ico_perfil.png" width="110"></div></div>'+
+    '<div class="row "><div class="col center h4 rojo text-capitalize">'+d['name']+'</div></div>'+
+    '<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">'+
+  '<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Datos personales</a>'+
+  '<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Mis direcciones</a>'+
+  '<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Mis pedidos</a>'+
+  '<a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Mis favoritos</a>'+
+'</div><br><br><br>'+
+    '';
+    return h;
+}
+function divPanelUsuarioDer(){
+    var h='';
+    h+='<div class="tab-content" id="v-pills-tabContent">'+
+    '<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">'+divEditUser()+'</div>'+
+    '<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>'+
+    '<div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>'+
+    '<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>'+
+  '</div>'+
+    '';
+    return h;
+}
+function divEditUser(){
+    var h='<nav>'+
+    '<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
+     '<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos personales</a>'+
+      '<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Seguridad</a>'+
+      
+    '</div>'+
+  '</nav>'+
+  '<div class="tab-content" id="nav-tabContent">'+
+    '<div class="tab-pane fade show active espacioFormulario" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" >'+formUsuario()+'</div>'+
+    '<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>'+
+    
+  '</div>'+
+  '';
+  return h;
+}
+function divDirecciones(){
+    var h='<nav>'+
+    '<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
+     '<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos personales</a>'+
+      '<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Seguridad</a>'+
+      '<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>'+
+    '</div>'+
+  '</nav>'+
+  '<div class="tab-content" id="nav-tabContent">'+
+    '<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>'+
+  '</div>'+
+  '';
+  return h;
+}
+function divPedidos(){
+    var h='<nav>'+
+    '<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
+     '<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos personales</a>'+
+      '<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Seguridad</a>'+
+      '<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>'+
+    '</div>'+
+  '</nav>'+
+  '<div class="tab-content" id="nav-tabContent">'+
+    '<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>'+
+  '</div>'+
+  '';
+  return h;
+}
+function divFavoritos(){
+    var h='<nav>'+
+    '<div class="nav nav-tabs" id="nav-tab" role="tablist">'+
+     '<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos personales</a>'+
+      '<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Seguridad</a>'+
+      '<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>'+
+    '</div>'+
+  '</nav>'+
+  '<div class="tab-content" id="nav-tabContent">'+
+    '<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>'+
+    '<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>'+
+  '</div>'+
+  '';
+  return h;
+}
+function divRegistroIzq(){
+    var h='<br>'+
+    '<div class="row" id="ti_registro"><div class="col-md-12"><span>Beneficios de ser usuario de<span></div></div>'+
+    '<div class="row" id="ti_registrob"><div class="col-md-12"><span>bio mercados<span></div></div>'+
+    '<div class="row registro_item"><div class="col-md-1"><img src="img/check.png"></div><div class="col-md-11"><span>Tendrás acceso a nuestra tienda virtual y nuestras aplicaciones móviles con una sola cuenta.</span></div></div>'+
+    '<div class="row registro_item"><div class="col-md-1"><img src="img/check.png"></div><div class="col-md-11"><span>Podrás acumular y canjear tus puntos bio por productos y ahorrar dinero en las compras.</span></div></div>'+
+    '<div class="row registro_item"><div class="col-md-1"><img src="img/check.png"></div><div class="col-md-11"><span>Obtendrás grandes descuentos, promociones y más en los precios de nuestros productos y cambios bio.</span></div></div>'+
+    '<div class="row registro_item"><div class="col-md-1"><img src="img/check.png"></div><div class="col-md-11"><span>Podrás realizar una compra sin salir de tu hogar y recibir los productos en la puerta de tu casa u oficina.</span></div></div><br><br>';
+
+
+    return h;
+}
+function divRegistroDer(){
+ var h='<div class="row" id="rowSexo"><div class="col-md-3">Seleccione Sexo:</div><div class="col-md-3"> <input class="form" required type="radio" name="sexo" value="m"> Hombre</div><div class="col-md-3"> <input required type="radio" name="sexo" value="f"> Mujer</div></div>'+
+ '<div><label>Rif. o Nro. de cedula:</label>'+
+    '<div class="input-group">'+
+        '<div class="input-group-prepend">'+
+            '<select id="selectCedula"><option>V</option><option>J</option><option>G</option><option>E</option></select>'+
+        '</div>'+
+        '<input pattern="^[0-9]+$" maxlength="11" required id="nroCedulaRegistro" type="text" class="form-control">'+
+    '</div>'+
+'</div>'+
+'<div class="row">'+
+'<div class="col-md-12"><label>Nombre y apellido: </label><input id="re_name" maxlength="100" required type="text" class="form-control"></div>'+
+'</div>'+
+ '<div><label>Fecha de nacimiento: </label><input id="re_fecha" required type="date" class="form-control"></div>'+
+ '<div class="row">'+
+ '<div class="col-md-6"><label>Correo Electrónico:      </label><input id="re_email" maxlength="100" required type="text" class="form-control"></div><div class="col-md-6"><label>Teléfono:    </label><input id="re_tel" required pattern="^[0-9\-]+$" type="text" title="Ejemplo: 0414-5138790" class="form-control"></div>'+
+ '</div>'+
+ '<div class="row">'+
+ '<div class="col-md-6"><label>Contraseña:          </label><input id="conf_clave" required type="password" class="form-control"></div><div class="col-md-6"><label>Repita su contraseña:    </label><input id="re_clave" required type="password" class="form-control"></div>'+
+ '</div><br>'+
+ '<div><input type="checkbox" class="messageCheckbox" id="terminos" onclick="activarBotonRegistro(this)"> Acepto los términos y condiciones.</div>'+
+ '<div><input type="checkbox">  Deseo recibir notificaciones de productos, ofertas y promociones al correo electrónico.</div>'+
+ '<div class="center" ><button id="btnRegistro" disabled class="btn btn-success">Crear cuenta</button></div>';
+
+
+
+
+ return '<form id="formRegistro" autocomplete="off" onSubmit="return registrarUsuario()">'+h+'</form>';
+
+}
+function formUsuario(){
+    var u=getLocal('usuario')['data'];
+var fecha=u['birthdate'];
+
+    var h='<br><div class="row" id="rowSexo"><div class="col-md-3">Seleccione Sexo:</div><div class="col-md-3"> <input '+(u['sex']=='m' ? 'checked' : '')+' class="form" required type="radio" name="sexo" value="m"> Hombre</div><div class="col-md-3"> <input '+(u['sex']=='f' ? 'checked' : '')+'  required type="radio" name="sexo" value="f"> Mujer</div></div>'+
+    '<div><label>Rif. o Nro. de cedula:</label>'+
+     
+           '<input readonly pattern="^[0-9]+$" maxlength="11" value="'+u['rif']+'"  required id="nroCedulaRegistro" type="text" class="form-control">'+
+      
+   '</div>'+
+   '<div class="row">'+
+   '<div class="col-md-12"><label>Nombre y apellido: </label><input value="'+u['name']+'" id="re_name" maxlength="100" required type="text" class="form-control"></div>'+
+   '</div>'+
+    '<div><label>Fecha de nacimiento: </label><input value="'+fecha+'" id="re_fecha" required type="date" class="form-control"></div>'+
+   '<br>'+
+    
+    
+    '<div class="center" ><button id="btnRegistro" disabled class="btn btn-success">Guardar</button></div>';
+   
+   
+   
+   
+    return '<form id="formEditUser" autocomplete="off" onSubmit="return guardarUsuario()">'+h+'</form>';
+   
+   }
+function activarBotonRegistro(a){
+    
+    val=document.querySelector('.messageCheckbox').checked;
+  
+    if(val){
+        btnRegistro.disabled=false;
+    }else{
+        btnRegistro.disabled=true;
+    }
+}
+
+function formatearFecha(fecha){
+    const date = new Date(fecha)
+const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' }) 
+const [{ value: month },,{ value: day },,{ value: year }] = dateTimeFormat .formatToParts(date ) 
+
+return `${day}/${month}/${year }`;
+}
+
+
+  function login(){
+ 
+    get('loginNuevo',"&email="+email.value+"&password="+password.value+"&web=1");
+  }
+ function guardarUsuario(){  
+        var radios = document.getElementsByName('sexo');
+        for (var i = 0, length = radios.length; i < length; i++) {
+          if (radios[i].checked) {
+            // do whatever you want with the checked radio
+            var sex=radios[i].value;
+        
+            // only one radio can be logically checked, don't check the rest
+            break;
+          }
+        }
+
+
+//console.log(rif+" "+name+" "+email+" "+fecha+" "+clave+" "+tel+" "+sex);
+var formData = new FormData();
+formData.append('sex',sex);
+formData.append('name',re_name.value);
+formData.append('email',re_email.value);
+formData.append('birthdate',re_fecha.value);
+formData.append('password',clave);
+formData.append('tlf',re_tel.value);
+
+post('actualizarPerfil',formData);
+ }
+function registrarUsuario(){
+    if(re_clave.value==conf_clave.value){
+     
+        var nacio=selectCedula.value;
+        var nroCedu=nroCedulaRegistro.value;
+        var rif=nacio+"-"+nroCedu;
+        var name=re_name.value;
+        var email=re_email.value;
+        var fecha=re_fecha.value;
+        var clave=re_clave.value;
+        var tel=re_tel.value;
+
+        var radios = document.getElementsByName('sexo');
+
+        for (var i = 0, length = radios.length; i < length; i++) {
+          if (radios[i].checked) {
+            // do whatever you want with the checked radio
+            var sex=radios[i].value;
+        
+            // only one radio can be logically checked, don't check the rest
+            break;
+          }
+        }
+
+
+//console.log(rif+" "+name+" "+email+" "+fecha+" "+clave+" "+tel+" "+sex);
+var formData = new FormData();
+formData.append('sex',sex);
+formData.append('name',name);
+formData.append('rif',rif);
+formData.append('email',email);
+formData.append('birthdate',fecha);
+formData.append('password',clave);
+formData.append('tlf',tel);
+
+post('registrarUsuario',formData);
+
+        //try{
+       // $.post("api_rapida.php", {sex:sex,name: name,rif:rif,email:email,birthdate:fecha,password:clave,tlf:tel}, function(result,statusText, xhr){
+           // var status = xhr.status; 
+           // alert(status);
+         // console.log(result);
+      //  });
+   // }catch(e){
+        //alert(e);
+    //}
+    }else{
+        alert("Sus contraseñas no coinciden.");
+    }
+    return false;
+}
 function divIzq(){
-    return divFiltro();
+    return divFiltro()+divPublicidad();
+}
+function divPublicidad(){
+    var h='<div class="row row_filtro_izq">'+publicidad('pubA','izq_producto_a')+'</div>'+
+    '<div class="row row_filtro_izq">'+publicidad('pubB','izq_producto_b')+'</div>'+
+    '<div class="row row_filtro_izq">'+publicidad('pubC','izq_producto_c')+'</div>'+
+    '<div class="row row_filtro_izq">'+publicidad('pubD','izq_producto_d')+'</div>';
+
+
+    return h;
 }
 function divDer(){
     ht='';
@@ -147,15 +529,80 @@ function cambiarDataFiltroHorizontal(tipo){
      DerHorizontalPro.innerHTML=ht;
 }
 function divPalabrasClaves(){
-    g='';//div_palabras_claves en div
+    d=document.getElementById('div_palabras_claves');
+    d.innerHTML=' ';//div_palabras_claves en div
     for( let a in palabrasClaves ){
-        g+=' <span>'+palabrasClaves[a]+'</span>';
-     
-          
+        if(palabrasClaves[a]!=''){
+        d.innerHTML+=' <span onclick="fitrarPalabraClave(this)">'+palabrasClaves[a]+'</span>';
+        }     
       };
-      return  g;
+      //return  g;
     
 }
+function fitrarPalabraClave(a){
+    var arr;
+    console.log(a.innerHTML);
+    name='hashtag_active';
+
+   
+    arr = a.className.split(" ");
+    if (arr.indexOf(name) == -1) {
+      a.className += " " + name;
+      arrPalabrasClaves.push(a.innerHTML);
+    }else{
+        a.classList.remove(name);
+        removeItemOnce(arrPalabrasClaves, a.innerHTML) 
+        
+    }
+
+
+
+console.log(arrPalabrasClaves);
+
+
+
+
+  cambiarDataFiltroHorizontal(selectOrganizar.value);
+    
+}
+function addoremoveclass(element,name) {
+    var arr;
+    arr = element.className.split(" ");
+    if (arr.indexOf(name) == -1) {
+      element.className += " " + name;
+    }else{
+        element.classList.remove("hashtag_active");
+        
+    }
+  }
+
+
+
+
+function removeItemOnce(arr, value) {  //remover array
+    var index = arr.indexOf(value);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+    return arr;
+}
+
+function removeItemAll(arr, value) { //remover todas la coincidencias
+    var i = 0;
+    while (i < arr.length) {
+        if(arr[i] === value) {
+            arr.splice(i, 1);
+        } else {
+            ++i;
+        }
+    }
+    return arr;
+}
+
+
+
+
+
 function fitrarRango(){
 var tipo="";
     precioMin=minRango.value;
@@ -189,7 +636,7 @@ function divFiltro(){
     '<div class="row"><div class="col-12 tituloFiltroIzq">Precio $:</div></div>'+
     inputRango()+''+multiRango()+''+
     //'<div class="row"><div class="col-12 tituloFiltroIzq">Ofertas:'+checkOfertas+'</div></div>'+
-    '<div class="row mt-3"><div class="col-12 tituloFiltroIzq">Por etiquetas:</div><div class="row" ><div class="col-12" id="div_palabras_claves">'+divPalabrasClaves()+'</div></div></div>'
+    '<div class="row mt-3"><div class="col-12 tituloFiltroIzq">Por etiquetas:</div><div class="row" ><div class="col-12" id="div_palabras_claves"></div></div></div>'
     ;
     return html;
 }
@@ -264,12 +711,37 @@ function listarProductos(tipo,div){
 }
 
 function procesarProductos(tipo){
+
     ht='';
     data=getLocal('productos'); 
     datos=data['data'];
+    if(arrPalabrasClaves.length>0){
+        datos = datos.filter(function(element) {
+    
+            for( let a in arrPalabrasClaves ){
+               
+                    var ss=arrPalabrasClaves[a];
+                    exp = new RegExp(''+ss+''); 
+
+                     if(exp.test(element.keyword)){
+                         return 1;
+                     }
+                  
+            };    
+
+
+            return 0;
+
+
+           
+   
+    
+          });      
+    }
     if(categoriaActual!=null){
         datos = datos.filter(element => JSON.parse(element.json_subcategories)[0].c ==categoriaActual);
         cargarPalabrasClaves(datos);
+        
     }
     datos = datos.filter(function(element) {
         //alert(element.price+" > min: "+precioMin+" "+element.price+" and < max: "+precioMax);
@@ -285,10 +757,6 @@ function procesarProductos(tipo){
                 return (element.total_precio_dolar>precioMin && element.total_precio_dolar<precioMax);
 
               });
-            
-            
-            
-           
         break;
         case 'precio':
             datos.sort((a, b) => a.price - b.price);
@@ -326,6 +794,7 @@ function cargarPalabrasClaves(datos){
     var t=todo.trim().split(" ").filter( onlyUnique );
     console.log(t);
     palabrasClaves = t;
+
     
 }
 function cajaProductos(element,tamano='2'){
@@ -407,60 +876,92 @@ function abreD(titulo,id){
    '<div class="dropdown-menu" aria-labelledby="'+id+'">';
    return aabreD;
 }
-function listar_publicidad_medio(){
+function publicidad(id,type){
     data=getLocal('listarPublicidadToda');
-    console.log(data);
-    
-    ht='';
-    var carrousel=document.getElementById("listar_publicidad_medio");
     var tipo='active';
+    ht='';
+var ht='<div id="carouselExampleControls_'+id+'" class="carousel slide" data-ride="carousel">'+
+    '<div class="carousel-inner" id="'+id+'">';
+
+
+   
     data['data'].forEach(element => {
-        if(element.type=="medio"){
+        if(element.type==type){
         ht+='<div class="carousel-item '+tipo+'"><img  class="d-block w-100" src="storage/'+element.image+'" alt="First slide"></div>';
         tipo=''
         }
     });
-    carrousel.innerHTML=ht;
-    
-}
-function listar_publicidad_final(){
-    data=getLocal('listarPublicidadToda');
-    console.log(data);
-    
-    ht='';
-    var carrousel=document.getElementById("listar_publicidad_final");
-    var tipo='active';
-    data['data'].forEach(element => {
-        if(element.type=="footer"){
-        ht+='<div class="carousel-item '+tipo+'"><img  class="d-block w-100" src="storage/'+element.image+'" alt="First slide"></div>';
-        tipo=''
-        }
-    });
-    carrousel.innerHTML=ht;
-    
-}
 
 
-function paginaPrincipal(){
-    categoriaActual=null;
-    var todo='<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">'+
-    '<div class="carousel-inner" id="imagenesCarrousel">'+
 
-    '</div>'+
-    '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">'+
+
+    ht+='</div>'+
+    '<a class="carousel-control-prev" href="#carouselExampleControls_'+id+'" role="button" data-slide="prev">'+
       '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
       '<span class="sr-only">Atras</span>'+
     '</a>'+
-    '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">'+
+    '<a class="carousel-control-next" href="#carouselExampleControls_'+id+'" role="button" data-slide="next">'+
       '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
      '<span class="sr-only">Siguiente</span>'+
     '</a>'+
-  '</div>'+
+  '</div>';
 
 
-  '<div class="container-fluid">'+
 
+    return ht;
 
+}
+
+function abrirLogin(){
+    m=document.getElementById('menuLogin');
+    e=document.getElementById('email');
+    if(m){
+    if(m.style.display=='block'){
+       
+        m.style.display="none";
+    }else{
+       
+        m.style.display="block";
+        e.focus();
+    }
+}
+}
+function cerrarFormLogin(){
+    m=document.getElementById('menuLogin');
+    if(m){
+        m.style.display="none";
+    }
+    
+    
+}
+function divMenuLogin(){
+    var d=getLocal('usuario')['data'];
+    var h='';
+    h='<div class="col-4" onclick="cambiarPagina(\'panel_usuario\')" id="divLoginCuadro" data-toggle="tooltip" data-placement="bottom" title="Mi cuenta"><img src="/assets/img/icono-perfil-bio.png"> <span>'+Truancate(d['name'], 20)+'</span></div>'+
+    '<div class="col" onclick="logout()" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión"><img src="img/salir.png" height="42" alt="Login" style="cursor:pointer"></div>'+
+                  '<div class="col po" data-toggle="tooltip" data-placement="bottom" title="Carrito de compras" style="text-align: left"><img src="/img/carrito.png" height="40" alt="Carrito"></div>'+
+                   '<div class="col po" data-toggle="tooltip" data-placement="bottom" title="Mis favoritos" style="padding-right: 0px;"><img src="/img/favorito.png" height="40" alt="Favoritos"></div>';
+    return h;
+
+}
+function divMiPerfil(){
+
+}
+function Truancate(txt, limit) {
+    
+    if (txt.length > limit) {
+      let newText = txt.substr(0, limit) + ' ...';
+      return newText;
+      
+    }else{
+        return txt;
+    }
+  }
+function paginaPrincipal(){
+    categoriaActual=null;
+    var todo=publicidad('imagenesCarrousel','top')+'<div class="container-fluid">'+
+
+    
 '<br>'+
   '<div class="row">'+
     '<div class="col-md-12 tituloPrincipal">'+
@@ -474,22 +975,7 @@ function paginaPrincipal(){
   '</div>'+
   '<div class="row mar" id="listar_categorias_movil_4">'+
     
-  '</div>'+
-
-
-  '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">'+
-    '<div class="carousel-inner" id="listar_publicidad_medio">'+
-
-    '</div>'+
-    '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">'+
-     '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
-      '<span class="sr-only">Atras</span>'+
-    '</a>'+
-    '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">'+
-      '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
-      '<span class="sr-only">Siguiente</span>'+
-    '</a>'+
-  '</div>'+
+  '</div>'+publicidad('listar_publicidad_medio','medio_bajo')+
 
   '<div class="container-fluid">'+
   '<div class="row">'+
@@ -513,22 +999,7 @@ function paginaPrincipal(){
 
 
 
-  '</div>'+
-
-
-  '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">'+
-    '<div class="carousel-inner" id="listar_publicidad_final">'+
-
-    '</div>'+
-    '<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">'+
-      '<span class="carousel-control-prev-icon" aria-hidden="true"></span>'+
-      '<span class="sr-only">Atras</span>'+
-    '</a>'+
-    '<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">'+
-      '<span class="carousel-control-next-icon" aria-hidden="true"></span>'+
-      '<span class="sr-only">Siguiente</span>'+
-    '</a>'+
-  '</div>';
+  '</div>'+publicidad('listar_publicidad_final','footer');
   return todo;
 }
 
