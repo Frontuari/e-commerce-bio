@@ -1,1 +1,0 @@
-INSERT INTO peoples (name,rif,sex,cities_id,phone,birthdate) VALUES ('','','','1','','') RETURNING id

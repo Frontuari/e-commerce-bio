@@ -106,6 +106,9 @@ switch($evento) {
     case 'loginMovil':
         loginMovil(false);
     break;
+    case 'actualizarFotoPerfil':
+        actualizarFotoPerfil();
+    break;
     case 'listar_categorias_movil':
         listar_categorias_movil(false);
     break;
@@ -247,6 +250,20 @@ switch($evento) {
     default:
     
     salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
+}
+function actualizarFotoPerfil(){
+    $users_id=$_SESSION['usuario']['id'];
+    wh_log("CARGANDO IMAGEN");
+    wh_log(print_r($_POST,true));
+    $image = $_POST['image'];
+    $name = md5($users_id.rand(0,9999999)).".png";
+    $avatar='users/'.$name;
+    q("UPDATE users SET avatar='$avatar' WHERE id=$users_id");
+    $realImage = base64_decode($image);
+ 
+    file_put_contents($avatar, $realImage);
+    getPerfil(false);
+    //salidaNueva($data['data'],"Perfil actualizado correctamente");
 }
 function listarProductosWeb(){
     $sql=getSqlListarProductos();
@@ -589,7 +606,7 @@ dtt.transports_id) select case
 
 function getPerfil($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
-    $arr=q("SELECT users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
+    $arr=q("SELECT users.avatar,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
     if(is_array($arr)){
         return salidaNueva($arr,"Perfil",true,$tipo_salida);
    }else{
@@ -706,7 +723,7 @@ function loginMovil($tipo_salida){
     $email=mb_strtolower(trim($_GET['email']));
     $clave=trim($_GET['password']);
     
-    $row=q("SELECT date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
+    $row=q("SELECT s.avatar,date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
     WHERE lower(s.email)='$email'")[0];
