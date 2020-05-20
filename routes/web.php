@@ -37,4 +37,5 @@ Route::get('/contact',"SinglePageController@contact")->name("contact");
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::get('masivo', ['uses' => 'Subscriptions@home', 'as' => 'voyager.masivo']);
 });
