@@ -104,6 +104,7 @@ return array(
     'App\\Http\\Controllers\\StatesController' => $baseDir . '/app/Http/Controllers/StatesController.php',
     'App\\Http\\Controllers\\StoresController' => $baseDir . '/app/Http/Controllers/StoresController.php',
     'App\\Http\\Controllers\\SubCategoriesController' => $baseDir . '/app/Http/Controllers/SubCategoriesController.php',
+    'App\\Http\\Controllers\\Subscriptions' => $baseDir . '/app/Http/Controllers/Subscriptions.php',
     'App\\Http\\Controllers\\TaxesController' => $baseDir . '/app/Http/Controllers/TaxesController.php',
     'App\\Http\\Controllers\\TrackingsController' => $baseDir . '/app/Http/Controllers/TrackingsController.php',
     'App\\Http\\Controllers\\TrakingsController' => $baseDir . '/app/Http/Controllers/TrakingsController.php',

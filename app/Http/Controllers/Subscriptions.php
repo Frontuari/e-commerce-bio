@@ -9,4 +9,5 @@ class Subscriptions extends Controller
     public function home(){
         return view('masivo');
     }
+    
 }

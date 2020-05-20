@@ -26,7 +26,7 @@ Enviar correo masivo
                     <textarea class="form-control richTextBox" name="" id="richtext">
     
 </textarea>
-<div class="center" style="text-align:center"><button class="btn btn-success btn-lg">Enviar</button></div>
+<div class="center" style="text-align:center"><button onclick="enviar()" id="btnEnviar" class="btn btn-success btn-lg">Enviar</button></div>
 
                     </div>
                 </div>
@@ -35,31 +35,94 @@ Enviar correo masivo
     </div>
 
     {{-- Single delete modal --}}
-    <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
+    <div class="modal modal-success fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('voyager::generic.close') }}"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><i class="voyager-trash"></i> aaaaaaaa</h4>
+                    <h4 class="modal-title">Enviado correctamente.</h4>
                 </div>
-                <div class="modal-footer">
-                    <form action="#" id="delete_form" method="POST">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <input type="submit" class="btn btn-danger pull-right delete-confirm" value="{{ __('voyager::generic.delete_confirm') }}">
-                    </form>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">{{ __('voyager::generic.cancel') }}</button>
+                <div class="modal-body">
+                    La información suministrada se está enviado a los usuarios suscritos.<br>Puede cerrar el panel administrador si lo desea, nuestro servicio esta haciendo el trabajo automáticamente.
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 @stop
 
+
+@section('javascript')
 <script>
-    
-        function borrar(){
+
+
+var formData = new FormData();
+post('ultimo_correo_masivo',formData);
+        function modal(){
             $('#delete_modal').modal('show');
         }
+        function btnCargando(){
+btnEnviar.innerHTML="Enviando...";
+btnEnviar.disabled=true;
+        }
+        function enviar(){
+            btnCargando();
+            var formData = new FormData();
+            
+            formData.append('texto',btoa(tinyMCE.activeEditor.getContent()));
+            post("enviar_correo_masivo",formData);
+
+        }
        
-   
+        function post(evento,datai) {
+    //var datai = new FormData(document.getElementById(idFormulario));
+    
+    datai.append("evento", evento);
+
+
+     var host=window.location.host;
+     var protocol=window.location.protocol;
+     var xmlhttp = new XMLHttpRequest();
+     let data=new Map();
+     data['success']=false;
+     data['msj_general']="Intente mas tarde";
+     xmlhttp.onreadystatechange = function() {
+         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+            if (xmlhttp.status == 200 || xmlhttp.status == 409) {
+               
+               procesar(xmlhttp.responseText,evento);
+            
+            }else {
+             procesar(data,evento);
+            }
+         }
+     };
+     
+     xmlhttp.open("POST", protocol+"//"+host+"/api_rapida.php", true);
+
+      xmlhttp.send(datai);
+ }
+
+
+
+
+
+
+function procesar(data,evento){
+    
+    switch(evento){
+    case 'enviar_correo_masivo':
+        modal();
+        console.log(data);
+    break;
+    case 'ultimo_correo_masivo':
+        console.log(data);
+        var a=JSON.parse(data)['data'][0]['text'];
+        var f=document.getElementById('richtext');
+        tinymce.activeEditor.setContent(a);
+        
+    break;
+    }
+
+}
 </script>
+@stop
