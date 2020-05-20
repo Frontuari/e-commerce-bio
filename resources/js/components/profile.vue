@@ -812,6 +812,10 @@
 				const response = await axios.get(URLSERVER+"api/regions");
 				this.regions = response.data.data;
 			},
+			async getCities() {
+				const response = await axios.get(URLSERVER+"api/cities");
+				this.cities = response.data.data;
+			},
 			async loadMunicipio(event) {
 				const state_id = event.target.value;
 				const response = await axios.get(URLSERVER+"api/regions/state/"+state_id);
@@ -872,7 +876,7 @@
 
 					axios.put(URLHOME+'api/user_address/'+direction.id, {
 						id: direction.id,
-						cities_id: direction.cities_id,
+						cities_id: direction.city_id,
 						address: direction.address,
 						status: direction.status,
 						users_id: direction.users_id,
@@ -898,7 +902,7 @@
 	            	console.log("esta entrando por el POST");
 	            	axios.post(URLHOME+'api/user_address', {
 						id: direction.id,
-						cities_id: direction.cities_id,
+						cities_id: direction.city_id,
 						address: direction.address,
 						status: direction.status,
 						users_id: direction.users_id,
@@ -977,6 +981,8 @@
 					nro_home: '',
 					reference_point: '',
 					city_id: '',
+					state_id: '',
+					region_id: '',
 					ciudad: '',
 					action:'save',
 				});
@@ -1009,6 +1015,7 @@
 			this.getTabUrl();
 			this.getStates();
 			this.getRegions();
+			this.getCities();
 			this.getPedidos();
 			console.log("direcciones::> ",this.userlogged.directions);
 		},
