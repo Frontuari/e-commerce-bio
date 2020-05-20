@@ -2,6 +2,12 @@
 
 
 @section('page_header')
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
     <div class="container-fluid">
         <h1 class="page-title">
 Enviar correo masivo
@@ -17,7 +23,11 @@ Enviar correo masivo
                 <div class="panel panel-bordered">
                     <div class="panel-body">
               
-  <button class="delete" onclick="borrar()">ddddd</button>
+                    <textarea class="form-control richTextBox" name="" id="richtext">
+    
+</textarea>
+<div class="center" style="text-align:center"><button class="btn btn-success btn-lg">Enviar</button></div>
+
                     </div>
                 </div>
             </div>
