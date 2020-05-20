@@ -80,10 +80,13 @@ Route::resource('user_visit_products', 'API\UserVisitProductsController');
 Route::get('tasa','API\CoinController@index');
 
 //LOCATION
-Route::get('cities','API\LocationController@getCities');
+
+
 Route::get('states','API\LocationController@getStates');
 Route::get('regions','API\LocationController@getRegions');
 Route::get('regions/state/{state_id}','API\LocationController@getRegionsByState');
+Route::get('cities','API\LocationController@getCities');
+Route::get('cities/region/{region_id}','API\LocationController@getCitiesByRegion');
 
 //SUSCRIPCION
 Route::post('subscribe','API\SubscriptionController@subscribe');

@@ -392,15 +392,17 @@ function login(){
     $email=$_GET['email'];
     $clave=$_GET['password'];
     
-    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
     INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='$email'")[0];
 
-    $directions=q("SELECT o.*,c.id as city_id,c.name as ciudad 
+    $directions=q("SELECT o.*,c.id as city_id,re.id as region_id,st.id as state_id
     FROM order_address as o
-        INNER JOIN cities c on c.id = o.cities_id
+        INNER JOIN cities c ON c.id=o.cities_id 
+        INNER JOIN regions re ON re.id=c.regions_id 
+        INNER JOIN states st ON st.id=re.states_id
         WHERE o.users_id = ".$row['id']." and o.status = 'A'
     ");
 

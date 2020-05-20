@@ -187,6 +187,54 @@
 												<div class="col-12">
 													<div v-for="(direction,index) in userlogged.directions" :key="direction.id" :id="'address-'+index" class="address-section">
 														<div class="row">
+
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label for="address-1-state">Estado:</label>
+																	<!-- <button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button> -->
+																	<select class="form-control" @change="loadMunicipio($event)" v-model="direction.state_id">
+																		<option value="">Seleccione</option>
+																		<option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
+																	</select>
+																	<!-- <input type="text" class="form-control dropdown-toggle"  data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled"  autocomplete="off"> -->
+																	<!-- <div class="dropdown-menu dropdown-menu-state">
+																	    <div class="dropdown-item" v-for="state in states" :key="state.id">
+																			<div class="form-check form-check-radio">
+																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" v-model="state.name">
+																				<label :for="state.name+'-address-1'" class="custom-check">{{state.name}}</label>
+																			</div>
+																	    </div>
+																	</div> -->
+																</div>
+															</div>
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label for="address-prov">Municipio:</label>
+																	<!-- <button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button> -->
+																	<!-- <input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad"> -->
+																	<select class="form-control" @change="loadParroquia($event)" v-model="direction.region_id">
+																		<option value="">Seleccione</option>
+																		<option v-for="region in regions" :key="region.id" :value="region.id">{{region.name}}</option>
+																	</select>
+																</div>
+															</div>
+
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label for="address-prov">Parroquia:</label>
+																	<!-- <button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button> -->
+																	<!-- <input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad"> -->
+																	<select class="form-control" v-model="direction.city_id">
+																		<option value="">Seleccione</option>
+																		<option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
+																	</select>
+																</div>
+															</div>
+
+
 															<div class="col-lg-6">
 																<div class="form-group">
 																	<label for="address-name">Dirección Corta (ejm: Mi Casa, Mi Oficina):</label>
@@ -220,38 +268,8 @@
 																</div>
 															</div>
 															
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-1-state">Estado:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<select class="form-control" @change="loadMunicipio($event)" v-model="direction.state_id">
-																		<option value="">Seleccione</option>
-																		<option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
-																	</select>
-																	<!-- <input type="text" class="form-control dropdown-toggle"  data-toggle="dropdown" aria-expanded="false" id="address-1-state" name="address-1-state" disabled="disabled"  autocomplete="off"> -->
-																	<!-- <div class="dropdown-menu dropdown-menu-state">
-																	    <div class="dropdown-item" v-for="state in states" :key="state.id">
-																			<div class="form-check form-check-radio">
-																				<input type="radio" class="form-check-input" :id="state.name+'-address-1'" name="radio-address-1" v-model="state.name">
-																				<label :for="state.name+'-address-1'" class="custom-check">{{state.name}}</label>
-																			</div>
-																	    </div>
-																	</div> -->
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-prov">Municipio:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<!-- <input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad"> -->
-																	<select class="form-control" v-model="direction.region_id">
-																		<option value="">Seleccione</option>
-																		<option v-for="region in regions" :key="region.id" :value="region.id">{{region.name}}</option>
-																	</select>
-																</div>
-															</div>
+															
+
 															<div class="col-lg-6">
 																<div class="form-group">
 																	<label for="address-post">Código postal:</label>
@@ -671,6 +689,7 @@
 				userData: [],
 				states: [],
 				regions: [],
+				cities: [],
 				orders: [],
 				data_products: [],
 				en_proceso: [],
@@ -797,6 +816,11 @@
 				const state_id = event.target.value;
 				const response = await axios.get(URLSERVER+"api/regions/state/"+state_id);
 				this.regions = response.data.data;
+			},
+			async loadParroquia(event) {
+				const region_id = event.target.value;
+				const response = await axios.get(URLSERVER+"api/cities/region/"+region_id);
+				this.cities = response.data.data;
 			},
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
