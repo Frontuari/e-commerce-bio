@@ -50,7 +50,7 @@ Vue.filter('FormatDolar',function(num) {
 
 Vue.filter('MediumImage',function(imageText) {
     imageText = imageText.split('.');
-    let newImageText = imageText[0]+'-medium.'+imageText[1];
+    let newImageText = imageText[0]+'-cropped.'+imageText[1];
     return newImageText;
 });
 
