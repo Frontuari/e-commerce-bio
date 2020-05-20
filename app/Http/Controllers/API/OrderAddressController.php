@@ -57,8 +57,8 @@ class OrderAddressController extends BaseController
     }
 
     function destroy($id) {
-        $order = OrderAddress::find($id);
-        $order->delete();
+        $order = OrderAddress::where("id",$id)->delete();
+        // $order->delete();
         return $order;
     }
 

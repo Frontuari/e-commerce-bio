@@ -383,10 +383,7 @@ function obtenerTodo(){
 function obtenerDireccion(){
     $row = q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
     INNER JOIN cities c on c.id = o.cities_id
-    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
-    ");
-    var_dump($row);
-    die();
+    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'");
     $_SESSION["usuario"]["directions"] = $row;
     salida($row,"Direcciones actualizadas",true);
 }
