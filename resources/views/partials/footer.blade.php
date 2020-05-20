@@ -102,7 +102,7 @@
 
 </main>
 	<script id="aaa" type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
 	@yield('js')
 	<script>
 

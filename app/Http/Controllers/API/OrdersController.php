@@ -217,7 +217,7 @@ class OrdersController extends BaseController
         ->where("order_products.orders",$id)
         ->get();
 
-        $response["order"] = $a[0];
+        $response["order"] = $a;
         $response["products"] = $products;
         return $this->sendResponse($response);
     }

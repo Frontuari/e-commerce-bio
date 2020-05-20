@@ -13,6 +13,7 @@
 			</div>
 		</div>
 	</section>
+
 	<cart 
 		:peso_max="{{$peso}}"
 		:delivery="{{$delivery}}" 

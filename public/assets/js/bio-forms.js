@@ -16,14 +16,14 @@ $(document).ready(function () {
 	$(document).on('click','.btn-edit-info', function(){
 		$(this).hide();
 		$(this).parent().find('.btn-confirm-info').show();
-		$(this).parent().find('input').removeAttr('disabled');
+		$(this).parent().find('input,select').removeAttr('disabled');
 	});
 
 	/*Click button to confirm the edited user info*/
 	$('.btn-confirm-info').on('click', function(){
 		$(this).hide();
 		$(this).parent().find('.btn-edit-info').show();
-		$(this).parent().find('input').attr('disabled','disabled');
+		$(this).parent().find('input,select').attr('disabled','disabled');
 		$(this).parent().find($('.dropdown-menu')).removeClass('show');
 	});
 /*

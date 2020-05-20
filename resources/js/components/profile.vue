@@ -101,7 +101,7 @@
 																<label for="user-birthday">Cumpleaños:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY" v-model="userData.birthdate">
+																<input type="date" class="form-control" id="user-birthday" name="user-birthday" disabled="disabled" value="DD/MM/YYYY" v-model="userData.birthdate">
 															</div>
 														</div>
 														<div class="col-lg-6">
@@ -109,7 +109,12 @@
 																<label for="user-gender">Sexo:</label>
 																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input :type="'text'" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="user-gender" name="user-gender" disabled="disabled" :value="(userData.sex == 'm')?'Masculino':'Femenino'" v-model="userData.sex">
+																<select id="user-gender" name="user-gender" disabled="disabled" class="form-control" v-model="userData.sex">
+																	<option value="">Seleccione</option>
+																	<option value="m">Masculino</option>
+																	<option value="f">Femenino</option>
+																</select>
+																<!-- <input :type="'text'" class="form-control dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="user-gender" name="user-gender" disabled="disabled" :value="(userData.sex == 'm')?'Masculino':'Femenino'" v-model="userData.sex">
 																<div class="dropdown-menu dropdown-menu-gender">
 																    <div class="dropdown-item">
 																		<div class="form-check form-check-radio">
@@ -123,7 +128,7 @@
 																	    	<label for="women" class="custom-check"><span></span>Femenino</label>
 																		</div>
 																    </div>
-																</div>
+																</div> -->
 															</div>
 														</div>
 														<div class="col-lg-6">

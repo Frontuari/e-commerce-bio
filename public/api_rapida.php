@@ -371,8 +371,11 @@ function obtenerTodo(){
     INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='".$_SESSION['usuario']['email']."'")[0];
 
-    $row_direccions=q("SELECT o.*,c.id as city_id,c.name as ciudad FROM order_address as o
+    $row_direccions=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
+        FROM order_address as o
     INNER JOIN cities c on c.id = o.cities_id
+    INNER JOIN regions re ON re.id=c.regions_id 
+    INNER JOIN states st ON st.id=re.states_id
     WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
     ");
     $_SESSION["usuario"]=$row_usuario;
@@ -381,7 +384,7 @@ function obtenerTodo(){
     salida($row_usuario,"Datos actualizados",true);
 }
 function obtenerDireccion(){
-    $row = q("SELECT o.*,c.id as city_id,re.id as region_id,st.id as state_id
+    $row = q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
         FROM order_address as o
     INNER JOIN cities c on c.id = o.cities_id
     INNER JOIN regions re ON re.id=c.regions_id 
@@ -401,7 +404,7 @@ function login(){
     INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='$email'")[0];
 
-    $directions=q("SELECT o.*,c.id as city_id,re.id as region_id,st.id as state_id
+    $directions=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
     FROM order_address as o
         INNER JOIN cities c ON c.id=o.cities_id 
         INNER JOIN regions re ON re.id=c.regions_id 
