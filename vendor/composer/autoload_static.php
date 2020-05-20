@@ -821,6 +821,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Tax' => __DIR__ . '/../..' . '/app/Tax.php',
         'App\\Taxes' => __DIR__ . '/../..' . '/app/Taxes.php',
         'App\\Trackings' => __DIR__ . '/../..' . '/app/Trackings.php',
+        'App\\Transporte' => __DIR__ . '/../..' . '/app/Transporte.php',
         'App\\Transports' => __DIR__ . '/../..' . '/app/Transports.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserRole' => __DIR__ . '/../..' . '/app/UserRole.php',

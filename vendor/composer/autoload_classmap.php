@@ -176,6 +176,7 @@ return array(
     'App\\Tax' => $baseDir . '/app/Tax.php',
     'App\\Taxes' => $baseDir . '/app/Taxes.php',
     'App\\Trackings' => $baseDir . '/app/Trackings.php',
+    'App\\Transporte' => $baseDir . '/app/Transporte.php',
     'App\\Transports' => $baseDir . '/app/Transports.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserRole' => $baseDir . '/app/UserRole.php',
