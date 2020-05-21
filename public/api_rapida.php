@@ -707,7 +707,7 @@ function horasDisponiblesEntrega(){
     $iniciarDespuesDe=2; //Horas
     $timenow = time();
     $index=0;
-    $maxApartado=24;
+    $maxApartado=12;
     $o=0;//hora apartada
     $i=2;//hora inicial
     while($o<$maxApartado){          
