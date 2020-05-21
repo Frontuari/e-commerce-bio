@@ -20,6 +20,7 @@ $activar_email_tracking	=true;
 $activar_tasa			=true;
 $activar_delivery		=true;
 $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
+$activar_correo_masivo	=true; //apura al usuario que pague despues de 1 hora
 
 
 $tiempo_acumulado_productos=0;
@@ -45,6 +46,14 @@ $retraso_delivery="+7 minutes";
 
 $tiempo_acumulado_paga_rapido=0;
 $retraso_paga_rapido="+5 minutes";
+
+$tiempo_acumulado_correo_masivo=0;
+$retraso_correo_masivo="+2 minutes";
+
+
+
+
+
 /* Ejemplo si quieren crear otro :)
 $activar_productosb=true;
 $tiempo_acumulado_productosb=0;
@@ -102,13 +111,37 @@ do{
 		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
 		$tiempo_acumulado_delivery=strtotime($retraso_delivery);		
 	}	
-	
+	if(time()>=$tiempo_acumulado_correo_masivo and $activar_correo_masivo==true){
+		syslog(LOG_INFO,"Actualizando correo masivo");
+		$tiempo_inicio = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		actualizarCorreoMasivo();
+		$tiempo_fin = microtime_float();//Opcional para medir el tiempo de ejecución del algoritmo
+		echo "Tiempo empleado: " . ($tiempo_fin - $tiempo_inicio)."\n"; //Opcional para medir el tiempo de ejecución del algoritmo
+		$tiempo_acumulado_correo_masivo=strtotime($retraso_correo_masivo);		
+	}		
 
 
 sleep($retraso_general);
 
 }while(true);
 closelog();
+
+
+function actualizarCorreoMasivo(){
+	$arrb=q("SELECT text FROM servicios WHERE tipo='correo_masivo' ORDER BY id desc LIMIT 1");
+	if(is_array($arrb)){
+		$textoCorreo=$arrb[0]['text'];
+		$arr=q("SELECT email FROM subscriptions WHERE enviado=0");
+		if(is_array($arr)){
+			foreach($arr as $obj){
+				$arrCorreo[]= $obj['email'];
+			}
+	
+			enviarCorreo($arrCorreo,"Noticias Biomercados",$textoCorreo,true);
+			q("UPDATE subscriptions SET enviado=1");
+		}
+	}
+}
 
 function paga_rapido(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='6' AND status='A'");
@@ -667,7 +700,7 @@ list($useg, $seg) = explode(" ", microtime());
 return ((float)$useg + (float)$seg);
 }
 
-function enviarCorreo($email,$titulo,$body){
+function enviarCorreo($email,$titulo,$body,$masivo=false){
 
     require __DIR__.'/vendor/autoload.php';
    // echo is_file(__DIR__.'/../vendor/autoload.php');
@@ -689,8 +722,14 @@ function enviarCorreo($email,$titulo,$body){
 	    $mail->SMTPDebug = 0;
         $mail->CharSet = 'UTF-8';
 	    //Recipients
-	    $mail->setFrom('noreply@biomercados.com.ve', 'Biomercados - Bio en línea');
-	    $mail->addAddress($email);
+		$mail->setFrom('noreply@biomercados.com.ve', 'Biomercados - Bio en línea');
+		if($masivo){
+			foreach($email as $correo){
+				$mail->addAddress($correo);
+			}
+		}else{
+			$mail->addAddress($email);
+		}
 	    
 	    $mail->isHTML(true);
 	    $mail->Subject = $titulo;
@@ -699,6 +738,7 @@ function enviarCorreo($email,$titulo,$body){
 	    $mail->send();
 	    return true;
 	} catch (Exception $e) {
+		echo $e;
 	    return false;
 	}
 
