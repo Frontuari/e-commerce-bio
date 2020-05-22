@@ -46,7 +46,7 @@ class OrdersController extends BaseController
         return $this->sendResponse($a);
     }
 
-    public function estadistica_ano(){
+    public function estadistica_ano() {
         $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
 
 //return $this->sendResponse($a);
@@ -64,22 +64,24 @@ class OrdersController extends BaseController
           //  print_r($a);
            // exit();
          // data                : [28, 48, 40, 19, 86, 27, 90,200]
-         foreach($arr['labels'] as $cod=>$mes){
-
+         foreach($arr['labels'] as $cod=>$mes) {
             foreach ($a as $valor){
-                if($valor->mes==($cod+1)){
+                if($valor->mes==($cod+1)) {
                     $arr['datasets'][0]['data'][$cod]=$valor->count;
-                }else{
+                }else {
                     if(!isset($arr['datasets'][0]['data'][$cod])){
                     $arr['datasets'][0]['data'][$cod]=0;
                     }
                 }
-                
             }
-         }
+        }
 
         return json_encode($arr);
+    }
 
+    public function getUltimaOrden() {
+        $ultimo = DB::table("orders")->select(DB::raw(" (max(id) + 1) as id"))->get();
+        return $this->sendResponse($ultimo);
     }
     
     /**

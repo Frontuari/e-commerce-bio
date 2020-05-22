@@ -73,6 +73,8 @@ Route::resource('orders', 'API\OrdersController');
     Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
     //Estadistica del año
     Route::get('orders/estadistica/ano','API\OrdersController@estadistica_ano');
+    //obtener ultima orden
+    Route::get('orders/ultima/get','API\OrdersController@getUltimaOrden');
 
 //ADD VISIT USER PRODUCT
 Route::resource('user_visit_products', 'API\UserVisitProductsController');

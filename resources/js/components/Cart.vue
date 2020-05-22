@@ -347,6 +347,10 @@
 																<label for="referencia-pago">Referencia</label>
 																<input type="text" name="referencia-pago" class="form-control" v-model="paymentData[index].ref">
 															</div>
+															<div class="form-group col-lg-3" v-if="pay.id == 8">
+																<label>Procesar</label>
+																<button type="button" @click="openMegasoft(paymentData[index].amount)" name="next" class="btn btn-submit" :disabled="paymentData[index].amount <= 0" >PROCESAR TDC</button>
+															</div>
 															
 														</div>
 													</div>
@@ -688,8 +692,22 @@
 				const bank       =   response.data.data;
 				this.paymentData[index].account = bank[0].bank_data_id;
 				this.paymentData[index].coin = bank[0].coins_id;
-				await Swal.fire(bank[0].name,bank[0].cuentas);
+				//solo si la cuenta es en Bs
+				if(bank[0].coins_id == 2) await Swal.fire(bank[0].name,bank[0].cuentas);
 			},
+			async openMegasoft(total) {
+				const response  =   await axios.get(URLSERVER+'api/orders/ultima/get');
+				const id       =   response.data.data[0].id;
+				total = total.split(".").join("").split(",").join("");
+				const megasoft = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id}&total=${total}`);
+				document.getElementById("MegaSoftOverlay").style.display = "block";
+				var winTimer = window.setInterval(function() {
+					if (megasoft.closed !== false) {
+						window.clearInterval(winTimer);
+						document.getElementById("MegaSoftOverlay").style.display = "none";
+					}
+				}, 200);
+			}
 		},
 		created() {
 			EventBus.$on('update_cantCart', data => {

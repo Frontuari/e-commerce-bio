@@ -20,6 +20,16 @@
 		:tasadolar="{{$tasa_dolar}}" 
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
 	</cart>
+
+	<div id="MegaSoftOverlay" class="overlay">
+
+		<!-- Overlay content -->
+		<div class="overlay-content">
+			<a href="#">PROCESANDO PAGO....</a>
+		</div>
+
+	</div>
+
 </main>
 <!-- CIERRE DEL MAIN-->
 @stop
