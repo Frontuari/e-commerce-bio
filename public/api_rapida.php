@@ -225,6 +225,21 @@ switch($evento) {
     case 'listarTracking':
         listarTracking();
     break;
+    case 'enviar_correo_masivo':
+        $texto=pg_escape_string(base64_decode($_POST['texto']));
+        q("INSERT INTO servicios (text,tipo) VALUES ('$texto','correo_masivo')");
+        q("UPDATE subscriptions SET enviado=0");
+        horasDisponiblesEntrega();
+
+    break;
+    case 'ultimo_correo_masivo':
+        $a=q("SELECT * FROM servicios ORDER BY id DESC LIMIT 1");
+        if(is_array($a)){
+            salidaNueva($a,"datos del ultimo correo",true);
+        }else{
+            salidaNueva(null,"Sin datos",false);
+        }
+    break;
     case 'getPerfil':
         getPerfil(false);
     break;
@@ -692,7 +707,7 @@ function horasDisponiblesEntrega(){
     $iniciarDespuesDe=2; //Horas
     $timenow = time();
     $index=0;
-    $maxApartado=24;
+    $maxApartado=12;
     $o=0;//hora apartada
     $i=2;//hora inicial
     while($o<$maxApartado){          

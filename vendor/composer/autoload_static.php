@@ -749,6 +749,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\StatesController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatesController.php',
         'App\\Http\\Controllers\\StoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/StoresController.php',
         'App\\Http\\Controllers\\SubCategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubCategoriesController.php',
+        'App\\Http\\Controllers\\Subscriptions' => __DIR__ . '/../..' . '/app/Http/Controllers/Subscriptions.php',
         'App\\Http\\Controllers\\TaxesController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaxesController.php',
         'App\\Http\\Controllers\\TrackingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TrackingsController.php',
         'App\\Http\\Controllers\\TrakingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TrakingsController.php',
