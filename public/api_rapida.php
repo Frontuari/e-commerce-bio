@@ -199,7 +199,10 @@ switch($evento) {
         buscarProducto();
     break;
     case 'listarProductosPorBusqueda':
-        listarProductosPorBusqueda();
+        listarProductosPorBusqueda(true);
+    break;
+    case 'listarProductosPorBusquedaAlvarado':
+        listarProductosPorBusqueda(false);
     break;
     case 'listarProductosCarrito':
         listarProductosCarrito($json);
@@ -1060,7 +1063,7 @@ function listarProductosCarrito($json){
     $sql=getSqlListarProductos('',trim($where));
     listarProductos($sql,$arr);
 }
-function listarProductosPorBusqueda(){
+function listarProductosPorBusqueda($tipo_salida=false){
     $texto=mb_strtolower($_GET['texto']);
     $arr=explode(' ',$texto);
     $otro='';
@@ -1077,7 +1080,7 @@ function listarProductosPorBusqueda(){
 
     $sql=getSqlListarProductos('',$where,'');
     $sql=filtroProductos($sql);
-    listarProductos($sql);    
+    listarProductos($sql,false,false,$tipo_salida);    
 }
 function buscarProducto(){//el autocompletado
   
