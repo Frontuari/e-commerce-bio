@@ -800,6 +800,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\PaymentMethods' => __DIR__ . '/../..' . '/app/PaymentMethods.php',
         'App\\People' => __DIR__ . '/../..' . '/app/People.php',
         'App\\Peoples' => __DIR__ . '/../..' . '/app/Peoples.php',
+        'App\\Permissions' => __DIR__ . '/../..' . '/app/Permissions.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
         'App\\ProductCategory' => __DIR__ . '/../..' . '/app/ProductCategory.php',
         'App\\ProductPackage' => __DIR__ . '/../..' . '/app/ProductPackage.php',

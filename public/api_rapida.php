@@ -265,6 +265,12 @@ switch($evento) {
     case 'listarPublicidad':
         listarPublicidad(false);
     break;
+    case 'devolucion':
+        $email=$_SESSION['usuario']['email'];
+        $orders_id=$_GET['orders_id'];
+        enviarCorreo('ds000082@gmail.com',"Solicitud de Devolución","El cliente $email, $name, $phone esta solicitando la devolución de la orden Nro. ".$orders_id);
+        salidaNueva(null,"Su solicitud de devolución ha sido procesada. Sera contactado en breves minutos.");
+    break;
     default:
     
     salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);

@@ -342,7 +342,8 @@ function actualizarProductos($ip){
 					if($sugerido<0){
 						$sugerido=0;
 					}else{
-						$sugerido=round($sugerido*0.80);
+						$porcentaje_traer_global=1;
+						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
 
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
@@ -420,7 +421,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					//echo $obj->ad_org_id." $obj->organizacion $obj->sku $obj->sugerido\n";
 					//echo $obj->sku."\n";
 					$tienda_id=$tienda[$obj->ad_org_id];
-					$sql="SELECT id FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
+					$sql="SELECT id,porc_stock FROM products WHERE sku=$obj->sku and stores_id=$tienda_id";
 					//echo " Consultando: ".$sql."\n";
 					$arr=q($sql);
 
@@ -433,6 +434,9 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
+						$porc_stock=$arr[0]['porc_stock'];
+						
+						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
 						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'"))){
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";

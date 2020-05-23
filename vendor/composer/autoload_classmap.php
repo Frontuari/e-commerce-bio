@@ -155,6 +155,7 @@ return array(
     'App\\PaymentMethods' => $baseDir . '/app/PaymentMethods.php',
     'App\\People' => $baseDir . '/app/People.php',
     'App\\Peoples' => $baseDir . '/app/Peoples.php',
+    'App\\Permissions' => $baseDir . '/app/Permissions.php',
     'App\\Product' => $baseDir . '/app/Product.php',
     'App\\ProductCategory' => $baseDir . '/app/ProductCategory.php',
     'App\\ProductPackage' => $baseDir . '/app/ProductPackage.php',
