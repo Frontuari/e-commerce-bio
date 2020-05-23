@@ -336,6 +336,7 @@
 														<div class="col-6 col-lg-16">Fecha de entrega</div>
 														<div class="col-6 col-lg-16">Estado</div>
 														<div class="col-6 col-lg-16">Repetir</div>
+														<div class="col-6 col-lg-16">Acción</div>
 													</div>
 												</div>
 
@@ -362,6 +363,14 @@
 													<div class="col-6 col-lg-16">
 														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
 															Repetir orden
+														</button>
+													</div>
+													<div class="col-6 col-lg-16">
+														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="devolucion(order.id)">
+															Solicitar Devolución
+														</button>
+														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button">
+															Calificar Orden
 														</button>
 													</div>
 												</div>
@@ -871,6 +880,15 @@
 					
 					
 				});
+			},
+			async devolucion(id)  {
+				const response = await axios.get(URLSERVER+"api_rapida.php?evento=devolucion&orders_id"+id);
+				Swal.fire(
+					'Devolución!',
+					'Su solicitud de devolución ha sido procesada. Será contactado muy pronto',
+					'success'
+				);
+
 			},
 			saveDirection(direction,index)
 			{	
