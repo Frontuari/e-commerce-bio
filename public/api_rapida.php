@@ -269,7 +269,7 @@ switch($evento) {
         $email=$_SESSION['usuario']['email'];
         $orders_id=$_GET['orders_id'];
         enviarCorreo('ds000082@gmail.com',"Solicitud de Devolución","El cliente $email, $name, $phone esta solicitando la devolución de la orden Nro. ".$orders_id);
-        salidaNueva(null,"Su solicitud de devolución ha sido procesada. Será contactado en breves minutos.");
+        salidaNueva(null,"Su solicitud ha sido procesada. Nos comunicaremos con usted.");
     break;
     default:
     
