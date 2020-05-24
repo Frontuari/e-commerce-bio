@@ -288,7 +288,7 @@ function actualizarFotoPerfil(){
     $realImage = base64_decode($image);
 
     if($_GET["from"]=="web"){
-        base64ToImage($realImage,$avatar);
+        file_put_contents($avatar, file_get_contents($image));
         obtenerTodo();
     }else{
         file_put_contents($avatar, $realImage);
@@ -1775,11 +1775,10 @@ function plantillaContacto($message){
 
 function base64ToImage($base64_string, $output_file) {
     $file = fopen($output_file, "wb");
-
     $data = explode(',', $base64_string);
-
     fwrite($file, base64_decode($data[1]));
     fclose($file);
+    chmod($output_file,"0777");
 
     return $output_file;
 }
