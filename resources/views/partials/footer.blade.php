@@ -369,6 +369,10 @@
 				
 			});
 		});
+
+		setInterval(() => {
+			axios.get(URLSERVER+"api_rapida.php?evento=obtenerTodo");
+		},60000);
 	</script>
 </body>
 </html>
