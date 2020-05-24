@@ -335,7 +335,6 @@
 														<div class="col-6 col-lg-16">Dirección de entrega</div>
 														<div class="col-6 col-lg-16">Fecha de entrega</div>
 														<div class="col-6 col-lg-16">Estado</div>
-														<div class="col-6 col-lg-16">Repetir</div>
 														<div class="col-6 col-lg-16">Acción</div>
 													</div>
 												</div>
@@ -361,17 +360,26 @@
 														</div>
 													</div>
 													<div class="col-6 col-lg-16">
-														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
+														<div class="btn-group" v-if="order.namestatus == 'Entregado'">
+															<button class="btn btn-submit btn-sm dropdown-toggle" style="color: white; padding: 5px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																Acción
+															</button>
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="javascript:void()" @click="repeatOrder(order.id)">Repetir orden</a>
+																<a class="dropdown-item" href="javascript:void()" @click="devolucion(order.id)">Solicitar Devolución</a>
+																<a class="dropdown-item" href="javascript:void()" @click="calificar(order.id)">Calificar Orden</a>
+															</div>
+														</div>
+
+														<!-- <button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
 															Repetir orden
 														</button>
-													</div>
-													<div class="col-6 col-lg-16">
 														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="devolucion(order.id)">
 															Solicitar Devolución
 														</button>
 														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button">
 															Calificar Orden
-														</button>
+														</button> -->
 													</div>
 												</div>
 											</div>
@@ -889,6 +897,9 @@
 					'success'
 				);
 
+			},
+			async calificar(id) {
+				console.log("funciona");
 			},
 			saveDirection(direction,index)
 			{	

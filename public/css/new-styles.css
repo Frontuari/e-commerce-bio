@@ -119,3 +119,7 @@ ul.carousel-indicators{
 @media screen and (max-height: 450px) {
 	.overlay a {font-size: 20px}
 }
+
+#all-orders .dropdown-item {
+	text-align: center;
+}
