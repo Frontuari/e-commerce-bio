@@ -286,9 +286,14 @@ function actualizarFotoPerfil(){
     $avatar='users/'.$name;
     q("UPDATE users SET avatar='$avatar' WHERE id=$users_id");
     $realImage = base64_decode($image);
- 
-    file_put_contents($avatar, $realImage);
-    getPerfil(false);
+
+    if($_GET["from"]=="web"){
+        base64ToImage($realImage,$avatar);
+        obtenerTodo();
+    }else{
+        file_put_contents($avatar, $realImage);
+        getPerfil(false);
+    }
     //salidaNueva($data['data'],"Perfil actualizado correctamente");
 }
 function listarProductosWeb(){
@@ -391,7 +396,7 @@ function e($row){
     return base64_encode(gzcompress(rawurlencode(json_encode($row)),9));
 }
 function obtenerTodo(){
-    $row_usuario=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
+    $row_usuario=q("SELECT p.rif,s.avatar as avatar,split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
     INNER JOIN cities c on c.id = p.cities_id
@@ -424,7 +429,7 @@ function login(){
     $email=$_GET['email'];
     $clave=$_GET['password'];
     
-    $row=q("SELECT p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,p.phone,p.phone_home
+    $row=q("SELECT p.rif,s.avatar as avatar ,split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
     INNER JOIN cities c on c.id = p.cities_id
@@ -1766,6 +1771,17 @@ function plantillaContacto($message){
     
  ';
 
+}
+
+function base64ToImage($base64_string, $output_file) {
+    $file = fopen($output_file, "wb");
+
+    $data = explode(',', $base64_string);
+
+    fwrite($file, base64_decode($data[1]));
+    fclose($file);
+
+    return $output_file;
 }
 
 ?>

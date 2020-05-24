@@ -84,7 +84,7 @@
 							<!-- no loggeado -->
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged">
-								<a href="/profile"><img src="/assets/img/icono-perfil-bio.png" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="/profile"><img :src="userlogged.avatar" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
 									<img src="/assets/img/icono-salir-bio.png">
 								</a>

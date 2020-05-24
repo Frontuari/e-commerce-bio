@@ -5,10 +5,14 @@
 				<div class="col-12">
 					<div class="profile-header">
 						<div class="profile-img">
-							<img :src="'assets/img/profile-default.png'" :alt="userData.name">
+							<img :src="userData.avatar" :alt="userData.name" v-if="!avatar">
+							<img :src="avatar" :alt="userData.name" v-else-if="!!avatar">
 							<form action="">
 								<div class="change-profile-img">
-									<button type="button" class="btn"><img src="assets/img/subir-archivo-bio-mercados.svg"></button>
+									<input type="file" name="imgPerfil" ref="file" @change="uploadPhoto($event)" style="display:none;">
+									<button type="button" class="btn" @click="$refs.file.click()">
+										<img src="assets/img/subir-archivo-bio-mercados.svg">
+									</button>
 								</div>
 							</form>
 						</div>
@@ -706,6 +710,7 @@
             return {
 				oneproduct: {},
 				favorites: [],
+				avatar: '',
 				cant_favorites : 0,
             	get_tab:'',
 				userData: [],
@@ -1041,7 +1046,29 @@
                 }
                 $('.cantidad_'+productID).val(this.cant_product[productID]);
                 $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
-            }
+            },
+			uploadPhoto() {
+				const image = event.target.files[0];
+				this.base64Image(image);
+			},
+			base64Image(fileObject){
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					this.avatar = e.target.result;
+					this.sendPhoto();
+				}
+				reader.readAsDataURL(fileObject);
+			},
+			async sendPhoto() {
+				const { avatar } = this;
+				let data = new FormData();
+				data.append("image",avatar);
+				// console.log("avatar::> ",avatar);
+				// console.log("avatar2::> ",{avatar});
+				const response = await axios.post(URLSERVER+"api_rapida.php?evento=actualizarFotoPerfil&from=web",data);
+				console.log("response::> ",response);
+			}
+			
 
         },
         mounted() {
