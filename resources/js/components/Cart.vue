@@ -197,16 +197,14 @@
 													<div class="col-lg-6">
 														<div class="form-group">
 															<label for="address-name">Elegir Dirección:</label>
-															<select v-model="selectedDirection" v-select2 class="select2">
-																<option value='0'>Pick - Up</option>
-																<option v-for="direction in userlogged.directions" :key="direction.id" :value='direction.id'>{{direction.address}}</option>
-															</select>
+															<div id="div_direccion_entrega"></div>
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection == 0">
 														<div class="form-group">
-															<label for="address-urb">Fecha:</label>
-															<input type="text" class="form-control datetimepicker" name="timepick" v-model="datetime" >
+															<label for="address-urb">Fecha y hora aprox. para su entrega:</label>
+															<div id="div_fecha"></div>
+															
 														</div>
 													</div>
 													<div class="col-lg-6" v-if="selectedDirection > 0">

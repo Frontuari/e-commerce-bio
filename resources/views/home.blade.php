@@ -51,6 +51,7 @@
 		width: 100%;
 		height: 100%;
 		z-index: 1000;
+		
 	}
 	#loader {
 		display: block;
@@ -62,11 +63,13 @@
 		margin: -75px 0 0 -75px;
 		border-radius: 50%;
 		border: 3px solid transparent;
-		border-top-color: #3498db;
+		border-top-color: #67BE5A;
 
 		-webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
 		animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 		z-index: 1001;
+	
+
 	}
 
     #loader:before {
@@ -82,6 +85,9 @@
 
         -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
         animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+		background-image: url("img/logo_bio_loader.png");
+		background-repeat: no-repeat;
+		background-size: 120px;
     }
 
     #loader:after {
@@ -105,7 +111,8 @@
 		top: 0;
 		width: 51%;
 		height: 100%;
-		background: #222222;
+		background: #fff;
+
 		z-index: 1000;
 	}
 	

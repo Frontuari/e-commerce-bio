@@ -282,6 +282,7 @@ export default {
 		},
 		logout()
 		{
+			localStorage.clear();
 			axios.get(URLSERVER+"api_rapida.php?evento=logout").then( () => {
 				location.href = URLSERVER;
 			});
