@@ -52,7 +52,7 @@ function procesar(data,evento){
                 for (var [key, value] of Object.entries(datos)) {
                     setLocal(key, value);
                 }
-                console.log(data);
+                // console.log(data);
                 actualizarResumenOrden();
             }
 
@@ -161,7 +161,7 @@ function actualizarResumenOrden(){
         var h='';
         var productos=getLocal('productosb');
         var d_envio=getLocal('envio').data[0];
-        console.log(d_envio);
+        // console.log(d_envio);
 
 
       
@@ -172,7 +172,7 @@ function actualizarResumenOrden(){
         var totalEnvioB=0.00;
         var totalEnvioD=0.00;
         var datos=getLocal('cartNew');
-        console.log(datos);
+        // console.log(datos);
         for (var [key, value] of Object.entries(datos)) {
             var p       =productos[value.product.id];
             if(p!=null){

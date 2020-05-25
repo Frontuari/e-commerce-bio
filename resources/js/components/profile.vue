@@ -760,8 +760,8 @@
 						direction_text: order.address+" "+order.sector+" "+order.nro_home+" "+order.zip_code+" "+order.reference_point,
 						status: order.namestatus
 					};
-					const rate_json = order.rate_json;
-					rate_json.forEach( a => {
+					
+					JSON.parse(order.rate_json).forEach( a => {
 						if(a.id == 1) {
 							this.currency_rate = Number(a.rate);
 						}

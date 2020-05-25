@@ -208,8 +208,8 @@ class OrdersController extends BaseController
         FROM trackings 
         WHERE trackings.orders_id = orders.id
         order by trackings.id DESC Limit 1) AS namestatus"))
-        ->join("order_address","orders.order_address_id","=","order_address.id")
-        ->join("users","users.id","=","order_address.users_id")
+        ->leftJoin("order_address","orders.order_address_id","=","order_address.id")
+        ->leftJoin("users","users.id","=","order_address.users_id")
         ->where("orders.id",$id)
         ->get();
 
