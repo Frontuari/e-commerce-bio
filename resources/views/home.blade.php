@@ -125,6 +125,7 @@
 	}
 	#loader {
 		z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
+		
 	}
 	h1 {
 		color: #EEEEEE;
@@ -144,12 +145,14 @@
 
 	.loaded #loader-wrapper {
 		visibility: hidden;
+		
 	}
 
 	.loaded #loader {
 		opacity: 0;
 		-webkit-transition: all 0.3s ease-out; 
 				transition: all 0.3s ease-out;
+				
 	}
 
 	.loaded #loader-wrapper .loader-section.section-right,
@@ -166,6 +169,7 @@
  
         -webkit-transition: all 0.3s 1s ease-out; 
                 transition: all 0.3s 1s ease-out;
+				
 	}
 
 	

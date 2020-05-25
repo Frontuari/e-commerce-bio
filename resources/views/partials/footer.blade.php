@@ -376,4 +376,23 @@
 		<?php endif; ?>
 	</script>
 </body>
+<script src="js/jsxcompressor.min.js" type="text/javascript"></script>
+<style>
+
+	.loaderb {
+		margin: 0 auto;
+		border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #67BE5A; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+	</style>
 </html>

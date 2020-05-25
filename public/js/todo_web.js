@@ -1,4 +1,3 @@
-miStorage = window.localStorage;
 var urlBaseImagen="storage/";
 var categoriaActual=null;
 var filtroPreIni=0;

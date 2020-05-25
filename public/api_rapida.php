@@ -920,13 +920,14 @@ function compararHora($from, $to, $input) {
 }
 function crearOrden($json){
     
-    //{"estado":16,"productos":{"20":3},"direccion":"3","hora_entrega":"1585872508"}
+    //$json='{"estado":16,"productos":{"20":3,"21":4},"direccion":"3","hora_entrega":"1585872508"}';
+    
     $orden=json_decode($json,true);
     $users_id   =$_SESSION['usuario']['id'];
     $order_address_id=$orden['direccion'] ?? "NULL";
     $delivery_time_date=Date("Y-m-d h:i:s",$orden['hora_entrega']);
     $arrProductos=$orden['productos'];
-    
+
     $coins_id=1;
     $packagings_id=1;
     $total_transport=0;
@@ -949,7 +950,7 @@ function crearOrden($json){
     $arrs=q($sql);
     //Validaciones
     if(!is_array($arrs)){
-        salidaNueva(null,"Disculpe intente mas tarde",false);
+        salidaNueva(null,"Disculpe intente mas tarde.",false);
     }
     $pesoTotal=0.00;
     foreach($arrs as $pro){
