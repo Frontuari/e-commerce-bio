@@ -77,7 +77,6 @@ var globalFunc = {
                 user_id: user_id
             })
             .then(function (response) {
-                // console.log(response.data);
                 if(response.data == 'exist') {
                     Swal.fire({
                         icon: 'error',
@@ -111,16 +110,13 @@ var globalFunc = {
             EventBus.$emit("update_cantCart",cantUpdate);
         }else {
             cart = globalFunc.validateCart(product,cart,cantidad);
-            cart.push({product: product,cant: parseInt(cantidad)});
             window.localStorage.setItem('cartNew', JSON.stringify(cart));
             EventBus.$emit("update_cantCart",cantidad);
         }
         
     },
     addComboToCart: function(products) {
-        console.log("products::> ",products);
         products.forEach( a => {
-            console.log("a::> ",a);
             globalFunc.addToCart(a,a.cant_combo);
         });
     },
@@ -203,7 +199,6 @@ var globalFunc = {
                 this.updateCartTotal();
                 let cart = JSON.parse(window.localStorage.getItem('cartNew'));
                 const cantUpdate = globalFunc.getCartCant(cart);
-                console.log("cantUpdate::> ",cantUpdate);
                 EventBus.$emit("update_cantCart",cantUpdate);
             }
         })
