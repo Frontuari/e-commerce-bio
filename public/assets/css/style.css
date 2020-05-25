@@ -2434,7 +2434,7 @@ input[type=checkbox]:checked+.custom-check span {
     width: 100%;
     height: auto;
     margin: auto;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .change-profile-img {
