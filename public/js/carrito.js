@@ -72,7 +72,11 @@ function elegidoMetodo(id,name){
     get("listarBancosdelMetododePago","&payment_methods_id="+id);
 }
 function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate){
-                  
+
+
+
+    
+    
     var div_referencia=`<div class="col-md-6">
     <label>Referencia:</label>
     <input id="input_ref" name="ref" class="form-control" type="text">
@@ -84,6 +88,15 @@ var txt_btn_pagar='Reportar pago';
         otro_ancho='<div class="col-md-3"></div>';
         txt_btn_pagar='Procesar TDC';
    }
+   if(coins_id==1){
+        var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
+        var msj="Use punto (.) para decimales";
+
+   }else{
+     var patron="^\\$?(([1-9](\\d*|\\d{0,2}(\.\\d{3})*))|0)(,\\d{1,2})?$";
+        var msj="Use coma (,) para decimales";
+   }
+
     datosBancarios.innerHTML=`
     <div class='row text-center h5'>
     <div class="col-md-12">
@@ -111,7 +124,7 @@ Titular: `+titular+`
         `+otro_ancho+`
         <div class="col-md-6">
             <label>Ingrese el monto en `+moneda+`:</label>
-            <input id="input_amount" name="amount" required autofocus class="form-control" type="text">
+            <input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" required autofocus class="form-control" type="text">
             <input id="input_coins_id" type="hidden" name="coins_id" value="`+coins_id+`">
             <input id="input_rate" type="hidden" name="rate" value="`+rate+`">
             <input id="input_bank_datas_id" type="hidden" name="bank_datas_id" value="`+id+`">
