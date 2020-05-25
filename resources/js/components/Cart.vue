@@ -31,6 +31,7 @@
 									Compra Completada
 								</li>
 							</ul>
+				
 							<fieldset class="carrito">
 								<div class="product-list">
 									<div class="row">
@@ -43,47 +44,65 @@
 													</div>
 												</div>
 												<div class="col-6 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
-													<div class="product-block">
-														<div class="product-img">
-															<img v-if="product_cart.product.photo != null" :src="'storage/'+JSON.parse(product_cart.product.photo)[0]">
-														</div>
-														<div class="product-content">
-															<a href="#" class="product-title">{{product_cart.product.name}}</a>
-															<!-- <span class="product-info">Descripción: {{product_cart.description_short}}</span> -->
-															<div class="product-quantity">
-																<label>Cantidad</label>
-																<div class="product-quantity-group">
-																	<input id="quantity2" class="form-control" type="text" name="quantity" v-model="product_cart.cant">
-																	<div class="product-quantity-buttons">
-																		<button type="button" class="btn" @click="increaseValue(product_cart.cant,product_cart.product.id,index)">
-																			<img src="assets/img/increase.png" alt="Increase">
-																		</button>
-																		<button type="button" class="btn" @click="decreaseValue(product_cart.cant,product_cart.product.id,index)">
-																			<img   src="assets/img/decrease.png" alt="decrease">
-																		</button>
+
+													
+													<div class="media" style="border-bottom:1px solid #ccc">
+
+														<img width="100px" v-if="product_cart.product.photo != null" :src="'storage/'+JSON.parse(product_cart.product.photo)[0]">
+														<div class="media-body">
+															<div class="row align-items-center mt-2">
+																<div class="col-md-4 align-self-center">
+																	<div class="row">
+																		<div class="col-md-12">
+																			<a href="#" class="product-title">{{product_cart.product.name}}</a><br>
+																				<span class="product-descount" v-if="product_cart.product.discount > 0">$ 4 / {{ product_cart.product.price | FormatNumber }}</span>
+
+																				<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.discount | FormatNumber }}</p>
+
+																				<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ {{ (product_cart.product.price  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.price | FormatNumber }}</p>
+
+																		</div>
+																	</div>
+																	
+
+																</div>
+															<div class="col-md-3 align-self-center">
+																			<div class="input-group mt-1">
+																																		
+																		<input style="width:20px" id="quantity2" class="form-control" type="text" name="quantity" v-model="product_cart.cant">
+																			<div style="width:30px; margin-top:-5px; margin-left:2px">
+																				<button style="padding:0; margin:0"  type="button" class="btn" @click="increaseValue(product_cart.cant,product_cart.product.id,index)">
+																					<img width="15px" src="assets/img/increase.png" alt="Increase">
+																				</button>
+																				<button style="padding:0; margin:0"  type="button" class="btn" @click="decreaseValue(product_cart.cant,product_cart.product.id,index)">
+																					<img  width="15px" src="assets/img/decrease.png" alt="decrease">
+																				</button>
+																			</div>
 																	</div>
 																</div>
+																<div class="col-md-4 text-right align-self-center">
+																	<a href="#" class="product-title">Total a pagar:</a><br>
+																	<div class="product-add">
+	
+																	
+																		<div class="product-prices">
+																			<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
+
+																			<p v-if="product_cart.product.discount <= 0">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
+																		</div>
+															
+																	</div>
+																</div>
+																<div class="col-md-1 text-right align-self-center">
+																	<button title="Eliminar del carrito" class="btn btn-delete-section"  @click="removeCart(index)" type="button"><img src="assets/img/eliminar-bio-mercados.svg"></button>
+																</div>
+																
 															</div>
-															<div class="product-prices">
 
-																<span class="product-descount" v-if="product_cart.product.discount > 0">$ 4 / {{ product_cart.product.price | FormatNumber }}</span>
 
-																<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.discount | FormatNumber }}</p>
 
-																<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ {{ (product_cart.product.price  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.price | FormatNumber }}</p>
 
-															</div>
-														</div>
-														<div class="product-add">
-															<span class="product-info">Total a pagar: </span>
-															<div class="product-prices">
-																<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
 
-																<p v-if="product_cart.product.discount <= 0">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
-															</div>
-															<div class="remove-product">
-																<button class="btn btn-delete-section"  @click="removeCart(index)" type="button">Eliminar del carrito <img src="assets/img/eliminar-bio-mercados.svg"></button>
-															</div>
 														</div>
 													</div>
 												</div>
@@ -111,7 +130,7 @@
 													<div class="row">
 														<div class="col-lg-12">
 															<h3 class="order-number order-text">Resumen de la compra</h3>
-															<div class="order-content">
+															<div class="order-content" id="div_resumen_compra">
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
@@ -264,7 +283,7 @@
 														<a href="/catalog" type="button" class="btn btn-link">Seguir comprando</a>
 														<div class="action-buttons-group">
 															<button type="button" name="previous" class="btn btn-link previous action-button">Volver atras</button>
-															<button type="button" name="next" class="btn btn-submit next action-button">CONFIRMAR DIRECCIÓN</button>
+															<button type="button" class="btn btn-submit  action-button" onclick="return procesarOrden()">CONFIRMAR DIRECCIÓN</button>
 														</div>
 													</div>
 												</div>
@@ -276,7 +295,7 @@
 													<div class="row">
 														<div class="col-lg-12">
 															<h3 class="order-number order-text">Resumen de la compra</h3>
-															<div class="order-content">
+															<div class="order-content" id="div_resumen_compra2">
 																<div class="order-description">
 
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
@@ -291,8 +310,22 @@
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
-																		<p>Total</p>
-																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		<div class="col-md-12">
+																			<p>Subtotal</p>
+																			<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Peso</p>
+																			<h3 class="order-text">{{ total_weight.toFixed(2) }} Kg </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Total Delivery:</p>
+																			<h3 class="order-text">$ {{ total_delivery / tasadolar | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
+																		</div>
+																		<div class="col-md-12">
+																			<p>Total a Pagar:</p>
+																			<h3 class="order-text">$ {{ total_pagar / tasadolar | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
+																		</div>
 																	</div>
 																</div>
 															</div>
