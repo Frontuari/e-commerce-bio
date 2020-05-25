@@ -345,7 +345,7 @@
 
 												<div class="row" v-for="order in orders" :key="order.id">
 													<div class="col-6 col-lg-16">
-														<button class="btn" type="button" data-toggle="modal" @click="getOrder(order.id)" data-target="#ModalOrder">
+														<button class="btn" type="button" @click="getOrder(order.id)" data-toggle="modal" data-target="#ModalOrder">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>
@@ -371,7 +371,7 @@
 															<div class="dropdown-menu">
 																<a class="dropdown-item" href="javascript:void()" @click="repeatOrder(order.id)">Repetir orden</a>
 																<a class="dropdown-item" href="javascript:void()" @click="devolucion(order.id)">Solicitar Devolución</a>
-																<a class="dropdown-item" href="javascript:void()" @click="calificar(order.id)">Calificar Orden</a>
+																<a class="dropdown-item" href="#ModalOrderRating" data-toggle="modal" data-target="#ModalOrderRating" @click="getOrder(order.id)">Calificar Orden</a>
 															</div>
 														</div>
 
@@ -430,7 +430,7 @@
 														<div class="col-6 col-lg-20">Fecha</div>
 														<div class="col-6 col-lg-20">Dirección de entrega</div>
 														<div class="col-6 col-lg-20">Fecha de entrega</div>
-														<div class="col-6 col-lg-20">Estado</div>
+														<div class="col-6 col-lg-20">Acción</div>
 													</div>
 												</div>
 												<div class="row" v-for="order in completos" :key="order.id">
@@ -447,10 +447,15 @@
 													</div>
 													<div class="col-6 col-lg-20"><span class="order-span">Fecha de entrega</span>{{order.delivery_time_date}}</div>
 													<div class="col-6 col-lg-20">
-														<span class="order-span">Estado</span>
-														<div class="process-status complete" data-toggle="tooltip" data-placement="bottom" title="El pedido ya ha sido entregado">
-															<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.75 19.44"><defs></defs><title>confirmar-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path class="cls-1" d="M20.1.4,9,11.51,4.64,7.16a1.36,1.36,0,0,0-1.92,0L.4,9.48a1.36,1.36,0,0,0,0,1.92L8,19A1.35,1.35,0,0,0,10,19l14.4-14.4a1.36,1.36,0,0,0,0-1.92L22,.4A1.37,1.37,0,0,0,20.1.4Z"/></g></g></svg> -->
-															{{order.namestatus}}
+														<div class="btn-group" v-if="order.namestatus == 'Entregado'">
+															<button class="btn btn-submit btn-sm dropdown-toggle" style="color: white; padding: 5px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																Acción
+															</button>
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="javascript:void()" @click="repeatOrder(order.id)">Repetir orden</a>
+																<a class="dropdown-item" href="javascript:void()" @click="devolucion(order.id)">Solicitar Devolución</a>
+																<a class="dropdown-item" href="#ModalOrderRating" data-toggle="modal" data-target="#ModalOrderRating" @click="getOrder(order.id)">Calificar Orden</a>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -699,12 +704,14 @@
 			</div>
 		</div>
 		<ModalOrder :tasadolar="currency_rate" :order="tmpOrder"></ModalOrder>
+		<ModalCalificacion :order="tmpOrder"></ModalCalificacion>
 		<ModalProducto :tasadolar="tasadolar" :product="oneproduct" :user_id="userlogged.id"></ModalProducto>
 	</section>
 </template>
 <script>
 	import ModalOrder from './ModalOrder.vue';
 	import ModalProducto from './ModalProducto.vue';
+	import ModalCalificacion from './ModalCalificacion.vue';
     export default {
         data() {
             return {
@@ -729,7 +736,8 @@
 		},
 		components: {
 			ModalOrder,
-			ModalProducto
+			ModalProducto,
+			ModalCalificacion
 		},
 		props: {
 			userlogged: Object,
@@ -741,9 +749,10 @@
             },
 			getOrder: async function(id) {
 				axios.get(URLHOME+'api/orders/'+id).then( datos => {
-					const order = datos.data.data.order;
+					const order = datos.data.data.order[0];
 					const products = datos.data.data.products;
 					this.tmpOrder = {
+						id: order.id,
 						num_order: order.id,
 						products: products,
 						total: Number(order.total_pay),
@@ -751,7 +760,7 @@
 						direction_text: order.address+" "+order.sector+" "+order.nro_home+" "+order.zip_code+" "+order.reference_point,
 						status: order.namestatus
 					};
-					const rate_json = JSON.parse(order.rate_json);
+					const rate_json = order.rate_json;
 					rate_json.forEach( a => {
 						if(a.id == 1) {
 							this.currency_rate = Number(a.rate);
@@ -1051,7 +1060,7 @@
 				const image = event.target.files[0];
 				this.base64Image(image);
 			},
-			base64Image(fileObject){
+			base64Image(fileObject) {
 				const reader = new FileReader();
 				reader.onload = (e) => {
 					this.avatar = e.target.result;
@@ -1063,13 +1072,8 @@
 				const { avatar } = this;
 				let data = new FormData();
 				data.append("image",avatar);
-				// console.log("avatar::> ",avatar);
-				// console.log("avatar2::> ",{avatar});
 				const response = await axios.post(URLSERVER+"api_rapida.php?evento=actualizarFotoPerfil&from=web",data);
-				console.log("response::> ",response);
 			}
-			
-
         },
         mounted() {
 			this.getFavorites();

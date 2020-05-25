@@ -24,6 +24,7 @@
 									</div>
 								</div>
 								<label class="order-text">Dirección de envio</label>
+								{{order.direction}}
 								<p v-if="order.direction == 0">
                                     Pick - Up
                                 </p>

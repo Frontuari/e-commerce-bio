@@ -25,7 +25,7 @@ class OrdersController extends BaseController
             ->select("orders.*","order_address.address",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
             FROM trackings 
             WHERE trackings.orders_id = orders.id
-            order by created_at DESC Limit 1) AS namestatus"))
+            order by trackings.id DESC Limit 1) AS namestatus"))
             ->leftJoin("order_address","orders.order_address_id","=","order_address.id")
             ->join("users","users.id","=","orders.users_id")
             ->where("orders.users_id",$_SESSION["usuario"]["id"])
@@ -207,7 +207,7 @@ class OrdersController extends BaseController
         ->select("orders.*","order_address.address","order_address.zip_code","order_address.urb","order_address.sector","order_address.nro_home","order_address.reference_point",DB::raw("(SELECT (SELECT name FROM orders_status WHERE orders_status.id = trackings.orders_status_id) 
         FROM trackings 
         WHERE trackings.orders_id = orders.id
-        order by created_at DESC Limit 1) AS namestatus"))
+        order by trackings.id DESC Limit 1) AS namestatus"))
         ->join("order_address","orders.order_address_id","=","order_address.id")
         ->join("users","users.id","=","order_address.users_id")
         ->where("orders.id",$id)
