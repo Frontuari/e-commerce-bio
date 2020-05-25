@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditarDisparadorDetBanksOrdersTable extends Migration
+class FixDisparadorOrdersBank2 extends Migration
 {
     /**
      * Run the migrations.
@@ -31,7 +31,7 @@ class EditarDisparadorDetBanksOrdersTable extends Migration
                     
               BEGIN	
             
-                    IF (NEW.status='aprobado' OR NEW.status='efectivo' OR v_tiempo_pago==0) AND (v_total_monto_aprobado_o_efectivo>=v_total_a_pagar) THEN
+                    IF (NEW.status='aprobado' OR NEW.status='efectivo' OR v_tiempo_pago=0) AND (v_total_monto_aprobado_o_efectivo>=v_total_a_pagar) THEN
                           INSERT INTO trackings (description,orders_id,orders_status_id,users_id,created_at) VALUES (NEW.description,NEW.orders_id,4,v_users_id,NOW());
                       UPDATE orders SET status='PR' WHERE orders.id=NEW.orders_id;
                   END IF;
@@ -61,7 +61,7 @@ class EditarDisparadorDetBanksOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::table('det_bank_orders', function (Blueprint $table) {
+        Schema::table('det_banks_orders', function (Blueprint $table) {
             //
         });
     }

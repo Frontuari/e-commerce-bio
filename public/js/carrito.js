@@ -18,25 +18,356 @@ if(document.getElementById("div_resumen_compra")){
     get('web_no_login');
 }
 
+if(document.getElementById("factura")){
+    factura.innerHTML="<div class='loaderb'><div>";
+    
+    get('consultarOrden','&id='+orders_id);
+}
+
+
+var id_orders=orders_id;
 var activar_envio=false;
 var direccionOrden=0;
 var horaEntregaOrden="NULL";
 
+var limite_max_pagos_alcanzado=false;
+var ordenPagada=false;
+function refrescar(){
+    location.reload();
+}
+function procesarPago(){
+    var amount=input_amount.value;
+    
+    var coins_id=input_coins_id.value;
+    var rate=input_rate.value;
+    var bank_datas_id=input_bank_datas_id.value;
 
+    if(bank_datas_id==3){
+        datosBancarios.innerHTML=`
+        <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC haga <a href="#" onclick="refrescar()">clic aquí</a></div></div>
+        `;
+        ventana = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${amount}`, "myWindow", "width=400,height=450"); 
+   
+        return false;
+    }
+    if(input_ref.value){
+        var ref=input_ref.value;
+    }else{
+        var ref='';
 
+    }
+    if(coins_id==1){
+        amount=amount*rate;
+    }
+    div_btn_guardar_pago.innerHTML="<div class='loaderb'><div>";
+    
+    console.log('guardarPago','&amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
+    get('guardarPago','&amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
+    return false;
+}
 
-
+function elegidoMetodo(id,name){
+    window.location.href="#bancosDelMetodo";
+    bancosDelMetodo.innerHTML="<div class='loaderb'><div>";
+    get("listarBancosdelMetododePago","&payment_methods_id="+id);
+}
+function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate){
+                  
+    var div_referencia=`<div class="col-md-6">
+    <label>Referencia:</label>
+    <input id="input_ref" name="ref" class="form-control" type="text">
+        </div>`;
+var otro_ancho='';
+var txt_btn_pagar='Reportar pago';
+   if(id==3 || id==2){
+        div_referencia='';
+        otro_ancho='<div class="col-md-3"></div>';
+        txt_btn_pagar='Procesar TDC';
+   }
+    datosBancarios.innerHTML=`
+    <div class='row text-center h5'>
+    <div class="col-md-12">
+    Banco: `+name+`
+    </div>
+</div>
+    <div class='row text-center h5'>
+        <div class="col-md-12">
+Titular: `+titular+`
+        </div>
+ 
+    </div>
+    <div class='row text-center h5'>
+        <div class="col-md-12">
+        Datos: `+descripcion+`
+        </div>
+    </div>
+    <div class='row text-center h5'>
+        <div class="col-md-12">
+        Moneda: `+moneda+`
+        </div>
+    </div>
+<form onsubmit="return procesarPago()" autocomplete="off">
+    <div class='row'>
+        `+otro_ancho+`
+        <div class="col-md-6">
+            <label>Ingrese el monto en `+moneda+`:</label>
+            <input id="input_amount" name="amount" required autofocus class="form-control" type="text">
+            <input id="input_coins_id" type="hidden" name="coins_id" value="`+coins_id+`">
+            <input id="input_rate" type="hidden" name="rate" value="`+rate+`">
+            <input id="input_bank_datas_id" type="hidden" name="bank_datas_id" value="`+id+`">
+        </div>
+        `+div_referencia+`
+    </div>
+    <div class='row text-center'>
+        <div class="col-md-12">
+        <br>
+            <div id="div_btn_guardar_pago">
+                <button class="btn btn-success">`+txt_btn_pagar+`</button>
+             </div>
+        </div>
+    </div>
+   </form> 
+    
+    `;
+ 
+}
 
 function procesar(data,evento){
     
     switch(evento){
+        case 'guardarPago':
+            var data = JSON.parse(data);
+            if(data.success==true){
+                alert("Su pago ha sido procesado!");
+                location.reload();
+                
+            }else{
+                console.log(data.msj_general);
+                div_btn_guardar_pago.innerHTML='<button class="btn btn-success">Reportar pago</button>';
+            }
+            
+    
+
+        break;
+        case 'listarBancosdelMetododePago':
+            var data = JSON.parse(data);
+            if(data.success==true){
+                var h='<hr>';
+                var datos=data.data;
+                for (var [key, value] of Object.entries(datos)) {
+                    var descrip=''
+                    if(value.description!=null){
+                        descrip=value.description.replace(/(\r\n|\n|\r)/gm, "");
+                    }else{
+                        descrip='megasoft';
+                    }
+                    h+='<div class="row"><div class="col-md-1"></div><div class="col-md-1"><input name="b"  class="form-controld" type="radio" onclick="elegidoBanco(\''+value.id+'\',\''+value.b_name+'\',\''+value.titular+'\',\''+descrip+'\',\''+value.c_name+'\',\''+value.coins_id+'\',\''+value.rate+'\')" value="'+value.id+'"></div><div class="col-md-10">'+value.b_name+' ('+value.c_name+')</div></div><hr>';
+                }
+                
+                bancosDelMetodo.innerHTML=h+"<div id='datosBancarios'></div>";
+            }
+
+        break;
+        case 'listarMetodosDePago':
+            if(limite_max_pagos_alcanzado==true){
+                metodosPago.innerHTML="<div class='text-danger center'><br>Disculpe, ya agoto sus 2 pagos máximos, deber ir a nuestra tienda biomercados más cercana para reportar su situación.</div>";
+            }else{
+                var data = JSON.parse(data);
+                if(data.success==true){
+                    var h='<hr>';
+                    var datos=data.data;
+                    for (var [key, value] of Object.entries(datos)) {
+                        h+='<div class="row"><div class="col-md-1"><input name="a"  class="form-controld" type="radio" onclick="elegidoMetodo(\''+value.id+'\',\''+value.name+'\')" value="'+value.id+'"></div><div class="col-md-11">'+value.name+'</div></div><hr>';
+                    }
+                    
+                    metodosPago.innerHTML=h+"<div id='bancosDelMetodo'></div>";
+                }
+            }
+        break;
+        case 'totalPagar':
+
+            var data = JSON.parse(data);
+            if(data.success==true){
+                ra=data.data[0];
+
+                var rateb=JSON.parse(ra.rate_json);
+                for (var i = 0; i < rateb.length; i++) {
+                  
+                    var id_rateb = (+rateb[i]['id']);
+                    _rateb = parseFloat(rateb[i]['rate']);
+                    if (id_rateb == 1) break;
+                  }
+
+                  var htotalD=parseFloat(ra.total_pay)/_rateb;
+                var pagado=0.00;
+                if(ra.cant_pagos!='0'){
+
+                    var pj=JSON.parse(ra.pago_json);
+                    for (var i = 0; i < pj.length; i++) {
+                    
+                        
+                        pagado+= parseFloat(pj[i]['amount']);
+                        
+                    }
+                    //validar la cantidad maxima de pagos.
+                   
+                    if(parseFloat(ra.cant_pagos)>1 &&  pagado<parseFloat(ra.total_pay)){
+                        //alert("");
+                        limite_max_pagos_alcanzado=true;
+                    }
+                    if( pagado>=parseFloat(ra.total_pay)){
+                        ordenPagada=true;
+                        div_image_top.innerHTML='<img style="margin:0 auto" src="img/topPagado.png">';
+                        div_completo_metodo_pago.innerHTML='<div class="row mt-4"><div class="col-md-12 center h3 text-center" style="color:#67BE5A"><br><br><br><br>Su compra ha sido completada!</div></div>';
+                    }
+
+                }
+                var pagadoD=pagado/_rateb;
+                var resta=parseFloat(ra.total_pay)-pagado;
+                var restaD=resta/_rateb;
+
+
+if(resta>0){
+    var colorFalta='text-danger';
+}else{
+    var colorFalta='';
+}
+
+console.log(ra);
+                
+            cuadroPagado.innerHTML=`
+            <div class="row">
+            <div class="col-md-6 text-left"><b>Debes pagar</b></div><div class="col-md-6 text-right"><b>`+formatB(ra.total_pay)+` / `+formatD(htotalD)+`</b></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-left"><b>Has pagado</b></div><div class="col-md-6 text-right"><b>`+formatB(pagado)+` / `+formatD(pagadoD)+`</b></div>
+        </div>
+        <div class="row `+colorFalta+`">
+            <div class="col-md-6 text-left "><b>Te falta por pagar</b></div><div class="col-md-6 text-right"><b>`+formatB(resta)+` / `+formatD(restaD)+`</b></div>
+        </div>   
+            `;
+            }
+        break;
+        case 'consultarOrden':
+            var data = JSON.parse(data);
+
+            if(data.success==true){
+                r=data.data[0];
+                var subTotal=parseFloat(r.total_transport)+parseFloat(r.sub_total);
+                var rate=JSON.parse(r.rate_json);
+                for (var i = 0; i < rate.length; i++) {
+                  
+                    var id_rate = (+rate[i]['id']);
+                    _rate = parseFloat(rate[i]['rate']);
+                    if (id_rate == 1) break;
+                  }
+
+                  var totalD=parseFloat(r.total_pay)/_rate;
+                
+
+                  _totalProductoB= new Object();
+                  _totalProductoD= new Object();
+                  _totalProductoBConFormato= new Object();
+                  _totalProductoDConFormato= new Object();
+                  res = JSON.parse(r.productos);
+                  var p_totalB=0.00;
+                  var p_totalD=0.00;
+                  var detalles='';
+
+
+                  for (var i = 0; i < res.length; i++) {
+                    var name=res[i]['name'];
+                    var cant=res[i]['cant'];
+                    var precio=res[i]['price'];
+                    _totalProductoB[i] = parseFloat(precio) * parseFloat(cant);
+                    _totalProductoBConFormato[i] =formatB(_totalProductoB[i]);
+                    p_totalB += _totalProductoB[i];
+          
+                    _totalProductoD[i] = _totalProductoB[i] / _rate;
+                    _totalProductoDConFormato[i] = formatD(_totalProductoD[i]);
+                    p_totalD += _totalProductoD[i];
+                    
+                    
+                    detalles+=`
+                    <div class="row celda" style="font-size:10px; border-bottom:1px solid #ddd">
+                        <div class="col-md-5 text-left">`+name+`</div>
+                        <div class="col-md-3 text-right">`+formatB(precio)+`</div>
+                        <div class="col-md-1 text-right">`+cant+`</div>
+                        <div class="col-md-3 text-right">`+formatB(_totalProductoB[i])+`</div>
+                    </div>`;
+                  }
+
+
+                  
+
+
+
+
+
+                factura.innerHTML=`
+                <div class="row">
+                    <div class="col-md-12 text-center h4" style="color:#67BE5A">Detalles de la orden</div>
+                </div>
+
+                <div id="cuadroPagado"></div>
+           
+                <hr>                      
+                <div class="row" style="font-size:12px">
+                    <div class="col-md-5 text-left"><b>Producto</b></div>
+                    <div class="col-md-3 text-right"><b>Precio Und.</b></div>
+                    <div class="col-md-1 text-right"><b>Cant.</b></div>
+                    <div class="col-md-3 text-right"><b>Total</b></div>
+                </div>
+                <div >`+detalles+`</div>
+               <div class="row">
+                    <div class="col-md-6 text-left">Productos</div><div class="col-md-6 text-right">`+formatB(r.sub_total)+`</div>
+                </div>
+                <div class="row">    
+                    <div class="col-md-6 text-left">Envío</div><div class="col-md-6 text-right">`+formatB(r.total_transport)+`</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Sub total</div><div class="col-md-6 text-right">`+formatB(subTotal)+`</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Exento</div><div class="col-md-6 text-right">`+formatB(r.exento)+`</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">BI.</div><div class="col-md-6 text-right">`+formatB(r.bi)+`</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-left">Impuestos</div><div class="col-md-6 text-right">`+formatB(r.total_tax)+`</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6 text-left"><b>TOTAL A PAGAR</b></div><div class="col-md-6 text-right"><b>`+formatB(r.total_pay)+` / `+formatD(totalD)+`</b></div>
+               </div>
+
+                `;
+
+                if(document.getElementById("cuadroPagado")){
+                    cuadroPagado.innerHTML="<div class='loaderb'><div>";
+                    
+                    get('totalPagar','&orders_id='+id_orders);
+                }
+                if(document.getElementById("metodosPago")){
+                    cuadroPagado.innerHTML="<div class='loaderb'><div>";
+                    
+                    get('listarMetodosDePago');
+                }
+            }else{
+                alert(data.msj_general);
+            }
+
+        break;
+       
         case 'crearOrden':
             var data = JSON.parse(data);
 
             if(data.success==true){
-
+                var orders_id=data.data[0].id;
                 alert("Su orden fue procesada exitosamente, proceda a realizar el pago.");
-                window.location="/profile";
+                window.location="/profile?orders_id="+orders_id;
+               
                 vaciarCarrito();
             }else{
                 alert(data.msj_general);
@@ -154,6 +485,9 @@ function activarEnvio(a){
         activar_envio=true;
     }
     actualizarResumenOrden();
+}
+function getOrder(id){
+    window.location="/profile?orders_id="+id.value;
 }
 
 function actualizarResumenOrden(){
