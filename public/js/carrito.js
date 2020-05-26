@@ -238,7 +238,8 @@ function procesar(data,evento){
                         //alert("");
                         limite_max_pagos_alcanzado=true;
                     }
-                    if( pagado>=parseFloat(ra.total_pay)){
+                    //alert(pagado.toFixed(2));
+                    if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
                         ordenPagada=true;
                         div_image_top.innerHTML='<img style="margin:0 auto" src="img/topPagado.png">';
                         div_completo_metodo_pago.innerHTML='<div class="row mt-4"><div class="col-md-12 center h3 text-center" style="color:#67BE5A"><br><br><br><br>Su compra ha sido completada!</div></div>';
@@ -246,7 +247,8 @@ function procesar(data,evento){
 
                 }
                 var pagadoD=pagado/_rateb;
-                var resta=parseFloat(ra.total_pay)-pagado;
+               
+                var resta=parseFloat((parseFloat(ra.total_pay)-pagado).toFixed(2));
                 var restaD=resta/_rateb;
 
 
@@ -329,7 +331,7 @@ console.log(ra);
 
                 factura.innerHTML=`
                 <div class="row">
-                    <div class="col-md-12 text-center h4" style="color:#67BE5A">Detalles de la orden</div>
+                    <div class="col-md-12 text-center h4" style="color:#67BE5A">Detalles de la orden #${id_orders}</div>
                 </div>
 
                 <div id="cuadroPagado"></div>
