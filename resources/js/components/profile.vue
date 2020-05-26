@@ -334,7 +334,7 @@
 											<div class="order-table">
 												<div class="thead-bio">
 													<div class="row">
-														<div class="col-6 col-lg-16">Número de Pedido</div>
+														<div class="col-6 col-lg-16">Orden Nro.</div>
 														<div class="col-6 col-lg-16">Fecha</div>
 														<div class="col-6 col-lg-16">Dirección de entrega</div>
 														<div class="col-6 col-lg-16">Fecha de entrega</div>
@@ -345,7 +345,7 @@
 
 												<div class="row" v-for="order in orders" :key="order.id">
 													<div class="col-6 col-lg-16">
-														<button class="btn" type="button" @click="getOrder(order.id)" data-toggle="modal" data-target="#ModalOrder">
+														<button class="btn" type="button" onclick="getOrder(this)" :value="order.id">
 															<span class="order-span">Número de Pedido</span> {{order.id}}
 														</button>
 													</div>

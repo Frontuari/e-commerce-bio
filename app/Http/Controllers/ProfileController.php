@@ -9,6 +9,7 @@ use App\Coin;
 class ProfileController extends Controller
 {
     function index() {
+        
         if(!isset($_SESSION["usuario"]) && empty($_SESSION["usuario"]) && empty($_SESSION["usuario"]["id"])){
             return redirect()->action('HomeController@index');
         }

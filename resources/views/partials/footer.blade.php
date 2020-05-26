@@ -394,5 +394,7 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.celda:nth-child(even) {background: #F2F2F2}
+.celda:nth-child(odd) {background: #FFF}
 	</style>
 </html>
