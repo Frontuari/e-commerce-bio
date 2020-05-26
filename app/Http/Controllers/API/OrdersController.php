@@ -29,6 +29,7 @@ class OrdersController extends BaseController
             ->leftJoin("order_address","orders.order_address_id","=","order_address.id")
             ->join("users","users.id","=","orders.users_id")
             ->where("orders.users_id",$_SESSION["usuario"]["id"])
+            ->orderBy("orders.id")
             ->get();
         }
         return $this->sendResponse($a);
@@ -211,6 +212,7 @@ class OrdersController extends BaseController
         ->leftJoin("order_address","orders.order_address_id","=","order_address.id")
         ->leftJoin("users","users.id","=","order_address.users_id")
         ->where("orders.id",$id)
+        ->orderBy("orders.id")
         ->get();
 
         $products = DB::table("order_products")
