@@ -22,6 +22,7 @@ class ProductController extends BaseController
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where('products.status','A')
+        ->where("products.qty_avaliable",">",0)
         ->groupBy("products.id","taxes.value")
         ->paginate($limit);
         return $this->sendResponse($Products, 'Product retrieved successfully.');
