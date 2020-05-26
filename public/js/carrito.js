@@ -41,27 +41,37 @@ function procesarPago(){
     var coins_id=input_coins_id.value;
     var rate=input_rate.value;
     var bank_datas_id=input_bank_datas_id.value;
+    var mega_amount='';
+    var ref='';
+    if(coins_id==2){
+        amount=parseFloat(formato_moneda(amount))*rate;
+        mega_amount=amount.toFixed(2);
+        //amount=(formato_moneda(amount)*rate);
+    }
+    if(coins_id==1){
+        amount=amount*rate;
+        //amount=(formato_moneda(amount)*rate);
+    }
 
     if(bank_datas_id==3){
         datosBancarios.innerHTML=`
         <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC haga <a href="#" onclick="refrescar()">clic aquí</a></div></div>
         `;
-        ventana = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${amount}`, "myWindow", "width=400,height=450"); 
-   
+      // console.log(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${amount}`, "myWindow", "width=400,height=450");
+        ventana = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${mega_amount}`, "myWindow", "width=400,height=450"); 
+      
         return false;
     }
-    if(input_ref.value){
-        var ref=input_ref.value;
+    if(document.getElementById('input_ref')){
+        ref=input_ref.value;
     }else{
-        var ref='';
+        ref='';
 
     }
-    if(coins_id==1){
-        amount=amount*rate;
-    }
+
     div_btn_guardar_pago.innerHTML="<div class='loaderb'><div>";
     
-    console.log('guardarPago','&amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
+    
     get('guardarPago','&amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
     return false;
 }
@@ -119,7 +129,7 @@ Titular: `+titular+`
         Moneda: `+moneda+`
         </div>
     </div>
-<form onsubmit="return procesarPago()" autocomplete="off">
+<form onsubmit="return false;" autocomplete="off">
     <div class='row'>
         `+otro_ancho+`
         <div class="col-md-6">
@@ -135,7 +145,7 @@ Titular: `+titular+`
         <div class="col-md-12">
         <br>
             <div id="div_btn_guardar_pago">
-                <button class="btn btn-success">`+txt_btn_pagar+`</button>
+                <button onclick="return procesarPago();" class="btn btn-success">`+txt_btn_pagar+`</button>
              </div>
         </div>
     </div>
@@ -702,3 +712,33 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     localStorage.clear();
     localStorage.setItem('ModalPrincipal','visto');
   }
+
+  function formato_moneda(value){
+    var listo='';
+    var b=value.trim();
+    var c;
+    // b=b.replaceAll(RegExp(r'\s'), '');
+    // b=b.replaceAll(RegExp(r',\.'), ' ');
+    b=b.split(' ').join('');
+    b=b.split('.').join(' ');
+    b=b.split(',').join(' ');
+    //b=b.replaceAll(' ', '');
+    //b=b.replaceAll('.', ' ');
+    //b=b.replaceAll(',', ' ');
+    c=b.split(' ');
+
+    var total=c.length;
+
+    if(total>1){
+    c[total-1]="."+c[total-1];
+
+    //  for(int i=0; i<c.length; i++){
+    //  listo=listo+c[i];
+    // }
+    c.forEach((element) =>listo=listo+element);
+}else{
+
+    listo=b;
+}
+return listo;
+}
