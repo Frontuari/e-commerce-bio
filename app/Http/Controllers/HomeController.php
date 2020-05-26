@@ -68,6 +68,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('created_at','desc')
+        ->where("products.qty_avaliable",">",0)
         ->take(12)
         ->get();
 
@@ -77,6 +78,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_view','desc')
+        ->where("products.qty_avaliable",">",0)
         ->take(12)
         ->get();
 
@@ -86,6 +88,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_sold','desc')
+        ->where("products.qty_avaliable",">",0)
         ->take(12)
         ->get();
 
@@ -95,6 +98,7 @@ class HomeController extends Controller
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('price','asc')
+        ->where("products.qty_avaliable",">",0)
         ->take(12)
         ->get();
 
