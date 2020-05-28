@@ -40,7 +40,8 @@ $_POST=seguro($_POST);
    // fwrite($archivo,"Resultado $xml \n");
     
    // fclose($archivo);
-   var_dump($xml)."<br>";
+   print_r($xml)."<br><br>";
+   var_dump($xml)."<br><br>";
     $xml= new leerXML($xml);
     print_r($xml);
     exit();
