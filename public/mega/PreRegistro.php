@@ -20,7 +20,7 @@ fwrite($archivo,date("d h:i:s ")."Obteniendo Login\n");
 fwrite($archivo,"Datos a enviar:\n");
 fwrite($archivo,"".$url.",".USERNAME.",".PASSWORD."\n");
 
-$numeroControl=$control->loginHTTPS($url,USERNAME,PASSWORD);
+$numeroControl=$control->loginHTTPS($url."d",USERNAME,PASSWORD);
 fwrite($archivo,date("d h:i:s ")."Control: $numeroControl \n");
 
 if(is_numeric($numeroControl)){
