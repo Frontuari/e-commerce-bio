@@ -40,22 +40,18 @@ $_POST=seguro($_POST);
    // fwrite($archivo,"Resultado $xml \n");
     
    // fclose($archivo);
-   print_r($xml)."<br><br>";
-   var_dump($xml)."<br><br>";
     $xml= new leerXML($xml);
-    print_r($xml);
-    exit();
     if($xml->getEstado()=='A'){
         salidaBuena($xml);
     }else{
-        salidaMala();
+        salidaMala($xml);
     }
 
-function salidaMala(){
+function salidaMala($xml){
     echo '
     <div style="text-align: center; "><img src="../logo.png" width="200" /></div>
 <p>&nbsp;</p>
-<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, intente de nuevo.<br /><br /><hr />www.biomercados.com.ve</div>     
+<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, <b>'.$xml->getDescripcion().'</b> intente de nuevo.<br /><br /><hr />www.biomercados.com.ve</div>     
     ';
     exit();
 }
