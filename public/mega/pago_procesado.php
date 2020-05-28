@@ -41,17 +41,21 @@ $_POST=seguro($_POST);
     
    // fclose($archivo);
     $xml= new leerXML($xml);
+    echo '<div style="display:none">'.$xml->getEstado().'</div>';
     if($xml->getEstado()=='A'){
         salidaBuena($xml);
-    }else{
+    }elseif($xml->getEstado()=='R'){
         salidaMala($xml);
+    }else{
+        header("Location: ".'http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto());
+        
     }
 
 function salidaMala($xml){
     echo '
     <div style="text-align: center; "><img src="../logo.png" width="200" /></div>
 <p>&nbsp;</p>
-<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, <b>'.$xml->getDescripcion().'</b> intente de nuevo.<br /><br /><hr />www.biomercados.com.ve</div>     
+<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b>, <b>'.$xml->getDescripcion().'</b><br> <a href="http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
     ';
     exit();
 }
