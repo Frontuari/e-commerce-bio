@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="Shortcut Icon" href="/assets/img/favicon.png" type="image/x-icon" />	
 	<link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}?ver=1.0.5">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}?ver=1.0.6">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}?ver=2.0.1">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}?ver=2.0.2">
 	
 	<style>.cls-1{fill:#ccc;}</style>
 	<script>

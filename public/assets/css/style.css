@@ -2174,8 +2174,8 @@ div[class*="col-"]:not(:last-child) .product-block {
 
 #register {
     padding: 3rem 0;
-    background-image: url('../img/fondo-registro.jpg');
-    background-size: 100%;
+    background-image: url('../../img/fondo01.jpg');
+    background-size: contain;
     background-position: left bottom;
     background-repeat: no-repeat;
 }
@@ -2379,9 +2379,9 @@ input[type=checkbox]:checked+.custom-check span {
 }
 
 @media (min-width: 992px) {
-    #register {
+    /*#register {
         background-size: 80%;
-    }
+    }*/
     .register-form {
         padding: 2rem 6rem 2rem 2rem;
         background-size: 175px;
