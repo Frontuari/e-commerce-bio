@@ -9,7 +9,7 @@ $monto=$_GET['total'];
 $archivo=fopen("log.txt",'a+');
 fwrite($archivo,"PreRegistro\n");
  
-$url = URL_MEGA."/payment/action/pa_URL_ALTERADA_MALA_ymentgatewayuniversal-".
+$url = URL_MEGA."/payment/action/paymentgatewayuniversal-".
     "prereg?cod_afiliacion=".CODAFILIACION."&factura=$nro_orden&monto=$monto";
 
 fwrite($archivo,"$url\n");
