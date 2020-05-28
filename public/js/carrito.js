@@ -471,24 +471,7 @@ function procesarOrden() {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.value) {
-                const products_id = id;
-                const users_id = this.userData.id;
                 
-                this.favorites.splice(index,1);
-                this.cant_favorites = this.favorites.length;
-
-                axios.post(URLHOME+'api/favorites/delete', {
-                    products_id: products_id,
-                    user_id: users_id
-                })
-                .then(function (response) {
-                    console.log(response.data);
-                    EventBus.$emit("update_cantFavorite",response.data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            
                 var datos=getLocal('cartNew');
                 var orden=new Object();
                 var arrProductos=new Object();
