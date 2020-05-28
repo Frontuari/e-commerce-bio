@@ -48,7 +48,7 @@
 													
 													<div class="media" style="border-bottom:1px solid #ccc">
 
-														<img width="100px" v-if="product_cart.product.photo != null" :src="'storage/'+JSON.parse(product_cart.product.photo)[0]">
+														<img width="100px" v-if="product_cart.product.photo != null" :src="'storage/'+JSON.parse(product_cart.product.photo)[0] | MediumImage">
 														<div class="media-body">
 															<div class="row align-items-center mt-2">
 																<div class="col-md-4 align-self-center">

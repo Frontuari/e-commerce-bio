@@ -54,6 +54,12 @@ Vue.filter('MediumImage',function(imageText) {
     return newImageText;
 });
 
+Vue.filter('BigImage',function(imageText) {
+    imageText = imageText.split('.');
+    let newImageText = imageText[0]+'-medium.'+imageText[1];
+    return newImageText;
+});
+
 Vue.directive('select2', {
     inserted(el) {
         $(el).on('select2:select', () => {

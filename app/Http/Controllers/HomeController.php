@@ -117,11 +117,15 @@ class HomeController extends Controller
             ->get();
             foreach($c["products"] as $j => $p) {
                 $cantTotal += $p->cant_combo;
-                if($p->calculado > 0){
-                    $total += ($p->calculado * $p->cant_combo);
-                }else {
-                    $total += ($p->price * $p->cant_combo);
+
+                if($p->qty_avaliable >= $p->cant_combo) {
+                    if($p->calculado > 0){
+                        $total += ($p->calculado * $p->cant_combo);
+                    }else {
+                        $total += ($p->price * $p->cant_combo);
+                    }
                 }
+
             }
             $c["combo_price"] = $total;
             $c["cantTotal"] = $cantTotal;

@@ -14,7 +14,7 @@
                                     <!-- The slideshow -->
                                     <div class="carousel-inner" v-if="product.photo != null">
                                         <div :class="(index==0)?'carousel-item active':'carousel-item'" v-for="(photo,index) in JSON.parse(product.photo)" v-bind:key="index">
-                                            <img :src="'storage/'+ photo | MediumImage">
+                                            <img :src="'storage/'+ photo | BigImage">
                                         </div>
                                     </div>
                                     <!-- Left and right controls -->

@@ -390,7 +390,7 @@ console.log(ra);
 
             if(data.success==true){
                 var orders_id=data.data[0].id;
-                alert("Su orden fue procesada exitosamente, proceda a realizar el pago.");
+                // alert("Su orden fue procesada exitosamente, proceda a realizar el pago.");
                 window.location="/profile?orders_id="+orders_id;
                
                 vaciarCarrito();
@@ -436,6 +436,7 @@ console.log(ra);
         break;
         case 'getAdreess':
             var data = JSON.parse(data);
+            console.log("data getAddress::> ",data);
             var options='';
             if(data.success){
                 var datos=data.data;
@@ -444,8 +445,9 @@ console.log(ra);
                     options+="<option value="+value.id+">"+value.address+" - "+value.st_name+", "+value.re_name+", "+value.urb+", "+value.sector+",  #"+value.nro_home+"</option>";
                     //console.log(key+" "+value.name);
                 }
-                div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile'>Agregar nueva dirección</a>";
+                div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile'>Agregar nueva dirección</a>";
             }else{
+                div_direccion_entrega.innerHTML="Usted no tiene direcciones registradas";
                 //alert(data.msj_general);
                 return false;
             }
@@ -455,49 +457,77 @@ console.log(ra);
     }
 
 }
-function procesarOrden(){
-    if(confirm("A partir de este momento no podra modificar su carrito, esta seguro de continuar?")){
-        var datos=getLocal('cartNew');
-        var orden=new Object();
-        var arrProductos=new Object();
-      
+function procesarOrden() {
+    if(document.getElementById("direccion_selected")) {
 
-        if(direccionOrden==0 || direccionOrden=='0'){
-          // orden['direccion']= "NULL";
-           //orden="direccion:NULL";
-           orden.direccion='NULL';
-          //orden.push('direccion: '+'NULL');
-        }else{
-            //orden['direccion']= direccionOrden;
-            //orden.push('direccion: '+direccionOrden);
-            orden.direccion=direccionOrden;
-            //orden.set("direccion",direccionOrden);
-            //orden.add
-        }
-        
-        orden.hora_entrega=fecha_hora_entrega.value;
-       // orden.push('hora_entrega: '+fecha_hora_entrega.value);
-       //orden.set("hora_entrega",fecha_hora_entrega.value);
-        
-        for (var [key, value] of Object.entries(datos)) {
-            var id       =value.product.id;
-            var cant        =value.cant;
+        Swal.fire({
+            title: 'Bio en Línea',
+            text: "A partir de este momento no podra modificar su carrito, esta seguro de continuar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                const products_id = id;
+                const users_id = this.userData.id;
+                
+                this.favorites.splice(index,1);
+                this.cant_favorites = this.favorites.length;
+
+                axios.post(URLHOME+'api/favorites/delete', {
+                    products_id: products_id,
+                    user_id: users_id
+                })
+                .then(function (response) {
+                    console.log(response.data);
+                    EventBus.$emit("update_cantFavorite",response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             
-           arrProductos[id]=cant;
-           //arrProductos.set("cant",id);
-        }
-        //orden.push('productos:{'+arrProductos+'}');
-        orden.productos=arrProductos;
-        //orden.set("productos",arrProductos);
-        //orden.push('productos: '+fecha_hora_entrega.value);
-        var json=JSON.stringify(orden);
-        console.log(json);
-        get('crearOrden','&json='+json);
-       
+                var datos=getLocal('cartNew');
+                var orden=new Object();
+                var arrProductos=new Object();
 
-       // alert(orden);
-    }else{
-        return false;
+                if(direccionOrden==0 || direccionOrden=='0'){
+                // orden['direccion']= "NULL";
+                //orden="direccion:NULL";
+                orden.direccion='NULL';
+                //orden.push('direccion: '+'NULL');
+                }else{
+                    //orden['direccion']= direccionOrden;
+                    //orden.push('direccion: '+direccionOrden);
+                    orden.direccion=direccionOrden;
+                    //orden.set("direccion",direccionOrden);
+                    //orden.add
+                }
+                
+                orden.hora_entrega=fecha_hora_entrega.value;
+                // orden.push('hora_entrega: '+fecha_hora_entrega.value);
+                //orden.set("hora_entrega",fecha_hora_entrega.value);
+                
+                for (var [key, value] of Object.entries(datos)) {
+                    var id       =value.product.id;
+                    var cant        =value.cant;
+                    
+                    arrProductos[id]=cant;
+                    //arrProductos.set("cant",id);
+                }
+                //orden.push('productos:{'+arrProductos+'}');
+                orden.productos=arrProductos;
+                //orden.set("productos",arrProductos);
+                //orden.push('productos: '+fecha_hora_entrega.value);
+                var json=JSON.stringify(orden);
+                // console.log(json);
+                get('crearOrden','&json='+json);
+            }
+        });
+    }else {
+        Swal.fire("Bio en Línea","No hay direcciones registradas","error");
     }
 
 }

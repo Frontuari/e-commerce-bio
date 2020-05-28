@@ -369,21 +369,22 @@
 																Acción
 															</button>
 															<div class="dropdown-menu">
-																<a class="dropdown-item" href="javascript:void()" @click="repeatOrder(order.id)">Repetir orden</a>
-																<a class="dropdown-item" href="javascript:void()" @click="devolucion(order.id)">Solicitar Devolución</a>
+																<a class="dropdown-item" href="javascript:void(0)" @click="repeatOrder(order.id)">Repetir orden</a>
+																<a class="dropdown-item" href="javascript:void(0)" @click="devolucion(order.id)">Solicitar Devolución</a>
 																<a class="dropdown-item" href="#ModalOrderRating" data-toggle="modal" data-target="#ModalOrderRating" @click="getOrder(order.id)">Calificar Orden</a>
 															</div>
 														</div>
-
-														<!-- <button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="repeatOrder(order.id)">
-															Repetir orden
-														</button>
-														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button" @click="devolucion(order.id)">
-															Solicitar Devolución
-														</button>
-														<button v-if="order.namestatus == 'Entregado'" class="btn-sm btn-submit" type="button">
-															Calificar Orden
-														</button> -->
+														
+														<div class="btn-group" v-if="order.namestatus == 'Esperando el pago'">
+															<button class="btn btn-submit btn-sm dropdown-toggle" style="color: white; padding: 5px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																Acción
+															</button>
+															<div class="dropdown-menu">
+																<a class="dropdown-item" href="javascript:void(0)" @click="PayOrder(order.id)">Realizar Pago</a>
+																<a class="dropdown-item" href="javascript:void(0)" @click="cancelOrder(order.id)">Cancelar Orden</a>
+															</div>
+														</div>
+														
 													</div>
 												</div>
 											</div>
@@ -768,6 +769,35 @@
 					});
 					
 				})
+			},
+			PayOrder(id){
+				window.location.href = location.href+"?orders_id="+id;
+			},
+			async cancelOrder(id) {
+				Swal.fire({
+					title: 'Bio en Línea',
+					text: "¿Está seguro de cancelar su ordern?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Eliminar!',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.value) {
+						axios.get(URLSERVER+"api/orders/cancelar/"+id).then( (data) => {
+							if(data.data.data == 1){
+								Swal.fire(
+									'Bio en Línea',
+									'Su orden ha sido cancelada exitosamente',
+									'success'
+								).then( result => {
+									location.href="/profile";
+								});
+							}
+						});
+					}
+				});
 			},
             getFavorites: async function () {
 				const response = await axios.get(URLHOME+'api/favorites');

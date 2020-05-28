@@ -29,7 +29,7 @@
 						</button>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
-						<a  href="/" class="navbar-brand"><img  src="/assets/img/logo.png" alt="Bio Mercados"></a>
+						<a  href="/" class="navbar-brand"><img  src="/img/logo.png" alt="Bio Mercados"></a>
 					</div>
 					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" v-on:submit="search()">

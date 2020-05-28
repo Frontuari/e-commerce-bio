@@ -251,6 +251,11 @@ class OrdersController extends BaseController
          return $this->sendResponse($orders);
     }
 
+    public function CancelarOrder($id) {
+        $ok = DB::update("UPDATE orders SET status = 'CU' WHERE id = ?",[$id]);
+        return $this->sendResponse($ok,"orden cancelada exitosamente");
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

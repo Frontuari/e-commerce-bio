@@ -11,8 +11,8 @@ input#bio-search{
 }
 
 div#brand-header img{
-	width: 121px !important;
-	height: 120px !important;
+	width: 100px;
+	height: 100px;
 }
 
 button.btn-search{

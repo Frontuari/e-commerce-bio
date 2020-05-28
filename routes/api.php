@@ -75,6 +75,8 @@ Route::resource('orders', 'API\OrdersController');
     Route::get('orders/estadistica/ano','API\OrdersController@estadistica_ano');
     //obtener ultima orden
     Route::get('orders/ultima/get','API\OrdersController@getUltimaOrden');
+    //Cancelar orden
+    Route::get('orders/cancelar/{id}','API\OrdersController@CancelarOrder');
 
 //ADD VISIT USER PRODUCT
 Route::resource('user_visit_products', 'API\UserVisitProductsController');
