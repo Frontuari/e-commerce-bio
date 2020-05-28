@@ -41,6 +41,8 @@ $_POST=seguro($_POST);
     
    // fclose($archivo);
     $xml= new leerXML($xml);
+    var_dump($xml);
+    exit();
     if($xml->getEstado()=='A'){
         salidaBuena($xml);
     }else{
