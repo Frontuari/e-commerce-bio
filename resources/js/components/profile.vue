@@ -151,6 +151,80 @@
 																<input type="text" class="form-control" id="user-office-phone" name="user-office-phone" disabled="disabled" v-model="userData.phone_home">
 															</div>
 														</div>
+
+														<div class="col-lg-6"></div>
+
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label for="address-1-state">Estado:</label>
+																<select class="form-control" @change="loadMunicipio($event)" v-model="userData.habDirection.state_id">
+																	<option value="">Seleccione</option>
+																	<option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label for="address-prov">Municipio:</label>
+																<select class="form-control" @change="loadParroquia($event)" v-model="userData.habDirection.region_id">
+																	<option value="">Seleccione</option>
+																	<option v-for="region in regions" :key="region.id" :value="region.id">{{region.name}}</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label for="address-prov">Parroquia:</label>
+																<select class="form-control" v-model="userData.habDirection.city_id">
+																	<option value="">Seleccione</option>
+																	<option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
+																</select>
+															</div>
+														</div>
+
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label for="address-urb">Urbanización / Barrio / Empresa:</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="userData.habDirection.urb">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label for="address-av">Sector, Avenida, calles, veredas:</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" v-model="userData.habDirection.sector">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label for="address-num">Número de casa/local:</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" v-model="userData.habDirection.nro_home">
+															</div>
+														</div>
+														
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label for="address-post">Código postal:</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" v-model="userData.habDirection.zip_code">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label for="address-ref">Punto de Referencia (opcional):</label>
+																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" v-model="userData.habDirection.reference_point">
+															</div>
+														</div>
+														
 														<div class="col-lg-12">
 															<div class="form-group">
 																<button class="btn btn-submit" @click="update_profile(userData)" type="button">GUARDAR CAMBIOS</button>
@@ -194,7 +268,7 @@
 										<div class="tab-pane fade show active" id="address" role="tabpanel" aria-labelledby="address-tab">
 											<form action="">
 												<div class="col-12">
-													<div v-for="(direction,index) in userlogged.directions" :key="direction.id" :id="'address-'+index" class="address-section">
+													<div v-for="(direction,index) in userData.directions" :key="direction.id" :id="'address-'+index" class="address-section">
 														<div class="row">
 
 															<div class="col-lg-4">
@@ -1113,6 +1187,7 @@
 			this.getCities();
 			this.getPedidos();
 			console.log("direcciones::> ",this.userlogged.directions);
+			console.log("habDirection::> ",this.userlogged.habDirection);
 		},
 		created() {
 			this.userData = this.userlogged;

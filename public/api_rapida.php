@@ -405,30 +405,41 @@ function e($row){
 }
 function obtenerTodo(){
     $row_usuario=q("SELECT p.rif,s.avatar as avatar,split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif , s.id,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,c.name as ciudad,p.phone,p.phone_home
-    FROM users s
-    INNER JOIN peoples p on p.id = s.peoples_id
-    INNER JOIN cities c on c.id = p.cities_id
-    WHERE s.email='".$_SESSION['usuario']['email']."'")[0];
+        FROM users s
+        INNER JOIN peoples p on p.id = s.peoples_id
+        INNER JOIN cities c on c.id = p.cities_id
+        WHERE s.email='".$_SESSION['usuario']['email']."'
+    ")[0];
 
+    $habDirection=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
+        FROM order_address as o
+        INNER JOIN cities c ON c.id=o.cities_id 
+        INNER JOIN regions re ON re.id=c.regions_id 
+        INNER JOIN states st ON st.id=re.states_id
+        WHERE o.users_id = ".$row_usuario['id']." and o.status = 'A' and o.type <> 'delivery'
+    ");
+    
     $row_direccions=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
         FROM order_address as o
-    INNER JOIN cities c on c.id = o.cities_id
-    INNER JOIN regions re ON re.id=c.regions_id 
-    INNER JOIN states st ON st.id=re.states_id
-    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'
+        INNER JOIN cities c on c.id = o.cities_id
+        INNER JOIN regions re ON re.id=c.regions_id 
+        INNER JOIN states st ON st.id=re.states_id
+        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A' and o.type = 'delivery'
     ");
     $_SESSION["usuario"]=$row_usuario;
     $_SESSION["usuario"]["directions"] = $row_direccions;
+    $_SESSION["usuario"]["habDirection"] = $habDirection;
 
-    salida($row_usuario,"Datos actualizados",true);
+    salida($_SESSION["usuario"],"Datos actualizados",true);
 }
 function obtenerDireccion(){
     $row = q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
         FROM order_address as o
-    INNER JOIN cities c on c.id = o.cities_id
-    INNER JOIN regions re ON re.id=c.regions_id 
-    INNER JOIN states st ON st.id=re.states_id
-    WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A'");
+        INNER JOIN cities c on c.id = o.cities_id
+        INNER JOIN regions re ON re.id=c.regions_id 
+        INNER JOIN states st ON st.id=re.states_id
+        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A' and o.type = 'delivery'
+    ");
     $_SESSION["usuario"]["directions"] = $row;
     salida($row,"Direcciones actualizadas",true);
 }
@@ -443,18 +454,27 @@ function login(){
     INNER JOIN cities c on c.id = p.cities_id
     WHERE s.email='$email'")[0];
 
+    $habDirection=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
+        FROM order_address as o
+        INNER JOIN cities c ON c.id=o.cities_id 
+        INNER JOIN regions re ON re.id=c.regions_id 
+        INNER JOIN states st ON st.id=re.states_id
+        WHERE o.users_id = ".$row['id']." and o.status = 'A' and o.type <> 'delivery'
+    ");
+
     $directions=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
     FROM order_address as o
         INNER JOIN cities c ON c.id=o.cities_id 
         INNER JOIN regions re ON re.id=c.regions_id 
         INNER JOIN states st ON st.id=re.states_id
-        WHERE o.users_id = ".$row['id']." and o.status = 'A'
+        WHERE o.users_id = ".$row['id']." and o.status = 'A' and o.type = 'delivery'
     ");
 
    if($row['email']){
         if(password_verify($clave,$row['password'])){
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
+            $_SESSION["habDirection"]=$habDirection;
             $_SESSION["usuario"]["directions"]=$directions;
             $row['id_sesion']=session_id();
             salida($row,"Bienvenido",true);
