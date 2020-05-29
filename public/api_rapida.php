@@ -58,6 +58,11 @@ switch($evento) {
         }
 
     break;
+    case 'prueba':
+        $row['data']['citiesAll']=getCitiesAll(true,true);
+        
+        
+    break;
     case 'theBest':
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -1350,7 +1355,7 @@ function guardarDireccion(){
 }
 function getStates($tipo_salida,$all=false){
     if($all){
-        $status="";
+        $status="1=1";
     }else{
         $status="status='A'";
     }
@@ -1363,11 +1368,13 @@ function getStates($tipo_salida,$all=false){
 }
 function getCitiesAll($tipo_salida,$all=false){
     if($all){
-        $status="";
+        $status="1=1";
     }else{
         $status="status='A'";
     }
-    $arr=q("SELECT id,name,regions_id FROM cities WHERE $status ORDER BY name");
+    $sql="SELECT id,name,regions_id FROM cities WHERE $status ORDER BY name";
+    $arr=q($sql);
+   
     if(is_array($arr)){
         return salidaNueva($arr,'parroquias',true,$tipo_salida);
     }else{
@@ -1397,7 +1404,7 @@ function getRegions($tipo_salida){
 function getRegionsAll($tipo_salida,$all=false){
     $states_id=$_GET['states_id'];
     if($all){
-        $status="";
+        $status="1=1";
     }else{
         $status="status='A'";
     }
