@@ -34,6 +34,9 @@ switch($evento) {
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['regions']=getRegionsAll(true);
         $row['data']['states']=getStates(true);
+        $row['data']['citiesAll']=getCitiesAll(true,true);
+        $row['data']['regionsAll']=getRegionsAll(true,true);
+        $row['data']['statesAll']=getStates(true,true);
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
@@ -1345,16 +1348,26 @@ function guardarDireccion(){
     }
 
 }
-function getStates($tipo_salida){
-    $arr=q("SELECT id,name FROM states WHERE status='A' ORDER BY name");
+function getStates($tipo_salida,$all=false){
+    if($all){
+        $status="";
+    }else{
+        $status="status='A'";
+    }
+    $arr=q("SELECT id,name FROM states WHERE $status ORDER BY name");
     if(is_array($arr)){
         return salidaNueva($arr,'Listando estados',true,$tipo_salida);
     }else{
         return salidaNueva(null,"No se cargaron los estados",false,$tipo_salida);
     }
 }
-function getCitiesAll($tipo_salida){
-    $arr=q("SELECT id,name,regions_id FROM cities WHERE status='A' ORDER BY name");
+function getCitiesAll($tipo_salida,$all=false){
+    if($all){
+        $status="";
+    }else{
+        $status="status='A'";
+    }
+    $arr=q("SELECT id,name,regions_id FROM cities WHERE $status ORDER BY name");
     if(is_array($arr)){
         return salidaNueva($arr,'parroquias',true,$tipo_salida);
     }else{
@@ -1373,6 +1386,7 @@ function getCities($tipo_salida){
 }
 function getRegions($tipo_salida){
     $states_id=$_GET['states_id'];
+    
     $arr=q("SELECT id,name,states_id FROM regions WHERE status='A' AND states_id='$states_id' ORDER BY name");
     if(is_array($arr)){
         return salidaNueva($arr,'Listando regiones',true,$tipo_salida);
@@ -1380,9 +1394,14 @@ function getRegions($tipo_salida){
         return salidaNueva(null,"No se cargaron los municipios",false,$tipo_salida);
     }
 }
-function getRegionsAll($tipo_salida){
+function getRegionsAll($tipo_salida,$all=false){
     $states_id=$_GET['states_id'];
-    $arr=q("SELECT id,name,states_id FROM regions WHERE status='A' ORDER BY name");
+    if($all){
+        $status="";
+    }else{
+        $status="status='A'";
+    }
+    $arr=q("SELECT id,name,states_id FROM regions WHERE $status ORDER BY name");
     if(is_array($arr)){
         return salidaNueva($arr,'Listando municipios',true,$tipo_salida);
     }else{
