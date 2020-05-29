@@ -642,7 +642,7 @@ dtt.transports_id) select case
 
 function getPerfil($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
-    $arr=q("SELECT users.avatar,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id'");
+    $arr=q("SELECT c.id as cities_id, r.id as regions_id, r.states_id, users.avatar,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id LEFT JOIN cities c on c.id=p.cities_id LEFT JOIN regions r ON r.id=c.regions_id WHERE users.id='$users_id'");
     if(is_array($arr)){
         return salidaNueva($arr,"Perfil",true,$tipo_salida);
    }else{
