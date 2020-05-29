@@ -191,7 +191,17 @@
                                                 @elseif(($row->type == 'select_dropdown' || $row->type == 'radio_btn') && property_exists($row->details, 'options'))
 
                                                     {!! $row->details->options->{$data->{$row->field}} ?? '' !!}
+                                                     <?php $a=$data->{$row->field} ?? '';
+                                                     if($a=='ED')
+                                                        $no_edit=false;
+                                                    else
+                                                        $no_edit=true;
 
+                                                      
+                                                     ?>
+                                                    @if ($row->field=='Entregado al cliente')
+                                                        sssss
+                                                    @endif
                                                 @elseif($row->type == 'date' || $row->type == 'timestamp')
                                                     @if ( property_exists($row->details, 'format') && !is_null($data->{$row->field}) )
                                                         {{ \Carbon\Carbon::parse($data->{$row->field})->formatLocalized($row->details->format) }}
@@ -284,11 +294,20 @@
                                             </td>
                                         @endforeach
                                         <td class="no-sort no-click bread-actions">
+                                            @if($no_edit==true && $rol==7)
+                                            <a href="orders/{{$data->getKey()}}" title="Ver" class="btn btn-sm btn-success pull-right view">
+                                                <i class="voyager-eye"></i> <span class="hidden-xs hidden-sm">Ver</span>
+                                            </a>
+                                            
+                                            @else
                                             @foreach($actions as $action)
                                                 @if (!method_exists($action, 'massAction'))
+                                                       
                                                     @include('voyager::bread.partials.actions', ['action' => $action])
                                                 @endif
                                             @endforeach
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                     @endforeach

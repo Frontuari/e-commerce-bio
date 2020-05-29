@@ -145,7 +145,7 @@ function actualizarCorreoMasivo(){
 
 function paga_rapido(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='6' AND status='A'");
-	$arr=q("SELECT u.email, o.created_at,o.id FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE status='NU' AND email_pay_speed ISNULL");
+	$arr=q("SELECT u.email, o.created_at,o.id,o.id as orders_id FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE status='NU' AND email_pay_speed ISNULL");
 	
 	if(is_array($arr)){
 		

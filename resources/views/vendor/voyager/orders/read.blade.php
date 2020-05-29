@@ -7,10 +7,12 @@
         <i class="{{ $dataType->icon }}"></i> {{ __('voyager::generic.viewing') }} {{ ucfirst($dataType->getTranslatedAttribute('display_name_singular')) }} &nbsp;
 
         @can('edit', $dataTypeContent)
+         @if( $rol=Auth::user()->role_id!=7)
             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $dataTypeContent->getKey()) }}" class="btn btn-info">
                 <span class="glyphicon glyphicon-pencil"></span>&nbsp;
                 {{ __('voyager::generic.edit') }}
             </a>
+            @endif
         @endcan
         @can('delete', $dataTypeContent)
             @if($isSoftDeleted)

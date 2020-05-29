@@ -236,6 +236,7 @@ if($row->field=='status'){
             if(isset($v->NU)){
             unset($v->NU);
             unset($v->CO);
+            //unset($v->ED);
             }
         }
 
@@ -251,6 +252,7 @@ if($row->field=='status'){
             unset($v->CO);
             unset($v->PR);
             unset($v->RT);
+            unset($v->SD);
             }
         }
         

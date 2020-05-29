@@ -22,7 +22,7 @@ $_POST=seguro($_POST);
     //$numeroControl='1588992434924134839';
     //$numeroControl='1588970854595134761'; //mala
     //echo $numeroControl;
-    if(!$numeroControl) salidaMala();
+    if(!$numeroControl) echo "Disculpe, intente mas tarde";
    // fwrite($archivo,"Control: $numeroControl\n");
     
     $url=URL_MEGA."/payment/action/paymentgatewayuniversal-querystatus?control=$numeroControl";
