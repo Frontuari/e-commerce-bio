@@ -34,9 +34,6 @@ switch($evento) {
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['regions']=getRegionsAll(true);
         $row['data']['states']=getStates(true);
-        $row['data']['citiesAll']=getCitiesAll(true,true);
-        $row['data']['regionsAll']=getRegionsAll(true,true);
-        $row['data']['statesAll']=getStates(true,true);
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
@@ -70,6 +67,9 @@ switch($evento) {
             $row['data']['regions']=getRegionsAll(true);
             $row['data']['states']=getStates(true);
             $row['data']['address']=getAdreess(true);   
+            $row['data']['citiesAll']=getCitiesAll(true,true);
+            $row['data']['regionsAll']=getRegionsAll(true,true);
+            $row['data']['statesAll']=getStates(true,true);
             $row['data']['payment_methods']=listarMetodoDePago(true);
             $row['data']['envio']=recargoEnvio(true);
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
