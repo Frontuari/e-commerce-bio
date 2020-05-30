@@ -48,6 +48,7 @@ switch($evento) {
         if($row['data']['usuario']['success']==true){
             $row['data']['perfil']=getPerfil(true);
             $row['data']['address']=getAdreess(true);   
+            $row['data']['addressHabitacion']=getAdreess(true,'habitacion');   
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
             $row['data']['productos_mayor']=productosMayorEdad(true);
             $row['success']=true;
@@ -149,6 +150,9 @@ switch($evento) {
     break;
     case 'getStates':
         echo getStates(false);
+    break;
+    case 'guardarDireccionHabitacion':
+        echo guardarDireccion('habitacion');
     break;
     case 'guardarDireccion':
         echo guardarDireccion();
@@ -704,7 +708,7 @@ function actualizarPerfil(){
     $birthdate=$_POST['birthdate'];
     $cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
-    $sql="UPDATE peoples SET cities_id='$cities_id', birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+    $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
   //  salidaNueva(null,$sql,false);
    $arr=q($sql);
    if(is_array($arr)){
@@ -1339,16 +1343,16 @@ function eliminarDireccion(){
     $arr=q("UPDATE order_address SET status='I' WHERE users_id='$users_id' AND id='$id'");
     salida(null,"Eliminado correctamente");
 }
-function getAdreess($tipo_salida){
+function getAdreess($tipo_salida,$type='delivery'){
     $users_id=$_SESSION['usuario']['id'];
-    $arr=q("SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE oa.users_id='$users_id' AND oa.status='A'");
+    $arr=q("SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE oa.users_id='$users_id' AND oa.status='A' AND oa.type='$type'");
     if(is_array($arr)){
         return salidaNueva($arr,'Listando direcciones',true,$tipo_salida);
     }else{
         return salidaNueva(null,"Disculpe no hay direcciones.",false,$tipo_salida);
     }
 }
-function guardarDireccion(){
+function guardarDireccion($type='delivery'){
     $users_id=$_SESSION['usuario']['id'];
     $cities_id=$_POST['cities_id'];
     $address=$_POST['address'];
@@ -1361,12 +1365,13 @@ function guardarDireccion(){
     if($id){//Actualiza
         $arr=q("UPDATE order_address SET cities_id='$cities_id',address='$address',zip_code='$zip_code',urb='$urb',sector='$sector',nro_home='$nro_home',reference_point='$reference_point' WHERE users_id='$users_id' AND id='$id' RETURNING id");
     }else{//Registra
-        $sql="INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point' ) RETURNING id";
+        $sql="INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point,type) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point','$type' ) RETURNING id";
         $arr=q($sql);
     }
 
     if(is_array($arr)){
-        $data=getAdreess(true);
+        
+        $data=getAdreess(true,$type);
         salidaNueva($data['data'],"Guardado exitosamente");
     }else{
         salidaNueva(null,"Disculpe, intente mas tarde",false);
