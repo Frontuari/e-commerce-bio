@@ -73,6 +73,7 @@ switch($evento) {
             $row['data']['regions']=getRegionsAll(true);
             $row['data']['states']=getStates(true);
             $row['data']['address']=getAdreess(true);   
+            $row['data']['addressHabitacion']=getAdreess(true,'habitacion'); 
             $row['data']['citiesAll']=getCitiesAll(true,true);
             $row['data']['regionsAll']=getRegionsAll(true,true);
             $row['data']['statesAll']=getStates(true,true);
