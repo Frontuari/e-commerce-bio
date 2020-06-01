@@ -100,6 +100,8 @@ class RegisterController extends BaseController
     public function update_profile(Request $request)
     {   
         $data_user = $request->all();
+        print_r($data_user);
+        die();
         //USER
         DB::table('users')
             ->where('id', $data_user['user_data']['id'])
@@ -117,6 +119,28 @@ class RegisterController extends BaseController
                 'phone' => $data_user["user_data"]['phone'],
                 'phone_home' => $data_user["user_data"]['phone_home'],
             ]);
+        
+        //Dirección de Habitación
+        $hasDirection = DB::table('order_address')->where("users_id","=",data_user['user_data']['id']);
+        if($hasDirection) {
+            DB::insert("INSERT INTO order_address (cities_id,address,status,users_id,zip_code,urb,sector,nro_home,reference_point) values(?,?,?,?,?,?,?,?)",['','','','','','','','','']);
+        }else {
+            DB::table('peoples')
+            ->where('users_id', $data_user['user_data']['peoples_id'])
+            ->update([
+                'cities_id' => '',
+                'address' => '',
+                'status' => '',
+                'users_id' => '',
+                'zip_code' => '',
+                'urb' => '',
+                'sector' => '',
+                'nro_home' => '',
+                'reference_point' => '',
+            ]);
+        }
+
+        
         
         // return $this->sendResponse(["success"=>true]);
         // return $this->sendResponse($this->getData($data_user["user_data"]["email"]));

@@ -157,18 +157,18 @@
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label for="address-1-state">Estado:</label>
-																<select class="form-control" @change="loadMunicipio($event)" v-model="userData.habDirection.state_id">
+																<select class="form-control" @change="loadMunicipioHab($event)" v-model="userData.habDirection.state_id">
 																	<option value="">Seleccione</option>
-																	<option v-for="state in states" :key="state.id" :value="state.id">{{state.name}}</option>
+																	<option v-for="state in Allstates" :key="state.id" :value="state.id">{{state.name}}</option>
 																</select>
 															</div>
 														</div>
 														<div class="col-lg-4">
 															<div class="form-group">
 																<label for="address-prov">Municipio:</label>
-																<select class="form-control" @change="loadParroquia($event)" v-model="userData.habDirection.region_id">
+																<select class="form-control" @change="loadParroquiaHab($event)" v-model="userData.habDirection.region_id">
 																	<option value="">Seleccione</option>
-																	<option v-for="region in regions" :key="region.id" :value="region.id">{{region.name}}</option>
+																	<option v-for="region in Allregions" :key="region.id" :value="region.id">{{region.name}}</option>
 																</select>
 															</div>
 														</div>
@@ -178,7 +178,7 @@
 																<label for="address-prov">Parroquia:</label>
 																<select class="form-control" v-model="userData.habDirection.city_id">
 																	<option value="">Seleccione</option>
-																	<option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
+																	<option v-for="city in Allcities" :key="city.id" :value="city.id">{{city.name}}</option>
 																</select>
 															</div>
 														</div>
@@ -799,6 +799,9 @@
 				states: [],
 				regions: [],
 				cities: [],
+				Allstates: [],
+				Allregions: [],
+				Allcities: [],
 				orders: [],
 				data_products: [],
 				en_proceso: [],
@@ -947,14 +950,23 @@
 			async getStates() {
 				const response = await axios.get(URLSERVER+"api/states");
 				this.states = response.data.data;
+
+				const response2 = await axios.get(URLSERVER+"api/Allstates");
+				this.Allstates = response2.data.data;
 			},
 			async getRegions() {
 				const response = await axios.get(URLSERVER+"api/regions");
 				this.regions = response.data.data;
+
+				const response2 = await axios.get(URLSERVER+"api/Allregions");
+				this.Allregions = response2.data.data;
 			},
 			async getCities() {
 				const response = await axios.get(URLSERVER+"api/cities");
 				this.cities = response.data.data;
+
+				const response2 = await axios.get(URLSERVER+"api/Allcities");
+				this.Allcities = response2.data.data;
 			},
 			async loadMunicipio(event) {
 				const state_id = event.target.value;
@@ -965,6 +977,16 @@
 				const region_id = event.target.value;
 				const response = await axios.get(URLSERVER+"api/cities/region/"+region_id);
 				this.cities = response.data.data;
+			},
+			async loadMunicipioHab(event) {
+				const state_id = event.target.value;
+				const response = await axios.get(URLSERVER+"api/regions/state/"+state_id);
+				this.Allregions = response.data.data;
+			},
+			async loadParroquiaHab(event) {
+				const region_id = event.target.value;
+				const response = await axios.get(URLSERVER+"api/cities/region/"+region_id);
+				this.Allcities = response.data.data;
 			},
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");

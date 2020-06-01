@@ -34,4 +34,19 @@ class LocationController extends BaseController
         $Cities = Cities::where("status","A")->get();
         return $this->sendResponse($Cities);
     }
+
+    public function getAllStates() {
+        $States = States::All();
+        return $this->sendResponse($States);
+    }
+
+    public function getAllRegions() {
+        $Regions = Regions::All();
+        return $this->sendResponse($Regions);
+    }
+
+    public function getAllCities() {
+        $Cities = Cities::All();
+        return $this->sendResponse($Cities);
+    }
 }

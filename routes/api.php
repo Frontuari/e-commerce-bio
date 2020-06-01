@@ -92,5 +92,10 @@ Route::get('regions/state/{state_id}','API\LocationController@getRegionsByState'
 Route::get('cities','API\LocationController@getCities');
 Route::get('cities/region/{region_id}','API\LocationController@getCitiesByRegion');
 
+
+Route::get('Allstates','API\LocationController@getAllStates');
+Route::get('Allregions','API\LocationController@getAllRegions');
+Route::get('Allcities','API\LocationController@getAllCities');
+
 //SUSCRIPCION
 Route::post('subscribe','API\SubscriptionController@subscribe');
