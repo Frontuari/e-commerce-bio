@@ -1186,10 +1186,20 @@
 			this.getRegions();
 			this.getCities();
 			this.getPedidos();
-			console.log("direcciones::> ",this.userlogged.directions);
-			console.log("habDirection::> ",this.userlogged.habDirection);
 		},
 		created() {
+			if(this.userlogged.habDirection == true) {
+				this.userlogged.habDirection = {
+					state_id: '',
+					region_id: '',
+					city_id: '',
+					urb: '',
+					sector: '',
+					nro_home: '',
+					zip_code: '',
+					reference_point: ''
+				};
+			}
 			this.userData = this.userlogged;
 			for(let i = 0;i<2000;i++) {
                 this.cant_product[i] = 1;
