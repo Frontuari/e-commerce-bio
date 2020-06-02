@@ -421,7 +421,7 @@ function obtenerTodo(){
         INNER JOIN cities c ON c.id=o.cities_id 
         INNER JOIN regions re ON re.id=c.regions_id 
         INNER JOIN states st ON st.id=re.states_id
-        WHERE o.users_id = ".$row_usuario['id']." and o.status = 'A' and o.type <> 'delivery'
+        WHERE o.users_id = ".$_SESSION['usuario']['id']." and o.status = 'A' and o.type <> 'delivery'
     ");
     
     $row_direccions=q("SELECT o.*,c.id as city_id,c.name as parroquia,re.id as region_id,re.name as municipio,st.id as state_id,st.name as estado
@@ -479,7 +479,7 @@ function login(){
         if(password_verify($clave,$row['password'])){
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
-            $_SESSION["habDirection"]=$habDirection;
+            $_SESSION["usuario"]["habDirection"]=$habDirection;
             $_SESSION["usuario"]["directions"]=$directions;
             $row['id_sesion']=session_id();
             salida($row,"Bienvenido",true);

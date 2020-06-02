@@ -186,42 +186,32 @@
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="address-urb">Urbanización / Barrio / Empresa:</label>
-																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="userData.habDirection.urb">
+																<input type="text" class="form-control" id="address-urb" name="address-urb"  v-model="userData.habDirection.urb">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="address-av">Sector, Avenida, calles, veredas:</label>
-																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="address-av" name="address-av" disabled="disabled" v-model="userData.habDirection.sector">
+																<input type="text" class="form-control" id="address-av" name="address-av"  v-model="userData.habDirection.sector">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="address-num">Número de casa/local:</label>
-																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="address-num" name="address-num" disabled="disabled" v-model="userData.habDirection.nro_home">
+																<input type="text" class="form-control" id="address-num" name="address-num"  v-model="userData.habDirection.nro_home">
 															</div>
 														</div>
 														
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="address-post">Código postal:</label>
-																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="address-post" name="address-post" disabled="disabled" v-model="userData.habDirection.zip_code">
+																<input type="text" class="form-control" id="address-post" name="address-post"  v-model="userData.habDirection.zip_code">
 															</div>
 														</div>
 														<div class="col-lg-6">
 															<div class="form-group">
 																<label for="address-ref">Punto de Referencia (opcional):</label>
-																<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																<input type="text" class="form-control" id="address-ref" name="address-ref" disabled="disabled" v-model="userData.habDirection.reference_point">
+																<input type="text" class="form-control" id="address-ref" name="address-ref"  v-model="userData.habDirection.reference_point">
 															</div>
 														</div>
 														
@@ -1208,9 +1198,10 @@
 			this.getRegions();
 			this.getCities();
 			this.getPedidos();
+			console.log("this.userData::> ",this.userData);
 		},
 		created() {
-			if(this.userlogged.habDirection == true) {
+			if(this.userlogged.habDirection === true) {
 				this.userlogged.habDirection = {
 					state_id: '',
 					region_id: '',
@@ -1221,7 +1212,19 @@
 					zip_code: '',
 					reference_point: ''
 				};
+			}else {
+				this.userlogged.habDirection = {
+					state_id: this.userlogged.habDirection[0].state_id,
+					region_id: this.userlogged.habDirection[0].region_id,
+					city_id: this.userlogged.habDirection[0].city_id,
+					urb: this.userlogged.habDirection[0].urb,
+					sector: this.userlogged.habDirection[0].sector,
+					nro_home: this.userlogged.habDirection[0].nro_home,
+					zip_code: this.userlogged.habDirection[0].zip_code,
+					reference_point: this.userlogged.habDirection[0].reference_point
+				};
 			}
+			console.log("this.userData::> ",this.userData);
 			this.userData = this.userlogged;
 			for(let i = 0;i<2000;i++) {
                 this.cant_product[i] = 1;
