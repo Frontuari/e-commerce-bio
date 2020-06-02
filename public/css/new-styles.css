@@ -140,3 +140,11 @@ ul.carousel-indicators{
 .wrapperStar input[type=radio]:checked ~ label,.wrapperStar input[type=radio]:checked+label {
   color: yellow;
 }
+
+#faq_view{
+	background-image: url(../../img/fondo01.jpg);
+    background-size: contain;
+    background-position: left bottom;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
