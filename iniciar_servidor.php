@@ -169,7 +169,7 @@ function paga_rapido(){
 
 function actualizarDelivery($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getDelivery";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
 	
 	$data=leer("Delivery",$url);
 	
@@ -184,7 +184,7 @@ function actualizarDelivery($ip){
 }
 function actualizarTasa($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getTax";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
 	
 	$data=leer("Tasa dolar",$url);
 
@@ -288,7 +288,7 @@ function actualizarEnvioOrden(){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/setOrders");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
@@ -321,8 +321,8 @@ function actualizarProductos($ip){
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
 	//$url_productos="$ip/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
-	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.74.230.206:9009/api/v1/getProducts";
-	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getProducts";
+	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.8.18.230:9000/api/v1/getProducts";
+	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
 	
