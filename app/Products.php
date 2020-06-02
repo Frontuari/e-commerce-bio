@@ -40,25 +40,25 @@ class Products extends Model
     public function cambiarEstatusIdempiere($value,$id){
 
         $data=Array();
-        $datab=Array();
+        //$datab=Array();
         $data[]=$id;
         if($value=='A'){
-            $datab[$id]='Y';
+           // $datab[$id]='Y';
             $data[]='Y';
         }else{
             $data[]='N';
-            $datab[$id]='N';
+           // $datab[$id]='N';
         }
         
         
         
         $json=json_encode($data);
-        $jsonb=json_encode($datab);
+       // $jsonb=json_encode($datab);
 
         
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"http://200.8.18.230:9000/api/v1/SyncProductActChk");
+        curl_setopt($ch, CURLOPT_URL,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/SyncProductActChk");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
                     "data=".$json."&datab=".$jsonb);
