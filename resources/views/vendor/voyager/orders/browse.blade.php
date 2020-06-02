@@ -425,6 +425,9 @@ button.dt-button.active {
                 , true))) !!}); //table.buttons().container().appendTo("#dataTable_length .col-sm-6:eq(0)");
             @else
             var table = $('#dataTable').DataTable({
+                "language": {
+    "search": "Busqueda en vista actual:"
+  },
                 aLengthMenu: [
  
         [-1]
@@ -495,7 +498,7 @@ button.dt-button.active {
 										
 					    
 					],
-               dom: 'B',
+               dom: 'fB',
             });
                 $('#search-input select').select2({
                     minimumResultsForSearch: Infinity

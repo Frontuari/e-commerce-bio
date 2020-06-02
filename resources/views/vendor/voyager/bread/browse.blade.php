@@ -389,12 +389,16 @@ button.dt-button.active {
                              "dom"=>'Blfrtip',
                         "order" => $orderColumn,
                         "language" => __('voyager::datatable'),
+                        //"language"=>["search"=> "Filter records:"],
                         "columnDefs" => [['targets' => -1, 'searchable' =>  false, 'orderable' => false]],
                     ],
                     config('voyager.dashboard.data_tables', []))
                 , true))) !!}); //table.buttons().container().appendTo("#dataTable_length .col-sm-6:eq(0)");
             @else
             var table = $('#dataTable').DataTable({
+                "language": {
+    "search": "Busqueda en vista actual:"
+  },
                 aLengthMenu: [
  
         [-1]
@@ -465,7 +469,7 @@ button.dt-button.active {
 										
 					    
 					],
-               dom: 'B',
+               dom: 'fB',
             });
                 $('#search-input select').select2({
                     minimumResultsForSearch: Infinity
