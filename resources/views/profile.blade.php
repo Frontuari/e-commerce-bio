@@ -35,9 +35,7 @@ if(isset($_GET['orders_id'])){
 				<div id="metodosPago"></div>
 			</div>
 			<div class="col-md-4 text-center">
-				<script>
-					var orders_id=<?php echo $_GET['orders_id']; ?>
-				</script>
+				
 				<div id="factura"></div>
 			</div>
 		
@@ -61,3 +59,13 @@ if(isset($_GET['orders_id'])){
 ?>
 
 @stop
+
+@section('js')
+<?php
+	if(isset($_GET['orders_id'])):
+?>
+	<script>
+		var orders_id=<?= $_GET['orders_id']; ?> 
+	</script>
+<?php endif; ?>
+@endsection

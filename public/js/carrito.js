@@ -32,6 +32,11 @@ var horaEntregaOrden="NULL";
 
 var limite_max_pagos_alcanzado=false;
 var ordenPagada=false;
+
+var aPagarBs = 0;
+var aPagarUsd = 0;
+
+
 function refrescar(){
     location.reload();
 }
@@ -43,23 +48,36 @@ function procesarPago(){
     var bank_datas_id=input_bank_datas_id.value;
     var mega_amount='';
     var ref='';
-    if(coins_id==2){
+
+    if(coins_id==2) { //bolivares
+        if(amount > aPagarBs) {
+            Swal.fire("Bio en Línea","El monto a pagar en Bolivares debe ser exacto","warning");
+            throw new Error("El monto a pagar debe ser exacto");
+            return false;
+        }
         amount=parseFloat(formato_moneda(amount))*rate;
         mega_amount=amount.toFixed(2);
-        //amount=(formato_moneda(amount)*rate);
     }
-    if(coins_id==1){
+    if(coins_id==1) { //dolares
+        if(amount > aPagarUsd) {
+            Swal.fire("Bio en Línea","El monto a pagar en Dolares debe ser exacto","warning");
+            throw new Error("El monto aa pagar debe ser exacto");
+            return false;
+        }
         amount=amount*rate;
-        //amount=(formato_moneda(amount)*rate);
     }
 
     if(bank_datas_id==3){
         datosBancarios.innerHTML=`
-        <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC haga <a href="#" onclick="refrescar()">clic aquí</a></div></div>
+        <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC se refrescará esta ventana</div></div>
         `;
-      // console.log(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${amount}`, "myWindow", "width=400,height=450");
         ventana = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${mega_amount}`, "myWindow", "width=400,height=450"); 
-      
+        var winTimer = window.setInterval(function() {
+            if (ventana.closed !== false) {
+                window.clearInterval(winTimer);
+                refrescar();
+            }
+        }, 200);
         return false;
     }
     if(document.getElementById('input_ref')){
@@ -81,31 +99,28 @@ function elegidoMetodo(id,name){
     bancosDelMetodo.innerHTML="<div class='loaderb'><div>";
     get("listarBancosdelMetododePago","&payment_methods_id="+id);
 }
-function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate){
-
-
-
-    
-    
+function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
+    console.log("id::> ",id);
     var div_referencia=`<div class="col-md-6">
     <label>Referencia:</label>
     <input id="input_ref" name="ref" class="form-control" type="text">
         </div>`;
-var otro_ancho='';
-var txt_btn_pagar='Reportar pago';
-   if(id==3 || id==2){
+    var otro_ancho='';
+    var txt_btn_pagar='Reportar pago';
+    if(id==3 || id==2) {
         div_referencia='';
         otro_ancho='<div class="col-md-3"></div>';
+    }
+    if(id==3) {
         txt_btn_pagar='Procesar TDC';
-   }
-   if(coins_id==1){
+    }
+    if(coins_id==1){
         var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
         var msj="Use punto (.) para decimales";
-
-   }else{
-     var patron="^\\$?(([1-9](\\d*|\\d{0,2}(\.\\d{3})*))|0)(,\\d{1,2})?$";
+    }else{
+        var patron="^\\$?(([1-9](\\d*|\\d{0,2}(\.\\d{3})*))|0)(,\\d{1,2})?$";
         var msj="Use coma (,) para decimales";
-   }
+    }
 
     datosBancarios.innerHTML=`
     <div class='row text-center h5'>
@@ -134,7 +149,7 @@ Titular: `+titular+`
         `+otro_ancho+`
         <div class="col-md-6">
             <label>Ingrese el monto en `+moneda+`:</label>
-            <input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" required autofocus class="form-control" type="text">
+            <input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" required class="form-control" type="text">
             <input id="input_coins_id" type="hidden" name="coins_id" value="`+coins_id+`">
             <input id="input_rate" type="hidden" name="rate" value="`+rate+`">
             <input id="input_bank_datas_id" type="hidden" name="bank_datas_id" value="`+id+`">
@@ -161,7 +176,7 @@ function procesar(data,evento){
         case 'guardarPago':
             var data = JSON.parse(data);
             if(data.success==true){
-                alert("Su pago ha sido procesado!");
+                Swal.fire("Bio en Línea","Su pago ha sido procesado","success");
                 location.reload();
                 
             }else{
@@ -250,6 +265,9 @@ function procesar(data,evento){
                
                 var resta=parseFloat((parseFloat(ra.total_pay)-pagado).toFixed(2));
                 var restaD=resta/_rateb;
+
+                aPagarBs = resta;
+                aPagarUsd = restaD;
 
 
 if(resta>0){
@@ -380,7 +398,7 @@ console.log(ra);
                     get('listarMetodosDePago');
                 }
             }else{
-                alert(data.msj_general);
+                Swal.fire("Bio en Línea",data.msj_general);
             }
 
         break;
@@ -395,7 +413,7 @@ console.log(ra);
                
                 vaciarCarrito();
             }else{
-                alert(data.msj_general);
+                Swal.fire("Bio en Línea",data.msj_general);
             }
 
         break;
@@ -404,7 +422,7 @@ console.log(ra);
             var data = JSON.parse(JXG.decompress(data));
 
             if(data.success==true){
-                var datos=data.data;
+                let datos=data.data;
                 for (var [key, value] of Object.entries(datos)) {
                     setLocal(key, value);
                 }
@@ -415,9 +433,6 @@ console.log(ra);
         break;
         case 'web_no_logina':
             var data = JSON.parse(JXG.decompress(data));
-
-
-
         break;
         case 'horasDisponiblesEntrega':
             var data = JSON.parse(data);
@@ -603,64 +618,30 @@ function actualizarResumenOrden(){
    
 }
 function actualizarStore(){
-        get('web_no_login');
+    get('web_no_login');
 }
-
 
 setInterval('actualizarStore()',3000);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function get(evento,variables="") {
-    //alert(variables);
-     //alert(url);
-     var host=window.location.host;
-     var protocol=window.location.protocol;
-     var xmlhttp = new XMLHttpRequest();
-     let data=new Map();
-     data['success']=false;
-     data['msj_general']="Intente mas tarde";
-     xmlhttp.onreadystatechange = function() {
-         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+    var host=window.location.host;
+    var protocol=window.location.protocol;
+    var xmlhttp = new XMLHttpRequest();
+    let data=new Map();
+    data['success']=false;
+    data['msj_general']="Intente mas tarde";
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
             if (xmlhttp.status == 200 || xmlhttp.status == 409) {
-               
-               procesar(xmlhttp.responseText,evento);
-                
+                procesar(xmlhttp.responseText,evento);
             }else {
-             procesar(data,evento);
+                procesar(data,evento);
             }
-         }
-     };
+        }
+    };
     
-     xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?evento="+evento+variables, true);
-      xmlhttp.send();
+    xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?evento="+evento+variables, true);
+    xmlhttp.send();
  }
 
  function post(evento,datai) {
@@ -668,31 +649,29 @@ function get(evento,variables="") {
     
     datai.append("evento", evento);
 
-
-     var host=window.location.host;
-     var protocol=window.location.protocol;
-     var xmlhttp = new XMLHttpRequest();
-     let data=new Map();
-     data['success']=false;
-     data['msj_general']="Intente mas tarde";
-     xmlhttp.onreadystatechange = function() {
-         if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-            if (xmlhttp.status == 200 || xmlhttp.status == 409) {
-               
-               procesar(xmlhttp.responseText,evento);
+    var host=window.location.host;
+    var protocol=window.location.protocol;
+    var xmlhttp = new XMLHttpRequest();
+    let data=new Map();
+    data['success']=false;
+    data['msj_general']="Intente mas tarde";
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+        if (xmlhttp.status == 200 || xmlhttp.status == 409) {
             
-            }else {
-             procesar(data,evento);
-            }
-         }
-     };
+            procesar(xmlhttp.responseText,evento);
+        
+        }else {
+            procesar(data,evento);
+        }
+        }
+    };
      
-     xmlhttp.open("POST", protocol+"//"+host+"/api_rapida.php", true);
+    xmlhttp.open("POST", protocol+"//"+host+"/api_rapida.php", true);
+    xmlhttp.send(datai);
+}
 
-      xmlhttp.send(datai);
- }
-
- function setLocal(key,value){
+function setLocal(key,value){
     localStorage.setItem(key, JSON.stringify(value));
 }
 function getLocal(key){
@@ -722,13 +701,13 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     } catch (e) {
       console.log(e)
     }
-  };
-  function vaciarCarrito(){
+}
+function vaciarCarrito(){
     localStorage.clear();
     localStorage.setItem('ModalPrincipal','visto');
-  }
+}
 
-  function formato_moneda(value){
+function formato_moneda(value){
     var listo='';
     var b=value.trim();
     var c;
@@ -745,15 +724,14 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     var total=c.length;
 
     if(total>1){
-    c[total-1]="."+c[total-1];
+        c[total-1]="."+c[total-1];
 
-    //  for(int i=0; i<c.length; i++){
-    //  listo=listo+c[i];
-    // }
-    c.forEach((element) =>listo=listo+element);
-}else{
-
-    listo=b;
-}
-return listo;
+        //  for(int i=0; i<c.length; i++){
+        //  listo=listo+c[i];
+        // }
+        c.forEach((element) =>listo=listo+element);
+    }else{
+        listo=b;
+    }
+    return listo;
 }
