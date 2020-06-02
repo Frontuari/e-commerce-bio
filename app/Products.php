@@ -61,7 +61,7 @@ class Products extends Model
         curl_setopt($ch, CURLOPT_URL,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/SyncProductActChk");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
-                    "data=".$json."&datab=".$jsonb);
+                    "data=".$json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         
         $server_output = curl_exec($ch);
