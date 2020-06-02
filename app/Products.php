@@ -31,4 +31,47 @@ class Products extends Model
        $fg= new FuncionesGenerales;
        return $fg->get_formato_moneda($value);
     }
+    public function setStatusAttribute($value)
+    {
+     
+        $this->cambiarEstatusIdempiere($value,$this->attributes['id']);
+        $this->attributes['status']=$value;
+    }
+    public function cambiarEstatusIdempiere($value,$id){
+
+        $data=Array();
+        $datab=Array();
+        $data[]=$id;
+        if($value=='A'){
+            $datab[$id]='Y';
+            $data[]='Y';
+        }else{
+            $data[]='N';
+            $datab[$id]='N';
+        }
+        
+        
+        
+        $json=json_encode($data);
+        $jsonb=json_encode($datab);
+
+
+        
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,"http://200.8.18.230:9000/api/v1/SyncProductActChk");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+                    "data=".$json."&datab=".$jsonb);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $server_output = curl_exec($ch);
+        
+        curl_close ($ch);
+        
+        // Further processing ...
+       //exit($server_output);
+
+
+    }
 }
