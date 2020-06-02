@@ -33,8 +33,8 @@ class Products extends Model
     }
     public function setStatusAttribute($value)
     {
-     
-        $this->cambiarEstatusIdempiere($value,$this->attributes['id']);
+    
+        $this->cambiarEstatusIdempiere($value,$this->attributes['sku']);
         $this->attributes['status']=$value;
     }
     public function cambiarEstatusIdempiere($value,$id){
@@ -54,7 +54,6 @@ class Products extends Model
         
         $json=json_encode($data);
         $jsonb=json_encode($datab);
-
 
         
         $ch = curl_init();
