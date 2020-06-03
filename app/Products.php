@@ -41,19 +41,19 @@ class Products extends Model
 
         $data=Array();
         //$datab=Array();
-      
+        $data['sku']=str_pad($id, 6, "0", STR_PAD_LEFT);
         if($value=='A'){
            // $datab[$id]='Y';
-            $data['sync'][]='Y';
+            $data['isecommerce']='Y';
         }else{
-            $data['sync'][]='N';
+            $data['isecommerce']='N';
            // $datab[$id]='N';
         }
-        $data['sync'][]=$id;
+       
         
         
         $json=json_encode($data);
-       // exit($json);
+        //exit($json);
        // $jsonb=json_encode($datab);
 
         
