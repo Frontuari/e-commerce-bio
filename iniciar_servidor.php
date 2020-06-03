@@ -201,25 +201,30 @@ function actualizarTasa($ip){
 function email_tracking(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='5' AND status='A'");
 
-	$arr=q("SELECT t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
+	$arr=q("SELECT oe.id as order_status,t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
 	
 	if(is_array($arr) and is_array($arra)){
 
 		foreach($arr as $obj){
 			$id=$obj['id'];
-			
-			$titulo=agregarVariables($arra[0]['titulo'],$obj);
-			$body=agregarVariables($arra[0]['body'],$obj);
-			if(enviarCorreo($obj['email'],$titulo,$body)){
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
-	
-			}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+			if($obj['order_status']==6){
 				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 			}else{
-				sleep(5);
-				enviarCorreo($obj['email'],$titulo,$body);
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 				
+				
+				$titulo=agregarVariables($arra[0]['titulo'],$obj);
+				$body=agregarVariables($arra[0]['body'],$obj);
+				if(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+		
+				}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+				}else{
+					sleep(5);
+					enviarCorreo($obj['email'],$titulo,$body);
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+					
+				}
 			}
 		}
 		
