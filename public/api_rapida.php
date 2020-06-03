@@ -715,7 +715,7 @@ function actualizarPerfil(){
    $arr=q($sql);
    if(is_array($arr)){
         $data=getPerfil(true);
-        salidaNueva($data,"Perfil actualizado correctamente");
+        salidaNueva($data['data'],"Perfil actualizado correctamente");
    }else{
     salidaNueva(null,"Disculpe, intente de nuevo",false);
    }
