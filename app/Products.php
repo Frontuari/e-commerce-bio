@@ -41,18 +41,19 @@ class Products extends Model
 
         $data=Array();
         //$datab=Array();
-        $data[]=$id;
+      
         if($value=='A'){
            // $datab[$id]='Y';
-            $data[]='Y';
+            $data['sync'][]='Y';
         }else{
-            $data[]='N';
+            $data['sync'][]='N';
            // $datab[$id]='N';
         }
-        
+        $data['sync'][]=$id;
         
         
         $json=json_encode($data);
+       // exit($json);
        // $jsonb=json_encode($datab);
 
         
@@ -60,7 +61,7 @@ class Products extends Model
 
         curl_setopt($ch, CURLOPT_URL,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/SyncProductActChk");
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_POSTFIELDS,
                     "data=".$json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

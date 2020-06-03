@@ -1054,7 +1054,7 @@ q("BEGIN");
         $total=$pro['total_precio'];
         $deduction=0;
         $products_id=$pro['id'];
-        $sql="INSERT INTO order_products (cant,price,total,orders,deduction,cod_combo,products_id) VALUES ($cant,$price,$total,$orders,$deduction,NULL,$products_id) RETURNING id";
+        $sql="INSERT INTO order_products (cant,price,total,orders,deduction,cod_combo,products_id,created_at) VALUES ($cant,$price,$total,$orders,$deduction,NULL,$products_id,NOW()) RETURNING id";
         //EXIT($sql);
         $arr=q($sql);
     }

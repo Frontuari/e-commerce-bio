@@ -130,7 +130,7 @@ Referencia. '.$xml->getReferencia().'<br>
     }
     q("COMMIT");
     if($pagoAbonado){
-        //salidaNueva($arr,"Su pago ha sido abonado".$sql);
+        enviarCorreo($users_email,'VOUCHER DE PAGO',$xml->getVoucher());
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
