@@ -11,24 +11,21 @@
                     </a>
                     <img v-else-if="!slider.url" class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
 
-                    <div class="container">
-                        <!--<div class="carousel-caption caption-left" >
+                    <!-- <div class="container">
+                        <div class="carousel-caption caption-left" >
                             <h5>¡Aprovecha nuestros combos!</h5>
                             <h2>Carnes <img src="assets/img/icono-bio.svg" class="ico-text">io</h2>
                             <p>Compra una gran variedad de tipos <br>de carnes a un excelente precio.</p>
                             <a href="#" class="btn">Comprar</a>
-                        </div>-->
-
-                        <!-- <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
-                           <a  v-bind:href="slider.url" class="btn">Comprar</a>
                         </div>
 
+                        <div class="carousel-caption caption-left" v-if="slider.order == 'izq'">
+                           <a  v-bind:href="slider.url" class="btn">Comprar</a>
+                        </div>
                          <div class="carousel-caption caption-right" v-if="slider.order == 'der'">
                            <a  v-bind:href="slider.url"  class="btn">Comprar</a>
-                        </div> -->
-
-
-                    </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
             <a class="carousel-control-prev" :href="'#'+id" role="button" data-slide="prev">
