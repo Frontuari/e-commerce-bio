@@ -263,7 +263,7 @@ function actualizarEnvioOrden(){
 				'peso',p.peso,
 				'peso_total',(p.peso*op.cant),
 				'total',(op.price*op.cant),
-				'tax',ROUND(((op.total/op.price)-1)*100)
+				'iva',ROUND(((op.total/op.price)-1)*100)
 			)
 			
 	) FROM order_products op INNER JOIN products p ON p.id=op.products_id WHERE op.orders=o.id) orderlines,
