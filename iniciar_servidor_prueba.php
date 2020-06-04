@@ -11,7 +11,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.0.103";
+$ip="http://192.168.0.102";
 
 
 $activar_productos		=true;
@@ -446,7 +446,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 
 						
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
-						$sqlb="SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'";
+						$sqlb="SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'";
 						if(is_array(q($sqlb))){
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
@@ -457,7 +457,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 							$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
 							//if($obj->sku==1601){
 							//	exit($sqlb);
-							//}
+	//	}
 						
 
 					}else{
