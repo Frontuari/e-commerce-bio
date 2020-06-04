@@ -711,7 +711,8 @@ function actualizarPerfil(){
     //$cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
     $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
-  //  salidaNueva(null,$sql,false);
+
+  // salidaNueva(null,$sql,false);
    $arr=q($sql);
    if(is_array($arr)){
         $data=getPerfil(true);
@@ -922,7 +923,8 @@ function cancelarOrden(){
     $arr=q($sql);//SEGURIDAD
     if(is_array($arr)){
       
-        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
+       // $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
+        $arr=q("UPDATE orders SET status='CU', observacion='Cancelado por el usuario',updated_at=NOW() WHERE id=$orders_id AND users_id=$users_id");
         if(is_array($arr)){
             salidaNueva($arr,"Orden cancelada exitosamente");
         }else{

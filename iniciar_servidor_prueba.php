@@ -11,7 +11,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.0.102";
+$ip="http://192.168.0.103";
 
 
 $activar_productos		=true;
@@ -339,6 +339,7 @@ function actualizarProductos($ip){
 
 				if($obj->ad_org_id==1000004){
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
+
 					$sugerido=$obj->sugerido;
 					if($sugerido<0){
 						$sugerido=0;
@@ -346,7 +347,7 @@ function actualizarProductos($ip){
 						$porcentaje_traer_global=1;
 						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
-
+		
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
 				
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
@@ -368,6 +369,7 @@ function actualizarProductos($ip){
 						
 						}
 					}else{
+						
 						$id_ca=$arr_ca[0]['id'];
 					}					
 					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";
@@ -387,6 +389,7 @@ function actualizarProductos($ip){
 							$id_sub_ca=$arr_insert_sub_ca[0]['id'];
 						}
 					}else{
+						
 						$id_sub_ca=$arr_sub_ca[0]['id'];
 					}
 					//NUEVA MODIFICACION CATEGORIAS
@@ -434,12 +437,17 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					
 					if(is_array($arr)){
+						
 						$products_id=$arr[0]['id'];
 						$porc_stock=$arr[0]['porc_stock'];
 						
 						$sugerido=round(($porc_stock*$sugerido)/100);
+
+
+						
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
-						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'"))){
+						$sqlb="SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'";
+						if(is_array(q($sqlb))){
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
@@ -447,7 +455,9 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 							//exit($sql);
 							$valido=q($sql);
 							$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
-					
+							//if($obj->sku==1601){
+							//	exit($sqlb);
+							//}
 						
 
 					}else{

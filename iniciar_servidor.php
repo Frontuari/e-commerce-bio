@@ -20,8 +20,7 @@ $activar_email_tracking	=true;
 $activar_tasa			=true;
 $activar_delivery		=true;
 $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
-$activar_correo_masivo	=true; //apura al usuario que pague despues de 1 hora
-
+$activar_correo_masivo	=true; 
 
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";

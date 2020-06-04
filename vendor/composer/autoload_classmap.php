@@ -100,6 +100,7 @@ return array(
     'App\\Http\\Controllers\\ProductsController' => $baseDir . '/app/Http/Controllers/ProductsController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
     'App\\Http\\Controllers\\RegionsController' => $baseDir . '/app/Http/Controllers/RegionsController.php',
+    'App\\Http\\Controllers\\Reportes' => $baseDir . '/app/Http/Controllers/Reportes.php',
     'App\\Http\\Controllers\\SinglePageController' => $baseDir . '/app/Http/Controllers/SinglePageController.php',
     'App\\Http\\Controllers\\StatesController' => $baseDir . '/app/Http/Controllers/StatesController.php',
     'App\\Http\\Controllers\\StoresController' => $baseDir . '/app/Http/Controllers/StoresController.php',
