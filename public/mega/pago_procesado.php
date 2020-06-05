@@ -130,7 +130,8 @@ Referencia. '.$xml->getReferencia().'<br>
     }
     q("COMMIT");
     if($pagoAbonado){
-        enviarCorreo($users_email,'VOUCHER DE PAGO',$xml->getVoucher());
+
+        enviarCorreo($users_email,'VOUCHER DE PAGO',formatear($xml->getVoucher()));
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
@@ -146,9 +147,13 @@ Referencia. '.$xml->getReferencia().'<br>
 
 
 
-
     exit();
 }
+function formatear($data){
+    
+    return "<div style='width:300px; margin:0 auto;'>".nl2br($data)."</div>";
+    
+    }
 
 function enviarPaginaCorreo($id,$email){
     //3 bienvenido
