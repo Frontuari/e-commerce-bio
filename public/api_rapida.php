@@ -324,7 +324,7 @@ function listarPublicidadToda($tipo_salida){
 }
 function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
-    $arr=q("select image from advs where type='$tipo'");
+    $arr=q("select image from advs where type='$tipo' AND status='A'");
     if(is_array($arr)){
      return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
     }else{
