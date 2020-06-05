@@ -20,8 +20,7 @@ $activar_email_tracking	=true;
 $activar_tasa			=true;
 $activar_delivery		=true;
 $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
-$activar_correo_masivo	=true; //apura al usuario que pague despues de 1 hora
-
+$activar_correo_masivo	=true; 
 
 $tiempo_acumulado_productos=0;
 $retraso_productos="+10 minutes";
@@ -201,25 +200,30 @@ function actualizarTasa($ip){
 function email_tracking(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='5' AND status='A'");
 
-	$arr=q("SELECT t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
+	$arr=q("SELECT oe.id as order_status,t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
 	
 	if(is_array($arr) and is_array($arra)){
 
 		foreach($arr as $obj){
 			$id=$obj['id'];
-			
-			$titulo=agregarVariables($arra[0]['titulo'],$obj);
-			$body=agregarVariables($arra[0]['body'],$obj);
-			if(enviarCorreo($obj['email'],$titulo,$body)){
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
-	
-			}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+			if($obj['order_status']==6){
 				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 			}else{
-				sleep(5);
-				enviarCorreo($obj['email'],$titulo,$body);
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 				
+				
+				$titulo=agregarVariables($arra[0]['titulo'],$obj);
+				$body=agregarVariables($arra[0]['body'],$obj);
+				if(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+		
+				}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+				}else{
+					sleep(5);
+					enviarCorreo($obj['email'],$titulo,$body);
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+					
+				}
 			}
 		}
 		
@@ -439,7 +443,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						
 						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
-						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status<>'NU' AND products_id='$products_id'"))){
+						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
 							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";

@@ -324,7 +324,7 @@ function listarPublicidadToda($tipo_salida){
 }
 function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
-    $arr=q("select image from advs where type='$tipo'");
+    $arr=q("select image from advs where type='$tipo' AND status='A'");
     if(is_array($arr)){
      return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
     }else{
@@ -708,10 +708,11 @@ function actualizarPerfil(){
     $sex=$_POST['sex'];
     $name=$_POST['name'];
     $birthdate=$_POST['birthdate'];
-    $cities_id=$_POST['cities_id'];
+    //$cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
     $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
-  //  salidaNueva(null,$sql,false);
+
+  // salidaNueva(null,$sql,false);
    $arr=q($sql);
    if(is_array($arr)){
         $data=getPerfil(true);
@@ -922,7 +923,8 @@ function cancelarOrden(){
     $arr=q($sql);//SEGURIDAD
     if(is_array($arr)){
       
-        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
+       // $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
+        $arr=q("UPDATE orders SET status='CU', observacion='Cancelado por el usuario',updated_at=NOW() WHERE id=$orders_id AND users_id=$users_id");
         if(is_array($arr)){
             salidaNueva($arr,"Orden cancelada exitosamente");
         }else{
@@ -1334,7 +1336,7 @@ function listarProductos(){
 }
 */
 function listar_categorias_movil($tipo_salida){
-    $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id");
+    $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
     //$row=q("SELECT name,image,image_b,id FROM categories WHERE status='A'");
     $row=recortar_imagen($row);
     return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
