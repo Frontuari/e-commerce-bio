@@ -174,7 +174,7 @@
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarBios">
 								<a class="dropdown-item" href="/culture">Cultura bio</a>
-								<a class="dropdown-item" href="/sucursal">Surcursales</a>
+								<a class="dropdown-item" href="/sucursal">Sucursales</a>
 								<a class="dropdown-item" target="_blank" href="http://portalproveedores.biomercados.com.ve:18880/webui/">Proveedores</a>
 								<a class="dropdown-item" href="/contact">Contacto</a>
 							</div>

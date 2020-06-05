@@ -88,11 +88,11 @@
 	<div class="modal modal-principal fade" id="ModalPrincipal" tabindex="-1" role="dialog" aria-labelledby="ModalPrincipalLabel" aria-hidden="true" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-body">
-					<h2>Desde <b>bio mercados</b>, inspirados en servir,<br/> queremos darte la mas cordial bienvenida</h2>
+				<div class="modal-body" id="modal_popup">
+					<!-- <h2>Desde <b>bio mercados</b>, inspirados en servir,<br/> queremos darte la mas cordial bienvenida</h2>
 					<p>Pensando en tu comodidad, ahora ponemos a tu disposición nuestra tienda virtual <strong>bio en linea</strong> , la cual puedes visitar ingresando a <a href="" class="enlace-modal">www.biomercados.com.ve</a> donde viviras la mejor experiencia de compra en linea con la variedad, frescura y calidad bio de siempre</p>
 					<p>Desde tu teléfono, tablet o Pc podras visitar bio en linea y hacer compras para ti o para tu familia, solo debes <strong>registrar</strong> tus datos una vez</p>
-					<p><span class="order-text">Llevamos el mercado hasta la puerta de tu casa o lo retiras</span> lista para llevar, bio en linea, a su servicio con un clic!!!</p>
+					<p><span class="order-text">Llevamos el mercado hasta la puerta de tu casa o lo retiras</span> lista para llevar, bio en linea, a su servicio con un clic!!!</p> -->
 				</div>
 			</div>
 		</div>
@@ -128,6 +128,19 @@
 	//******************************************************************
 
 		jQuery(document).ready(function($){
+
+			if(!window.localStorage.getItem("ModalPrincipal")) {
+				axios.get(URLSERVER+"api/advs/type/Bienvenida").then( res => {
+					const srcImage = res.data.data[0].image;
+					$("#modal_popup").html(`<img src="storage/${srcImage}" />`);
+					localStorage.setItem("ModalPrincipal", "visto");
+					$('#ModalPrincipal').modal('show');
+				});
+			}else {
+				$("#ModalPrincipal").remove();
+			}
+
+
 
 			$(".select2").select2({
 				placeholder: 'Selecccione',
@@ -229,18 +242,11 @@
 
 		    });
 
-			var modal_principal = localStorage.getItem("ModalPrincipal");
-			if(modal_principal == 'visto')
-			{
-				$("#ModalPrincipal").remove();
-			}else{
-				//no pasa nada
-				localStorage.setItem("ModalPrincipal", "visto");
-			}
+			
 
 			
 			$(window).on('load',function(){
-		        $('#ModalPrincipal').modal('show');
+		        
 
 		        width_window = parseInt($(window).width());
 		        if(width_window<=990)

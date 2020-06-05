@@ -1873,14 +1873,14 @@ div[class*="col-"]:not(:last-child) .product-block {
 }
 
 #ModalPrincipal .modal-dialog .modal-content .modal-body {
-    background-image: url('../img/Fondo-Pop-up.png');
+    /* background-image: url('../img/Fondo-Pop-up.png'); */
     background-size: 100%;
     background-position: bottom center;
     background-repeat: no-repeat;
     height: auto;
-    padding-left: 90px;
+    /* padding-left: 90px;
     padding-right: 90px;
-    padding-bottom: 200px;
+    padding-bottom: 200px; */
 }
 
 #ModalPrincipal .modal-dialog .modal-content {
