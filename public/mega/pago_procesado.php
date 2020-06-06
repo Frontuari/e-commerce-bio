@@ -151,7 +151,12 @@ Referencia. '.$xml->getReferencia().'<br>
 }
 function formatear($data){
     
-    return "<div style='width:300px; margin:0 auto;'>".nl2br($data)."</div>";
+    return "<div style='border:1px solid #000; width:300px; margin:0 auto; background:#F2F2F2'>
+    <div style='text-align:center;background:#67BE5A; color:white'>VOUCHER<BR>ELECTRÓNICO<BR></div>
+    Alimentos FM, C.A.<br>
+    RIF: J-31721968-6<br>
+    <br>
+    ".nl2br($data)."<BR></div><div style='text-align:center'><br>Para más información, visita la sección contáctanos de www.biomercados.com.ve<br><span style=''><b>¡INSPIRADOS EN SERVIR!</b><span></div>";
     
     }
 
