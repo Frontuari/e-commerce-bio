@@ -708,9 +708,10 @@ function actualizarPerfil(){
     $sex=$_POST['sex'];
     $name=$_POST['name'];
     $birthdate=$_POST['birthdate'];
+    $phone=$_POST['phone'];
     //$cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
-    $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+    $sql="UPDATE peoples SET birthdate='$birthdate',phone='$phone', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
 
   // salidaNueva(null,$sql,false);
    $arr=q($sql);
