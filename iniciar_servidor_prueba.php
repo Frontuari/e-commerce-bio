@@ -318,6 +318,24 @@ function actualizarEnvioOrden(){
 
 
 function actualizarProductos($ip){
+
+	$data['sku']="001601";
+	$data['isecommerce']="Y";
+	$data['PVP']="238532.01";
+	$data['pricelist']="205631.04";
+	$data['m_product_id']="1007761";
+	$data['categoria']['nombre'][]="Bebidas y Snacks";
+	$data['categoria']['codigo'][]="1000010";
+	$data['categoria']['nombre'][]="Otra categoria";
+	$data['categoria']['codigo'][]="1003232";
+	$data['item_name']="DORITOS MEGA QUESO 150GR";
+	$data['bsca_netweight']="150";
+	$data['ad_org_id']="1000004";
+	$data['sugerido']="500";
+	$data['TaxType']="IVA";
+	$data['IMPUESTO']="16";
+	echo json_encode($data);
+	exit("salio");
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
 	$url_productos="$ip/example_api_bio/getProducts.json";
