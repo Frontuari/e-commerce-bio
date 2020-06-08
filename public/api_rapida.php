@@ -704,11 +704,11 @@ function listarBancosdelMetododePagoAll($tipo_salida){
    }
 }
 function actualizarPerfil(){
-    $rif=$_POST['rif'];
-    $sex=$_POST['sex'];
-    $name=$_POST['name'];
-    $birthdate=$_POST['birthdate'];
-    $phone=$_POST['phone'];
+    $rif=trim($_POST['rif']);
+    $sex=trim($_POST['sex']);
+    $name=trim($_POST['name']);
+    $birthdate=trim($_POST['birthdate']);
+    $phone=trim($_POST['phone']);
     //$cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
     $sql="UPDATE peoples SET birthdate='$birthdate',phone='$phone', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
