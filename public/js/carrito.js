@@ -257,7 +257,7 @@ function procesar(data,evento){
                     if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
                         ordenPagada=true;
                         div_image_top.innerHTML='<img style="margin:0 auto" src="img/topPagado.png">';
-                        div_completo_metodo_pago.innerHTML='<div class="row mt-4"><div class="col-md-12 center h3 text-center" style="color:#67BE5A"><br><br><br><br>Su compra ha sido completada!</div></div>';
+                        div_completo_metodo_pago.innerHTML='<div class="row mt-4"><div class="col-md-12 center h3 text-center" style="color:#67BE5A"><br><br><br><br>Desde bio mercados agradecemos su preferencia, nuestra prioridad es ofrecer el mejor servicio siempre. ¡Inspirados en servir!!</div></div>';
                     }
 
                 }
