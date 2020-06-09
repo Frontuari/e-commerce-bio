@@ -11,7 +11,7 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.0.102";
+$ip="http://192.168.43.91";
 
 
 $activar_productos		=true;
@@ -319,23 +319,6 @@ function actualizarEnvioOrden(){
 
 function actualizarProductos($ip){
 
-	$data['sku']="001601";
-	$data['isecommerce']="Y";
-	$data['PVP']="238532.01";
-	$data['pricelist']="205631.04";
-	$data['m_product_id']="1007761";
-	$data['categoria']['nombre'][]="Bebidas y Snacks";
-	$data['categoria']['codigo'][]="1000010";
-	$data['categoria']['nombre'][]="Otra categoria";
-	$data['categoria']['codigo'][]="1003232";
-	$data['item_name']="DORITOS MEGA QUESO 150GR";
-	$data['bsca_netweight']="150";
-	$data['ad_org_id']="1000004";
-	$data['sugerido']="500";
-	$data['TaxType']="IVA";
-	$data['IMPUESTO']="16";
-	echo json_encode($data);
-	exit("salio");
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
 	$url_productos="$ip/example_api_bio/getProducts.json";
@@ -344,7 +327,7 @@ function actualizarProductos($ip){
 	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
-	
+
 	if($data!=false){
 	
 		$arr=q("SELECT id,nro_tienda FROM stores");
@@ -353,10 +336,16 @@ function actualizarProductos($ip){
 		if(is_array($arr)){
 			$todoProducto=array(); //para inactivar o activar lo que exista o no exista
 			q("BEGIN");
+			procesarSubCategoriasYcategorias($data->item);
+			
 			foreach($data->item as $obj){
 
 				if($obj->ad_org_id==1000004){
+
+					
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
+					
+
 
 					$sugerido=$obj->sugerido;
 					if($sugerido<0){
@@ -366,8 +355,17 @@ function actualizarProductos($ip){
 						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
 		
+
+
+
+
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
 				
+
+
+
+/*
+
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
@@ -416,6 +414,21 @@ function actualizarProductos($ip){
 					if(!is_array($sql)){
 						q("UPDATE sub_categories SET categories_id=$id_ca WHERE id='$id_sub_ca'");
 					}
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
 
 //------------IMPUESTOS--------------------
 if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
@@ -479,7 +492,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						
 
 					}else{
-						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'".pg_escape_string($obj->item_name)."','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
@@ -511,15 +524,30 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 //---------------------------------
 
 
-					
 
-					$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id=$id_sub_ca";
+
+if(is_array($obj->Categoria)){
+		foreach($obj->Categoria as $cat){
+
+
+			$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id='$cat->codigo'";
 				
-					$arr_det=q($sql);
+			$arr_det=q($sql);
+			
+			if(!is_array($arr_det)){
+$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
+//				exit($sql);
+				q($sql);
+			}
+		}
+}
+
+
+
+
+
+
 					
-					if(!is_array($arr_det)){
-						q("INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$id_sub_ca)");
-					}
 
 
 
@@ -589,6 +617,57 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 					*/
 
 }
+
+
+
+
+
+
+
+function procesarSubCategoriasYcategorias($data){
+	//borrar categorias y sub categorias
+	//q("DELETE FROM det_sub_categories");
+	//q("DELETE FROM sub_categories");
+	//q("DELETE FROM categories");
+	foreach($data as $obj){
+		if(is_array($obj->Categoria)){
+			foreach($obj->Categoria as $cat){
+				$categoria[$cat->codigo]=$cat->categoria;
+			}
+		}else{
+			//PRODUCTO SIN CATEGORIA
+			//echo "Producto sin categoria".print_r($obj,true);
+			//exit();
+		}
+		
+	}
+	//print_r($categoria);
+	foreach($categoria as $cod=>$nombre){
+		$sql="SELECT id FROM categories WHERE id='$cod'";
+		$res=q($sql);
+		if(is_array($res)){
+			$sql="UPDATE categories SET name='$nombre',updated_at=NOW() WHERE id='$cod' RETURNING id";
+			$res=q($sql);
+			$sql="UPDATE sub_categories SET name='$nombre',updated_at=NOW() WHERE id='$cod' RETURNING id";
+			$res=q($sql);
+		}else{
+			$sql="INSERT INTO categories (id,name,\"order\",created_at) VALUES ('$cod','$nombre',30,NOW()) RETURNING id";
+			//exit($sql);
+			$res=q($sql);
+			if(!is_array($res)){
+				echo "error: ".$sql;
+			}
+			$sql="INSERT INTO sub_categories (id,name,created_at,categories_id) VALUES ('$cod','$nombre',NOW(),'$cod') RETURNING id";
+			$res=q($sql);
+			if(!is_array($res)){
+				echo "error: ".$sql;
+			}
+		}
+	}
+
+}
+
+
 function crearArreglo($arr){
 	foreach($arr as $obj){
 		$resArray[$obj['nro_tienda']]=$obj['id'];
@@ -648,7 +727,6 @@ function isJson($string) {
 	json_decode($string);
 	return (json_last_error() == JSON_ERROR_NONE);
 }
-
 
 
 
