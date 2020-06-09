@@ -452,9 +452,9 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
 						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', qty_avaliable='$sugerido', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}
 							//exit($sql);
 							$valido=q($sql);
