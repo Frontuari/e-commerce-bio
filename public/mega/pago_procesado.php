@@ -57,6 +57,15 @@ function salidaMala($xml){
 <p>&nbsp;</p>
 <div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> <b>Cod. '.$xml->getCodigo().' '.$xml->getDescripcion().'</b><br><br> <a href="http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
     ';
+
+
+    $orders_id=$xml->getFactura();
+    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='$orders_id'";
+    $arr=q($sql);
+    if(is_array($arr)){
+     $users_email=$arr[0]['email'];
+    }
+    enviarCorreo($users_email,'VOUCHER DE PAGO RECHAZADO',formatear($xml->getVoucher()));
     exit();
 }
 function salidaBuena($xml){
