@@ -339,6 +339,7 @@ function actualizarProductos($ip){
 		if(is_array($arr)){
 			$todoProducto=array(); //para inactivar o activar lo que exista o no exista
 			q("BEGIN");
+			procesarSubCategoriasYcategorias($data->item);
 			foreach($data->item as $obj){
 
 				if($obj->ad_org_id==1000004){
@@ -350,9 +351,13 @@ function actualizarProductos($ip){
 						$porcentaje_traer_global=1;
 						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
-
+					if($obj->isecommerce=='N'){
+						$estatusProducto='I';
+					}else{
+						$estatusProducto='A';
+					}
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
-				
+				/*
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
@@ -400,6 +405,9 @@ function actualizarProductos($ip){
 						q("UPDATE sub_categories SET categories_id=$id_ca WHERE id='$id_sub_ca'");
 					}
 
+
+					*/
+
 //------------IMPUESTOS--------------------
 if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 	$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
@@ -444,9 +452,9 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
 						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', qty_avaliable='$sugerido', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}
 							//exit($sql);
 							$valido=q($sql);
@@ -455,7 +463,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						
 
 					}else{
-						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'$obj->item_name','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'".pg_escape_string($obj->item_name)."','".pg_escape_string($obj->item_name)."','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
@@ -489,13 +497,21 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 
 					
 
-					$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id=$id_sub_ca";
-				
-					$arr_det=q($sql);
-					
-					if(!is_array($arr_det)){
-						q("INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$id_sub_ca)");
-					}
+if(is_array($obj->Categoria)){
+	foreach($obj->Categoria as $cat){
+
+
+		$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id='$cat->codigo'";
+			
+		$arr_det=q($sql);
+		
+		if(!is_array($arr_det)){
+$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
+//				exit($sql);
+			q($sql);
+		}
+	}
+}
 
 
 
@@ -518,13 +534,14 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 		foreach($arr as $ob){
 			
 			$sku=$ob['sku'];
-			$status=$ob['status'];
+			//$status=$ob['status'];
 			//print_r($todoProducto); exit();
 			//echo $todoProducto['sku_idempiere'][$sku]."\n";
 			//echo "existe: ".$todoProducto['sku_idempiere'][$sku]." status: ".$status."\n";
-			if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
-				q("UPDATE products SET status='A' WHERE sku='$sku'");
-			}elseif(!$todoProducto['sku_idempiere'][$sku]){
+			//if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
+				//q("UPDATE products SET status='A' WHERE sku='$sku'");
+			//}else
+			if(!$todoProducto['sku_idempiere'][$sku]){
 				q("UPDATE products SET status='I' WHERE sku='$sku'");
 			}
 		}
@@ -563,6 +580,48 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 					[sugerido] => 121
 					
 					*/
+
+}
+function procesarSubCategoriasYcategorias($data){
+	//borrar categorias y sub categorias
+	//q("DELETE FROM det_sub_categories");
+	//q("DELETE FROM sub_categories");
+	//q("DELETE FROM categories");
+	foreach($data as $obj){
+		if(is_array($obj->Categoria)){
+			foreach($obj->Categoria as $cat){
+				$categoria[$cat->codigo]=$cat->categoria;
+			}
+		}else{
+			//PRODUCTO SIN CATEGORIA
+			//echo "Producto sin categoria".print_r($obj,true);
+			//exit();
+		}
+		
+	}
+	//print_r($categoria);
+	foreach($categoria as $cod=>$nombre){
+		$sql="SELECT id FROM categories WHERE id='$cod'";
+		$res=q($sql);
+		if(is_array($res)){
+			$sql="UPDATE categories SET name='$nombre',updated_at=NOW() WHERE id='$cod' RETURNING id";
+			$res=q($sql);
+			$sql="UPDATE sub_categories SET name='$nombre',updated_at=NOW() WHERE id='$cod' RETURNING id";
+			$res=q($sql);
+		}else{
+			$sql="INSERT INTO categories (id,name,\"order\",created_at) VALUES ('$cod','$nombre',30,NOW()) RETURNING id";
+			//exit($sql);
+			$res=q($sql);
+			if(!is_array($res)){
+				echo "error: ".$sql;
+			}
+			$sql="INSERT INTO sub_categories (id,name,created_at,categories_id) VALUES ('$cod','$nombre',NOW(),'$cod') RETURNING id";
+			$res=q($sql);
+			if(!is_array($res)){
+				echo "error: ".$sql;
+			}
+		}
+	}
 
 }
 function crearArreglo($arr){

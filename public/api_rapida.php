@@ -676,7 +676,7 @@ dtt.transports_id) select case
 
 function getPerfil($tipo_salida){
     $users_id=$_SESSION['usuario']['id'];
-    $arr=q("SELECT c.id as cities_id, r.id as regions_id, r.states_id, users.avatar,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id LEFT JOIN cities c on c.id=p.cities_id LEFT JOIN regions r ON r.id=c.regions_id WHERE users.id='$users_id'");
+    $arr=q("SELECT p.phone, c.id as cities_id, r.id as regions_id, r.states_id, users.avatar,users.email, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif,p.rif,p.sex,p.name,p.birthdate FROM users INNER JOIN peoples p ON p.id=users.peoples_id LEFT JOIN cities c on c.id=p.cities_id LEFT JOIN regions r ON r.id=c.regions_id WHERE users.id='$users_id'");
     if(is_array($arr)){
         return salidaNueva($arr,"Perfil",true,$tipo_salida);
    }else{
@@ -704,13 +704,14 @@ function listarBancosdelMetododePagoAll($tipo_salida){
    }
 }
 function actualizarPerfil(){
-    $rif=$_POST['rif'];
-    $sex=$_POST['sex'];
-    $name=$_POST['name'];
-    $birthdate=$_POST['birthdate'];
+    $rif=trim($_POST['rif']);
+    $sex=trim($_POST['sex']);
+    $name=trim($_POST['name']);
+    $birthdate=trim($_POST['birthdate']);
+    $phone=trim($_POST['phone']);
     //$cities_id=$_POST['cities_id'];
     $users_id=$_SESSION['usuario']['id'];
-    $sql="UPDATE peoples SET birthdate='$birthdate', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
+    $sql="UPDATE peoples SET birthdate='$birthdate',phone='$phone', rif='$rif',name='$name',sex='$sex' WHERE id=(SELECT peoples_id FROM users WHERE id='$users_id') RETURNING id";
 
   // salidaNueva(null,$sql,false);
    $arr=q($sql);
