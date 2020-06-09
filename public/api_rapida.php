@@ -288,7 +288,8 @@ switch($evento) {
     break;
     default:
     
-    salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
+    salidaNueva(null,"Intente de nuevo.",false);
+    //salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
 }
 function actualizarFotoPerfil(){
     $users_id=$_SESSION['usuario']['id'];
