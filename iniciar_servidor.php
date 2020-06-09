@@ -351,7 +351,11 @@ function actualizarProductos($ip){
 						$porcentaje_traer_global=1;
 						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
-
+					if($obj->isecommerce=='N'){
+						$estatusProducto='I';
+					}else{
+						$estatusProducto='A';
+					}
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
 				/*
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
@@ -448,9 +452,9 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
 						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}
 							//exit($sql);
 							$valido=q($sql);
@@ -530,13 +534,14 @@ $sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($pr
 		foreach($arr as $ob){
 			
 			$sku=$ob['sku'];
-			$status=$ob['status'];
+			//$status=$ob['status'];
 			//print_r($todoProducto); exit();
 			//echo $todoProducto['sku_idempiere'][$sku]."\n";
 			//echo "existe: ".$todoProducto['sku_idempiere'][$sku]." status: ".$status."\n";
-			if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
-				q("UPDATE products SET status='A' WHERE sku='$sku'");
-			}elseif(!$todoProducto['sku_idempiere'][$sku]){
+			//if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
+				//q("UPDATE products SET status='A' WHERE sku='$sku'");
+			//}else
+			if(!$todoProducto['sku_idempiere'][$sku]){
 				q("UPDATE products SET status='I' WHERE sku='$sku'");
 			}
 		}
