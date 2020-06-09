@@ -18,10 +18,10 @@
 						<h2><i>Beneficios de ser usuario de</i></h2>
 						<h1>bio mercados</h1>
 						<ul class="items">
-							<li>Tendrás acceso a nuestra tienda virtual y nuestras aplicaciones móviles con una sola cuenta.</li>
-							<li>Podrás acumular y canjear tus puntos bio por productos y ahorrar dinero en las compras.</li>
-							<li>Obtendrás grandes descuentos, promociones y más en los precios de nuestros productos y cambios bio.</li>
-							<li>Podrás realizar una compra sin salir de tu hogar y recibir los productos en la puerta de tu casa u oficina.</li>
+							<li>Tendrá acceso a nuestra tienda virtual y nuestras aplicaciones móviles con una sola cuenta.</li>
+							<li>Podrá acumular y canjear sus puntos bio por productos y ahorrar dinero en las compras.</li>
+							<li>Obtendrá grandes descuentos, promociones y más, en los precios de nuestros productos y cambios bio.</li>
+							<li>Podrá realizar una compra sin salir de su hogar y recibir los productos en la puerta de su casa u oficina.</li>
 						</ul>
 					</div>
 				</div>

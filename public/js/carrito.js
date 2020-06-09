@@ -106,7 +106,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
     <input id="input_ref" name="ref" class="form-control" type="text">
         </div>`;
     var otro_ancho='';
-    var txt_btn_pagar='Reportar pago';
+    var txt_btn_pagar='Pagar';
     if(id==3 || id==2) {
         div_referencia='';
         otro_ancho='<div class="col-md-3"></div>';
@@ -181,7 +181,7 @@ function procesar(data,evento){
                 
             }else{
                 console.log(data.msj_general);
-                div_btn_guardar_pago.innerHTML='<button class="btn btn-success">Reportar pago</button>';
+                div_btn_guardar_pago.innerHTML='<button class="btn btn-success">Pagar</button>';
             }
             
     
@@ -286,7 +286,7 @@ console.log(ra);
             <div class="col-md-6 text-left"><b>Has pagado</b></div><div class="col-md-6 text-right"><b>`+formatB(pagado)+` / `+formatD(pagadoD)+`</b></div>
         </div>
         <div class="row `+colorFalta+`">
-            <div class="col-md-6 text-left "><b>Te falta por pagar</b></div><div class="col-md-6 text-right"><b>`+formatB(resta)+` / `+formatD(restaD)+`</b></div>
+            <div class="col-md-6 text-left "><b>Saldo restante</b></div><div class="col-md-6 text-right"><b>`+formatB(resta)+` / `+formatD(restaD)+`</b></div>
         </div>   
             `;
             }

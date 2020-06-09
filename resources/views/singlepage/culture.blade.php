@@ -15,7 +15,7 @@
 		</div>
 		<div id="mision" class='col-md-5 col-sm-5 mb-xs-24'>
 			<div class="section-subtitle"><h2>Misi&oacute;n</h2></div>
-			<div class="pmv"><p>Ser reconocidos como la cadena de supermercados que ofrece una amplia variedad de alimentos y no alimentos, con precios y competitivos y de alta calidad. Liderado por un Equipo humano que con entusiasmo trabaje en pro del bien común, y que comprende que satisfacer las necesidades del cliente es nuestra razón de existir.</p></div>
+			<div class="pmv"><p>Ser reconocidos como la cadena de supermercados que ofrece una amplia variedad de alimentos y no alimentos, con precios competitivos y de alta calidad, liderado por un equipo humano que con entusiasmo trabaja en pro del bien común, y que comprende que satisfacer las necesidades del cliente es nuestra razón de existir.</p></div>
 		</div>
 	</div>
 </div>

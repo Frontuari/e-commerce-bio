@@ -147,7 +147,7 @@
 															</div>
 															<div class="order-footer-buttons">
 																<button type="button" name="next" class="btn btn-submit next action-button" v-if="this.datauser.id !=='undefined'" >CONFIRMAR PEDIDO</button>
-																<p v-if="this.datauser.id=='undefined'" >Inicie sesion para confirmar</p>
+																<p v-if="this.datauser.id=='undefined'">Inicie sesion para confirmar</p>
 																<a href="/catalog" type="buttond" class="btdn btn-lindk">Seguir comprando</a>
 															</div>
 														</div>
@@ -561,6 +561,14 @@
 			LoadImageFile(event) {
 				this.payment_img = event.target.files[0];
 			},
+			openLogin() {
+				if($(".login_navbar").hasClass('show')===true)
+				{
+					$(".login_navbar").removeClass('show');
+				}else{
+					$(".login_navbar").addClass('show');
+				}
+			},
 			async getPayments() {
 				const response = await axios.get(URLSERVER+"api/payment_methods");
 				this.payments = response.data.data;
@@ -730,6 +738,7 @@
 		},
 		mounted()
 		{
+
 			const _this = this;
 			if( window.localStorage.getItem("cartNew") ){
 				this.length_car = JSON.parse(window.localStorage.getItem("cartNew")).length;
@@ -758,6 +767,7 @@
 				this.datauser = this.userlogged;
 			}else{
 				this.datauser.id = 'undefined';
+				Swal.fire("Bio en Línea","Debe iniciar sesión para confirmar su carrito de compras","info");
 			}
 
 			this.order = {
