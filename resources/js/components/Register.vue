@@ -14,8 +14,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="rif">Cédula:</label>
-                <input type="text" class="form-control" id="rif" name="rif" v-model="User.rif">
+                <label for="rif" style="display: block;">Cédula/RIF:</label>
+                <select class="form-control" style="width: 20%; display: inline-block;">
+                    <option>V</option>
+                    <option>E</option>
+                    <option>J</option>
+                    <option>G</option>
+                    <option>C</option>
+                </select>
+                <input type="text" class="form-control" style="width: 79%; display: inline-block;" id="rif" name="rif" v-model="User.rif">
             </div>
             <div class="form-group">
                 <label for="username">Nombre y Apellido:</label>
