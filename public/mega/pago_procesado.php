@@ -167,6 +167,7 @@ RIF: J-31721968-6<br>
         <td></td>
      </tr>
 </table> ";
+}
 
 function formatear_VIEJO($data){
     
