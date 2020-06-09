@@ -584,9 +584,9 @@ $sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($pr
 }
 function procesarSubCategoriasYcategorias($data){
 	//borrar categorias y sub categorias
-	//q("DELETE FROM det_sub_categories");
-	//q("DELETE FROM sub_categories");
-	//q("DELETE FROM categories");
+	q("DELETE FROM det_sub_categories");
+	q("DELETE FROM sub_categories");
+	q("DELETE FROM categories");
 	foreach($data as $obj){
 		if(is_array($obj->Categoria)){
 			foreach($obj->Categoria as $cat){
