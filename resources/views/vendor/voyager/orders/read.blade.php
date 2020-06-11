@@ -1,5 +1,8 @@
-@extends('voyager::master')
 
+@extends('voyager::master')
+<?php
+if(!isset($_GET['minimo'])){
+    ?>
 @section('page_title', __('voyager::generic.view').' '.$dataType->getTranslatedAttribute('display_name_singular'))
 
 @section('page_header')
@@ -33,7 +36,9 @@
     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
-
+<?php
+}
+?>
 @section('content')
     <div class="page-content read container-fluid">
         <div class="row">
