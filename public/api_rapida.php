@@ -288,7 +288,8 @@ switch($evento) {
     break;
     default:
     
-    salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
+    salidaNueva(null,"Intente de nuevo.",false);
+    //salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
 }
 function actualizarFotoPerfil(){
     $users_id=$_SESSION['usuario']['id'];
@@ -925,7 +926,7 @@ function cancelarOrden(){
     if(is_array($arr)){
       
        // $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at) VALUES ($orders_id,$orders_status_id,$users_id,NOW()) RETURNING id");
-        $arr=q("UPDATE orders SET status='CU', observacion='Cancelado por el usuario',updated_at=NOW() WHERE id=$orders_id AND users_id=$users_id");
+        $arr=q("UPDATE orders SET status='CU', observacion='Cancelado por el usuario',updated_at=NOW() WHERE id=$orders_id AND users_id='$users_id'  RETURNING id");
         if(is_array($arr)){
             salidaNueva($arr,"Orden cancelada exitosamente");
         }else{

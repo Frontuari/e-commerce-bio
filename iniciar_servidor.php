@@ -11,7 +11,8 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.42.75";
+//$ip="http://192.168.42.75"; //local
+$ip="200.74.230.206:9009";
 
 
 $activar_productos		=true;
@@ -23,7 +24,7 @@ $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
 $activar_correo_masivo	=true; 
 
 $tiempo_acumulado_productos=0;
-$retraso_productos="+10 minutes";
+$retraso_productos="+1 minutes";
 
 
 
@@ -36,18 +37,18 @@ $retraso_email_tracking="+1 minutes";
 
 
 $tiempo_acumulado_tasa=0;
-$retraso_tasa="+7 minutes";
+$retraso_tasa="+1 minutes";
 
 
 $tiempo_acumulado_delivery=0;
-$retraso_delivery="+7 minutes";
+$retraso_delivery="+1 minutes";
 
 
 $tiempo_acumulado_paga_rapido=0;
-$retraso_paga_rapido="+5 minutes";
+$retraso_paga_rapido="+1 minutes";
 
 $tiempo_acumulado_correo_masivo=0;
-$retraso_correo_masivo="+2 minutes";
+$retraso_correo_masivo="+1 minutes";
 
 
 
@@ -168,7 +169,7 @@ function paga_rapido(){
 
 function actualizarDelivery($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getDelivery";
 	
 	$data=leer("Delivery",$url);
 	
@@ -183,7 +184,7 @@ function actualizarDelivery($ip){
 }
 function actualizarTasa($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getTax";
 	
 	$data=leer("Tasa dolar",$url);
 
@@ -240,7 +241,7 @@ function agregarVariables($texto,$variables){
 	return $texto;
 }
 
-function actualizarEnvioOrden(){
+function actualizarEnvioOrden($ip){
 	$arr=q("SELECT *, CASE WHEN direccion_a_no_usar_esta='' THEN 'Valencia' else direccion_a_no_usar_esta END as direccion_a FROM (SELECT 
 	'T01' as localidad,
 	o.id as norder,
@@ -285,6 +286,7 @@ function actualizarEnvioOrden(){
 	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y");
 	
 	if(is_array($arr)){
+		echo "Enviado Nueva orden";
 		$data['data']=$arr;
 		//print_r($arr); exit();
 		foreach($arr as $index=>$obj){
@@ -293,7 +295,8 @@ function actualizarEnvioOrden(){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
+	
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
@@ -327,7 +330,7 @@ function actualizarProductos($ip){
 	//$url_productos="$ip/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
 	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.8.18.230:9000/api/v1/getProducts";
-	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getProducts";
+	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
 	

@@ -57,6 +57,15 @@ function salidaMala($xml){
 <p>&nbsp;</p>
 <div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> <b>Cod. '.$xml->getCodigo().' '.$xml->getDescripcion().'</b><br><br> <a href="http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
     ';
+
+
+    $orders_id=$xml->getFactura();
+    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='$orders_id'";
+    $arr=q($sql);
+    if(is_array($arr)){
+     $users_email=$arr[0]['email'];
+    }
+    enviarCorreo($users_email,'VOUCHER DE PAGO RECHAZADO',formatear($xml->getVoucher()));
     exit();
 }
 function salidaBuena($xml){
@@ -150,8 +159,28 @@ Referencia. '.$xml->getReferencia().'<br>
     exit();
 }
 function formatear($data){
+    $data=str_replace("_", "", $data);
+return "
+<table border='0' cellspacing='0' width='100%''>
+    <tr>
+        <td></td>
+        <td width='300' style=' font-family: \"Courier New\", Courier, monospace; padding:20px; border:1px solid #000; border-radius: 15px; border-style: dashed; width:300px; margin:0 auto; background:#F2F2F2'>
+        <div >
+<div style='text-align:center;background:#67BE5A; color:white; margin-bottom:10px' >VOUCHER<BR>ELECTRÓNICO<BR></div>
+Alimentos FM, C.A.<br>
+RIF: J-31721968-6<br>
+<br>
+".nl2br($data)."<BR></div><hr><div style='text-align:center'><br>Para más información, visita la sección contáctanos de www.biomercados.com.ve<br><span style=''><b>¡INSPIRADOS EN SERVIR!</b><span></div>
+
+        </td>
+        <td></td>
+     </tr>
+</table> ";
+}
+
+function formatear_VIEJO($data){
     
-    return "<div style='border:1px solid #000; width:300px; margin:0 auto; background:#F2F2F2'>
+    return "<div style='font-family: \"Courier New\", Courier, monospace; padding:20px; border:1px solid #000; border-radius: 15px; border-style: dashed; width:300px; margin:0 auto; background:#F2F2F2'>
     <div style='text-align:center;background:#67BE5A; color:white'>VOUCHER<BR>ELECTRÓNICO<BR></div>
     Alimentos FM, C.A.<br>
     RIF: J-31721968-6<br>
