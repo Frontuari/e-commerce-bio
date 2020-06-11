@@ -241,7 +241,7 @@ function agregarVariables($texto,$variables){
 	return $texto;
 }
 
-function actualizarEnvioOrden(){
+function actualizarEnvioOrden($ip){
 	$arr=q("SELECT *, CASE WHEN direccion_a_no_usar_esta='' THEN 'Valencia' else direccion_a_no_usar_esta END as direccion_a FROM (SELECT 
 	'T01' as localidad,
 	o.id as norder,
@@ -296,6 +296,7 @@ function actualizarEnvioOrden(){
 		}
 		$data['data']=json_encode($data['data']);
 	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
+	
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
