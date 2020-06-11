@@ -95,7 +95,7 @@ function procesarPago(){
 }
 
 function elegidoMetodo(id,name){
-    window.location.href="#bancosDelMetodo";
+    // window.location.href="#bancosDelMetodo";
     bancosDelMetodo.innerHTML="<div class='loaderb'><div>";
     get("listarBancosdelMetododePago","&payment_methods_id="+id);
 }
