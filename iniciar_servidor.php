@@ -295,7 +295,8 @@ function actualizarEnvioOrden($ip){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
+	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
 	
 	//$res=true;
 	if($res!=true){
