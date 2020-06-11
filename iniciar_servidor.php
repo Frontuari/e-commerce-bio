@@ -24,7 +24,7 @@ $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
 $activar_correo_masivo	=true; 
 
 $tiempo_acumulado_productos=0;
-$retraso_productos="+10 minutes";
+$retraso_productos="+1 minutes";
 
 
 
@@ -37,18 +37,18 @@ $retraso_email_tracking="+1 minutes";
 
 
 $tiempo_acumulado_tasa=0;
-$retraso_tasa="+7 minutes";
+$retraso_tasa="+1 minutes";
 
 
 $tiempo_acumulado_delivery=0;
-$retraso_delivery="+7 minutes";
+$retraso_delivery="+1 minutes";
 
 
 $tiempo_acumulado_paga_rapido=0;
-$retraso_paga_rapido="+5 minutes";
+$retraso_paga_rapido="+1 minutes";
 
 $tiempo_acumulado_correo_masivo=0;
-$retraso_correo_masivo="+2 minutes";
+$retraso_correo_masivo="+1 minutes";
 
 
 

@@ -11,20 +11,20 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.43.91";
+$ip="http://192.168.43.91"; //local
+//$ip="200.74.230.206:9009";
 
 
-$activar_productos		=true;
-$activar_envio_orden	=false;
+$activar_productos		=false;
+$activar_envio_orden	=true;
 $activar_email_tracking	=false;
 $activar_tasa			=false;
 $activar_delivery		=false;
 $activar_paga_rapido	=false; //apura al usuario que pague despues de 1 hora
-$activar_correo_masivo	=false; //apura al usuario que pague despues de 1 hora
-
+$activar_correo_masivo	=false; 
 
 $tiempo_acumulado_productos=0;
-$retraso_productos="+1 minutes";
+$retraso_productos="+3 minutes";
 
 
 
@@ -37,18 +37,18 @@ $retraso_email_tracking="+1 minutes";
 
 
 $tiempo_acumulado_tasa=0;
-$retraso_tasa="+7 minutes";
+$retraso_tasa="+1 minutes";
 
 
 $tiempo_acumulado_delivery=0;
-$retraso_delivery="+7 minutes";
+$retraso_delivery="+1 minutes";
 
 
 $tiempo_acumulado_paga_rapido=0;
-$retraso_paga_rapido="+5 minutes";
+$retraso_paga_rapido="+1 minutes";
 
 $tiempo_acumulado_correo_masivo=0;
-$retraso_correo_masivo="+2 minutes";
+$retraso_correo_masivo="+1 minutes";
 
 
 
@@ -169,7 +169,7 @@ function paga_rapido(){
 
 function actualizarDelivery($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getDelivery";
 	
 	$data=leer("Delivery",$url);
 	
@@ -184,7 +184,7 @@ function actualizarDelivery($ip){
 }
 function actualizarTasa($ip){
 	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
-	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
+	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getTax";
 	
 	$data=leer("Tasa dolar",$url);
 
@@ -201,25 +201,30 @@ function actualizarTasa($ip){
 function email_tracking(){
 	$arra=q("SELECT titulo,body FROM pages WHERE id='5' AND status='A'");
 
-	$arr=q("SELECT t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
+	$arr=q("SELECT oe.id as order_status,t.id, t.description, oe.name as status,u.email,t.orders_id  FROM trackings t INNER JOIN orders_status oe ON oe.id=t.orders_status_id INNER JOIN users u ON u.id=t.users_id WHERE t.enviado_email=0");
 	
 	if(is_array($arr) and is_array($arra)){
 
 		foreach($arr as $obj){
 			$id=$obj['id'];
-			
-			$titulo=agregarVariables($arra[0]['titulo'],$obj);
-			$body=agregarVariables($arra[0]['body'],$obj);
-			if(enviarCorreo($obj['email'],$titulo,$body)){
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
-	
-			}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+			if($obj['order_status']==6){
 				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 			}else{
-				sleep(5);
-				enviarCorreo($obj['email'],$titulo,$body);
-				q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
 				
+				
+				$titulo=agregarVariables($arra[0]['titulo'],$obj);
+				$body=agregarVariables($arra[0]['body'],$obj);
+				if(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+		
+				}elseif(enviarCorreo($obj['email'],$titulo,$body)){
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+				}else{
+					sleep(5);
+					enviarCorreo($obj['email'],$titulo,$body);
+					q("UPDATE trackings SET enviado_email=1 WHERE id='$id'");
+					
+				}
 			}
 		}
 		
@@ -289,7 +294,7 @@ function actualizarEnvioOrden(){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
@@ -318,16 +323,15 @@ function actualizarEnvioOrden(){
 
 
 function actualizarProductos($ip){
-
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	$url_productos="$ip/example_api_bio/getProducts.json";
+	//$url_productos="$ip/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
 	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.8.18.230:9000/api/v1/getProducts";
-	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getProducts";
+	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
-
+	
 	if($data!=false){
 	
 		$arr=q("SELECT id,nro_tienda FROM stores");
@@ -337,16 +341,10 @@ function actualizarProductos($ip){
 			$todoProducto=array(); //para inactivar o activar lo que exista o no exista
 			q("BEGIN");
 			procesarSubCategoriasYcategorias($data->item);
-			
 			foreach($data->item as $obj){
 
 				if($obj->ad_org_id==1000004){
-
-					
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
-					
-
-
 					$sugerido=$obj->sugerido;
 					if($sugerido<0){
 						$sugerido=0;
@@ -354,18 +352,13 @@ function actualizarProductos($ip){
 						$porcentaje_traer_global=1;
 						$sugerido=round($sugerido*$porcentaje_traer_global);
 					}
-		
-
-
-
-
+					if($obj->isecommerce=='N'){
+						$estatusProducto='I';
+					}else{
+						$estatusProducto='A';
+					}
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
-				
-
-
-
-/*
-
+				/*
 					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
 				
 					$arr_ca=q($sql);
@@ -385,7 +378,6 @@ function actualizarProductos($ip){
 						
 						}
 					}else{
-						
 						$id_ca=$arr_ca[0]['id'];
 					}					
 					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";
@@ -405,7 +397,6 @@ function actualizarProductos($ip){
 							$id_sub_ca=$arr_insert_sub_ca[0]['id'];
 						}
 					}else{
-						
 						$id_sub_ca=$arr_sub_ca[0]['id'];
 					}
 					//NUEVA MODIFICACION CATEGORIAS
@@ -416,19 +407,7 @@ function actualizarProductos($ip){
 					}
 
 
-
-*/
-
-
-
-
-
-
-
-
-
-
-
+					*/
 
 //------------IMPUESTOS--------------------
 if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
@@ -468,31 +447,24 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					
 					
 					if(is_array($arr)){
-						
 						$products_id=$arr[0]['id'];
 						$porc_stock=$arr[0]['porc_stock'];
 						
 						$sugerido=round(($porc_stock*$sugerido)/100);
-
-
-						
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
-						$sqlb="SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'";
-						if(is_array(q($sqlb))){
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}else{
-							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='$obj->item_name', qty_avaliable='$sugerido', stores_id='$tienda_id' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
+							$sql="UPDATE products SET peso='$peso', price='$obj->pricelist',name='".pg_escape_string($obj->item_name)."', qty_avaliable='$sugerido', stores_id='$tienda_id', status='$estatusProducto' WHERE sku=$obj->sku and stores_id=$tienda_id RETURNING id";
 						}
 							//exit($sql);
 							$valido=q($sql);
 							$msj="error al actualizar! ID: $obj->m_product_id SQL: ".$sql;
-							//if($obj->sku==1601){
-							//	exit($sqlb);
-	//	}
+					
 						
 
 					}else{
-						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'".pg_escape_string($obj->item_name)."','$obj->item_description','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
+						$sql="INSERT INTO products (peso,sku,name,description_short,price,qty_avaliable,stores_id,created_at,updated_at) VALUES ('$peso',$obj->sku,'".pg_escape_string($obj->item_name)."','".pg_escape_string($obj->item_name)."','$obj->pricelist','$sugerido',$tienda_id,NOW(),NOW()) RETURNING id";
 						
 						$valido=q($sql);
 						$products_id=$valido[0]['id'];
@@ -524,30 +496,23 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 //---------------------------------
 
 
-
+					
 
 if(is_array($obj->Categoria)){
-		foreach($obj->Categoria as $cat){
+	foreach($obj->Categoria as $cat){
 
 
-			$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id='$cat->codigo'";
-				
-			$arr_det=q($sql);
+		$sql="SELECT 1 FROM det_sub_categories WHERE products_id=$products_id AND sub_categories_id='$cat->codigo'";
 			
-			if(!is_array($arr_det)){
+		$arr_det=q($sql);
+		
+		if(!is_array($arr_det)){
 $sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
 //				exit($sql);
-				q($sql);
-			}
+			q($sql);
 		}
+	}
 }
-
-
-
-
-
-
-					
 
 
 
@@ -570,13 +535,14 @@ $sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($pr
 		foreach($arr as $ob){
 			
 			$sku=$ob['sku'];
-			$status=$ob['status'];
+			//$status=$ob['status'];
 			//print_r($todoProducto); exit();
 			//echo $todoProducto['sku_idempiere'][$sku]."\n";
 			//echo "existe: ".$todoProducto['sku_idempiere'][$sku]." status: ".$status."\n";
-			if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
-				q("UPDATE products SET status='A' WHERE sku='$sku'");
-			}elseif(!$todoProducto['sku_idempiere'][$sku]){
+			//if($todoProducto['sku_idempiere'][$sku] and $status=='I'){
+				//q("UPDATE products SET status='A' WHERE sku='$sku'");
+			//}else
+			if(!$todoProducto['sku_idempiere'][$sku]){
 				q("UPDATE products SET status='I' WHERE sku='$sku'");
 			}
 		}
@@ -617,13 +583,6 @@ $sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($pr
 					*/
 
 }
-
-
-
-
-
-
-
 function procesarSubCategoriasYcategorias($data){
 	//borrar categorias y sub categorias
 	//q("DELETE FROM det_sub_categories");
@@ -666,8 +625,6 @@ function procesarSubCategoriasYcategorias($data){
 	}
 
 }
-
-
 function crearArreglo($arr){
 	foreach($arr as $obj){
 		$resArray[$obj['nro_tienda']]=$obj['id'];
@@ -727,6 +684,7 @@ function isJson($string) {
 	json_decode($string);
 	return (json_last_error() == JSON_ERROR_NONE);
 }
+
 
 
 
