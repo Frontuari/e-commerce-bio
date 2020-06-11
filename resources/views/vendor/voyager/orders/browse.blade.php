@@ -222,7 +222,24 @@
                                                     <span class="badge badge-lg" style="background-color: {{ $data->{$row->field} }}">{{ $data->{$row->field} }}</span>
                                                 @elseif($row->type == 'text')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
-                                                    <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
+                                                    <div>
+                                                        
+                                                    
+                                                    <?php
+                                                        if($row->field!='id'){
+                                                         ?>   
+                                                        {{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}
+                                                        <?php
+                                                        }else{
+                                                           
+                                                               echo '<a style="cursor:pointer" onclick="popitup(\'/admin/orders/'.$data->{$row->field}.'?minimo=true\',\'ventana_'.$data->{$row->field}.'\')">'.$data->{$row->field}.'</a>';
+                                                            
+
+                                                        }
+                                                        ?>
+                                                
+                                                
+                                                </div>
                                                 @elseif($row->type == 'text_area')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
@@ -555,5 +572,10 @@ button.dt-button.active {
             });
             $('.selected_ids').val(ids);
         });
+                function popitup(url,windowName) {
+       newwindow=window.open(url,windowName,'height=600,width=500');
+       //if (window.focus) {newwindow.focus()}
+       return false;
+     }
     </script>
 @stop

@@ -70,7 +70,7 @@ $nro_factura=str_pad($o->id, 8, "0", STR_PAD_LEFT);
 $direccion_usuario=($o->dir_entrega=='' ? 'Valencia' : $o->dir_entrega);
 $direccion_entrega=($o->dir_entrega=='' ? $o->address : $o->dir_entrega);
 if($direccion_entrega==''){
-    $direccion_entrega='Retirar en tienda Biomercados';
+    $direccion_entrega='Retirar en Zona Pickup';
 }
 //$fecha_factura=date('d/m/Y',strtotime($o->fecha_enviado_bio));
 //$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
