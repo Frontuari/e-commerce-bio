@@ -1,21 +1,172 @@
 <?php
    ini_set('display_errors','ON');
+   session_start();
    error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
    const OPENSSL_CIPHER_NAME = "aes-128-ecb";
     require_once("AesCipher.php");
-    $amount="30.55";
+
+    $_GET           =seguro($_GET);
+    $customer_id    =$_GET['nacionalidad'].$_GET['cedula'];
+    $card_number    =$_GET['card_number'];
+    $amount         =$_GET['amount'];
+    $nroFactura     =$_GET['nroFactura'];
+    $account_type   =$_GET['account_type'];
+    $expiration_date=$_GET['ano'].'/'.$_GET['mes'];
+    $clave          =cifrar($_GET['clave']);
+    $cvv            =cifrar($_GET['cvv']);
+    $evento         =$_GET['evento'];
+
+    switch($evento){
+        case 'inicio':
+            $_SESSION['amount']     =$amount;
+            $_SESSION['nroFactura'] =$nroFactura;       
+
+            $boton='<button type="submit" name="evento" value="solicitarClave" class="btn btn-success">Continuar</button>';
+            include('vista.php');
+        break;
+        case 'solicitarClave':
+
+            $res=autenticar($card_number,$customer_id);
+
+            if($res['success']==true){
+
+                $_SESSION['card_number']=$card_number;
+                $_SESSION['customer_id']=$customer_id;
+                $disabled=true;
+                $obj=json_decode($res['data']);
+                $tipo_auth=descifrar($obj->authentication_info->twofactor_type);
+
+                //echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
+            
+                switch($tipo_auth){
+                    case 'clavetelefonica':
+                        $titulo="Ingrese su clave telefónica";
+                        $clave=$claveTelefonica;
+                    break;
+        
+                    case 'claveinternet':
+                        $titulo="Ingrese su clave de internet";
+                        $clave=$claveInternet;
+                    break;
+        
+                    case 'otp':
+                        $titulo="Ingrese su clave OTP";
+                        $clave=$claveOtp;
+                    break;
+                }
+                $htmlPasoB='
+
+                <div class="row">
+                <div class="col-4">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Código CVV:</label>
+                    <input autofocus value="752" name="cvv" title="Nro. CVV que se encuentra en la parte trasera de su carrito" pattern="^\D*\d{3}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                </div>
+                <div class="col-8">
+                  
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha de expiración:</label><br>
+                Mes: <select name="mes">
+                    '.selectFecha(1,12).'
+                    </select>
+                Año: <select name="ano">
+                        '.selectFecha(date('Y'),date('Y', strtotime('+20 years'))).'
+                </select><br></div>
+                </div>
+              </div>
+
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tipo de cuenta:</label>
+                    <select name="account_type" required class="form-control">
+                        <option value="CC">Corriente</option>
+                        <option value="CA">Ahorros</option>
+                    </select>
+                </div>    
+                
+                <div class="form-group">
+                    <label for="exampleInputEmail1">'.$titulo.':</label>
+                    <input value="1234" name="clave" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>             
+
+
+                ';
+                $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Regresar</a> ';
+                $boton.='<button type="submit" name="evento" value="procesarPago" class="btn btn-success">Procesar pago</button>';
+            }else{
+                $htmlPasoB=$res['data'];
+               
+            }
+
+                
+            
+            include('vista.php');
+        break;
+        case 'procesarPago':
+            
+           //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
+           $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
+           if($res['success']==true){
+                $boton='';
+                $obj=json_decode($res['data']);
+                print_r($obj);
+                if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
+                    $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
+                    $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                }elseif(isset($obj->transaction_response)){
+
+                    
+
+
+                    
+                   // $htmlFinal=$obj->transaction_response->trx_status;
+                    $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number);
+                }else{
+                    $htmlFinal="Disculpe, intente mas tarde.";
+                }
+                $boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
+        
+            }else{
+                $htmlFinal=$res['data'];
+                $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                $boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
+            }
+            include('vista.php');
+        break;
+
+
+    }
+exit();
+function selectFecha($inicio,$fin){
+    $option='';
+  
+    while($inicio<=$fin){
+        
+        $option.='<option>'.str_pad($inicio, 2, "0", STR_PAD_LEFT).'</option>';
+        $inicio++;
+    }
+   return $option;
+    
+}
+
+/*
+
+
+    $amount="30.55"; //
     $nroFactura='1231888';
 
 
-   $card_number="501878200066287386";
-   $customer_id="V18366876";
+   $card_number="501878200066287386";//
+   $customer_id="V18366876";//
+
    $account_type="CC";
    $expiration_date="2021/11";
    $claveTelefonica=cifrar("1234");
    $claveInternet=cifrar("Banco_12");
    $claveOtp="";
    $cvv=cifrar("752");
- 
+ */
 /*
    $card_number="501878200048646634";
    $customer_id="V18780283";
@@ -71,62 +222,44 @@ echo descifrar('Jd2EZD3KdoP1i6xdlMFbBg==');
 echo $claveTelefonica."<br>";
 echo $claveInternet."<br>";
 echo "autentificando..<br>";
-$body='
-{
-    "merchant_identify": {
-        "integratorId": 31,
-        "merchantId": 150332,
-        "terminalId": "abcde"
-    },
-    "client_identify": {
-        "ipaddress": "10.0.0.1",
-        "browser_agent": "Chrome 18.1.3",
-        "mobile": {
-            "manufacturer": "Samsung",
-            "model": "S9",
-            "os_version": "Oreo 9.1",
-            "location": {
-                "lat": 37.4224764,
-                "lng": -122.0842499
+
+
+
+function autenticar($card_number,$customer_id){
+    $body='
+    {
+        "merchant_identify": {
+            "integratorId": 31,
+            "merchantId": 150332,
+            "terminalId": "abcde"
+        },
+        "client_identify": {
+            "ipaddress": "10.0.0.1",
+            "browser_agent": "Chrome 18.1.3",
+            "mobile": {
+                "manufacturer": "Samsung",
+                "model": "S9",
+                "os_version": "Oreo 9.1",
+                "location": {
+                    "lat": 37.4224764,
+                    "lng": -122.0842499
+                }
             }
+        },
+        "transaction_authInfo" : {
+            "trx_type": "solaut",
+            "payment_method": "tdd",
+            "card_number": "'.$card_number.'",
+            "customer_id": "'.$customer_id.'"
         }
-    },
-    "transaction_authInfo" : {
-        "trx_type": "solaut",
-        "payment_method": "tdd",
-		"card_number": "'.$card_number.'",
-		"customer_id": "'.$customer_id.'"
     }
-}
-';
-$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/getauth',$body);
-if($res['success']==true){
-  
-    $obj=json_decode($res['data']);
-    $tipo_auth=descifrar($obj->authentication_info->twofactor_type);
-    echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
-   
-    switch($tipo_auth){
-        case 'clavetelefonica':
-            $clave=$claveTelefonica;
-        break;
+    ';
+    $res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/getauth',$body);
+    return $res;
 
-        case 'claveinternet':
-            $clave=$claveInternet;
-        break;
-
-        case 'otp':
-            $clave=$claveOtp;
-        break;
-    }
-
-}else{
-    echo $res['data'];
 }
 
-
-
-
+function procesarPago($card_number,$customer_id,$nroFactura,$account_type,$clave,$expiration_date,$cvv,$amount){
 $body='
 {
 	"merchant_identify": {
@@ -156,19 +289,15 @@ $body='
 	}
 }';
 
-echo $body."<br><hr>";
 
+//echo $body;
 //exit();
 
 $res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/pay',$body);
-if($res['success']==true){
-    $obj=json_decode($res['data']);
-    //echo $obj->authentication_info->twofactor_type;
-    print_r($obj);
-   
 
-}else{
-    echo $res['data'];
+return $res;
+
+
 }
 
 
@@ -261,8 +390,132 @@ function descifrar($dato){
 }
 
 
+function seguro($varb){
+    if(isset($varb)){
+        foreach($varb as $id=>$var){
+            $_GET[$id]= pg_escape_string(htmlspecialchars(filter_var(trim($var),FILTER_SANITIZE_STRING)));
+        }
+    }
+    return $_GET;
+}
 
 
+function salidaMala($xml){
+    echo '
+    <div style="text-align: center; "><img src="../logo.png" width="200" /></div>
+<p>&nbsp;</p>
+<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> <b>Cod. '.$xml->getCodigo().' '.$xml->getDescripcion().'</b><br><br> <a href="http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
+    ';
+
+/*
+    $orders_id=$xml->getFactura();
+    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='$orders_id'";
+    $arr=q($sql);
+    if(is_array($arr)){
+     $users_email=$arr[0]['email'];
+    }
+    enviarCorreo($users_email,'VOUCHER DE PAGO RECHAZADO',formatear($xml->getVoucher()));
+    exit();
+    */
+}
+function salidaBuena($ref,$nroFactura){
+    return '
+<div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
+
+Orden Nro. '.$nroFactura.'<br>
+Referencia. '.$ref.'<br>
+<br /><hr />www.biomercados.com.ve</div>     
+    ';
+/*
+    $amount=$xml->getMonto()/100;
+    //$amount=set_formato_moneda($xml->getMonto());
+   // exit("monto: ".$amount." origen: ".$xml->getMonto()." otros ".$xml->getVoucher());
+    $orders_id=$xml->getFactura();
+    $bank_datas_id=3;
+    $ref="MEGA ".$xml->getReferencia()." ".$xml->getControl();
+    $description=substr(segurob($xml->getVoucher()), 0, 254);
+    $coins_id=2;
+    $status='aprobado';
+
+    //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
+    $diferencia_aceptable=0;
+    if($coins_id==1){ //dolares
+        $diferencia_aceptable=convertir_a_bs($coins_id,0.01);
+        $sumar_sql="+$diferencia_aceptable";
+       
+    }
+    //----------------------
+
+    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='$orders_id'";
+   $arr=q($sql);
+   if(is_array($arr)){
+    $users_id=$arr[0]['id'];
+    $users_purchase_quantity=$arr[0]['purchase_quantity'];
+    $users_email=$arr[0]['email'];
+   }
+    q("BEGIN");
+    $sql="INSERT INTO det_bank_orders (description,coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$description','$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
+   // exit($sql);
+    $arr=q($sql);
+    if(is_array($arr)) $pagoAbonado=true;
+
+    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
+    //exit($sql);
+    $arr=q($sql);
+
+    if(is_array($arr)){
+        $order_status_id=4;
+        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+        //primera compra
+        if($users_purchase_quantity==0){
+            $users_purchase_quantity=1;
+            enviarPaginaCorreo(4,$users_email);
+        }
+    }else{
+        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))";
+    
+        $arr=q($sql);
+        if(is_array($arr)){
+            $order_status_id=2;
+            $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+            //primera compra
+            if($users_purchase_quantity==0){
+                $users_purchase_quantity=1;
+                enviarPaginaCorreo(4,$users_email);
+            }
+        }
+    }
+    q("COMMIT");
+    if($pagoAbonado){
+
+        enviarCorreo($users_email,'VOUCHER DE PAGO',formatear($xml->getVoucher()));
+   }else{
+        // salidaNueva(null,"Disculpe, intente de nuevo",false);
+   } 
+*/
+
+}
 
 
+function set_formato_moneda($value){
+    $listo=null;
+    $patróna = '/[\s]/';
+    $patrón = '/[,\.]/';
+    $va=preg_replace($patróna,"",trim($value));
+    $va=preg_replace($patrón," ",$va);
+    $arr=explode(" ",$va);
+    $total=count($arr);
+    if($total>1){
+        $arr[$total-1]=".".$arr[$total-1];
+        foreach($arr as $valor) $listo.=$valor;
+    }else{
+
+        $listo=$va;
+    }
+   
+    return $listo;
+}
+function formato_numero($numero){
+	return number_format($numero, 2, ",", ".");
+	}
 ?>
