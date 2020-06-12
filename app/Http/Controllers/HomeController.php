@@ -102,7 +102,7 @@ class HomeController extends Controller
         ->take(12)
         ->get();
 
-        $comboData = Packages::where('status','A')->take(8)->get();
+        $comboData = Packages::where('status','A')->take(8)->orderBy('type','asc')->get();
         $Combos = [];
         
         foreach($comboData as $i => $c) {
