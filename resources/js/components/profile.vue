@@ -33,13 +33,13 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="my-address-tab" data-toggle="tab" href="#my-address" role="tab" aria-controls="my-address" aria-selected="false">
+									<a class="nav-link" id="my-address-tab" ref="addressLink" data-toggle="tab" href="#my-address" role="tab" aria-controls="my-address" aria-selected="false">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.16 19.2"><title>mis-direcciones-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path d="M7.59,12.07a4.48,4.48,0,1,1,4.48-4.48.38.38,0,1,1-.76,0,3.72,3.72,0,1,0-3.72,3.72.38.38,0,0,1,0,.76Z"/><path d="M7.36,19.16A.36.36,0,0,1,7,19a28.25,28.25,0,0,0-3-3.71,23,23,0,0,1-2.78-3.44A7.92,7.92,0,0,1,0,7.58,7.6,7.6,0,0,1,7.59,0a7.58,7.58,0,0,1,7.59,7.58.35.35,0,0,1-.11.27.36.36,0,0,1-.26.11.4.4,0,0,1-.39-.38,6.83,6.83,0,0,0-13.66,0c0,3,1.78,4.93,3.84,7.18a27.35,27.35,0,0,1,3.08,3.82.38.38,0,0,1-.12.52A.36.36,0,0,1,7.36,19.16Z"/><path d="M11.58,19.2a1.8,1.8,0,0,1-1.79-1.8V14l-.67.61a.46.46,0,0,1-.32.16.37.37,0,0,1-.28-.13.38.38,0,0,1-.1-.27.42.42,0,0,1,.12-.26l4-3.68a1.8,1.8,0,0,1,1.22-.48,1.79,1.79,0,0,1,1.22.48l4,3.68a.37.37,0,0,1,.12.26.34.34,0,0,1-.1.27.37.37,0,0,1-.28.13.44.44,0,0,1-.26-.1l-.76-.7V17.4A1.81,1.81,0,0,1,16,19.2Zm2.21-8.54a1.06,1.06,0,0,0-.71.28l-2.53,2.32V17.4a1,1,0,0,0,1,1H16a1,1,0,0,0,1-1V13.22l-2.5-2.28A1,1,0,0,0,13.79,10.66Z"/></g></g></svg>
 										Mis direcciones de Envío
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="my-orders-tab" data-toggle="tab" href="#my-orders" role="tab" aria-controls="my-orders" aria-selected="false">
+									<a class="nav-link trigger" id="my-orders-tab" ref="ordersLink" data-toggle="tab" href="#my-orders" role="tab" aria-controls="my-orders" aria-selected="false">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.43 19.97"><title>mis-pedidos-bio-mercados</title><g id="Capa_2" data-name="Capa 2"><g id="Perfil_de_Usuario" data-name="Perfil de Usuario"><path d="M14.53,13h.32a.31.31,0,0,0,0-.61h0v-.82h.84a.27.27,0,0,0,.28.2.3.3,0,0,0,.31-.3v-.21A.31.31,0,0,0,16,11H14.53a.27.27,0,0,0-.21.09.29.29,0,0,0-.09.21v1.43a.31.31,0,0,0,.09.22.27.27,0,0,0,.21.09Z"/><path d="M14.53,15.76H16a.3.3,0,0,0,.3-.3V14a.3.3,0,0,0-.3-.3H14.53a.3.3,0,0,0-.3.3v1.43a.3.3,0,0,0,.3.3Zm.31-1.43h.82v.83h-.82Z"/><path d="M14.85,17.93h0v-.82h.82a.31.31,0,0,0,.61,0v-.29A.33.33,0,0,0,16,16.5H14.53a.32.32,0,0,0-.3.32v1.43a.29.29,0,0,0,.09.21.32.32,0,0,0,.21.08h.32a.31.31,0,0,0,0-.61Z"/><path d="M16.66,11.32l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.49a.32.32,0,0,0,.43,0l1.1-1.11a.3.3,0,0,0-.43-.43Z"/><path d="M16.66,16.93l-.89.89-.27-.27a.3.3,0,0,0-.43.43l.49.48a.3.3,0,0,0,.43,0l1.1-1.1a.3.3,0,0,0-.43-.43Z"/><path d="M19.78,11.69H17.87a.3.3,0,1,0,0,.6h1.91a.3.3,0,0,0,0-.6Z"/><path d="M19.78,14.46H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M19.78,17.24H17.87a.31.31,0,0,0,0,.61h1.91a.31.31,0,0,0,0-.61Z"/><path d="M20.13,8.61H19.05a1.07,1.07,0,0,0-1-.78H16.88V5a.32.32,0,0,0-.15-.26L8.59,0a.32.32,0,0,0-.3,0L.15,4.74A.32.32,0,0,0,0,5v9.4a.33.33,0,0,0,.15.27l8.14,4.7a.32.32,0,0,0,.31,0l4.29-2.47v1.78a1.25,1.25,0,0,0,.37.92,1.28,1.28,0,0,0,.92.37h5.95a1.28,1.28,0,0,0,.92-.37,1.3,1.3,0,0,0,.38-.92V9.92a1.3,1.3,0,0,0-1.3-1.31ZM18,8.43a.44.44,0,0,1,.44.44v0a.44.44,0,0,1-.44.44H16.28a.43.43,0,0,1-.44-.44v0a.44.44,0,0,1,.44-.44ZM8.44.65l3.39,2L4.29,7,.91,5ZM8.16,18.58.61,14.23V5.53L8.16,9.88Zm.28-9.23-3.54-2L12.44,3,16,5Zm4.45.57V16.2L8.76,18.58V9.88l7.51-4.35v2.3h0a1.06,1.06,0,0,0-1,.78H14.18a1.29,1.29,0,0,0-1.29,1.31Zm7.93,8.76a.68.68,0,0,1-.2.49.7.7,0,0,1-.49.2H14.18a.7.7,0,0,1-.49-.2.68.68,0,0,1-.2-.49V9.92a.7.7,0,0,1,.69-.71h1.09a1,1,0,0,0,1,.74H18a1,1,0,0,0,1-.74h1.1a.71.71,0,0,1,.69.71Z"/></g></g></svg>
 										Mis pedidos
 									</a>
@@ -863,7 +863,7 @@
 									'Su orden ha sido cancelada exitosamente',
 									'success'
 								).then( result => {
-									location.href="/profile";
+									location.href="/profile?tab=my-orders";
 								});
 							}
 						});
@@ -882,9 +882,12 @@
 					tab[name]=value;
 				});
 
-				if(tab['tab'] == 'my-favorites')
-				{
+				if(tab['tab'] == 'my-favorites') {
 					this.$refs.favoriteLink.click();
+				}else if(tab['tab'] == 'my-orders') {
+					this.$refs.ordersLink.click();
+				}else if(tab['tab'] == "my-address"){
+					this.$refs.addressLink.click();
 				}
 			},
 			removeToFavorite(id,user_id,index)

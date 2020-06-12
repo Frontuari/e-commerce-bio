@@ -25,7 +25,10 @@ if(document.getElementById("factura")){
 }
 
 
-var id_orders=orders_id;
+var id_orders="";
+if(typeof(orders_id) !== "undefined") {
+    id_orders = orders_id;
+}
 var activar_envio=false;
 var direccionOrden=0;
 var horaEntregaOrden="NULL";
@@ -102,7 +105,7 @@ function elegidoMetodo(id,name){
 function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
     console.log("id::> ",id);
     var div_referencia=`<div class="col-md-6">
-    <label>Referencia:</label>
+    <label>Referencia Bancaria:</label>
     <input id="input_ref" name="ref" class="form-control" type="text">
         </div>`;
     var otro_ancho='';
@@ -248,11 +251,9 @@ function procesar(data,evento){
                         
                     }
                     //validar la cantidad maxima de pagos.
-                   
-                    if(parseFloat(ra.cant_pagos)>1 &&  pagado<parseFloat(ra.total_pay)){
-                        //alert("");
-                        limite_max_pagos_alcanzado=true;
-                    }
+                    // if(parseFloat(ra.cant_pagos)>1 &&  pagado<parseFloat(ra.total_pay)){
+                    //     limite_max_pagos_alcanzado=true;
+                    // }
                     //alert(pagado.toFixed(2));
                     if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
                         ordenPagada=true;
@@ -318,7 +319,7 @@ console.log(ra);
                   var detalles='';
 
 
-                  for (var i = 0; i < res.length; i++) {
+                for (var i = 0; i < res.length; i++) {
                     var name=res[i]['name'];
                     var cant=res[i]['cant'];
                     var precio=res[i]['price'];
@@ -338,14 +339,7 @@ console.log(ra);
                         <div class="col-md-1 text-right">`+cant+`</div>
                         <div class="col-md-3 text-right">`+formatB(_totalProductoB[i])+`</div>
                     </div>`;
-                  }
-
-
-                  
-
-
-
-
+                }
 
                 factura.innerHTML=`
                 <div class="row">
@@ -462,7 +456,7 @@ console.log(ra);
                 }
                 div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile'>Agregar nueva dirección</a>";
             }else{
-                div_direccion_entrega.innerHTML="Usted no tiene direcciones registradas";
+                div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='0'>Pick - Up</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
                 //alert(data.msj_general);
                 return false;
             }
@@ -621,7 +615,10 @@ function actualizarStore(){
     get('web_no_login');
 }
 
-setInterval('actualizarStore()',3000);
+window.onload = function() {
+    setInterval('actualizarStore()',1000);    
+}
+
 
 function get(evento,variables="") {
     var host=window.location.host;

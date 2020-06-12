@@ -19,7 +19,7 @@
 						<h1>bio mercados</h1>
 						<ul class="items">
 							<li>Tendrá acceso a nuestra tienda virtual y nuestras aplicaciones móviles con una sola cuenta.</li>
-							<li>Podrá acumular y canjear sus puntos bio por productos y ahorrar dinero en las compras.</li>
+							<!-- <li>Podrá acumular y canjear sus puntos bio por productos y ahorrar dinero en las compras.</li> -->
 							<li>Obtendrá grandes descuentos, promociones y más, en los precios de nuestros productos y cambios bio.</li>
 							<li>Podrá realizar una compra sin salir de su hogar y recibir los productos en la puerta de su casa u oficina.</li>
 						</ul>

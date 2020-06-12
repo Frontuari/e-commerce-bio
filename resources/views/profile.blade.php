@@ -30,7 +30,10 @@ if(isset($_GET['orders_id'])){
                     <div class="col-md-12 text-center h4" style="color:#67BE5A">Métodos de pago</div>
 				</div>
 				<div class="row">
-                    <div class="col-md-12"><span class="text-danger">Importante:</span><br><span class="text-danger">*</span> Puede realizar un máximo de 2 pagos<br><span class="text-danger">*</span> Si va a pagar en efectivo combinado con otro método de pago, debe elegir primero el método de pago en Efectivo.</div>
+                    <div class="col-md-12"><span class="text-danger">Importante:</span><br>
+                    	<!-- <span class="text-danger">*</span> Puede realizar un máximo de 2 pagos<br> -->
+                    	<span class="text-danger">*</span> Si va a pagar en efectivo combinado con otro método de pago, debe elegir primero el método de pago en Efectivo.
+                    </div>
 				</div>
 				<div id="metodosPago"></div>
 			</div>
