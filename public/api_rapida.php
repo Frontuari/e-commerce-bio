@@ -341,7 +341,7 @@ function listarCombos($tipo_salida=false){
     'cant',dpp.cant,
     'stock',p.qty_avaliable
 ) 
-) json,initcap(pa.name) as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
+) json,pa.name as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
     $arr=q($sql);
     if(is_array($arr)){
         $arr=recortar_imagen_combo($arr);
