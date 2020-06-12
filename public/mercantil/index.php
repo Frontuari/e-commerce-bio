@@ -121,16 +121,16 @@
 
                     
                    // $htmlFinal=$obj->transaction_response->trx_status;
-                    $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number);
+                    //$htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
                 }else{
                     $htmlFinal="Disculpe, intente mas tarde.";
                 }
-                $boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
+                //$boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
         
             }else{
                 $htmlFinal=$res['data'];
                 $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
-                $boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
+                //$boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
             }
             include('vista.php');
         break;
@@ -149,80 +149,6 @@ function selectFecha($inicio,$fin){
    return $option;
     
 }
-
-/*
-
-
-    $amount="30.55"; //
-    $nroFactura='1231888';
-
-
-   $card_number="501878200066287386";//
-   $customer_id="V18366876";//
-
-   $account_type="CC";
-   $expiration_date="2021/11";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("752");
- */
-/*
-   $card_number="501878200048646634";
-   $customer_id="V18780283";
-   $account_type="CC";
-   $expiration_date="2019/12";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("851");
-
-   $card_number="501878200039261815";
-   $customer_id="V6257291";
-   $account_type="CC";
-   $expiration_date="2015/05";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("772");
-
-
-   $card_number="501878200028558700";
-   $customer_id="V20328261";
-   $account_type="CC";
-   $expiration_date="2015/06";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("932");
-
-
-   $card_number="501878200047405644";
-   $customer_id="V19288271";
-   $account_type="CC";
-   $expiration_date="2018/02";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("936");
-
-   $card_number="501878200070125028";
-   $customer_id="V9785256";
-   $account_type="CC";
-   $expiration_date="2022/03";
-   $claveTelefonica=cifrar("1234");
-   $claveInternet=cifrar("Banco_12");
-   $claveOtp="";
-   $cvv=cifrar("563");
-   */
-  // echo $cvv;
-
-//Autentificacion
-echo descifrar('Jd2EZD3KdoP1i6xdlMFbBg==');
-echo $claveTelefonica."<br>";
-echo $claveInternet."<br>";
-echo "autentificando..<br>";
-
 
 
 function autenticar($card_number,$customer_id){
@@ -418,7 +344,7 @@ function salidaMala($xml){
     exit();
     */
 }
-function salidaBuena($ref,$nroFactura){
+function salidaBuena($ref,$nroFactura,$amount){
     return '
 <div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
 
@@ -426,24 +352,28 @@ Orden Nro. '.$nroFactura.'<br>
 Referencia. '.$ref.'<br>
 <br /><hr />www.biomercados.com.ve</div>     
     ';
-/*
-    $amount=$xml->getMonto()/100;
+
+ 
     //$amount=set_formato_moneda($xml->getMonto());
    // exit("monto: ".$amount." origen: ".$xml->getMonto()." otros ".$xml->getVoucher());
-    $orders_id=$xml->getFactura();
-    $bank_datas_id=3;
-    $ref="MEGA ".$xml->getReferencia()." ".$xml->getControl();
-    $description=substr(segurob($xml->getVoucher()), 0, 254);
+    $orders_id=$nroFactura;
+    $bank_datas_id=6;
+ //   $ref=$ref;
+    $description="TDD mercantil ";
     $coins_id=2;
     $status='aprobado';
 
     //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
     $diferencia_aceptable=0;
+    $sumar_sql='';
+    /*
     if($coins_id==1){ //dolares
         $diferencia_aceptable=convertir_a_bs($coins_id,0.01);
         $sumar_sql="+$diferencia_aceptable";
        
     }
+
+    */
     //----------------------
 
     $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='$orders_id'";
@@ -488,11 +418,11 @@ Referencia. '.$ref.'<br>
     q("COMMIT");
     if($pagoAbonado){
 
-        enviarCorreo($users_email,'VOUCHER DE PAGO',formatear($xml->getVoucher()));
+        //enviarCorreo($users_email,'VOUCHER DE PAGO',formatear($xml->getVoucher()));
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
-*/
+
 
 }
 
