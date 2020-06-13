@@ -364,7 +364,7 @@ function salidaBuena($ref,$nroFactura,$amount){
    // exit("monto: ".$amount." origen: ".$xml->getMonto()." otros ".$xml->getVoucher());
     $orders_id=$nroFactura;
     $bank_datas_id=6;
-    $ref="TDD ".$ref;
+   // $ref=$ref;
     $description="TDD mercantil ";
     $coins_id=2;
     $status='aprobado';
