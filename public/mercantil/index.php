@@ -1,7 +1,13 @@
 <?php
-   ini_set('display_errors','ON');
-   session_start();
-   error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
+cabecera('On');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+$a=extraer_datos_db();
+$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
+$datos=run();
+session_start();
+
    const OPENSSL_CIPHER_NAME = "aes-128-ecb";
     require_once("AesCipher.php");
 
@@ -107,6 +113,7 @@
             
            //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
            $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
+
            if($res['success']==true){
                 $boton='';
                 $obj=json_decode($res['data']);
@@ -122,6 +129,8 @@
                     
                    // $htmlFinal=$obj->transaction_response->trx_status;
                 $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
+                $_SESSION['amount']=null;
+                $_SESSION['nroFactura']=null;
                 }else{
                     $htmlFinal="Disculpe, intente mas tarde.";
                 }
@@ -129,7 +138,7 @@
         
             }else{
                 $htmlFinal=$res['data'];
-                $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intente nuevamente</a> ';
                 //$boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
             }
             include('vista.php');
@@ -447,5 +456,149 @@ function set_formato_moneda($value){
 }
 function formato_numero($numero){
 	return number_format($numero, 2, ",", ".");
-	}
+    }
+    
+    function cabecera($error="Off"){
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+        header("Access-Control-Allow-Headers: content-type, authorization");
+        //header('Content-type: text/html; charset=utf-8');
+        ini_set('display_errors',$error);
+        error_reporting(E_ALL ^E_NOTICE ^E_DEPRECATED);
+        ini_set('max_execution_time', 155);
+    }
+    function run(){
+        $postdata = file_get_contents("php://input");
+        $input = json_decode($postdata);
+        if($_GET['id_sesion']){
+            session_id($_GET['id_sesion']);
+        }
+        return $input;
+    }
+
+
+
+
+
+
+
+    function conectar_db($host,$base_dato,$usuario,$clave,$puerto){
+        $dbconn = pg_connect("host=".$host." dbname=$base_dato user=$usuario password=$clave port=$puerto")
+        or die('No se ha podido conectar: ' . pg_last_error());
+        return $dbconn;
+    }
+    function q($sql){
+        $arr=array();
+       // $result = pg_query($sql) or die(false);
+       $con=$GLOBALS["con"];
+        if (pg_send_query($con,$sql)) {
+            $res=pg_get_result($con);
+            if ($res) {
+              $state = pg_result_error_field($res, PGSQL_DIAG_SQLSTATE);
+              if ($state==0) {
+                while ($line = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+                    $arr[]=$line;
+                }
+                if(count($arr)){
+                    return $arr;
+                }else{
+                    return true;
+                }
+              }
+              else {
+                  switch($state){
+                      case 23505:
+                        salida(null,"El registro ya existe, intente de nuevo.",false);
+                      break;
+                      case '22P02':
+                        salida(null,"Ingrese todos los campos obligatorios.",false);
+                        
+                      break;
+                      default:
+                        exit($sql);
+                  }
+              }
+            }  
+          }
+          salida('',"Disculpe, intente de nuevo",false);
+    
+    
+    }
+    function enviarPaginaCorreo($id,$email){
+        //3 bienvenido
+        //4 primera compra
+        $arr=q("SELECT * FROM pages WHERE id='$id'");
+        if(is_array($arr)){
+            $titulo=$arr[0]['titulo'];
+            $body=$arr[0]['body'];
+            enviarCorreo($email,$titulo,$body);
+        }
+    }
+    function salida($row,$msj_general="",$bueno=true){
+        $rowa['success']=$bueno;
+        if(!$bueno) header('HTTP/1.1 409 Conflict');
+        $rowa['msj_general']=$msj_general;
+        $rowa['data']=$row;
+        echo json_encode($rowa);
+        exit();
+    }
+    function enviarCorreo($email,$titulo,$body){
+
+        require __DIR__.'/../../vendor/autoload.php';
+       // echo is_file(__DIR__.'/../vendor/autoload.php');
+    
+    
+        $mail = new PHPMailer(true);
+    
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'mail.biomercados.com.ve';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'noreply@biomercados.com.ve';                     // SMTP username
+            $mail->Password   = 'Bio2020';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            
+            $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->SMTPDebug = 0;
+            $mail->CharSet = 'UTF-8';
+            //Recipients
+            $mail->setFrom('noreply@biomercados.com.ve', 'Biomercados - Bio en línea');
+            $mail->addAddress($email);
+            
+            $mail->isHTML(true);
+            $mail->Subject = $titulo;
+            $mail->Body    = $body;
+            
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    
+    }
+    function extraer_datos_db(){
+        $gestor = @fopen("../../.env", "r");
+        if ($gestor) {
+            while (($búfer = fgets($gestor, 4096)) !== false) {
+                $arr[]=$búfer;
+            }
+            fclose($gestor);
+        }
+        $db['host']     =limpiar($arr[9]);
+        $db['port']     =limpiar($arr[10]);
+        $db['database'] =limpiar($arr[11]);
+        $db['user']     =limpiar($arr[12]);
+        $db['password'] =limpiar($arr[13]);
+        return $db;
+    }
+    
+    
+    
+    function limpiar($var){
+        return trim(explode('=',$var)[1]);
+    }
 ?>
