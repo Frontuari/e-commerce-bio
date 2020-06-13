@@ -83,6 +83,19 @@ function procesarPago(){
         }, 200);
         return false;
     }
+    if(bank_datas_id==6){
+        datosBancarios.innerHTML=`
+        <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDD se refrescará esta ventana</div></div>
+        `;
+        ventana = window.open(`http://199.188.204.152/mercantil/index.php?evento=inicio&nroFactura=${id_orders}&amount=${mega_amount}`, "myWindow", "width=400,height=550"); 
+        var winTimer = window.setInterval(function() {
+            if (ventana.closed !== false) {
+                window.clearInterval(winTimer);
+                refrescar();
+            }
+        }, 200);
+        return false;
+    }
     if(document.getElementById('input_ref')){
         ref=input_ref.value;
     }else{
@@ -110,12 +123,15 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
         </div>`;
     var otro_ancho='';
     var txt_btn_pagar='Pagar';
-    if(id==3 || id==2) {
+    if(id==3 || id==2  || id==6) {
         div_referencia='';
         otro_ancho='<div class="col-md-3"></div>';
     }
     if(id==3) {
         txt_btn_pagar='Procesar TDC';
+    }
+    if(id==6) {
+        txt_btn_pagar='Procesar TDD';
     }
     if(coins_id==1){
         var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
@@ -554,43 +570,45 @@ function actualizarResumenOrden(){
         var totalEnvioD=0.00;
         var datos=getLocal('cartNew');
         // console.log(datos);
-        for (var [key, value] of Object.entries(datos)) {
-            var p       =productos[value.product.id];
-            if(p!=null){
-            var cant        =value.cant;
-            var peso        =p.peso;
-            var precio_con_iva=(p.total_precio*cant);
-            var precio_dolar=(p.total_precio_dolar*cant);
-            var nombre      =p.name;
-            totalB+=precio_con_iva;
-            totalD+=precio_dolar;
-            totalPeso+=peso;
+        if(datos){
+            for (var [key, value] of Object.entries(datos)) {
+                var p       =productos[value.product.id];
+                if(p!=null){
+                var cant        =value.cant;
+                var peso        =p.peso;
+                var precio_con_iva=(p.total_precio*cant);
+                var precio_dolar=(p.total_precio_dolar*cant);
+                var nombre      =p.name;
+                totalB+=precio_con_iva;
+                totalD+=precio_dolar;
+                totalPeso+=peso;
 
-            detalle+='<div class="row" style="margin-bottom:5px; border-bottom:1px solid #ddd "><div class="col-md-1" style="margin:0"><img width="30px" src="storage/'+p.image+'"></div><div class="col-md-5" style="font-size:13px">'+nombre+' <span style="color:red"> X '+cant+'</span></div><div class="col-md-5" style="text-align:right">'+formatB(precio_con_iva)+'<br>'+formatD(precio_dolar)+'</div></div>';
+                detalle+='<div class="row" style="margin-bottom:5px; border-bottom:1px solid #ddd "><div class="col-md-1" style="margin:0"><img width="30px" src="storage/'+p.image+'"></div><div class="col-md-5" style="font-size:13px">'+nombre+' <span style="color:red"> X '+cant+'</span></div><div class="col-md-5" style="text-align:right">'+formatB(precio_con_iva)+'<br>'+formatD(precio_dolar)+'</div></div>';
+                }
             }
-        }
-
-        var peso_max=d_envio.peso_max;
-        var precioEnvioB=d_envio.precio_b;
-        var precioEnvioD=d_envio.precio_d;
-        var peso_cargado=peso_max;
-        var multiplo_peso=1;
-
-        while(totalPeso>peso_cargado) {
-          multiplo_peso++;
-         
-            peso_cargado+=(peso_max+peso_cargado);
-         
-        }
-        if(activar_envio==false){
-            multiplo_peso=0;
-        }
-        totalEnvioB=precioEnvioB*multiplo_peso;
-        totalEnvioD=precioEnvioD*multiplo_peso;
-        totalPagarB=totalEnvioB+totalB;
-        totalPagarD=totalEnvioD+totalD;
 
 
+            var peso_max=d_envio.peso_max;
+            var precioEnvioB=d_envio.precio_b;
+            var precioEnvioD=d_envio.precio_d;
+            var peso_cargado=peso_max;
+            var multiplo_peso=1;
+
+            while(totalPeso>peso_cargado) {
+            multiplo_peso++;
+            
+                peso_cargado+=(peso_max+peso_cargado);
+            
+            }
+            if(activar_envio==false){
+                multiplo_peso=0;
+            }
+            totalEnvioB=precioEnvioB*multiplo_peso;
+            totalEnvioD=precioEnvioD*multiplo_peso;
+            totalPagarB=totalEnvioB+totalB;
+            totalPagarD=totalEnvioD+totalD;
+
+  
 
 
 
@@ -602,7 +620,7 @@ function actualizarResumenOrden(){
         '<div class="row"><div class="col-md-12" style="color:red; text-align:right">(impuestos incluidos)</div></div><br>'+
         ''+
         '';
-
+  }
         if(document.getElementById("div_resumen_compra")){
             div_resumen_compra.innerHTML=h;
         }
