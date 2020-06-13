@@ -110,7 +110,8 @@ session_start();
             include('vista.php');
         break;
         case 'procesarPago':
-            
+           //echo salidaBuena(2332,218,20.44)."s";
+            //exit();
            //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
            $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
 
@@ -129,6 +130,7 @@ session_start();
                     
                    // $htmlFinal=$obj->transaction_response->trx_status;
                 $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
+                //$htmlFinal=salidaBuena(2332,218,20.44);
                 $_SESSION['amount']=null;
                 $_SESSION['nroFactura']=null;
                 }else{
@@ -354,13 +356,7 @@ function salidaMala($xml){
     */
 }
 function salidaBuena($ref,$nroFactura,$amount){
-    return '
-<div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
 
-Orden Nro. '.$nroFactura.'<br>
-Referencia. '.$ref.'<br>
-<br /><hr />www.biomercados.com.ve</div>     
-    ';
 
  
     //$amount=set_formato_moneda($xml->getMonto());
@@ -431,7 +427,13 @@ Referencia. '.$ref.'<br>
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
-
+   return '
+   <div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
+   
+   Orden Nro. '.$nroFactura.'<br>
+   Referencia. '.$ref.'<br>
+   <br /><hr /></div>     
+       ';
 
 }
 
