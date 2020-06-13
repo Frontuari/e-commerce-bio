@@ -118,7 +118,7 @@ session_start();
            if($res['success']==true){
                 $boton='';
                 $obj=json_decode($res['data']);
-                print_r($obj);
+                //print_r($obj);
                 if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
                     $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
                     $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
