@@ -57,7 +57,7 @@
 				$portada = "storage/".$category[0]->image_b;
 				$title = $category[0]->name;
 			}else{
-				$portada = '/assets/img/banner-titulos.jpg';
+				$portada = '/assets/img/banner-titulos.png';
 				$title = 'Catalogo';
 			}
 			

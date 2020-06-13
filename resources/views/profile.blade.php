@@ -10,7 +10,7 @@ if(isset($_GET['orders_id'])){
 
 ?>
 
-<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
+<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.png');">
 		<div class="container">
 			<div class="text-center">
 				<h1>Carrito de Compras</h1>
@@ -49,7 +49,7 @@ if(isset($_GET['orders_id'])){
 
 }else{
 	?>
-		<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
+		<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.png');">
 		<div class="container">
 			<div class="text-center">
 				<h1>Mi Cuenta</h1>
