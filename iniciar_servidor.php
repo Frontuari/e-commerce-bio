@@ -242,8 +242,8 @@ function agregarVariables($texto,$variables){
 }
 
 function actualizarEnvioOrden($ip){
-	$arr=q("SELECT *, CASE WHEN direccion_a_no_usar_esta='' THEN 'Valencia' else direccion_a_no_usar_esta END as direccion_a FROM (SELECT 
-	'T01' as localidad,
+	$arr=q("SELECT localidad,norder,envio,sub_total,exento,base_imponible,iva,total,rif,direccion_de_entrega,direccion_b,descripcion,telefono,fecha_de_orden,fecha_para_entrega,orderlines,detallepago, (CASE WHEN k.direccion_a='' THEN 'Valencia' ELSE k.direccion_a END) as  direccion_a from (SELECT *, (CASE WHEN direccion_habitacion IS NULL THEN direccion_de_entrega else direccion_habitacion END) as direccion_a FROM (SELECT 
+	'T06' as localidad,
 	o.id as norder,
 	o.total_transport as envio,
 	o.sub_total,
@@ -253,7 +253,7 @@ function actualizarEnvioOrden($ip){
 	o.total_pay as total,
 	p.rif as rif,
 	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_de_entrega,
-	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_a_no_usar_esta,
+	(SELECT concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) FROM public.order_address oa where type='habitacion' AND users_id=t.users_id) as direccion_habitacion,
 	'Carabobo' AS direccion_B,
 	p.name as descripcion,
 	p.phone as telefono,
@@ -283,7 +283,7 @@ function actualizarEnvioOrden($ip){
 			
 	) FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id INNER JOIN payment_methods pm ON pm.id=bd.payment_methods_id WHERE dbo.orders_id=o.id) detallepago 
 	
-	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y");
+	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y) k");
 	
 	if(is_array($arr)){
 		echo "Enviado Nueva orden";
