@@ -1275,7 +1275,20 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
     'c',c.id,
     'm',c.adulto
 ) 
-) json_subcategories, initcap(p.keyword) keyword,p.qty_sold,p.peso,p.qty_avaliable,p.qty_max,p.description_short,coalesce(SUM(t.value),0.000000) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id INNER JOIN categories c ON c.id=sc.categories_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' $join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+) json_subcategories,
+initcap(p.keyword) keyword,
+p.qty_sold,p.peso,
+p.qty_avaliable,
+p.qty_max,
+p.description_short,
+coalesce((SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id),0.000000) total_impuesto,
+coalesce(((p.price*(SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id)/100)+p.price),p.price) total_precio,
+p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,
+coalesce(((p.price*(SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id)/100)+p.price),p.price)/(SELECT rate FROM coins WHERE id=1) as total_precio_dolar
+FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id
+INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
+INNER JOIN categories c ON c.id=sc.categories_id
+$join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
