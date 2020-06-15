@@ -1129,7 +1129,7 @@ function listarProductosPorBusqueda($tipo_salida=false){
         $otro=$texto;
     }
     
-    $where="AND (to_tsvector(p.name) @@ to_tsquery('$otro') OR (name iLIKE '%$texto%'))";
+    $where="AND ((to_tsvector(p.name) @@ to_tsquery('$otro')) OR (name iLIKE '%$texto%'))";
 
     $sql=getSqlListarProductos('',$where,'');
     $sql=filtroProductos($sql);
