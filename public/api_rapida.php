@@ -1133,7 +1133,7 @@ function listarProductosPorBusqueda($tipo_salida=false){
 
     $sql=getSqlListarProductos('',$where,'');
     $sql=filtroProductos($sql);
-    exit($sql);
+
     listarProductos($sql,false,false,$tipo_salida);    
 }
 function buscarProducto(){//el autocompletado
