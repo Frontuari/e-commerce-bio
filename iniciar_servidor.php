@@ -502,6 +502,25 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 					
 
 if(is_array($obj->Categoria)){
+	//eliminar producto de subcategoria
+	$sql="SELECT id,sub_categories_id FROM det_sub_categories WHERE products_id=$products_id";
+	$arr_det=q($sql);
+	if(is_array($arr_det)){
+		foreach($arr_det as $sub){
+			$esta=false;
+			foreach($obj->Categoria as $cat){
+				if($sub['sub_categories_id']==$cat->codigo){
+					$esta=true;
+				}
+			}
+			if(!$esta){
+				$idSub=$sub['id'];
+				q("DELETE FROM det_sub_categories WHERE id='$idSub'");
+			}
+		}
+	}
+	//-------------------------------
+
 	foreach($obj->Categoria as $cat){
 
 
@@ -510,7 +529,7 @@ if(is_array($obj->Categoria)){
 		$arr_det=q($sql);
 		
 		if(!is_array($arr_det)){
-$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
+			$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
 //				exit($sql);
 			q($sql);
 		}
