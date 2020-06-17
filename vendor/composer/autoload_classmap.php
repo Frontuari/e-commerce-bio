@@ -68,6 +68,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\BankDatasController' => $baseDir . '/app/Http/Controllers/BankDatasController.php',
     'App\\Http\\Controllers\\BanksController' => $baseDir . '/app/Http/Controllers/BanksController.php',
+    'App\\Http\\Controllers\\BiowalletController' => $baseDir . '/app/Http/Controllers/BiowalletController.php',
     'App\\Http\\Controllers\\BrandsController' => $baseDir . '/app/Http/Controllers/BrandsController.php',
     'App\\Http\\Controllers\\CalendarController' => $baseDir . '/app/Http/Controllers/CalendarController.php',
     'App\\Http\\Controllers\\CartController' => $baseDir . '/app/Http/Controllers/CartController.php',

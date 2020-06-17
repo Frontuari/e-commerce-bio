@@ -713,6 +713,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\BankDatasController' => __DIR__ . '/../..' . '/app/Http/Controllers/BankDatasController.php',
         'App\\Http\\Controllers\\BanksController' => __DIR__ . '/../..' . '/app/Http/Controllers/BanksController.php',
+        'App\\Http\\Controllers\\BiowalletController' => __DIR__ . '/../..' . '/app/Http/Controllers/BiowalletController.php',
         'App\\Http\\Controllers\\BrandsController' => __DIR__ . '/../..' . '/app/Http/Controllers/BrandsController.php',
         'App\\Http\\Controllers\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarController.php',
         'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
