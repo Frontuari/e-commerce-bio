@@ -17,7 +17,8 @@ class CreateBiowalletsTable extends Migration
             $table->bigIncrements('id');
             $table->decimal('monto', 20, 2);
             $table->string('tipo')->nullable()->default('Nuevo');
-            $table->unsignedBigInteger('users_id');
+            $table->string('email');
+            $table->text('observacion')->nullable();
             $table->unsignedBigInteger('orders_id')->nullable();
             $table->timestamps();
         });
