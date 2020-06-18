@@ -25,6 +25,9 @@ class ProductController extends BaseController
         ->where("products.qty_avaliable",">",0)
         ->groupBy("products.id","taxes.value")
         ->paginate($limit);
+
+        // dd($Products->toSql());
+
         return $this->sendResponse($Products, 'Product retrieved successfully.');
     }
 
