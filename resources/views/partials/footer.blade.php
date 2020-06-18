@@ -31,8 +31,8 @@
 						</a>
 						<div class="collapse" id="apps">
 							<div class="card card-body">
-								<a href="#"><img src="/assets/img/descarga-app-android-bio.svg"></a>
-								<a href="#"><img src="/assets/img/descarga-app-ios-bio.svg"></a>
+								<a href="https://play.google.com/store/apps/details?id=com.bio.biomercados"><img src="/assets/img/descarga-app-android-bio.svg"></a>
+								<!-- <a href="#"><img src="/assets/img/descarga-app-ios-bio.svg"></a> -->
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 	<script id="aaa" type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
 	@yield('js')
-	<script type="text/javascript" src="js/carrito.js?ver=1.2.3"></script>
+	<script type="text/javascript" src="js/carrito.js?ver=1.2.5"></script>
 	
 	<script>
 

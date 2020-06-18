@@ -164,8 +164,9 @@
             }
         },
         created() {
-            for(let i = 0;i<2000;i++) {
-                this.cant_product[i] = 1;
+            let products = JSON.parse(window.localStorage.getItem("productos")).data;
+            for(let i = 0;i<products.length;i++) {
+                this.cant_product[products[i].id] = 1;
             }
         },
         props: {
