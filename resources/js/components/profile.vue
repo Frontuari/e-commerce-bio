@@ -189,7 +189,7 @@
 
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label for="address-urb">Urbanización / Barrio / Empresa:</label>
+																<label for="address-urb">Urbanización / Empresa:</label>
 																<input type="text" class="form-control" id="address-urb" name="address-urb"  v-model="userData.habDirection.urb">
 															</div>
 														</div>
@@ -322,7 +322,7 @@
 															</div>
 															<div class="col-lg-6">
 																<div class="form-group">
-																	<label for="address-urb">Urbanización / Barrio / Empresa:</label>
+																	<label for="address-urb">Urbanización / Empresa:</label>
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
 																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="direction.urb">

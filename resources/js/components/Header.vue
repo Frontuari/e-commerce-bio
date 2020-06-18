@@ -33,7 +33,7 @@
 					</div>
 					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" v-on:submit="search()">
-							<input class="form-control" id="bio-search" type="text" placeholder="Busca aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText">
+							<input class="form-control" id="bio-search" type="text" placeholder="Busque aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText" autocomplete="off">
 							<button class="btn btn-search" type="button" @click="search()"><img src="/assets/img/visualizar-producto-bio.svg"></button>
 							<div class="keyup_search" :style="{ display: dSearch }">
 								<span  :style="{display: gifSearch}">Cargando.....</span>

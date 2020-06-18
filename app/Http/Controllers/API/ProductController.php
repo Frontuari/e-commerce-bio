@@ -65,7 +65,11 @@ class ProductController extends BaseController
         ->whereRaw("( ( to_tsvector(products.name) @@ to_tsquery('$otro') OR to_tsvector(products.keyword) @@ to_tsquery('$otro') ) OR (products.keyword ilike '%$otro%' OR products.name ilike '%$otro%') )")
         ->groupBy("products.id")
         ->orderBy("products.name")
-        ->take(10)->get();
+        ->take(10)
+        ->get();
+
+        // dd($Product->toSql());
+
         if (is_null($Product)) {
             return $this->sendError('Product not found.');
         }
