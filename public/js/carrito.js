@@ -62,11 +62,11 @@ function procesarPago(){
         mega_amount=amount.toFixed(2);
     }
     if(coins_id==1) { //dolares
-        if(amount > aPagarUsd) {
-            Swal.fire("Bio en Línea","El monto a pagar en Dolares debe ser exacto","warning");
-            throw new Error("El monto aa pagar debe ser exacto");
-            return false;
-        }
+        // if(amount > aPagarUsd) {
+        //     Swal.fire("Bio en Línea","El monto a pagar en Dolares debe ser exacto","warning");
+        //     throw new Error("El monto aa pagar debe ser exacto");
+        //     return false;
+        // }
         amount=amount*rate;
     }
 
@@ -634,7 +634,7 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-    setInterval('actualizarStore()',3000);
+    setInterval('actualizarStore()',1500);
 }
 
 

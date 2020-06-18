@@ -18,7 +18,7 @@
 						</div>
 						<div class="profile-info">
 							<h2 class="profile-title">{{userData.name}}</h2>
-							<!-- <p class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p> -->
+							<p class="bio-points">Mi saldo disponible<span class="quantity-span">{{userData.saldo}}<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
 						</div>
 					</div>
 				</div>

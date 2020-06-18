@@ -59,7 +59,7 @@ class ProductController extends BaseController
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where("products.status","A")
         ->where("products.qty_avaliable",">",0)
-        ->whereRaw("to_tsvector(products.name) @@ to_tsquery('$otro') OR to_tsvector(products.keyword) @@ to_tsquery('$otro')")
+        ->whereRaw("( ( to_tsvector(products.name) @@ to_tsquery('$otro') OR to_tsvector(products.keyword) @@ to_tsquery('$otro') ) OR (products.keyword ilike '%$otro%' OR products.name ilike '%$otro%') )")
         ->groupBy("products.id")
         ->orderBy("products.name")
         ->take(10)->get();

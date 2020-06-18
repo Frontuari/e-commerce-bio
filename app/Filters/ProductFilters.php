@@ -20,8 +20,9 @@ class ProductFilters extends QueryFilters
     }
 
     public function cat($id) {
-        if(isset($id) && !empty($id) && $id > 0)
+        if(isset($id) && !empty($id) && $id > 0) {
             return $this->builder->join("det_sub_categories","det_sub_categories.products_id","=","products.id")->join("sub_categories","sub_categories.id","=","det_sub_categories.sub_categories_id")->where('sub_categories.categories_id','=',$id)->groupBy("products.id");
+        }
     }
 
     public function search($term) {
@@ -39,7 +40,7 @@ class ProductFilters extends QueryFilters
                 $otro=$texto;
             }
 
-            return $this->builder->whereRaw("to_tsvector(products.name) @@ to_tsquery('$otro')");
+            return $this->builder->whereRaw("( (to_tsvector(products.keyword) @@ to_tsquery('$otro') OR to_tsvector(products.name) @@ to_tsquery('$otro')) OR (products.keyword ilike '%$otro%' OR products.name ilike '%$otro%'))");
         }
     }
 
