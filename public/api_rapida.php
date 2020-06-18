@@ -311,7 +311,7 @@ function actualizarFotoPerfil(){
     //salidaNueva($data['data'],"Perfil actualizado correctamente");
 }
 function listarProductosWeb(){
-    $sql=getSqlListarProductos();
+    $sql=getSqlListarProductos('','','','',false);
     $sql=filtroProductos($sql);
     return listarProductos($sql,false,true,false);
 }
@@ -1260,8 +1260,9 @@ function _filtro($obj,$nameUnico){
     }
     return $nameUnico;
 }
-function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit=''){
-    $limit='LIMIT 100';
+function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit='',$is_limit = true){
+    if($is_limit) $limit='LIMIT 100';
+
     $users_id=$_SESSION['usuario']['id'];
     if($users_id){
         
