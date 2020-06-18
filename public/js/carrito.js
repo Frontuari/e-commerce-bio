@@ -634,7 +634,7 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-    setInterval('actualizarStore()',1000);    
+    setInterval('actualizarStore()',3000);
 }
 
 
