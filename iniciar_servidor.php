@@ -295,8 +295,8 @@ function actualizarEnvioOrden($ip){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
-	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
+	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
+	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
 	
 	//$res=true;
 	if($res!=true){
@@ -346,6 +346,7 @@ function actualizarProductos($ip){
 			procesarSubCategoriasYcategorias($data->item);
 			foreach($data->item as $obj){
 
+//				if($obj->ad_org_id==1000032){
 				if($obj->ad_org_id==1000004){
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
 					$sugerido=$obj->sugerido;
@@ -361,58 +362,8 @@ function actualizarProductos($ip){
 						$estatusProducto='A';
 					}
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
-				/*
-					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
-				
-					$arr_ca=q($sql);
-				
-					
-					if(!is_array($arr_ca)) {
-						$name_ca=explode("-",$obj->Nivel3)[1];
-						$sql="INSERT INTO categories (name,c_elementvalue_id_n3) VALUES ('$name_ca',$obj->c_elementvalue_id_N3) RETURNING id";
-						$arr_insert_ca=q($sql);
-						if(!is_array($arr_insert_ca)){
-							$malo=true;
-							msj("MALO insertar categoria ".$sql);
-							break;
-						}else{
-						
-							$id_ca=$arr_insert_ca[0]['id'];
-						
-						}
-					}else{
-						$id_ca=$arr_ca[0]['id'];
-					}					
-					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";
-					
-					$arr_sub_ca=q($sql);
-				
-					$name_sub_ca=explode("-",$obj->Nivel4)[1];
-					if(!is_array($arr_sub_ca)) {
-						$sql="INSERT INTO sub_categories (name,categories_id,c_elementvalue_id_n4) VALUES ('$name_sub_ca',$id_ca,$obj->c_elementvalue_id_N4) RETURNING id";
-						
-						$arr_insert_sub_ca=q($sql);
-						if(!is_array($arr_insert_sub_ca)){
-							$malo=true;
-							msj("MALO");
-							break;
-						}else{
-							$id_sub_ca=$arr_insert_sub_ca[0]['id'];
-						}
-					}else{
-						$id_sub_ca=$arr_sub_ca[0]['id'];
-					}
-					//NUEVA MODIFICACION CATEGORIAS
-					$sql="SELECT sc.id FROM sub_categories sc INNER JOIN categories c ON c.id=sc.categories_id WHERE sc.c_elementvalue_id_n4=$obj->c_elementvalue_id_N4 AND c.c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
-					$arr=q($sql);
-					if(!is_array($sql)){
-						q("UPDATE sub_categories SET categories_id=$id_ca WHERE id='$id_sub_ca'");
-					}
 
-
-					*/
-
-//------------IMPUESTOS--------------------
+					//------------IMPUESTOS--------------------
 if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 	$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
 

@@ -167,6 +167,9 @@ switch($evento) {
     case 'listarFavoritos':
        listarFavoritos();
     break;
+    case 'saldo':
+        saldo();
+    break;
     case 'listarProductosFiltrados':
         listarProductosFiltrados();
     break;
@@ -507,7 +510,18 @@ function listarFavoritos(){
     $sql=filtroProductos($sql);
     listarProductos($sql);
 }
+function saldo(){
+    $users_id=$_SESSION['usuario']['id'];
 
+    $arr=q("SELECT saldo FROM users WHERE id='$users_id'");
+    if(is_array($arr)){
+        salidaNueva($arr,'Consultando saldo',true);
+
+    }else{
+        salidaNueva(null,'Intente mas tarde',false);
+    }
+    
+}
 function listarProductosFiltrados($tipo_salida=false,$simple=false){
     $precioInicial=$_GET['precioInicial'];
     $precioFinal=$_GET['precioFinal'];
@@ -826,10 +840,21 @@ function guardarPago(){
     $coins_id=$_GET['coins_id'];
     $status='nuevo';
     $users_id=$_SESSION['usuario']['id'];
+
+    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
+    if(is_array($arr)){
+        $payment_methods_id=$arr[0]['payment_methods_id'];
+    }
+
     if($ref=='null'){
        
         $ref="EFECTIVO";
-        $status='efectivo';
+        if($payment_methods_id==5){
+            $ref="-";
+            $status='aprobado';
+        }else{
+            $status='efectivo';
+        }
     }
     
     //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
@@ -842,9 +867,46 @@ function guardarPago(){
     //----------------------
     $users_id=$_SESSION['usuario']['id'];
    // $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay>=((SELECT SUM(amount) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado') GROUP BY dbo.orders_id)+$amount)";
-    //exit($sql);
+ 
+
+
+
+
+
     q("BEGIN");
+    //PARA BIOWALLET----------------   
+
+    if($payment_methods_id==5){
+        $sql="SELECT u.saldo FROM users u WHERE u.id='$users_id'";
+        
+        $arr=q($sql);
+
+        if(is_array($arr)){
+            $arrb=q("SELECT ROUND(('$amount'/rate),2) monto FROM coins WHERE id='1'");
+            if(is_array($arrb)){
+                $monto=$arrb[0]['monto'];
+                
+                $saldo=$arr[0]['saldo'];
+     
+                if($saldo<$monto){
+                    
+                    salidaNueva(null,"Su saldo es insuficiente",false);
+                }
+            }
+
+        }
+    }
+//-------------------------------
+
+
+
+
+
+
+
+
     $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
+    //exit($sql);
    // exit($sql);
     $arr=q($sql);
     if(is_array($arr)) $pagoAbonado=true;
