@@ -1,12 +1,13 @@
 <?php
 cabecera('On');
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
-session_start();
+
 
    const OPENSSL_CIPHER_NAME = "aes-128-ecb";
     require_once("AesCipher.php");
@@ -268,9 +269,9 @@ function send_url($url,$body){
     curl_setopt($ch, CURLOPT_POSTFIELDS,$body); 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
-        'X-IBM-Client-Id: af60d48c-427f-4db1-b5a3-e726f342dab4',
-        'Environment: test',
-        'ApiKey:mbu1'
+        'X-IBM-Client-Id: af60d48c-427f-4db1-b5a3-e726f342dab4'
+        //'Environment: test',
+        //'ApiKey:mbu1'
     ));
     $server_output = curl_exec($ch);
     if (curl_errno($ch)) {
