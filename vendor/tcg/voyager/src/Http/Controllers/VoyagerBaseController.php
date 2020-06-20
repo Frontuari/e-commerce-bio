@@ -857,6 +857,7 @@ class VoyagerBaseController extends Controller
                 if ($search) {
                     // If we are using additional_attribute as label
                     if (in_array($options->label, $model->additional_attributes ?? [])) {
+                        //$relationshipOptions = $model->where('status', '=', 'A');
                         $relationshipOptions = $model->all();
                         $relationshipOptions = $relationshipOptions->filter(function ($model) use ($search, $options) {
                             return stripos($model->{$options->label}, $search) !== false;
@@ -864,9 +865,10 @@ class VoyagerBaseController extends Controller
                         $total_count = $relationshipOptions->count();
                         $relationshipOptions = $relationshipOptions->forPage($page, $on_page);
                     } else {
-                        $total_count = $model->where($options->label, 'LIKE', '%'.$search.'%')->count();
+                        $total_count = $model->where($options->label, 'iLIKE', '%'.$search.'%')->where('status', '=', 'A')->count();
                         $relationshipOptions = $model->take($on_page)->skip($skip)
-                            ->where($options->label, 'LIKE', '%'.$search.'%')
+                            ->where($options->label, 'iLIKE', '%'.$search.'%')
+                            ->where('status', '=', 'A')
                             ->get();
                     }
                 } else {
