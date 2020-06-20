@@ -24,7 +24,7 @@
 						<div class="col-6 col-20" v-for="product_recent in recent" v-bind:key="product_recent.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img v-if="product_recent.photo != null" :src="'storage/'+JSON.parse(product_recent.photo)[0] | MediumImage">
+									<LazyImg v-if="product_recent.photo != null" :source="'storage/'+JSON.parse(product_recent.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
 										<button v-if="product_recent.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_recent,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -37,7 +37,9 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">{{ product_recent.name }}</a>
+								<a href="#" class="product-title" v-if="!product_recent.name_insuperable">{{ product_recent.name }}</a>
+								<a href="#" class="product-title" v-if="product_recent.name_insuperable" v-html="product_recent.name_insuperable"></a>
+
 								<span class="product-info">({{product_recent.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p>IVA INCLUIDO</p>
@@ -62,7 +64,7 @@
 						<div class="col-6 col-20" v-for="product_sold in sold" v-bind:key="product_sold.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img v-if="product_sold.photo != null" :src="'storage/'+JSON.parse(product_sold.photo)[0] | MediumImage">
+									<LazyImg v-if="product_sold.photo != null" :source="'storage/'+JSON.parse(product_sold.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
 										<button v-if="product_sold.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_sold,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -75,7 +77,9 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">{{ product_sold.name }}</a>
+								<a href="#" class="product-title" v-if="!product_sold.name_insuperable">{{ product_sold.name }}</a>
+								<a href="#" class="product-title" v-if="product_sold.name_insuperable" v-html="product_sold.name_insuperable"></a>
+								
 								<span class="product-info">({{product_sold.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>IVA INCLUIDO</p>
@@ -100,7 +104,7 @@
 						<div class="col-6 col-20" v-for="product_view in viewed" v-bind:key="product_view.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img v-if="product_view.photo != null" :src="'storage/'+JSON.parse(product_view.photo)[0] | MediumImage">
+									<LazyImg v-if="product_view.photo != null" :source="'storage/'+JSON.parse(product_view.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
 										<button v-if="product_view.qty_avaliable > 0" type="button" class="btn"  @click="addToCart(product_view,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -113,7 +117,9 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">{{ product_view.name }}</a>
+								<a href="#" class="product-title" v-if="!product_view.name_insuperable">{{ product_view.name }}</a>
+								<a href="#" class="product-title" v-if="product_view.name_insuperable" v-html="product_view.name_insuperable"></a>
+								
 								<span class="product-info">({{product_view.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>IVA INCLUIDO</p>
@@ -138,7 +144,7 @@
 						<div class="col-6 col-20" v-for="product_best in best_price" v-bind:key="product_best.id">
 							<div class="product-block">
 								<div class="product-img">
-									<img v-if="product_best.photo != null" :src="'storage/'+JSON.parse(product_best.photo)[0] | MediumImage">
+									<LazyImg v-if="product_best.photo != null" :source="'storage/'+JSON.parse(product_best.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
 										<button v-if="product_best.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_best,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
@@ -151,7 +157,8 @@
 										</button>
 									</div>
 								</div>
-								<a href="#" class="product-title">{{ product_best.name }}</a>
+								<a href="#" class="product-title" v-if="!product_best.name_insuperable">{{ product_best.name }}</a>
+								<a href="#" class="product-title" v-if="product_best.name_insuperable" v-html="product_best.name_insuperable"></a>
 								<span class="product-info">({{product_best.qty_avaliable}} Disponibles )</span>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>IVA INCLUIDO</p>
@@ -179,6 +186,7 @@
 
 <script>
 	import ModalProducto from './ModalProducto.vue';
+	import LazyImg from './LazyImg.vue';
 
     export default {
         data() {
@@ -189,7 +197,8 @@
             }
 		},
 		components:{
-			ModalProducto
+			ModalProducto,
+			LazyImg
 		},
 		props: {
 			userlogged: Object,

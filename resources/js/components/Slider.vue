@@ -7,9 +7,9 @@
             <div class="carousel-inner">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
                     <a :href="slider.url" v-if="!!slider.url">
-                        <img class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
+                        <LazyImg class="d-block w-100" :source="'storage/'+slider.image" :alt="slider.image"></LazyImg>
                     </a>
-                    <img v-else-if="!slider.url" class="d-block w-100" :src="'storage/'+slider.image" :alt="slider.image">
+                    <LazyImg v-else-if="!slider.url" class="d-block w-100" :source="'storage/'+slider.image" :alt="slider.image"></LazyImg>
 
                     <!-- <div class="container">
                         <div class="carousel-caption caption-left" >
@@ -41,10 +41,14 @@
     </section>
 </template>
 <script>
+    import LazyImg from './LazyImg.vue';
     export default {
         props: {
             sliders: Array,
             id: String
+        },
+        components: {
+            LazyImg
         },
         mounted() {
             // console.log("this.sliders::> ",this.sliders);

@@ -148,3 +148,13 @@ ul.carousel-indicators{
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
+
+.oferta{
+	color: #F9FBF7;
+	background-color: #EF901A;
+	border: 1px solid #FF7700;
+    color: white;
+    padding: 3px;
+    border-radius: 12px;
+    text-shadow: 2px 1px 3px rgba(0,0,0,0.65)
+}

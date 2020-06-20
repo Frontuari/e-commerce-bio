@@ -6,7 +6,7 @@
 
 <!--MAIN-->
 <main id="app">
-	<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.jpg');">
+	<section class="jumbotron" style="background-image: url('assets/img/banner-titulos.png');">
 		<div class="container">
 			<div class="text-center">
 				<h1>Carrito de Compras</h1>

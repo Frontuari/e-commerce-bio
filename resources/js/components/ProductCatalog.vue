@@ -13,7 +13,7 @@
                                 <!-- The slideshow -->
                                 <div class="carousel-inner">
                                     <div :class="(index==0)?'carousel-item active':'carousel-item'" v-for="(photo,index) in JSON.parse(product.photo)" v-bind:key="index">
-                                        <img :src="'storage/'+ photo | MediumImage">
+                                        <LazyImg :source="'storage/'+ photo | MediumImage"></LazyImg>
                                     </div>
                                 </div>
                                 <!-- Left and right controls -->
@@ -38,7 +38,8 @@
                             </div>
                         </div>
                         <div class="product-content" >
-                            <a href="#ModalProd" data-toggle="modal" data-target="#ModalProd" @click="getProduct(product)" class="product-title">{{ product.name }}</a>
+                            <a href="#ModalProd" data-toggle="modal" data-target="#ModalProd" @click="getProduct(product)" class="product-title" v-if="!product.name_insuperable">{{ product.name }}</a>
+                            <a href="#ModalProd" data-toggle="modal" data-target="#ModalProd" @click="getProduct(product)" class="product-title" v-if="product.name_insuperable" v-html="product.name_insuperable"></a>
                             <!-- <span class="product-info">500 g</span> -->
 
                             <div class="product-prices" v-if="product.impuesto > 0">
@@ -123,6 +124,7 @@
 </template>
 <script>
     import ModalProducto from './ModalProducto.vue';
+    import LazyImg from './LazyImg.vue';
     export default {
         data() {
             return {
@@ -132,7 +134,8 @@
             }
         },
         components:{
-			ModalProducto
+			ModalProducto,
+            LazyImg
         },
         methods: {
             getProduct: function(objP) {

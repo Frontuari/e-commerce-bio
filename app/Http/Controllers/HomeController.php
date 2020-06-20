@@ -64,7 +64,7 @@ class HomeController extends Controller
 
         $MostRecent = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('created_at','desc')
@@ -74,7 +74,7 @@ class HomeController extends Controller
 
         $MostView = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_view','desc')
@@ -84,7 +84,7 @@ class HomeController extends Controller
 
         $MostSold = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_sold','desc')
@@ -94,7 +94,7 @@ class HomeController extends Controller
 
         $BestPrice = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('price','asc')

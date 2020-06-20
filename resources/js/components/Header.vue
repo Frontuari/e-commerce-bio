@@ -169,7 +169,7 @@
 						</li>
 						<li id="nav-bios" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarBios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Conoce a bio mercados
+								Conozca a bio mercados
 								<img src="/assets/img/abajo-blanco-bio.svg">
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarBios">
