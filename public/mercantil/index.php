@@ -1,12 +1,13 @@
 <?php
 cabecera('On');
+session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
-session_start();
+
 
    const OPENSSL_CIPHER_NAME = "aes-128-ecb";
     require_once("AesCipher.php");
@@ -66,7 +67,7 @@ session_start();
                 <div class="col-4">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Código CVV:</label>
-                    <input autofocus value="752" name="cvv" title="Nro. CVV que se encuentra en la parte trasera de su carrito" pattern="^\D*\d{3}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input autofocus value="" name="cvv" title="Nro. CVV que se encuentra en la parte trasera de su carrito" pattern="^\D*\d{3}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 </div>
                 <div class="col-8">
@@ -93,7 +94,7 @@ session_start();
                 
                 <div class="form-group">
                     <label for="exampleInputEmail1">'.$titulo.':</label>
-                    <input value="1234" name="clave" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input value="" name="clave" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>             
 
 
@@ -168,7 +169,7 @@ function autenticar($card_number,$customer_id){
     {
         "merchant_identify": {
             "integratorId": 31,
-            "merchantId": 150332,
+            "merchantId": 220003,
             "terminalId": "abcde"
         },
         "client_identify": {
@@ -192,7 +193,8 @@ function autenticar($card_number,$customer_id){
         }
     }
     ';
-    $res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/getauth',$body);
+    #$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/getauth',$body);
+    $res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/prod/v1/payment/getauth',$body);
     return $res;
 
 }
@@ -202,7 +204,7 @@ $body='
 {
 	"merchant_identify": {
 		"integratorId": 31,
-		"merchantId": 150332,
+		"merchantId": 220003,
 		"terminalId": "abcde"
 	},
 	"client_identify": {
@@ -231,7 +233,8 @@ $body='
 //echo $body;
 //exit();
 
-$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/pay',$body);
+#$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/pay',$body);
+$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/prod/v1/payment/pay',$body);
 
 return $res;
 
@@ -266,9 +269,9 @@ function send_url($url,$body){
     curl_setopt($ch, CURLOPT_POSTFIELDS,$body); 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
-        'X-IBM-Client-Id: 9860e0f2-ed46-495e-a25f-ef377ea645f6',
-        'Environment: test',
-        'ApiKey:mbu1'
+        'X-IBM-Client-Id: af60d48c-427f-4db1-b5a3-e726f342dab4'
+        //'Environment: test',
+        //'ApiKey:mbu1'
     ));
     $server_output = curl_exec($ch);
     if (curl_errno($ch)) {
@@ -297,7 +300,7 @@ function cifrar($dato){
 $cvv  = mb_convert_encoding($dato, "UTF-8");
 
 # Clave secreta enviada por el Banco
-$keybank = mb_convert_encoding("A9279120481620090622AA30", "UTF-8");
+$keybank = mb_convert_encoding("A10222430541120200617AA30", "UTF-8");
 
 # Generacion del hash a partir de la clave secreta del banco
 $keyhash = AesCipher::createKeyhash($keybank);
@@ -315,7 +318,7 @@ function descifrar($dato){
 
 
     # Clave secreta enviada por el Banco
-    $keybank = mb_convert_encoding("A9279120481620090622AA30", "UTF-8");
+    $keybank = mb_convert_encoding("A10222430541120200617AA30", "UTF-8");
     
     # Generacion del hash a partir de la clave secreta del banco
     $keyhash = AesCipher::createKeyhash($keybank);

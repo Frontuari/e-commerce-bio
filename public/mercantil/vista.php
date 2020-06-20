@@ -52,7 +52,7 @@ if($htmlFinal){
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Ingrese el número de su tarjeta:</label>
-                      <input <?php echo ($disabled ? '' : 'autofocus'); ?> value="501878200066287386" name="card_number"  title="Nro. de tarjeta incorrecto, Debe contener 18 digitos" pattern="^\D*\d{18}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <input <?php echo ($disabled ? '' : 'autofocus'); ?> value="" name="card_number"  title="Nro. de tarjeta incorrecto, Debe contener 18 digitos" pattern="^\D*\d{18}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                       
                     </div>
                     <div class="form-group">
@@ -61,7 +61,7 @@ if($htmlFinal){
                             <div class="input-group-prepend">
                               <select <?php echo ($disabled ? 'disabled="true"' : ''); ?> name="nacionalidad" style="border:1px solid #ccc"><option>V</option><option>J</option><option>G</option></select>
                             </div>
-                            <input <?php echo ($disabled ? 'readonly' : ''); ?> value="18366876" name="cedula" title="El nro. de cedula es incorrecto." pattern="^[0-9]+$" required type="text" class="form-control" id="exampleInputPassword1">
+                            <input <?php echo ($disabled ? 'readonly' : ''); ?> value="" name="cedula" title="El nro. de cedula es incorrecto." pattern="^[0-9]+$" required type="text" class="form-control" id="exampleInputPassword1">
                           </div>
                     </div>
                       <?php

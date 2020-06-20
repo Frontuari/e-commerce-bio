@@ -289,6 +289,13 @@ switch($evento) {
         enviarCorreo('ds000082@gmail.com',"Solicitud de Devolución","El cliente $email, $name, $phone esta solicitando la devolución de la orden Nro. ".$orders_id);
         salidaNueva(null,"Su solicitud ha sido procesada. Nos comunicaremos con usted.");
     break;
+    case 'reporte_ingresos':
+        $fecha_inicio=$_GET['fecha_inicio'];
+        $fecha_fin=$_GET['fecha_fin'];
+        //exit("SELECT SUM(amount),created_at::date FECHA FROM det_bank_orders  where created_at between '$fecha_inicio' and '$fecha_fin' GROUP BY created_at ORDER BY created_at");
+        $arr=q("SELECT SUM(amount) ingreso,fecha FROM (SELECT amount,created_at::date AS fecha   FROM det_bank_orders where (created_at between '$fecha_inicio' and '$fecha_fin') AND (status='aprobado')) t GROUP BY fecha ORDER BY fecha");   
+
+    break;
     default:
     
     salidaNueva(null,"Intente de nuevo.",false);
