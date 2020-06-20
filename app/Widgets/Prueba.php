@@ -92,7 +92,7 @@ class Prueba extends BaseDimmer
         <div class="center col-md-9 col-sm-12 col-xs-12 lin">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Historico de pedidos</h3>
+                    <h3 class="box-title">Historico de ordenes</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -103,6 +103,9 @@ class Prueba extends BaseDimmer
                 <div class="box-body">
                     <div class="chart">
                         <canvas id="areaChart" style="height: 248px; width: 511px;" height="248" width="511"></canvas>
+                    </div>
+                    <div class="chartb">
+                        <canvas id="areaChartIngresos" style="height: 248px; width: 511px;" height="248" width="511"></canvas>
                     </div>
                 </div>
                  <!-- /.box-body -->

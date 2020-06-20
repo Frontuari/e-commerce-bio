@@ -50,10 +50,9 @@ class OrdersController extends BaseController
     public function estadistica_ano() {
         $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
 
-//return $this->sendResponse($a);
         $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         $arr['datasets'][0]=array(
-            'label'               => 'Pedidos',
+            'label'               => 'Ordenes',
             'backgroundColor'       =>'#28b67a',
             'fillColor'           => '#28b67a',
             'strokeColor'         => '#13945C',
@@ -61,10 +60,6 @@ class OrdersController extends BaseController
             'pointStrokeColor'    => 'rgba(60,141,188,1)',
             'pointHighlightFill'  => '#80bc00',
             'pointHighlightStroke'=> 'rgba(60,141,188,1)');
-            //echo json_encode($arr);
-          //  print_r($a);
-           // exit();
-         // data                : [28, 48, 40, 19, 86, 27, 90,200]
          foreach($arr['labels'] as $cod=>$mes) {
             foreach ($a as $valor){
                 if($valor->mes==($cod+1)) {
