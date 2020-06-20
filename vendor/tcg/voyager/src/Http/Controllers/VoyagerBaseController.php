@@ -865,10 +865,11 @@ class VoyagerBaseController extends Controller
                         $total_count = $relationshipOptions->count();
                         $relationshipOptions = $relationshipOptions->forPage($page, $on_page);
                     } else {
-                        $total_count = $model->where($options->label, 'iLIKE', '%'.$search.'%')->where('status', '=', 'A')->count();
+                        $total_count = $model->where($options->label, 'iLIKE', '%'.$search.'%')->where('status', '=', 'A')->where('qty_avaliable', '>', '0')->count();
                         $relationshipOptions = $model->take($on_page)->skip($skip)
                             ->where($options->label, 'iLIKE', '%'.$search.'%')
                             ->where('status', '=', 'A')
+                            ->where('qty_avaliable', '>', '0')
                             ->get();
                     }
                 } else {
