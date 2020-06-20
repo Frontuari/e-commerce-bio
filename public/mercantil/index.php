@@ -299,7 +299,7 @@ function cifrar($dato){
 $cvv  = mb_convert_encoding($dato, "UTF-8");
 
 # Clave secreta enviada por el Banco
-$keybank = mb_convert_encoding("A9279120481620090622AA30", "UTF-8");
+$keybank = mb_convert_encoding("A10222430541120200617AA30", "UTF-8");
 
 # Generacion del hash a partir de la clave secreta del banco
 $keyhash = AesCipher::createKeyhash($keybank);
