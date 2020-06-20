@@ -123,7 +123,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 		</div>`;
 	var otro_ancho='';
 	var txt_btn_pagar='Pagar';
-	if(id==3 || id==2  || id==6) {
+	if(id==3 || id==2  || id==6 || id==7) {
 		div_referencia='';
 		otro_ancho='<div class="col-md-3"></div>';
 	}
@@ -195,11 +195,11 @@ function procesar(data,evento){
 		case 'guardarPago':
 			var data = JSON.parse(data);
 			if(data.success==true){
-				Swal.fire("Bio en Línea","Su pago ha sido procesado","success");
+				Swal.fire("Bio en casa","Su pago ha sido procesado","success");
 				location.reload();
 				
 			}else{
-				console.log(data.msj_general);
+				Swal.fire("Bio en casa",data.msj_general,"danger");
 				div_btn_guardar_pago.innerHTML='<button class="btn btn-success">Pagar</button>';
 			}
 			
