@@ -1349,6 +1349,7 @@ function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$l
 initcap(p.keyword) keyword,
 p.qty_sold,p.peso,
 p.qty_avaliable,
+case when p.keyword ilike '%insuperable%' then 1 else 0 end as promocion,
 p.qty_max,
 p.description_short,
 coalesce((SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id),0.000000) total_impuesto,
