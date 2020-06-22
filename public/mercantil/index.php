@@ -13,7 +13,9 @@ $datos=run();
     require_once("AesCipher.php");
 
     $_GET           =seguro($_GET);
-    $customer_id    =$_GET['nacionalidad'].$_GET['cedula'];
+    $nacionalidad   =$_GET['nacionalidad'];
+    $cedula         =$_GET['cedula'];
+    $customer_id    =$nacionalidad.$cedula;
     $card_number    =$_GET['card_number'];
     $amount         =$_GET['amount'];
     $nroFactura     =$_GET['nroFactura'];
@@ -43,7 +45,7 @@ $datos=run();
                 $obj=json_decode($res['data']);
                 $tipo_auth=descifrar($obj->authentication_info->twofactor_type);
 
-                //echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
+                echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
             
                 switch($tipo_auth){
                     case 'clavetelefonica':

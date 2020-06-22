@@ -52,16 +52,16 @@ if($htmlFinal){
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Ingrese el número de su tarjeta:</label>
-                      <input <?php echo ($disabled ? '' : 'autofocus'); ?> value="" name="card_number"  title="Nro. de tarjeta incorrecto, Debe contener 18 digitos" pattern="^\D*\d{18}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <input <?php echo ($disabled ? '' : 'autofocus'); ?> value="<?php echo $_SESSION['card_number']; ?>" name="card_number"  title="Nro. de tarjeta incorrecto, Debe contener 18 digitos" pattern="^\D*\d{18}$" type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                       
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Ingrese su número de cedula o Rif:</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                              <select <?php echo ($disabled ? 'disabled="true"' : ''); ?> name="nacionalidad" style="border:1px solid #ccc"><option>V</option><option>J</option><option>G</option></select>
+                              <select <?php echo ($disabled ? 'disabled="true"' : ''); ?> name="nacionalidad" style="border:1px solid #ccc"><option <?php if($nacionalidad=='V') echo 'selected'; ?>>V</option><option <?php if($nacionalidad=='J') echo 'selected'; ?> >J</option><option <?php if($nacionalidad=='G') echo 'selected'; ?> >G</option></select>
                             </div>
-                            <input <?php echo ($disabled ? 'readonly' : ''); ?> value="" name="cedula" title="El nro. de cedula es incorrecto." pattern="^[0-9]+$" required type="text" class="form-control" id="exampleInputPassword1">
+                            <input <?php echo ($disabled ? 'readonly' : ''); ?> value="<?php echo $_SESSION['cedula']; ?>" name="cedula" title="El nro. de cedula es incorrecto." pattern="^[0-9]+$" required type="text" class="form-control" id="exampleInputPassword1">
                           </div>
                     </div>
                       <?php
