@@ -200,7 +200,7 @@ function autenticar($card_number,$customer_id){
     }
     ';
     #$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/getauth',$body);
-    $res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/prod/v1/payment/getauth',$body);
+    $res= send_url('https://apimbu.mercantilbanco.com/mercantil-banco/prod/v1/payment/getauth',$body);
     return $res;
 
 }
@@ -240,7 +240,7 @@ $body='
 //exit();
 
 #$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/pay',$body);
-$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/prod/v1/payment/pay',$body);
+$res= send_url('https://apimbu.mercantilbanco.com/mercantil-banco/prod',$body);
 
 return $res;
 
