@@ -36,11 +36,15 @@ $datos=run();
         case 'solicitarClave':
 
             $res=autenticar($card_number,$customer_id);
-
+            $obj=json_decode($res['data']);
+            print_r($obj);
+            exit();
             if($res['success']==true){
 
                 $_SESSION['card_number']=$card_number;
                 $_SESSION['customer_id']=$customer_id;
+                $_SESSION['cedula']=$cedula;
+                $_SESSION['nacionalidad']=$nacionalidad;
                 $disabled=true;
                 $obj=json_decode($res['data']);
                 $tipo_auth=descifrar($obj->authentication_info->twofactor_type);
