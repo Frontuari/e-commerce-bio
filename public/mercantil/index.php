@@ -129,13 +129,25 @@ $datos=run();
                 //print_r($obj);
                 if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
                     $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
+                    
                     $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                    $html_correo=voucherMalo('',$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->error_list[0]->description);
+
+
+                    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
+                    $arr=q($sql);
+                    if(is_array($arr)){
+                     $users_email=$arr[0]['email'];
+                     enviarCorreo($users_email,'Voucher de pago',$html_correo);
+                    }
+
+
+
+
+
+                    
                 }elseif(isset($obj->transaction_response)){
 
-                    
-
-
-                    
                    // $htmlFinal=$obj->transaction_response->trx_status;
                 $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
                 //$htmlFinal=salidaBuena(2332,218,20.44);
@@ -438,6 +450,8 @@ function salidaBuena($ref,$nroFactura,$amount){
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
+   $html_voucher=voucher('APROBADO',$_SESSION['card_number'],$nroFactura,$ref);
+   enviarCorreo($users_email,'Voucher de pago',$html_voucher);
    return '
    <div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
    
@@ -448,7 +462,78 @@ function salidaBuena($ref,$nroFactura,$amount){
 
 }
 
+function voucherMalo($status,$nroTarjeta,$nroOrden,$detalles){
+    $fecha=date('d/m/Y h:i:s A');
+    return "
+    <table cellspacing='0' width='100%''>
+    <tr>
+        <td></td>
+        <td width='300' style=' font-family: \"Courier New\", Courier, monospace; padding:20px; border:1px solid #000; border-radius: 15px; border-style: dashed; width:300px; margin:0 auto; background:#F2F2F2'>
+        <div >
+<div style='text-align:center;background:#67BE5A; color:white; margin-bottom:10px' >VOUCHER<BR>ELECTRÓNICO<BR></div>
+Alimentos FM, C.A.<br>
+RIF: J-31721968-6<br>
+<br>
+<div style='text-align:center'>BANCO MERCANTIL</div>
+<br>
+Fecha: $fecha
+<br>
+Transacción:<b><span style='color:red'> RECHAZADA</span></b>
+<BR>
+Tipo: Tarjeta de Debito
+<br>
+$nroTarjeta
+<br>
 
+Orden Nro. $nroOrden
+<br>
+Detalles: $detalles
+<br>
+
+
+</div><hr><div style='text-align:center'><br>Para más información, visita la sección contáctanos de www.biomercados.com.ve<br><span style=''><b>¡INSPIRADOS EN SERVIR!</b><span></div>
+
+        </td>
+        <td></td>
+     </tr>
+</table>";
+}
+function voucher($status,$nroTarjeta,$nroOrden,$nroReferencia){
+    $fecha=date('d/m/Y h:i:s A');
+    return "
+    <table cellspacing='0' width='100%''>
+    <tr>
+        <td></td>
+        <td width='300' style=' font-family: \"Courier New\", Courier, monospace; padding:20px; border:1px solid #000; border-radius: 15px; border-style: dashed; width:300px; margin:0 auto; background:#F2F2F2'>
+        <div >
+<div style='text-align:center;background:#67BE5A; color:white; margin-bottom:10px' >VOUCHER<BR>ELECTRÓNICO<BR></div>
+Alimentos FM, C.A.<br>
+RIF: J-31721968-6<br>
+<br>
+<div style='text-align:center'>BANCO MERCANTIL</div>
+<br>
+Fecha: $fecha
+<br>
+Transacción:<b><span style='color:green'> APROBADA</span></b>
+<BR>
+Tipo: Tarjeta de Debito
+<br>
+$nroTarjeta
+<br>
+
+Orden Nro. $nroOrden
+<br>
+Nro. de Referencia: $nroReferencia
+<br>
+
+
+</div><hr><div style='text-align:center'><br>Para más información, visita la sección contáctanos de www.biomercados.com.ve<br><span style=''><b>¡INSPIRADOS EN SERVIR!</b><span></div>
+
+        </td>
+        <td></td>
+     </tr>
+</table>";
+}
 function set_formato_moneda($value){
     $listo=null;
     $patróna = '/[\s]/';
