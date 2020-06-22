@@ -121,7 +121,8 @@ $datos=run();
             //exit();
            //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
            $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
-
+           echo $res;
+            exit();
            if($res['success']==true){
                 $boton='';
                 $obj=json_decode($res['data']);
