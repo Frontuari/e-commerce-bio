@@ -37,8 +37,8 @@ $datos=run();
 
             $res=autenticar($card_number,$customer_id);
             $obj=json_decode($res['data']);
-            print_r($obj);
-            exit();
+           // print_r($obj);
+           // exit();
             if($res['success']==true){
 
                 $_SESSION['card_number']=$card_number;
@@ -49,7 +49,7 @@ $datos=run();
                 $obj=json_decode($res['data']);
                 $tipo_auth=descifrar($obj->authentication_info->twofactor_type);
 
-                echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
+               // echo "Codigo de autentificación: ".$tipo_auth."<br><br>Procesando pago...<br>";
             
                 switch($tipo_auth){
                     case 'clavetelefonica':
