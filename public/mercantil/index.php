@@ -119,10 +119,10 @@ $datos=run();
         case 'procesarPago':
            //echo salidaBuena(2332,218,20.44)."s";
             //exit();
-           //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
+           exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
            $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
-           echo $res;
-            exit();
+           //echo $res;
+            //exit();
            if($res['success']==true){
                 $boton='';
                 $obj=json_decode($res['data']);
