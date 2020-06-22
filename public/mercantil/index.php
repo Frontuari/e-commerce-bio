@@ -119,7 +119,7 @@ $datos=run();
         case 'procesarPago':
            //echo salidaBuena(2332,218,20.44)."s";
             //exit();
-           exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
+           //exit($_SESSION['card_number']." ".$_SESSION['customer_id']." ".$_SESSION['nroFactura']." ".$account_type." ".$clave." ".$expiration_date." ".$cvv." ".$_SESSION['amount']);
            $res=procesarPago($_SESSION['card_number'],$_SESSION['customer_id'],$_SESSION['nroFactura'],$account_type,$clave,$expiration_date,$cvv,$_SESSION['amount']);
            //echo $res;
             //exit();
@@ -241,7 +241,7 @@ $body='
 //exit();
 
 #$res= send_url('https://apimbu.mercantilbanco.com:9443/mercantil-banco/desarrollo/v1/payment/pay',$body);
-$res= send_url('https://apimbu.mercantilbanco.com/mercantil-banco/prod',$body);
+$res= send_url('https://apimbu.mercantilbanco.com/mercantil-banco/prod/v1/payment/pay',$body);
 
 return $res;
 
