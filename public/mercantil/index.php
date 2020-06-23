@@ -126,11 +126,11 @@ $datos=run();
            if($res['success']==true){
                 $boton='';
                 $obj=json_decode($res['data']);
-                print_r($obj);
+
                // echo "A: ".$obj->status->error_code."<br>";
                 if(isset($obj->status->error_code)){
                     if($obj->status->error_code>0){
-                        $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
+                        $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br>'.$obj->status->description.'</div>';
                     
                         $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
                         $html_correo=voucherMalo($obj->status->error_code,$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->status->description);
@@ -498,9 +498,9 @@ Fecha: $fecha
 <br>
 Transacción:<b><span style='color:red'> RECHAZADA</span></b>
 <BR>
-Tipo: Tarjeta de Debito
+Tipo: Tarjeta de Débito Mercantil
 <br>
-$nroTarjeta
+Nro. $nroTarjeta
 <br>
 
 Orden Nro. $nroOrden
@@ -536,9 +536,9 @@ Fecha: $fecha
 <br>
 Transacción:<b><span style='color:green'> APROBADA</span></b>
 <BR>
-Tipo: Tarjeta de Debito
+Tipo: Tarjeta de Débito Mercantil
 <br>
-$nroTarjeta
+Nro. $nroTarjeta
 <br>
 
 Orden Nro. $nroOrden
