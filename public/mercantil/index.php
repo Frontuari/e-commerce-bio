@@ -127,6 +127,8 @@ $datos=run();
                 $boton='';
                 $obj=json_decode($res['data']);
                 print_r($obj);
+                echo "A: ".$obj->status->error_code."<br>";
+                echo "B: ".$obj->status[0]->error_code;
                 if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
                     $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
                     
