@@ -127,37 +127,53 @@ $datos=run();
                 $boton='';
                 $obj=json_decode($res['data']);
                 print_r($obj);
-                echo "A: ".$obj->status->error_code."<br>";
-                echo "B: ".$obj->status[0]->error_code;
-                if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
-                    $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
+               // echo "A: ".$obj->status->error_code."<br>";
+                if(isset($obj->status->error_code)){
+                    if($obj->status->error_code>0){
+                        $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
                     
-                    $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
-                    $html_correo=voucherMalo('',$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->error_list[0]->description);
+                        $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                        $html_correo=voucherMalo($obj->status->error_code,$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->status->description);
 
-
-                    $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
-                    $arr=q($sql);
-                    if(is_array($arr)){
-                     $users_email=$arr[0]['email'];
-                     enviarCorreo($users_email,'Voucher de pago',$html_correo);
+                        $sql="SELECT u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
+                        $arr=q($sql);
+                        if(is_array($arr)){
+                            $users_email=$arr[0]['email'];
+                            enviarCorreo($users_email,'Voucher de pago',$html_correo);
+                        }                    
                     }
 
-
-
-
-
-                    
-                }elseif(isset($obj->transaction_response)){
-
-                   // $htmlFinal=$obj->transaction_response->trx_status;
-                $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
-                //$htmlFinal=salidaBuena(2332,218,20.44);
-                $_SESSION['amount']=null;
-                $_SESSION['nroFactura']=null;
                 }else{
-                    $htmlFinal="<div style='text-align: center;'>Disculpe, intente mas tarde.</div>";
-                    $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                    if(isset($obj->error_list[0]->error_code) and $obj->error_list[0]->error_code!='0000'){
+                        $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
+                        
+                        $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                        $html_correo=voucherMalo('',$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->error_list[0]->description);
+
+
+                        $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
+                        $arr=q($sql);
+                        if(is_array($arr)){
+                        $users_email=$arr[0]['email'];
+                        enviarCorreo($users_email,'Voucher de pago',$html_correo);
+                        }
+
+
+
+
+
+                        
+                    }elseif(isset($obj->transaction_response)){
+
+                    // $htmlFinal=$obj->transaction_response->trx_status;
+                    $htmlFinal=salidaBuena($obj->transaction_response->payment_reference,$obj->transaction_response->invoice_number,$obj->transaction_response->amount);
+                    //$htmlFinal=salidaBuena(2332,218,20.44);
+                    $_SESSION['amount']=null;
+                    $_SESSION['nroFactura']=null;
+                    }else{
+                        $htmlFinal="<div style='text-align: center;'>Disculpe, intente mas tarde.</div>";
+                        $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
+                    }
                 }
                 //$boton.='<button type="submit" onclick="window.close()" class="btn btn-success">Salir</button>';
         
@@ -464,7 +480,7 @@ function salidaBuena($ref,$nroFactura,$amount){
 
 }
 
-function voucherMalo($status,$nroTarjeta,$nroOrden,$detalles){
+function voucherMalo($codigo,$nroTarjeta,$nroOrden,$detalles){
     $fecha=date('d/m/Y h:i:s A');
     return "
     <table cellspacing='0' width='100%''>
@@ -490,6 +506,8 @@ $nroTarjeta
 Orden Nro. $nroOrden
 <br>
 Detalles: $detalles
+<br>
+Código del error: $codigo
 <br>
 
 
