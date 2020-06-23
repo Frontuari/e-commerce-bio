@@ -133,7 +133,7 @@ $datos=run();
                         $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br>'.$obj->status->description.'</div>';
                     
                         $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
-                        $html_correo=voucherMalo($obj->status->error_code,$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->status->description);
+                        $html_correo=voucherMalo($obj->status->error_code,substr($_SESSION['card_number'], 13),$_SESSION['nroFactura'],$obj->status->description);
 
                         $sql="SELECT u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
                         $arr=q($sql);
@@ -148,7 +148,7 @@ $datos=run();
                         $htmlFinal='<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> '.$obj->error_list[0]->description.'</div>';
                         
                         $boton='<a href="?evento=inicio&amount='.$_SESSION['amount'].'&nroFactura='.$_SESSION['nroFactura'].'" class="btn btn-secondary">Intentar nuevamente</a> ';
-                        $html_correo=voucherMalo('',$_SESSION['card_number'],$_SESSION['nroFactura'],$obj->error_list[0]->description);
+                        $html_correo=voucherMalo($obj->error_list[0]->error_code,substr($_SESSION['card_number'], 13),$_SESSION['nroFactura'],$obj->error_list[0]->description);
 
 
                         $sql="SELECT u.id,u.purchase_quantity,u.email FROM orders o INNER JOIN users u ON u.id=o.users_id WHERE o.id='".$_SESSION['nroFactura']."'";
@@ -468,7 +468,7 @@ function salidaBuena($ref,$nroFactura,$amount){
    }else{
         // salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
-   $html_voucher=voucher('APROBADO',$_SESSION['card_number'],$nroFactura,$ref);
+   $html_voucher=voucher('APROBADO',substr($_SESSION['card_number'], 13),$nroFactura,$ref);
    enviarCorreo($users_email,'Voucher de pago',$html_voucher);
    return '
    <div style="text-align: center;">Transacción <b><span style="color:green">APROBADA</span></b><br />
@@ -500,7 +500,7 @@ Transacción:<b><span style='color:red'> RECHAZADA</span></b>
 <BR>
 Tipo: Tarjeta de Débito Mercantil
 <br>
-Nro. $nroTarjeta
+Nro. XXXXXXXXXXXXX$nroTarjeta
 <br>
 
 Orden Nro. $nroOrden
@@ -538,7 +538,7 @@ Transacción:<b><span style='color:green'> APROBADA</span></b>
 <BR>
 Tipo: Tarjeta de Débito Mercantil
 <br>
-Nro. $nroTarjeta
+Nro. XXXXXXXXXXXXX$nroTarjeta
 <br>
 
 Orden Nro. $nroOrden
