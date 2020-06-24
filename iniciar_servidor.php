@@ -364,24 +364,24 @@ function actualizarProductos($ip){
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
 
 					//------------IMPUESTOS--------------------
-if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
-	$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
+					if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
+						$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
 
-	$sql="SELECT id FROM taxes WHERE value='$obj->IMPUESTO'";
-	
-	$arr=q($sql);
-	if(!is_array($arr)){
-		$sql="INSERT INTO taxes (short_name,name,value,type,created_at) VALUES ('$nombre_impuesto','$nombre_impuesto','$obj->IMPUESTO','porc',NOW()) RETURNING id";
-		$arr=q($sql);
-		if(!is_array($arr)){
-			echo "ERROR: ".$sql;
-		}
-		$taxes_id=$arr[0]['id'];
-	}else{
-		$taxes_id=$arr[0]['id'];
-	}
-	$memo[$obj->IMPUESTO]=true;
-}
+						$sql="SELECT id FROM taxes WHERE value='$obj->IMPUESTO'";
+						
+						$arr=q($sql);
+						if(!is_array($arr)){
+							$sql="INSERT INTO taxes (short_name,name,value,type,created_at) VALUES ('$nombre_impuesto','$nombre_impuesto','$obj->IMPUESTO','porc',NOW()) RETURNING id";
+							$arr=q($sql);
+							if(!is_array($arr)){
+								echo "ERROR: ".$sql;
+							}
+							$taxes_id=$arr[0]['id'];
+						}else{
+							$taxes_id=$arr[0]['id'];
+						}
+						$memo[$obj->IMPUESTO]=true;
+					}
 
 
 
@@ -441,9 +441,13 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 	$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
 }else{
 	
-		if($obj->IMPUESTO==0 and $arr[0]['value']>0){
+	if($obj->IMPUESTO==0 and $arr[0]['value']>0){
+		q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
+	}elseif($obj->IMPUESTO!=$arr[0]['value']>0){
 			q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
-		}
+		}elseif($obj->IMPUESTO>0 and $obj->IMPUESTO!=$arr[0]['value']){
+				q("UPDATE det_product_taxes SET taxes_id='$taxes_id' WHERE products_id='$products_id'");
+			}	
 	
 }
 

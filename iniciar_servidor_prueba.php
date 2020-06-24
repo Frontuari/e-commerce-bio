@@ -11,12 +11,12 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
 $retraso_general=30;
-$ip="http://192.168.43.91"; //local
-//$ip="200.74.230.206:9009";
+//$ip="http://192.168.42.75"; //local
+$ip="200.74.230.206:9009";
 
 
-$activar_productos		=false;
-$activar_envio_orden	=true;
+$activar_productos		=true;
+$activar_envio_orden	=false;
 $activar_email_tracking	=false;
 $activar_tasa			=false;
 $activar_delivery		=false;
@@ -24,7 +24,7 @@ $activar_paga_rapido	=false; //apura al usuario que pague despues de 1 hora
 $activar_correo_masivo	=false; 
 
 $tiempo_acumulado_productos=0;
-$retraso_productos="+3 minutes";
+$retraso_productos="+1 minutes";
 
 
 
@@ -241,9 +241,9 @@ function agregarVariables($texto,$variables){
 	return $texto;
 }
 
-function actualizarEnvioOrden(){
-	$arr=q("SELECT *, CASE WHEN direccion_a_no_usar_esta='' THEN 'Valencia' else direccion_a_no_usar_esta END as direccion_a FROM (SELECT 
-	'T01' as localidad,
+function actualizarEnvioOrden($ip){
+	$arr=q("SELECT localidad,norder,envio,sub_total,exento,base_imponible,iva,total,rif,direccion_de_entrega,direccion_b,descripcion,telefono,fecha_de_orden,fecha_para_entrega,orderlines,detallepago, (CASE WHEN k.direccion_a='' THEN 'Valencia' ELSE k.direccion_a END) as  direccion_a from (SELECT *, (CASE WHEN direccion_habitacion IS NULL THEN direccion_de_entrega else direccion_habitacion END) as direccion_a FROM (SELECT 
+	'T06' as localidad,
 	o.id as norder,
 	o.total_transport as envio,
 	o.sub_total,
@@ -253,7 +253,7 @@ function actualizarEnvioOrden(){
 	o.total_pay as total,
 	p.rif as rif,
 	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_de_entrega,
-	concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) AS direccion_a_no_usar_esta,
+	(SELECT concat_ws(', ', 'Valencia, Zipcode:' || oa.zip_code, oa.urb,oa.sector,'#' || oa.nro_home,oa.reference_point) FROM public.order_address oa where type='habitacion' AND users_id=t.users_id) as direccion_habitacion,
 	'Carabobo' AS direccion_B,
 	p.name as descripcion,
 	p.phone as telefono,
@@ -283,9 +283,10 @@ function actualizarEnvioOrden(){
 			
 	) FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id INNER JOIN payment_methods pm ON pm.id=bd.payment_methods_id WHERE dbo.orders_id=o.id) detallepago 
 	
-	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y");
+	FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN users ON o.users_id=users.id INNER JOIN peoples p ON p.id=users.peoples_id WHERE t.orders_status_id=4 AND o.enviado_bio=0) y) k");
 	
 	if(is_array($arr)){
+		echo "Enviado Nueva orden";
 		$data['data']=$arr;
 		//print_r($arr); exit();
 		foreach($arr as $index=>$obj){
@@ -294,7 +295,9 @@ function actualizarEnvioOrden(){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
+	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
 	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
+	
 	//$res=true;
 	if($res!=true){
 		echo "Error al enviar la orden al servidor de bio";
@@ -325,10 +328,10 @@ function actualizarEnvioOrden(){
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	//$url_productos="$ip/example_api_bio/getProducts.json";
+	$url_productos="http://192.168.0.102/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
-	//$url_productos="http://dortiz:aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp@200.8.18.230:9000/api/v1/getProducts";
-	$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getProducts";
+	
+	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getProducts";
 	
 	$data=leer("Productos",$url_productos);
 	
@@ -343,6 +346,7 @@ function actualizarProductos($ip){
 			procesarSubCategoriasYcategorias($data->item);
 			foreach($data->item as $obj){
 
+//				if($obj->ad_org_id==1000032){
 				if($obj->ad_org_id==1000004){
 					$todoProducto['sku_idempiere'][intval($obj->sku)]=true;
 					$sugerido=$obj->sugerido;
@@ -358,76 +362,26 @@ function actualizarProductos($ip){
 						$estatusProducto='A';
 					}
 				if(isset($obj->item_name) and $obj->pricelist>0 and $obj->ad_org_id){
-				/*
-					$sql="SELECT id FROM categories WHERE c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
-				
-					$arr_ca=q($sql);
-				
-					
-					if(!is_array($arr_ca)) {
-						$name_ca=explode("-",$obj->Nivel3)[1];
-						$sql="INSERT INTO categories (name,c_elementvalue_id_n3) VALUES ('$name_ca',$obj->c_elementvalue_id_N3) RETURNING id";
-						$arr_insert_ca=q($sql);
-						if(!is_array($arr_insert_ca)){
-							$malo=true;
-							msj("MALO insertar categoria ".$sql);
-							break;
+
+					//------------IMPUESTOS--------------------
+					if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
+						$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
+
+						$sql="SELECT id FROM taxes WHERE value='$obj->IMPUESTO'";
+						
+						$arr=q($sql);
+						if(!is_array($arr)){
+							$sql="INSERT INTO taxes (short_name,name,value,type,created_at) VALUES ('$nombre_impuesto','$nombre_impuesto','$obj->IMPUESTO','porc',NOW()) RETURNING id";
+							$arr=q($sql);
+							if(!is_array($arr)){
+								echo "ERROR: ".$sql;
+							}
+							$taxes_id=$arr[0]['id'];
 						}else{
-						
-							$id_ca=$arr_insert_ca[0]['id'];
-						
+							$taxes_id=$arr[0]['id'];
 						}
-					}else{
-						$id_ca=$arr_ca[0]['id'];
-					}					
-					$sql="SELECT id FROM sub_categories WHERE c_elementvalue_id_n4=$obj->c_elementvalue_id_N4";
-					
-					$arr_sub_ca=q($sql);
-				
-					$name_sub_ca=explode("-",$obj->Nivel4)[1];
-					if(!is_array($arr_sub_ca)) {
-						$sql="INSERT INTO sub_categories (name,categories_id,c_elementvalue_id_n4) VALUES ('$name_sub_ca',$id_ca,$obj->c_elementvalue_id_N4) RETURNING id";
-						
-						$arr_insert_sub_ca=q($sql);
-						if(!is_array($arr_insert_sub_ca)){
-							$malo=true;
-							msj("MALO");
-							break;
-						}else{
-							$id_sub_ca=$arr_insert_sub_ca[0]['id'];
-						}
-					}else{
-						$id_sub_ca=$arr_sub_ca[0]['id'];
+						$memo[$obj->IMPUESTO]=true;
 					}
-					//NUEVA MODIFICACION CATEGORIAS
-					$sql="SELECT sc.id FROM sub_categories sc INNER JOIN categories c ON c.id=sc.categories_id WHERE sc.c_elementvalue_id_n4=$obj->c_elementvalue_id_N4 AND c.c_elementvalue_id_n3=$obj->c_elementvalue_id_N3";
-					$arr=q($sql);
-					if(!is_array($sql)){
-						q("UPDATE sub_categories SET categories_id=$id_ca WHERE id='$id_sub_ca'");
-					}
-
-
-					*/
-
-//------------IMPUESTOS--------------------
-if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
-	$nombre_impuesto=$obj->TaxType." ".$obj->IMPUESTO;
-
-	$sql="SELECT id FROM taxes WHERE value='$obj->IMPUESTO'";
-	
-	$arr=q($sql);
-	if(!is_array($arr)){
-		$sql="INSERT INTO taxes (short_name,name,value,type,created_at) VALUES ('$nombre_impuesto','$nombre_impuesto','$obj->IMPUESTO','porc',NOW()) RETURNING id";
-		$arr=q($sql);
-		if(!is_array($arr)){
-			echo "ERROR: ".$sql;
-		}
-		$taxes_id=$arr[0]['id'];
-	}else{
-		$taxes_id=$arr[0]['id'];
-	}
-	$memo[$obj->IMPUESTO]=true;
-}
 
 
 
@@ -449,7 +403,7 @@ if(!isset($memo[$obj->IMPUESTO]) and $obj->IMPUESTO>0){
 					if(is_array($arr)){
 						$products_id=$arr[0]['id'];
 						$porc_stock=$arr[0]['porc_stock'];
-						
+		
 						$sugerido=round(($porc_stock*$sugerido)/100);
 						//verificar que el producto no este en un proceso de compra sin ser enviado a idempiere
 						if(is_array(q("SELECT op.products_id FROM order_products op INNER JOIN orders o ON o.id=op.orders WHERE o.status='NU' AND products_id='$products_id'"))){
@@ -487,9 +441,13 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 	$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
 }else{
 	
-		if($obj->IMPUESTO==0 and $arr[0]['value']>0){
+	if($obj->IMPUESTO==0 and $arr[0]['value']>0){
+		q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
+	}elseif($obj->IMPUESTO!=$arr[0]['value']>0){
 			q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
-		}
+		}elseif($obj->IMPUESTO>0 and $obj->IMPUESTO!=$arr[0]['value']){
+				q("UPDATE det_product_taxes SET taxes_id='$taxes_id' WHERE products_id='$products_id'");
+			}	
 	
 }
 
@@ -499,6 +457,25 @@ if(!is_array($arr) AND $obj->IMPUESTO>0){
 					
 
 if(is_array($obj->Categoria)){
+	//eliminar producto de subcategoria
+	$sql="SELECT id,sub_categories_id FROM det_sub_categories WHERE products_id=$products_id";
+	$arr_det=q($sql);
+	if(is_array($arr_det)){
+		foreach($arr_det as $sub){
+			$esta=false;
+			foreach($obj->Categoria as $cat){
+				if($sub['sub_categories_id']==$cat->codigo){
+					$esta=true;
+				}
+			}
+			if(!$esta){
+				$idSub=$sub['id'];
+				q("DELETE FROM det_sub_categories WHERE id='$idSub'");
+			}
+		}
+	}
+	//-------------------------------
+
 	foreach($obj->Categoria as $cat){
 
 
@@ -507,7 +484,7 @@ if(is_array($obj->Categoria)){
 		$arr_det=q($sql);
 		
 		if(!is_array($arr_det)){
-$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
+			$sql="INSERT INTO det_sub_categories (products_id,sub_categories_id) VALUES ($products_id,$cat->codigo)";
 //				exit($sql);
 			q($sql);
 		}
