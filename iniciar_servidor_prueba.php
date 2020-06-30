@@ -328,7 +328,7 @@ function actualizarEnvioOrden($ip){
 function actualizarProductos($ip){
 	$malo=false;
 	//syslog(LOG_INFO, "Prueba de memoria: " . memory_get_usage(true));
-	$url_productos="http://192.168.0.102/example_api_bio/getProducts.json";
+	$url_productos="http://192.168.0.103/example_api_bio/getProducts.json";
 	$memo=array(); //para guardar lo que ya existe y no consulte de nuevo la db por cada producto(impuestos)
 	
 	//$url_productos="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getProducts";
@@ -377,10 +377,17 @@ function actualizarProductos($ip){
 								echo "ERROR: ".$sql;
 							}
 							$taxes_id=$arr[0]['id'];
+							$taxes_idb[$obj->IMPUESTO]=$arr[0]['id'];
 						}else{
 							$taxes_id=$arr[0]['id'];
+							$taxes_idb[$obj->IMPUESTO]=$arr[0]['id'];
 						}
 						$memo[$obj->IMPUESTO]=true;
+					}
+					if($obj->IMPUESTO>0){
+						$taxes_id=$taxes_idb[$obj->IMPUESTO];
+					}else{
+						$taxes_id=null;
 					}
 
 
@@ -436,18 +443,23 @@ function actualizarProductos($ip){
 $sql="SELECT t.id,t.value FROM det_product_taxes dpt INNER JOIN taxes t ON t.id=dpt.taxes_id WHERE products_id='$products_id'";
 
 $arr=q($sql);
-if(!is_array($arr) AND $obj->IMPUESTO>0){
-	
+
+
+if(!is_array($arr) && $obj->IMPUESTO>0){
 	$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
 }else{
 	
 	if($obj->IMPUESTO==0 and $arr[0]['value']>0){
-		q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
-	}elseif($obj->IMPUESTO!=$arr[0]['value']>0){
-			q("DELETE FROM det_product_taxes WHERE products_id='$products_id' AND taxes_id='$taxes_id'");
+		q("DELETE FROM det_product_taxes WHERE products_id='$products_id'");
+	}elseif($obj->IMPUESTO!=$arr[0]['value']){
+		$sql="DELETE FROM det_product_taxes WHERE products_id='$products_id'";
+			q($sql);
+			if($obj->IMPUESTO>0){
+				$arr=q("INSERT INTO det_product_taxes (taxes_id,products_id) VALUES ('$taxes_id','$products_id')");
+			}
 		}elseif($obj->IMPUESTO>0 and $obj->IMPUESTO!=$arr[0]['value']){
 				q("UPDATE det_product_taxes SET taxes_id='$taxes_id' WHERE products_id='$products_id'");
-			}	
+		}	
 	
 }
 
