@@ -1,7 +1,9 @@
 @extends('partials.base')
 @section('title','Home')
 @section('body')
-<?php exit("<div style='text-align:center'><img style='margin:0 auto' width='200' src='img/logo.png'><br>Estamos trabajando en una actualización, intente más tarde.</div>");?>
+<?php 
+//exit("<div style='text-align:center'><img style='margin:0 auto' width='200' src='img/logo.png'><br>Estamos trabajando en una actualización, intente más tarde.</div>");
+?>
 	<div id="loader-wrapper">
 		<div id="loader"></div>
 	
