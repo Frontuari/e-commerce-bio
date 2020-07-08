@@ -1033,7 +1033,7 @@ function crearOrden($json){
     $orden=json_decode($json,true);
     $users_id   =$_SESSION['usuario']['id'];
     $order_address_id=$orden['direccion'] ?? "NULL";
-    $delivery_time_date=Date("Y-m-d h:i:s",$orden['hora_entrega']);
+    $delivery_time_date=Date("Y-m-d H:i:s",$orden['hora_entrega']);
     $arrProductos=$orden['productos'];
 
     $coins_id=1;
