@@ -64,10 +64,12 @@
                 formData.append("codigoCorreo",this.codigo);
                 this.sending = true;
                 axios.post(URLHOME+'api_rapida.php?evento=confirmarCodRecuperacion',formData).then( (data) => {
+                    console.log(data);
+                    this.sending = false;
                     Swal.fire("Bio en línea","Código correcto, puede cambiar su clave","success").then( result => {
                         this.first = false;
                         this.second = false;
-                        this.second = true;
+                        this.third = true;
                         this.sending = false;
                     });
                 }).catch(err => {
@@ -88,11 +90,12 @@
                 formData.append("password",this.password);
                 if(this.password === this.samepassword){
                     axios.post(URLHOME+'api_rapida.php?evento=cambiarClavePublico',formData).then( (data) => {
-                        Swal.fire("Bio en línea","Código correcto, puede cambiar su clave","success").then( result => {
-                            this.first = false;
+                        Swal.fire("Bio en línea","Clave Cambiada con Exito, Ya puedes Iniciar Sesion!!","success").then( result => {
+                            /*this.first = false;
                             this.second = false;
                             this.second = true;
-                            this.sending = false;
+                            this.sending = false;*/
+                            document.location.href = '/';
                         });
                     }).catch(err => {
                         if(!!err) {
