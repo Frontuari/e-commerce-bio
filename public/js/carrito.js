@@ -69,7 +69,7 @@ function procesarPago(){
 		// }
 		amount=amount*rate;
 	}
-
+console.log(amount);
 	if(bank_datas_id==3){
 		datosBancarios.innerHTML=`
 		<div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC se refrescará esta ventana</div></div>

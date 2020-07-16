@@ -853,9 +853,9 @@ function guardarPago(){
         $payment_methods_id=$arr[0]['payment_methods_id'];
     }
 
-    if($ref=='null'){
+    if($ref=='null' || $payment_methods_id==3){
        
-        $ref="EFECTIVO";
+        $ref="Efectivo $";
         if($payment_methods_id==5){
             $ref="-";
             $status='aprobado';
@@ -1378,7 +1378,7 @@ function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprim
         
         return salidaNueva($row,"Listando productos",true,$tipo_salida,$comprimido);
     }else{
-        return salidaNueva(null,"Nos encontramos productos que coincidan con tu búsqueda.",false,$tipo_salida,$comprimido);
+        return salidaNueva(null,"No encontramos productos que coincidan con tu búsqueda.",false,$tipo_salida,$comprimido);
     }
 }
 
