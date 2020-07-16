@@ -285,8 +285,8 @@ switch($evento) {
         $email=$_SESSION['usuario']['email'];
         $name=$_SESSION['usuario']['name'];
         $phone=$_SESSION['usuario']['phone'];
-        $orders_id=$_GET['orders_id'];
-        enviarCorreo('devoluciones.bioencasa@biomercados.com.ve',"Solicitud de Devolución","El cliente $email, $name, $phone esta solicitando la devolución de la orden Nro. ".$orders_id);
+        $orders_id=$_GET['orders_id']; //EL NRO DE ORDEN NO FUNCIONA AGREGAR EN UN FUTURO
+        enviarCorreo('devoluciones.bioencasa@biomercados.com.ve',"Solicitud de Devolución","El cliente $email, $name, $phone esta solicitando una devolución.");
         salidaNueva(null,"Su solicitud ha sido procesada. Nos comunicaremos con usted.");
     break;
     case 'reporte_ingresos':
