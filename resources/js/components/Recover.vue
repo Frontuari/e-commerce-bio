@@ -25,12 +25,12 @@
             <div v-if="!!third">
                 <div class="form-group">
                     <label for="email">Nueva clave:</label>
-                    <input type="text" class="form-control" id="password" name="password" v-model="password">
+                    <input type="password" class="form-control" id="password" name="password" v-model="password">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Repita su clave:</label>
-                    <input type="text" class="form-control" id="samepassword" name="samepassword" v-model="samepassword">
+                    <input type="password" class="form-control" id="samepassword" name="samepassword" v-model="samepassword">
                 </div>
                 
                 <div class="form-group">
