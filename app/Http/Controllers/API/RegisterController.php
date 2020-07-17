@@ -184,4 +184,9 @@ class RegisterController extends BaseController
         return "Token invalido";
     }
 
+    public function getAmountBW($user_id){
+        $data = User::findorfail($user_id);
+        return json_decode($data->saldo);
+    }
+
 }

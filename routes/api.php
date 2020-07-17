@@ -17,6 +17,7 @@ Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 Route::post('update_profile', 'API\RegisterController@update_profile');
 Route::resource("user_address",'API\OrderAddressController');
+Route::get('getAmountBW/{id}', 'API\RegisterController@getAmountBW');
 
 //ADVS
 Route::resource('advs', 'API\AdvsController');

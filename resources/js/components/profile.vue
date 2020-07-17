@@ -18,7 +18,7 @@
 						</div>
 						<div class="profile-info">
 							<h2 class="profile-title">{{userData.name}}</h2>
-							<p class="bio-points">Mi saldo disponible<span class="quantity-span">{{userData.saldo}}<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
+							<p class="bio-points">Mi saldo disponible<span class="quantity-span">{{ userData.saldo }}<img src="assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></p>
 						</div>
 					</div>
 				</div>
@@ -816,6 +816,11 @@
 			tasadolar: Number
 		},
         methods: {
+        	getAmountBW: function(user_id){
+        		axios.get(URLHOME+'api/getAmountBW/'+user_id).then( datos => {
+        			this.userData.saldo = datos.data;
+        		});
+        	},
 			getProduct: function(objP) {
 				this.oneproduct = objP;
             },
@@ -1205,6 +1210,7 @@
 			this.getRegions();
 			this.getCities();
 			this.getPedidos();
+			this.getAmountBW(this.userData.id);
 			console.log("this.userData::> ",this.userData);
 		},
 		created() {
