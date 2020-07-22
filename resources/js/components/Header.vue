@@ -98,6 +98,9 @@
 							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
 								<a href="/profile?tab=my-favorites"><img src="/assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</li>
+							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom"  v-if="!!userlogged">
+								<a href="#" style="background: #ED3928; border-radius: 8px; padding-right: 8px;"><img src="/assets/img/icono-puntos-bio.svg" style="width: 25px !important; height: 25px !important; padding: 5px;" alt="Bio Wallet"><span class="quantity-span">{{saldo	}}</span></a>
+							</li>
 
 							<!-- loggeado -->
 							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="/assets/img/icono-salir-bio.png"></a></li>-->
@@ -192,6 +195,7 @@ export default {
         return {
 			cant_cart: 0,
 			cant_favorite: 0,
+			saldo: 0,
 			categories: [],
 			products: [],
 			searched: {},
@@ -210,6 +214,11 @@ export default {
 		userlogged: Object
 	},
     methods: {
+    	getAmountBW: function(){
+    		axios.get(URLHOME+'api/getAmountBW/'+this.userlogged.id).then( datos => {
+    			this.saldo = datos.data;
+    		});
+    	},
 		search() {
 			const route = "/catalog?search="+this.searchText;
 			window.location.href = route;
@@ -301,6 +310,7 @@ export default {
     mounted() {
 		this.getCategories();
 		this.getFavorites();
+		this.getAmountBW();
 		if( window.localStorage.getItem("cartNew") ){
 			const _this = this;
 			JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {

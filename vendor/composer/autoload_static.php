@@ -652,6 +652,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
 
     public static $classMap = array (
         'AdvsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvsTableSeeder.php',
+        'App\\Actions\\PaymentAction' => __DIR__ . '/../..' . '/app/Actions/PaymentAction.php',
         'App\\Advs' => __DIR__ . '/../..' . '/app/Advs.php',
         'App\\BankDatas' => __DIR__ . '/../..' . '/app/BankDatas.php',
         'App\\BankOrder' => __DIR__ . '/../..' . '/app/BankOrder.php',
