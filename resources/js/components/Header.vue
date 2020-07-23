@@ -215,9 +215,11 @@ export default {
 	},
     methods: {
     	getAmountBW: function(){
-    		axios.get(URLHOME+'api/getAmountBW/'+this.userlogged.id).then( datos => {
-    			this.saldo = datos.data;
-    		});
+    		if(this.userlogged){
+    			axios.get(URLHOME+'api/getAmountBW/'+this.userlogged.id).then( datos => {
+	    			this.saldo = datos.data;
+	    		});
+    		}
     	},
 		search() {
 			const route = "/catalog?search="+this.searchText;

@@ -1568,7 +1568,7 @@ function confirmarCodRecuperacion(){
 function enviarCodRecuperacion(){
     $email  =$_GET['email'];
     $res=q("SELECT 1 FROM users WHERE email='$email'");
-    $codigoCorreo=generarCodigoVerificacion($email);
+    $codigoCorreo=generateRandomString();
     if(is_array($res)){
         $res=enviarCorreo($email,'Código de verificación',plantillaCodigo($codigoCorreo));
 if($res){
@@ -1582,6 +1582,16 @@ if($res){
     }else{
         salida(null,"El correo no existe, intente nuevamente.",false);
     }
+}
+
+function generateRandomString($length = 6) {
+    $characters = '0123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
 
 function confirmarCorreo(){
