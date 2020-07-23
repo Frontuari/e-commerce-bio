@@ -462,7 +462,7 @@ function obtenerDireccion(){
 }
 
 function login(){
-    $email=$_GET['email'];
+    $email=strtolower($_GET['email']);
     $clave=$_GET['password'];
     
     $row=q("SELECT p.rif,s.avatar as avatar ,split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,c.id as city_id,p.phone,p.phone_home,p.saldo
