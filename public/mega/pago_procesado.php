@@ -372,6 +372,4 @@ function set_formato_moneda($value){
         
     }
 
-
-
 ?>
