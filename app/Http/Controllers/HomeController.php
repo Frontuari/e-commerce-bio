@@ -108,13 +108,24 @@ class HomeController extends Controller
         foreach($comboData as $i => $c) {
             $total = 0;
             $cantTotal = 0;
-            $c["products"] = DB::table("det_product_packages")
+            /*$c["products"] = DB::table("det_product_packages")
             ->select("products.*","det_product_packages.cant as cant_combo",DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
             ->join("products","products.id","=","det_product_packages.products_id")
             ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
             ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
             ->where("det_product_packages.packages_id",$c["id"])
-            ->get();
+            ->get();*/
+
+            $c["products"] = DB::select("select products.*, 
+                                det_product_packages.cant as cant_combo, 
+                                taxes.value as impuesto, 
+                                ( (products.price * taxes.value / 100) + products.price) as calculado
+                            from det_product_packages
+                            inner join products on products.id = det_product_packages.products_id
+                            left join det_product_taxes on det_product_taxes.products_id = products.id
+                            left join taxes on taxes.id = det_product_taxes.taxes_id
+                            where det_product_packages.packages_id = ".$c["id"]." and products.qty_avaliable >= det_product_packages.cant and products.status = 'A'");
+            
             foreach($c["products"] as $j => $p) {
                 $cantTotal += $p->cant_combo;
 
