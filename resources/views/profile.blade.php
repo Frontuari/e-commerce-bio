@@ -32,7 +32,7 @@ if(isset($_GET['orders_id'])){
 				<div class="row">
                     <div class="col-md-12"><span class="text-danger">Importante:</span><br>
                     	<!-- <span class="text-danger">*</span> Puede realizar un máximo de 2 pagos<br> -->
-                    	<span class="text-danger">*</span> Si va a pagar en efectivo combinado con otro método de pago, debe elegir primero el método de pago en Efectivo.
+                    	<span class="text-danger">*</span> Si desea pagar en efectivo USD y combinar su pago con otro método de pago, debe seleccionar primero la opción Efectivo USD.
                     </div>
 				</div>
 				<div id="metodosPago"></div>
