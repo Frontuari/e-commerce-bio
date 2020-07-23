@@ -1790,11 +1790,11 @@ function salida_list($row,$bueno=true){
 }
 function plantillaCodigo($codigo){
     return '
-    <div style="text-align:center; background-color: #7FBC01;">
+    <!--<div style="text-align:center; background-color: #7FBC01;">
     <img width="200" src="https://i.imgur.com/bqhoBSp.png" titñe="Bio en Línea">
     
     </div>
-    <br>
+    <br>-->
     <div style="text-align:center">
     Bienvenido a nuestra red Biomercados<br><br>Su codigo verificación es: <br>
     <b><span style="font-size:25px">'.$codigo.'</span></b>
