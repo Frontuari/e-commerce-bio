@@ -86,14 +86,14 @@
 
 .parallax {
   /* The image used */
-  background-image: url("http://biomercados.com.ve/wp-content/uploads/2019/12/paraparal-2.jpg");
+  background-image: url("{{ asset('assets/img/sucursales/paraparal.jpg') }}");
 
   /* Set a specific height */
   height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
-  background-position: center;
+  background-position: 0 180%;
   background-repeat: no-repeat;
   background-size: cover;
 }

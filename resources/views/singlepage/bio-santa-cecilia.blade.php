@@ -85,14 +85,14 @@
 <style>
 .parallax {
   /* The image used */
-  background-image: url("http://biomercados.com.ve/wp-content/uploads/2019/11/DSC_0425-2.jpg");
+  background-image: url("{{ asset('assets/img/sucursales/santa_cecilia.jpg') }}");
 
   /* Set a specific height */
   height: 500px;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
-  background-position: center;
+  background-position: 0 190%;
   background-repeat: no-repeat;
   background-size: cover;
 }
