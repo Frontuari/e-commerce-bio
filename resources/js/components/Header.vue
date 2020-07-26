@@ -96,7 +96,7 @@
 								<a href="/cart"><img src="/assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
 							</li>
 
-							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
+							<li id="nav-fav" v-if="userlogged" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver sus favoritos">
 								<a href="/profile?tab=my-favorites"><img src="/assets/img/favoritos-bio.png" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</li>
 							<li id="nav-fav" data-toggle="tooltip" data-placement="bottom"  v-if="!!userlogged">
@@ -132,9 +132,9 @@
 						</div>
 						<div class="col-md-12">
 							<!-- no loggeado -->
-							<div class="top-info-nav">
+							<div class="top-info-nav" v-if="userlogged">
 								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">{{saldo}}<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
-								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
+								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</div>
 							<!-- no loggeado -->
 						</div>
