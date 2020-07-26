@@ -127,13 +127,13 @@
 								<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
 								<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
 								<li><a href="https://twitter.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-								<li><a href="#"><img src="/assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
+								<!--<li><a href="#"><img src="/assets/img/icono-youtube-bio.svg" alt="LinkedIn"></a></li>-->
 							</ul>
 						</div>
 						<div class="col-md-12">
 							<!-- no loggeado -->
 							<div class="top-info-nav">
-								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">0<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">{{saldo}}<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 							</div>
 							<!-- no loggeado -->
