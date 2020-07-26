@@ -69,14 +69,14 @@
 											<input type="password" class="form-control" name="password" v-model="user.pass" @keypress="enterLogin($event)">
 										</div>
 										<div class="form-group">
-											<input type="checkbox"> Recordar Usuario
+											<input type="checkbox"> Recordar Contraseña
 										</div>
 										<div class="form-group">
 											<button type="button" @click="login()" class="btn">Entrar</button>
 										</div>
 										<div class="form-group form-group-register">
 											<small>¿No tienes cuenta? <a  href="/join" class="white">Registrate aquí</a></small>
-											<small><a href="/recover" class="white">¿Olvidaste la contraseña?</a></small>
+											<small><a href="/recover" class="white">¿Olvido su Contraseña?</a></small>
 										</div>
 									</form>
 								</div>

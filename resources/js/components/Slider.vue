@@ -1,10 +1,10 @@
 <template>    
-    <section id="main-slider">
-        <div :id="id" class="carousel slide" data-ride="carousel">
+    <section id="main-slider" style="overflow: hidden; height: auto !important;">
+        <div :id="id" class="carousel slide" data-ride="carousel" style="height:550px !important;">
             <ol class="carousel-indicators">
                 <li v-for="(slider, index) in sliders" v-bind:key="slider.id" :data-target="'#'+id" :data-slide-to="index" v-bind:class="{'active': index == 0}"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="height: 600px !important;">
                 <div v-bind:class="{'carousel-item': true,'active': index == 0}" v-for="(slider,index) in sliders" v-bind:key="slider.id">
                     <a :href="slider.url" v-if="!!slider.url">
                         <LazyImg class="d-block w-100" :source="'storage/'+slider.image" :alt="slider.image"></LazyImg>

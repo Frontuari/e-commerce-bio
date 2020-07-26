@@ -15,12 +15,12 @@
             </div>
             <div class="form-group">
                 <label for="rif" style="display: block;">Cédula/RIF:</label>
-                <select class="form-control" style="width: 20%; display: inline-block;">
-                    <option>V</option>
-                    <option>E</option>
-                    <option>J</option>
-                    <option>G</option>
-                    <option>C</option>
+                <select id="nationality" v-model="User.nationality" class="form-control" style="width: 20%; display: inline-block;">
+                    <option value="V-">V</option>
+                    <option value="E-">E</option>
+                    <option value="J-">J</option>
+                    <option value="G-">G</option>
+                    <option value="C-">C</option>
                 </select>
                 <input type="text" class="form-control" style="width: 79%; display: inline-block;" id="rif" name="rif" v-model="User.rif">
             </div>
@@ -75,6 +75,7 @@
                     birthdate:'',
                     tlf:'',
                     sex: '',
+                    nationality: 'V-'
                 }
             }
         },
@@ -87,7 +88,7 @@
 
                     if(this.User.password == this.User.c_password){
                         const formData = new FormData();
-                        formData.append("rif",this.User.rif);
+                        formData.append("rif",this.User.nationality+this.User.rif);
                         formData.append("name",this.User.name);
                         formData.append("password",this.User.password);
                         formData.append("email",this.User.email);
