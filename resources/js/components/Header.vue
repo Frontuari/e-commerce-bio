@@ -130,20 +130,9 @@
 							</ul>
 						</div>
 						<div class="col-md-12">
-							<!-- loggeado -->
-							<!--<div class="top-info-nav">
-								<div class="top-info-log">
-									<a href="#"><img src="/assets/img/icono-perfil-bio.png" alt="User"><span class="link-text">Pablo Mendoza</span></a> 
-									<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
-									<a href="#" class="logout"><img src="/assets/img/cerrar-sesion-bio.svg"></a>
-								</div>
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">253<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
-							</div>-->
-							<!-- loggeado -->
-
 							<!-- no loggeado -->
 							<div class="top-info-nav">
-								<a href="#" class="bio-points">Mis Puntos bio<span class="quantity-span">0<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
+								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">0<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">0</span></a>
 							</div>
 							<!-- no loggeado -->
