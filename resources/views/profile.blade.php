@@ -20,7 +20,9 @@ if(isset($_GET['orders_id'])){
 	</section>
 	<div class="container">
 	<div class="row" style="text-align:center;" id="div_image_top">
-				<img style="margin:0 auto" src="img/topPagar.png">
+		<div class="col-lg-12 col-12">
+			<img style="margin:0 auto; width: 100% !important;" src="img/topPagar.png">
+		</div>
 	</div>
 	</DIV>
 	<div class="container">

@@ -114,6 +114,7 @@ function elegidoMetodo(id,name){
 	// window.location.href="#bancosDelMetodo";
 	bancosDelMetodo.innerHTML="<div class='loaderb'><div>";
 	get("listarBancosdelMetododePago","&payment_methods_id="+id);
+	location.href="#utlimo_metodo_pago";
 }
 function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	console.log("id::> ",id);
@@ -218,7 +219,7 @@ function procesar(data,evento){
 					}else{
 						descrip='megasoft';
 					}
-					h+='<div class="row"><div class="col-md-1"></div><div class="col-md-1"><input name="b"  class="form-controld" type="radio" onclick="elegidoBanco(\''+value.id+'\',\''+value.b_name+'\',\''+value.titular+'\',\''+descrip+'\',\''+value.c_name+'\',\''+value.coins_id+'\',\''+value.rate+'\')" value="'+value.id+'"></div><div class="col-md-10">'+value.b_name+' ('+value.c_name+')</div></div><hr>';
+					h+='<div class="row"><div class="col-md-1 col-1"></div><div class="col-md-1 col-1"><input name="b"  class="form-controld" type="radio" onclick="elegidoBanco(\''+value.id+'\',\''+value.b_name+'\',\''+value.titular+'\',\''+descrip+'\',\''+value.c_name+'\',\''+value.coins_id+'\',\''+value.rate+'\')" value="'+value.id+'"></div><div class="col-md-10 col-10">'+value.b_name+' ('+value.c_name+')</div></div><hr>';
 				}
 				
 				bancosDelMetodo.innerHTML=h+"<div id='datosBancarios'></div>";
@@ -233,8 +234,15 @@ function procesar(data,evento){
 				if(data.success==true){
 					var h='<hr>';
 					var datos=data.data;
+					var ultimo = "";
+					
 					for (var [key, value] of Object.entries(datos)) {
-						h+='<div class="row"><div class="col-md-1"><input name="a"  class="form-controld" type="radio" onclick="elegidoMetodo(\''+value.id+'\',\''+value.name+'\')" value="'+value.id+'"></div><div class="col-md-11">'+value.name+'</div></div><hr>';
+						
+						if(key == 0){
+							ultimo = "id='utlimo_metodo_pago'";
+						}
+
+						h+='<div class="row"><div class="col-md-1 col-1"><input name="a" '+ultimo+'  class="form-controld" type="radio" onclick="elegidoMetodo(\''+value.id+'\',\''+value.name+'\')" value="'+value.id+'"></div><div class="col-md-11 col-11">'+value.name+'</div></div><hr>';
 					}
 					
 					metodosPago.innerHTML=h+"<div id='bancosDelMetodo'></div>";
