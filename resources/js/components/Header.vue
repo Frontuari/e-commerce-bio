@@ -25,7 +25,7 @@
 				<div class="row align-items-center-md">
 					<div id="toggler-header" class="col-4">
 						<button class="navbar-toggler toggle-menu" type="button">
-							<img src="/assets/img/menu-movil-bio.svg" alt="Menu Bars">
+							<img src="/assets/img/menu-movil-bio.png" alt="Menu Bars">
 						</button>
 					</div>
 					<div id="brand-header" class="col-lg-2 col-4">
