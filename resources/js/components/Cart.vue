@@ -43,7 +43,7 @@
 														<button type="button" @click="droppingCart()" class="btn btn-submit" style="display: inline-flex!important; float:right">Vaciar Carrito</button>
 													</div>
 												</div>
-												<div class="col-6 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
+												<div class="col-sm-12 col-lg-12" v-for="(product_cart,index) in products_cart" :key="product_cart.id">
 
 													
 													<div class="media" style="border-bottom:1px solid #ccc">

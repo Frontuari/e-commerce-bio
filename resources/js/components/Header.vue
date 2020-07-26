@@ -23,7 +23,7 @@
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
-					<div id="toggler-header" class="col-4">
+					<div id="toggler-header" class="col-3">
 						<button class="navbar-toggler toggle-menu" type="button">
 							<img src="/assets/img/menu-movil-bio.png" alt="Menu Bars">
 						</button>
@@ -31,6 +31,7 @@
 					<div id="brand-header" class="col-lg-2 col-4">
 						<a  href="/" class="navbar-brand"><img  src="/img/logo.png" alt="Bio Mercados"></a>
 					</div>
+
 					<div id="search-header" class="col-lg-6 col-md-12">
 						<form class="form-inline" v-on:submit="search()">
 							<input class="form-control" id="bio-search" type="text" placeholder="Busque aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText" autocomplete="off">
@@ -48,7 +49,7 @@
 						</form>
 					</div>
 					
-					<div id="nav-header" class="col-lg-4 col-4">
+					<div id="nav-header" class="col-lg-4 col-5">
 						<ul>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
@@ -84,7 +85,7 @@
 							<!-- no loggeado -->
 							<!-- loggeado -->
 							<li id="nav-logged" v-if="!!userlogged">
-								<a href="/profile"><img :src="userlogged.avatar" alt="User"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
+								<a href="/profile"><img :src="userlogged.avatar" alt="User" style="margin-left:15px !important;"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
 									<img src="/assets/img/icono-salir-bio.png">
 								</a>
@@ -123,9 +124,9 @@
 						<!---->
 						<div class="col-md-12">
 							<ul class="social-nav">
-								<li><a href="#"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
-								<li><a href="#"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
-								<li><a href="#"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
+								<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
+								<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
+								<li><a href="https://twitter.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
 								<li><a href="#"><img src="/assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
 							</ul>
 						</div>
