@@ -142,6 +142,12 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 		var msj="Use coma (,) para decimales";
 	}
 
+	var mensaje = "Ingrese el monto en "+moneda+":";
+
+	if(name == 'bio wallet'){
+		mensaje = "Introduzca el monto que desea usar de su saldo disponible en bio wallet";
+	}
+
 	datosBancarios.innerHTML=`
 	<div class='row text-center h5'>
 	<div class="col-md-12">
@@ -168,7 +174,7 @@ Titular: `+titular+`
 	<div class='row'>
 		`+otro_ancho+`
 		<div class="col-md-6">
-			<label>Ingrese el monto en `+moneda+`:</label>
+			<label>`+mensaje+`:</label>
 			<input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" required class="form-control" type="text">
 			<input id="input_coins_id" type="hidden" name="coins_id" value="`+coins_id+`">
 			<input id="input_rate" type="hidden" name="rate" value="`+rate+`">
