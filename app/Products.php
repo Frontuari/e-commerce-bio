@@ -59,7 +59,7 @@ class Products extends Model
         
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/SyncProductActChk");
+        curl_setopt($ch, CURLOPT_URL,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/SyncProductActChk");
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_POSTFIELDS,

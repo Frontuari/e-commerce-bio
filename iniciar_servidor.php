@@ -12,7 +12,7 @@ $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port'])
 
 $retraso_general=30;
 //$ip="http://192.168.42.75"; //local
-$ip="200.74.230.206:9009";
+$ip="200.8.18.230:9000";
 
 
 $activar_productos		=true;
