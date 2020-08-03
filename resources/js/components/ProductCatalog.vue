@@ -145,6 +145,7 @@
             getpage(index) {
                 this.page = index;
                 this.$emit("getpage",this.page);
+                document.location = '#';
             },
             increaseValue(product)
             {
