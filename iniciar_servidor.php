@@ -10,7 +10,7 @@ date_default_timezone_set('America/Manaus');
 $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 
-$retraso_general=30;
+$retraso_general=60;
 //$ip="http://192.168.42.75"; //local
 $ip="200.74.230.206:9009";
 
@@ -24,31 +24,31 @@ $activar_paga_rapido	=true; //apura al usuario que pague despues de 1 hora
 $activar_correo_masivo	=true; 
 
 $tiempo_acumulado_productos=0;
-$retraso_productos="+1 minutes";
+$retraso_productos="+2 minutes";
 
 
 
 $tiempo_acumulado_envio_orden=0;
-$retraso_envio_orden="+1 minutes";
+$retraso_envio_orden="+2 minutes";
 
 
 $tiempo_acumulado_email_tracking=0;
-$retraso_email_tracking="+1 minutes";
+$retraso_email_tracking="+2 minutes";
 
 
 $tiempo_acumulado_tasa=0;
-$retraso_tasa="+1 minutes";
+$retraso_tasa="+2 minutes";
 
 
 $tiempo_acumulado_delivery=0;
-$retraso_delivery="+1 minutes";
+$retraso_delivery="+2 minutes";
 
 
 $tiempo_acumulado_paga_rapido=0;
-$retraso_paga_rapido="+1 minutes";
+$retraso_paga_rapido="+2 minutes";
 
 $tiempo_acumulado_correo_masivo=0;
-$retraso_correo_masivo="+1 minutes";
+$retraso_correo_masivo="+2 minutes";
 
 
 
