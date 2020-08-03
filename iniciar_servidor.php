@@ -624,7 +624,7 @@ function msj($value){
 }
 function get_url($url){
 	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 180);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 360);
 
 		if(curl_errno($ch)>0 and !$ch){
 			return false;
