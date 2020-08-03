@@ -26,7 +26,7 @@
 		private $pass;
 		private $url;
 		public function __construct() {
-			$this->uri = "200.8.18.230:9000/api/v1";
+			$this->uri = "200.74.230.206:9009/api/v1";
 			$this->user = "dortiz";
 			$this->pass = "aluTQYPY2lpOZdTAXscAI1FXZMIgZecPoawXhDWg7Kp";
 			$this->url = "http://".$this->user.":".$this->pass."@".$this->uri;

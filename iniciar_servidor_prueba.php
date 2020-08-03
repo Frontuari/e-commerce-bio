@@ -12,7 +12,7 @@ $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port'])
 
 $retraso_general=30;
 //$ip="http://192.168.42.75"; //local
-$ip="200.8.18.230:9000";
+$ip="200.74.230.206:9009";
 
 
 $activar_productos		=true;
@@ -168,7 +168,7 @@ function paga_rapido(){
 }
 
 function actualizarDelivery($ip){
-	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getDelivery";
+	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getDelivery";
 	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getDelivery";
 	
 	$data=leer("Delivery",$url);
@@ -183,7 +183,7 @@ function actualizarDelivery($ip){
 	}
 }
 function actualizarTasa($ip){
-	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/getTax";
+	$url_prueba="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/getTax";
 	$url="http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/getTax";
 	
 	$data=leer("Tasa dolar",$url);
@@ -295,7 +295,7 @@ function actualizarEnvioOrden($ip){
 			$data['data'][$index]['detallepago']=json_decode($obj['detallepago']);
 		}
 		$data['data']=json_encode($data['data']);
-	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.8.18.230:9000/api/v1/setOrders");
+	//$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@200.74.230.206:9009/api/v1/setOrders");
 	$res=send_url($data,"http://ecommerce:2ViGiPJ1DAElzDwEteBbiIH4gF939fKuOD5GKRhedZp@$ip/api/v1/setOrders");
 	
 	//$res=true;

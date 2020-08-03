@@ -215,6 +215,7 @@ function procesar(data,evento){
 		break;
 		case 'listarBancosdelMetododePago':
 			var data = JSON.parse(data);
+			console.log(data);
 			if(data.success==true){
 				var h='<hr>';
 				var datos=data.data;
