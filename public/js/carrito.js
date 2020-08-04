@@ -1,5 +1,5 @@
-
-
+var aPagarBs = 0;
+var aPagarUsd = 0;
 
 if(document.getElementById("div_fecha")){
 	
@@ -36,8 +36,8 @@ var horaEntregaOrden="NULL";
 var limite_max_pagos_alcanzado=false;
 var ordenPagada=false;
 
-var aPagarBs = 0;
-var aPagarUsd = 0;
+//var aPagarBs = 0;
+//var aPagarUsd = 0;
 
 
 function refrescar(){
@@ -124,6 +124,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 		</div>`;
 	var otro_ancho='';
 	var txt_btn_pagar='Pagar';
+	var monto_total = 0;
 	if(id==3 || id==2  || id==6 || id==7) {
 		div_referencia='';
 		otro_ancho='<div class="col-md-3"></div>';
@@ -137,9 +138,11 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	if(coins_id==1){
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
 		var msj="Use punto (.) para decimales";
+		monto_total = aPagarUsd;
 	}else{
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(\.\\d{3})*))|0)(,\\d{1,2})?$";
 		var msj="Use coma (,) para decimales";
+		monto_total = aPagarBs;
 	}
 
 	var mensaje = "Ingrese el monto en "+moneda+":";
@@ -175,7 +178,7 @@ Titular: `+titular+`
 		`+otro_ancho+`
 		<div class="col-md-6">
 			<label>`+mensaje+`:</label>
-			<input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" required class="form-control" type="text">
+			<input id="input_amount" title="`+msj+`" pattern="`+patron+`" name="amount" value="`+monto_total.toFixed(2)+`" required class="form-control" type="text">
 			<input id="input_coins_id" type="hidden" name="coins_id" value="`+coins_id+`">
 			<input id="input_rate" type="hidden" name="rate" value="`+rate+`">
 			<input id="input_bank_datas_id" type="hidden" name="bank_datas_id" value="`+id+`">
