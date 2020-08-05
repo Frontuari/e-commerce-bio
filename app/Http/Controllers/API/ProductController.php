@@ -22,7 +22,7 @@ class ProductController extends BaseController
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where('products.status','A')
-        ->where("qty_avaliable",">",0)
+        ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
         ->groupBy("products.id","taxes.value")
         ->paginate($limit);
 
