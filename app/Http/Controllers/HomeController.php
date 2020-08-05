@@ -64,41 +64,41 @@ class HomeController extends Controller
 
         $MostRecent = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('created_at','desc')
-        ->where("products.qty_avaliable",">",0)
+        ->where("qty_avaliable",">",0)
         ->take(12)
         ->get();
 
         $MostView = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_view','desc')
-        ->where("products.qty_avaliable",">",0)
+        ->where("qty_avaliable",">",0)
         ->take(12)
         ->get();
 
         $MostSold = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_sold','desc')
-        ->where("products.qty_avaliable",">",0)
+        ->where("qty_avaliable",">",0)
         ->take(12)
         ->get();
 
         $BestPrice = Product::where('products.status','A')
         ->where('is_combo',false)
-        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado"))
+        ->select("products.*",DB::raw("taxes.value as impuesto"),DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('price','asc')
-        ->where("products.qty_avaliable",">",0)
+        ->where("qty_avaliable",">",0)
         ->take(12)
         ->get();
 
@@ -120,11 +120,12 @@ class HomeController extends Controller
                                 det_product_packages.cant as cant_combo, 
                                 taxes.value as impuesto, 
                                 ( (products.price * taxes.value / 100) + products.price) as calculado
+                                , ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable
                             from det_product_packages
                             inner join products on products.id = det_product_packages.products_id
                             left join det_product_taxes on det_product_taxes.products_id = products.id
                             left join taxes on taxes.id = det_product_taxes.taxes_id
-                            where det_product_packages.packages_id = ".$c["id"]." and products.qty_avaliable >= det_product_packages.cant and products.status = 'A'");
+                            where det_product_packages.packages_id = ".$c["id"]." and qty_avaliable >= det_product_packages.cant and products.status = 'A'");
             
             foreach($c["products"] as $j => $p) {
                 $cantTotal += $p->cant_combo;
