@@ -1352,6 +1352,7 @@ p.qty_avaliable,
 case when p.keyword ilike '%insuperable%' then 1 else 0 end as promocion,
 p.qty_max,
 p.description_short,
+((p.qty_avaliable * p.porc_stock) / 100) as qty_avaliable,
 coalesce((SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id),0.000000) total_impuesto,
 coalesce(((p.price*(SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxes dpt ON dpt.products_id=p.id AND t.id=dpt.taxes_id GROUP BY p.id)/100)+p.price),p.price) total_precio,
 p.name,p.photo as image, p.id, p.price,$whereUsuario ROUND(p.user_rating) as rating,
@@ -1359,7 +1360,7 @@ coalesce(((p.price*(SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxe
 FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id
 INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
 INNER JOIN categories c ON c.id=sc.categories_id
-$join  WHERE (p.status='A' AND p.qty_avaliable>0) $where GROUP BY p.id $order $limit";
+$join  WHERE (p.status='A' AND ((p.qty_avaliable * p.porc_stock) / 100) > 0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
