@@ -16,3 +16,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 iniciar_servidor.php
+/app/Products.php
+/public/getProducts.php

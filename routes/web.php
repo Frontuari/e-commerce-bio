@@ -39,4 +39,6 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
     Route::get('masivo', ['uses' => 'Subscriptions@home', 'as' => 'voyager.masivo']);
     Route::get('reportes', ['uses' => 'Reportes@home', 'as' => 'voyager.reportes']);
+
+    Route::get('kpis/transactions-for-period','KpisController@TransactionsForPeriod');
 });
