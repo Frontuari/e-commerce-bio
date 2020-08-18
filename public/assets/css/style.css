@@ -2658,7 +2658,7 @@ input[type=checkbox]:checked+.custom-check span {
 
 @media (min-width: 992px) {
     .user-profile {
-        background-image: url('../img/fondo-mi-cuenta-bio-mercados.png');
+        /*background-image: url('../img/fondo-mi-cuenta-bio-mercados.png');*/
         background-size: 300px;
         background-repeat: no-repeat;
         background-position: right -25px;

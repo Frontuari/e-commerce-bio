@@ -14,7 +14,6 @@ $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
-
 //best_sql_listarFavoritos(true);
 if($_GET['evento']=='' && $_POST['evento']!=''){
     $evento=$_POST['evento'];

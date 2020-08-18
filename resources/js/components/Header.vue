@@ -201,7 +201,7 @@ export default {
         }
 	},
 	props: {
-		userlogged: Object
+		userlogged: Object,
 	},
     methods: {
     	getAmountBW: function(){
