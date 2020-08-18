@@ -41,4 +41,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('reportes', ['uses' => 'Reportes@home', 'as' => 'voyager.reportes']);
 
     Route::get('kpis/transactions-for-period','KpisController@TransactionsForPeriod');
+    Route::get('kpis/sales-for-period','KpisController@SalesForPeriod');
+    Route::get('kpis/sales-units-for-period','KpisController@SalesUnitsForPeriod');
+    
+    Route::post('kpis/getData', 'KpisController@getData')->name('get_data');
 });

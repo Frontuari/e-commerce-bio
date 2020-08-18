@@ -196,6 +196,9 @@ return [
         'js/Chart.min.js',
         'js/autonumeric.js',
         'js/final.js',
+        'js/raphael-min.js',
+        'js/morris.min.js',
+        'js/kpis.js'
         
     ],
 

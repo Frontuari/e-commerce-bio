@@ -31,7 +31,7 @@
 							<label>Hasta:</label>
 							<input type="date" name="date_to" id="date_to" class="form-control" />
 						</div>
-						<button class="btn btn-success" id="transactions_for_period" type="button">Enviar</button>
+						<button class="btn btn-success" id="sales_units_for_period" type="button">Enviar</button>
 
 						<h4>Resultado</h4>
 						<hr />
