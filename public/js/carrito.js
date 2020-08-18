@@ -446,8 +446,8 @@ console.log(ra);
 
 		break;
 		case 'web_no_login':
-	  
-			var data = JSON.parse(data);
+	  		console.log(JXG.decompress(data));
+			var data = JSON.parse(JXG.decompress(data));
 
 			if(data.success==true){
 				let datos=data.data;
