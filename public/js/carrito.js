@@ -69,12 +69,15 @@ function procesarPago(){
 		// }
 		amount=amount*rate;
 	}
-console.log(amount);
+
 	if(bank_datas_id==3){
 		datosBancarios.innerHTML=`
 		<div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDC se refrescará esta ventana</div></div>
 		`;
-		ventana = window.open(`http://199.188.204.152/mega/PreRegistro.php?nro_orden=${id_orders}&total=${mega_amount}`, "myWindow", "width=400,height=450"); 
+
+		url_popup = url_base+"/mega/PreRegistro.php?nro_orden="+id_orders+"&total="+mega_amount;
+
+		ventana = window.open(url_popup, "myWindow", "width=400,height=450"); 
 		var winTimer = window.setInterval(function() {
 			if (ventana.closed !== false) {
 				window.clearInterval(winTimer);
@@ -83,11 +86,14 @@ console.log(amount);
 		}, 200);
 		return false;
 	}
+
 	if(bank_datas_id==6){
 		datosBancarios.innerHTML=`
 		<div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en TDD se refrescará esta ventana</div></div>
 		`;
-		ventana = window.open(`http://199.188.204.152/mercantil/index.php?evento=inicio&nroFactura=${id_orders}&amount=${mega_amount}`, "myWindow", "width=400,height=550"); 
+
+		url_popup = url_base+"/mercantil/index.php?evento=inicio&nroFactura="+id_orders+"&amount="+mega_amount;
+		ventana = window.open(url_popup, "myWindow", "width=400,height=550"); 
 		var winTimer = window.setInterval(function() {
 			if (ventana.closed !== false) {
 				window.clearInterval(winTimer);
@@ -96,6 +102,32 @@ console.log(amount);
 		}, 200);
 		return false;
 	}
+
+	if(bank_datas_id==10){
+		var udata = user_data.split(",");
+		var cedula = udata[0].split("-")[1];
+		var nombre = udata[1].split(" ")[0];
+		var apellido = udata[1].split(" ")[1];
+
+		datosBancarios.innerHTML=`
+	   <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en Tarjeta de Credito Internacional se refrescará esta ventana</div></div>`;
+		
+		var nb = nombre;
+		var ap = apellido;
+		var ci = cedula;
+		var tdci_amount = (amount/rate).toFixed(2);
+		url_popup = url_base+"/international-payment-button/"+nb+"/"+ap+"/"+ci+"/"+id_orders+"/"+tdci_amount;
+		ventana = window.open(url_popup, "myWindow", "width=800,height=600");
+		var winTimer = window.setInterval(function() {
+			if (ventana.closed !== false) {
+				window.clearInterval(winTimer);
+				refrescar();
+			}
+		}, 200);
+		
+		return false;
+	}
+
 	if(document.getElementById('input_ref')){
 		ref=input_ref.value;
 	}else{
@@ -118,6 +150,7 @@ function elegidoMetodo(id,name){
 }
 function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	console.log("id::> ",id);
+
 	var div_referencia=`<div class="col-md-6">
 	<label>Referencia Bancaria:</label>
 	<input id="input_ref" name="ref" class="form-control" type="text">
@@ -125,7 +158,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	var otro_ancho='';
 	var txt_btn_pagar='Pagar';
 	var monto_total = 0;
-	if(id==3 || id==2  || id==6 || id==7) {
+	if(id==3 || id==2  || id==6 || id==7 || id==10) {
 		div_referencia='';
 		otro_ancho='<div class="col-md-3"></div>';
 	}
@@ -134,6 +167,9 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	}
 	if(id==6) {
 		txt_btn_pagar='Procesar TDD';
+	}
+	if(id==10) {
+		txt_btn_pagar='Procesar TDC Internacional';
 	}
 	if(coins_id==1){
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
@@ -446,7 +482,6 @@ console.log(ra);
 
 		break;
 		case 'web_no_login':
-	  		console.log(JXG.decompress(data));
 			var data = JSON.parse(JXG.decompress(data));
 
 			if(data.success==true){

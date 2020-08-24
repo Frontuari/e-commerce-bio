@@ -70,7 +70,8 @@ if(isset($_GET['orders_id'])){
 	if(isset($_GET['orders_id'])):
 ?>
 	<script>
-		var orders_id=<?= $_GET['orders_id']; ?> 
+		var orders_id=<?= $_GET['orders_id']; ?>;
+		var user_data = "<?php print $_SESSION['usuario']['rif'].','.$_SESSION['usuario']['name'] ?>";
 	</script>
 <?php endif; ?>
 @endsection

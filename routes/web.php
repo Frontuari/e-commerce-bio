@@ -12,6 +12,7 @@
 */
 
 Route::get('/',"HomeController@index")->name("home");
+Route::get('/international-payment-button/{nb}/{ap}/{ci}/{nai}/{mt}','HomeController@InternationalPaymentButton')->name('TestInternationalPaymentButton');
 Route::get('/terminos-condiciones',"HomeController@terminos")->name("home");
 Route::get('/faq',"HomeController@faq")->name("home");
 

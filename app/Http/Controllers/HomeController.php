@@ -179,4 +179,41 @@ class HomeController extends Controller
             "faqs" => $data
         ]);
     }
+
+    public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt){
+
+        $post_url = "https://sandbox.123pago.net/msBotonDePago/index.jsp";
+        $post_values = array(
+                "nbproveedor" => "BIOMERCADOS",
+                "nb" => "$nb",
+                "ap" => "$ap",
+                "ci" => "$ci",
+                //"em" => "stephen@mastersavvy.com",
+                "cs" => "9da3140b284ccb07b35ccfab53381563",
+                "nai" => "$nai",
+                "co" => "Compra en Tienda Biomercados",
+                //"tl" => "02127400012",
+                "mt" => "$mt",
+                "ancho" => "250px"
+            );
+
+        $post_string = "";
+
+        foreach( $post_values as $key => $value ){ 
+            $post_string .= "$key=" . urlencode( $value ) . "&";
+        } 
+
+        $post_string = rtrim( $post_string, "& " );
+
+        $request = curl_init($post_url);
+        curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+        
+        curl_setopt($request, CURLOPT_POSTFIELDS, $post_string);
+        curl_setopt($request, CURLOPT_SSL_VERIFYPEER,FALSE);
+
+        $post_response = curl_exec($request);
+
+        curl_close ($request);
+        echo $post_response;
+    }
 }
