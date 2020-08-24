@@ -160,6 +160,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	var monto_total = 0;
 	if(id==3 || id==2  || id==6 || id==7 || id==10 || id==12) {
 		div_referencia='';
+		
 		otro_ancho='<div class="col-md-3"></div>';
 	}
 	if(id==3) {
