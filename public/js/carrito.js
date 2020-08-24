@@ -158,21 +158,37 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	var otro_ancho='';
 	var txt_btn_pagar='Pagar';
 	var monto_total = 0;
+	var html_boton = "<button onclick='return procesarPago();' class='btn btn-success'>"+txt_btn_pagar+"</button>";
+	
 	if(id==3 || id==2  || id==6 || id==7 || id==10 || id==12) {
 		div_referencia='';
 		otro_ancho='<div class="col-md-3"></div>';
 	}
+
 	if(id==3) {
 		txt_btn_pagar='Procesar TDC';
 	}
+
 	if(id==6) {
 		txt_btn_pagar='Procesar TDD';
 	}
+
+	html_boton = "<button onclick='return procesarPago();' class='btn btn-success'>"+txt_btn_pagar+"</button>";
+
 	if(id==10 || id==12) {
-		div_referencia='';
-		otro_ancho='<div class="col-md-3"></div>';
-		txt_btn_pagar='Procesar TDC Internacional';
+		var udata = user_data.split(",");
+		var cedula = udata[0].split("-")[1];
+		var nombre = udata[1].split(" ")[0];
+		var apellido = udata[1].split(" ")[1];
+		var orderNo = orders_id;
+
+		monto_total = aPagarUsd;
+
+		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total.toFixed(2);
+
+		html_boton = "<iframe src='"+url_popup+"' width='150' height='150' frameborder='0'></iframe>";
 	}
+
 	if(coins_id==1){
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
 		var msj="Use punto (.) para decimales";
@@ -227,7 +243,7 @@ Titular: `+titular+`
 		<div class="col-md-12">
 		<br>
 			<div id="div_btn_guardar_pago">
-				<button onclick="return procesarPago();" class="btn btn-success">`+txt_btn_pagar+`</button>
+				`+html_boton+`
 			 </div>
 		</div>
 	</div>
