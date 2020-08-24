@@ -12,7 +12,7 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171491944-1"></script>
 	<script>
-	  var url_base = "{{ url('/') }}";
+	  var url_base = "{{ str_replace('http','https',url('/')) }}";
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
