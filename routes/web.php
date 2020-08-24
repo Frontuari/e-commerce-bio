@@ -13,7 +13,7 @@
 
 Route::get('/',"HomeController@index")->name("home");
 Route::get('/international-payment-button/{nb}/{ap}/{ci}/{nai}/{mt}','HomeController@InternationalPaymentButton')->name('InternationalPaymentButton');
-Route::post('/123pago/despedida','HomeController@url_despedida');
+Route::get('/123pago/despedida','HomeController@url_despedida');
 Route::post('/123pago/retorno','HomeController@url_retorno');
 Route::get('/terminos-condiciones',"HomeController@terminos")->name("home");
 Route::get('/faq',"HomeController@faq")->name("home");
