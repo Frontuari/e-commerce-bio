@@ -103,7 +103,7 @@ function procesarPago(){
 		return false;
 	}
 
-	if(bank_datas_id==10){
+	if(bank_datas_id==10 || bank_datas_id==12){
 		var udata = user_data.split(",");
 		var cedula = udata[0].split("-")[1];
 		var nombre = udata[1].split(" ")[0];
