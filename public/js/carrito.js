@@ -168,7 +168,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	if(id==6) {
 		txt_btn_pagar='Procesar TDD';
 	}
-	if(id==10) {
+	if(id==10 || id==12) {
 		txt_btn_pagar='Procesar TDC Internacional';
 	}
 	if(coins_id==1){
