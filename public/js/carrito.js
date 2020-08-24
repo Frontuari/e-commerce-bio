@@ -186,7 +186,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 
 		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total.toFixed(2);
 
-		html_boton = "<iframe src='"+url_popup+"' width='150' height='150' frameborder='0'></iframe>";
+		html_boton = "<iframe src='"+url_popup+"' width='250' height='250' frameborder='0'></iframe>";
 	}
 
 	if(coins_id==1){
