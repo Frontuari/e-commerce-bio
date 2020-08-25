@@ -71,7 +71,7 @@ if(isset($_GET['orders_id'])){
 ?>
 	<script>
 		var orders_id=<?= $_GET['orders_id']; ?>;
-		var user_data = "<?php print $_SESSION['usuario']['rif'].','.$_SESSION['usuario']['name'] ?>";
+		var user_data = "<?php print $_SESSION['usuario']['rif'].','.$_SESSION['usuario']['name'].','.$_SESSION['usuario']['email'] ?>";
 	</script>
 <?php endif; ?>
 @endsection

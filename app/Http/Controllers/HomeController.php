@@ -180,7 +180,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt){
+    public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt, $em){
 
         $post_url = "https://sandbox.123pago.net/msBotonDePago/index.jsp";
         $post_values = array(
@@ -188,7 +188,7 @@ class HomeController extends Controller
                 "nb" => "$nb",
                 "ap" => "$ap",
                 "ci" => "$ci",
-                //"em" => "stephen@mastersavvy.com",
+                "em" => "$em",
                 "cs" => "9da3140b284ccb07b35ccfab53381563",
                 "nai" => "$nai",
                 "co" => "Compra en Tienda Biomercados",

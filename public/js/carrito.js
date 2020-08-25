@@ -181,10 +181,11 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 		var nombre = udata[1].split(" ")[0];
 		var apellido = udata[1].split(" ")[1];
 		var orderNo = orders_id;
+		var email = udata[2];
 
 		monto_total = aPagarUsd;
 
-		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total.toFixed(2);
+		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total.toFixed(2)+'/'+email;
 		html_boton = "<iframe src='"+url_popup+"' width='250' height='250' frameborder='0'></iframe>";
 	}
 
