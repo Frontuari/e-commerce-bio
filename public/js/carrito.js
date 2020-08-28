@@ -796,5 +796,5 @@ function formato_moneda(value){
 }
 
 function saludarDesdeBase(){
-	alert("LLego al padre!!");
+	alert("Saludos desde el Padre!!");
 }

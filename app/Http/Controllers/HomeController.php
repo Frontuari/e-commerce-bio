@@ -218,7 +218,7 @@ class HomeController extends Controller
 
         print "<script>";
         print 'function saludarDesdePadre(){
-                    alert("Ventana Despedida 123pago Cerrada!!");
+                    alert("Saludo desde el Iframe!!");
                     window.parent.saludarDesdeBase();
                 }';
         print "</script>";
