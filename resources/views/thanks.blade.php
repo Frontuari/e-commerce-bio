@@ -9,6 +9,7 @@
 	closeThanks = function(){
 		var opener = window.opener;
 		opener.saludarDesdePadre();
+		window.close();
 	}
 </script>
 </body>

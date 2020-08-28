@@ -795,6 +795,6 @@ function formato_moneda(value){
 	return listo;
 }
 
-function saludarDesdePadre(){
+function saludarDesdeBase(){
 	alert("Ventana Despedida 123pago Cerrada!!");
 }

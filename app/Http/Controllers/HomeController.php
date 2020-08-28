@@ -215,10 +215,16 @@ class HomeController extends Controller
 
         curl_close ($request);
         echo $post_response;
+
+        print "<script>";
+        print 'function saludarDesdePadre(){
+                    alert("Ventana Despedida 123pago Cerrada!!");
+                    window.opener.saludarDesdeBase();
+                }';
+        print "</script>";
     }
 
     public function url_despedida(Request $request){
-        
         return view('thanks');
     }
 }
