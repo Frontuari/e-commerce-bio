@@ -215,12 +215,6 @@ class HomeController extends Controller
 
         curl_close ($request);
         echo $post_response;
-
-        print "<script>";
-        print 'function saludarDesdePadre(){
-                    alert("Saludo desde el Iframe!!");
-                }';
-        print "</script>";
     }
 
     public function url_despedida(Request $request){
