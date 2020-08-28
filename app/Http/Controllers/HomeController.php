@@ -219,7 +219,7 @@ class HomeController extends Controller
         print "<script>";
         print 'function saludarDesdePadre(){
                     alert("Ventana Despedida 123pago Cerrada!!");
-                    parent.saludarDesdeBase();
+                    window.parent.document.saludarDesdeBase();
                 }';
         print "</script>";
     }
