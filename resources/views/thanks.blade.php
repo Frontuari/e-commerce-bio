@@ -7,6 +7,7 @@
 <button type="button" onclick="closeThanks();">Salir</button>
 <script type="text/javascript">
 	closeThanks = function(){
+		console.log(window.opener.paymentData);
 		window.opener.saludarDesdeIframe();
 		window.close();
 	}
