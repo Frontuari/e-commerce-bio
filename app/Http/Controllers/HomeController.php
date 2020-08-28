@@ -218,10 +218,7 @@ class HomeController extends Controller
     }
 
     public function url_despedida(Request $request){
-        dd($request);
-    }
-
-    public function url_retorno(Request $request){
-        dd($request);
+        
+        return view('thanks');
     }
 }

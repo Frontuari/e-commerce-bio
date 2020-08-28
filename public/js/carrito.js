@@ -103,31 +103,6 @@ function procesarPago(){
 		return false;
 	}
 
-	if(bank_datas_id==10 || bank_datas_id==12){
-		var udata = user_data.split(",");
-		var cedula = udata[0].split("-")[1];
-		var nombre = udata[1].split(" ")[0];
-		var apellido = udata[1].split(" ")[1];
-
-		datosBancarios.innerHTML=`
-	   <div class="row"><div class="col-md-12 text-center"><br>Luego de procesar su pago exitoso en Tarjeta de Credito Internacional se refrescará esta ventana</div></div>`;
-		
-		var nb = nombre;
-		var ap = apellido;
-		var ci = cedula;
-		var tdci_amount = (amount/rate).toFixed(2);
-		url_popup = url_base+"/international-payment-button/"+nb+"/"+ap+"/"+ci+"/"+id_orders+"/"+tdci_amount;
-		ventana = window.open(url_popup, "myWindow", "width=800,height=600");
-		var winTimer = window.setInterval(function() {
-			if (ventana.closed !== false) {
-				window.clearInterval(winTimer);
-				refrescar();
-			}
-		}, 200);
-		
-		return false;
-	}
-
 	if(document.getElementById('input_ref')){
 		ref=input_ref.value;
 	}else{
@@ -818,4 +793,8 @@ function formato_moneda(value){
 		listo=b;
 	}
 	return listo;
+}
+
+function saludarDesdePadre(){
+	alert("Ventana Despedida 123pago Cerrada!!");
 }
