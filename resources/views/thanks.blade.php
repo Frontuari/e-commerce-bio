@@ -7,8 +7,7 @@
 <button type="button" onclick="closeThanks();">Salir</button>
 <script type="text/javascript">
 	closeThanks = function(){
-		var opener = window.opener;
-		opener.saludarDesdePadre();
+		parent.saludarDesdePadre();
 		window.close();
 	}
 </script>
