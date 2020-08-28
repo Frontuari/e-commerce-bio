@@ -219,7 +219,6 @@ class HomeController extends Controller
         print "<script>";
         print 'function saludarDesdePadre(){
                     alert("Saludo desde el Iframe!!");
-                    window.parent.saludarDesdeBase();
                 }';
         print "</script>";
     }
