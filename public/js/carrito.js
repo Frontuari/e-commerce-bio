@@ -112,6 +112,7 @@ function procesarPago(){
 
 	div_btn_guardar_pago.innerHTML="<div class='loaderb'><div>";
 	
+	console.log('evento => guardarPago, '+'parametros => &amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
 	
 	get('guardarPago','&amount='+amount+'&ref='+ref+'&coins_id='+coins_id+'&orders_id='+id_orders+'&bank_datas_id='+bank_datas_id);
 	return false;
