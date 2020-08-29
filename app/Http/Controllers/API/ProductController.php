@@ -18,7 +18,7 @@ class ProductController extends BaseController
         $limit = ($data["limit"] ?? 10);
         
         $Products = Product::filter($filters)
-        ->select("products.*",DB::raw("(case when products.keyword ilike '%insuperable%' then concat (products.name, ' <span class=\"oferta\">#BIOINSUPERABLE</span>') end) as name_insuperable"),DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
+        ->select("products.*",DB::raw("(case when products.mark_keyword is not null then concat (products.name, ' <span class=\"oferta\">',products.mark_keyword,'</span>') end) as name_insuperable"),DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where('products.status','A')
