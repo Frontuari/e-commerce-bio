@@ -293,7 +293,7 @@ function procesar(data,evento){
 
 			var data = JSON.parse(data);
 			console.log("data para carlosssss => "+data.data[0]);
-			//alert("Paso");
+			alert("Paso");
 			if(data.success==true){
 				ra=data.data[0];
 
