@@ -699,9 +699,9 @@ function get(evento,variables="") {
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
 			if (xmlhttp.status == 200 || xmlhttp.status == 409) {
-				console.log("Para Carlitos: "+xmlhttp.responseText+", evento => "+evento);
+				procesar(xmlhttp.responseText,evento);
 			}else {
-				console.log("Para Carlitos: "+data+", evento => "+evento);
+				procesar(data,evento);
 			}
 		}
 	};
