@@ -292,7 +292,8 @@ function procesar(data,evento){
 		case 'totalPagar':
 
 			var data = JSON.parse(data);
-			alert("Por aca Paso "+JSON.parse(JSON.stringify(data)));
+			console.log("data para carlos => "+data);
+			alert("Paso");
 			if(data.success==true){
 				ra=data.data[0];
 
