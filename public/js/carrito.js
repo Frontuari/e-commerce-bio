@@ -292,8 +292,7 @@ function procesar(data,evento){
 		case 'totalPagar':
 
 			var data = JSON.parse(data);
-			console.log("data para carlosssss => "+JSON.parse(data.data[0]));
-			alert("Paso");
+			
 			if(data.success==true){
 				ra=data.data[0];
 
@@ -321,6 +320,9 @@ function procesar(data,evento){
 					//     limite_max_pagos_alcanzado=true;
 					// }
 					//alert(pagado.toFixed(2));
+
+					console.log(pagado.toFixed(2)+" ==> "+parseFloat(ra.total_pay));
+
 					if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
 						ordenPagada=true;
 						div_image_top.innerHTML='<img style="margin:0 auto" src="img/topPagado.png">';
