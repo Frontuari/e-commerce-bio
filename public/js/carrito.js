@@ -321,7 +321,7 @@ function procesar(data,evento){
 					// }
 					//alert(pagado.toFixed(2));
 
-					console.log(pagado.toFixed(2)+" ==> "+parseFloat(ra.total_pay));
+					console.log("Esto es para carlitos ==> "+pagado.toFixed(2)+" ==> "+parseFloat(ra.total_pay));
 
 					if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
 						ordenPagada=true;
