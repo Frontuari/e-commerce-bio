@@ -219,7 +219,7 @@ class HomeController extends Controller
         print "<script>";
 
         print "function callback_button(paymentData){
-            console.log('Aqui carlos Recive los datos el proceso '+paymentData);
+            parent.getPaymentData(paymentData);
         }";
 
         print 'function createPayment(){

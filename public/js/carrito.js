@@ -1,5 +1,6 @@
 var aPagarBs = 0;
 var aPagarUsd = 0;
+var paymentDataip;
 
 if(document.getElementById("div_fecha")){
 	
@@ -798,6 +799,11 @@ function formato_moneda(value){
 	return listo;
 }
 
+function getPaymentData(paymentData){
+	paymentDataip = paymentData;
+}
+
 function successPayment(){
+	console.log(JSON.stringify(paymentDataip));
 	procesarPago();
 }
