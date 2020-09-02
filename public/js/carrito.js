@@ -804,6 +804,11 @@ function getPaymentData(paymentData){
 }
 
 function successPayment(){
-	console.log("Aqui recibe carritojs la data del pago "+JSON.stringify(paymentDataip));
-	procesarPago();
+	data = paymentDataip;
+	if(data.status == 'ok'){
+		procesarPago();
+	}else{
+		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente mas tarde!!","error");
+	}
+	
 }
