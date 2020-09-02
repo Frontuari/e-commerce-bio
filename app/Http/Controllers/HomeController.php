@@ -217,17 +217,10 @@ class HomeController extends Controller
         echo $post_response;
 
         print "<script>";
-        
-        print "window.onbeforeunload = function (event) {
-                    var message = 'Important: Please click on \'Save\' button to leave this page.';
-                    if (typeof event == 'undefined') {
-                        event = window.event;
-                    }
-                    if (event) {
-                        event.returnValue = message;
-                    }
-                    return message;
-                };";
+
+        print "function callback_button(paymentData){
+            console.log('Aqui carlos Recive los datos el proceso '+paymentData);
+        }";
 
         print 'function createPayment(){
                     parent.successPayment();
