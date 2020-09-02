@@ -801,6 +801,10 @@ function formato_moneda(value){
 
 function getPaymentData(paymentData){
 	paymentDataip = paymentData;
+	if(!paymentDataip){
+		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente nuevamente!!","error");
+		document.reaload();
+	}
 }
 
 function successPayment(){
