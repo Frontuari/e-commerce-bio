@@ -798,6 +798,6 @@ function formato_moneda(value){
 	return listo;
 }
 
-function realizarPago(){
+function successPayment(){
 	procesarPago();
 }

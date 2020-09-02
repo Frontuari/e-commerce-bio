@@ -217,8 +217,8 @@ class HomeController extends Controller
         echo $post_response;
 
         print "<script>";
-        print 'function saludarDesdeIframe(){
-                    parent.saludarDesdeBase();
+        print 'function createPayment(){
+                    parent.successPayment();
                 }';
         print "</script>";
     }
