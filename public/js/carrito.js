@@ -804,6 +804,6 @@ function getPaymentData(paymentData){
 }
 
 function successPayment(){
-	console.log(JSON.stringify(paymentDataip));
+	console.log("Aqui recibe carritojs la data del pago "+JSON.stringify(paymentDataip));
 	procesarPago();
 }
