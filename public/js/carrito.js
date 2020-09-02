@@ -809,6 +809,7 @@ function successPayment(){
 		procesarPago();
 	}else{
 		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente mas tarde!!","error");
+		document.reaload();
 	}
 	
 }
