@@ -196,7 +196,7 @@
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<h5>Tipo de Delivery</h5>
+													<h5>Tipos de Delivery</h5>
 													<div class="row">
 														<div class="col-md-4">
 															<div class="radio">
@@ -210,7 +210,7 @@
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type"> Entrega Durante el día. Gratis sin límite de peso.</label>
+															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type">Delivery Gratis: entrega el mismo dia, sin limite de peso.</label>
 															</div>
 														</div>
 														<input id="dvy_type" type="hidden" value="0" name="dvy_type" />
