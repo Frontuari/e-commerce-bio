@@ -1025,8 +1025,22 @@ function crearOrden($json){
     $orden=json_decode($json,true);
     $users_id   =$_SESSION['usuario']['id'];
     $order_address_id=$orden['direccion'] ?? "NULL";
+    $delivery_type = $orden['delivery_type'];
+    $delivery_type_text = "";
     $delivery_time_date=Date("Y-m-d H:i:s",$orden['hora_entrega']);
     $arrProductos=$orden['productos'];
+
+    if($delivery_type == 0){
+        $delivery_type_text = "Pick Up";
+        $transports_id=1;
+        $order_address_id="NULL";
+    }else if ($delivery_type == 1){
+        $delivery_type_text = "Delivery Express";
+        $transports_id=2;
+    }else if($delivery_type == 2){
+        $delivery_type_text = "Entregar Durante el Dia";
+        $transports_id=3;
+    }
 
     $coins_id=1;
     $packagings_id=1;
@@ -1037,21 +1051,25 @@ function crearOrden($json){
     $base_imponible=0.00;
     $exento=0.00;
     $rate_json=getRateJson();
-    if($order_address_id!=null and $order_address_id!="null" and $order_address_id!="NULL" and $order_address_id!=0){
+
+    /*if($order_address_id!=null and $order_address_id!="null" and $order_address_id!="NULL" and $order_address_id!=0){
         $transports_id=2;
     }else{
         $transports_id=1;
         $order_address_id="NULL";
-    }
+    }*/
     
     $where=armarWhereProductos($arrProductos);
     $sql="SELECT p.peso,p.qty_min, p.qty_max,p.qty_avaliable,p.name, ((coalesce(SUM(t.value),0.000000)*p.price)/100) total_impuesto,coalesce(((p.price*SUM(t.value)/100)+p.price),p.price) total_precio, p.id, p.price FROM products p LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id  LEFT JOIN taxes t ON t.id=dpt.taxes_id and t.status='A' WHERE p.status='A' $where GROUP BY p.id";
+
    
     $arrs=q($sql);
+
     //Validaciones
     if(!is_array($arrs)){
         salidaNueva(null,"Disculpe intente mas tarde.",false);
     }
+
     $pesoTotal=0.00;
     foreach($arrs as $pro){
         $cant=$arrProductos[$pro['id']];
@@ -1082,7 +1100,9 @@ function crearOrden($json){
    $sql="SELECT peso_max,price,coalesce((price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100),0.000000) as impuesto FROM transports WHERE id=$transports_id";
 
     $arr=q($sql);
+
     if(is_array($arr)){
+
         //--------PESO-----
         $peso_max=$arr[0]['peso_max'];
         $peso_cargado=$peso_max;
@@ -1108,7 +1128,7 @@ function crearOrden($json){
     $total_pay=$sub_total+$total_tax+$total_transport;
     //GUARDAR
    
-    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay,bi,exento)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,$total_transport,(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay,$base_imponible,$exento) RETURNING id";
+    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay,bi,exento, delivery_type)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,$total_transport,(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay,$base_imponible,$exento,'$delivery_type_text') RETURNING id";
 //EXIT($sql);
 q("BEGIN");
     $res=q($sql);

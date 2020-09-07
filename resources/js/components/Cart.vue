@@ -194,12 +194,36 @@
 													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h5>Tipo de Delivery</h5>
+													<div class="row">
+														<div class="col-md-4">
+															<div class="radio">
+															  <label><input type="radio" onclick="deli_type(this);" value="0" name="delivery_type" checked> Zona Pick up Mañongo</label>
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="radio">
+															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: Reciba 2 horas 3 $ cada 20 kg.</label>
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="radio">
+															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type"> Entrega Durante el día. Gratis sin límite de peso.</label>
+															</div>
+														</div>
+														<input id="dvy_type" type="hidden" value="0" name="dvy_type" />
+													</div>
+												</div>
+											</div>
+											<hr />
 											<div id="info-block-address" class="info-block">
 												<div class="row">
 													<div class="col-12">
 														<h5>Dirección de Envío</h5>
 													</div>
-													<div class="col-lg-6">
+													<div class="col-lg-6" id="select_address">
 														<div class="form-group">
 															<label for="address-name">Elegir Dirección:</label>
 															<div id="div_direccion_entrega"></div>

@@ -465,7 +465,9 @@ console.log(ra);
 		break;
 	   
 		case 'crearOrden':
+			console.log(data);
 			var data = JSON.parse(data);
+
 
 			if(data.success==true){
 				var orders_id=data.data[0].id;
@@ -515,7 +517,7 @@ console.log(ra);
 			var options='';
 			if(data.success){
 				var datos=data.data;
-				options+="<option value='0'>Pick - Up</option>";
+				options+="<option value='0' id='one_value'>Pick - Up</option>";
 				for (var [key, value] of Object.entries(datos)) {
 					options+="<option value="+value.id+">"+value.address+" - "+value.st_name+", "+value.re_name+", "+value.urb+", "+value.sector+",  #"+value.nro_home+"</option>";
 					//console.log(key+" "+value.name);
@@ -560,6 +562,7 @@ function procesarOrden() {
 					//orden['direccion']= direccionOrden;
 					//orden.push('direccion: '+direccionOrden);
 					orden.direccion=direccionOrden;
+					orden.delivery_type = document.getElementById('dvy_type').value;
 					//orden.set("direccion",direccionOrden);
 					//orden.add
 				}
@@ -590,12 +593,18 @@ function procesarOrden() {
 
 }
 function activarEnvio(a){
+
+	var dataOption = document.getElementById("direccion_selected").value;
+
 	if(a.value==0){
 		activar_envio=false;
 		direccionOrden=null;
-	}else{
-		direccionOrden=a.value;
+	}else if(a.value == 1){
+		direccionOrden=dataOption;
 		activar_envio=true;
+	}else if(a.value == 2){
+		activar_envio=false;
+		direccionOrden=dataOption;
 	}
 	actualizarResumenOrden();
 }
@@ -816,4 +825,21 @@ function successPayment(){
 		document.reaload();
 	}
 	
+}
+
+function deli_type(e){
+	var column = document.getElementById('select_address');
+	if(parseInt(e.value) > 0){
+		//column.style.display = 'block';
+		//document.getElementById('one_value').style.display = 'none';
+		document.getElementById('direccion_selected').selectedIndex = 1;
+	}else{
+		//column.style.display = 'none';
+		//document.getElementById('one_value').style.display = 'block';
+		document.getElementById('direccion_selected').selectedIndex = 0;
+	}
+
+	document.getElementById('dvy_type').value = e.value;
+
+	activarEnvio(e);
 }
