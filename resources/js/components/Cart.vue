@@ -205,7 +205,7 @@
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: Reciba 2 horas 3 $ cada 20 kg.</label>
+															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: $3, tiempo de entrega 2 horas, limite de peso 20kg.</label>
 															</div>
 														</div>
 														<div class="col-md-4">
