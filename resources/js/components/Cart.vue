@@ -223,7 +223,7 @@
 													<div class="col-12">
 														<h5>Dirección de Envío</h5>
 													</div>
-													<div class="col-lg-6" id="select_address">
+													<div class="col-lg-6" id="select_address" style="display: none;">
 														<div class="form-group">
 															<label for="address-name">Elegir Dirección:</label>
 															<div id="div_direccion_entrega"></div>

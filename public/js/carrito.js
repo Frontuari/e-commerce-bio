@@ -830,12 +830,12 @@ function successPayment(){
 function deli_type(e){
 	var column = document.getElementById('select_address');
 	if(parseInt(e.value) > 0){
-		//column.style.display = 'block';
-		//document.getElementById('one_value').style.display = 'none';
+		column.style.display = 'block';
+		document.getElementById('one_value').style.display = 'none';
 		document.getElementById('direccion_selected').selectedIndex = 1;
 	}else{
-		//column.style.display = 'none';
-		//document.getElementById('one_value').style.display = 'block';
+		column.style.display = 'none';
+		document.getElementById('one_value').style.display = 'block';
 		document.getElementById('direccion_selected').selectedIndex = 0;
 	}
 
