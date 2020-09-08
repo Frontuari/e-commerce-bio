@@ -1,6 +1,7 @@
 var aPagarBs = 0;
 var aPagarUsd = 0;
 var paymentDataip;
+var checkDeliveryType=0;
 
 if(document.getElementById("div_fecha")){
 	
@@ -536,57 +537,60 @@ console.log(ra);
 }
 function procesarOrden() {
 	if(document.getElementById("direccion_selected")) {
-
-		Swal.fire({
-			title: 'Bio en Línea',
-			text: "A partir de este momento no podra modificar su carrito, esta seguro de continuar?",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Aceptar',
-			cancelButtonText: 'Cancelar'
-		}).then((result) => {
-			if (result.value) {
-				
-				var datos=getLocal('cartNew');
-				var orden=new Object();
-				var arrProductos=new Object();
-
-				if(direccionOrden==0 || direccionOrden=='0'){
-				// orden['direccion']= "NULL";
-				//orden="direccion:NULL";
-				orden.direccion='NULL';
-				//orden.push('direccion: '+'NULL');
-				}else{
-					//orden['direccion']= direccionOrden;
-					//orden.push('direccion: '+direccionOrden);
-					orden.direccion=direccionOrden;
-					orden.delivery_type = document.getElementById('dvy_type').value;
-					//orden.set("direccion",direccionOrden);
-					//orden.add
-				}
-				
-				orden.hora_entrega=fecha_hora_entrega.value;
-				// orden.push('hora_entrega: '+fecha_hora_entrega.value);
-				//orden.set("hora_entrega",fecha_hora_entrega.value);
-				
-				for (var [key, value] of Object.entries(datos)) {
-					var id       =value.product.id;
-					var cant        =value.cant;
+		if(checkDeliveryType == 2 && aPagarUsd < 3){
+			Swal.fire("Bio en Línea","Para este tipo de delivery el monto debe ser al menos de 3$","error");
+		}else{
+			Swal.fire({
+				title: 'Bio en Línea',
+				text: "A partir de este momento no podra modificar su carrito, esta seguro de continuar?",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Aceptar',
+				cancelButtonText: 'Cancelar'
+			}).then((result) => {
+				if (result.value) {
 					
-					arrProductos[id]=cant;
-					//arrProductos.set("cant",id);
+					var datos=getLocal('cartNew');
+					var orden=new Object();
+					var arrProductos=new Object();
+
+					if(direccionOrden==0 || direccionOrden=='0'){
+					// orden['direccion']= "NULL";
+					//orden="direccion:NULL";
+					orden.direccion='NULL';
+					//orden.push('direccion: '+'NULL');
+					}else{
+						//orden['direccion']= direccionOrden;
+						//orden.push('direccion: '+direccionOrden);
+						orden.direccion=direccionOrden;
+						orden.delivery_type = document.getElementById('dvy_type').value;
+						//orden.set("direccion",direccionOrden);
+						//orden.add
+					}
+					
+					orden.hora_entrega=fecha_hora_entrega.value;
+					// orden.push('hora_entrega: '+fecha_hora_entrega.value);
+					//orden.set("hora_entrega",fecha_hora_entrega.value);
+					
+					for (var [key, value] of Object.entries(datos)) {
+						var id       =value.product.id;
+						var cant        =value.cant;
+						
+						arrProductos[id]=cant;
+						//arrProductos.set("cant",id);
+					}
+					//orden.push('productos:{'+arrProductos+'}');
+					orden.productos=arrProductos;
+					//orden.set("productos",arrProductos);
+					//orden.push('productos: '+fecha_hora_entrega.value);
+					var json=JSON.stringify(orden);
+					// console.log(json);
+					get('crearOrden','&json='+json);
 				}
-				//orden.push('productos:{'+arrProductos+'}');
-				orden.productos=arrProductos;
-				//orden.set("productos",arrProductos);
-				//orden.push('productos: '+fecha_hora_entrega.value);
-				var json=JSON.stringify(orden);
-				// console.log(json);
-				get('crearOrden','&json='+json);
-			}
-		});
+			});
+		}
 	}else {
 		Swal.fire("Bio en Línea","No hay direcciones registradas","error");
 	}
@@ -669,6 +673,7 @@ function actualizarResumenOrden(){
 
   
 
+		aPagarUsd = totalPagarD; 
 
 
 
@@ -829,6 +834,7 @@ function successPayment(){
 
 function deli_type(e){
 	var column = document.getElementById('select_address');
+	checkDeliveryType = e.value;
 	if(parseInt(e.value) > 0){
 		column.style.display = 'block';
 		document.getElementById('one_value').style.display = 'none';
