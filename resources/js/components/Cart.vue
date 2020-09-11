@@ -205,12 +205,12 @@
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: $3, tiempo de entrega 2 horas, limite de peso 20kg.</label>
+															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis: Entrega de 2 a 24 horas.</label>
 															</div>
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis: entrega el mismo dia, sin limite de peso.</label>
+															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: $3. Entrega en 2 horas</label>
 															</div>
 														</div>
 														<input id="dvy_type" type="hidden" value="0" name="dvy_type" />
