@@ -228,7 +228,7 @@ class HomeController extends Controller
             print "</script>";
         }else{
             print "<script>";
-                print "document.getElementById('form_bt').submit();";
+                print "go();";
             print "</script>";
         }
         
