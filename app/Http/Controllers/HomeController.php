@@ -228,7 +228,7 @@ class HomeController extends Controller
             print "</script>";
         }else{
             print "<script>";
-                print "alert('hola');"
+                print "alert('hola');";
             print "</script>";
         }
         
