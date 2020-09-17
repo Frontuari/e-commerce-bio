@@ -180,7 +180,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt, $em){
+    public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt, $em, $from = 'desktop'){
 
         $post_url = "https://sandbox.123pago.net/msBotonDePago/index.jsp";
         $post_values = array(
@@ -215,17 +215,23 @@ class HomeController extends Controller
 
         curl_close ($request);
         echo $post_response;
+        if($from == 'desktop'){
+            print "<script>";
 
-        print "<script>";
+            print "function callback_button(paymentData){
+                parent.getPaymentData(paymentData);
+            }";
 
-        print "function callback_button(paymentData){
-            parent.getPaymentData(paymentData);
-        }";
-
-        print 'function createPayment(){
-                    parent.successPayment();
-                }';
-        print "</script>";
+            print 'function createPayment(){
+                        parent.successPayment();
+                    }';
+            print "</script>";
+        }else{
+            print "<script>";
+                print "alert('hola');"
+            print "</script>";
+        }
+        
     }
 
     public function url_despedida(Request $request){
