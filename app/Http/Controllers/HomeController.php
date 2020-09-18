@@ -228,9 +228,14 @@ class HomeController extends Controller
             print "</script>";
         }else{
             print "<script>";
+                print 'function createPayment(){
+                            window.close();
+                        }';
+                print "</script>";
+
                 print "function callback_button(paymentData){
-                    Print.postMessage(paymentData);
-                }";
+                             Print.postMessage(paymentData);
+                        }";
             print "</script>";
         }
         
