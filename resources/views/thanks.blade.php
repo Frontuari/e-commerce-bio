@@ -32,8 +32,8 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	var orderno = localStorage.getItem('orderno');
 	closeThanks = function(){
+		var orderno = localStorage.getItem('orderno');
 		//window.opener.createPayment();
 		Print.postMessage('el numero de la orden es: '+orderno);
 		//window.close();

@@ -229,7 +229,7 @@
 															<div id="div_direccion_entrega"></div>
 														</div>
 													</div>
-													<div class="col-lg-6" v-if="selectedDirection == 0">
+													<div class="col-lg-6" id="div_contenedor_fecha" v-if="selectedDirection == 0">
 														<div class="form-group">
 															<label for="address-urb">Fecha y hora aprox. para su entrega:</label>
 															<div id="div_fecha"></div>
