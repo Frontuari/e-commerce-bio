@@ -39,9 +39,9 @@
 			var orderno = localStorage.getItem('orderno');
 			var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
 			urlServicio = urlServicio.replace('http:','https:');
-			alert(urlServicio+orderno);
+			
 			$.get(urlServicio+orderno, function(data){
-                let d = JSON.parse(data);
+                let d = JSON.stringify(data);
                 alert(d);
                 Print.postMessage('la data es: '+d);
             });
