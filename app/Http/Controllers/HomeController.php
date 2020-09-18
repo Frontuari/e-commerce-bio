@@ -240,7 +240,7 @@ class HomeController extends Controller
     }
 
     public function getdataresponse($orderno = null){
-        $data = Storage::get('tmp_responses/'.$orderno.".txt");
+        $data = url('/tmp_responses/'.$orderno.".txt");
         return response()->json($data);
     }
 }
