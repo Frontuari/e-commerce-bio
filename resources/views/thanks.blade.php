@@ -41,9 +41,8 @@
 			urlServicio = urlServicio.replace('http:','https:');
 			
 			$.get(urlServicio+orderno, function(data){
-                let d = JSON.stringify(data);
-                alert(d);
-                Print.postMessage('la data es: '+d);
+                let d = data;
+                Print.postMessage(d);
             });
 
 		});
