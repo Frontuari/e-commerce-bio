@@ -34,7 +34,8 @@
 <script type="text/javascript">
 	closeThanks = function(){
 		//window.opener.createPayment();
-		window.close();
+		Print.postMessage('hola');
+		//window.close();
 	}
 </script>
 </body>
