@@ -33,7 +33,7 @@
 	</div>
 <script type="text/javascript">
 	closeThanks = function(){
-		window.opener.createPayment();
+		//window.opener.createPayment();
 		window.close();
 	}
 </script>
