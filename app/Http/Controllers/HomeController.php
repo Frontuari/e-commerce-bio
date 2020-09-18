@@ -240,7 +240,7 @@ class HomeController extends Controller
     }
 
     public function getdataresponse($orderno = null){
-        $data = url('/tmp_responses/'.$orderno.".txt");
+        $data = file_get_contents(url('/tmp_responses/'.$orderno.".txt"));
         return response()->json($data);
     }
 }
