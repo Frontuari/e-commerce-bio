@@ -15,7 +15,7 @@ Route::get('/',"HomeController@index")->name("home");
 Route::get('/international-payment-button/{nb}/{ap}/{ci}/{nai}/{mt}/{em}/{from?}','HomeController@InternationalPaymentButton')->name('InternationalPaymentButton');
 Route::get('/123pago/despedida','HomeController@url_despedida');
 
-Route::get('/123pago/getdataresponse/{orderno?}','HomeController@getdataresponse')->name('getdataresponse');
+Route::get('/123pago/getdataresponse/{orderno?}','HomeController@getdataresponse');
 
 Route::post('/123pago/retorno','HomeController@url_retorno');
 

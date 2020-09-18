@@ -25,20 +25,26 @@
 						<p>¡Inspirados en servir!</p>
 					</div>
 					<div class="card-footer text-right">
-						<button class="btn btn-success" onclick="closeThanks();" type="button">Salir</button>
+						<button class="btn btn-success" id="btn_thanks" type="button">Salir</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	closeThanks = function(){
-		var orderno = localStorage.getItem('orderno');
-		//window.opener.createPayment();
-		Print.postMessage('el numero de la orden es: '+orderno);
-		//window.close();
-		localStorage.clear();
-	}
+
+	$(document).ready(function(){
+		$("#btn_thanks").click(function(){
+			var orderno = localStorage.getItem('orderno');
+			$.get("{{ url('/123pago/getdataresponse/') }}"+orderno, function(data){
+                let d = JSON.parse(data);
+                alert(d);
+                Print.postMessage('la data es: '+d);
+            });
+
+		});
+	});
 </script>
 </body>
 </html>
