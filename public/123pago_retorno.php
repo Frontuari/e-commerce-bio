@@ -2,4 +2,4 @@
 	$data = $_REQUEST;
 	$name = $data['nai'];
 
-	file_put_contents("tmp_responses/".$name.".txt", joson_encode($data));
+	file_put_contents("tmp_responses/".$name.".txt", json_encode($data));
