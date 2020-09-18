@@ -37,7 +37,10 @@
 	$(document).ready(function(){
 		$("#btn_thanks").click(function(){
 			var orderno = localStorage.getItem('orderno');
-			$.get("{{ url('/123pago/getdataresponse/') }}"+orderno, function(data){
+			var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
+			urlServicio = urlServicio.replace('http:','https:');
+			
+			$.get(urlServicio+orderno, function(data){
                 let d = JSON.parse(data);
                 alert(d);
                 Print.postMessage('la data es: '+d);
