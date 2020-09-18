@@ -1,4 +1,5 @@
 <?php
-	$data = json_encode($_REQUEST);
+	$data = $_REQUEST;
+	$name = $data['nai'];
 
-	file_put_contents("123pago.txt", $data);
+	file_put_contents("tmp_responses/".$name.".txt", joson_encode($data));
