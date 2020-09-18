@@ -227,14 +227,28 @@ class HomeController extends Controller
                     }';
             print "</script>";
         }else{
-            print "<script>";
-                print "localStorage.setItem('orderno','".$nai."')";
-            print "</script>";
+        ?>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                let orderno = localStorage.setItem('orderno','".$nai."');
+                $.get("<?php url('/123pago/getdataresponse/') ?>"+orderno, function(data){
+                    let d = JSON.stringify(data);
+                    alert(d);
+                });
+            });
+        </script>
+        <?php
         }
         
     }
 
     public function url_despedida(Request $request){
         return view('thanks');
+    }
+
+    public function getdataresponse($orderno = null){
+        $data = $_SESSION[$orderno];
+        return response()->json($data);
     }
 }

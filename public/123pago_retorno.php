@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	@session_start();
 
 	$data = $_REQUEST;
 	$name = $data['nai'];
