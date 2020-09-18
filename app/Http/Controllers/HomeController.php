@@ -10,6 +10,7 @@ use App\Product;
 use App\Packages;
 use App\Pages;
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -239,7 +240,7 @@ class HomeController extends Controller
     }
 
     public function getdataresponse($orderno = null){
-        $data = $_SESSION[$orderno];
+        $data = Storage::get('tmp_responses/'.$orderno.".txt");
         return response()->json($data);
     }
 }
