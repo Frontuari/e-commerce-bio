@@ -231,7 +231,6 @@ class HomeController extends Controller
                 print 'function createPayment(){
                             window.close();
                         }';
-                print "</script>";
 
                 print "function callback_button(paymentData){
                              Print.postMessage(paymentData);
