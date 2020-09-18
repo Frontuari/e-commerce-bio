@@ -32,10 +32,12 @@
 		</div>
 	</div>
 <script type="text/javascript">
+	var orderno = localStorage.getItem('orderno');
 	closeThanks = function(){
 		//window.opener.createPayment();
-		Print.postMessage('hola');
+		Print.postMessage('el numero de la orden es: '+orderno);
 		//window.close();
+		localStorage.clear();
 	}
 </script>
 </body>

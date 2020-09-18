@@ -228,6 +228,7 @@ class HomeController extends Controller
             print "</script>";
         }else{
             print "<script>";
+                print "localStorage.setItem('orderno','".$nai."')";
                 print 'function createPayment(){
                             window.close();
                         }';
