@@ -24,7 +24,7 @@
 						<p>Desde bio mercados agradecemos su preferencia</p>
 						<p>¡Inspirados en servir!</p>
 					</div>
-					<div class="card-footer text-right">
+					<div class="card-footer text-right" id="contenedor_boton">
 						<button class="btn btn-success" id="btn_thanks" type="button">Salir</button>
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 		});
 
 		if(orderno){
-			$("#btn_thanks").hide();
+			$("#contenedor_boton").hide();
 			var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
 			urlServicio = urlServicio.replace('http:','https:');
 			$.get(urlServicio+orderno, function(data){
