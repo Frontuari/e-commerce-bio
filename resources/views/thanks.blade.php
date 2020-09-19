@@ -36,16 +36,17 @@
 
 	$(document).ready(function(){
 		$("#btn_thanks").click(function(){
-			var orderno = localStorage.getItem('orderno');
-			var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
-			urlServicio = urlServicio.replace('http:','https:');
 			
-			$.get(urlServicio+orderno, function(data){
-                let d = data;
-                Print.postMessage(d);
-            });
-
 		});
+
+		var orderno = localStorage.getItem('orderno');
+		var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
+		urlServicio = urlServicio.replace('http:','https:');
+		
+		$.get(urlServicio+orderno, function(data){
+            let d = data;
+            Print.postMessage(d);
+        });
 	});
 </script>
 </body>
