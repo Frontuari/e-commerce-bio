@@ -855,7 +855,7 @@ function guardarPago(){
     if($ref=='null' || $payment_methods_id==3){
        
         $ref="Efectivo $";
-        if($payment_methods_id==5){
+        if($payment_methods_id==5 || $payment_methods_id==12){
             $ref="-";
             $status='aprobado';
         }else{
