@@ -136,7 +136,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 	var monto_total = 0;
 	var html_boton = "<button onclick='return procesarPago();' class='btn btn-success'>"+txt_btn_pagar+"</button>";
 	
-	if(id==3 || id==2  || id==6 || id==7 || id==10 || id==12) {
+	if(id==3 || id==2  || id==6 || id==7 || id==10 || id==12 || id==15) {
 		div_referencia='';
 		otro_ancho='<div class="col-md-3"></div>';
 	}
@@ -151,7 +151,7 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 
 	html_boton = "<button onclick='return procesarPago();' class='btn btn-success'>"+txt_btn_pagar+"</button>";
 
-	if(id==10 || id==12) {
+	if(id==15) {
 		var udata = user_data.split(",");
 		var cedula = udata[0].split("-")[1];
 		var nombre = udata[1].split(" ")[0];
