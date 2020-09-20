@@ -69,6 +69,8 @@ if(isset($a)){
 $nro_factura=str_pad($o->id, 8, "0", STR_PAD_LEFT);
 $direccion_usuario=($o->dir_entrega=='' ? 'Valencia' : $o->dir_entrega);
 $direccion_entrega=($o->dir_entrega=='' ? $o->address : $o->dir_entrega);
+$transport_id = $o->transports_id;
+
 if($direccion_entrega==''){
     $direccion_entrega='Retirar en Zona Pickup';
 }
@@ -76,7 +78,12 @@ if($direccion_entrega==''){
 //$hora_factura=date('h:i:s A',strtotime($o->fecha_enviado_bio));
 $fecha_factura=date('d/m/Y',strtotime($o->created_at));
 $hora_factura=date('h:i:s A',strtotime($o->created_at));
-$fecha_entrega=$o->fecha_entrega;
+if($transport_id != 3){
+   $fecha_entrega=$o->fecha_entrega; 
+}else{
+    $fecha_entrega="Antes de 24 horas recibira su pedido";
+}
+
 
 $fac= "
 <style>
