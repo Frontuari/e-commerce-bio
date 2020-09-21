@@ -845,7 +845,7 @@ function deli_type(e){
 		document.getElementById('direccion_selected').selectedIndex = 0;
 	}
 
-	if(parseInt(e.value) == 2){
+	if(parseInt(e.value) == 2 || parseInt(e.value) == 1){
 		document.getElementById("div_contenedor_fecha").style.display = 'none';
 	}else{
 		document.getElementById("div_contenedor_fecha").style.display = 'block';
