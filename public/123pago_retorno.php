@@ -8,11 +8,11 @@
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	//guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
+	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
 
-	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $u_id, $c_id){
+	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $users_id, $c_id){
 
 	    $amount=$amount;
 	    $orders_id=$orders_id;
@@ -20,7 +20,7 @@
 	    $ref=trim($ref);
 	    $coins_id=$c_id;
 	    $status='aprobado';
-	    $users_id=$u_id;
+	    $users_id=$users_id;
 	    
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
@@ -30,6 +30,9 @@
 	    
 	    //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
 	    $diferencia_aceptable=0;
+	    if($coins_id==1){ //dolares
+	        $sumar_sql="+$diferencia_aceptable";
+	    }
 
 	    q("BEGIN");
 
