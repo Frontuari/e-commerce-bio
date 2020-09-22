@@ -7,13 +7,16 @@
 	$baseUrl = 'http://'.$_SERVER['HTTP_HOST'].'/api_rapida.php?evento=guardarPago';
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
-	
+
 	$params = "&amount=".$total_amount."&ref=".$data['parametro4']."&coins_id=".$coins_id."&orders_id=".$data['nai']."&bank_datas_id=15";
 
 	file_put_contents("prueba_123pagos.txt", $baseUrl.$params);
 
-	file_get_contents($baseUrl.$params);
-
+	$cURLConnection = curl_init();
+	curl_setopt($cURLConnection, CURLOPT_URL, $baseUrl.$params);
+	curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+	$data = curl_exec($cURLConnection);
+	curl_close($cURLConnection);
 
 	/*-------------------------functions for operations-------------------------------*/
 	function extraer_datos_db(){
