@@ -36,9 +36,9 @@
 
 	$(document).ready(function(){
 		var orderno = localStorage.getItem('orderno');
-		
 		if(orderno){
 			$("#contenedor_boton").hide();
+			Print.postMessage('activo');
 			/*var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
 			urlServicio = urlServicio.replace('http:','https:');
 			$.get(urlServicio+orderno, function(data){
