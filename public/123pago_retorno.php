@@ -9,8 +9,6 @@
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	print_r($data);
-
 	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
@@ -26,6 +24,8 @@
 	    $users_id=$users_id;
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
+
+	    print_r($arr);
 
 
 	    if(is_array($arr)){
