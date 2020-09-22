@@ -39,13 +39,6 @@
 		if(orderno){
 			$("#contenedor_boton").hide();
 			Print.postMessage('activo');
-			/*var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
-			urlServicio = urlServicio.replace('http:','https:');
-			$.get(urlServicio+orderno, function(data){
-	            let d = data;
-	            Print.postMessage(d);
-	        });
-	        localStorage.clear();*/
 		}else{
 			$("#contenedor_boton").show();
 		}

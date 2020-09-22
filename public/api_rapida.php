@@ -950,6 +950,7 @@ function guardarPago(){
          salidaNueva(null,"Disculpe, intente de nuevo",false);
    } 
 }
+
 function convertir_a_bs($coins_id,$value){
     $arr=q("SELECT rate FROM coins WHERE id='$coins_id'");
     if(is_array($arr)){
