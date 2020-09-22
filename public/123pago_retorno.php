@@ -1,14 +1,15 @@
 <?php
-	$data = $_POST;
+	global $con;
+	$data = $_REQUEST;
 
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
-	$user = q('select * from orders where id = '.$data['nai']);
+	$user = q('select * from orders where id = 315');
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
+	guardarPago($total_amount,315, 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
 
@@ -21,9 +22,10 @@
 	    $coins_id=$c_id;
 	    $status='aprobado';
 	    $users_id=$users_id;
-	    
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
+
+
 	    if(is_array($arr)){
 	        $payment_methods_id=$arr[0]['payment_methods_id'];
 	    }
@@ -36,14 +38,14 @@
 
 	    q("BEGIN");
 
+
+
 	    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
-	    //exit($sql);
-	   // exit($sql);
+	    
 	    $arr=q($sql);
 	    if(is_array($arr)) $pagoAbonado=true;
 
 	    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
-	    //exit($sql);
 	    $arr=q($sql);
 
 	    if(is_array($arr)){
@@ -90,7 +92,7 @@
 	function q($sql){
 	    $arr=array();
 	   // $result = pg_query($sql) or die(false);
-	   $con=$GLOBALS["con"];
+	   	global $con;
 	    if (pg_send_query($con,$sql)) {
 
 	        $res=pg_get_result($con);
@@ -111,13 +113,13 @@
 	                    print "El registro ya existe.";
 	                  break;
 	                  case '22P02'://faltan campos
-	                    print "Disculpe intente mas tarde..";
+	                    print "error 1";
 	                    
 	                  break;
 	                  default:
 
 	                 // wh_log($sql);
-	                    print "Disculpe, intente mas tarde...";
+	                   print "Error 2";
 	              }
 	          }
 	        }  
