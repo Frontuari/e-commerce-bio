@@ -25,9 +25,6 @@
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
 
-	    print_r($arr);
-
-
 	    if(is_array($arr)){
 	        $payment_methods_id=$arr[0]['payment_methods_id'];
 	    }
@@ -41,6 +38,8 @@
 	    q("BEGIN");
 
 	    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
+
+	    print($sql);
 	    
 	    $arr=q($sql);
 	    if(is_array($arr)) $pagoAbonado=true;
@@ -61,7 +60,13 @@
 	        }
 	    }
 
-	    q("COMMIT");
+		q("COMMIT");
+		
+	    if($pagoAbonado){
+		        salidaNueva($arr,"Su pago ha sido abonado".$sql);
+		}else{
+		         salidaNueva(null,"Disculpe, intente de nuevo",false);
+		} 
 	}
 
 	function extraer_datos_db(){
@@ -127,3 +132,24 @@
 	      	print "Disculpe, intente de nuevo";
 	      }
 	 }
+
+	 function salidaNueva($row,$msj_general="",$bueno=true,$tipo_salida=false,$comprimido=false){
+	    $rowa['success']=$bueno;
+	    if(!$bueno) header('HTTP/1.1 409 Conflict');
+	    $rowa['msj_general']=$msj_general;
+	    $rowa['data']=$row;
+	    if($_SESSION['sesion_iniciada']==true){
+	        $rowa['login']=true;
+	    }
+	    if($tipo_salida==true){
+	        
+	        return $rowa;
+	    }else{
+	        if($comprimido==true){
+	            
+	        }else{
+	            echo json_encode($rowa);
+	        }
+	    }
+	    exit();
+	}
