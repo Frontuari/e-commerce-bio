@@ -36,10 +36,7 @@
 
 	$(document).ready(function(){
 		var orderno = localStorage.getItem('orderno');
-		$("#btn_thanks").click(function(){
-			
-		});
-
+		
 		if(orderno){
 			$("#contenedor_boton").hide();
 			var urlServicio = "{{ url('/123pago/getdataresponse') }}/";
@@ -51,8 +48,12 @@
 	        localStorage.clear();
 		}else{
 			$("#contenedor_boton").show();
+
 	        window.opener.createPayment();
-	        window.close();
+
+	        $("#btn_thanks").click(function(){
+				window.close();
+			});
 		}
 
 	});
