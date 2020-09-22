@@ -817,6 +817,7 @@ function getPaymentData(paymentData){
 	paymentDataip = paymentData;
 	if(!paymentDataip){
 		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente nuevamente!!","error");
+		document.getElementById("div_btn_guardar_pago").innerHTML="<div class='loaderb'><div>";
 		location.reload();
 	}
 }
@@ -829,6 +830,7 @@ function successPayment(){
 		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente mas tarde!!","error");
 		document.reaload();
 	}*/
+	document.getElementById("div_btn_guardar_pago").innerHTML="<div class='loaderb'><div>";
 	location.reload();
 }
 
