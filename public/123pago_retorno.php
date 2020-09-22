@@ -5,11 +5,11 @@
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
-	$user = q('select * from orders where id = 315');
+	$user = q('select * from orders where id = '.$data['nai']);
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	guardarPago($total_amount,315, 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
+	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
 
@@ -37,8 +37,6 @@
 	    }
 
 	    q("BEGIN");
-
-
 
 	    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
 	    
