@@ -8,7 +8,10 @@
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$params = "&amount=".$total_amount."&ref=".$data['parametro4']."&coins_id=".$coins_id."&orders_id=".$data['nai']."&bank_datas_id=15";
 
+	file_put_contents("prueba_123pagos.txt", $baseUrl.$params);
+
 	file_get_contents($baseUrl.$params);
+
 
 	/*-------------------------functions for operations-------------------------------*/
 	function extraer_datos_db(){
