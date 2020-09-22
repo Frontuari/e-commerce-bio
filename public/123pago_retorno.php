@@ -1,6 +1,6 @@
 <?php
 	$data = $_POST;
-	
+
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
@@ -12,7 +12,7 @@
 
 	/*-------------------------functions for operations-------------------------------*/
 
-	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $users_id, $c_id){
+	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $u_id, $c_id){
 
 	    $amount=$amount;
 	    $orders_id=$orders_id;
@@ -20,7 +20,7 @@
 	    $ref=trim($ref);
 	    $coins_id=$c_id;
 	    $status='aprobado';
-	    $users_id=$users_id;
+	    $users_id=$u_id;
 	    
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
@@ -30,11 +30,6 @@
 	    
 	    //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
 	    $diferencia_aceptable=0;
-	    if($coins_id==1){ //dolares
-	        $diferencia_aceptable=convertir_a_bs($coins_id,0.01);
-	        $sumar_sql="+$diferencia_aceptable";
-	       
-	    }
 
 	    q("BEGIN");
 
