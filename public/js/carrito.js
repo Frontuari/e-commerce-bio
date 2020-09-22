@@ -822,14 +822,14 @@ function getPaymentData(paymentData){
 }
 
 function successPayment(){
-	data = paymentDataip;
+	/*data = paymentDataip;
 	if(data.status == 'ok'){
 		procesarPago();
 	}else{
 		Swal.fire("Bio en Línea","Su pago no se ha podido procesar, intente mas tarde!!","error");
 		document.reaload();
-	}
-	
+	}*/
+	document.reaload();
 }
 
 function deli_type(e){
