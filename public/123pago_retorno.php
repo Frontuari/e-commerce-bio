@@ -11,6 +11,8 @@
 
 	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
+	file_put_contents("url_retorno_data.txt", $data);
+
 	/*-------------------------functions for operations-------------------------------*/
 
 	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $users_id, $c_id){
