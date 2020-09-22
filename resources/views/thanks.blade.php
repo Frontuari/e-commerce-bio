@@ -48,13 +48,12 @@
 	        localStorage.clear();
 		}else{
 			$("#contenedor_boton").show();
-
 	        window.opener.createPayment();
-
-	        $("#btn_thanks").click(function(){
-				window.close();
-			});
 		}
+
+		$("#btn_thanks").click(function(){
+			window.close();
+		});
 
 	});
 </script>
