@@ -3,7 +3,7 @@
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
-	$user = q('select * from orders where id = '.$data[0]['nai']);
+	$user = q('select * from orders where id = '.$data['nai']);
 
 	
 	$baseUrl = 'http://'.$_SERVER['HTTP_HOST'].'/api_rapida.php?evento=guardarPago';
