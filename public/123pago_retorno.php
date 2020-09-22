@@ -8,7 +8,7 @@
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
+	//guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
 
@@ -16,7 +16,7 @@
 
 	    $amount=$amount;
 	    $orders_id=$orders_id;
-	    $bank_datas_id=$bank_datas_id
+	    $bank_datas_id=$bank_datas_id;
 	    $ref=trim($ref);
 	    $coins_id=$c_id;
 	    $status='aprobado';
