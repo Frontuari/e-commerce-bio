@@ -1,14 +1,16 @@
 <?php
+	$data = $_POST;
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
+	$user = q('select * from orders where id = '.$data[0]['nai']);
 
-	$data = $_POST;
+	
 	$baseUrl = 'http://'.$_SERVER['HTTP_HOST'].'/api_rapida.php?evento=guardarPago';
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	$params = "&amount=".$total_amount."&ref=".$data['parametro4']."&coins_id=".$coins_id."&orders_id=".$data['nai']."&bank_datas_id=15";
+	$params = "&amount=".$total_amount."&ref=".$data['parametro4']."&coins_id=".$coins_id."&orders_id=".$data['nai']."&bank_datas_id=15&user_id=".$user[0]['users_id'];
 
 	file_put_contents("prueba_123pagos.txt", $baseUrl.$params);
 

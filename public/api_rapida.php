@@ -845,7 +845,13 @@ function guardarPago(){
     $ref=trim($_GET['ref']);
     $coins_id=$_GET['coins_id'];
     $status='nuevo';
-    $users_id=$_SESSION['usuario']['id'];
+
+    if(isset($_GET['user_id']) and !empty($_GET['user_id'])){
+        $users_id=$_GET['user_id'];
+    }else{
+        $users_id=$_SESSION['usuario']['id'];
+    }
+    
 
     $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
     if(is_array($arr)){
