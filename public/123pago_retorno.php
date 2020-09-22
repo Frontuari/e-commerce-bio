@@ -1,26 +1,69 @@
 <?php
 	$data = $_POST;
+	
 	$a=extraer_datos_db();
 	$con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 	$coins = q('select * from coins where id = 1');
 	$user = q('select * from orders where id = '.$data['nai']);
-
-	
-	$baseUrl = 'http://'.$_SERVER['HTTP_HOST'].'/api_rapida.php?evento=guardarPago';
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	$params = "&amount=".$total_amount."&ref=".$data['parametro4']."&coins_id=".$coins_id."&orders_id=".$data['nai']."&bank_datas_id=15&user_id=".$user[0]['users_id'];
-
-	file_put_contents("prueba_123pagos.txt", $baseUrl.$params);
-
-	$cURLConnection = curl_init();
-	curl_setopt($cURLConnection, CURLOPT_URL, $baseUrl.$params);
-	curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-	$data = curl_exec($cURLConnection);
-	curl_close($cURLConnection);
+	guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
 
 	/*-------------------------functions for operations-------------------------------*/
+
+	function guardarPago($amount, $orders_id, $bank_datas_id, $ref, $users_id, $c_id){
+
+	    $amount=$amount;
+	    $orders_id=$orders_id;
+	    $bank_datas_id=$bank_datas_id
+	    $ref=trim($ref);
+	    $coins_id=$c_id;
+	    $status='aprobado';
+	    $users_id=$users_id;
+	    
+
+	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
+	    if(is_array($arr)){
+	        $payment_methods_id=$arr[0]['payment_methods_id'];
+	    }
+	    
+	    //PARA ARREGLAR PROBLEMA DE DIFERENCIAS EN DECIMALES CAMBIARIAS
+	    $diferencia_aceptable=0;
+	    if($coins_id==1){ //dolares
+	        $diferencia_aceptable=convertir_a_bs($coins_id,0.01);
+	        $sumar_sql="+$diferencia_aceptable";
+	       
+	    }
+
+	    q("BEGIN");
+
+	    $sql="INSERT INTO det_bank_orders (coins_id,other_amount,status,ref,amount,orders_id,bank_datas_id,created_at,updated_at,users_id) VALUES('$coins_id','$diferencia_aceptable','$status','$ref',$amount,$orders_id,$bank_datas_id,NOW(),NOW(),$users_id) RETURNING id";
+	    //exit($sql);
+	   // exit($sql);
+	    $arr=q($sql);
+	    if(is_array($arr)) $pagoAbonado=true;
+
+	    $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))"; 
+	    //exit($sql);
+	    $arr=q($sql);
+
+	    if(is_array($arr)){
+	        $order_status_id=4;
+	        $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+	    }else{
+	        $sql="SELECT id FROM orders WHERE id=$orders_id AND total_pay<=((SELECT (SUM(amount)$sumar_sql) as amount FROM det_bank_orders dbo WHERE dbo.orders_id=$orders_id and (status='nuevo' OR status='aprobado' OR status='efectivo') GROUP BY dbo.orders_id))";
+	    
+	        $arr=q($sql);
+	        if(is_array($arr)){
+	            $order_status_id=2;
+	            $arr=q("INSERT INTO trackings (orders_id,orders_status_id,users_id,created_at,updated_at) VALUES ($orders_id,$order_status_id,$users_id,NOW(),NOW()) RETURNING id");
+	        }
+	    }
+
+	    q("COMMIT");
+	}
+
 	function extraer_datos_db(){
 	    $gestor = @fopen("../.env", "r");
 	    if ($gestor) {
