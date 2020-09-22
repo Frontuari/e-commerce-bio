@@ -49,6 +49,10 @@
 	            Print.postMessage(d);
 	        });
 	        localStorage.clear();
+		}else{
+			$("#contenedor_boton").show();
+	        window.opener.createPayment();
+	        window.close();
 		}
 
 	});
