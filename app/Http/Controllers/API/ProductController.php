@@ -111,4 +111,10 @@ class ProductController extends BaseController
         $keywords = array_values(array_unique($keywords));
         return $this->sendResponse($keywords);
     }
+
+    public function bysku($sku = null){
+        $data = Product::where('sku','=',$sku)->get();
+
+        return response()->json($data);
+    }
 }
