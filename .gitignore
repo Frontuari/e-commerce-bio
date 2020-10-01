@@ -6,6 +6,7 @@
 /public/css/app.css
 /public/123pago.txt
 public/mix-manifest.json
+/public/mega/constantes.php
 ~
 /storage/*.key
 package-lock.json

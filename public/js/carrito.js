@@ -159,16 +159,16 @@ function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
 		var orderNo = orders_id;
 		var email = udata[2];
 
-		monto_total = aPagarUsd;
+		monto_total = up(aPagarUsd,2);
 
-		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total.toFixed(2)+'/'+email;
+		url_popup = url_base+"/international-payment-button/"+nombre+"/"+apellido+"/"+cedula+"/"+orderNo+"/"+monto_total+'/'+email;
 		html_boton = "<iframe src='"+url_popup+"' width='250' height='250' frameborder='0'></iframe>";
 	}
 
 	if(coins_id==1){
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$";
 		var msj="Use punto (.) para decimales";
-		monto_total = aPagarUsd;
+		monto_total = up(aPagarUsd,2);
 	}else{
 		var patron="^\\$?(([1-9](\\d*|\\d{0,2}(\.\\d{3})*))|0)(,\\d{1,2})?$";
 		var msj="Use coma (,) para decimales";
@@ -305,6 +305,7 @@ function procesar(data,evento){
 				  }
 
 				  var htotalD=parseFloat(ra.total_pay)/_rateb;
+				  htotalD = up(htotalD,2);
 				var pagado=0.00;
 				if(ra.cant_pagos!='0'){
 
@@ -334,6 +335,7 @@ function procesar(data,evento){
 			   
 				var resta=parseFloat((parseFloat(ra.total_pay)-pagado).toFixed(2));
 				var restaD=resta/_rateb;
+				restaD = up(restaD, 2);
 
 				aPagarBs = resta;
 				aPagarUsd = restaD;
@@ -374,8 +376,7 @@ console.log(ra);
 					if (id_rate == 1) break;
 				  }
 
-				  var totalD=parseFloat(r.total_pay)/_rate;
-				
+				  var totalD=up((parseFloat(Math.ceil(r.total_pay))/_rate), 2);		
 
 				  _totalProductoB= new Object();
 				  _totalProductoD= new Object();
@@ -856,4 +857,8 @@ function deli_type(e){
 	document.getElementById('dvy_type').value = e.value;
 
 	activarEnvio(e);
+}
+
+function up(v, n) {
+    return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
 }
