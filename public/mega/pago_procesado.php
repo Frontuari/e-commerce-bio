@@ -11,6 +11,9 @@ session_start();
 $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
+
+$host = $_SERVER['HTTP_HOST'];
+
     include_once './Clases/Login.php';
     include_once './Clases/LeerXML.php';
     include './constantes.php';
@@ -47,7 +50,7 @@ $_POST=seguro($_POST);
     }elseif($xml->getEstado()=='R'){
         salidaMala($xml);
     }else{
-        header("Location: ".'http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto());
+        header("Location: ".'http://'.$host.'/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto());
         
     }
 
@@ -55,7 +58,7 @@ function salidaMala($xml){
     echo '
     <div style="text-align: center; "><img src="../logo.png" width="200" /></div>
 <p>&nbsp;</p>
-<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> <b>Cod. '.$xml->getCodigo().' '.$xml->getDescripcion().'</b><br><br> <a href="http://199.188.204.152/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
+<div style="text-align: center;">Transacción <b><span style="color:red">RECHAZADA</span></b><br> <b>Cod. '.$xml->getCodigo().' '.$xml->getDescripcion().'</b><br><br> <a href="http://'.$host.'/mega/PreRegistro.php?nro_orden='.$xml->getFactura().'&total='.$xml->getMonto().'">haga clic aquí para intentar nuevamente.</a><br /><br /><hr />www.biomercados.com.ve</div>     
     ';
 
 
