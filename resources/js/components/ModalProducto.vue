@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div class="product-prices">
-                                            <p><b>Total:</b> $ {{ (totalModal / tasadolar) | FormatDolar}} / Bs {{totalModal | FormatNumber}} </p>
+                                            <p><b>Total:</b> $ {{ (up((totalModal / tasadolar), 2)) | FormatDolar}} / Bs {{totalModal | FormatNumber}} </p>
                                         </div>
                                         <div class="product-buttons">
                                             <button type="button" class="btn" v-if="product.qty_avaliable > 0" @click="addToCart(product,cantModal)">Añadir al carrito</button>
@@ -111,6 +111,9 @@
                 if(this.cantModal > 1 ) {
                     this.cantModal--;
                 }
+            },
+            up(v, n){
+                return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
             }
         },
         computed: {

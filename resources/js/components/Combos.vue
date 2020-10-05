@@ -30,7 +30,7 @@
 										<a href="#" class="product-title">{{ com.name }}</a>
 										<span class="product-info">{{com.cantTotal}} Productos</span>
 										<div class="product-prices" >
-											<p> ${{ (com.combo_price / tasadolar) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
+											<p> ${{ (up((com.combo_price / tasadolar), 2)) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
 										</div>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 										<a href="#" class="product-title">{{com.name}}</a>
 										<span class="product-info">{{com.cantTotal}} Productos</span>
 										<div class="product-prices" v-if="index > 0">
-											<p> ${{ (com.combo_price / tasadolar) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
+											<p> ${{ (up((com.combo_price / tasadolar), 2)) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
 										</div>
 									</div>
 								</div>
@@ -84,7 +84,7 @@
 										<a href="#" class="product-title">{{ com.name }}</a>
 										<span class="product-info">{{com.cantTotal}} Productos</span>
 										<div class="product-prices" >
-											<p> ${{ (com.combo_price / tasadolar) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
+											<p> ${{ (up((com.combo_price / tasadolar), 2)) | FormatDolar}} / Bs {{ com.combo_price | FormatNumber }}</p>
 										</div>
 									</div>
 								</div>
@@ -121,6 +121,9 @@
 				console.log("objP::> ",objP);
 				this.combo = objP;
 				this.index = index;
+			},
+			up(v, n){
+				return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
 			}
 		},
 		mounted() {

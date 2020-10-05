@@ -49,11 +49,11 @@
 								</div>
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
 									<p>{{ product_recent.calculado | FormatNumber }} Bs</p>
-									<p>{{ (product_recent.calculado / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_recent.impuesto">
 									<p>{{ product_recent.price | FormatNumber }} Bs</p>
-									<p>{{ (product_recent.price / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -89,11 +89,11 @@
 								</div>
 								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>{{ product_sold.calculado | FormatNumber }} Bs</p>
-									<p>{{ (product_sold.calculado / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_sold.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_sold.impuesto">
 									<p>{{ product_sold.price | FormatNumber }} Bs</p>
-									<p>{{ (product_sold.price / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_sold.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -129,11 +129,11 @@
 								</div>
 								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>{{ product_view.calculado | FormatNumber }} Bs</p>
-									<p>{{ (product_view.calculado / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_view.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_view.impuesto">
 									<p>{{ product_view.price | FormatNumber }} Bs</p>
-									<p>{{ (product_view.price / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_view.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -168,11 +168,11 @@
 								</div>
 								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>{{ product_best.calculado | FormatNumber }} Bs</p>
-									<p>{{ (product_best.calculado / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_best.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_best.impuesto">
 									<p>{{ product_best.price | FormatNumber }} Bs</p>
-									<p>{{ (product_best.price / tasadolar) | FormatDolar}} $</p>
+									<p>{{ (up((product_best.price / tasadolar),2)) | FormatDolar}} $</p>
 								</div>
 							</div>
 						</div>
@@ -211,6 +211,9 @@
 		methods: {
 			getProduct: function(objP) {
 				this.oneproduct = objP;
+            },
+            up(v, n){
+            	return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
             }
 		}
     }

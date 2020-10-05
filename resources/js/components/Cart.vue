@@ -57,9 +57,9 @@
 																			<a href="#" class="product-title">{{product_cart.product.name}}</a><br>
 																				<span class="product-descount" v-if="product_cart.product.discount > 0">$ 4 / {{ product_cart.product.price | FormatNumber }}</span>
 
-																				<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.discount | FormatNumber }}</p>
+																				<p v-if="product_cart.product.discount > 0">$ {{ (up((product_cart.product.discount  / tasadolar), 2)) | FormatDolar}} / Bs {{ product_cart.product.discount | FormatNumber }}</p>
 
-																				<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ {{ (product_cart.product.price  / tasadolar) | FormatDolar}} / Bs {{ product_cart.product.price | FormatNumber }}</p>
+																				<p v-if="product_cart.product.price > 0 && product_cart.product.discount <= 0">$ {{ (up((product_cart.product.price  / tasadolar), 2)) | FormatDolar}} / Bs {{ product_cart.product.price | FormatNumber }}</p>
 
 																		</div>
 																	</div>
@@ -86,9 +86,9 @@
 	
 																	
 																		<div class="product-prices">
-																			<p v-if="product_cart.product.discount > 0">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
+																			<p v-if="product_cart.product.discount > 0">$ {{ up(((product_cart.product.discount * product_cart.cant) / tasadolar),2) | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</p>
 
-																			<p v-if="product_cart.product.discount <= 0">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
+																			<p v-if="product_cart.product.discount <= 0">$ {{ up(((product_cart.product.price * product_cart.cant) / tasadolar), 2) | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</p>
 																		</div>
 															
 																	</div>
@@ -120,15 +120,17 @@
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-                                                                        <h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{(product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</h3>
+                                                                        <h3 v-if="product_cart.product.discount > 0" class="order-text">
+                                                                        $ {{ up( ((product_cart.product.discount * product_cart.cant) / tasadolar) , 2) | FormatDolar}} / Bs {{product_cart.product.discount * product_cart.cant | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">
+																		$ {{ up(((product_cart.product.price * product_cart.cant) / tasadolar),2) | FormatDolar}} / Bs {{product_cart.product.price * product_cart.cant | FormatNumber}}</h3>
 																	</div>
 																</div>
 																<div class="order-description order-total">
 																	<div class="row">
 																		<div class="col-md-12">
 																			<p>Subtotal</p>
-																			<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																			<h3 class="order-text">$ {{ up(((total_cart) / tasadolar), 2) | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																		</div>
 																		<div class="col-md-12">
 																			<p>Peso</p>
@@ -136,11 +138,11 @@
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total Delivery:</p>
-																			<h3 class="order-text">$ {{ total_delivery / tasadolar | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
+																			<h3 class="order-text">$ {{ up((total_delivery / tasadolar), 2) | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total a Pagar:</p>
-																			<h3 class="order-text">$ {{ total_pagar / tasadolar | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
+																			<h3 class="order-text">$ {{ up((total_pagar / tasadolar), 2) | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
 																		</div>
 																	</div>
 																</div>
@@ -311,9 +313,9 @@
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
 
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ (product_cart.product.discount * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.discount * product_cart.cant) | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">{{ up(((product_cart.product.discount * product_cart.cant) / tasadolar),2) | FormatDolar }} / Bs {{ (product_cart.product.discount * product_cart.cant) | FormatNumber}}</h3>
 
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ (product_cart.product.price * product_cart.cant) / tasadolar | FormatDolar }} / Bs {{ (product_cart.product.price * product_cart.cant) | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">{{ up(((product_cart.product.price * product_cart.cant) / tasadolar), 2) | FormatDolar }} / Bs {{ (product_cart.product.price * product_cart.cant) | FormatNumber}}</h3>
 
 																	</div>
 
@@ -322,7 +324,7 @@
 																	<div class="row">
 																		<div class="col-md-12">
 																			<p>Subtotal</p>
-																			<h3 class="order-text">$ {{(total_cart) / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																			<h3 class="order-text">$ {{ up(((total_cart) / tasadolar), 2) | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																		</div>
 																		<div class="col-md-12">
 																			<p>Peso</p>
@@ -330,11 +332,11 @@
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total Delivery:</p>
-																			<h3 class="order-text">$ {{ total_delivery / tasadolar | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
+																			<h3 class="order-text">$ {{ up((total_delivery / tasadolar), 2) | FormatDolar }} / Bs {{ total_delivery | FormatNumber }} </h3>
 																		</div>
 																		<div class="col-md-12">
 																			<p>Total a Pagar:</p>
-																			<h3 class="order-text">$ {{ total_pagar / tasadolar | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
+																			<h3 class="order-text">$ {{ up((total_pagar / tasadolar),2) | FormatDolar }} / Bs {{total_pagar | FormatNumber}} </h3>
 																		</div>
 																	</div>
 																</div>
@@ -431,7 +433,7 @@
 																<div class="order-description order-total">
 																	<div class="row">
 																		<p>Total</p>
-																		<h3 class="order-text">$ {{total_cart / tasadolar | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
+																		<h3 class="order-text">$ {{ up((total_cart / tasadolar), 2) | FormatDolar}} / Bs {{total_cart | FormatNumber}} </h3>
 																		<span v-if="payButton">
 																			<font color="red">
 																				Su abono de pago debe ser exacto
@@ -446,7 +448,7 @@
 																		<table class="table table-sm table-borderless">
 																			<tr>
 																				<td><b>USD:</b> </td>
-																				<td>$ {{totalAbonoUsd}} </td>
+																				<td>$ {{  up(totalAbonoUsd, 2) }} </td>
 																			</tr>
 																			<tr>
 																				<td><b>Bs:</b> </td>
@@ -454,11 +456,11 @@
 																			</tr>
 																			<tr>
 																				<td>Resta:  </td>
-																				<td>$ {{Resta / tasadolar | FormatDolar}} / Bs {{Resta | FormatNumber}}</td>
+																				<td>$ {{ up((Resta / tasadolar), 2) | FormatDolar}} / Bs {{Resta | FormatNumber}}</td>
 																			</tr>
 																			<tr>
 																				<td>Total:  </td>
-																				<td>$ {{totalAbono / tasadolar | FormatDolar}} / Bs {{totalAbono | FormatNumber}}</td>
+																				<td>$ {{  up((totalAbono / tasadolar), 2) | FormatDolar}} / Bs {{totalAbono | FormatNumber}}</td>
 																			</tr>
 																		</table>
 																		
@@ -468,8 +470,8 @@
 																<div class="order-description">
 																	<div class="row"  v-for="product_cart in products_cart" :key="product_cart.id">
 																		<p>{{product_cart.product.name}} ({{product_cart.cant}} Articulos)</p>
-																		<h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{product_cart.product.discount / tasadolar | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
-																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{product_cart.product.price / tasadolar | FormatDolar }} / Bs {{product_cart.product.price | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount > 0" class="order-text">$ {{ up((product_cart.product.discount / tasadolar),2) | FormatDolar}} / Bs {{product_cart.product.discount | FormatNumber}}</h3>
+																		<h3 v-if="product_cart.product.discount <= 0" class="order-text">$ {{ up((product_cart.product.price / tasadolar),2) | FormatDolar }} / Bs {{product_cart.product.price | FormatNumber}}</h3>
 																	</div>
 																</div>
 																
@@ -582,6 +584,9 @@
 			delivery: Number
 		},
 		methods:{
+            up(v, n){
+                return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
+            },
 			LoadImageFile(event) {
 				this.payment_img = event.target.files[0];
 			},

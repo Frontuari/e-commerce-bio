@@ -49,10 +49,10 @@
                                 <p>EXENTO DE IVA</p>
                             </div>
                             <div class="product-prices" v-if="product.impuesto > 0">
-                                <p> ${{ (product.calculado / tasadolar) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
+                                <p> ${{ (up((product.calculado / tasadolar), 2)) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
                             </div>
                             <div class="product-prices" v-if="!product.impuesto">
-                                <p> ${{ (product.price / tasadolar) | FormatDolar}} / Bs {{ product.price | FormatNumber }}</p>
+                                <p> ${{ (up((product.price / tasadolar), 2)) | FormatDolar}} / Bs {{ product.price | FormatNumber }}</p>
                             </div>
                         </div>
                         <div class="product-add">
@@ -165,6 +165,9 @@
                 }
                 $('.cantidad_'+productID).val(this.cant_product[productID]);
                 $('.cantidad_'+productID)[0].dispatchEvent(new CustomEvent('input'));
+            },
+            up(v, n){
+                return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
             }
         },
         created() {

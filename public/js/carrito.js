@@ -647,7 +647,7 @@ function actualizarResumenOrden(){
 				totalD+=precio_dolar;
 				totalPeso+=peso;
 
-				detalle+='<div class="row" style="margin-bottom:5px; border-bottom:1px solid #ddd "><div class="col-md-1" style="margin:0"><img width="30px" src="storage/'+p.image+'"></div><div class="col-md-5" style="font-size:13px">'+nombre+' <span style="color:red"> X '+cant+'</span></div><div class="col-md-5" style="text-align:right">'+formatB(precio_con_iva)+'<br>'+formatD(precio_dolar)+'</div></div>';
+				detalle+='<div class="row" style="margin-bottom:5px; border-bottom:1px solid #ddd "><div class="col-md-1" style="margin:0"><img width="30px" src="storage/'+p.image+'"></div><div class="col-md-5" style="font-size:13px">'+nombre+' <span style="color:red"> X '+cant+'</span></div><div class="col-md-5" style="text-align:right">'+formatB(precio_con_iva)+'<br>'+formatD(up(precio_dolar,2))+'</div></div>';
 				}
 			}
 
@@ -679,9 +679,9 @@ function actualizarResumenOrden(){
 
 
 		h='<div class="detalleOrdenProducts">'+detalle+'</div><br>'+
-		'<div class="row"><div class="col-md-4">Sub total:</div><div class="col-md-8" style="text-align:right">'+formatB(totalB)+' / '+formatD(totalD)+'</div></div>'+
-		'<div class="row"><div class="col-md-4">Envío:</div><div class="col-md-8" style="text-align:right">'+formatB(totalEnvioB)+' / '+formatD(totalEnvioD)+'</div></div>'+
-		'<div class="row"><div class="col-md-4" style="font-size:17px">TOTAL:</div><div class="col-md-8" style="font-size:17px; text-align:right">'+formatB(totalPagarB)+' / '+formatD(totalPagarD)+'</div></div>'+
+		'<div class="row"><div class="col-md-4">Sub total:</div><div class="col-md-8" style="text-align:right">'+formatB(totalB)+' / '+formatD(up(totalD,2))+'</div></div>'+
+		'<div class="row"><div class="col-md-4">Envío:</div><div class="col-md-8" style="text-align:right">'+formatB(totalEnvioB)+' / '+formatD(up(totalEnvioD, 2))+'</div></div>'+
+		'<div class="row"><div class="col-md-4" style="font-size:17px">TOTAL:</div><div class="col-md-8" style="font-size:17px; text-align:right">'+formatB(totalPagarB)+' / '+formatD(up(totalPagarD, 2))+'</div></div>'+
 		'<div class="row"><div class="col-md-12" style="color:red; text-align:right">(impuestos incluidos)</div></div><br>'+
 		''+
 		'';
