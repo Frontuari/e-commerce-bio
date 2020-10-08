@@ -5,7 +5,7 @@
 					<div class="footer-block">
 						<img src="/assets/img/logo-bio-mercados.svg" alt="Bio Mercados">
 						
-						<p><span>Teléfono:</span> (0241) 714.16.00</p>
+						<p><span>Teléfono:</span> (0241) 335.4101</p>
 						<p><span>Correo:</span> contacto@biomercados.com.ve</p>
 					</div>
 				</div>

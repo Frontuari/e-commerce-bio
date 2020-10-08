@@ -340,6 +340,13 @@ function procesar(data,evento){
 				aPagarBs = resta;
 				aPagarUsd = restaD;
 
+				var mostrar = "";
+				var titulopago = "Debes Pagar";
+
+if(aPagarBs <= 0){
+	mostrar = "style='display:none'";
+	titulopago = "Has pagado";
+}
 
 if(resta>0){
 	var colorFalta='text-danger';
@@ -351,12 +358,12 @@ console.log(ra);
 				
 			cuadroPagado.innerHTML=`
 			<div class="row">
-			<div class="col-md-6 text-left"><b>Debes pagar</b></div><div class="col-md-6 text-right"><b>`+formatB(ra.total_pay)+` / `+formatD(htotalD)+`</b></div>
+			<div class="col-md-6 text-left"><b>`+titulopago+`</b></div><div class="col-md-6 text-right"><b>`+formatB(ra.total_pay)+` / `+formatD(htotalD)+`</b></div>
 		</div>
-		<div class="row">
+		<div class="row" `+mostrar+`>
 			<div class="col-md-6 text-left"><b>Has pagado</b></div><div class="col-md-6 text-right"><b>`+formatB(pagado)+` / `+formatD(pagadoD)+`</b></div>
 		</div>
-		<div class="row `+colorFalta+`">
+		<div class="row `+colorFalta+`" `+mostrar+`>
 			<div class="col-md-6 text-left "><b>Saldo restante</b></div><div class="col-md-6 text-right"><b>`+formatB(resta)+` / `+formatD(restaD)+`</b></div>
 		</div>   
 			`;
