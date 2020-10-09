@@ -652,7 +652,6 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
 
     public static $classMap = array (
         'AdvsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AdvsTableSeeder.php',
-        'App\\Actions\\PaymentAction' => __DIR__ . '/../..' . '/app/Actions/PaymentAction.php',
         'App\\Advs' => __DIR__ . '/../..' . '/app/Advs.php',
         'App\\BankDatas' => __DIR__ . '/../..' . '/app/BankDatas.php',
         'App\\BankOrder' => __DIR__ . '/../..' . '/app/BankOrder.php',
@@ -736,6 +735,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Http\\Controllers\\GroupsController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupsController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\HomePagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomePagesController.php',
+        'App\\Http\\Controllers\\KpisController' => __DIR__ . '/../..' . '/app/Http/Controllers/KpisController.php',
         'App\\Http\\Controllers\\LogsController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogsController.php',
         'App\\Http\\Controllers\\OrderAddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderAddressController.php',
         'App\\Http\\Controllers\\OrderProductsController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderProductsController.php',

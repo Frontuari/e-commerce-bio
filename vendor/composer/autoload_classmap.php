@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdvsTableSeeder' => $baseDir . '/database/seeds/AdvsTableSeeder.php',
-    'App\\Actions\\PaymentAction' => $baseDir . '/app/Actions/PaymentAction.php',
     'App\\Advs' => $baseDir . '/app/Advs.php',
     'App\\BankDatas' => $baseDir . '/app/BankDatas.php',
     'App\\BankOrder' => $baseDir . '/app/BankOrder.php',
@@ -91,6 +90,7 @@ return array(
     'App\\Http\\Controllers\\GroupsController' => $baseDir . '/app/Http/Controllers/GroupsController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\HomePagesController' => $baseDir . '/app/Http/Controllers/HomePagesController.php',
+    'App\\Http\\Controllers\\KpisController' => $baseDir . '/app/Http/Controllers/KpisController.php',
     'App\\Http\\Controllers\\LogsController' => $baseDir . '/app/Http/Controllers/LogsController.php',
     'App\\Http\\Controllers\\OrderAddressController' => $baseDir . '/app/Http/Controllers/OrderAddressController.php',
     'App\\Http\\Controllers\\OrderProductsController' => $baseDir . '/app/Http/Controllers/OrderProductsController.php',
