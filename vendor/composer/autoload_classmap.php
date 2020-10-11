@@ -165,7 +165,7 @@ return array(
     'App\\ProductPackage' => $baseDir . '/app/ProductPackage.php',
     'App\\ProductSubcategory' => $baseDir . '/app/ProductSubcategory.php',
     'App\\ProductTax' => $baseDir . '/app/ProductTax.php',
-    'App\\Products' => $baseDir . '/app/Products.php',
+    'App\\Products' => $baseDir . '/app/Products.example.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
