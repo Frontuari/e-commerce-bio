@@ -810,7 +810,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\ProductPackage' => __DIR__ . '/../..' . '/app/ProductPackage.php',
         'App\\ProductSubcategory' => __DIR__ . '/../..' . '/app/ProductSubcategory.php',
         'App\\ProductTax' => __DIR__ . '/../..' . '/app/ProductTax.php',
-        'App\\Products' => __DIR__ . '/../..' . '/app/Products.php',
+        'App\\Products' => __DIR__ . '/../..' . '/app/Products.example.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
