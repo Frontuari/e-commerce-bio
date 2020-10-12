@@ -20,10 +20,10 @@
 										<span v-else-if="p.cant_combo > p.qty_avaliable"><font color="red"> ({{p.qty_avaliable}} Disponible) </font></span>
 									</span>
 									
-									<div class="product-prices" v-if="index != 0">
-										<!-- <span class="product-descount">$ 3 / Bs 135.000</span> -->
+									<!--<div class="product-prices">
+										<span class="product-descount">$ 3 / Bs 135.000</span>
 										<p> ${{ (combo.combo_price / tasadolar) | FormatDolar}} / Bs {{ combo.combo_price | FormatNumber }}</p>
-									</div>
+									</div>-->
 								</div>
 								<div class="product-options">
 									<form action="">
