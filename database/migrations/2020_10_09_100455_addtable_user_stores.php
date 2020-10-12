@@ -15,11 +15,11 @@ class AddtableUserStores extends Migration
     {
         Schema::create('user_stores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('stores_id');
             $table->timestamps();
 
-            $table->foreign('users_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('stores_id')->references('id')->on('stores')->onUpdate('cascade')->onDelete('restrict');
         });
     }

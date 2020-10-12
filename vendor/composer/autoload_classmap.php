@@ -186,6 +186,7 @@ return array(
     'App\\Transports' => $baseDir . '/app/Transports.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserRole' => $baseDir . '/app/UserRole.php',
+    'App\\UserStores' => $baseDir . '/app/UserStores.php',
     'App\\UserVisitProducts' => $baseDir . '/app/UserVisitProducts.php',
     'App\\Views' => $baseDir . '/app/Views.php',
     'App\\Widgets\\BaseDimmer' => $baseDir . '/app/Widgets/BaseDimmer.php',

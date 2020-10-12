@@ -831,6 +831,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Transports' => __DIR__ . '/../..' . '/app/Transports.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserRole' => __DIR__ . '/../..' . '/app/UserRole.php',
+        'App\\UserStores' => __DIR__ . '/../..' . '/app/UserStores.php',
         'App\\UserVisitProducts' => __DIR__ . '/../..' . '/app/UserVisitProducts.php',
         'App\\Views' => __DIR__ . '/../..' . '/app/Views.php',
         'App\\Widgets\\BaseDimmer' => __DIR__ . '/../..' . '/app/Widgets/BaseDimmer.php',

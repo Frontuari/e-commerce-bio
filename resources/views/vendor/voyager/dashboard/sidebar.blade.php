@@ -14,8 +14,28 @@
                     <div class="title">{{Voyager::setting('admin.title', 'VOYAGER')}}</div>
                 </a>
                 <div>
-
+                    <?php
+                    $_SESSION['store']=$_GET['store'];
+                    
+                    
+                    $user_id= Auth::user()->id;
+                    $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id");
+                    if(count($res)>0){
+                        echo "<select onchange='cambiarPagina(this.value)' name='store_id' class='form-control'>";
+                        foreach($res as $index=>$obj){
+                            echo "<option ".($_SESSION['store']==$obj->stores_id ? 'selected' : '')." value='".$obj->stores_id."'>".$obj->name."</option>";
+                        }
+                        echo "</select>";
+                    }
+                    //echo "ss";
+                    ?>
                 </div>
+                <script>
+                    function cambiarPagina(a){
+                        url="<?php echo URL::to('/admin/?store='); ?>";
+                        window.location.replace(url+a);
+                    }
+                    </script>
             </div><!-- .navbar-header -->
 
             <div class="panel widget center bgimage"
