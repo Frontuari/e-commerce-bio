@@ -138,10 +138,10 @@ var APP_URL = "'.url("/").'";
     }
     public function ventas(){
         $orders= new Orders;
-        $count = $orders->where('status','=','NU')->count();
+        //$count = $orders->where('status','=','NU')->count();
 
         $store_id=$_SESSION['stores_id'];
-        $count =DB::select("SELECT count(*) as cant FROM orders WHERE stores_id=$store_id")[0]->cant;
+        $count =DB::select("SELECT count(*) as cant FROM orders WHERE stores_id=$store_id AND status='NU'")[0]->cant;
         $url="/admin/orders";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">
@@ -159,7 +159,10 @@ var APP_URL = "'.url("/").'";
     }
     public function opiniones(){
         $RatingProducts= new RatingProducts;
-        $count = $RatingProducts->count();
+       // $count = $RatingProducts->count();
+        $store_id=$_SESSION['stores_id'];
+        $count =DB::select("SELECT count(*) as cant FROM rating_products rp INNER JOIN products p ON p.id=rp.products_id WHERE p.stores_id=$store_id")[0]->cant;
+
         $url="/admin/rating-products";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">

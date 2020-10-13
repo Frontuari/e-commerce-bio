@@ -47,8 +47,37 @@ class OrdersController extends BaseController
         return $this->sendResponse($a);
     }
 
+    public function estadistica_ingresos() {
+        $stores_id=$_SESSION['stores_id'];
+        $a=DB::select("SELECT date_part('month', created_at) as mes, ROUND(sum(total_pay/cast(((rate_json::json->2)::json->>'rate') as numeric)),2) as sum FROM orders where orders.stores_id=$stores_id AND status='EC' AND created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
+
+        $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+        $arr['datasets'][0]=array(
+            'label'               => 'Ingresos $',
+            'backgroundColor'       =>'#28b67a',
+            'fillColor'           => '#28b67a',
+            'strokeColor'         => '#13945C',
+            'pointColor'         => '#13945C',
+            'pointStrokeColor'    => 'rgba(60,141,188,1)',
+            'pointHighlightFill'  => '#80bc00',
+            'pointHighlightStroke'=> 'rgba(60,141,188,1)');
+         foreach($arr['labels'] as $cod=>$mes) {
+            foreach ($a as $valor){
+                if($valor->mes==($cod+1)) {
+                    $arr['datasets'][0]['data'][$cod]=$valor->sum;
+                }else {
+                    if(!isset($arr['datasets'][0]['data'][$cod])){
+                    $arr['datasets'][0]['data'][$cod]=0;
+                    }
+                }
+            }
+        }
+
+        return json_encode($arr);
+    }
     public function estadistica_ano() {
-        $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
+        $stores_id=$_SESSION['stores_id'];
+        $a=DB::select("SELECT date_part('month', created_at) as mes, count(id) FROM orders where orders.stores_id=$stores_id AND status='EC' AND created_at>=NOW() - interval '1 YEAR' group by date_part('month', created_at)");
 
         $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         $arr['datasets'][0]=array(

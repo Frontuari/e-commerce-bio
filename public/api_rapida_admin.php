@@ -7,15 +7,15 @@ $a=extraer_datos_db();
 $con=conectar_db($a['host'],$a['database'],$a['user'],$a['password'],$a['port']);
 $datos=run();
 session_start();
-
 $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
+$stores_id=$_SESSION['stores_id'];
 
 if($_GET['token']=='leonardomelendez'){
     switch($_GET['evento']) {
         case 'consutar_nuevo_pago':
-            $arr=q("SELECT count(dbo.id) as cant FROM det_bank_orders dbo WHERE dbo.status='nuevo'");
+            $arr=q("SELECT count(dbo.id) as cant FROM det_bank_orders dbo INNER JOIN bank_datas bd ON bd.id=dbo.bank_datas_id WHERE bd.stores_id=$stores_id AND dbo.status='nuevo'");
             if(is_array($arr)){
                 salida($arr,"Consulta realizada",true);
             }else{
@@ -23,7 +23,7 @@ if($_GET['token']=='leonardomelendez'){
             }
         break;
         case 'consutar_nuevas_ordenes':
-            $arr=q("SELECT count(o.id) as cant FROM orders o WHERE o.status='PR'");
+            $arr=q("SELECT count(o.id) as cant FROM orders o WHERE o.stores_id=$stores_id AND o.status='PR'");
             if(is_array($arr)){
                 salida($arr,"Consulta realizada",true);
             }else{
@@ -31,7 +31,7 @@ if($_GET['token']=='leonardomelendez'){
             }
         break;
         case 'consutar_nuevas_ordenes_delivery':
-            $arr=q("SELECT count(o.id) as cant FROM orders o WHERE o.status='SD'");
+            $arr=q("SELECT count(o.id) as cant FROM orders o WHERE o.stores_id=$stores_id AND o.status='SD'");
             if(is_array($arr)){
                 salida($arr,"Consulta realizada",true);
             }else{

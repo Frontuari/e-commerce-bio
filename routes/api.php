@@ -77,6 +77,8 @@ Route::resource('orders', 'API\OrdersController');
     Route::put('orders/set_qualify/{id}','API\OrdersController@set_qualify');
     //Estadistica del año
     Route::get('orders/estadistica/ano','API\OrdersController@estadistica_ano');
+    //Estadistica ingresos mensuales
+    Route::get('orders/estadistica/ingresos','API\OrdersController@estadistica_ingresos');
     //obtener ultima orden
     Route::get('orders/ultima/get','API\OrdersController@getUltimaOrden');
     //Cancelar orden
