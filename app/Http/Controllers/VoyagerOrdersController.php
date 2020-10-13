@@ -86,7 +86,10 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
                // $query->where('status','<>','EC');
             }    
           
-            
+            //----------MULTITIENDA
+            $stores_id=$_SESSION['stores_id'];
+            $query->where('stores_id','=',$stores_id);
+            //-------
             if ($orderBy && in_array($orderBy, $dataType->fields())) {
                 $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'desc';
                 $dataTypeContent = call_user_func([

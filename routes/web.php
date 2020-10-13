@@ -13,7 +13,7 @@
 
 if(isset($_GET['store'])){
     $_SESSION['stores_id']=$_GET['store'];
-}elseif(!$_SESSION['stores_id']){
+}elseif(!isset($_SESSION['stores_id'])){
     $_SESSION['stores_id']=1;
 }
 

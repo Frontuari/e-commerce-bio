@@ -69,7 +69,8 @@ class VoyagerBaseController extends Controller
             if ($dataType->scope && $dataType->scope != '' && method_exists($model, 'scope'.ucfirst($dataType->scope))) {
                 $query = $model->{$dataType->scope}();
             } else {
-                $query = $model::select('*');
+
+                $query = $model::select($dataType->name.'.*');
             }
 
             // Use withTrashed() if model uses SoftDeletes and if toggle is selected
@@ -81,7 +82,74 @@ class VoyagerBaseController extends Controller
                     $query = $query->withTrashed();
                 }
             }
-
+            //----------MULTITIENDA 2
+            switch($dataType->name){
+                case 'rating_products':
+                  
+                    $stores_id=$_SESSION['stores_id'];
+                   // exit($stores_id."sd");
+                    $query->join('products', 'rating_products.products_id', '=', 'products.id');
+                    $query->where('products.stores_id','=',$stores_id);
+                break;
+                case 'products':
+                  
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->where('products.stores_id','=',$stores_id);
+                break;
+                case 'det_bank_orders':
+                    
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->join('orders', 'det_bank_orders.orders_id', '=', 'orders.id');
+                    $query->where('orders.stores_id','=',$stores_id);
+                break;
+                case 'trackings':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->join('orders', 'trackings.orders_id', '=', 'orders.id');
+                    $query->where('orders.stores_id','=',$stores_id);
+               
+                break;
+                case 'order_products':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->join('orders', 'order_products.orders', '=', 'orders.id');
+                    $query->where('orders.stores_id','=',$stores_id);
+               
+                break;
+                case 'packages':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->join('orders', 'order_products.orders', '=', 'orders.id');
+                    $query->where('orders.stores_id','=',$stores_id);
+               
+                break;
+                case 'bank_datas':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->where('bank_datas.stores_id','=',$stores_id);
+               
+                break;
+                case 'calendars':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->where('calendars.stores_id','=',$stores_id);
+               
+                break;
+                case 'transports':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->where('transports.stores_id','=',$stores_id);
+               
+                break;
+                case 'advs':
+                   
+                    $stores_id=$_SESSION['stores_id'];
+                    $query->where('advs.stores_id','=',$stores_id);
+               
+                break;
+                
+            }
+            //-------
             // If a column has a relationship associated with it, we do not want to show that field
             $this->removeRelationshipField($dataType, 'browse');
 

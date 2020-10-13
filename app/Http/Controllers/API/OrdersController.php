@@ -81,7 +81,7 @@ class OrdersController extends BaseController
 
         $arr['labels']=array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         $arr['datasets'][0]=array(
-            'label'               => 'Ordenes',
+            'label'               => 'Ventas',
             'backgroundColor'       =>'#28b67a',
             'fillColor'           => '#28b67a',
             'strokeColor'         => '#13945C',

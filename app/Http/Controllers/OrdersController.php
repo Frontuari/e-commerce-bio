@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
+
     public function show($id)
     {
         $response = [];

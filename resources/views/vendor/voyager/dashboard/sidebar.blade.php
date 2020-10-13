@@ -28,11 +28,17 @@
                         echo "</select>";
                     }
                     //echo "ss";
+
+                    //echo url()->current();
+
+                    // Get the current URL including the query string...
+                    //echo url()->full();
+                   // exit();
                     ?>
                 </div>
                 <script>
                     function cambiarPagina(a){
-                        url="<?php echo URL::to('/admin/?store='); ?>";
+                        url="<?php echo url()->current().'?store='; ?>";
                         window.location.replace(url+a);
                     }
                     </script>

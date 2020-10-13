@@ -67,4 +67,5 @@ class Orders extends Model
         $fg= new FuncionesGenerales;
         return $fg->get_formato_moneda($value);
      }
+     
 }

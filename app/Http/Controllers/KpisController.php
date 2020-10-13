@@ -20,7 +20,7 @@ class KpisController extends Controller
         $chart = $request->input('chart_name');
 
     	$data = [];
-
+        $stores_id=$_SESSION['stores_id'];
         switch($chart){
 
             case 'transactions_for_period':
@@ -28,7 +28,7 @@ class KpisController extends Controller
                 $data = DB::select(DB::raw("select 
                     count(id) as qty,
                     to_char(created_at, 'dd/mm/YYYY') as day 
-                from orders where status = 'EC'
+                from orders where stores_id=$stores_id AND status = 'EC'
                 and created_at between '$from' and '$to' 
                 group by day order by day DESC"));
 
@@ -40,7 +40,7 @@ class KpisController extends Controller
                     to_char(o.created_at, 'dd/mm/YYYY') as day,
                     ROUND(SUM((o.total_pay / cast(cast(o.rate_json as json)->2->>'rate' as numeric))), 2) as amount
                 from orders as o
-                where cast(o.rate_json as json)->2->>'symbol' = '$' AND o.status = 'EC'
+                where o.stores_id=$stores_id AND cast(o.rate_json as json)->2->>'symbol' = '$' AND o.status = 'EC'
                 and o.created_at between '$from' and '$to'
                 group by day
                 order by day DESC"));
@@ -55,7 +55,7 @@ class KpisController extends Controller
                 from orders as o
                 inner join order_products as op on (op.orders = o.id)
                 inner join products as p on (p.id = op.products_id)
-                where o.status = 'EC' and o.created_at between '$from' and '$to'
+                where o.stores_id=$stores_id AND o.status = 'EC' and o.created_at between '$from' and '$to'
                 group by day
                 order by day DESC"));
 
