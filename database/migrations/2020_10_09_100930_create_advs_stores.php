@@ -13,13 +13,8 @@ class CreateAdvsStores extends Migration
      */
     public function up()
     {
-        Schema::create('advs_stores', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('advs_id');
-            $table->unsignedBigInteger('stores_id');
-            $table->timestamps();
-
-            $table->foreign('advs_id')->references('id')->on('advs')->onUpdate('cascade')->onDelete('restrict');
+        Schema::table('advs', function (Blueprint $table) {
+            $table->unsignedBigInteger('stores_id')->default(1);
             $table->foreign('stores_id')->references('id')->on('stores')->onUpdate('cascade')->onDelete('restrict');
         });
     }

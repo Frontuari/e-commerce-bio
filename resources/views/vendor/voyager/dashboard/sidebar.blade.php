@@ -15,15 +15,15 @@
                 </a>
                 <div>
                     <?php
-                    $_SESSION['store']=$_GET['store'];
+        
                     
                     
                     $user_id= Auth::user()->id;
-                    $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id");
+                    $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id WHERE us.user_id=".$user_id);
                     if(count($res)>0){
                         echo "<select onchange='cambiarPagina(this.value)' name='store_id' class='form-control'>";
                         foreach($res as $index=>$obj){
-                            echo "<option ".($_SESSION['store']==$obj->stores_id ? 'selected' : '')." value='".$obj->stores_id."'>".$obj->name."</option>";
+                            echo "<option ".($_SESSION['stores_id']==$obj->stores_id ? 'selected' : '')." value='".$obj->stores_id."'>".$obj->name."</option>";
                         }
                         echo "</select>";
                     }

@@ -10,7 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+if(isset($_GET['store'])){
+    $_SESSION['stores_id']=$_GET['store'];
+}else{
+    $_SESSION['stores_id']=1;
+}
 Route::get('/',"HomeController@index")->name("home");
 Route::get('/international-payment-button/{nb}/{ap}/{ci}/{nai}/{mt}/{em}/{from?}','HomeController@InternationalPaymentButton')->name('InternationalPaymentButton');
 Route::get('/123pago/despedida','HomeController@url_despedida');

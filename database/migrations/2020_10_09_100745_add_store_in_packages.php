@@ -14,7 +14,7 @@ class AddStoreInPackages extends Migration
     public function up()
     {
         Schema::table('packages', function (Blueprint $table) {
-            $table->unsignedBigInteger('stores_id')->nullable();
+            $table->unsignedBigInteger('stores_id')->default(1);
 
             $table->foreign('stores_id')->references('id')->on('stores')->onUpdate('cascade')->onDelete('restrict');
         });

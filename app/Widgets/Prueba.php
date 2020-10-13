@@ -8,6 +8,7 @@ use TCG\Voyager\Facades\Voyager;
 use App\Orders;
 use App\Products;
 use App\RatingProducts;
+use DB;
 class Prueba extends BaseDimmer
 {
     /**
@@ -66,8 +67,7 @@ class Prueba extends BaseDimmer
         return Auth::user()->can('browse', Voyager::model('User'));
     }
     public function productos(){
-        $products= new Products;
-        $count = $products->count();
+        $count =DB::table('products')->where('stores_id','=',$_SESSION['stores_id'])->count();
         $url="/admin/products";
         return '
           
@@ -139,6 +139,9 @@ var APP_URL = "'.url("/").'";
     public function ventas(){
         $orders= new Orders;
         $count = $orders->where('status','=','NU')->count();
+
+        $store_id=$_SESSION['stores_id'];
+        $count =DB::select("SELECT count(*) as cant FROM orders WHERE stores_id=$store_id")[0]->cant;
         $url="/admin/orders";
         return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
         <a href="'.$url.'">
