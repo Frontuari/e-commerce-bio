@@ -22,6 +22,8 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+
+        
     }
 
     function cambiarBarra($data) {
@@ -35,6 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $Coin = Coin::where("id",1)->first();
         
         $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
