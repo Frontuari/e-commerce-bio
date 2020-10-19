@@ -21,6 +21,18 @@ if($_GET['evento']=='' && $_POST['evento']!=''){
     $evento=$_GET['evento'];
 }
 switch($evento) {
+    case 'listarEstadosYtiendas':
+        $row['data']['listarTiendas']=listarTiendas(true);
+        $row['data']['EstadosConTiendas']=listarEstadosConTiendas(true);
+        echo json_encode($row);
+    break;
+    case 'listarTiendas':
+        echo listarTiendas(false);
+    break;
+    case 'EstadosConTiendas':
+        echo listarEstadosConTiendas(false);
+    break;
+
     case 'contactweb':
         $message = array("name"=>$_POST['name'],"email"=>$_POST['email'],"message"=>$_POST['message']);
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
@@ -42,7 +54,7 @@ switch($evento) {
         $row['msj_general']=true;
         echo e($row);
     break;
-    case 'loginNuevo':
+    case 'loginNuevo': //no se usa en la app
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
             $row['data']['perfil']=getPerfil(true);
@@ -63,7 +75,7 @@ switch($evento) {
         
         
     break;
-    case 'theBest':
+    case 'theBest': //se usa en la app como login
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
             $row['data']['perfil']=getPerfil(true);
@@ -111,6 +123,9 @@ switch($evento) {
     break;
     case 'login':
         login();
+    break;
+    case 'cambiarTienda':
+        cambiarTienda();
     break;
     case 'loginMovil':
         loginMovil(false);
@@ -185,6 +200,9 @@ switch($evento) {
         $sql=getSqlListarProductos();
         $sql=filtroProductos($sql);
         listarProductos($sql);
+    break;
+    case 'listarBancosdelMetododePagoAll':
+        listarBancosdelMetododePagoAll(true);
     break;
     case 'guardarFavorito':
         guardarFavorito();
@@ -300,6 +318,36 @@ switch($evento) {
     salidaNueva(null,"Intente de nuevo.",false);
     //salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
 }
+function cambiarTienda(){
+    $_SESSION['stores_id']=$_GET['id_tienda'];
+
+
+    $row['data']['categories']=listar_categorias_movil(true);
+    $row['data']['states']=getStates(true);
+    $row['data']['address']=getAdreess(true);   
+    $row['data']['envio']=recargoEnvio(true);
+    $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+
+
+}
+function listarTiendas($tipo_salida){
+    $sql="SELECT sto.id,sto.name,sto.membrete,sto.states_id,sta.name as estado_nombre FROM stores sto INNER JOIN states sta ON sta.id=sto.states_id WHERE sta.status='A' AND sto.status='A'";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,'Listando tiendas',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,'No encontramos tiendas',false,$tipo_salida);
+    }
+}
+function listarEstadosConTiendas($tipo_salida){
+    $sql="SELECT sta.name,sta.id FROM stores sto INNER JOIN states sta ON sta.id=sto.states_id WHERE sta.status='A' AND sto.status='A' GROUP BY sta.id";
+    $arr=q($sql);
+    if(is_array($arr)){
+        return salidaNueva($arr,'Listando estados con tiendas',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,'No encontramos estados con tiendas',false,$tipo_salida);
+    }
+}
 function actualizarFotoPerfil(){
     $users_id=$_SESSION['usuario']['id'];
     //wh_log("CARGANDO IMAGEN");
@@ -334,7 +382,8 @@ function listarPublicidadToda($tipo_salida){
 }
 function listarPublicidad($tipo_salida){
     $tipo=$_GET['tipo'];
-    $arr=q("select image from advs where type='$tipo' AND status='A'");
+    $whereTienda=whereTienda('a');
+    $arr=q("select image from advs a where $whereTienda a.type='$tipo' AND a.status='A'");
     if(is_array($arr)){
      return salidaNueva($arr,'Listar publicidad',true,$tipo_salida);
     }else{
@@ -342,6 +391,7 @@ function listarPublicidad($tipo_salida){
     }
 }
 function listarCombos($tipo_salida=false){
+    $whereTienda=whereTienda('pa');
     $sql="SELECT todo.*,todo.total_precio/rate.rate as total_precio_dolar FROM (SELECT json_agg(
         json_build_object(
 			'products_id',p.id,
@@ -350,13 +400,20 @@ function listarCombos($tipo_salida=false){
     'cant',dpp.cant,
     'stock',p.qty_avaliable
 ) 
-) json,pa.name as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
+) json,pa.name as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE $whereTienda pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
     $arr=q($sql);
     if(is_array($arr)){
         $arr=recortar_imagen_combo($arr);
         return salidaNueva($arr,'Listado combos',true,$tipo_salida);
     }else{
         return salidaNueva(null,'No encontramos Compras fáciles',false,$tipo_salida);
+    }
+}
+function whereTienda($prefix){
+    if(isset($_SESSION['stores_id'])){
+        return $prefix.'.stores_id='.$_SESSION['stores_id'].' AND';
+    }else{
+        return '';
     }
 }
 
@@ -678,6 +735,8 @@ function consultarOrden(){
     }
 }
 function recargoEnvio($tipo_salida){
+    $filtrarPorTienda=whereTienda('bd');
+
     $transports_id=2;
         $coins_id=1;
         //$sql="SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p";
@@ -716,7 +775,10 @@ function listarBancosdelMetododePago($tipo_salida){
    }
 }
 function listarBancosdelMetododePagoAll($tipo_salida){
-    $sql="SELECT bd.id,payment_methods_id,c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id";
+    $filtrarPorTienda=whereTienda('bd');
+
+    $sql="SELECT bd.id,payment_methods_id,c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE $filtrarPorTienda 1=1";
+    
     $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,"Listando datos bancarios",true,$tipo_salida);
@@ -744,8 +806,9 @@ function actualizarPerfil(){
    }
 }
 function listarOrdenes(){
-    $users_id=$_SESSION['usuario']['id'];
-        $sql="SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id WHERE o.users_id='$users_id' ORDER BY o.id DESC";
+        $users_id=$_SESSION['usuario']['id'];
+        $filtrarPorTienda=whereTienda('o');
+        $sql="SELECT o.*,TO_CHAR(o.created_at :: DATE, 'dd/mm/yyyy') AS fecha,os.name status_tracking,t.orders_status_id FROM (SELECT o.*,MAX(t.id) as t_id FROM orders o LEFT JOIN order_address oa ON oa.id=o.order_address_id INNER JOIN trackings t ON t.orders_id=o.id GROUP BY o.id) o INNER JOIN trackings t ON t.id=o.t_id INNER JOIN orders_status os ON os.id=t.orders_status_id WHERE $filtrarPorTienda o.users_id='$users_id' ORDER BY o.id DESC";
    // exit($sql);
         $arr=q($sql);
    
@@ -766,7 +829,8 @@ function listarMetodoDePago($tipo_salida){
 function listarTracking(){
     $users_id=$_SESSION['usuario']['id'];
         $orders_id=$_GET['orders_id'];
-        $arr=q("SELECT t.description,os.name,TO_CHAR(t.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha FROM trackings t INNER JOIN orders_status os ON os.id=t.orders_status_id INNER JOIN orders o ON o.id=t.orders_id WHERE o.users_id='$users_id' AND o.id='$orders_id' ORDER BY t.id DESC");
+        $filtrarPorTienda=whereTienda('o');
+        $arr=q("SELECT t.description,os.name,TO_CHAR(t.created_at, 'dd/mm/yyyy HH12:MI AM') AS fecha FROM trackings t INNER JOIN orders_status os ON os.id=t.orders_status_id INNER JOIN orders o ON o.id=t.orders_id WHERE $filtrarPorTienda o.users_id='$users_id' AND o.id='$orders_id' ORDER BY t.id DESC");
         if(is_array($arr)){
             salidaNueva($arr,"Listando Tracking");
        }else{
@@ -776,47 +840,55 @@ function listarTracking(){
 function horasDisponiblesEntrega(){
     
     $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
-    $arr=q("SELECT * FROM calendars WHERE status='A'");
-    $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
-    $iniciarDespuesDe=2; //Horas
-    $timenow = time();
-    $index=0;
-    $maxApartado=12;
-    $o=0;//hora apartada
-    $i=2;//hora inicial
-    while($o<$maxApartado){          
-
-        $fechaComprobar = strtotime("+ $i hours",time());
-        $horaComprobar=date('H:i',$fechaComprobar);
-        $diaComprobar=date('N',$fechaComprobar);
-        $diaActual=strftime('%d',$timenow);
-        if(comprobarDia($diaComprobar,$horaComprobar,$arr)){
-            $o++;
-            $diaDisponible=strftime('%d',$fechaComprobar);
-            //$horas[]['id']='A';
-            $horas[$index]['id']=$index;
-            $horas[$index]['time']=$fechaComprobar;
-            $msjHora=date('h:iA',$fechaComprobar);
-            if($diaActual==$diaDisponible){
-                $msj="Hoy";
-            }else{
-                $msj=$diassemana[$diaComprobar-1];
+    $filtrarPorTienda=whereTienda('c');
+    $sql="SELECT c.* FROM calendars c WHERE $filtrarPorTienda c.status='A'";
+    $arr=q($sql);
+    if(is_array($arr)){
+        $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
+        $iniciarDespuesDe=2; //Horas
+        $timenow = time();
+        $index=0;
+        $maxApartado=12;
+        $o=0;//hora apartada
+        $i=2;//hora inicial
+        while($o<$maxApartado){          
+    
+            $fechaComprobar = strtotime("+ $i hours",time());
+            $horaComprobar=date('H:i',$fechaComprobar);
+            $diaComprobar=date('N',$fechaComprobar);
+            $diaActual=strftime('%d',$timenow);
+            if(comprobarDia($diaComprobar,$horaComprobar,$arr)){
+                $o++;
+                $diaDisponible=strftime('%d',$fechaComprobar);
+                //$horas[]['id']='A';
+                $horas[$index]['id']=$index;
+                $horas[$index]['time']=$fechaComprobar;
+                $msjHora=date('h:iA',$fechaComprobar);
+                if($diaActual==$diaDisponible){
+                    $msj="Hoy";
+                }else{
+                    $msj=$diassemana[$diaComprobar-1];
+                }
+                $horas[$index]['name']=$msj." - ".$msjHora;
+                $index++;
             }
-            $horas[$index]['name']=$msj." - ".$msjHora;
-            $index++;
+            $i++;
+            if($i==168){ //Para que no quede en un ciclo en caso de que esten cerrados los despachos
+                break;
+            }
         }
-        $i++;
-        if($i==168){ //Para que no quede en un ciclo en caso de que esten cerrados los despachos
-            break;
-        }
-    }
+    
+        salidaNueva($horas,"Listando horas disponible para entrega",true,false,false);
 
-    salidaNueva($horas,"Listando horas disponible para entrega",true,false,false);
+    }else{
+        salidaNueva(null,"No hay horas configuradas",false,false,false);
+    }
+   
 }
 function loginMovil($tipo_salida){
     $email=mb_strtolower(trim($_GET['email']));
     $clave=trim($_GET['password']);
-    
+
     $row=q("SELECT s.avatar,date_part('year',age(p.birthdate)) as edad,s.purchase_quantity, p.rif, split_part(p.rif, '-', 1) as nacionalidad,split_part(p.rif, '-', 2) as nro_rif, s.id,s.password,s.email,p.name,s.peoples_id,p.sex,p.birthdate,p.phone,p.phone_home
     FROM users s
     INNER JOIN peoples p on p.id = s.peoples_id
@@ -827,6 +899,7 @@ function loginMovil($tipo_salida){
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
             $_SESSION['sesion_iniciada']=true;
+            cambiarTienda();
             $row['id_sesion']=session_id();
             return salidaNueva($row,"Bienvenido",true,$tipo_salida);
         }else{
@@ -1284,6 +1357,8 @@ function guardarCalificacion(){
     }
 }
 function listarProductosIA($tipo_salida=false,$simple=false){
+
+    $filtrarPorTienda=whereTienda('p');
     $users_id=$_SESSION['usuario']['id'];
     //$users_id=1;
     $cant_mostrar=20;
@@ -1293,7 +1368,7 @@ $description_short=array();
 $keyword=array();
 //
     try{
-        $arr=q('SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
+        $arr=q('SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
         $string="";
         if(is_array($arr)){
             foreach ($arr as $obj){
@@ -1349,6 +1424,7 @@ function _filtro($obj,$nameUnico){
     return $nameUnico;
 }
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit='',$is_limit = true){
+    $filtrarPorTienda=whereTienda('p');
     if($is_limit) $limit='LIMIT 100';
 
     $users_id=$_SESSION['usuario']['id'];
@@ -1379,7 +1455,7 @@ coalesce(((p.price*(SELECT sum(t.value) FROM taxes t INNER JOIN det_product_taxe
 FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id
 INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
 INNER JOIN categories c ON c.id=sc.categories_id
-$join  WHERE (p.status='A' AND ((p.qty_avaliable * p.porc_stock) / 100) > 0) $where GROUP BY p.id $order $limit";
+$join  WHERE $filtrarPorTienda (p.status='A' AND ((p.qty_avaliable * p.porc_stock) / 100) > 0) $where GROUP BY p.id $order $limit";
  
     return $sql;
 }
@@ -1443,10 +1519,15 @@ function listarProductos(){
 }
 */
 function listar_categorias_movil($tipo_salida){
-    $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
+    $whereTienda=whereTienda('p');
+    $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE $whereTienda p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
     //$row=q("SELECT name,image,image_b,id FROM categories WHERE status='A'");
-    $row=recortar_imagen($row);
-    return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
+    if(is_array($row)){
+        $row=recortar_imagen($row);
+        return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
+    }else{
+        return salidaNueva(null,"Sin categorias",false,$tipo_salida);
+    }
 }
 function eliminarDireccion(){
     $users_id=$_SESSION['usuario']['id'];
@@ -1456,7 +1537,14 @@ function eliminarDireccion(){
 }
 function getAdreess($tipo_salida,$type='delivery'){
     $users_id=$_SESSION['usuario']['id'];
-    $arr=q("SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE oa.users_id='$users_id' AND oa.status='A' AND oa.type='$type'");
+    if($type=='delivery'){
+        $stores_id=$_SESSION['stores_id'];
+        $whereStore="st.id=(SELECT states_id FROM stores WHERE id=$stores_id) AND ";
+      
+    }
+    $sql="SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE $whereStore oa.users_id='$users_id' AND oa.status='A' AND oa.type='$type'";
+    //exit($sql);
+    $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,'Listando direcciones',true,$tipo_salida);
     }else{
@@ -1491,11 +1579,11 @@ function guardarDireccion($type='delivery'){
 }
 function getStates($tipo_salida,$all=false){
     if($all){
-        $status="1=1";
+        $sql="SELECT id,name FROM states ORDER BY name";
     }else{
-        $status="status='A'";
+        $sql="SELECT s.id,s.name FROM stores INNER JOIN states s ON s.id=stores.states_id WHERE s.status='A' GROUP BY s.id ORDER BY name";
     }
-    $arr=q("SELECT id,name FROM states WHERE $status ORDER BY name");
+    $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,'Listando estados',true,$tipo_salida);
     }else{
