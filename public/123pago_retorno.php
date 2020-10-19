@@ -9,9 +9,11 @@
 	$total_amount = number_format(($data['amount']*$coins[0]['rate']),2,'.','');
 	$coins_id = $coins[0]['id'];
 
-	if(isset($data['parametro4']) and !empty($data['parametro4'])){
+	file_put_contents("prueba_desde_el_movil.txt", json_encode($data));
+
+	//if(isset($data['parametro4']) and !empty($data['parametro4'])){
 		guardarPago($total_amount,$data['nai'], 15, $data['parametro4'], $user[0]['users_id'], $coins_id);
-	}
+	//}
 
 	/*-------------------------functions for operations-------------------------------*/
 
