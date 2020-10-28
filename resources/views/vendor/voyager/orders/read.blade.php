@@ -83,8 +83,9 @@ if($transport_id != 3){
 }else{
     $fecha_entrega="Antes de 24 horas recibira su pedido";
 }
-
-
+$stores_id=$_SESSION['stores_id'];
+$a=DB::select("SELECT membrete FROM stores WHERE id=$stores_id");
+$membrete=$a[0]->membrete;
 $fac= "
 <style>
 #t{
@@ -96,27 +97,10 @@ $fac= "
 }
 #t td { padding: 1px; }
 </style>
+
 <table id='t'>
 <tr>
-    <td class='titu' colspan='2'>SENIAT</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>J-317219686</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>ALIMENTOS FM C.A.</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>CALLE CALLEJON MAÑONGO (176)</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>TERRENO CIVICO NRO. 01-A-15 LOCAL 1</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>NRO 1 URB MAÑONGO NAGUANAGUA</td>
-</tr>
-<tr>
-    <td class='titu' colspan='2'>ESTADO CARABOBO ZONA POSTAL 2005</td>
+    <td colspan='2'>$membrete</td>
 </tr>
 <tr>
     <td>Documento: $nro_factura</td>

@@ -67,6 +67,20 @@ class Prueba extends BaseDimmer
         return Auth::user()->can('browse', Voyager::model('User'));
     }
     public function productos(){
+      if(!isset($_SESSION['stores_id'])){
+        $user_id= Auth::user()->id;
+        $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id WHERE us.user_id=".$user_id);
+        if(count($res)>0){
+            
+            foreach($res as $index=>$obj){
+                
+                $_SESSION['stores_id']=$obj->stores_id;
+    
+                break;
+            }
+           
+        }
+    }
         $count =DB::table('products')->where('stores_id','=',$_SESSION['stores_id'])->count();
         $url="/admin/products";
         return '

@@ -1,6 +1,5 @@
 <?php
 cabecera('On');
-
 use App\Http\Resources\Favorite;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -76,8 +75,11 @@ switch($evento) {
         
     break;
     case 'theBest': //se usa en la app como login
+        
         $row['data']['usuario']=loginMovil(true);
+   
         if($row['data']['usuario']['success']==true){
+         
             $row['data']['perfil']=getPerfil(true);
             $row['data']['categories']=listar_categorias_movil(true);
             $row['data']['cities']=getCitiesAll(true);
@@ -125,7 +127,7 @@ switch($evento) {
         login();
     break;
     case 'cambiarTienda':
-        cambiarTienda();
+        echo cambiarTienda();
     break;
     case 'loginMovil':
         loginMovil(false);
@@ -276,6 +278,9 @@ switch($evento) {
             salidaNueva(null,"Sin datos",false);
         }
     break;
+    case 'getAdreess':
+        getAdreess(true);
+    break;
     case 'getPerfil':
         getPerfil(false);
     break;
@@ -322,11 +327,27 @@ function cambiarTienda(){
     $_SESSION['stores_id']=$_GET['id_tienda'];
 
 
-    $row['data']['categories']=listar_categorias_movil(true);
+   $row['data']['categories']=listar_categorias_movil(true);
     $row['data']['states']=getStates(true);
     $row['data']['address']=getAdreess(true);   
     $row['data']['envio']=recargoEnvio(true);
     $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+    $row['data']['listarCombos']=listarCombos(true);
+  
+    $row['data']['listarProductosIA']=listarProductosIA(true);
+    $sql=getSqlListarProductos();
+    $sql=filtroProductos($sql);
+    
+    $row['data']['listarProductos']=listarProductos($sql,false,true);
+    $_GET['tipo']='top';
+    $row['data']['listarPublicidad&tipo=top']=listarPublicidad(true);
+    $_GET['tipo']='footer';
+    $row['data']['listarPublicidad&tipo=footer']=listarPublicidad(true);
+
+    $row['success']=true;
+    $row['msj_general']="Tienda cambiada";
+
+    return d($row);
 
 
 }
@@ -735,11 +756,12 @@ function consultarOrden(){
     }
 }
 function recargoEnvio($tipo_salida){
-    $filtrarPorTienda=whereTienda('bd');
+    $stores_id=$_SESSION['stores_id'];
 
     $transports_id=2;
         $coins_id=1;
         //$sql="SELECT p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=$coins_id)) as precio_d FROM (SELECT (price*(SELECT SUM(value) FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.transports_id=$transports_id GROUP BY dtt.transports_id)/100+price) as precio_b FROM transports WHERE id=$transports_id) p";
+       /*
         $sql="
         SELECT p.peso_max,p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=1)) as precio_d FROM (SELECT (price*
 																							 (with sum_null as (SELECT SUM(value) as sum_n
@@ -747,6 +769,15 @@ FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id WHERE dtt.tr
 dtt.transports_id) select case
     when not exists (select 1 from sum_null) then 0
     else (select sum_n from sum_null) end) /100+price) as precio_b,t.peso_max FROM transports t WHERE id=2) p
+        ";
+
+        */
+        $sql="SELECT p.peso_max,p.precio_b,(p.precio_b/(SELECT rate FROM coins WHERE id=1)) as precio_d FROM (SELECT (price*
+																							 (with sum_null as (SELECT SUM(value) as sum_n
+FROM det_tax_transports dtt INNER JOIN taxes t ON t.id=dtt.taxes_id INNER JOIN transports tr ON tr.id=dtt.transports_id WHERE tr.principal='SI' AND tr.stores_id=$stores_id GROUP BY
+dtt.transports_id) select case
+    when not exists (select 1 from sum_null) then 0
+    else (select sum_n from sum_null) end) /100+price) as precio_b,t.peso_max FROM transports t WHERE principal='SI' AND t.stores_id=$stores_id) p
         ";
   //exit($sql);
         $arr=q($sql);
@@ -1368,11 +1399,18 @@ $description_short=array();
 $keyword=array();
 //
     try{
-        $arr=q('SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20');
+       
+        $sql='SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20';
+        $arr=q($sql);
+
         $string="";
         if(is_array($arr)){
+            
             foreach ($arr as $obj){
-               
+                //hay caracteres que generan error en el ts_query
+                    $obj['name']=str_replace('!','',$obj['name']);
+                    $obj['description_short']=str_replace('!','',$obj['description_short']);
+                     /////----------
                     $nameUnico=_filtro($obj['name'],$nameUnico);
                     $nameUnico=_filtro($obj['description_short'],$nameUnico);
                     $nameUnico=_filtro($obj['keyword'],$nameUnico);
@@ -1381,10 +1419,11 @@ $keyword=array();
                 $string.=$key." ";
             }
         }else{
+            $where=' ';
             $order='ORDER BY RANDOM()';
             $sql=getSqlListarProductos('','',$order);
-           
-            listarProductos($sql,false,$tipo_salida,true,$simple);
+          
+            return listarProductos($sql,false,$tipo_salida,true,$simple);
         }
     }
     catch(\Exception $e){
@@ -1398,11 +1437,13 @@ $keyword=array();
        WHERE query @@ to_tsvector(description_short)
        ORDER BY rank DESC
        LIMIT $cant_mostrar";
+   
        $order='ORDER BY RANDOM()';
       $join="INNER JOIN ($sql) as r ON r.id=p.id";
       $sql=getSqlListarProductos($join,'',$order);
-    
-      listarProductos($sql,false,$tipo_salida,true,$simple);
+  
+      return listarProductos($sql,false,$tipo_salida,true,$simple);
+   
     }
     catch(\Exception $e){
         salidaNueva(null,"disculpe, intente nuevamente 2");
@@ -1461,12 +1502,16 @@ $join  WHERE $filtrarPorTienda (p.status='A' AND ((p.qty_avaliable * p.porc_stoc
 }
 function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true,$simple=false){
     if($simple){
+        
         $sql="SELECT id FROM ($sql) as todo";
     }
     $row=q($sql);
     if(is_array($row)){
+        
         if($simple==false){
+            
         $row=recortar_imagen($row,$agregarCantidad);
+     
         }
 
                 

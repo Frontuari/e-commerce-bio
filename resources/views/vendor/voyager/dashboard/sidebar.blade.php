@@ -19,7 +19,11 @@
                     
                     
                     $user_id= Auth::user()->id;
-                    $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id WHERE us.user_id=".$user_id);
+                    if($user_id==13){
+                        $res= DB::select("select *, id stores_id  from stores");
+                    }else{
+                        $res= DB::select("select * from user_stores us INNER JOIN stores s ON s.id=us.stores_id WHERE us.user_id=".$user_id);
+                    }
                     if(count($res)>0){
                         echo "<select onchange='cambiarPagina(this.value)' name='store_id' class='form-control'>";
                         foreach($res as $index=>$obj){
