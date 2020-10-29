@@ -53,6 +53,30 @@ switch($evento) {
         $row['msj_general']=true;
         echo e($row);
     break;
+    case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
+         
+        $row['data']['categories']=listar_categorias_movil(true);
+        $row['data']['cities']=getCitiesAll(true);
+        $row['data']['regions']=getRegionsAll(true);
+        $row['data']['states']=getStates(true);
+        $row['data']['citiesAll']=getCitiesAll(true,true);
+        $row['data']['regionsAll']=getRegionsAll(true,true);
+        $row['data']['statesAll']=getStates(true,true);
+        $row['data']['listarCombos']=listarCombos(true);
+        $row['data']['payment_methods']=listarMetodoDePago(true);
+        
+      //  $row['data']['envio']=recargoEnvio(true);
+   
+        $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+        $row['success']=true;
+        $row['msj_general']="Bienvenido";
+
+        if($_GET['web']==1){
+            echo e($row);
+           }else{
+            echo d($row);
+           }
+break;
     case 'loginNuevo': //no se usa en la app
         $row['data']['usuario']=loginMovil(true);
         if($row['data']['usuario']['success']==true){
@@ -213,7 +237,14 @@ switch($evento) {
         consultarFavorito();
     break;
     case 'listarProductosIA':
-        listarProductosIA();
+        if($_GET['id_sesion']){
+            listarProductosIA();
+        }else{
+            listarProductosAzar();
+        }
+    break;
+    case 'listarProductosAzar':
+        listarProductosAzar();
     break;
     case 'guardarCalificacion':
         guardarCalificacion();
@@ -325,16 +356,29 @@ switch($evento) {
 }
 function cambiarTienda(){
     $_SESSION['stores_id']=$_GET['id_tienda'];
+    $users_id=$_SESSION['usuario']['id'];
+    if($users_id){
+        $row['data']['address']=getAdreess(true);  
+        $row['data']['listarProductosIA']=listarProductosIA(true); 
+    }else{
+        
+        $row['data']['listarProductosIA']=listarProductosAzar(true);
+    
+    }
 
 
    $row['data']['categories']=listar_categorias_movil(true);
+   //print_r($row);
+   //exit();
     $row['data']['states']=getStates(true);
-    $row['data']['address']=getAdreess(true);   
+   
+    
     $row['data']['envio']=recargoEnvio(true);
+   
     $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
     $row['data']['listarCombos']=listarCombos(true);
   
-    $row['data']['listarProductosIA']=listarProductosIA(true);
+    $row['data']['idSession']=idSession(true);    
     $sql=getSqlListarProductos();
     $sql=filtroProductos($sql);
     
@@ -675,10 +719,12 @@ function listarProductosPorCategoria(){
             $categories_id=$_GET['categories_id'];
             $users_id=$_SESSION['usuario']['id'];
            
-            $arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
-            if(is_array($arr)){
-                salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
-            }
+            //QUITADA VALIDACION DE MENOR DE EDAD
+            //$arr=q("SELECT 1 FROM categories WHERE id='$categories_id' AND adulto='Y' AND (select date_part('year',age(p.birthdate)) FROM users INNER JOIN peoples p ON p.id=users.peoples_id WHERE users.id='$users_id')<18");
+           
+            //if(is_array($arr)){
+            //    salidaNueva(null,"Disculpe, debe ser mayor de edad (18+) para acceder a esta categoría.",false);
+            //}
     //se borro INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id
             //$join="INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
             $where="AND sc.categories_id='$categories_id'";
@@ -754,6 +800,10 @@ function consultarOrden(){
     }else{
         salidaNueva(null,"Disculpe, intente de nuevo",false);
     }
+}
+function idSession($tipo_salida){
+        $row['id_sesion']=session_id();
+        return salidaNueva($row,"Id session",true,$tipo_salida);
 }
 function recargoEnvio($tipo_salida){
     $stores_id=$_SESSION['stores_id'];
@@ -1387,8 +1437,23 @@ function guardarCalificacion(){
         salidaNueva(null,"Ha fallado la calificación",false);
     }
 }
-function listarProductosIA($tipo_salida=false,$simple=false){
+function listarProductosAzar($tipo_salida=false,$simple=false){
+    $cant_mostrar=20;
+ try{
+       $sql="SELECT p.id, p.name FROM products p where p.status='A' AND qty_avaliable>0 AND p.stores_id=".$_SESSION['stores_id']." ORDER BY RANDOM() LIMIT $cant_mostrar";
+   
+       $order='ORDER BY RANDOM()';
+      $join="INNER JOIN ($sql) as r ON r.id=p.id";
+      $sql=getSqlListarProductos($join,'',$order);
 
+      return listarProductos($sql,false,$tipo_salida,true,$simple);
+   
+    }
+    catch(\Exception $e){
+        salidaNueva(null,"disculpe, intente nuevamente 2");
+    }
+}
+function listarProductosIA($tipo_salida=false,$simple=false){
     $filtrarPorTienda=whereTienda('p');
     $users_id=$_SESSION['usuario']['id'];
     //$users_id=1;
@@ -1400,7 +1465,7 @@ $keyword=array();
 //
     try{
        
-        $sql='SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20';
+        $sql='SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' p.status="A" AND qty_avaliable>0 AND uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20';
         $arr=q($sql);
 
         $string="";
