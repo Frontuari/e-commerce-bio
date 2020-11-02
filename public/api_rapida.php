@@ -116,6 +116,7 @@ break;
             $row['data']['statesAll']=getStates(true,true);
             $row['data']['payment_methods']=listarMetodoDePago(true);
             $row['data']['envio']=recargoEnvio(true);
+           
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
             $row['data']['productos_mayor']=productosMayorEdad(true);
@@ -358,8 +359,11 @@ function cambiarTienda(){
     $_SESSION['stores_id']=$_GET['id_tienda'];
     $users_id=$_SESSION['usuario']['id'];
     if($users_id){
+       
         $row['data']['address']=getAdreess(true);  
+        
         $row['data']['listarProductosIA']=listarProductosIA(true); 
+        
     }else{
         
         $row['data']['listarProductosIA']=listarProductosAzar(true);
@@ -846,8 +850,9 @@ function getPerfil($tipo_salida){
 }
 
 function listarBancosdelMetododePago($tipo_salida){
+    $stores_id=$_SESSION['stores_id'];
     $payment_methods_id=$_GET['payment_methods_id'];
-    $sql="SELECT c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE payment_methods_id=$payment_methods_id";
+    $sql="SELECT c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE bd.stores_id=$stores_id AND payment_methods_id=$payment_methods_id";
     $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,"Listando datos bancarios",true,$tipo_salida);
@@ -976,12 +981,15 @@ function loginMovil($tipo_salida){
     WHERE lower(s.email)='$email'")[0];
 
    if($row['email']){
+       
         if(password_verify($clave,$row['password'])){
+            
             unset($row["password"]);
             $_SESSION["usuario"]=$row;
             $_SESSION['sesion_iniciada']=true;
             cambiarTienda();
             $row['id_sesion']=session_id();
+            
             return salidaNueva($row,"Bienvenido",true,$tipo_salida);
         }else{
             $row=null;
@@ -1183,6 +1191,13 @@ function crearOrden($json){
     
     //$json='{"estado":16,"productos":{"20":3,"21":4},"direccion":"3","hora_entrega":"1585872508"}';
     
+    
+    //IMPORTANTE PARA LA WEB
+    //SOLO CARGAR EN LA SESIÓN EL ID DE LA TIENDA STORES_ID EN LA SESIÓN
+
+    $stores_id=$_SESSION['stores_id'];
+
+
     $orden=json_decode($json,true);
     $users_id   =$_SESSION['usuario']['id'];
     $order_address_id=$orden['direccion'] ?? "NULL";
@@ -1289,7 +1304,7 @@ function crearOrden($json){
     $total_pay=$sub_total+$total_tax+$total_transport;
     //GUARDAR
    
-    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay,bi,exento, delivery_type)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,$total_transport,(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay,$base_imponible,$exento,'$delivery_type_text') RETURNING id";
+    $sql="INSERT INTO orders (users_id,delivery_time_date,transports_id,rate_json,order_address_id,created_at,updated_at,coins_id,packagings_id,total_transport,total_packaging,total_tax,sub_total,total_pay,bi,exento, delivery_type,stores_id)  VALUES ('$users_id','$delivery_time_date','$transports_id','$rate_json',$order_address_id,NOW(),NOW(),$coins_id,$packagings_id,$total_transport,(SELECT value FROM packagings WHERE id=$packagings_id),$total_tax,$sub_total,$total_pay,$base_imponible,$exento,'$delivery_type_text',$stores_id) RETURNING id";
 //EXIT($sql);
 q("BEGIN");
     $res=q($sql);
@@ -1465,9 +1480,10 @@ $keyword=array();
 //
     try{
        
-        $sql='SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' p.status="A" AND qty_avaliable>0 AND uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20';
+        $sql='SELECT p.name, p.description_short, initcap(p.keyword) keyword, products_id FROM user_visit_products uvp INNER JOIN products p ON p.id=uvp.products_id WHERE '.$filtrarPorTienda.' p.status=\'A\' AND qty_avaliable>0 AND uvp.updated_at > NOW() - interval \'1 month\' AND uvp.users_id='.$users_id.' LIMIT 20';
+        
         $arr=q($sql);
-
+        
         $string="";
         if(is_array($arr)){
             
