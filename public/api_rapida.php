@@ -119,6 +119,7 @@ break;
            
             $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
             $row['data']['favoritos']=best_sql_listarFavoritos(true);
+            //print_r($row); exit();
             $row['data']['productos_mayor']=productosMayorEdad(true);
             $row['success']=true;
             $row['msj_general']="Bienvenido";
@@ -400,7 +401,7 @@ function cambiarTienda(){
 
 }
 function listarTiendas($tipo_salida){
-    $sql="SELECT sto.id,sto.name,sto.membrete,sto.states_id,sta.name as estado_nombre FROM stores sto INNER JOIN states sta ON sta.id=sto.states_id WHERE sta.status='A' AND sto.status='A'";
+    $sql="SELECT sto.id,sto.name,sto.membrete,sto.states_id,sta.name as estado_nombre FROM stores sto INNER JOIN states sta ON sta.id=sto.states_id WHERE sta.status='A' AND sto.status='A' order by orden";
     $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,'Listando tiendas',true,$tipo_salida);

@@ -4,6 +4,29 @@
             <button class="hamburger btn-link">
                 <span class="hamburger-inner"></span>
             </button>
+            <style>
+.ff{
+    font-family: 'Bree Rg';
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+
+            </style>
+            <span style="font-size:20px; margin-top:8px" class="breadcrumb ff">
+            <?php
+        
+                    
+                    
+        $user_id= Auth::user()->id;
+     
+            $res= DB::select("select *, id stores_id  from stores WHERE id=".$_SESSION['stores_id']);
+            echo $res[0]->name;
+
+        ?>
+
+
+            </span>
             @section('breadcrumbs')
             <ol class="breadcrumb hidden-xs">
                 @php
