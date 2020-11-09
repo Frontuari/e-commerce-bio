@@ -44,6 +44,13 @@
 	<style>.cls-1{fill:#ccc;}</style>
 	<script>
 		var min_range, max_range;
+		@if(Cookie::get("store_id"))
+			var storeName = '{{ Cookie::get("store_name") }}';
+			var storeId = '{{ Cookie::get("store_id") }}';
+		@else 
+			var storeName = '';
+			var storeId = '';
+		@endif
 	</script>
 	@yield('css')
 </head>
@@ -51,7 +58,4 @@
 <body>
 
 <main id="app">
-	<header-menu 
-		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}" 
-		:storeData="{{ json_encode($storeData) }}">
-	</header-menu>
+	<header-menu :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></header-menu>

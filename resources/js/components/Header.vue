@@ -51,6 +51,8 @@
 					
 					<div id="nav-header" class="col-lg-4 col-5">
 						<ul>
+							<li>Tienda: {{ stName }}</li>
+							<li style="width: 100px !important;"></li>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -197,12 +199,13 @@ export default {
 				email: '',
 				pass: ''
 			},
-			logged: false
+			logged: false,
+			stName: '',
+			stID:''
         }
 	},
 	props: {
-		userlogged: Object,
-		storeData: Object
+		userlogged: Object
 	},
     methods: {
     	getAmountBW: function(){
@@ -301,6 +304,8 @@ export default {
         });
     },
     mounted() {
+    	this.stName = storeName;
+    	this.stID = storeId;
 		this.getCategories();
 		this.getFavorites();
 		this.getAmountBW();

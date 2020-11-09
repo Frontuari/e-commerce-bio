@@ -150,7 +150,6 @@ class HomeController extends Controller
             array_push($Combos,$c);
         }
         $Combos = json_encode($Combos);
-        $storeData = ['store_id' => Cookie::get('store_id'), 'store_name' => Cookie::get('store_name')];
         return view("home",[
             "tasa_dolar"=>$Coin->rate,
             "sliders"=>$Slider,
@@ -161,8 +160,7 @@ class HomeController extends Controller
             "sold"=>$MostSold,
             "bestprice"=>$BestPrice,
             "combos"=>$Combos,
-            "footer"=>$footer,
-            "storeData" => $storeData
+            "footer"=>$footer
         ]);
     }
 
