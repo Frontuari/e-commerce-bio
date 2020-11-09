@@ -1,0 +1,4 @@
+li.list-group-item:hover{
+	cursor: pointer !important;
+	border-left: 10px solid #67be5a !important;
+}

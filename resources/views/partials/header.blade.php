@@ -51,4 +51,7 @@
 <body>
 
 <main id="app">
-	<header-menu :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></header-menu>
+	<header-menu 
+		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}" 
+		:storeData="{{ json_encode($storeData) }}">
+	</header-menu>

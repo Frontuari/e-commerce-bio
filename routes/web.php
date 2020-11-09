@@ -13,7 +13,13 @@
 if(isset($_GET['store'])){
     $_SESSION['stores_id']=$_GET['store'];
 }
-Route::get('/',"HomeController@index")->name("home");
+
+Route::get('/',"HomeController@index")->middleware('checkstore')->name("home");
+
+Route::get('/store-state','HomeController@state_selector')->name('state_selector');
+Route::get('/store/{state_id?}/{state_name}','HomeController@store_selector')->name('store_selector');
+Route::get('/set-store/{store_id}/{store_name}','HomeController@set_store')->name('set_store');
+
 Route::get('/international-payment-button/{nb}/{ap}/{ci}/{nai}/{mt}/{em}/{from?}','HomeController@InternationalPaymentButton')->name('InternationalPaymentButton');
 Route::get('/123pago/despedida','HomeController@url_despedida');
 

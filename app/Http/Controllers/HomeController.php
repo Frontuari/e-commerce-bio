@@ -9,8 +9,10 @@ use App\ProductCategory;
 use App\Product;
 use App\Packages;
 use App\Pages;
+use App\Stores;
 use Illuminate\Support\Facades\DB;
 use Storage;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
@@ -148,7 +150,7 @@ class HomeController extends Controller
             array_push($Combos,$c);
         }
         $Combos = json_encode($Combos);
-
+        $storeData = ['store_id' => Cookie::get('store_id'), 'store_name' => Cookie::get('store_name')];
         return view("home",[
             "tasa_dolar"=>$Coin->rate,
             "sliders"=>$Slider,
@@ -159,7 +161,8 @@ class HomeController extends Controller
             "sold"=>$MostSold,
             "bestprice"=>$BestPrice,
             "combos"=>$Combos,
-            "footer"=>$footer
+            "footer"=>$footer,
+            "storeData" => $storeData
         ]);
     }
 
@@ -259,5 +262,33 @@ class HomeController extends Controller
     public function getdataresponse($orderno = null){
         $data = file_get_contents(url('/tmp_responses/'.$orderno.".txt"));
         return response()->json($data);
+    }
+
+    public function state_selector(){
+
+        $title = "Seleccione el Estado";
+        $data = DB::select(DB::raw('select sts.id, sts.name from states sts
+                    inner join stores as srs on (srs.states_id = sts.id) 
+                    group by sts.name, sts.id'));
+
+        return view('state_selector',['title' => $title, 'data' => $data]);
+    }
+
+    public function store_selector($state_id = null, $state_name = null){
+        $data = [];
+        $title = "Seleccione la Tienda";
+        if($state_id != null){
+            $data = Stores::where('states_id','=',$state_id)->get();
+        }
+
+        return view('store_selector',['title' => $title, 'data'=>$data]);
+    }
+
+    public function set_store($store_id, $store_name, Request $request){
+       $id = $store_id;
+       $name = $store_name;
+       Cookie::queue(Cookie::make('store_id',$id,3600));
+       Cookie::queue(Cookie::make('store_name',$name,3600));
+       return redirect('/');
     }
 }

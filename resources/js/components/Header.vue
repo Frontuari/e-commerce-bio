@@ -202,6 +202,7 @@ export default {
 	},
 	props: {
 		userlogged: Object,
+		storeData: Object
 	},
     methods: {
     	getAmountBW: function(){
