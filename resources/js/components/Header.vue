@@ -28,11 +28,11 @@
 							<img src="/assets/img/menu-movil-bio.png" alt="Menu Bars">
 						</button>
 					</div>
-					<div id="brand-header" class="col-lg-2 col-4">
+					<div id="brand-header" class="col-lg-1 col-4">
 						<a  href="/" class="navbar-brand"><img  src="/img/logo.png" alt="Bio Mercados"></a>
 					</div>
 
-					<div id="search-header" class="col-lg-6 col-md-12">
+					<div id="search-header" class="col-lg-7 col-md-12">
 						<form class="form-inline" v-on:submit="search()">
 							<input class="form-control" id="bio-search" type="text" placeholder="Busque aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText" autocomplete="off">
 							<button class="btn btn-search" type="button" @click="search()"><img src="/assets/img/visualizar-producto-bio.svg"></button>
@@ -48,11 +48,13 @@
 
 						</form>
 					</div>
+
+					<div class="col-lg-2 text-center" style="padding-top: 18px !important;">
+						<p><b style="color:#67be5a; font-weight: bold;">Tienda Actual:</b> <a title="Click para cambiar Tienda" href="/store-state" style="font-size:14px; font-weight:bold; color:#ed3928; border:1px solid #67be5a; padding: 5px; border-radius:4px !important;">{{ stName }}</a></p>
+					</div>
 					
-					<div id="nav-header" class="col-lg-4 col-5">
+					<div id="nav-header" class="col-lg-2 col-5">
 						<ul>
-							<li>Tienda: {{ stName }}</li>
-							<li style="width: 100px !important;"></li>
 							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
