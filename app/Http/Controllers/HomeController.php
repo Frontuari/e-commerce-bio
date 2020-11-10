@@ -26,7 +26,10 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-        $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+        if(Cookie::get("store_id")){
+            $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+        }
+        
     }
 
     function cambiarBarra($data) {

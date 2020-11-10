@@ -17,7 +17,9 @@ class ProductController extends BaseController
     private $store_id;
 
     public function __construct(){
-        $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+        if(Cookie::get("store_id")){
+            $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+        }
     }
 
     public function index(Request $request,ProductFilters $filters)
