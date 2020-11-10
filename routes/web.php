@@ -30,7 +30,7 @@ Route::post('/123pago/retorno','HomeController@url_retorno');
 Route::get('/terminos-condiciones',"HomeController@terminos")->name("home");
 Route::get('/faq',"HomeController@faq")->name("home");
 
-Route::get('/catalog','CatalogController@index')->name("Catalog");
+Route::get('/catalog','CatalogController@index')->middleware('checkstore')->name("Catalog");
 
 Route::get('/join',"HomeController@join")->name("join");
 Route::get('/recover',"HomeController@recover")->name("join");

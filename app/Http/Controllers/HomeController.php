@@ -13,9 +13,11 @@ use App\Stores;
 use Illuminate\Support\Facades\DB;
 use Storage;
 use Illuminate\Support\Facades\Cookie;
+use Crypt;
 
 class HomeController extends Controller
 {
+    private $store_id;
     /**
      * Create a new controller instance.
      *
@@ -24,8 +26,7 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
-
-        
+        $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
     }
 
     function cambiarBarra($data) {
@@ -39,13 +40,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         
         $Coin = Coin::where("id",1)->first();
         
-        $Slider = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
+        $Slider = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("top")).'%'])->orderBy('order','ASC')->get();
 
         $Medio_Bajo = [];
-        $Med = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
+        $Med = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("medio_bajo")).'%'])->orderBy('order','ASC')->get();
         foreach ($Med as $i => $m) {
             $m["image"] = $this->cambiarBarra($m["image"]);
             array_push($Medio_Bajo, $m);
@@ -53,7 +55,7 @@ class HomeController extends Controller
         $Medio_Bajo = json_encode($Medio_Bajo);
 
         $footer = [];
-        $foot = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
+        $foot = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("footer")).'%'])->orderBy('order','ASC')->get();
         foreach ($foot as $i => $f) {
             $f["image"] = $this->cambiarBarra($f["image"]);
             array_push($footer, $f);
@@ -75,6 +77,7 @@ class HomeController extends Controller
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('created_at','desc')
         ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
+        ->where('products.stores_id',$this->store_id)
         ->take(12)
         ->get();
 
@@ -85,6 +88,7 @@ class HomeController extends Controller
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_view','desc')
         ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
+        ->where('products.stores_id',$this->store_id)
         ->take(12)
         ->get();
 
@@ -95,6 +99,7 @@ class HomeController extends Controller
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('qty_sold','desc')
         ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
+        ->where('products.stores_id',$this->store_id)
         ->take(12)
         ->get();
 
@@ -108,7 +113,7 @@ class HomeController extends Controller
         ->take(12)
         ->get();
 
-        $comboData = Packages::where('status','A')->take(8)->orderBy('type','asc')->get();
+        $comboData = Packages::where('status','A')->where('stores_id',$this->store_id)->take(8)->orderBy('type','asc')->get();
         $Combos = [];
         
         foreach($comboData as $i => $c) {

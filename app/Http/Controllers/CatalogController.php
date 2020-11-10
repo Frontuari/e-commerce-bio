@@ -8,9 +8,17 @@
 	use App\Product;
 	use App\Advs;
 	use Illuminate\Support\Facades\DB;
+	use Crypt;
+	use Cookie;
 
 	class CatalogController extends Controller
 	{
+
+		private $store_id;
+
+		public function __construct(){
+			$this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+		}
 
 		function cambiarBarra($data) {
 	        return str_replace("\\", "/", $data);
@@ -19,7 +27,7 @@
 		function index() {
 
 			$Ads_a = [];
-	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_a")).'%'])->orderBy('order','ASC')->get();
+	        $a = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_a")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
 	            array_push($Ads_a, $m);
@@ -27,7 +35,7 @@
 			$Ads_a = json_encode($Ads_a);
 			
 			$Ads_b = [];
-	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_b")).'%'])->orderBy('order','ASC')->get();
+	        $a = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_b")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
 	            array_push($Ads_b, $m);
@@ -35,7 +43,7 @@
 			$Ads_b = json_encode($Ads_b);
 			
 			$Ads_c = [];
-	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_c")).'%'])->orderBy('order','ASC')->get();
+	        $a = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_c")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
 	            array_push($Ads_c, $m);
@@ -43,7 +51,7 @@
 			$Ads_c = json_encode($Ads_c);
 			
 			$Ads_d = [];
-	        $a = Advs::where('status','A')->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_d")).'%'])->orderBy('order','ASC')->get();
+	        $a = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_d")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
 	            $m["image"] = $this->cambiarBarra($m["image"]);
 	            array_push($Ads_d, $m);
@@ -85,11 +93,12 @@
 				->join("sub_categories","sub_categories.id","=","det_sub_categories.sub_categories_id")
 				->where('sub_categories.categories_id','=',$cat)
 				->where('products.status','A')
+				->where('products.stores_id',$this->store_id)
 				->whereNotNull('keyword')
 				->groupBy("products.id")
 				->get();
 			}else {
-	        	$data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(20)->get();
+	        	$data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->where('stores_id',$this->store_id)->whereNotNull('keyword')->take(20)->get();
 	        }
 	        $keywords = [];
 	        foreach($data as $i => $d) {

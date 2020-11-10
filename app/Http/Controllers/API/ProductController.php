@@ -9,9 +9,17 @@ use App\Filters\ProductFilters;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
 use Illuminate\Support\Facades\DB;
+use Crypt;
+use Cookie;
 
 class ProductController extends BaseController
 {
+    private $store_id;
+
+    public function __construct(){
+        $this->store_id = Crypt::decrypt(Cookie::get("store_id"), false);
+    }
+
     public function index(Request $request,ProductFilters $filters)
     {
         $data = $request->all();
@@ -22,6 +30,7 @@ class ProductController extends BaseController
         ->leftJoin("det_product_taxes","det_product_taxes.products_id","=","products.id")
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where('products.status','A')
+        ->where('products.stores_id',$this->store_id)
         ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
         ->groupBy("products.id","taxes.value")
         ->paginate($limit);
@@ -62,6 +71,7 @@ class ProductController extends BaseController
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->where("products.status","A")
         ->where("products.qty_avaliable",">",0)
+        ->where('products.stores_id',$this->store_id)
         ->whereRaw("( ( to_tsvector(products.name) @@ to_tsquery('$otro') OR to_tsvector(products.keyword) @@ to_tsquery('$otro') ) OR (products.keyword ilike '%$otro%' OR products.name ilike '%$otro%') )")
         ->groupBy("products.id")
         ->orderBy("products.name")
@@ -78,29 +88,29 @@ class ProductController extends BaseController
 
     public function most_recent()
     {
-        $Products = Product::where('status','A')->orderBy('created_at','desc')->take(10)->get();
+        $Products = Product::where('status','A')->where('stores_id',$this->store_id)->orderBy('created_at','desc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
     public function most_viewed()
     {
-        $Products = Product::where('status','A')->orderBy('qty_view','desc')->take(10)->get();
+        $Products = Product::where('status','A')->where('stores_id',$this->store_id)->orderBy('qty_view','desc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
 
     public function most_sold()
     {
-        $Products = Product::where('status','A')->orderBy('qty_sold','desc')->take(10)->get();
+        $Products = Product::where('status','A')->where('stores_id',$this->store_id)->orderBy('qty_sold','desc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
 
     public function best_price()
     {
-        $Products = Product::where('status','A')->orderBy('price','asc')->take(10)->get();
+        $Products = Product::where('status','A')->where('stores_id',$this->store_id)->orderBy('price','asc')->take(10)->get();
         return $this->sendResponse(ProductResource::collection($Products), 'Product retrieved successfully.');
     }
 
     public function getTags() {
-        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->whereNotNull('keyword')->take(10)->get();
+        $data = Product::select(DB::raw("DISTINCT trim(keyword) as key"))->where('status','A')->where('stores_id',$this->store_id)->whereNotNull('keyword')->take(10)->get();
         $keywords = [];
         foreach($data as $i => $d) {
             $tmp = explode(" ", $d->key);
