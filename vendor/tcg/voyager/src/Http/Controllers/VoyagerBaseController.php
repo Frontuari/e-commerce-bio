@@ -119,8 +119,8 @@ class VoyagerBaseController extends Controller
                 case 'packages':
                    
                     $stores_id=$_SESSION['stores_id'];
-                    $query->join('orders', 'order_products.orders', '=', 'orders.id');
-                    $query->where('orders.stores_id','=',$stores_id);
+                   // $query->join('orders', 'order_products.orders', '=', 'orders.id');
+                    $query->where('packages.stores_id','=',$stores_id);
                
                 break;
                 case 'bank_datas':
