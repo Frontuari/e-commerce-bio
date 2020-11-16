@@ -2,9 +2,8 @@
 	<section id="catalogo" class="main-content">
 		<div class="container-fluid">
 			<div class="row">
-				<div id="content">
+				<div id="content">	
 					<ul id='selected-filters'></ul>
-					
 					<div class="products-order">
 						<div class="form-group">
 							<span>Mostrando</span>
@@ -25,8 +24,6 @@
 								<option value="ZAdesc">De Z -> A</option>
 								<option value="Pasc">Precio - De menor a mayor</option>
 								<option value="Pdesc">Precio - De mayor a menor</option>
-								<!-- <option value="2">Más Vendidos</option>
-								<option value="2">Más Recientes</option> -->
 							</select>
 						</div>
 					</div>
@@ -82,13 +79,23 @@
 
 					<ProductList v-if="products" v-on:getpage="pageclick" :tasadolar="tasadolar" :products="products" :user_id="datauser.id"></ProductList>
 
-					<div class="bio-ads">
-						<!--<Slider :sliders="ads_a"></Slider>
-						<div class="ad-box" v-for="a in ads" :key="a.url">
-							<a :href="a.url"><img :src="'storage/'+a.image"></a>
-						</div> -->
-						
+					<div class="row" style="margin-top: 40px !important;">
+						<div class="col-md-6">
+							<Slider :id="'slider_catalog1'" :sliders="ads_a"></Slider>
+						</div>
+						<div class="col-md-6">
+							<Slider :id="'slider_catalog2'" :sliders="ads_b"></Slider>
+						</div>
 					</div>
+
+					<!--<div class="bio-ads">
+						<div class="ad-box">
+							<Slider :id="'slider_catalog1'" :sliders="ads_a"></Slider>
+							<Slider :id="'slider_catalog2'" :sliders="ads_b"></Slider>
+							<Slider :id="'slider_catalog3'" :sliders="ads_c"></Slider>
+							<Slider :id="'slider_catalog4'" :sliders="ads_d"></Slider>
+						</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
