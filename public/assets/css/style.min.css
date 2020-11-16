@@ -30,11 +30,13 @@ a.new-cat{
 	padding-bottom: 20px !important;
 }
 
-div.col-md-2 > div.product-block:hover{
+div.col-md-2 > div.product-block:hover, div.col-6 > div.product-block:hover{
 	border:2px solid #67be5a;
 	border-radius:10px !important;
 	box-shadow: 2px 2px 10px #ccc;
 }
+
+
 
 div.category-img{
 	border-radius: 20px !important;
