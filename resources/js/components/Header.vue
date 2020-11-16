@@ -1,8 +1,8 @@
 <template>
 
     <header id="myHeader">
-    	<div class="col-md-12 text-center" style="padding-top: 10px !important;">
-			<p><b style="color:#67be5a; font-weight: bold;">Tienda Actual:</b> <a title="Click para cambiar Tienda" href="/store-state" style="font-size:14px; font-weight:bold; color:#ed3928; border:1px solid #67be5a; padding: 5px; border-radius:4px !important;">{{ stName }}</a></p>
+    	<div class="col-md-12 text-center" style="padding: 12px 0px 1px 0px !important; background: #67be5a;">
+			<p><b style="color:white; font-weight: bold;">Tienda Actual:</b> <a title="Click para cambiar Tienda" href="/store-state" style="font-size:14px; font-weight:bold; color:#ed3928; border:1px solid white; padding: 5px; border-radius:4px !important;">{{ stName }}</a></p>
 		</div>
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
