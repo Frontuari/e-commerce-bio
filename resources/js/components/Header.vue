@@ -1,5 +1,9 @@
 <template>
+
     <header id="myHeader">
+    	<div class="col-md-12 text-center" style="padding-top: 10px !important;">
+			<p><b style="color:#67be5a; font-weight: bold;">Tienda Actual:</b> <a title="Click para cambiar Tienda" href="/store-state" style="font-size:14px; font-weight:bold; color:#ed3928; border:1px solid #67be5a; padding: 5px; border-radius:4px !important;">{{ stName }}</a></p>
+		</div>
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
@@ -28,12 +32,8 @@
 
 						</form>
 					</div>
-
-					<div class="col-lg-2 text-center" style="padding-top: 18px !important;">
-						<p><b style="color:#67be5a; font-weight: bold;">Tienda Actual:</b> <a title="Click para cambiar Tienda" href="/store-state" style="font-size:14px; font-weight:bold; color:#ed3928; border:1px solid #67be5a; padding: 5px; border-radius:4px !important;">{{ stName }}</a></p>
-					</div>
 					
-					<div id="nav-header" class="col-lg-2 col-5">
+					<div id="nav-header" class="col-lg-4 col-5">
 						<ul>
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -96,69 +96,6 @@
 				</div>
 			</div>
 		</div>
-		<!--<nav class="navbar navbar-expand-lg navbar-light color-white navbar-custom">
-			<div class="container-fluid">
-				<div id="mainNavbar">
-					<div id="top-info" class="w-100 align-items-center">
-						<div class="col-md-12 text-right">
-							<button class="navbar-toggler toggle-menu" type="button">
-								<img src="/assets/img/x.svg" alt="Menu Bars">
-							</button>
-						</div>
-						<div class="col-md-12">
-							<ul class="social-nav">
-								<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
-								<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
-								<li><a href="https://twitter.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-								
-							</ul>
-						</div>
-						<div class="col-md-12">
-							<div class="top-info-nav" v-if="userlogged">
-								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">{{saldo}}<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
-								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
-							</div>
-							
-						</div>
-					</div>
-					<ul class="navbar-nav">
-						<li class="nav-item" v-for="cat in categories.slice(0,5)" :key="cat.id">
-							<a class="nav-link" :href="'/catalog?cat='+cat.id">{{cat.name}}</a>
-						</li>
-						<li id="nav-categories" class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Más Categorías
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a v-for="cat in categories.slice(5)" :key="cat.id" class="dropdown-item" :href="'/catalog?cat='+cat.id">{{cat.name}}</a>
-							</div>
-						</li> 
-						<li id="nav-all-categories" class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="dropdown-uppercase">Categorías</span>
-								<img src="/assets/img/flecha-izquierda-bio.svg">
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarCategories">
-								<a v-for="cat in categories" :key="cat.id" class="dropdown-item" :href="'/catalog?cat='+cat.id" >{{cat.name}}</a>
-							</div>
-						</li>
-						<li id="nav-bios" class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarBios" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Conozca a bio mercados
-								<img src="/assets/img/abajo-blanco-bio.svg">
-							</a>
-							<div class="dropdown-menu" aria-labelledby="navbarBios">
-								<a class="dropdown-item" href="/culture">Cultura bio</a>
-								<a class="dropdown-item" href="/sucursal">Sucursales</a>
-								<a class="dropdown-item" target="_blank" href="http://portalproveedores.biomercados.com.ve:18880/webui/">Proveedores</a>
-								<a class="dropdown-item" href="/contact">Contacto</a>
-							</div>
-						</li>
-					</ul>
-					
-				</div>
-			</div>
-		</nav>-->
 	</header>
 </template>
 <script>

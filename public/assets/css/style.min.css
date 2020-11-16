@@ -59,3 +59,7 @@ h3.filter-title{
 #filter-more-result > div.form-group label{
 	padding-left: 10px;
 }
+
+div.middle-header{
+	padding: 0px !important;
+}
