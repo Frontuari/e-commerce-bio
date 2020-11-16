@@ -719,6 +719,7 @@ function get(evento,variables="") {
 	data['msj_general']="Intente mas tarde";
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+			//if (xmlhttp.status == 200 || xmlhttp.status == 409) {
 			if (xmlhttp.status == 200 || xmlhttp.status == 409) {
 				procesar(xmlhttp.responseText,evento);
 			}else {

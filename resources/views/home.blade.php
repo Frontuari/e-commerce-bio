@@ -13,16 +13,6 @@
 	
 	</div>
 
-	<slider :id="'sliderHome1'" :sliders="{{ $sliders }}"></slider>
-
-	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
-
-	<ads :categories="{{ $categories }}"></ads>
-
-	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
-
-	<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
-
 	<nuestros-productos 
 		:recent="{{ $recent }}"
 		:viewed="{{ $viewed }}"
@@ -32,9 +22,28 @@
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
 	</nuestros-productos>
 
-	<!-- <footer-ad :ads="{{ $footer }}"></footer-ad> -->
+	<slider :id="'sliderHome1'" :sliders="{{ $sliders }}"></slider>
 
-	<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>
+	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<ads :categories="{{ $categories }}"></ads>
+			</div>
+			<div class="col-md-6" style="padding-top: 12%;">
+				<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
+				<br />
+				<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
+
+	
+	<!-- <footer-ad :ads="{{ $footer }}"></footer-ad> -->
+	
 
 @stop
 

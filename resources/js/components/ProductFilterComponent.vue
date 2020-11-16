@@ -1,9 +1,9 @@
 <template>
     <section id="products">
 		<div class="container-fluid">
-			<div class="section-title">
+			<!--<div class="section-title">
 				<h2>Nuestros Productos</h2>
-			</div>
+			</div>-->
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item text-right-md">
 					<a class="nav-link active" id="recents-tab" data-toggle="tab" href="#recents" role="tab" aria-controls="recents" aria-selected="true">Más Recientes</a>

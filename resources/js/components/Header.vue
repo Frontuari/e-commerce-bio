@@ -1,25 +1,5 @@
 <template>
     <header id="myHeader">
-		<!-- <div class="top-header color-white">
-			<div class="container-fluid">
-				<div class="row align-items-center">
-					<div class="col-md-6">
-						<div class="top-info">
-							<a href="mailto:contacto@biomercado.com">contacto@biomercado.com</a>
-							<a href="tel:584241234567">+58 424 123 4567</a>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<ul class="social-nav">
-							<li><a href="#"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
-							<li><a href="#"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
-							<li><a href="#"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-							<li><a href="#"><img src="/assets/img/icono-linkedin-bio.svg" alt="LinkedIn"></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div> -->
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
@@ -55,13 +35,10 @@
 					
 					<div id="nav-header" class="col-lg-2 col-5">
 						<ul>
-							<!-- no loggeado-->
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<span class="link-text">Entrar / Registrarse</span> <img src="/assets/img/login-bio.png" alt="Login">
 								</a>
-				
-								<!-- el login-->
 								<div class="dropdown-menu  login_navbar" aria-labelledby="navbarLogin">
 									<form action="#">
 										<h3>Acceder a la cuenta</h3>
@@ -86,15 +63,14 @@
 									</form>
 								</div>
 							</li>
-							<!-- no loggeado -->
-							<!-- loggeado -->
+							
 							<li id="nav-logged" v-if="!!userlogged">
 								<a href="/profile"><img :src="userlogged.avatar" alt="User" style="margin-left:15px !important;"><span class="link-text" v-if="!!userlogged"> {{userlogged.name}}</span></a> 
 								<a href="javascript:void(0)" @click="logout()" class="logout">
 									<img src="/assets/img/icono-salir-bio.png">
 								</a>
 							</li>
-							<!-- loggeado -->
+							
 							
 							<li id="nav-cart" data-toggle="tooltip" data-placement="bottom" title="Haga click para ver el carrito">
 								<a href="/cart"><img src="/assets/img/carrito-de-compras-bio.png" alt="Cart"><span class="quantity-span">{{cant_cart}}</span></a>
@@ -107,16 +83,20 @@
 								<a href="#" style="background: #ED3928; border-radius: 8px; padding-right: 8px;"><img src="/assets/img/icono-puntos-bio.svg" style="width: 25px !important; height: 25px !important; padding: 5px;" alt="Bio Wallet"><span class="quantity-span">{{saldo}}</span></a>
 							</li>
 
-							<!-- loggeado -->
-							<!--<li id="nav-logout"><a href="javascript:void(0)" @click="logout()"><img src="/assets/img/icono-salir-bio.png"></a></li>-->
-							<!-- loggeado -->
 						</ul>
 
 					</div>
 				</div>
 			</div>
 		</div>
-		<nav class="navbar navbar-expand-lg navbar-light color-white navbar-custom">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-2" v-for="cat in categories.slice(0,12)" :key="cat.id" :style="'background:url(/storage/'+cat.image+'); baground-repeat: no-repeat; background-size: auto;'">
+					<a class="new-cat" :href="'/catalog?cat='+cat.id">{{ cat.name }}</a>
+				</div>
+			</div>
+		</div>
+		<!--<nav class="navbar navbar-expand-lg navbar-light color-white navbar-custom">
 			<div class="container-fluid">
 				<div id="mainNavbar">
 					<div id="top-info" class="w-100 align-items-center">
@@ -125,22 +105,20 @@
 								<img src="/assets/img/x.svg" alt="Menu Bars">
 							</button>
 						</div>
-						<!---->
 						<div class="col-md-12">
 							<ul class="social-nav">
 								<li><a href="https://www.facebook.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-facebook-bio.svg" alt="Facebook"></a></li>
 								<li><a href="https://www.instagram.com/biomercadosVE/" target="_blank"><img src="/assets/img/icono-instagram-bio.svg" alt="Instagram"></a></li>
 								<li><a href="https://twitter.com/BioMercadosVe/" target="_blank"><img src="/assets/img/icono-twitter-bio.svg" alt="Twitter"></a></li>
-								<!--<li><a href="#"><img src="/assets/img/icono-youtube-bio.svg" alt="LinkedIn"></a></li>-->
+								
 							</ul>
 						</div>
 						<div class="col-md-12">
-							<!-- no loggeado -->
 							<div class="top-info-nav" v-if="userlogged">
 								<a href="#" class="bio-points">Bio Wallet<span class="quantity-span">{{saldo}}<img src="/assets/img/icono-puntos-bio.svg" alt="Bio Points"></span></a>
 								<a href="#"><img src="/assets/img/favoritos-bio.svg" alt="Favorites"><span class="quantity-span">{{cant_favorite}}</span></a>
 							</div>
-							<!-- no loggeado -->
+							
 						</div>
 					</div>
 					<ul class="navbar-nav">
@@ -180,7 +158,7 @@
 					
 				</div>
 			</div>
-		</nav>
+		</nav>-->
 	</header>
 </template>
 <script>

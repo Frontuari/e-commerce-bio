@@ -16,6 +16,7 @@ class Packages extends Model
      
         parent::save(); 
     } 
+    
     public function setNameAttribute($value)
     {
         if(isset($this->attributes['id'])){

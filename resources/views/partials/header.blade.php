@@ -47,7 +47,7 @@
 		@if(Cookie::get("store_id"))
 			var storeName = '{{ Cookie::get("store_name") }}';
 			var storeId = '{{ Cookie::get("store_id") }}';
-		@else 
+		@else
 			var storeName = '';
 			var storeId = '';
 		@endif

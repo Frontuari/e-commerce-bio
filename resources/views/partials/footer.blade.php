@@ -313,17 +313,17 @@
 		        //clearHeader, not clearheader - caps H
 		        height_header = $("#myHeader").height();
 
-		        $("#myHeader").addClass("fixed-top");
+		        //$("#myHeader").addClass("fixed-top");
 		        $(".jumbotron").css({'margin-top':(height_header)+'px'});
-		        $("#main-slider").css({'margin-top':(height_header)+'px'});
+		        //$("#main-slider").css({'margin-top':(height_header)+'px'});
 		        //$("#combos-bio").css({'margin-top':(height_header)+'px'});
 
 		    }
 
 		    if(scroll == 0){
-		    	$("#myHeader").removeClass("fixed-top");
+		    	//$("#myHeader").removeClass("fixed-top");
 		        $(".jumbotron").css({'margin-top':'0px'});
-		        $("#main-slider").css({'margin-top':'0px'});
+		        //$("#main-slider").css({'margin-top':'0px'});
 		        $("#combos-bio").css({'margin-top':'0px'});
 
 		    }
