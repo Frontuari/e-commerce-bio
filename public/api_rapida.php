@@ -13,6 +13,12 @@ $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
+$st_id = $_GET['storeID'];
+
+if(!isset($_SESSION['stores_id']) and empty($_SESSION['stores_id'])){
+    $_SESSION['stores_id'] = $st_id;
+}
+
 //best_sql_listarFavoritos(true);
 if($_GET['evento']=='' && $_POST['evento']!=''){
     $evento=$_POST['evento'];
