@@ -15,9 +15,9 @@ $_POST=seguro($_POST);
 
 $st_id = $_GET['storeID'];
 
-if(!isset($_SESSION['stores_id']) and empty($_SESSION['stores_id'])){
+//if(!isset($_SESSION['stores_id']) and empty($_SESSION['stores_id'])){
     $_SESSION['stores_id'] = $st_id;
-}
+//}
 
 //best_sql_listarFavoritos(true);
 if($_GET['evento']=='' && $_POST['evento']!=''){
@@ -57,6 +57,7 @@ switch($evento) {
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
+        //print_r($row);
         echo e($row);
     break;
     case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
@@ -476,7 +477,8 @@ function listarCombos($tipo_salida=false){
     'cant',dpp.cant,
     'stock',p.qty_avaliable
 ) 
-) json,pa.name as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE $whereTienda pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
+) json,pa.name as name,pa.id,pa.type,pa.image,SUM(((p.price*coalesce(t.value,0.00)*0.01)+p.price)*dpp.cant) total_precio FROM packages pa INNER JOIN det_product_packages dpp ON dpp.packages_id=pa.id INNER JOIN products p ON p.id=dpp.products_id LEFT JOIN det_product_taxes dpt ON dpt.products_id=p.id LEFT JOIN taxes t ON t.id=dpt.taxes_id  WHERE pa.stores_id = ".$_SESSION['stores_id']." AND pa.status='A' AND p.qty_avaliable>0 AND p.status='A' GROUP BY pa.id) todo, (SELECT * FROM coins c WHERE c.id=1) rate ORDER BY type ASC";
+
     $arr=q($sql);
     if(is_array($arr)){
         $arr=recortar_imagen_combo($arr);
@@ -870,7 +872,7 @@ function listarBancosdelMetododePago($tipo_salida){
 function listarBancosdelMetododePagoAll($tipo_salida){
     $filtrarPorTienda=whereTienda('bd');
 
-    $sql="SELECT bd.id,payment_methods_id,c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE $filtrarPorTienda 1=1";
+    $sql="SELECT bd.id,payment_methods_id,c.name c_name,b.name b_name,bd.titular,bd.description,bd.id,c.id coins_id,c.rate FROM bank_datas bd INNER JOIN banks b ON b.id=bd.banks_id INNER JOIN coins c ON c.id=bd.coins_id WHERE bd.stores_id = ".$_SESSION['stores_id'];
     
     $arr=q($sql);
     if(is_array($arr)){
@@ -934,7 +936,8 @@ function horasDisponiblesEntrega(){
     
     $diassemana = array("Lunes","Martes","Miercoles","Jueves","Viernes","Sábado","Domingo");
     $filtrarPorTienda=whereTienda('c');
-    $sql="SELECT c.* FROM calendars c WHERE $filtrarPorTienda c.status='A'";
+    $sql="SELECT c.* FROM calendars c WHERE c.stores_id = ".$_SESSION['stores_id']." AND c.status='A'";
+    
     $arr=q($sql);
     if(is_array($arr)){
         $horasNoDisponibles=array(20,21,22,23,01,02,03,04,05,06,07);
@@ -1198,7 +1201,8 @@ function crearOrden($json){
     
     //$json='{"estado":16,"productos":{"20":3,"21":4},"direccion":"3","hora_entrega":"1585872508"}';
     
-    
+    $transports_id = 0;
+
     //IMPORTANTE PARA LA WEB
     //SOLO CARGAR EN LA SESIÓN EL ID DE LA TIENDA STORES_ID EN LA SESIÓN
 
@@ -1677,6 +1681,7 @@ function getAdreess($tipo_salida,$type='delivery'){
     }
     $sql="SELECT oa.*, st.id states_id, re.id regions_id, st.name st_name,ci.name ci_name,re.name re_name FROM order_address oa INNER JOIN cities ci ON ci.id=oa.cities_id INNER JOIN regions re ON re.id=ci.regions_id INNER JOIN states st ON st.id=re.states_id WHERE $whereStore oa.users_id='$users_id' AND oa.status='A' AND oa.type='$type'";
     //exit($sql);
+    
     $arr=q($sql);
     if(is_array($arr)){
         return salidaNueva($arr,'Listando direcciones',true,$tipo_salida);

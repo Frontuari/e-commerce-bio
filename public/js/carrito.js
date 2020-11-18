@@ -628,7 +628,9 @@ function actualizarResumenOrden(){
 		
 		var h='';
 		var productos=getLocal('productosb');
+		
 		var d_envio=getLocal('envio').data[0];
+
 		// console.log(d_envio);
 
 
@@ -659,9 +661,9 @@ function actualizarResumenOrden(){
 			}
 
 
-			var peso_max=d_envio.peso_max;
-			var precioEnvioB=d_envio.precio_b;
-			var precioEnvioD=d_envio.precio_d;
+			var peso_max=(d_envio) ? d_envio.peso_max : 0;
+			var precioEnvioB=(d_envio) ? d_envio.precio_b : 0;
+			var precioEnvioD=(d_envio) ? d_envio.precio_d : 0;
 			var peso_cargado=peso_max;
 			var multiplo_peso=1;
 
