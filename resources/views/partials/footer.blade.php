@@ -104,7 +104,7 @@
 	<script id="aaa" type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
 	@yield('js')
-	<script type="text/javascript" src="js/carrito.js?v={{ strtotime(date('d-m-Y HH:mm:ss')) }}"></script>
+	<script type="text/javascript" src="js/carrito.js?ver={{ strtotime('now') }}"></script>
 	
 	<script>
 
