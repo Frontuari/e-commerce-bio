@@ -7,7 +7,7 @@
 	<link rel="Shortcut Icon" href="/assets/img/favicon.png" type="image/x-icon" />	
 	<link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
 	<!--<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.min.css') }}?ver=1.0.8">-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.min.css') }}?ver=1.0.10">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.min.css') }}?ver={{ strtotime(now()) }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
 	<!--<link rel="stylesheet" type="text/css" href="{{ asset('css/new-styles.css') }}?ver=2.0.4">-->
 	
