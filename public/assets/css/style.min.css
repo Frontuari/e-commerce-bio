@@ -63,3 +63,18 @@ h3.filter-title{
 div.middle-header{
 	padding: 15px 0px 0px 0px !important;
 }
+
+div#nav-header{
+	height: auto;
+}
+
+div#nav-header ul li{
+	
+	text-align: center;
+}
+
+
+div#nav-header ul li a{
+	float: right;
+	display: inline;
+}

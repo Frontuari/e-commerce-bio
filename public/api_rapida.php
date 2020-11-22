@@ -45,7 +45,7 @@ switch($evento) {
     case 'web_no_login':
         $row['data']['listarPublicidadToda']=listarPublicidadToda(true);
         $row['data']['productosb']=reformularIdProductosCompleto(listarProductosWeb());
-        $row['data']['productos']=listarProductosWeb();
+        /*$row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['regions']=getRegionsAll(true);
@@ -53,7 +53,7 @@ switch($evento) {
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-        $row['data']['listarCombos']=listarCombos(true);
+        $row['data']['listarCombos']=listarCombos(true);*/
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;

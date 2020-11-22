@@ -27,10 +27,10 @@
 	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 				<ads :categories="{{ $categories }}"></ads>
 			</div>
-			<div class="col-md-6" style="padding-top: 12%;">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding-top: 12%;">
 				<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
 				<br />
 				<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>

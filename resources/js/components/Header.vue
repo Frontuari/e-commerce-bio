@@ -7,16 +7,16 @@
 		<div class="middle-header">
 			<div class="container-fluid container-movil">
 				<div class="row align-items-center-md">
-					<div id="toggler-header" class="col-3">
+					<!--<div id="toggler-header" class="col-3">
 						<button class="navbar-toggler toggle-menu" type="button">
 							<img src="/assets/img/menu-movil-bio.png" alt="Menu Bars">
 						</button>
-					</div>
-					<div id="brand-header" class="col-lg-1 col-4">
+					</div>-->
+					<div id="brand-header" class="col-lg-1 col-md-12 col-sm-12 col-xs-12 text-center">
 						<a  href="/" class="navbar-brand"><img  src="/img/logo.png" alt="Bio Mercados"></a>
 					</div>
 
-					<div id="search-header" class="col-lg-7 col-md-12">
+					<div id="search-header" class="col-lg-8 col-md-12 col-sm-12 col-xs-12 text-center">
 						<form class="form-inline" v-on:submit="search()">
 							<input class="form-control" id="bio-search" type="text" placeholder="Busque aquí..." aria-label="Search" v-on:input="SearchProducts($event)" v-model="searchText" autocomplete="off">
 							<button class="btn btn-search" type="button" @click="search()"><img src="/assets/img/visualizar-producto-bio.svg"></button>
@@ -32,8 +32,9 @@
 
 						</form>
 					</div>
+
 					
-					<div id="nav-header" class="col-lg-4 col-5">
+					<div id="nav-header" class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<ul>
 							<li id="nav-login" class="dropdown">
 								<a href="#" v-if="!userlogged" id="navbarLogin" class="navbarLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,7 +92,7 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-2" v-for="cat in categories.slice(0,12)" :key="cat.id" :style="'background:url(/storage/'+cat.image+'); background-repeat: no-repeat; background-size: auto;'">
+				<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6" v-for="cat in categories.slice(0,12)" :key="cat.id" :style="'background:url(/storage/'+cat.image+'); background-repeat: no-repeat; background-size: auto;'">
 					<a class="new-cat" :href="'/catalog?cat='+cat.id">{{ cat.name }}</a>
 				</div>
 			</div>
