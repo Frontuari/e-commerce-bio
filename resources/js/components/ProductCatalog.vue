@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="pagination">
-                        <ul>
+                        <!--<ul>
                             <li v-if="!!products.prev_page_url">
                                 <a href="javascript:void(0)" @click="getpage(products.current_page - 1)"><img src="assets/img/prev.png" alt="Prev"></a>
                             </li>
@@ -153,7 +153,7 @@
                             <li v-if="!!products.next_page_url">
                                 <a href="javascript:void(0)" @click="getpage(products.current_page + 1)"><img src="assets/img/next.png" alt="Next"></a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </div>
                 </div>
             </div>

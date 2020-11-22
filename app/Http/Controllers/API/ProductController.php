@@ -25,7 +25,7 @@ class ProductController extends BaseController
     public function index(Request $request,ProductFilters $filters)
     {
         $data = $request->all();
-        $limit = ($data["limit"] ?? 10);
+        $limit = ($data["limit"] ?? 10000);
         
         $Products = Product::filter($filters)
         ->select("products.*",DB::raw("(case when products.mark_keyword is not null then concat (products.name, ' <span class=\"oferta\">',products.mark_keyword,'</span>') end) as name_insuperable"),DB::raw("taxes.value as impuesto"),DB::raw("( (products.price * taxes.value / 100) + products.price) as calculado, ((products.qty_avaliable * products.porc_stock) / 100) as qty_avaliable"))

@@ -384,16 +384,17 @@
 <script src="js/jsxcompressor.min.js" type="text/javascript"></script>
 <style>
 
-	<?php
-		if(isset($_GET['cat']) and !empty($_GET['cat'])){
-			?>
-				strong#cat_<?=$_GET['cat']?>{
-					visibility: visible !important;
-				}
-			<?php
-		}
+<?php
+if(isset($_GET['cat']) and !empty($_GET['cat'])){
 	?>
-	.loaderb {
+		strong#cat_<?=$_GET['cat']?>{
+			visibility: visible !important;
+		}
+	<?php
+}
+?>
+
+.loaderb {
 		margin: 0 auto;
 		border: 8px solid #f3f3f3; /* Light grey */
   border-top: 8px solid #67BE5A; /* Blue */
