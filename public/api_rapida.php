@@ -52,8 +52,8 @@ switch($evento) {
         $row['data']['states']=getStates(true);
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
-        /*$row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-        $row['data']['listarCombos']=listarCombos(true);*/
+        $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
+        $row['data']['listarCombos']=listarCombos(true);
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
