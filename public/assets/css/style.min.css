@@ -6,11 +6,11 @@ a.new-cat{
 	display:block;
 	font-size:14px !important;
 	font-weight: bold;
-	color: white !important;
 }
 
-a.new-cat:hover > strong{
-	visibility: visible !important;
+a.new-cat:hover strong{
+	text-decoration: underline !important;
+	color: #ed3928;
 }
 
 #products .nav-tabs .nav-link:hover{

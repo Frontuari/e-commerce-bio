@@ -388,7 +388,8 @@
 if(isset($_GET['cat']) and !empty($_GET['cat'])){
 	?>
 		strong#cat_<?=$_GET['cat']?>{
-			visibility: visible !important;
+			text-decoration: underline !important;
+			color: #ed3928;
 		}
 	<?php
 }
