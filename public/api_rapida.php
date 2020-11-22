@@ -57,7 +57,8 @@ switch($evento) {
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
-        echo e($row);
+        //echo e($row);
+        print json_encode($row);
     break;
     case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
          
