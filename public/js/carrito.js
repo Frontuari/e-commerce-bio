@@ -490,14 +490,14 @@ console.log(ra);
 
 		break;
 		case 'web_no_login':
-			var data = JSON.parse(data);
+			var data = JSON.parse(JXG.decompress(data));
 
 			if(data.success==true){
 				let datos=data.data;
 				for (var [key, value] of Object.entries(datos)) {
 					setLocal(key, value);
 				}
-				// console.log(data);
+				console.log(data);
 				actualizarResumenOrden();
 			}
 
