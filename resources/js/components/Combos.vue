@@ -44,7 +44,7 @@
 					<div id="right-combos" class="col-lg-12 ">
 						<div class="row">
 							<div id="combo-group-2" class="combo-group">
-								<div class="col-6 col-lg-3" v-for="(com, index) in combo_product.slice(0,10)" :key="com.id">
+								<div class="col-6 col-lg-3" v-for="(com, index) in combo_product.slice(0,)" :key="com.id">
 									<div class="product-block">
 										<div class="product-img">
 											<LazyImg v-if="com.image != null" :source="'storage/'+com.image | BigImage"></LazyImg>

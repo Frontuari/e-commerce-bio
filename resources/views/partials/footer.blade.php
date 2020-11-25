@@ -16,9 +16,10 @@
 						</a>
 						<div class="collapse" id="enlaces">
 							<div class="card card-body">
+								<a href="/culture">Cultura bio</a>
+								<a href="/sucursal">Sucursales</a>
 								<a href="/faq">Preguntas Frecuentes</a>
 								<a href="/terminos-condiciones">Términos legales</a>
-								<!-- <a href="#">Soporte</a> -->
 								<a href="/contact">Contacto</a>
 							</div>
 						</div>
