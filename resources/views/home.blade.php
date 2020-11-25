@@ -25,7 +25,18 @@
 	<slider :id="'sliderHome1'" :sliders="{{ $sliders }}"></slider>
 
 	<combos :combo_product="{{$combos}}" :tasadolar="{{$tasa_dolar}}"></combos>
-	<div class="container-fluid">
+
+	<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
+
+	<div class="container-fluid" style="margin-top: 60px !important;">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<ads :categories="{{ $categories }}"></ads>
+			</div>
+		</div>
+	</div>
+
+	<!--<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 				<ads :categories="{{ $categories }}"></ads>
@@ -36,7 +47,7 @@
 				<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	
 
 	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
