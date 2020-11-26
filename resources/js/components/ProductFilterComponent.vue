@@ -22,13 +22,21 @@
 				<div class="tab-pane fade show active" id="recents" role="tabpanel" aria-labelledby="recents-tab">
 					<div class="row">
 						<div class="col-6 col-20" v-for="product_recent in recent" v-bind:key="product_recent.id">
-							<div class="product-block">
+							<div class="product-block" style="position: relative !important;">
+
+
+								<span :class="'globito product_'+product_recent.id">{{ getCurrentQty(product_recent.id) }}</span>
+
+
 								<div class="product-img">
 									<LazyImg v-if="product_recent.photo != null" :source="'storage/'+JSON.parse(product_recent.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
-										<button v-if="product_recent.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_recent,1)">
+
+										<!--<button v-if="product_recent.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_recent,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
-										</button>
+										</button>-->
+
+
 										<button type="button" class="btn" @click="addToFavorite(product_recent,userlogged.id)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.93 15"><title>añadir-favorito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"/><path class="cls-1" d="M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"/><path class="cls-1" d="M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"/><path class="cls-1" d="M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"/></g></g></svg>
 										</button>
@@ -55,6 +63,25 @@
 									<p>{{ product_recent.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
+
+
+								<div :class="'row content_product_control_'+product_recent.id" :style="getCurrentQty(product_recent.id) > 0 ? 'display:block;' : 'display:none;'">
+									
+									<div class="col-12 text-center" style="padding: 10px 50px !important;">
+
+										<input type="number" min="0" :value="getCurrentQty(product_recent.id) == 0 ? 1 : getCurrentQty(product_recent.id)" :class="'cart-add-button add_del_'+product_recent.id" @change="addProductIncrement($event, product_recent);" :max="product_recent.qty_avaliable" />
+
+									</div>
+								</div>
+								<div :class="'row content_product_button_'+product_recent.id" v-if="getCurrentQty(product_recent.id) == 0"  style="padding: 10px 80px !important;">
+									<div class="col-12 text-center">
+										<button class="btn btn-success" @click="addToCart(product_recent,1)">Agregar</button>
+									</div>
+									
+								</div>
+
+
+								
 							</div>
 						</div>
 					</div>
@@ -62,13 +89,20 @@
 				<div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
 					<div class="row">
 						<div class="col-6 col-20" v-for="product_sold in sold" v-bind:key="product_sold.id">
-							<div class="product-block">
+							<div class="product-block" style="position: relative !important;">
+
+								<span :class="'globito product_'+product_sold.id">{{ getCurrentQty(product_sold.id) }}</span>
+
 								<div class="product-img">
 									<LazyImg v-if="product_sold.photo != null" :source="'storage/'+JSON.parse(product_sold.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
-										<button v-if="product_sold.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_sold,1)">
+
+
+										<!--<button v-if="product_sold.qty_avaliable > 0" type="button" class="btn" @click="addToCart(product_sold,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
-										</button>
+										</button>-->
+
+
 										<button type="button" class="btn" @click="addToFavorite(product_sold,userlogged.id)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.93 15"><title>añadir-favorito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"/><path class="cls-1" d="M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"/><path class="cls-1" d="M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"/><path class="cls-1" d="M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"/></g></g></svg>
 										</button>
@@ -95,6 +129,23 @@
 									<p>{{ product_sold.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_sold.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
+
+
+								<div :class="'row content_product_control_'+product_sold.id" :style="getCurrentQty(product_sold.id) > 0 ? 'display:block;' : 'display:none;'">
+
+									<div class="col-12 text-center" style="padding: 10px 50px !important;">
+
+										<input type="number" min="0" :value="getCurrentQty(product_sold.id) == 0 ? 1 : getCurrentQty(product_sold.id)" :class="'cart-add-button add_del_'+product_sold.id" @change="addProductIncrement($event, product_sold);" :max="product_sold.qty_avaliable" />
+
+									</div>
+								</div>
+								<div :class="'row content_product_button_'+product_sold.id" v-if="getCurrentQty(product_sold.id) == 0"  style="padding: 10px 80px !important;">
+									<div class="col-12 text-center">
+										<button class="btn btn-success" @click="addToCart(product_sold,1)">Agregar</button>
+									</div>
+									
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -102,13 +153,17 @@
 				<div class="tab-pane fade" id="searched" role="tabpanel" aria-labelledby="searched-tab">
 					<div class="row">
 						<div class="col-6 col-20" v-for="product_view in viewed" v-bind:key="product_view.id">
-							<div class="product-block">
+							<div class="product-block" style="position: relative !important;">
+
+								<span :class="'globito product_'+product_view.id">{{ getCurrentQty(product_view.id) }}</span>
+
+
 								<div class="product-img">
 									<LazyImg v-if="product_view.photo != null" :source="'storage/'+JSON.parse(product_view.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
-										<button v-if="product_view.qty_avaliable > 0" type="button" class="btn"  @click="addToCart(product_view,1)">
+										<!--<button v-if="product_view.qty_avaliable > 0" type="button" class="btn"  @click="addToCart(product_view,1)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.31 15"><title>añadir-carrito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M13.2,11.58H8.83a.45.45,0,1,0,0,.9H10.1a.81.81,0,1,1-.81.81.46.46,0,0,0-.91,0,1.72,1.72,0,1,0,3.22-.81h1.6a.45.45,0,1,0,0-.9Z"/><path class="cls-1" d="M14.21,3.33a.48.48,0,0,0-.35-.16H4V1.35A.45.45,0,0,0,3.67.92L.58,0A.45.45,0,0,0,0,.32a.45.45,0,0,0,.3.56l2.77.81v9.89H2.65a.45.45,0,0,0,0,.9h2.6a.81.81,0,1,1-.81.81.45.45,0,1,0-.9,0,1.72,1.72,0,1,0,1.71-1.71H4v-.77h8.52a.43.43,0,0,0,.22-.06.46.46,0,0,0,.22-.3L14.3,3.71A.48.48,0,0,0,14.21,3.33Zm-.9.74L13,5.39H4V4.07ZM4,9.91V8.59H10.1a.45.45,0,0,0,0-.9H4V6.29h8.87l-.72,3.62Z"/></g></g></svg>
-										</button>
+										</button>-->
 										<button type="button" class="btn" @click="addToFavorite(product_view,userlogged.id)">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.93 15"><title>añadir-favorito-bio</title><g id="Capa_2" data-name="Capa 2"><g id="Guias_y_recursos" data-name="Guias y recursos"><path class="cls-1" d="M4.7,7.56a.42.42,0,0,1-.42-.42V3.5H14.51a.43.43,0,0,1,0,.85H5.13V7.14A.42.42,0,0,1,4.7,7.56Z"/><path class="cls-1" d="M14.93,15H7.19a.43.43,0,0,1,0-.85h6.9V5.09a.42.42,0,1,1,.84,0Z"/><path class="cls-1" d="M11.53,6a.42.42,0,0,1-.42-.43V2a1,1,0,0,0-.43-.84A1.86,1.86,0,0,0,9.6.85C9,.85,8,1.15,8,2V5.53a.42.42,0,1,1-.84,0V2A2.18,2.18,0,0,1,9.6,0,2.12,2.12,0,0,1,12,2V5.53A.43.43,0,0,1,11.53,6Z"/><path class="cls-1" d="M8.74,8.11a2.23,2.23,0,0,0-1.63-.77A3.6,3.6,0,0,0,4.7,8.39,3.58,3.58,0,0,0,2.3,7.34a2.23,2.23,0,0,0-1.63.77A2.51,2.51,0,0,0,0,10.31C.32,12,2,13.69,4.52,15a.39.39,0,0,0,.18,0,.41.41,0,0,0,.19,0c2.57-1.27,4.2-3,4.48-4.65A2.51,2.51,0,0,0,8.74,8.11Zm-.21,2.06c-.1.66-.7,2.34-3.83,3.93C1.57,12.51,1,10.83.87,10.17a1.68,1.68,0,0,1,.4-1.47h0a1.39,1.39,0,0,1,1-.51h0a3.14,3.14,0,0,1,2,1.09.44.44,0,0,0,.6,0A3.15,3.15,0,0,1,7.09,8.18a1.41,1.41,0,0,1,1,.51h0A1.63,1.63,0,0,1,8.53,10.17Z"/></g></g></svg>
 										</button>
@@ -135,6 +190,21 @@
 									<p>{{ product_view.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_view.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
+
+								<div :class="'row content_product_control_'+product_view.id" :style="getCurrentQty(product_view.id) > 0 ? 'display:block;' : 'display:none;'">
+									<div class="col-12 text-center" style="padding: 10px 50px !important;">
+
+										<input type="number" min="0" :value="getCurrentQty(product_view.id) == 0 ? 1 : getCurrentQty(product_view.id)" :class="'cart-add-button add_del_'+product_view.id" @change="addProductIncrement($event, product_view);" :max="product_view.qty_avaliable" />
+
+									</div>
+								</div>
+								<div :class="'row content_product_button_'+product_view.id" v-if="getCurrentQty(product_view.id) == 0"  style="padding: 10px 80px !important;">
+									<div class="col-12 text-center">
+										<button class="btn btn-success" @click="addToCart(product_view,1)">Agregar</button>
+									</div>
+									
+								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -142,7 +212,10 @@
 				<div class="tab-pane fade" id="cost" role="tabpanel" aria-labelledby="cost-tab">
 					<div class="row">
 						<div class="col-6 col-20" v-for="product_best in best_price" v-bind:key="product_best.id">
-							<div class="product-block">
+							<div class="product-block" style="position: relative !important;">
+
+								<span :class="'globito product_'+product_best.id">{{ getCurrentQty(product_best.id) }}</span>
+
 								<div class="product-img">
 									<LazyImg v-if="product_best.photo != null" :source="'storage/'+JSON.parse(product_best.photo)[0] | MediumImage"></LazyImg>
 									<div class="product-actions">
@@ -174,6 +247,22 @@
 									<p>{{ product_best.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_best.price / tasadolar),2)) | FormatDolar}} $</p>
 								</div>
+
+								<div :class="'row content_product_control_'+product_best.id" :style="getCurrentQty(product_best.id) > 0 ? 'display:block;' : 'display:none;'">
+									<div class="col-12 text-center" style="padding: 10px 50px !important;">
+
+										<input type="number" min="0" :value="getCurrentQty(product_best.id) == 0 ? 1 : getCurrentQty(product_best.id)" :class="'cart-add-button add_del_'+product_best.id" @change="addProductIncrement($event, product_best);" :max="product_best.qty_avaliable" />
+
+									</div>
+								</div>
+
+								<div :class="'row content_product_button_'+product_best.id" v-if="getCurrentQty(product_best.id) == 0"  style="padding: 10px 80px !important;">
+									<div class="col-12 text-center">
+										<button class="btn btn-success" @click="addToCart(product_best,1)">Agregar</button>
+									</div>
+									
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -211,6 +300,9 @@
 		methods: {
 			getProduct: function(objP) {
 				this.oneproduct = objP;
+            },
+            addProductIncrement: function(event, product){
+            	this.addToCart(product, event.target.value);
             },
             up(v, n){
             	return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);

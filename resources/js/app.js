@@ -154,8 +154,37 @@ var globalFunc = {
             cart = globalFunc.validateCart(product,cart,cantidad);
             window.localStorage.setItem('cartNew', JSON.stringify(cart));
             const cantUpdate = globalFunc.getCartCant(cart);
+
+            $(".content_product_button_"+product.id).hide(100);
+            $(".content_product_control_"+product.id).show(100);
+
+            /*if(document.getElementById("content_product_button_"+product.id)){
+                document.getElementById("content_product_button_"+product.id).style.display="none";
+            }*/
+
+            /*if(document.getElementById("content_product_control_"+product.id)){
+                document.getElementById("content_product_control_"+product.id).style.display="block";
+            }*/
+            
+            $(".product_"+product.id).html(cantidad);
+
+
             EventBus.$emit("update_cantCart",cantUpdate);
         }else {
+
+            $(".content_product_button_"+product.id).hide(100);
+            $(".content_product_control_"+product.id).show(100);
+
+           /*if(document.getElementById("content_product_button_"+product.id)){
+                document.getElementById("content_product_button_"+product.id).style.display="none";
+            }
+
+            if(document.getElementById("content_product_control_"+product.id)){
+                document.getElementById("content_product_control_"+product.id).style.display="block";
+            }*/
+            
+            $(".product_"+product.id).html(cantidad);
+
             cart = globalFunc.validateCart(product,cart,cantidad);
             window.localStorage.setItem('cartNew', JSON.stringify(cart));
             EventBus.$emit("update_cantCart",cantidad);
@@ -167,12 +196,27 @@ var globalFunc = {
             globalFunc.addToCart(a,a.cant_combo);
         });
     },
+    getCurrentQty: function(product_id){
+        let qty = 0;
+        if(window.localStorage.getItem('cartNew')) {
+            cart = JSON.parse(window.localStorage.getItem('cartNew'));
+            cart.forEach((a, b) => {
+                if (a.product.id == product_id) {
+                    qty = parseInt(cart[b].cant);
+                }
+            });
+        }
+
+        return qty;
+    },
     validateCart: function(product,tmp,cantidad) {
         let exist = false;
         tmp.forEach( (a,b) => {
             if (a.product.id == product.id) {
-                if(product.qty_avaliable >= parseInt(parseInt(tmp[b].cant) + parseInt(cantidad)) ){
-                    tmp[b].cant = parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                if(product.qty_avaliable >= parseInt(cantidad) ){
+                    tmp[b].cant = parseInt(cantidad); //parseInt(parseInt(tmp[b].cant) + parseInt(cantidad));
+                    $(".product_"+product.id).html(tmp[b].cant);
+                    $(".add_del_"+product.id).val(cantidad);
                 }else{
                     Swal.fire({
                         icon: 'error',
@@ -278,6 +322,7 @@ Vue.prototype.addComboToCart = globalFunc.addComboToCart;
 Vue.prototype.removeCart = globalFunc.removeCart;
 Vue.prototype.dropCart = globalFunc.dropCart;
 Vue.prototype.droppingCart = globalFunc.droppingCart;
+Vue.prototype.getCurrentQty = globalFunc.getCurrentQty;
 
 
 
