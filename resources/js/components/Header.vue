@@ -92,8 +92,8 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6" v-for="cat in categories.slice(0,12)" :key="cat.id" :style="'background:url(/storage/'+cat.image+'); background-repeat: no-repeat; background-size: 100% 100%; margin-top: 5px;'">
-					<a class="new-cat" :href="'/catalog?cat='+cat.id"><strong style="visibility: hidden;" :id="'cat_'+cat.id">{{ cat.name }}</strong></a>
+				<div class="col-lg-2 col-md-4 col-sm-6 col-xs-6" v-for="cat in categories.slice(0,12)" :key="cat.id" :style="'background:url(/storage/'+cat.image+'); background-repeat: no-repeat; background-size: auto;'">
+					<a class="new-cat" :href="'/catalog?cat='+cat.id" style="margin-top: 5px"><strong style="visibility: hidden;" :id="'cat_'+cat.id">{{ cat.name }}</strong></a>
 				</div>
 			</div>
 		</div>

@@ -14,9 +14,11 @@
 	    <!-- Styles -->
 	    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	    <link rel="stylesheet" type="text/css" href="{{ asset('css/store.css') }}">
+	    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bree-font.css') }}">
 	     <style type="text/css">
 	    	body{
 	    		background: #72b615 !important;
+	    		font-family: 'Bree Rg';
 	    	}
 
 	    	div.lista h1{
