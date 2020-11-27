@@ -36,31 +36,14 @@
 		</div>
 	</div>
 
-	<!--<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-				<ads :categories="{{ $categories }}"></ads>
-			</div>
-			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding-top: 12%;">
-				<slider :id="'sliderHome2'" :sliders="{{ $medio_bajo }}"></slider>
-				<br />
-				<slider :id="'sliderHome3'" :sliders="{{ $footer }}"></slider>
-			</div>
-		</div>
-	</div>-->
-	
-
-	<!-- <offers :medio_bajo="{{ $medio_bajo }}"></offers> -->
-
-	
-	<!-- <footer-ad :ads="{{ $footer }}"></footer-ad> -->
-	
-
 @stop
 
 @section('js')
+<script src="{{ asset('assets/js/bootstrap-input-number.js') }}"></script>
 <script>
-	
+	$(document).ready(function(){
+		$("input.cart-add-button").inputSpinner();
+	});
 </script>
 @endsection
 

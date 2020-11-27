@@ -1,13 +1,6 @@
 @extends('partials.base')
 @section('title','Catalog')
 @section('body')
-	<!--<div class="jumbotron" style="background-image: url('{{ $portada }}');">
-		<div class="container">
-			<div class="text-center">
-				<h1 style="visibility: hidden">{{ $title }}</h1>
-			</div>
-		</div>
-	</div>-->
 	<catalog
 		:tags="{{ $tags }}"
 		:ads_a="{{ $ads_a }}"
@@ -17,4 +10,13 @@
 		:tasadolar="{{$tasa_dolar}}"
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
 	</catalog>
+@stop
+
+@section('js')
+<script src="{{ asset('assets/js/bootstrap-input-number.js') }}"></script>
+<script>
+	$(document).ready(function(){
+		$(".cart-add-button").inputSpinner();
+	});
+</script>
 @stop

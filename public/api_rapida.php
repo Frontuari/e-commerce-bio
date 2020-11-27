@@ -13,10 +13,10 @@ $json=$_GET['json'];
 $_GET=seguro($_GET);
 $_POST=seguro($_POST);
 
-$st_id = $_GET['storeID'];
+$_SESSION['stores_id'] = $_GET['id_tienda'];
 
 //if(!isset($_SESSION['stores_id']) and empty($_SESSION['stores_id'])){
-    $_SESSION['stores_id'] = $st_id;
+    
 //}
 
 //best_sql_listarFavoritos(true);
@@ -363,7 +363,7 @@ break;
     //salida($row,"Disculpe debe enviar un evento".$_POST['evento']."-".$_GET['evento'],false);
 }
 function cambiarTienda(){
-    $_SESSION['stores_id']=$_GET['id_tienda'];
+    //$_SESSION['stores_id']=$_GET['id_tienda'];
     $users_id=$_SESSION['usuario']['id'];
     if($users_id){
        

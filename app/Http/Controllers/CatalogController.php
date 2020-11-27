@@ -27,7 +27,7 @@
 	    }
 
 		function index() {
-
+			$categoryName = "";
 			$Ads_a = [];
 	        $a = Advs::where('status','A')->where('stores_id',$this->store_id)->whereRaw('LOWER(type) LIKE ?', [trim(strtolower("izq_producto_a")).'%'])->orderBy('order','ASC')->get();
 	        foreach ($a as $i => $m) {
@@ -66,6 +66,7 @@
 				$category = json_decode($category);
 				$portada = "storage/".$category[0]->image_b;
 				$title = $category[0]->name;
+				$categoryName = $category[0]->name;
 			}else{
 				$portada = '/assets/img/banner-titulos.png';
 				$title = 'Catalogo';
@@ -84,7 +85,8 @@
 				"ads_b"=>$Ads_b,
 				"ads_c"=>$Ads_c,
 				"ads_d"=>$Ads_d,
-				"tags"=>$k
+				"tags"=>$k,
+				"categoryName"=>$categoryName
 			]);
 		}
 

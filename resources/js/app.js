@@ -158,13 +158,6 @@ var globalFunc = {
             $(".content_product_button_"+product.id).hide(100);
             $(".content_product_control_"+product.id).show(100);
 
-            /*if(document.getElementById("content_product_button_"+product.id)){
-                document.getElementById("content_product_button_"+product.id).style.display="none";
-            }*/
-
-            /*if(document.getElementById("content_product_control_"+product.id)){
-                document.getElementById("content_product_control_"+product.id).style.display="block";
-            }*/
             
             $(".product_"+product.id).html(cantidad);
 
@@ -175,13 +168,6 @@ var globalFunc = {
             $(".content_product_button_"+product.id).hide(100);
             $(".content_product_control_"+product.id).show(100);
 
-           /*if(document.getElementById("content_product_button_"+product.id)){
-                document.getElementById("content_product_button_"+product.id).style.display="none";
-            }
-
-            if(document.getElementById("content_product_control_"+product.id)){
-                document.getElementById("content_product_control_"+product.id).style.display="block";
-            }*/
             
             $(".product_"+product.id).html(cantidad);
 

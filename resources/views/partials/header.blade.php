@@ -21,6 +21,13 @@
 			var storeName = '';
 			var storeId = '';
 		@endif
+
+		@if(isset($categoryName) and !empty($categoryName))
+			var categoryName = "{{ $categoryName }}";
+		@else 
+			var categoryName = "";
+		@endif
+
 	</script>
 	@yield('css')
 </head>

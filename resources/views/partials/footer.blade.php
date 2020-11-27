@@ -103,16 +103,13 @@
 
 </main>
 	<script id="aaa" type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
 	@yield('js')
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
 	<script type="text/javascript" src="js/carrito.js?ver={{ strtotime('now') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bootstrap-input-number.js') }}"></script>
 	<script>
 	//******************************************************************
 	// Determinar valores de fecha y hora para la recojer el pedido
 		hora=new moment().format("HH");
-
-		$("input.cart-add-button").inputSpinner();
 
 		if (parseInt(hora)>18)
 		{

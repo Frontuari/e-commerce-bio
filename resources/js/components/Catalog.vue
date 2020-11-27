@@ -5,27 +5,36 @@
 				<div id="content">	
 					<ul id='selected-filters'></ul>
 					<div class="products-order">
-						<div class="form-group">
-							<span>Mostrando</span>
-							<select id="show" class="form-control" v-model="limitP">
-								<option value="5">5</option>
-								<option value="10">10</option>
-								<option value="20">20</option>
-								<option value="50">50</option>
-								<option value="100">100</option>
-								<option value="-1">Todos</option>
-							</select>
-							<span>Resultados de {{products.total}}</span>
-						</div>
-						<div class="form-group">
-							<h5>Organizar por:</h5>
-							<select id="order-by" class="form-control" v-model="orderP">
-								<option value="AZasc">De A -> Z</option>
-								<option value="ZAdesc">De Z -> A</option>
-								<option value="Pasc">Precio - De menor a mayor</option>
-								<option value="Pdesc">Precio - De mayor a menor</option>
-							</select>
-						</div>
+							<div class="col-lg-4">
+								<div class="form-group" style="width: 100%; float: left;">
+									<span>Mostrando</span>
+									<select id="show" class="form-control" v-model="limitP">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+										<option value="-1">Todos</option>
+									</select>
+									<span>Resultados de {{products.total}}</span>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group" style="padding-top: 2% !important;">
+									<h5 style="border:1px solid white; padding:5px 10px; border-radius:8px;">{{ catName }}</h5>
+								</div>
+							</div>
+							<div class="col-lg-5">
+								<div class="form-group" style="width: 100%; float: right;">
+									<h5>Organizar por:</h5>
+									<select id="order-by" class="form-control" v-model="orderP">
+										<option value="AZasc">De A -> Z</option>
+										<option value="ZAdesc">De Z -> A</option>
+										<option value="Pasc">Precio - De menor a mayor</option>
+										<option value="Pdesc">Precio - De mayor a menor</option>
+									</select>
+								</div>
+							</div>
 					</div>
 					<div class="row">
 						<div class="col-md-2">
@@ -37,23 +46,21 @@
 								<div class="range-slider">
 								    <input type="text" class="js-range-slider" value="" />
 								</div>
+								<form class="form-inline" style="padding-left: 25%; display: none;">
+									<div class="form-group">
+										<label style="padding-right: 5px;">Desde: </label>
+									    <input type="number" style="width: 80px" class="js-input-from form-control" v-model="min_price" />
+									 </div>
+									 <div class="form-group">
+									 	<label style="padding-right: 5px; padding-left: 5px;">Hasta: </label>
+									    <input type="number" style="width: 80px" class="js-input-to form-control" v-model="max_price" />
+									</div>
+								</form>
 						</div>
-						<div class="col-md-3">
-							<form class="form-inline" style="padding-left: 25%;">
-								<div class="form-group">
-									<label style="padding-right: 5px;">Desde: </label>
-								    <input type="number" style="width: 80px" class="js-input-from form-control" v-model="min_price" />
-								 </div>
-								 <div class="form-group">
-								 	<label style="padding-right: 5px; padding-left: 5px;">Hasta: </label>
-								    <input type="number" style="width: 80px" class="js-input-to form-control" v-model="max_price" />
-								</div>
-							</form>
-						</div>
-						<div class="col-md-5">
+						<div class="col-md-6">
 							<form class="form-inline" id="filter-more-result">
 								<div class="form-group">
-									<label style="font-size: 18px; font-weight: bold;">Ofertas: </label>
+									<label style="font-size: 18px; font-weight: bold;">Productos: </label>
 								</div>
 								<div class="form-group">
 									<input type="radio" class="check-box" id="mas-reciente" title="Mas Recientes" name="radioOferta" value="mr" v-model="filterP">
@@ -125,6 +132,7 @@
 				max_price: 50,
 				page: 1,
             	datauser:[],
+            	catName: categoryName
 
             }
 		},

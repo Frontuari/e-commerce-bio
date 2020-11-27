@@ -730,7 +730,7 @@ function get(evento,variables="") {
 		}
 	};
 	
-	xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?storeID="+storeId+"&evento="+evento+variables, true);
+	xmlhttp.open("GET", protocol+"//"+host+"/api_rapida.php?id_tienda="+storeId+"&evento="+evento+variables, true);
 	xmlhttp.send();
  }
 
