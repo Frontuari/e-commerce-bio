@@ -5,9 +5,9 @@
 				<div id="content">	
 					<ul id='selected-filters'></ul>
 					<div class="products-order">
-							<div class="col-lg-4">
-								<div class="form-group" style="width: 100%; float: left;">
-									<span>Mostrando</span>
+							<div class="col-lg-3">
+								<div class="form-group" style="float: left;">
+									<!--<span>Mostrando</span>
 									<select id="show" class="form-control" v-model="limitP">
 										<option value="5">5</option>
 										<option value="10">10</option>
@@ -15,13 +15,13 @@
 										<option value="50">50</option>
 										<option value="100">100</option>
 										<option value="-1">Todos</option>
-									</select>
-									<span>Resultados de {{products.total}}</span>
+									</select>-->
+									<span style="margin-top: 10px !important;">{{products.total}} productos encontrados</span>
 								</div>
 							</div>
-							<div class="col-lg-3">
-								<div class="form-group" style="padding-top: 2% !important;">
-									<h5 style="border:1px solid white; padding:5px 10px; border-radius:8px;">{{ catName }}</h5>
+							<div class="col-lg-4">
+								<div class="form-group" style="padding-top: 5px !important;">
+									<h5 style="border:1px solid white; padding:5px 10px; border-radius:8px;">Categoria: {{ catName }}</h5>
 								</div>
 							</div>
 							<div class="col-lg-5">
