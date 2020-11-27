@@ -284,9 +284,10 @@ class HomeController extends Controller
         $data = [];
         $title = "Seleccione la Tienda";
         if($state_id != null){
-            $data = Stores::where('states_id','=',$state_id)->get();
+            $data = Stores::where('states_id','=',$state_id)->where('status','=','A')->get();
         }
 
+        
         return view('store_selector',['title' => $title, 'data'=>$data]);
     }
 

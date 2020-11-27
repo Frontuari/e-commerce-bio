@@ -89,6 +89,9 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+			@if($data->count() == 1)
+				location.href="/set-store/{{ $data[0]->id }}/{{ $data[0]->name }}";
+			@endif
 			setStoreID = function(id, name){
 				location.href="/set-store/"+id+"/"+name;
 			}
