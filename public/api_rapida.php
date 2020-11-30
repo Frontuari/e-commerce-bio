@@ -1207,9 +1207,16 @@ function crearOrden($json){
 
     $stores_id=$_SESSION['stores_id'];
 
+    $orden=json_decode($json,true);    
 
-    $orden=json_decode($json,true);
-    $users_id   =$_SESSION['usuario']['id'];
+    if(!empty($_SESSION['usuario']['id'])){
+      $users_id =  $_SESSION['usuario']['id'];
+    }else{
+      $users_id = $_GET['user_id'];
+      $_SESSION['usuario']['id'] = $users_id;
+    }
+    
+
     $order_address_id=$orden['direccion'] ?? "NULL";
     $delivery_type = $orden['delivery_type'];
     $delivery_type_text = "";

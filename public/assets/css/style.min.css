@@ -35,7 +35,7 @@ a.new-cat:hover strong{
 	padding-bottom: 20px !important;
 }
 
-div.col-md-2 > div.product-block, div.col-20 > div.product-block{
+div.col-md-2 > div.product-block, div.col-md-4 > div.product-block, div.col-20 > div.product-block{
 	border:1px solid #67be5a;
 	border-radius:10px !important;
 }
