@@ -1032,11 +1032,13 @@ function guardarPago(){
     if($ref=='null' || $payment_methods_id==3){
        
         $ref="Efectivo $";
-        if($payment_methods_id==5 || $payment_methods_id==12){
+       // if($payment_methods_id==5 || $payment_methods_id==12){
+        if($payment_methods_id==12){
             $ref="-";
             $status='aprobado';
         }else{
-            $status='efectivo';
+            //$status='efectivo';
+            $status = 'nuevo';
         }
     }
     
@@ -1212,8 +1214,12 @@ function crearOrden($json){
     if(!empty($_SESSION['usuario']['id'])){
       $users_id =  $_SESSION['usuario']['id'];
     }else{
-      $users_id = $_GET['user_id'];
-      $_SESSION['usuario']['id'] = $users_id;
+
+      if(!empty($_GET['user_id'])){
+        $users_id = $_GET['user_id'];
+        $_SESSION['usuario']['id'] = $users_id;
+      }
+      
     }
     
 
@@ -1666,7 +1672,7 @@ function listar_categorias_movil($tipo_salida){
     $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE $whereTienda p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
     //$row=q("SELECT name,image,image_b,id FROM categories WHERE status='A'");
     if(is_array($row)){
-        $row=recortar_imagen($row);
+        //$row=recortar_imagen($row);
         return salidaNueva($row,"Listado de categorias",true,$tipo_salida);
     }else{
         return salidaNueva(null,"Sin categorias",false,$tipo_salida);
