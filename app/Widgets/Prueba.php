@@ -157,44 +157,52 @@ var APP_URL = "'.url("/").'";
     public function ventas(){
         $orders= new Orders;
         //$count = $orders->where('status','=','NU')->count();
+        if(isset($_SESSION['stores_id']) and !empty($_SESSION['stores_id'])){
+          $store_id=$_SESSION['stores_id'];
+          $count =DB::select("SELECT count(*) as cant FROM orders WHERE stores_id=$store_id AND status='NU'")[0]->cant;
+          $url="/admin/orders";
+          return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+          <a href="'.$url.'">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
 
-        $store_id=$_SESSION['stores_id'];
-        $count =DB::select("SELECT count(*) as cant FROM orders WHERE stores_id=$store_id AND status='NU'")[0]->cant;
-        $url="/admin/orders";
-        return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
-        <a href="'.$url.'">
-        <div class="info-box">
-          <span class="info-box-icon bg-aqua"><i class="ion ion-ios-cart-outline"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Total Ordenes</span>
-            <span class="info-box-number">'.$count.'</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div></a>
-        <!-- /.info-box -->
-      </div>';
+            <div class="info-box-content">
+              <span class="info-box-text">Total Ordenes</span>
+              <span class="info-box-number">'.$count.'</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div></a>
+          <!-- /.info-box -->
+        </div>';
+      }else{
+        return '';
+      }
     }
     public function opiniones(){
         $RatingProducts= new RatingProducts;
        // $count = $RatingProducts->count();
-        $store_id=$_SESSION['stores_id'];
-        $count =DB::select("SELECT count(*) as cant FROM rating_products rp INNER JOIN products p ON p.id=rp.products_id WHERE p.stores_id=$store_id")[0]->cant;
+        if(isset($_SESSION['stores_id']) and !empty($_SESSION['stores_id'])){
+            $store_id=$_SESSION['stores_id'];
+            $count =DB::select("SELECT count(*) as cant FROM rating_products rp INNER JOIN products p ON p.id=rp.products_id WHERE p.stores_id=$store_id")[0]->cant;
 
-        $url="/admin/rating-products";
-        return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
-        <a href="'.$url.'">
-        <div class="info-box">
-          <span class="info-box-icon bg-yellow"><i class="ion-heart"></i></span>
+            $url="/admin/rating-products";
+            return '<div class="col-md-3 col-sm-6 col-xs-12 lin">
+            <a href="'.$url.'">
+            <div class="info-box">
+              <span class="info-box-icon bg-yellow"><i class="ion-heart"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text">Opiniones</span>
-            <span class="info-box-number">'.$count.'</span>
-          </div>
-          <!-- /.info-box-content -->
-        </div></a>
-        <!-- /.info-box -->
-      </div>';
+              <div class="info-box-content">
+                <span class="info-box-text">Opiniones</span>
+                <span class="info-box-number">'.$count.'</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div></a>
+            <!-- /.info-box -->
+          </div>';
+        }else{
+          return '';
+        }
+
     }
 
 
