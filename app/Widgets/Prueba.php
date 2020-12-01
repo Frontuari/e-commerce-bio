@@ -80,25 +80,29 @@ class Prueba extends BaseDimmer
             }
            
         }
+
+         $count =DB::table('products')->where('stores_id','=',$_SESSION['stores_id'])->count();
+          $url="/admin/products";
+          return '
+            
+              <div class="col-md-3 col-sm-6 col-xs-12 lin">
+              <a href="'.$url.'">
+                  <div class="info-box">
+                      <span class="info-box-icon bg-aqua"><i class="ion-ios-baseball-outline"></i></span>
+                     
+                      <div class="info-box-content">
+                      <span class="info-box-text">Productos</span>
+                          <span class="info-box-number">'.$count.'</span>
+                      </div>
+                      <!-- /.info-box-content -->
+                  </div></a>
+                  <!-- /.info-box -->
+               </div>
+      ';
+    }else{
+      return '';
     }
-        $count =DB::table('products')->where('stores_id','=',$_SESSION['stores_id'])->count();
-        $url="/admin/products";
-        return '
-          
-            <div class="col-md-3 col-sm-6 col-xs-12 lin">
-            <a href="'.$url.'">
-                <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="ion-ios-baseball-outline"></i></span>
-                   
-                    <div class="info-box-content">
-                    <span class="info-box-text">Productos</span>
-                        <span class="info-box-number">'.$count.'</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div></a>
-                <!-- /.info-box -->
-             </div>
-    ';
+       
     }
     public function grafico_pedidos(){
         $html="";
