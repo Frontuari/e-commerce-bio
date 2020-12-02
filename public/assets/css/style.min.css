@@ -44,11 +44,12 @@ div.col-md-2 > div.product-block:hover, div.col-20 > div.product-block:hover{
 	box-shadow: 2px 2px 15px #ccc;
 }
 
-
+div.category-img{
+	height: 200px !important;
+}
 
 div.category-img{
 	border-radius: 20px !important;
-	margin-bottom: 20px !important;
 }
 
 #combos-bio{
