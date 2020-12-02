@@ -200,14 +200,14 @@
 												<div class="col-md-12">
 													<h5>Tipos de Delivery</h5>
 													<div class="row">
-														<div class="col-md-4">
+														<div class="col-md-4" id="pickout-contenedor">
 															<div class="radio">
 															  <label><input type="radio" onclick="deli_type(this);" value="0" name="delivery_type" checked> Zona Pick up Mañongo</label>
 															</div>
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis: Entrega en las próximas 24 horas. Valencia Norte, Naguanagua y San Diego</label>
+															  <label><input type="radio" id="auto-checked" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis: Entrega en las próximas 24 horas. Valencia Norte, Naguanagua y San Diego</label>
 															</div>
 														</div>
 														<div class="col-md-4">

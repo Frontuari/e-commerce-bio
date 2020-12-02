@@ -526,11 +526,16 @@ console.log(ra);
 			var options='';
 			if(data.success){
 				var datos=data.data;
-				options+="<option value='0' id='one_value'>Pick - Up</option>";
+				var options = "";
+				if(storeId != 6){
+					options+="<option value='0' id='one_value'>Pick - Up</option>";
+				}
+				
 				for (var [key, value] of Object.entries(datos)) {
 					options+="<option value="+value.id+">"+value.address+" - "+value.st_name+", "+value.re_name+", "+value.urb+", "+value.sector+",  #"+value.nro_home+"</option>";
 					//console.log(key+" "+value.name);
 				}
+
 				div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile'>Agregar nueva dirección</a>";
 			}else{
 				div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='0'>Pick - Up</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
@@ -850,11 +855,18 @@ function deli_type(e){
 	checkDeliveryType = e.value;
 	if(parseInt(e.value) > 0){
 		column.style.display = 'block';
-		document.getElementById('one_value').style.display = 'none';
-		document.getElementById('direccion_selected').selectedIndex = 1;
+		if(document.getElementById('one_value')){
+			document.getElementById('one_value').style.display = 'none';
+			document.getElementById('direccion_selected').selectedIndex = 1;
+		}else{
+			document.getElementById('direccion_selected').selectedIndex = 0;
+		}
+		
 	}else{
 		column.style.display = 'none';
-		document.getElementById('one_value').style.display = 'block';
+		if(document.getElementById('one_value')){
+			document.getElementById('one_value').style.display = 'block';
+		}
 		document.getElementById('direccion_selected').selectedIndex = 0;
 	}
 
@@ -871,4 +883,15 @@ function deli_type(e){
 
 function up(v, n) {
     return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
+}
+
+
+//Modificaciones
+if(document.getElementById("pickout-contenedor")){
+	if(storeId == 6){
+		document.getElementById("pickout-contenedor").style.display = "none";
+		document.getElementById('div_contenedor_fecha').style.display = "none";
+		document.getElementById("select_address").style.display = "block";
+		document.getElementById("auto-checked").checked = true;
+	}
 }
