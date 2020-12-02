@@ -19,8 +19,14 @@
                     
                     
         $user_id= Auth::user()->id;
-     
-            $res= DB::select("select *, id stores_id  from stores WHERE id=".$_SESSION['stores_id']);
+     if(isset($_SESSION['stores_id'])){
+        $res= DB::select("select *, id stores_id  from stores WHERE id=".$_SESSION['stores_id']);
+     }else{
+         session_destroy();
+         
+         exit("Disculpe este usuario no tiene acceso a las tiendas, comuniquese con el administrador del sistema. <a href='/admin/logout'>Regresar<a/>");
+     }
+            
             echo $res[0]->name;
 
         ?>
