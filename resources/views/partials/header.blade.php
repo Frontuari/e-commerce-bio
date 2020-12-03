@@ -28,6 +28,12 @@
 			var categoryName = "";
 		@endif
 
+		@if(isset($tagName) and !empty($tagName))
+			var tagName = "{{ $tagName }}";
+		@else 
+			var tagName = "";
+		@endif
+
 	</script>
 	@yield('css')
 </head>

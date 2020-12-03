@@ -383,6 +383,12 @@
 	</script>
 </body>
 <script src="js/jsxcompressor.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$("span.oferta").click(function(){
+		var url = $(this).attr("data-url");
+		location.href=url;
+	});
+</script>
 <style>
 
 <?php

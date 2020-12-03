@@ -132,7 +132,8 @@
 				max_price: 50,
 				page: 1,
             	datauser:[],
-            	catName: categoryName
+            	catName: categoryName,
+            	tgName: ''
 
             }
 		},
@@ -178,6 +179,7 @@
 		
         },
         mounted() {
+        	this.tgName = tagName;
         	console.log("ads::> ",this.ads);
 			if(this.isObject(this.userlogged)){
 				this.datauser = this.userlogged;
@@ -203,7 +205,7 @@
 		},
 		computed: {
 			filtros: function() {
-				return "&"+this.filterP+"&cat="+this.cat+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
+				return "&"+this.filterP+"&cat="+this.cat+"&tags="+this.tgName+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
 			}
 		},
 		created: function() {

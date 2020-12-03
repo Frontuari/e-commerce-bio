@@ -59,7 +59,7 @@ class ProductFilters extends QueryFilters
                 $otro="#".$texto;
             }
 
-            return $this->builder->whereRaw("to_tsvector(products.keyword) @@ to_tsquery('$otro')");
+            return $this->builder->whereRaw("to_tsvector(products.mark_keyword) @@ to_tsquery('$otro')");
         }
     }
 

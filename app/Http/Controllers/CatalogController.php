@@ -75,6 +75,8 @@
 			$Coin = Coin::where("id",1)->first();
 			// die($_GET["cat"]);
 			$cat = ($_GET["cat"] ?? 0);
+			$tag = ($_GET["tag"] ?? '');
+
 			$k = json_encode($this->getTags($cat));
 
 			return view("catalog",[
@@ -86,7 +88,8 @@
 				"ads_c"=>$Ads_c,
 				"ads_d"=>$Ads_d,
 				"tags"=>$k,
-				"categoryName"=>$categoryName
+				"categoryName"=>$categoryName,
+				"tagName"=>$tag
 			]);
 		}
 
