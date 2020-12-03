@@ -128,6 +128,11 @@
 
 		jQuery(document).ready(function($){
 
+
+			$("a#change_store").click(function(){
+				window.localStorage.removeItem('cartNew');
+			});
+
 			if(!window.localStorage.getItem("ModalPrincipal")) {
 				axios.get(URLSERVER+"api/advs/type/Bienvenida").then( res => {
 					const srcImage = res.data.data[0].image;
