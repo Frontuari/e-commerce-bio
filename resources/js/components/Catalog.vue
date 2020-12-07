@@ -205,7 +205,13 @@
 		},
 		computed: {
 			filtros: function() {
-				return "&"+this.filterP+"&cat="+this.cat+"&tags="+this.tgName+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
+				let tagParameter = '';
+				
+				if(tagName){
+					tagParameter = "&tags="+this.tgName;
+				}
+
+				return "&"+this.filterP+"&cat="+this.cat+tagParameter+"&limit="+this.limitP+"&order="+this.orderP+"&precio="+this.min_price+","+this.max_price+"&page="+this.page+this.sParam+this.fTags+this.idParam;
 			}
 		},
 		created: function() {
