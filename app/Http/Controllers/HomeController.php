@@ -113,6 +113,7 @@ class HomeController extends Controller
         ->leftJoin("taxes","taxes.id","=","det_product_taxes.taxes_id")
         ->orderBy('price','asc')
         ->where(DB::raw("((products.qty_avaliable * products.porc_stock) / 100)"),">",0)
+        ->where('products.stores_id',$this->store_id)
         ->take(12)
         ->get();
 
