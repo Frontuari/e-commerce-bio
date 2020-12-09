@@ -204,6 +204,7 @@
 
 		},
 		computed: {
+
 			filtros: function() {
 				let tagParameter = '';
 				

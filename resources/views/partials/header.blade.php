@@ -41,4 +41,15 @@
 <body>
 
 <main id="app">
+	<?php
+		if(isset($_SESSION['usuario']) and !empty($_SESSION['usuario'])){
+	?>
 	<header-menu :userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}"></header-menu>
+	<?php
+		}else{
+	?>
+	<header-menu></header-menu>
+	<?php
+		}
+	?>
+	

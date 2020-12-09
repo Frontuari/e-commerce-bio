@@ -19,7 +19,18 @@
 		:sold="{{ $sold }}"
 		:best_price="{{ $bestprice }}"
 		:tasadolar="{{$tasa_dolar}}" 
+		<?php
+		if(isset($_SESSION['usuario']) and !empty($_SESSION['usuario'])){
+	?>
 		:userlogged="{{ json_encode($_SESSION['usuario'] ?? '') }}">
+	<?php
+		}else{
+	?>
+		:userlogged="{}">
+	<?php
+		}
+	?>
+		
 	</nuestros-productos>
 
 	<slider :id="'sliderHome1'" :sliders="{{ $sliders }}"></slider>

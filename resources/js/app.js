@@ -309,6 +309,7 @@ Vue.prototype.removeCart = globalFunc.removeCart;
 Vue.prototype.dropCart = globalFunc.dropCart;
 Vue.prototype.droppingCart = globalFunc.droppingCart;
 Vue.prototype.getCurrentQty = globalFunc.getCurrentQty;
+Vue.prototype.loadControls = globalFunc.loadControls;
 
 
 
