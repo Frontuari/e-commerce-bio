@@ -16,7 +16,7 @@
 <script src="{{ asset('assets/js/bootstrap-input-number.js') }}"></script>
 <script>
 	$(document).ready(function(){
-		$(".cart-add-button").inputSpinner();
+		$("input.cart-add-button").inputSpinner();
 	});
 </script>
 @stop
