@@ -28,7 +28,7 @@
 				<div class="col-lg-3">
 					<div class="footer-block">
 						<a class="btn btn-title" data-toggle="collapse" href="#apps" role="button" aria-expanded="false" aria-controls="apps">
-							Descarga nuestras <br class="on-desktop">app's móviles
+							Descarga nuestra <br class="on-desktop">app móvil
 						</a>
 						<div class="collapse" id="apps">
 							<div class="card card-body">

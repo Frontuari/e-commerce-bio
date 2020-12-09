@@ -64,19 +64,19 @@
 								</div>
 								<div class="form-group">
 									<input type="radio" class="check-box" id="mas-reciente" title="Mas Recientes" name="radioOferta" value="mr" v-model="filterP">
-									<label for="mas-reciente"> Más Recientes</label>
+									<label for="mas-reciente" style="font-size: 16px;"> Más Recientes</label>
 								</div>
 								<div class="form-group">
 									<input type="radio" class="check-box" id="mas-buscados" title="Mas Buscados" name="radioOferta" value="mb" v-model="filterP">
-									<label for="mas-buscados"> Más Buscados</label>
+									<label for="mas-buscados" style="font-size: 16px;"> Más Buscados</label>
 								</div>
 								<div class="form-group">
 									<input type="radio" class="check-box" id="mas-vendidos" title="Mas Vendidos" name="radioOferta" value="mv" v-model="filterP">
-									<label for="mas-vendidos"> Más Vendidos</label>
+									<label for="mas-vendidos" style="font-size: 16px;"> Más Vendidos</label>
 								</div>
 								<div class="form-group">
 									<input type="radio" class="check-box" id="mejor-precio" title="Mejor Precio" name="radioOferta" value="mj" v-model="filterP"> 
-									<label for="mejor-precio"> Mejor Precio</label>
+									<label for="mejor-precio" style="font-size: 16px;"> Mejor Precio</label>
 								</div>
 							</form>
 						</div>
