@@ -41,9 +41,15 @@
                         <div :class="'row content_product_control_'+product.id" :style="getCurrentQty(product.id) > 0 ? 'display:block;' : 'display:none;'">
                                     
                             <div class="col-12 text-center" style="padding: 10px 50px !important;">
-
-                                <input type="number" min="0" :value="getCurrentQty(product.id) == 0 ? 1 : getCurrentQty(product.id)" :class="'cart-add-button add_del_'+product.id" @change="addProductIncrement($event, product);" :max="product.qty_avaliable" />
-
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button @click="delProduct('product_category_'+product.id, product);" class="btn btn-decrement btn-outline-secondary btn-minus">-</button>
+                                      </div>
+                                    <input type="number" style="text-align: center;" min="0" :id="'product_category_'+product.id" :value="getCurrentQty(product.id) == 0 ? 1 : getCurrentQty(product.id)" :class="'cart-add-button form-control add_del_'+product.id" @change="addProductIncrement($event, product);" :max="product.qty_avaliable" />
+                                    <div class="input-group-append">
+                                        <button @click="addProduct('product_category_'+product.id, product, product.qty_avaliable);" class="btn btn-increment btn-outline-secondary btn-plus">+</button>
+                                      </div>
+                                </div>
                             </div>
 
                         </div>
@@ -107,10 +113,34 @@
                 console.log(objP);
 				this.oneproduct = objP;
             },
+            addProductIncrement: function(event, product){
+                this.addToCart(product, event.target.value);
+            },
             getpage(index) {
                 this.page = index;
                 this.$emit("getpage",this.page);
                 document.location = '#';
+            },
+            addProduct(id, product, qtyav){
+                let currentQty = parseInt(document.getElementById(id).value);
+                let newQty = currentQty;
+
+                if(currentQty < qtyav){
+                 newQty = parseInt(currentQty + 1);   
+                }
+
+                document.getElementById(id).value = newQty;
+                this.addToCart(product, newQty);
+                
+            },
+            delProduct(id, product){
+                let currentQty = parseInt(document.getElementById(id).value);
+                let newQty = 0
+                if(parseInt(currentQty) > 0){
+                    newQty = parseInt(currentQty - 1);  
+                }
+            
+                this.addToCart(product, newQty);
             },
             increaseValue(product)
             {
@@ -134,6 +164,11 @@
             up(v, n){
                 return Math.ceil(v * Math.pow(10, n)) / Math.pow(10, n);
             }
+        },
+        mounted(){
+            $(document).ready(function(){
+                alert("Hola");
+            });
         },
         created() {
             let products = JSON.parse(window.localStorage.getItem("productos")).data;

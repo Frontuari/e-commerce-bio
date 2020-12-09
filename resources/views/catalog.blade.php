@@ -27,6 +27,7 @@
 <script>
 	$(document).ready(function(){
 		$("input.cart-add-button").inputSpinner();
+
 	});
 </script>
 @stop

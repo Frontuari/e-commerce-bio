@@ -21,7 +21,7 @@
 			<div class="tab-content" id="ProductsContent">
 				<div class="tab-pane fade show active" id="recents" role="tabpanel" aria-labelledby="recents-tab">
 					<div class="row">
-						<div class="col-6 col-20" v-for="product_recent in recent" v-bind:key="product_recent.id">
+						<div class="col-lg-2 col-md-4 col-sm-6 col-xm-12" v-for="product_recent in recent" v-bind:key="product_recent.id">
 							<div class="product-block" style="position: relative !important;">
 
 
