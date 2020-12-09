@@ -830,6 +830,7 @@ class ComposerStaticInit983cca90fc09f5e13051eaaf692b8382
         'App\\Trackings' => __DIR__ . '/../..' . '/app/Trackings.php',
         'App\\Transporte' => __DIR__ . '/../..' . '/app/Transporte.php',
         'App\\Transports' => __DIR__ . '/../..' . '/app/Transports.php',
+        'App\\Urbanization' => __DIR__ . '/../..' . '/app/Urbanization.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\UserRole' => __DIR__ . '/../..' . '/app/UserRole.php',
         'App\\UserStores' => __DIR__ . '/../..' . '/app/UserStores.php',

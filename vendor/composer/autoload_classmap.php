@@ -185,6 +185,7 @@ return array(
     'App\\Trackings' => $baseDir . '/app/Trackings.php',
     'App\\Transporte' => $baseDir . '/app/Transporte.php',
     'App\\Transports' => $baseDir . '/app/Transports.php',
+    'App\\Urbanization' => $baseDir . '/app/Urbanization.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\UserRole' => $baseDir . '/app/UserRole.php',
     'App\\UserStores' => $baseDir . '/app/UserStores.php',
