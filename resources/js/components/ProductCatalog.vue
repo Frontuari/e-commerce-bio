@@ -166,9 +166,7 @@
             }
         },
         mounted(){
-            $(document).ready(function(){
-                alert("Hola");
-            });
+            
         },
         created() {
             let products = JSON.parse(window.localStorage.getItem("productos")).data;
