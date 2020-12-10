@@ -61,7 +61,7 @@ switch($evento) {
     break;
     case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
          
-        $row['data']['categories']=listar_categorias_movil(true);
+        $row['data']['categories']=listar_categorias_movil(true, "mobile");
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['regions']=getRegionsAll(true);
         $row['data']['states']=getStates(true);
@@ -111,7 +111,7 @@ break;
         if($row['data']['usuario']['success']==true){
          
             $row['data']['perfil']=getPerfil(true);
-            $row['data']['categories']=listar_categorias_movil(true);
+            $row['data']['categories']=listar_categorias_movil(true, "mobile");
             $row['data']['cities']=getCitiesAll(true);
             $row['data']['regions']=getRegionsAll(true);
             $row['data']['states']=getStates(true);
@@ -378,7 +378,7 @@ function cambiarTienda(){
     }
 
 
-   $row['data']['categories']=listar_categorias_movil(true);
+   $row['data']['categories']=listar_categorias_movil(true, "mobile");
    //print_r($row);
    //exit();
     $row['data']['states']=getStates(true);
