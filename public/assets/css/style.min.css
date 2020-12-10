@@ -40,7 +40,7 @@ div.col-md-2 > div.product-block, div.col-md-4 > div.product-block, div.col-20 >
 	border-radius:10px !important;
 }
 
-div.col-md-2 > div.product-block:hover, div.col-20 > div.product-block:hover{
+div.col-lg-2 > div.product-block:hover, div.col-md-4 > div.product-block:hover{
 	box-shadow: 2px 2px 15px #ccc;
 }
 

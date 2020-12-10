@@ -102,9 +102,9 @@
 	<div class="over toggle-menu"></div>
 
 </main>
-	<script id="aaa" type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver={{ strtotime(now()) }}"></script>
 	@yield('js')
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=1.0.0"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver={{ strtotime(now()) }}"></script>
 	<script type="text/javascript" src="js/carrito.js?ver={{ strtotime('now') }}"></script>
 	<script>
 	//******************************************************************
@@ -387,7 +387,7 @@
 		<?php endif; ?>
 	</script>
 </body>
-<script src="js/jsxcompressor.min.js" type="text/javascript"></script>
+<script src="js/jsxcompressor.min.js?ver={{ strtotime(now()) }}" type="text/javascript"></script>
 <script type="text/javascript">
 	$("span.oferta").click(function(){
 		var url = $(this).attr("data-url");

@@ -67,7 +67,7 @@
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_recent.id" v-if="getCurrentQty(product_recent.id) == 0"  style="padding: 10px 80px !important;">
+								<div :class="'row content_product_button_'+product_recent.id" v-if="getCurrentQty(product_recent.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_recent,1)">Agregar</button>
 									</div>
@@ -126,7 +126,7 @@
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_sold.id" v-if="getCurrentQty(product_sold.id) == 0"  style="padding: 10px 80px !important;">
+								<div :class="'row content_product_button_'+product_sold.id" v-if="getCurrentQty(product_sold.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_sold,1)">Agregar</button>
 									</div>
@@ -182,7 +182,7 @@
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_view.id" v-if="getCurrentQty(product_view.id) == 0"  style="padding: 10px 80px !important;">
+								<div :class="'row content_product_button_'+product_view.id" v-if="getCurrentQty(product_view.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_view,1)">Agregar</button>
 									</div>
@@ -237,7 +237,7 @@
 									</div>
 								</div>
 
-								<div :class="'row content_product_button_'+product_best.id" v-if="getCurrentQty(product_best.id) == 0"  style="padding: 10px 80px !important;">
+								<div :class="'row content_product_button_'+product_best.id" v-if="getCurrentQty(product_best.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_best,1)">Agregar</button>
 									</div>

@@ -21,13 +21,3 @@
 		?>
 	</catalog>
 @stop
-
-@section('js')
-<script src="{{ asset('assets/js/bootstrap-input-number.js') }}"></script>
-<script>
-	$(document).ready(function(){
-		$("input.cart-add-button").inputSpinner();
-
-	});
-</script>
-@stop
