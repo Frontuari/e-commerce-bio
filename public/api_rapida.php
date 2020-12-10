@@ -168,7 +168,7 @@ break;
         actualizarFotoPerfil();
     break;
     case 'listar_categorias_movil':
-        listar_categorias_movil(false);
+        listar_categorias_movil(false, "mobile");
     break;
     case 'registrarUsuario':
         registrarUsuario();
@@ -1667,9 +1667,14 @@ function listarProductos(){
     salida_movil($row);
 }
 */
-function listar_categorias_movil($tipo_salida){
+function listar_categorias_movil($tipo_salida, $for = "web"){
     $whereTienda=whereTienda('p');
-    $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE $whereTienda p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
+    if($for == "web"){
+        $row=q("SELECT c.name,c.image,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE $whereTienda p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
+    }else{
+        $row=q("SELECT c.name,c.image_to_phone,c.image_b,c.id FROM categories c INNER JOIN sub_categories sc ON sc.categories_id=c.id INNER JOIN det_sub_categories dsc ON dsc.sub_categories_id=sc.id INNER JOIN products p ON p.id=dsc.products_id WHERE $whereTienda p.status='A' AND c.status='A' AND p.qty_avaliable>0 AND c.name<>'' GROUP BY c.id order by c.order");
+    }
+    
     //$row=q("SELECT name,image,image_b,id FROM categories WHERE status='A'");
     if(is_array($row)){
         //$row=recortar_imagen($row);
