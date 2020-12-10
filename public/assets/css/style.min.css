@@ -105,5 +105,17 @@ span.globito{
 	top: 5px !important;
 	text-align: center;
 	vertical-align: middle !important;
+	z-index: 10 !important;
+}
+
+div.keyup_search{
 	z-index: 100 !important;
+	height: 400px !important;
+	overflow: scroll !important;
+	box-shadow: 5px 5px 10px #ccc;
+}
+
+div.keyup_search ol li{
+	text-align: left !important;
+	border-bottom: 1px solid #ccc !important;
 }
