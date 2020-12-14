@@ -288,8 +288,11 @@ class HomeController extends Controller
             $data = Stores::where('states_id','=',$state_id)->where('status','=','A')->get();
         }
 
+        if($data->count() == 1){
+            return redirect('/set-store/'.$data[0]->id.'/'.$data[0]->name);
+        }
         
-        return view('store_selector',['title' => $title, 'data'=>$data]);
+        //return view('store_selector',['title' => $title, 'data'=>$data]);
     }
 
     public function set_store($store_id, $store_name, Request $request){
