@@ -207,12 +207,12 @@
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" id="auto-checked" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis: Entrega en las próximas 24 horas. Valencia Norte, Naguanagua y San Diego</label>
+															  <label><input type="radio" id="auto-checked" onclick="deli_type(this);"  value="2" name="delivery_type"> Delivery Gratis</label>
 															</div>
 														</div>
 														<div class="col-md-4">
 															<div class="radio">
-															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express: $3, 2 horas. Valencia Norte, Naguanagua y San Diego</label>
+															  <label><input type="radio" onclick="deli_type(this);"  value="1" name="delivery_type"> Delivery Express</label>
 															</div>
 														</div>
 														<input id="dvy_type" type="hidden" value="0" name="dvy_type" />
