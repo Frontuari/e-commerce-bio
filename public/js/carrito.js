@@ -713,7 +713,7 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-	setInterval('actualizarStore()',5000);
+	setInterval('actualizarStore()',30000);
 }
 
 
