@@ -189,7 +189,7 @@
 
 														<div class="col-lg-6">
 															<div class="form-group">
-																<label for="address-urb">Urbanización / Empresa:</label>
+																<label for="address-urb">Urbanización:</label>
 																<input type="text" class="form-control" id="address-urb" name="address-urb"  v-model="userData.habDirection.urb">
 															</div>
 														</div>
@@ -304,13 +304,25 @@
 																	<!-- <button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button> -->
 																	<!-- <input type="text" class="form-control" id="address-prov" name="address-prov" disabled="disabled" v-model="direction.ciudad"> -->
-																	<select class="form-control" v-model="direction.city_id">
+																	<select class="form-control" :id="'city_id_'+direction.city_id" @change="loadUrbanizations($event, 'address_urb_'+index)" v-model="direction.city_id">
 																		<option value="">Seleccione</option>
 																		<option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
 																	</select>
 																</div>
 															</div>
 
+															<div class="col-lg-6">
+																<div class="form-group">
+																	<label for="address-urb">Urbanización:</label>
+																	<!--<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
+																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
+																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="direction.urb">-->
+																	<select class="form-control" :id="'address_urb_'+index" v-model="direction.urb">
+																		<option value="">Seleccione</option>
+																		<option v-for="urb in urbanizations" :key="urb.id" :value="urb.id">{{urb.name}}</option>
+																	</select>
+																</div>
+															</div>
 
 															<div class="col-lg-6">
 																<div class="form-group">
@@ -318,14 +330,6 @@
 																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
 																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
 																	<input type="text" class="form-control" id="address-name" name="address-name" disabled="disabled" v-model="direction.address">
-																</div>
-															</div>
-															<div class="col-lg-6">
-																<div class="form-group">
-																	<label for="address-urb">Urbanización / Empresa:</label>
-																	<button class="btn btn-edit-info" type="button"><img src="assets/img/editar-bio-mercados.svg"></button>
-																	<button class="btn btn-confirm-info" type="button"><img src="assets/img/confirmar-bio-mercados.svg"></button>
-																	<input type="text" class="form-control" id="address-urb" name="address-urb" disabled="disabled" v-model="direction.urb">
 																</div>
 															</div>
 															<div class="col-lg-6">
@@ -796,6 +800,7 @@
 				Allstates: [],
 				Allregions: [],
 				Allcities: [],
+				urbanizations: [],
 				orders: [],
 				data_products: [],
 				en_proceso: [],
@@ -989,6 +994,17 @@
 				const region_id = event.target.value;
 				const response = await axios.get(URLSERVER+"api/cities/region/"+region_id);
 				this.Allcities = response.data.data;
+			},
+			async loadUrbanizations(event, elemento) {
+				document.getElementById(elemento).innerHTML = "";
+				const city_id = event.target.value;
+				const response = await axios.get(URLSERVER+"api/urbanization/"+city_id);
+				this.urbanizations = response.data.data;
+			},
+			async setCurrentUrb(c_id) {
+				const city_id = c_id
+				const response = await axios.get(URLSERVER+"api/urbanization/"+city_id);
+				return response.data.data;
 			},
 			async getPedidos() {
 				const response = await axios.get(URLSERVER+"api/orders");
@@ -1211,6 +1227,22 @@
 			this.getCities();
 			this.getPedidos();
 			this.getAmountBW(this.userData.id);
+
+			this.userData.directions.forEach((item, index) => {
+				let cities = this.setCurrentUrb(item.city_id).then((result) =>{
+					let element = document.getElementById("address_urb_"+index);
+					let html = "";
+					element.innerHTML = "";
+					result.forEach((item, index) => {
+						html+="<option value='"+item.id+"'>"+item.name+"</option>";
+					});
+					element.innerHTML = html;
+
+					html = "";
+				});
+				
+			});
+
 			console.log("this.userData::> ",this.userData);
 		},
 		created() {

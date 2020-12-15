@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\States;
 use App\Regions;
 use App\Cities;
+use App\Urbanization;
 
 class LocationController extends BaseController
 {
@@ -48,5 +49,11 @@ class LocationController extends BaseController
     public function getAllCities() {
         $Cities = Cities::All();
         return $this->sendResponse($Cities);
+    }
+
+    public function getUrbanizationByCity($city_id = null){
+        $Urbanizations = Urbanization::where('city_id','=',$city_id)->get();
+
+        return $this->sendResponse($Urbanizations);
     }
 }
