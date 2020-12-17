@@ -120,14 +120,14 @@ div.keyup_search ol li{
 	border-bottom: 1px solid #ccc !important;
 }
 
-div.loaded{
+div.product-img div.loaded{
 	overflow: hidden !important;
 }
 
-img.image__item{
+div.product-img img.image__item{
 	transition: transform .5s ease !important;
 }
 
-img.image__item:hover{
+div.product-img img.image__item:hover{
 	transform: scale(1.5) !important;
 }
