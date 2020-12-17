@@ -105,7 +105,7 @@
 	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver={{ strtotime(now()) }}"></script>
 	@yield('js')
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver={{ strtotime(now()) }}"></script>
-	<script type="text/javascript" src="js/carrito.min.js?ver=2.0.1"></script>
+	<script type="text/javascript" src="js/carrito.min.js?ver=2.0.2"></script>
 	<script>
 	//******************************************************************
 	// Determinar valores de fecha y hora para la recojer el pedido

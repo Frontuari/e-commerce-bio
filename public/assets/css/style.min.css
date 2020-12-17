@@ -119,3 +119,15 @@ div.keyup_search ol li{
 	text-align: left !important;
 	border-bottom: 1px solid #ccc !important;
 }
+
+div.loaded{
+	overflow: hidden !important;
+}
+
+img.image__item{
+	transition: transform .5s ease !important;
+}
+
+img.image__item:hover{
+	transform: scale(1.5) !important;
+}

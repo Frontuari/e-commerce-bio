@@ -536,7 +536,7 @@ console.log(ra);
 					//console.log(key+" "+value.name);
 				}
 
-				div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile'>Agregar nueva dirección</a>";
+				div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
 			}else{
 				div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='0'>Pick - Up</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
 				//alert(data.msj_general);
