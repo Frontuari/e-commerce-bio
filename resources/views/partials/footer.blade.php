@@ -107,6 +107,20 @@
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver={{ strtotime(now()) }}"></script>
 	<script type="text/javascript" src="js/carrito.min.js?ver=2.0.2"></script>
 	<script>
+
+		$("span#eye-view-password").click(function(){
+			let state = $(this).attr("data-state");
+			if(state == 'hidden'){
+				$(this).attr("data-state","show");
+				$(this).html("<i class='fa fa-eye-slash'></i>");
+				$("#password").attr("type","text");
+			}else{
+				$(this).attr("data-state","hidden");
+				$(this).html("<i class='fa fa-eye'></i>");
+				$("#password").attr("type","password");
+			}
+		});
+
 	//******************************************************************
 	// Determinar valores de fecha y hora para la recojer el pedido
 		hora=new moment().format("HH");

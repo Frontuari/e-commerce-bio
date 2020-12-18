@@ -38,7 +38,7 @@
                             <p>{{ (up((product.price / tasadolar), 2)) | FormatDolar}} $</p>
                         </div>
 
-                        <div :class="'row content_product_control_'+product.id" :style="getCurrentQty(product.id) > 0 ? 'display:block;' : 'display:none;'">
+                        <div :class="'row content-button-add content_product_control_'+product.id" :style="getCurrentQty(product.id) > 0 ? 'display:block;' : 'display:none;'">
                                     
                             <div class="col-12 text-center" style="padding: 10px 50px !important;">
                                 <div class="input-group">
@@ -54,7 +54,7 @@
 
                         </div>
 
-                        <div :class="'row content_product_button_'+product.id" v-if="getCurrentQty(product.id) == 0">
+                        <div :class="'row content-button-add content_product_button_'+product.id" v-if="getCurrentQty(product.id) == 0">
                             <div class="col-12 text-center">
                                 <button class="btn btn-success" @click="addToCart(product,1)">Agregar</button>
                             </div>

@@ -131,3 +131,21 @@ div.product-img img.image__item{
 div.product-img img.image__item:hover{
 	transform: scale(1.5) !important;
 }
+
+div.content-button-add{
+	position: absolute; bottom: 3px; 
+	margin-left: 0%;
+	width: 100%; 
+	display: block;
+}
+
+span#eye-view-password{
+	position: absolute;
+	right:10px;
+	bottom:2px;
+	cursor: pointer;
+}
+
+i.fa-eye, i.fa-eye-slash{
+	color:#67be5a !important;
+}

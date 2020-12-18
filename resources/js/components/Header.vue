@@ -49,7 +49,10 @@
 										</div>
 										<div class="form-group">
 											<label>Contraseña</label>
-											<input type="password" class="form-control" name="password" v-model="user.pass" @keypress="enterLogin($event)">
+											<div style="position: relative;">
+											<input type="password" id="password" class="form-control" name="password" v-model="user.pass" @keypress="enterLogin($event)">
+											<span id="eye-view-password" data-state="hidden"><i class="fa fa-eye"></i></span>
+											</div>
 										</div>
 										<div class="form-group">
 											<input type="checkbox"> Recordar Contraseña

@@ -59,7 +59,7 @@
 								</div>
 
 
-								<div :class="'row content_product_control_'+product_recent.id" :style="getCurrentQty(product_recent.id) > 0 ? 'display:block;' : 'display:none;'">
+								<div :class="'row content-button-add content_product_control_'+product_recent.id" :style="getCurrentQty(product_recent.id) > 0 ? 'display:block;' : 'display:none;'">
 									
 									<div class="col-12 text-center" style="padding: 10px 50px !important;">
 
@@ -67,7 +67,7 @@
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_recent.id" v-if="getCurrentQty(product_recent.id) == 0">
+								<div :class="'row content-button-add content_product_button_'+product_recent.id" v-if="getCurrentQty(product_recent.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_recent,1)">Agregar</button>
 									</div>
@@ -118,7 +118,7 @@
 								</div>
 
 
-								<div :class="'row content_product_control_'+product_sold.id" :style="getCurrentQty(product_sold.id) > 0 ? 'display:block;' : 'display:none;'">
+								<div :class="'row content-button-add content_product_control_'+product_sold.id" :style="getCurrentQty(product_sold.id) > 0 ? 'display:block;' : 'display:none;'">
 
 									<div class="col-12 text-center" style="padding: 10px 50px !important;">
 
@@ -126,7 +126,7 @@
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_sold.id" v-if="getCurrentQty(product_sold.id) == 0">
+								<div :class="'row content-button-add content_product_button_'+product_sold.id" v-if="getCurrentQty(product_sold.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_sold,1)">Agregar</button>
 									</div>
@@ -175,14 +175,14 @@
 									<p>{{ (up((product_view.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 
-								<div :class="'row content_product_control_'+product_view.id" :style="getCurrentQty(product_view.id) > 0 ? 'display:block;' : 'display:none;'">
+								<div :class="'row content-button-add content_product_control_'+product_view.id" :style="getCurrentQty(product_view.id) > 0 ? 'display:block;' : 'display:none;'">
 									<div class="col-12 text-center" style="padding: 10px 50px !important;">
 
 										<input type="number" min="0" :value="getCurrentQty(product_view.id) == 0 ? 1 : getCurrentQty(product_view.id)" :class="'cart-add-button add_del_'+product_view.id" @change="addProductIncrement($event, product_view);" :max="product_view.qty_avaliable" />
 
 									</div>
 								</div>
-								<div :class="'row content_product_button_'+product_view.id" v-if="getCurrentQty(product_view.id) == 0">
+								<div :class="'row content-button-add content_product_button_'+product_view.id" v-if="getCurrentQty(product_view.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_view,1)">Agregar</button>
 									</div>
@@ -229,7 +229,7 @@
 									<p>{{ (up((product_best.price / tasadolar),2)) | FormatDolar}} $</p>
 								</div>
 
-								<div :class="'row content_product_control_'+product_best.id" :style="getCurrentQty(product_best.id) > 0 ? 'display:block;' : 'display:none;'">
+								<div :class="'row content-button-add content_product_control_'+product_best.id" :style="getCurrentQty(product_best.id) > 0 ? 'display:block;' : 'display:none;'">
 									<div class="col-12 text-center" style="padding: 10px 50px !important;">
 
 										<input type="number" min="0" :value="getCurrentQty(product_best.id) == 0 ? 1 : getCurrentQty(product_best.id)" :class="'cart-add-button add_del_'+product_best.id" @change="addProductIncrement($event, product_best);" :max="product_best.qty_avaliable" />
@@ -237,7 +237,7 @@
 									</div>
 								</div>
 
-								<div :class="'row content_product_button_'+product_best.id" v-if="getCurrentQty(product_best.id) == 0">
+								<div :class="'row content-button-add content_product_button_'+product_best.id" v-if="getCurrentQty(product_best.id) == 0">
 									<div class="col-12 text-center">
 										<button class="btn btn-success" @click="addToCart(product_best,1)">Agregar</button>
 									</div>
