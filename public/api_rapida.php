@@ -48,6 +48,7 @@ switch($evento) {
         $row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
+        $row['data']['urbanizations']=getUrbanizationsAll(true);
         $row['data']['regions']=getRegionsAll(true);
         $row['data']['states']=getStates(true);
         $row['data']['payment_methods']=listarMetodoDePago(true);
@@ -66,6 +67,7 @@ switch($evento) {
         $row['data']['regions']=getRegionsAll(true);
         $row['data']['states']=getStates(true);
         $row['data']['citiesAll']=getCitiesAll(true,true);
+        $row['data']['urbanizations']=getUrbanizationsAll(true);
         $row['data']['regionsAll']=getRegionsAll(true,true);
         $row['data']['statesAll']=getStates(true,true);
         $row['data']['listarCombos']=listarCombos(true);
@@ -101,7 +103,7 @@ break;
     break;
     case 'prueba':
         $row['data']['citiesAll']=getCitiesAll(true,true);
-        
+        $row['data']['urbanizations']=getUrbanizationsAll(true);
         
     break;
     case 'theBest': //se usa en la app como login
@@ -119,6 +121,7 @@ break;
             $row['data']['addressHabitacion']=getAdreess(true,'habitacion'); 
             $row['data']['citiesAll']=getCitiesAll(true,true);
             $row['data']['regionsAll']=getRegionsAll(true,true);
+            $row['data']['urbanizations']=getUrbanizationsAll(true);
             $row['data']['statesAll']=getStates(true,true);
             $row['data']['payment_methods']=listarMetodoDePago(true);
             $row['data']['envio']=recargoEnvio(true);
@@ -1707,11 +1710,14 @@ function getAdreess($tipo_salida,$type='delivery'){
     }
 }
 function guardarDireccion($type='delivery'){
+    
+    $_SESSION['usuario']['id'] = $_GET['user_id'];
+
     $users_id=$_SESSION['usuario']['id'];
     $cities_id=$_POST['cities_id'];
     $address=$_POST['address'];
     $zip_code=$_POST['zip_code'];
-    $urb=$_POST['urb'];
+    $urb=(isset($_POST['urb']) and !empty($_POST['urb'])) ? $_POST['urb'] : $_POST['urbanization_id'];
     $sector=$_POST['sector'];
     $nro_home=$_POST['nro_home'];
     $reference_point=$_POST['reference_point'];
@@ -1720,6 +1726,7 @@ function guardarDireccion($type='delivery'){
         $arr=q("UPDATE order_address SET cities_id='$cities_id',address='$address',zip_code='$zip_code',urb='$urb',sector='$sector',nro_home='$nro_home',reference_point='$reference_point' WHERE users_id='$users_id' AND id='$id' RETURNING id");
     }else{//Registra
         $sql="INSERT INTO order_address (users_id,cities_id,address,zip_code,urb,sector,nro_home,reference_point,type) VALUES ('$users_id','$cities_id','$address','$zip_code','$urb','$sector','$nro_home','$reference_point','$type' ) RETURNING id";
+        
         $arr=q($sql);
     }
 
@@ -1745,6 +1752,7 @@ function getStates($tipo_salida,$all=false){
         return salidaNueva(null,"No se cargaron los estados",false,$tipo_salida);
     }
 }
+
 function getCitiesAll($tipo_salida,$all=false){
     if($all){
         $status="1=1";
@@ -1760,6 +1768,23 @@ function getCitiesAll($tipo_salida,$all=false){
         return salidaNueva(null,"No se cargaron las parroquias",false,$tipo_salida);
     }
 }
+
+function getUrbanizationsAll($tipo_salida,$all=false){
+    if($all){
+        $status="1=1";
+    }else{
+        $status="status='A'";
+    }
+    $sql="SELECT id,name,city_id FROM urbanizations WHERE $status ORDER BY name";
+    $arr=q($sql);
+   
+    if(is_array($arr)){
+        return salidaNueva($arr,'urbanizaciones',true,$tipo_salida);
+    }else{
+        return salidaNueva(null,"No se cargaron las urbanizaciones",false,$tipo_salida);
+    }
+}
+
 function getCities($tipo_salida){
     
     $regions_id=$_GET['regions_id'];
