@@ -523,12 +523,12 @@ console.log(ra);
 		case 'getAdreess':
 			var data = JSON.parse(data);
 			console.log("data getAddress::> ",data);
-			var options='';
+			var options = "";
 			if(data.success){
 				var datos=data.data;
-				var options = "";
+
 				if(storeId != 6){
-					options+="<option value='0' id='one_value'>Pick - Up</option>";
+					options+="<option value='-1' id='one_value'>Pick - Up</option>";
 				}
 				
 				for (var [key, value] of Object.entries(datos)) {
@@ -538,7 +538,11 @@ console.log(ra);
 
 				div_direccion_entrega.innerHTML="<select onchange='activarEnvio(this)' class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection' >"+options+"</select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
 			}else{
-				div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='0'>Pick - Up</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
+				if(storeId != 6){
+					div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='-1'>Pick - Up</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
+				}else{
+					div_direccion_entrega.innerHTML="<select class='form-control' id='direccion_selected' name='direccion' v-model='selectedDirection'><option value='0'>Sin Direcciones</option></select><br><a href='/profile?tab=my-address'>Agregar nueva dirección</a>";
+				}
 				//alert(data.msj_general);
 				return false;
 			}
@@ -549,7 +553,8 @@ console.log(ra);
 
 }
 function procesarOrden() {
-	if(document.getElementById("direccion_selected")) {
+	if(document.getElementById("direccion_selected") && document.getElementById("direccion_selected").value != '0') {
+
 		if(checkDeliveryType == 2 && aPagarUsd < 3){
 			Swal.fire("Bio en Línea","Para este tipo de delivery el monto debe ser al menos de 3$","error");
 		}else{
