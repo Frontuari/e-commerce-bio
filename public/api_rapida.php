@@ -1820,6 +1820,7 @@ function getRegionsAll($tipo_salida,$all=false){
     }
 }
 function cambiarClave(){
+    $_SESSION['usuario']['email'] = $_GET['email'];
     $email  =$_SESSION['usuario']['email'];
     $passwordActual=$_POST['passwordActual']; 
     $password   =password_hash($_POST['password'],PASSWORD_BCRYPT);
