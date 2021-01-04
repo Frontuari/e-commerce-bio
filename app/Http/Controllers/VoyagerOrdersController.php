@@ -30,14 +30,13 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             $dataRow = Voyager::model('DataRow')->whereDataTypeId($dataType->id)->get();
             foreach ($searchable as $key => $value) {
                 $displayName = $dataRow->where('field', $value)->first()->getTranslatedAttribute('display_name');
-                
                 $searchNames[$value] = $displayName ?: ucwords(str_replace('_', ' ', $value));
                 
             }
         }
 
         $orderBy = $request->get('order_by', $dataType->order_column);
-        $sortOrder = $request->get('sort_order', null);
+        $sortOrder = $request->get('sort_order', 'ASC');
         $usesSoftDeletes = false;
         $showSoftDeleted = false;
 
@@ -71,6 +70,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             }
            
             $rol=Auth::user()->role_id;
+            
             if($rol==5){
                 $query->where('status','<>','NU');
                 $query->where('status','<>','CO');
@@ -91,7 +91,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             $query->where('stores_id','=',$stores_id);
             //-------
             if ($orderBy && in_array($orderBy, $dataType->fields())) {
-                $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'desc';
+                $querySortOrder = (!empty($sortOrder)) ? $sortOrder : 'ASC';
                 $dataTypeContent = call_user_func([
                     $query->orderBy($orderBy, $querySortOrder),
                     $getter,
@@ -99,7 +99,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
             } elseif ($model->timestamps) {
                 $dataTypeContent = call_user_func([$query->latest($model::CREATED_AT), $getter]);
             } else {
-                $dataTypeContent = call_user_func([$query->orderBy($model->getKeyName(), 'DESC'), $getter]);
+                $dataTypeContent = call_user_func([$query->orderBy($model->getKeyName(), 'ASC'), $getter]);
             }
 
             // Replace relationships' keys for labels and create READ links if a slug is provided.
@@ -148,16 +148,21 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
 
         // Define orderColumn
         $orderColumn = [];
+
         if ($orderBy) {
             $index = $dataType->browseRows->where('field', $orderBy)->keys()->first() + ($showCheckboxColumn ? 1 : 0);
-            $orderColumn = [[$index, 'desc']];
+        
+            $orderColumn = [[$index, 'ASC']];
             if (!$sortOrder && isset($dataType->order_direction)) {
                 $sortOrder = $dataType->order_direction;
                 $orderColumn = [[$index, $dataType->order_direction]];
             } else {
-                $orderColumn = [[$index, 'desc']];
+                $orderColumn = [[$index, 'ASC']];
             }
+
         }
+
+
         $rol=Auth::user()->role_id;
         if($rol==7){
         foreach ($dataType->browseRows as $key => $row) {
@@ -177,6 +182,7 @@ class VoyagerOrdersController extends \TCG\Voyager\Http\Controllers\VoyagerBaseC
            // }
         }
     }
+
 //exit();
 
         $view = 'voyager::bread.browse';

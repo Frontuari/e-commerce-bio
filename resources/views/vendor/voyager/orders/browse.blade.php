@@ -133,12 +133,43 @@
                                 <tbody>
                                     @foreach($dataTypeContent as $data)
                                     <tr style="<?php
-                                    date_default_timezone_set('America/Manaus');
+                                    date_default_timezone_set('America/Caracas');
                                     //echo strtotime($data['created_at'])." - ".date('d-m-y h-i-s');
-                                    if(strtotime($data['created_at'])<=strtotime("-60 minutes") and $data['status']=='NU'){
-                                    echo "background:#FFB7B7";
+                                    if($data['status']=='NU'){
+                                        echo "background:pink;";
                                     //FALTA ENVIAR CORREO AL USUARIO
                                     }
+
+                                    if($data['status']=='PR'){
+                                        echo "background:yellow;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
+                                    if($data['status']=='SD'){
+                                        echo "background:gray;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
+                                    if($data['status']=='ED'){
+                                        echo "background:blue;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
+                                    if($data['status']=='EC'){
+                                        echo "background:green;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
+                                    if($data['status']=='RT'){
+                                        echo "background:orange;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
+                                    if($data['status']=='CO'){
+                                        echo "background:red;";
+                                    //FALTA ENVIAR CORREO AL USUARIO
+                                    }
+
                                     ?>">
                                         @if($showCheckboxColumn)
                                             <td>
@@ -449,7 +480,7 @@ button.dt-button.active {
  
         [-1]
     ],
-    "order": [[ 0, "desc" ]],
+    "order": [[ 1, "asc" ]],
     buttons: [
 					    { extend: 'print', text: 'Imprimir', exportOptions: {columns: ':visible'},"className": 'btn btn-default btn-xs'  },
 					    { extend: 'colvis', text: 'Ocultar campos',"className": 'btn btn-default btn-xs'   },

@@ -131,7 +131,19 @@
                                 </thead>
                                 <tbody>
                                     @foreach($dataTypeContent as $data)
-                                    <tr>
+                                    <tr style="<?php
+                                    switch($data['status']){
+                                        case 'nuevo':
+                                            echo "background:pink;";
+                                        break;
+                                        case 'aprobado':
+                                            echo "background:green;";
+                                        break;
+                                        case 'rechazado':
+                                            echo "background:red;";
+                                        break;
+                                    }
+                                    ?>">
                                         @if($showCheckboxColumn)
                                             <td>
                                                 <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
@@ -415,13 +427,13 @@ button.dt-button.active {
             @else
             var table = $('#dataTable').DataTable({
                 "language": {
-    "search": "Busqueda en vista actual:"
+    "search": "Busqueda en vista actual:",
   },
                 aLengthMenu: [
  
         [-1]
     ],
-    
+    "order":[[5, 'desc']],
     buttons: [
 					    { extend: 'print', text: 'Imprimir', exportOptions: {columns: ':visible'},"className": 'btn btn-default btn-xs'  },
 					    { extend: 'colvis', text: 'Ocultar campos',"className": 'btn btn-default btn-xs'   },
