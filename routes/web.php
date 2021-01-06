@@ -58,6 +58,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('kpis/transactions-for-period','KpisController@TransactionsForPeriod');
     Route::get('kpis/sales-for-period','KpisController@SalesForPeriod');
     Route::get('kpis/sales-units-for-period','KpisController@SalesUnitsForPeriod');
-    
+    Route::get('kpis/export-all-data-peoples','KpisController@export_peoples_all_data')->name('export_peoples_all_data');
     Route::post('kpis/getData', 'KpisController@getData')->name('get_data');
 });
