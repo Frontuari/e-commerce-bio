@@ -80,46 +80,6 @@ class KpisController extends Controller
     }
 
     public function export_peoples_all_data(){
-        $peoples = DB::select(DB::raw("select 
-                                            p.rif,
-                                            p.name,
-                                            to_char(p.birthdate,'dd-mm-yyyy') as birthdate,
-                                            case 
-                                                when p.sex = 'm' 
-                                                    then 'Masculino'
-                                                when p.sex = 'f'
-                                                    then 'Femenino'
-                                            end as sex,
-                                            p.phone,
-                                            to_char(p.created_at, 'dd-mm-yyyy') as created_at,
-                                            p.phone_home,
-                                            COALESCE(u.email,' ') as user_name,
-                                            p.saldo
-                                        from peoples p
-                                        left join users u on (p.id = u.peoples_id)"));
-        
-        $peoples_array[] = array('Rif o Cedula','Nombre', 'Fecha de Nacimiento','Sexo','Telefono','Creado','Telefono de Casa','Usuario','Saldo');
-        
-        /*foreach($peoples as $people){
-            $peoples_array[] = Array(
-                'Rif o Cedula' => $people->rif,
-                'Nombre' => $people->name,
-                'Fecha de Nacimiento' => $people->birthdate,
-                'Sexo' => $people->sex,
-                'Telefono' => $people->phone,
-                'Creado' => $people->created_at,
-                'Telefono de Casa' => $people->phone_home,
-                'Usuario' => $people->user_name,
-                'Saldo' => $people->saldo
-            );  
-        }
-
-        Excel::create('Lista de Usuarios', function($excel) use ($peoples_array){
-            $excel->setTitle('Lista de Usuarios');
-            $excel->sheet('Lista de Usuarios', function($sheet) use ($peoples_array){
-                $sheet->fromArray($peoples_array, null, 'A1', false, false);
-            });
-        })->download('xlsx');*/
         return Excel::download(new PeoplesExport, 'peoples.xlsx');
     }
 }
