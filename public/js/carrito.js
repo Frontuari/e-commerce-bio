@@ -677,7 +677,7 @@ function actualizarResumenOrden(){
 			var peso_cargado=peso_max;
 			var multiplo_peso=1;
 
-			while(totalPeso>peso_cargado) {
+			while(totalPeso>=peso_cargado) {
 			multiplo_peso++;
 			
 				peso_cargado+=(peso_max+peso_cargado);

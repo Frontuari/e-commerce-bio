@@ -1310,7 +1310,7 @@ function crearOrden($json){
         $peso_cargado=$peso_max;
         $multiplo_peso=1;
 
-        while($pesoTotal>$peso_cargado) {
+        while($pesoTotal>=$peso_cargado) {
             $multiplo_peso++;
          
               $peso_cargado+=($peso_max+$peso_cargado);
