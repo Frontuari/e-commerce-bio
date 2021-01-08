@@ -1573,7 +1573,7 @@ function _filtro($obj,$nameUnico){
 }
 function getSqlListarProductos($join='',$where='',$order='ORDER BY p.id DESC',$limit='',$is_limit = true){
     $filtrarPorTienda=whereTienda('p');
-    if($is_limit) $limit='LIMIT 100';
+    if($is_limit) $limit='LIMIT 1000';
 
     $users_id=$_SESSION['usuario']['id'];
     if($users_id){
