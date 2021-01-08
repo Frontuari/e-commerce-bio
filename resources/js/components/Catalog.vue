@@ -125,7 +125,7 @@
 				selectedTags:'',
 				products: {},
 				filterP: '',
-				limitP: 50,
+				limitP: 200,
 				orderP: 'AZasc',
 				rangeP: '',
 				min_price: 0,
