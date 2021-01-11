@@ -497,7 +497,6 @@ console.log(ra);
 				for (var [key, value] of Object.entries(datos)) {
 					setLocal(key, value);
 				}
-				console.log(data);
 				actualizarResumenOrden();
 			}
 
@@ -641,6 +640,7 @@ function actualizarResumenOrden(){
 		
 		var d_envio=getLocal('envio').data[0];
 
+
 		// console.log(d_envio);
 
 
@@ -691,8 +691,6 @@ function actualizarResumenOrden(){
 			totalPagarB=totalEnvioB+totalB;
 			totalPagarD=totalEnvioD+totalD;
 
-  
-
 		aPagarUsd = totalPagarD; 
 
 
@@ -718,7 +716,8 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-	setInterval('actualizarStore()',30000);
+	//setInterval('actualizarStore()',30000);
+	actualizarStore();
 }
 
 
@@ -882,7 +881,6 @@ function deli_type(e){
 	}
 
 	document.getElementById('dvy_type').value = e.value;
-
 	activarEnvio(e);
 }
 
