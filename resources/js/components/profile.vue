@@ -614,7 +614,7 @@
 																		<p> ${{ (favorite.price / tasadolar) | FormatDolar}} / Bs {{ favorite.price | FormatNumber }}</p>
 																	</div>
 																</div>
-											                    <div class="product-add">
+											                    <div class="product-add" v-if="favorite.porc_stock > 0">
 																	
 																	<span class="product-info" v-if="favorite.qty_avaliable > 0">Disponibles: <b>{{favorite.qty_avaliable}} en Stock</b></span>
                             										<span class="product-info" v-else>Producto<b> Agotado!</b></span>

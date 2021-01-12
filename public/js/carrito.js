@@ -125,7 +125,7 @@ function elegidoMetodo(id,name){
 	location.href="#utlimo_metodo_pago";
 }
 function elegidoBanco(id,name,titular,descripcion,moneda,coins_id,rate) {
-	console.log("id::> ",id);
+	//console.log("id::> ",id);
 
 	var div_referencia=`<div class="col-md-6">
 	<label>Referencia Bancaria:</label>
@@ -248,7 +248,7 @@ function procesar(data,evento){
 		break;
 		case 'listarBancosdelMetododePago':
 			var data = JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			if(data.success==true){
 				var h='<hr>';
 				var datos=data.data;
@@ -292,7 +292,7 @@ function procesar(data,evento){
 		case 'totalPagar':
 
 			var data = JSON.parse(data);
-			console.log("Datos Sacados ==> "+JSON.stringify(data));
+			//console.log("Datos Sacados ==> "+JSON.stringify(data));
 			if(data.success==true){
 				ra=data.data[0];
 
@@ -322,7 +322,7 @@ function procesar(data,evento){
 					// }
 					//alert(pagado.toFixed(2));
 
-					console.log("Esto es para carlitos ==> "+pagado.toFixed(2)+" ==> "+parseFloat(ra.total_pay));
+					//console.log("Esto es para carlitos ==> "+pagado.toFixed(2)+" ==> "+parseFloat(ra.total_pay));
 
 					if( pagado.toFixed(2)>=parseFloat(ra.total_pay)){
 						ordenPagada=true;
@@ -354,7 +354,7 @@ if(resta>0){
 	var colorFalta='';
 }
 
-console.log(ra);
+//console.log(ra);
 				
 			cuadroPagado.innerHTML=`
 			<div class="row">
@@ -474,7 +474,7 @@ console.log(ra);
 		break;
 	   
 		case 'crearOrden':
-			console.log(data);
+			//console.log(data);
 			var data = JSON.parse(data);
 
 
@@ -521,7 +521,7 @@ console.log(ra);
 		break;
 		case 'getAdreess':
 			var data = JSON.parse(data);
-			console.log("data getAddress::> ",data);
+			//console.log("data getAddress::> ",data);
 			var options = "";
 			if(data.success){
 				var datos=data.data;
@@ -716,8 +716,8 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-	//setInterval('actualizarStore()',30000);
-	actualizarStore();
+	setInterval('actualizarStore()',5000);
+	//actualizarStore();
 }
 
 
@@ -796,7 +796,7 @@ function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
   
 	  return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
 	} catch (e) {
-	  console.log(e)
+	  //console.log(e)
 	}
 }
 function vaciarCarrito(){

@@ -130,4 +130,9 @@ class ProductController extends BaseController
 
         return response()->json($data);
     }
+    public function verify_producs($codes){
+        $arr_codes = explode(",",$codes);
+        $products = Product::whereIn('id',$arr_codes)->where('porc_stock','=',0)->get();
+        return response()->json($products);
+    }
 }

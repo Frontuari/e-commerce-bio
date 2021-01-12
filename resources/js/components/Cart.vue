@@ -550,6 +550,7 @@
 				total_weight: 0,
 				total_delivery: 0,
 				total_pagar: 0,
+				list_codes:[],
 				datauser:[],
 				payments: [],
 				selectedDirection: '',
@@ -571,7 +572,8 @@
 				num_order: 0,
 				tmpOrder: {},
 				banks:[],
-				payButton: true
+				payButton: true,
+				products_stock_zero: []
 			}
 		},
 		components:{
@@ -757,6 +759,14 @@
 						document.getElementById("MegaSoftOverlay").style.display = "none";
 					}
 				}, 200);
+			},
+			async getProductsUpdated(codes){
+				const response  =   await axios.get(URLSERVER+'api/verify-products/'+codes);
+				let ddata = [];
+				response.data.forEach((a) => {
+					ddata.push(a.id);
+				});
+				return ddata;
 			}
 		},
 		created() {
@@ -769,15 +779,57 @@
 		{
 
 			const _this = this;
+			let codes = [];
+			var newCodes = [];
+
 			if( window.localStorage.getItem("cartNew") ){
+
 				this.length_car = JSON.parse(window.localStorage.getItem("cartNew")).length;
 				this.products_cart = JSON.parse(window.localStorage.getItem("cartNew"));
+
 				JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {
-					_this.cant_cart += parseInt(a.cant);
-				});	
+					this.cant_cart += parseInt(a.cant);
+				});
+				
+				//Validity Stock 0
+				for(let i = 0; i<this.length_car; i++)
+				{
+					codes.push(this.products_cart[i].product.id);
+				}
+
+				codes = codes.join(",");
+
+				this.getProductsUpdated(codes).then((data)=>{
+					data.forEach((e)=>{
+						newCodes.push(e);
+					});
+
+					if(newCodes.length > 0){
+						this.products_cart = [];
+						//console.log(window.localStorage.getItem("cartNew"));
+						JSON.parse(window.localStorage.getItem("cartNew")).forEach ( (a) => {
+
+							if(newCodes.indexOf(a.product.id) === -1){
+								this.products_cart.push(a);	
+							}
+
+						});
+
+						if(this.products_cart.length > 0){
+							window.localStorage.removeItem("cartNew");
+							window.localStorage.setItem("cartNew",JSON.stringify(this.products_cart));
+						}
+
+						this.length_car = this.products_cart.length;
+					}
+				});
+				//End Validity Stock 0
 			}else{
+				EventBus.$emit("update_cantCart",this.cant_cart);
 				this.length_car = 0;
 			}
+
+			
 			
 			for(let i = 0; i<this.length_car; i++)
 			{

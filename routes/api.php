@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::get('urbanization/{city_id}','API\LocationController@getUrbanizationByCity');
 
+Route::get('verify-products/{codes}','API\ProductController@verify_producs');
+
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 Route::post('update_profile', 'API\RegisterController@update_profile');
