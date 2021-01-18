@@ -742,7 +742,12 @@ function listarProductosPorCategoria(){
             //}
     //se borro INNER JOIN det_sub_categories dsc ON dsc.products_id=p.id
             //$join="INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id";
-            $where="AND sc.categories_id='$categories_id'";
+            if($categories_id != -1){
+                $where="AND sc.categories_id='$categories_id'";
+            }else{
+                $where="AND p.mark_keyword like '%BIOINSUPERABLE%'";
+            }
+            
             $sql=getSqlListarProductos("",$where);
             $sql=filtroProductos($sql);
             listarProductos($sql);
