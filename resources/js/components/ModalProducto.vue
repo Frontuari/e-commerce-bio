@@ -37,23 +37,12 @@
                                     <div class="product-prices" v-if="!product.impuesto">
                                         <p>EXENTO DE IVA</p>
                                     </div>
-
-
-                                    <!--<div class="product-prices" v-if="product.impuesto > 0">
+                                    <div class="product-prices" v-if="product.impuesto > 0">
                                         <p> ${{ (product.calculado / tasadolar) | FormatDolar}} / Bs {{ product.calculado | FormatNumber }}</p>
                                     </div>
                                     <div class="product-prices" v-if="!product.impuesto">
                                         <p> ${{ (product.price / tasadolar) | FormatDolar}} / Bs {{ product.price | FormatNumber }}</p>
-                                    </div>-->
-
-                                    <div class="product-prices" v-if="product.impuesto > 0">
-                                        <p> ${{ product.calculado | FormatDolar}} / Bs {{ (product.calculado * tasadolar) | FormatNumber }}</p>
                                     </div>
-                                    <div class="product-prices" v-if="!product.impuesto">
-                                        <p> ${{ product.price | FormatDolar}} / Bs {{ (product.price * tasadolar) | FormatNumber }}</p>
-                                    </div>
-
-
                                 </div>
                                 <div class="product-options">
                                     <span class="product-info" v-if="product.qty_avaliable > 0">Disponibles: <b>{{product.qty_avaliable}} en Stock</b></span>
@@ -134,9 +123,9 @@
 			totalModal: function() {
                 let price = 0;
                 if(this.product.impuesto > 0) {
-                    price = (this.product.calculado * this.tasadolar) * this.cantModal;
+                    price = this.product.calculado * this.cantModal;
                 }else if(!this.product.impuesto) {
-                    price = (this.product.price * this.tasadolar) * this.cantModal;;
+                    price = this.product.price * this.cantModal;;
                 }
 
 				return price;

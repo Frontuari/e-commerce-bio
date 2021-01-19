@@ -49,19 +49,13 @@
 								<div class="product-prices" v-if="!product_recent.impuesto">
 									<p>EXENTO DE IVA</p>
 								</div>
-
 								<div class="product-prices" v-if="product_recent.impuesto > 0">
-									<!--<p>{{ product_recent.calculado | FormatNumber }} Bs</p>-->
-									<p>{{ (product_recent.calculado * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_recent.calculado | FormatDolar}} $</p>
+									<p>{{ product_recent.calculado | FormatNumber }} Bs</p>
+									<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
-
 								<div class="product-prices" v-if="!product_recent.impuesto">
-									<!--<p>{{ product_recent.price | FormatNumber }} Bs</p>-->
-									<p>{{ (product_recent.price * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_recent.price | FormatDolar}} $</p>
+									<p>{{ product_recent.price | FormatNumber }} Bs</p>
+									<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 
 
@@ -114,29 +108,13 @@
 								<div class="product-prices" v-if="!product_sold.impuesto">
 									<p>EXENTO DE IVA</p>
 								</div>
-
-
-								<!--<div class="product-prices" v-if="product_sold.impuesto > 0">
+								<div class="product-prices" v-if="product_sold.impuesto > 0">
 									<p>{{ product_sold.calculado | FormatNumber }} Bs</p>
 									<p>{{ (up((product_sold.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_sold.impuesto">
 									<p>{{ product_sold.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_sold.price / tasadolar), 2)) | FormatDolar}} $</p>
-								</div>-->
-
-								<div class="product-prices" v-if="product_sold.impuesto > 0">
-									<!--<p>{{ product_recent.calculado | FormatNumber }} Bs</p>-->
-									<p>{{ (product_sold.calculado * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_sold.calculado | FormatDolar}} $</p>
-								</div>
-
-								<div class="product-prices" v-if="!product_sold.impuesto">
-									<!--<p>{{ product_recent.price | FormatNumber }} Bs</p>-->
-									<p>{{ (product_sold.price * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_sold.price | FormatDolar}} $</p>
 								</div>
 
 
@@ -188,28 +166,13 @@
 								<div class="product-prices" v-if="!product_view.impuesto">
 									<p>EXENTO DE IVA</p>
 								</div>
-								
-								<!--<div class="product-prices" v-if="product_view.impuesto > 0">
+								<div class="product-prices" v-if="product_view.impuesto > 0">
 									<p>{{ product_view.calculado | FormatNumber }} Bs</p>
 									<p>{{ (up((product_view.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_view.impuesto">
 									<p>{{ product_view.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_view.price / tasadolar), 2)) | FormatDolar}} $</p>
-								</div>-->
-
-								<div class="product-prices" v-if="product_view.impuesto > 0">
-									<!--<p>{{ product_recent.calculado | FormatNumber }} Bs</p>-->
-									<p>{{ (product_view.calculado * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_view.calculado | FormatDolar}} $</p>
-								</div>
-
-								<div class="product-prices" v-if="!product_view.impuesto">
-									<!--<p>{{ product_recent.price | FormatNumber }} Bs</p>-->
-									<p>{{ (product_view.price * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_view.price | FormatDolar}} $</p>
 								</div>
 
 								<div :class="'row content-button-add content_product_control_'+product_view.id" :style="getCurrentQty(product_view.id) > 0 ? 'display:block;' : 'display:none;'">
@@ -257,29 +220,13 @@
 								<div class="product-prices" v-if="!product_best.impuesto">
 									<p>EXENTO DE IVA</p>
 								</div>
-
-
-								<!--<div class="product-prices" v-if="product_best.impuesto > 0">
+								<div class="product-prices" v-if="product_best.impuesto > 0">
 									<p>{{ product_best.calculado | FormatNumber }} Bs</p>
 									<p>{{ (up((product_best.calculado / tasadolar), 2)) | FormatDolar}} $</p>
 								</div>
 								<div class="product-prices" v-if="!product_best.impuesto">
 									<p>{{ product_best.price | FormatNumber }} Bs</p>
 									<p>{{ (up((product_best.price / tasadolar),2)) | FormatDolar}} $</p>
-								</div>-->
-
-								<div class="product-prices" v-if="product_best.impuesto > 0">
-									<!--<p>{{ product_recent.calculado | FormatNumber }} Bs</p>-->
-									<p>{{ (product_best.calculado * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.calculado / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_best.calculado | FormatDolar}} $</p>
-								</div>
-
-								<div class="product-prices" v-if="!product_best.impuesto">
-									<!--<p>{{ product_recent.price | FormatNumber }} Bs</p>-->
-									<p>{{ (product_best.price * tasadolar) | FormatNumber }} Bs</p>
-									<!--<p>{{ (up((product_recent.price / tasadolar), 2)) | FormatDolar}} $</p>-->
-									<p>{{ product_best.price | FormatDolar}} $</p>
 								</div>
 
 								<div :class="'row content-button-add content_product_control_'+product_best.id" :style="getCurrentQty(product_best.id) > 0 ? 'display:block;' : 'display:none;'">
