@@ -16,6 +16,7 @@
 	<style>.cls-1{fill:#ccc;}</style>
 	<script>
 		var min_range, max_range;
+		var url_base = "{{ str_replace('http:','https:',url('/')) }}";
 		@if(Cookie::get("store_id"))
 			var storeName = '{{ Cookie::get("store_name") }}';
 			var storeId = '{{ Cookie::get("store_id") }}';
