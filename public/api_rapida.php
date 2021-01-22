@@ -58,7 +58,7 @@ switch($evento) {
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
-        echo e($row);
+        echo n($row);
     break;
     case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
          
@@ -552,6 +552,9 @@ json_build_object('f',f.id)) as json_favorite,p.description_short,p.qty_avaliabl
 }
 function d($row){
     return gzcompress(json_encode($row), 9);
+}
+function n($row){
+    return json_encode($row);
 }
 function e($row){
     return base64_encode(gzcompress(rawurlencode(json_encode($row)),9));
