@@ -492,6 +492,7 @@ if(resta>0){
 		case 'web_no_login':
 			var data = JSON.parse(JXG.decompress(data));
 
+
 			if(data.success==true){
 				let datos=data.data;
 				for (var [key, value] of Object.entries(datos)) {
@@ -716,8 +717,8 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-	setInterval('actualizarStore()',5000);
-	//actualizarStore();
+	//setInterval('actualizarStore()',5000);
+	actualizarStore();
 }
 
 
