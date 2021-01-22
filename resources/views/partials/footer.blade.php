@@ -102,10 +102,10 @@
 	<div class="over toggle-menu"></div>
 
 </main>
-	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.11"></script>
+	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.12"></script>
 	@yield('js')
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.11"></script>
-	<script type="text/javascript" src="js/carrito.min.js?ver=3.0.11"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.12"></script>
+	<script type="text/javascript" src="js/carrito.min.js?ver=3.0.12"></script>
 	<script>
 
 		$("span#eye-view-password").click(function(){
