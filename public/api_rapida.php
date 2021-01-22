@@ -58,7 +58,7 @@ switch($evento) {
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
-        echo n($row);
+        echo e($row);
     break;
     case 'loginNoUser': //NUEVO ENTRAR SIN LOGUEARSE
          

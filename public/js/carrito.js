@@ -490,8 +490,8 @@ if(resta>0){
 
 		break;
 		case 'web_no_login':
-			//var data = JSON.parse(JXG.decompress(data));
-			var data = JSON.parse(data);
+			var data = JSON.parse(JXG.decompress(data));
+			//var data = JSON.parse(data);
 
 			if(data.success==true){
 				let datos=data.data;
