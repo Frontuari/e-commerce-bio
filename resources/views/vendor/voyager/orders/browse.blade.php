@@ -480,7 +480,7 @@ button.dt-button.active {
  
         [-1]
     ],
-    "order": [[ 2, "asc" ]],
+    "order": [[ 2, "desc" ]],
     buttons: [
 					    { extend: 'print', text: 'Imprimir', exportOptions: {columns: ':visible'},"className": 'btn btn-default btn-xs'  },
 					    { extend: 'colvis', text: 'Ocultar campos',"className": 'btn btn-default btn-xs'   },
