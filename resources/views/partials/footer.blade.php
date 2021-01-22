@@ -102,10 +102,10 @@
 	<div class="over toggle-menu"></div>
 
 </main>
-	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.10"></script>
+	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.11"></script>
 	@yield('js')
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.10"></script>
-	<script type="text/javascript" src="js/carrito.min.js?ver=3.0.10"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.11"></script>
+	<script type="text/javascript" src="js/carrito.min.js?ver=3.0.11"></script>
 	<script>
 
 		$("span#eye-view-password").click(function(){
@@ -401,7 +401,7 @@
 		<?php endif; ?>
 	</script>
 </body>
-<script src="js/jsxcompressor.min.js?ver=3.0.9" type="text/javascript"></script>
+<script src="js/jsxcompressor.min.js?ver=3.0.11" type="text/javascript"></script>
 <script type="text/javascript">
 	$("span.oferta").click(function(){
 		var url = $(this).attr("data-url");
