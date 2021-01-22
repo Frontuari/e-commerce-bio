@@ -619,13 +619,15 @@ function activarEnvio(a){
 
 	var dataOption = document.getElementById("direccion_selected").value;
 
-	if(a.value==0){
+	console.log(a.value);
+
+	if(parseInt(a.value)==0){
 		activar_envio=false;
 		direccionOrden=null;
-	}else if(a.value == 1){
+	}else if(parseInt(a.value) == 1){
 		direccionOrden=dataOption;
 		activar_envio=true;
-	}else if(a.value == 2){
+	}else if(parseInt(a.value) == 2){
 		activar_envio=false;
 		direccionOrden=dataOption;
 	}
