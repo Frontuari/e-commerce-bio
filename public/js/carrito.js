@@ -720,8 +720,8 @@ function actualizarStore(){
 }
 
 window.onload = function() {
-	setInterval('actualizarStore()',15000);
-	//actualizarStore();
+	//setInterval('actualizarStore()',15000);
+	actualizarStore();
 }
 
 
