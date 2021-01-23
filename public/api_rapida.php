@@ -43,9 +43,9 @@ switch($evento) {
         enviarCorreo("contacto@biomercados.com.ve",$_POST['subject'],plantillaContacto($message));
         break;
     case 'web_no_login':
-        //$row['data']['listarPublicidadToda']=listarPublicidadToda(true);
+        $row['data']['listarPublicidadToda']=listarPublicidadToda(true);
         $row['data']['productosb']=reformularIdProductosCompleto(listarProductosWeb());
-        //$row['data']['productos']=listarProductosWeb();
+        $row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['urbanizations']=getUrbanizationsAll(true);
@@ -54,7 +54,7 @@ switch($evento) {
         $row['data']['payment_methods']=listarMetodoDePago(true);
         $row['data']['envio']=recargoEnvio(true);
         $row['data']['bank_datas']=listarBancosdelMetododePagoAll(true);
-        //$row['data']['listarCombos']=listarCombos(true);
+        $row['data']['listarCombos']=listarCombos(true);
         //$row['data']['pro_ia']=listarProductosIA(true,true); LOGIN
         $row['success']=true;
         $row['msj_general']=true;
@@ -1612,7 +1612,7 @@ FROM products p INNER JOIN det_sub_categories dsc ON p.id=dsc.products_id
 INNER JOIN sub_categories sc ON sc.id=dsc.sub_categories_id
 INNER JOIN categories c ON c.id=sc.categories_id
 $join  WHERE $filtrarPorTienda (p.status='A' AND ((p.qty_avaliable * p.porc_stock) / 100) > 0) $where GROUP BY p.id $order $limit";
- 
+    
     return $sql;
 }
 function listarProductos($sql,$agregarCantidad=false,$tipo_salida=false,$comprimido=true,$simple=false){
