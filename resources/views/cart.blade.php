@@ -34,3 +34,11 @@
 <!-- CIERRE DEL MAIN-->
 @stop
 
+@section('js')
+<script type="text/javascript">
+	window.onload = function() {
+		setInterval('actualizarStore()',10000);
+		actualizarStore();
+	}
+</script>
+@stop

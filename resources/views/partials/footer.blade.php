@@ -103,9 +103,10 @@
 
 </main>
 	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.12"></script>
-	@yield('js')
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.12"></script>
 	<script type="text/javascript" src="js/carrito.js?ver=3.0.18"></script>
+	@yield('js')
+
 	<script>
 
 		$("span#eye-view-password").click(function(){
