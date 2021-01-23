@@ -44,8 +44,8 @@ switch($evento) {
         break;
     case 'web_no_login':
         //$row['data']['listarPublicidadToda']=listarPublicidadToda(true);
-        //$row['data']['productosb']=reformularIdProductosCompleto(listarProductosWeb());
-        $row['data']['productos']=listarProductosWeb();
+        $row['data']['productosb']=reformularIdProductosCompleto(listarProductosWeb());
+        //$row['data']['productos']=listarProductosWeb();
         $row['data']['listar_categorias_movil']=listar_categorias_movil(true);
         $row['data']['cities']=getCitiesAll(true);
         $row['data']['urbanizations']=getUrbanizationsAll(true);
