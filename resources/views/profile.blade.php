@@ -75,3 +75,12 @@ if(isset($_GET['orders_id'])){
 	</script>
 <?php endif; ?>
 @endsection
+
+@section('js')
+<script type="text/javascript">
+	window.onload = function() {
+		setInterval('actualizarStore()',10000);
+		actualizarStore();
+	}
+</script>
+@stop
