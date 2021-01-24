@@ -17,6 +17,9 @@
 	<script>
 		var min_range, max_range;
 		var url_base = "{{ str_replace('http:','https:',url('/')) }}";
+		<?php if(isset($_GET['orders_id']) and !empty($_GET['orders_id'])){ ?>
+			var orders_id=<?=$_GET['orders_id']?>;
+		<?php  } ?>
 		@if(Cookie::get("store_id"))
 			var storeName = '{{ Cookie::get("store_name") }}';
 			var storeId = '{{ Cookie::get("store_id") }}';
