@@ -79,7 +79,6 @@ if(isset($_GET['orders_id'])){
 <script type="text/javascript">
 	window.onload = function() {
 		setInterval('actualizarStore()',5000);
-		actualizarStore();
 	}
 </script>
 @stop
