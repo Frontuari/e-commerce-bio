@@ -37,7 +37,7 @@
 @section('js')
 <script type="text/javascript">
 	window.onload = function() {
-		setInterval('actualizarStore()',10000);
+		setInterval('actualizarStore()',5000);
 		actualizarStore();
 	}
 </script>
