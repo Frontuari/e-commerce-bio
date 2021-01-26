@@ -196,22 +196,8 @@ class HomeController extends Controller
 
     public function InternationalPaymentButton($nb, $ap, $ci, $nai, $mt, $em, $from = 'desktop'){
 
-        $post_url = "https://sandbox.123pago.net/msBotonDePago/index.jsp";
-        //$post_url = "https://totalpos.123pago.net/msBotonDePago/index.jsp";
-        $post_values = array(
-                "nbproveedor" => "BIOMERCADOS",
-                "nb" => "$nb",
-                "ap" => "$ap",
-                "ci" => "$ci",
-                "em" => "$em",
-                "cs" => "9da3140b284ccb07b35ccfab53381563",
-                "nai" => "$nai",
-                "co" => "Compra en Tienda Biomercados",
-                //"tl" => "02127400012",
-                "mt" => "$mt",
-                "ancho" => "250px"
-            );
-
+        //$post_url = "https://sandbox.123pago.net/msBotonDePago/index.jsp";
+        $post_url = "https://totalpos.123pago.net/msBotonDePago/index.jsp";
         /*$post_values = array(
                 "nbproveedor" => "BIOMERCADOS",
                 "nb" => "$nb",
@@ -225,6 +211,20 @@ class HomeController extends Controller
                 "mt" => "$mt",
                 "ancho" => "250px"
             );*/
+
+        $post_values = array(
+                "nbproveedor" => "BIOMERCADOS",
+                "nb" => "$nb",
+                "ap" => "$ap",
+                "ci" => "$ci",
+                "em" => "$em",
+                "cs" => "9da3140b284ccb07b35ccfab53381563",
+                "nai" => "$nai",
+                "co" => "Compra en Tienda Biomercados",
+                //"tl" => "02127400012",
+                "mt" => "$mt",
+                "ancho" => "250px"
+            );
 
         $post_string = "";
 

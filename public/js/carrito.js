@@ -631,6 +631,7 @@ function activarEnvio(a){
 		activar_envio=false;
 		direccionOrden=dataOption;
 	}
+	
 	actualizarResumenOrden();
 }
 function getOrder(id){
@@ -719,10 +720,10 @@ function actualizarStore(){
 	get('web_no_login');
 }
 
-window.onload = function() {
-	//setInterval('actualizarStore()',15000);
+/*window.onload = function() {
+	setInterval('actualizarStore()',15000);
 	actualizarStore();
-}
+}*/
 
 
 function get(evento,variables="") {
