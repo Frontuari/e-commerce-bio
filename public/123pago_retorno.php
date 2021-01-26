@@ -20,7 +20,7 @@
 	    $bank_datas_id=$bank_datas_id;
 	    $ref=trim($ref);
 	    $coins_id=$c_id;
-	    $status='aprobado';
+	    $status='nuevo';
 	    $users_id=$users_id;
 
 	    $arr=q("SELECT payment_methods_id FROM bank_datas WHERE id='$bank_datas_id'");
