@@ -104,7 +104,7 @@
 </main>
 	<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?version=4"></script>
-	<script type="text/javascript" src="js/carrito.js?version=4"></script>
+	<script type="text/javascript" src="js/carrito.min.js?version=4"></script>
 	@yield('js')
 
 	<script>

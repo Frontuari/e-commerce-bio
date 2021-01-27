@@ -491,7 +491,7 @@ if(resta>0){
 		break;
 		case 'web_no_login':
 			var data = JSON.parse(JXG.decompress(data));
-			console.log(data);
+			//console.log(data);
 			//var data = JSON.parse(data);
 
 			if(data.success==true){
@@ -619,7 +619,7 @@ function activarEnvio(a){
 
 	var dataOption = document.getElementById("direccion_selected").value;
 
-	console.log(a.value);
+	//console.log(a.value);
 
 	if(parseInt(a.value)==0){
 		activar_envio=false;
