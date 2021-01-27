@@ -102,9 +102,9 @@
 	<div class="over toggle-menu"></div>
 
 </main>
-	<script type="text/javascript" src="{{ mix('js/app.js') }}&ver=3.0.12"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?ver=3.0.12"></script>
-	<script type="text/javascript" src="js/carrito.js?ver=3.0.18"></script>
+	<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bio-forms.js') }}?version=4"></script>
+	<script type="text/javascript" src="js/carrito.js?version=4"></script>
 	@yield('js')
 
 	<script>
@@ -402,7 +402,7 @@
 		<?php endif; ?>
 	</script>
 </body>
-<script src="js/jsxcompressor.min.js?ver=3.0.11" type="text/javascript"></script>
+<script src="js/jsxcompressor.min.js?version=4" type="text/javascript"></script>
 <script type="text/javascript">
 	$("span.oferta").click(function(){
 		var url = $(this).attr("data-url");
