@@ -132,11 +132,14 @@ div.product-img img.image__item:hover{
 	transform: scale(1.5) !important;
 }
 
+div.product-content{
+	height: 88% !important;
+}
 div.content-button-add{
-	position: absolute; bottom: 3px; 
-	margin-left: 0%;
+	margin-left: 0% !important;
 	width: 100%; 
 	display: block;
+	text-align: center !important;
 }
 
 span#eye-view-password{
